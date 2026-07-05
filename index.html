@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ============ SEO ============ -->
+<title>ProyTech — AI Front Desk & Websites for Realtors & Lenders | Wichita, KS</title>
+<meta name="description" content="ProyTech builds premium websites and an AI front desk that answers every lead in seconds — so realtors and lenders never lose another deal to a slow reply. Based in Wichita, KS." />
+<meta name="keywords" content="AI front desk, real estate lead automation, realtor website, lender website, missed call text back, AI receptionist, Wichita web design, real estate SEO, mortgage lead follow up" />
+<link rel="canonical" href="https://getproytech.com/" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#070B1F" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="ProyTech — Your Front Desk, Answering Every Lead in Seconds" />
+<meta property="og:description" content="78% of buyers hire the first agent who responds. ProyTech makes sure that's you — websites + an AI front desk for realtors and lenders." />
+<meta property="og:url" content="https://getproytech.com/" />
+<meta property="og:site_name" content="ProyTech" />
+<meta property="og:image" content="https://getproytech.com/og-image.png" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ProyTech — AI Front Desk & Websites for Realtors & Lenders" />
+<meta name="twitter:description" content="Answer every lead in seconds. Book more showings. Never lose a deal to a slow reply again." />
+<meta name="twitter:image" content="https://getproytech.com/og-image.png" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<!-- ============ Structured Data: LocalBusiness ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "ProyTech",
+  "description": "AI front desk automation and premium website builds for realtors, lenders, and local businesses.",
+  "url": "https://getproytech.com/",
+  "email": "getproytech@gmail.com",
+  "areaServed": "United States",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "105 N Main St",
+    "addressLocality": "Wichita",
+    "addressRegion": "KS",
+    "postalCode": "67202",
+    "addressCountry": "US"
+  },
+  "makesOffer": [
+    { "@type": "Offer", "name": "Website Build", "priceCurrency": "USD", "price": "750" },
+    { "@type": "Offer", "name": "AI Front-Office Automation", "priceCurrency": "USD", "price": "500" },
+    { "@type": "Offer", "name": "Qualified-Leads Funnel", "priceCurrency": "USD", "price": "1000" },
+    { "@type": "Offer", "name": "Free Discovery Audit", "priceCurrency": "USD", "price": "0" }
+  ]
+}
+</script>
+<!-- ============ Structured Data: FAQ ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What does ProyTech actually do?","acceptedAnswer":{"@type":"Answer","text":"Two things. We build premium websites that make you look legit, and we install an AI front desk that answers every call, text, and web lead in seconds — qualifying them and booking appointments 24/7."}},
+    {"@type":"Question","name":"Do you only work with realtors and lenders?","acceptedAnswer":{"@type":"Answer","text":"That's where we start, because speed-to-lead matters most in real estate and mortgage. But the same system works for any local business losing calls and leads after hours."}},
+    {"@type":"Question","name":"Will this replace my current CRM?","acceptedAnswer":{"@type":"Answer","text":"No. We build on top of the tools you already use and wire leads straight into your existing CRM. We add the front desk, not another login you have to babysit."}},
+    {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Websites start at $750. The AI front desk starts at $500/month. We set final numbers per client after a free audit — no obligation."}}
+  ]
+}
+</script>
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#070B1F;
+  --ink-2:#0C1230;
+  --ink-3:#111a44;
+  --cobalt:#2E5BFF;
+  --cobalt-bright:#5A82FF;
+  --orange:#FF4D14;
+  --orange-bright:#FF6A38;
+  --ivory:#F5F7FF;
+  --white:#FFFFFF;
+  --text-dim:#96A2D4;
+  --text-dim-2:#6D78A8;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.16);
+  --line-dark:rgba(7,11,31,.12);
+
+  --f-display:'Space Grotesk',sans-serif;
+  --f-body:'Inter',sans-serif;
+  --f-mono:'Space Mono',monospace;
+
+  --maxw:1180px;
+  --pad:clamp(20px,5vw,72px);
+  --radius:18px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-body);
+  background:var(--ink);
+  color:var(--white);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--orange);color:#fff}
+
+/* ============================================================
+   SHARED
+   ============================================================ */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.eyebrow{
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cobalt-bright);display:inline-flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--orange)}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.05;letter-spacing:-.02em}
+.h2{font-size:clamp(30px,4.6vw,54px)}
+.lead{font-size:clamp(16px,1.7vw,19px);color:var(--text-dim);max-width:56ch}
+.orange{color:var(--orange)}
+.cobalt{color:var(--cobalt-bright)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--f-body);font-weight:600;font-size:15px;
+  padding:15px 26px;border-radius:100px;border:1px solid transparent;
+  cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 8px 30px rgba(255,77,20,.32)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,77,20,.45)}
+.btn-ghost{background:transparent;color:#fff;border-color:var(--line-strong)}
+.btn-ghost:hover{border-color:#fff;transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(7,11,31,.25)}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+
+/* section bands */
+.band{padding:clamp(72px,11vw,140px) 0;position:relative}
+.band-light{background:var(--ivory);color:var(--ink)}
+.band-light .lead{color:#4b5578}
+.band-light .eyebrow{color:var(--cobalt)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+header.nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);
+  background:rgba(7,11,31,.72);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:-.01em}
+.logo b{color:var(--orange);font-weight:700}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:14.5px;color:var(--text-dim);font-weight:500;transition:color .16s}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;gap:12px;align-items:center}
+.nav-toggle{display:none;background:none;border:0;color:#fff;cursor:pointer}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-cta .btn-ghost{display:none}
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;overflow:hidden;padding-top:clamp(48px,8vw,86px);padding-bottom:clamp(60px,9vw,110px)}
+.hero-glow{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero-glow::before{content:"";position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;
+  background:radial-gradient(circle,rgba(46,91,255,.28),transparent 62%)}
+.hero-glow::after{content:"";position:absolute;bottom:-30%;left:-15%;width:50vw;height:50vw;
+  background:radial-gradient(circle,rgba(255,77,20,.14),transparent 60%)}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(38px,6vw,72px);margin:22px 0 20px}
+.hero h1 .flip{color:var(--orange)}
+.hero-sub{font-size:clamp(16px,1.9vw,20px);color:var(--text-dim);max-width:50ch;margin-bottom:32px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.hero-trust{display:flex;gap:26px;flex-wrap:wrap;font-size:13.5px;color:var(--text-dim-2)}
+.hero-trust b{color:#fff;font-family:var(--f-mono);font-size:15px}
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+}
+
+/* ---- Hero signature: the front desk demo ---- */
+.desk{background:linear-gradient(180deg,#0E1638,#0A1130);border:1px solid var(--line-strong);
+  border-radius:22px;padding:18px;box-shadow:0 30px 70px rgba(0,0,0,.5);position:relative}
+.desk-top{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 14px;border-bottom:1px solid var(--line)}
+.desk-title{display:flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--text-dim)}
+.dot-live{width:8px;height:8px;border-radius:50%;background:#34d17a;box-shadow:0 0 0 0 rgba(52,209,122,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,209,122,.55)}70%{box-shadow:0 0 0 9px rgba(52,209,122,0)}100%{box-shadow:0 0 0 0 rgba(52,209,122,0)}}
+.desk-clock{font-family:var(--f-mono);font-size:11px;color:var(--text-dim-2)}
+.desk-feed{padding:16px 6px 6px;min-height:322px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:82%;padding:12px 15px;border-radius:15px;font-size:14.5px;opacity:0;transform:translateY(10px);animation:rise .5s forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.msg .who{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;display:block;margin-bottom:3px}
+.msg.in{align-self:flex-start;background:#182352;border:1px solid var(--line)}
+.msg.ai{align-self:flex-end;background:linear-gradient(135deg,var(--cobalt),#1e3fc4);border:1px solid rgba(90,130,255,.5)}
+.msg .stamp{font-family:var(--f-mono);font-size:10px;color:#9fe9c0;margin-top:5px;display:block}
+.race{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11.5px;
+  background:rgba(255,77,20,.1);border:1px solid rgba(255,77,20,.28);color:#ffb59c;
+  padding:8px 12px;border-radius:10px;align-self:center;opacity:0;animation:rise .5s forwards}
+.booked{align-self:center;display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;
+  color:#8ff0b8;background:rgba(52,209,122,.12);border:1px solid rgba(52,209,122,.3);
+  padding:9px 14px;border-radius:100px;opacity:0;animation:rise .5s forwards}
+.typing{align-self:flex-end;display:flex;gap:4px;padding:12px 15px;background:#152046;border-radius:15px;opacity:0;animation:rise .3s forwards}
+.typing span{width:6px;height:6px;border-radius:50%;background:#7b8ac9;animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+
+/* ============================================================
+   LOGOS / RUN STRIP
+   ============================================================ */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0}
+.strip-inner{display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:center;
+  font-family:var(--f-mono);font-size:12.5px;letter-spacing:.06em;color:var(--text-dim-2)}
+.strip-inner b{color:var(--text-dim)}
+
+/* ============================================================
+   THE LEAK (pain)
+   ============================================================ */
+.leak-head{max-width:720px;margin-bottom:56px}
+.leak-head h2{margin:18px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat{background:var(--ink-2);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;
+  transition:border-color .2s,transform .2s}
+.stat:hover{border-color:rgba(255,77,20,.4);transform:translateY(-4px)}
+.stat .num{font-family:var(--f-display);font-weight:700;font-size:clamp(34px,4vw,46px);line-height:1;
+  color:var(--orange);letter-spacing:-.03em}
+.stat .lbl{margin-top:12px;font-size:14px;color:var(--text-dim);line-height:1.45}
+.stat .src{margin-top:10px;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;color:var(--text-dim-2)}
+@media(max-width:820px){.stat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.stat-grid{grid-template-columns:1fr}}
+
+/* ============================================================
+   THE LADDER
+   ============================================================ */
+.ladder-head{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:50px}
+.ladder-head h2{margin-top:16px}
+@media(max-width:760px){.ladder-head{grid-template-columns:1fr}}
+.rungs{display:flex;flex-direction:column;gap:16px}
+.rung{background:#fff;border:1px solid var(--line-dark);border-radius:20px;overflow:hidden}
+.rung-top{display:grid;grid-template-columns:190px 1fr;gap:0;align-items:stretch}
+@media(max-width:720px){.rung-top{grid-template-columns:1fr}}
+.rung-label{padding:26px;background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.rung-label.core{background:linear-gradient(150deg,var(--cobalt),#1a34a8)}
+.rung-num{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.5)}
+.rung-name{font-family:var(--f-display);font-weight:600;font-size:22px}
+.rung-tag{font-size:12.5px;color:rgba(255,255,255,.62)}
+.rung-body{padding:22px 26px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.rung-body{grid-template-columns:1fr}}
+.offer{padding:16px 0}
+.offer h3{font-size:17px;color:var(--ink);margin-bottom:5px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.offer .price{font-family:var(--f-mono);font-size:11px;font-weight:700;color:var(--orange);
+  background:rgba(255,77,20,.09);padding:3px 9px;border-radius:100px;letter-spacing:.02em}
+.offer p{font-size:13.5px;color:#5a6486;line-height:1.5}
+.offer .for{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;color:#8b93b0;margin-top:8px;text-transform:uppercase}
+.rung.core-rung{box-shadow:0 20px 50px rgba(46,91,255,.16);border-color:rgba(46,91,255,.3)}
+
+/* ============================================================
+   COST OF THE GLUE (calculator)
+   ============================================================ */
+.glue{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:860px){.glue{grid-template-columns:1fr;gap:36px}}
+.glue-copy h2{margin:16px 0}
+.calc{background:linear-gradient(180deg,#0E1638,#0A1027);border:1px solid var(--line-strong);
+  border-radius:22px;padding:clamp(24px,3vw,34px);box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.calc-row{margin-bottom:24px}
+.calc-row .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.calc-row label{font-size:14px;color:var(--text-dim)}
+.calc-row .val{font-family:var(--f-mono);font-weight:700;font-size:16px;color:#fff}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:100px;outline:none;
+  background:linear-gradient(90deg,var(--cobalt) 0%,var(--cobalt) var(--p,40%),#1c2450 var(--p,40%),#1c2450 100%)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--orange);cursor:pointer;box-shadow:0 0 0 5px rgba(255,77,20,.18);transition:transform .1s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.12)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:50%;
+  background:var(--orange);cursor:pointer;box-shadow:0 0 0 5px rgba(255,77,20,.18)}
+.calc-result{margin-top:8px;padding-top:24px;border-top:1px solid var(--line)}
+.calc-result .cap{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim-2)}
+.calc-result .big{font-family:var(--f-display);font-weight:700;font-size:clamp(40px,6vw,60px);
+  color:var(--orange);letter-spacing:-.03em;line-height:1.05;margin:6px 0}
+.calc-result .fine{font-size:13px;color:var(--text-dim)}
+
+/* ============================================================
+   LIVE ACTIVITY
+   ============================================================ */
+.live{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+@media(max-width:860px){.live{grid-template-columns:1fr;gap:36px}}
+.live-copy h2{margin:16px 0}
+.feed{background:var(--ink-2);border:1px solid var(--line);border-radius:22px;
+  padding:10px;max-height:440px;overflow:hidden;position:relative}
+.feed::after{content:"";position:absolute;left:0;right:0;bottom:0;height:80px;
+  background:linear-gradient(transparent,var(--ink-2));pointer-events:none}
+.feed-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+.feed-head .t{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--text-dim);display:flex;gap:8px;align-items:center}
+.feed-head .c{font-family:var(--f-mono);font-size:11px;color:var(--text-dim-2)}
+.feed-list{padding:8px}
+.ev{display:flex;gap:13px;padding:13px 12px;border-radius:12px;align-items:flex-start;
+  animation:evin .5s ease}
+@keyframes evin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+.ev:nth-child(odd){background:rgba(255,255,255,.02)}
+.ev .ic{width:34px;height:34px;border-radius:9px;flex-shrink:0;display:grid;place-items:center;font-size:15px}
+.ev .ic.call{background:rgba(255,77,20,.14)}
+.ev .ic.book{background:rgba(52,209,122,.14)}
+.ev .ic.chat{background:rgba(46,91,255,.18)}
+.ev .ic.lead{background:rgba(90,130,255,.14)}
+.ev .txt{font-size:13.7px;color:#cdd4f0;line-height:1.4}
+.ev .txt b{color:#fff;font-weight:600}
+.ev .tm{margin-left:auto;font-family:var(--f-mono);font-size:10.5px;color:var(--text-dim-2);white-space:nowrap;padding-top:2px}
+
+/* ============================================================
+   MEET ACE
+   ============================================================ */
+.ace-sec{position:relative;overflow:hidden}
+.ace-sec .hero-glow::before{top:auto;bottom:-40%;right:-10%}
+.ace-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+@media(max-width:860px){.ace-grid{grid-template-columns:1fr;gap:40px}}
+.ace-copy h2{margin:16px 0}
+.ace-points{list-style:none;margin:26px 0 32px;display:flex;flex-direction:column;gap:14px}
+.ace-points li{display:flex;gap:12px;font-size:15px;color:var(--text-dim)}
+.ace-points .tick{color:var(--orange);font-weight:700;flex-shrink:0}
+.ace-points b{color:#fff;font-weight:600}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.price-head{max-width:660px;margin-bottom:48px}
+.price-head h2{margin:16px 0}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:860px){.price-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
+.pcard{border:1px solid var(--line-dark);border-radius:20px;padding:30px;background:#fff;display:flex;flex-direction:column}
+.pcard.feature{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 24px 60px rgba(7,11,31,.3);position:relative}
+.pcard.feature::before{content:"MOST POPULAR";position:absolute;top:20px;right:20px;font-family:var(--f-mono);
+  font-size:9.5px;letter-spacing:.14em;color:var(--orange);border:1px solid rgba(255,77,20,.4);
+  padding:4px 8px;border-radius:100px}
+.pcard .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt)}
+.pcard.feature .k{color:var(--cobalt-bright)}
+.pcard h3{font-size:22px;margin:12px 0 4px;color:inherit}
+.pcard .amt{font-family:var(--f-display);font-weight:700;font-size:40px;letter-spacing:-.03em;margin:14px 0 2px}
+.pcard .amt small{font-size:15px;font-weight:500;color:var(--text-dim-2)}
+.pcard .pre{font-family:var(--f-mono);font-size:11px;color:var(--text-dim-2);letter-spacing:.06em}
+.pcard ul{list-style:none;margin:20px 0 26px;display:flex;flex-direction:column;gap:11px}
+.pcard li{font-size:14px;display:flex;gap:9px;color:#4b5578}
+.pcard.feature li{color:var(--text-dim)}
+.pcard li::before{content:"→";color:var(--orange);font-weight:700}
+.pcard .btn{margin-top:auto;width:100%}
+.founding{margin-top:34px;background:rgba(255,77,20,.06);border:1px solid rgba(255,77,20,.22);
+  border-radius:16px;padding:22px 26px;display:flex;gap:16px;align-items:flex-start}
+.band-light .founding{color:var(--ink)}
+.founding .star{color:var(--orange);font-size:20px;line-height:1}
+.founding p{font-size:14px;color:#4b5578;line-height:1.55}
+.founding b{color:var(--ink)}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:48px}
+@media(max-width:760px){.faq-grid{grid-template-columns:1fr;gap:28px}}
+.faq-item{border-bottom:1px solid var(--line);padding:22px 0;cursor:pointer}
+.faq-q{display:flex;justify-content:space-between;gap:20px;align-items:center;font-family:var(--f-display);
+  font-weight:500;font-size:19px}
+.faq-q .pm{color:var(--orange);font-size:24px;transition:transform .2s;flex-shrink:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--text-dim);font-size:15px}
+.faq-item.open .faq-a{max-height:220px;margin-top:14px}
+.faq-item.open .pm{transform:rotate(45deg)}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final{text-align:center;position:relative;overflow:hidden}
+.final .hero-glow::before{top:-30%;left:50%;transform:translateX(-50%);right:auto;width:70vw;height:70vw}
+.final-inner{position:relative;z-index:1;max-width:720px;margin:0 auto}
+.final h2{font-size:clamp(34px,5.4vw,60px);margin:18px 0 20px}
+.final p{color:var(--text-dim);font-size:18px;margin-bottom:34px}
+.final .hero-cta{justify-content:center}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 30px}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;margin-bottom:44px}
+@media(max-width:700px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-brand .logo{margin-bottom:14px;display:inline-block}
+.foot-brand p{font-size:14px;color:var(--text-dim);max-width:34ch}
+.foot-col h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-dim-2);margin-bottom:16px}
+.foot-col a,.foot-col span{display:block;font-size:14px;color:var(--text-dim);margin-bottom:10px}
+.foot-col a:hover{color:#fff}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  padding-top:26px;border-top:1px solid var(--line);font-size:12.5px;color:var(--text-dim-2)}
+
+/* ============================================================
+   CHAT WIDGET (Ace)
+   ============================================================ */
+.ace-launch{position:fixed;bottom:24px;right:24px;z-index:80;display:flex;align-items:center;gap:11px;
+  background:var(--orange);color:#fff;border:0;border-radius:100px;padding:14px 20px 14px 16px;
+  font-family:var(--f-body);font-weight:600;font-size:15px;cursor:pointer;
+  box-shadow:0 12px 34px rgba(255,77,20,.42);transition:transform .18s}
+.ace-launch:hover{transform:translateY(-3px) scale(1.02)}
+.ace-launch .av{width:26px;height:26px;border-radius:50%;background:#fff;color:var(--orange);
+  display:grid;place-items:center;font-weight:700;font-size:14px}
+.ace-panel{position:fixed;bottom:24px;right:24px;z-index:81;width:min(390px,calc(100vw - 32px));
+  height:min(600px,calc(100vh - 48px));background:#0B1027;border:1px solid var(--line-strong);
+  border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.6);display:none;flex-direction:column;overflow:hidden}
+.ace-panel.open{display:flex}
+.ace-h{padding:16px 18px;background:linear-gradient(135deg,var(--cobalt),#1a2fa0);display:flex;align-items:center;gap:12px}
+.ace-h .av{width:38px;height:38px;border-radius:50%;background:#fff;color:var(--cobalt);display:grid;place-items:center;font-family:var(--f-display);font-weight:700}
+.ace-h .who{flex:1}
+.ace-h .who .n{font-family:var(--f-display);font-weight:600;font-size:16px}
+.ace-h .who .s{font-family:var(--f-mono);font-size:10.5px;color:#bcd0ff;display:flex;align-items:center;gap:6px}
+.ace-h .x{background:none;border:0;color:#fff;cursor:pointer;opacity:.8;font-size:20px}
+.ace-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.cmsg{max-width:85%;padding:11px 14px;border-radius:14px;font-size:14.5px;line-height:1.5}
+.cmsg.ace{align-self:flex-start;background:#182352;border:1px solid var(--line)}
+.cmsg.user{align-self:flex-end;background:linear-gradient(135deg,var(--cobalt),#1e3fc4)}
+.cchips{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px}
+.cchip{font-size:12.5px;background:rgba(46,91,255,.12);border:1px solid rgba(90,130,255,.3);
+  color:#bcd0ff;padding:7px 12px;border-radius:100px;cursor:pointer;transition:background .15s}
+.cchip:hover{background:rgba(46,91,255,.24)}
+.ace-foot{padding:14px 16px;border-top:1px solid var(--line);display:flex;gap:10px}
+.ace-foot input{flex:1;background:#141c40;border:1px solid var(--line);border-radius:100px;
+  padding:12px 16px;color:#fff;font-family:var(--f-body);font-size:14px;outline:none}
+.ace-foot input:focus{border-color:var(--cobalt)}
+.ace-foot button{background:var(--orange);border:0;border-radius:50%;width:44px;height:44px;color:#fff;
+  cursor:pointer;font-size:17px;flex-shrink:0;transition:transform .12s}
+.ace-foot button:hover{transform:scale(1.06)}
+.ctyping{align-self:flex-start;display:flex;gap:4px;padding:12px 15px;background:#182352;border-radius:14px}
+.ctyping span{width:6px;height:6px;border-radius:50%;background:#7b8ac9;animation:blink 1.2s infinite}
+.ctyping span:nth-child(2){animation-delay:.2s}.ctyping span:nth-child(3){animation-delay:.4s}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo">Proy<b>Tech</b></a>
+    <nav class="nav-links">
+      <a href="#leak">The Problem</a>
+      <a href="#ladder">What We Do</a>
+      <a href="#glue">Calculator</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn btn-ghost" onclick="openAce()">Talk to Ace</button>
+      <a href="#book" class="btn btn-primary">Free audit</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">For Realtors &amp; Lenders</span>
+      <h1>78% of buyers hire the <span class="flip">first</span> agent who answers.</h1>
+      <p class="hero-sub">The average agent takes <b style="color:#fff">over 15 hours</b> to reply to a new lead. ProyTech gives you a website that looks the part and an AI front desk that answers every call, text, and form <b style="color:#fff">in seconds</b> — so you're always first.</p>
+      <div class="hero-cta">
+        <a href="#book" class="btn btn-primary">Book my free audit →</a>
+        <button class="btn btn-ghost" onclick="openAce()">Ask Ace a question</button>
+      </div>
+      <div class="hero-trust">
+        <div><b>&lt;10s</b><br>average reply</div>
+        <div><b>24/7</b><br>never off the clock</div>
+        <div><b>Wichita</b><br>built &amp; supported local</div>
+      </div>
+    </div>
+
+    <!-- SIGNATURE: the front desk demo -->
+    <div class="desk" aria-hidden="true">
+      <div class="desk-top">
+        <div class="desk-title"><span class="dot-live"></span> ProyTech Front Desk · Live</div>
+        <div class="desk-clock" id="deskClock">9:47 PM</div>
+      </div>
+      <div class="desk-feed" id="deskFeed"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RUN STRIP ============ -->
+<div class="strip">
+  <div class="wrap strip-inner">
+    <span>WHAT WE PLUG INTO:</span>
+    <b>Your CRM</b><span>·</span><b>Missed-call text-back</b><span>·</span><b>AI booking</b><span>·</span><b>Website + SEO</b><span>·</span><b>Newsletters</b>
+  </div>
+</div>
+
+<!-- ============ THE LEAK ============ -->
+<section class="band" id="leak">
+  <div class="wrap">
+    <div class="leak-head reveal">
+      <span class="eyebrow">The Leak</span>
+      <h2 class="h2">You're not short on leads.<br>You're losing the ones you have.</h2>
+      <p class="lead">Every unanswered call, every after-hours form that sits till morning, every lead you followed up with once and forgot — that's commission walking out the door. Here's what the data says it's costing agents right now.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat reveal"><div class="num">21×</div><div class="lbl">more likely to qualify a lead when you answer in 5 minutes vs. 30.</div><div class="src">MIT / InsideSales</div></div>
+      <div class="stat reveal"><div class="num">15 hrs</div><div class="lbl">average time an agent takes to respond to a new online lead.</div><div class="src">Inman 2025</div></div>
+      <div class="stat reveal"><div class="num">62%</div><div class="lbl">of inquiries arrive after hours — nights and weekends, when you're off.</div><div class="src">Zillow / NAR</div></div>
+      <div class="stat reveal"><div class="num">1.3</div><div class="lbl">follow-ups the average agent makes — when 80% of deals need 5 or more.</div><div class="src">Industry avg</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE LADDER ============ -->
+<section class="band band-light" id="ladder">
+  <div class="wrap">
+    <div class="ladder-head reveal">
+      <div>
+        <span class="eyebrow">What We Do</span>
+        <h2 class="h2">One ladder. Four rungs.<br>Start anywhere, climb from there.</h2>
+      </div>
+      <p class="lead">A cheap website gets us in the door. The AI front desk is where the real money is saved. Everything's built to work together.</p>
+    </div>
+
+    <div class="rungs">
+      <!-- RUNG 1 -->
+      <div class="rung reveal">
+        <div class="rung-top">
+          <div class="rung-label"><span class="rung-num">RUNG 01</span><span class="rung-name">Wedge</span><span class="rung-tag">Get in the door</span></div>
+          <div class="rung-body">
+            <div class="offer">
+              <h3>Website Build <span class="price">from $750</span></h3>
+              <p>A clean, premium site that makes you look like the obvious choice — with SEO built in so you actually get found.</p>
+              <div class="for">Realtors · lenders · any new relationship</div>
+            </div>
+            <div class="offer">
+              <h3>Free Discovery Audit <span class="price">$0</span></h3>
+              <p>30–45 minutes. We spot 2–3 obvious wins in how you capture and follow up on leads. No pitch, no obligation.</p>
+              <div class="for">Anyone curious where the leaks are</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RUNG 2 (core) -->
+      <div class="rung core-rung reveal">
+        <div class="rung-top">
+          <div class="rung-label core"><span class="rung-num">RUNG 02 · CORE</span><span class="rung-name">The Front Desk</span><span class="rung-tag">Where we live</span></div>
+          <div class="rung-body">
+            <div class="offer">
+              <h3>AI Front-Office Automation <span class="price">from $500/mo</span></h3>
+              <p>Missed-call text-back, AI receptionist, automated booking, straight into your CRM. Captures the leads you're already losing.</p>
+              <div class="for">Any business losing calls after hours</div>
+            </div>
+            <div class="offer">
+              <h3>Qualified-Leads Funnel <span class="price">from $1,000/mo</span></h3>
+              <p>Video → qualify → book → show-up nurture. Fills your calendar with pre-screened people who are ready to talk. Ad management optional.</p>
+              <div class="for">Realtors, lenders, service pros who sell on calls</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RUNG 3 -->
+      <div class="rung reveal">
+        <div class="rung-top">
+          <div class="rung-label"><span class="rung-num">RUNG 03</span><span class="rung-name">Expansion</span><span class="rung-tag">Stay top of mind</span></div>
+          <div class="rung-body">
+            <div class="offer">
+              <h3>Realtor Newsletters <span class="price">from $200/mo</span></h3>
+              <p>Done-for-you automated newsletters that keep you in front of your sphere. Set it once, it sends itself.</p>
+              <div class="for">Relationship-driven salespeople</div>
+            </div>
+            <div class="offer">
+              <h3>Paid Ad Management <span class="price">from $2,000/mo</span></h3>
+              <p>Meta ad management that feeds the funnel. Ad spend is separate and always yours — never buried in our fee.</p>
+              <div class="for">Ready to pour fuel on a working system</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RUNG 4 -->
+      <div class="rung reveal">
+        <div class="rung-top">
+          <div class="rung-label"><span class="rung-num">RUNG 04</span><span class="rung-name">Advisory</span><span class="rung-tag">Our brain, on tap</span></div>
+          <div class="rung-body">
+            <div class="offer">
+              <h3>Consulting — Deep Dive <span class="price">~$1,000</span></h3>
+              <p>Half a day in the room, then a written roadmap you can act on. Credited toward a build if you move forward.</p>
+              <div class="for">Owners who want a plan, not just tools</div>
+            </div>
+            <div class="offer">
+              <h3>Advisory Retainer <span class="price">from $500/mo</span></h3>
+              <p>Ongoing strategy on positioning, lead-gen, automation, and how to actually use AI in your day-to-day.</p>
+              <div class="for">Growing businesses who want a partner</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COST OF THE GLUE ============ -->
+<section class="band" id="glue">
+  <div class="wrap glue">
+    <div class="glue-copy reveal">
+      <span class="eyebrow">The Cost of the Glue</span>
+      <h2 class="h2">The "glue" holding your business together is costing you deals.</h2>
+      <p class="lead">The glue is you — manually catching calls, replying when you can, remembering to follow up. It works until it doesn't. Slide the numbers and see what slow response time actually costs you in a year.</p>
+      <div class="hero-cta" style="margin-top:26px">
+        <a href="#book" class="btn btn-primary">Plug the leak →</a>
+      </div>
+    </div>
+
+    <div class="calc reveal">
+      <div class="calc-row">
+        <div class="top"><label>New leads per month</label><span class="val" id="vLeads">40</span></div>
+        <input type="range" id="rLeads" min="5" max="150" value="40" />
+      </div>
+      <div class="calc-row">
+        <div class="top"><label>Average commission / deal</label><span class="val" id="vComm">$9,000</span></div>
+        <input type="range" id="rComm" min="2000" max="20000" step="500" value="9000" />
+      </div>
+      <div class="calc-row">
+        <div class="top"><label>How fast do you reply now?</label><span class="val" id="vResp">A few hours</span></div>
+        <input type="range" id="rResp" min="0" max="3" step="1" value="2" />
+      </div>
+      <div class="calc-result">
+        <div class="cap">Estimated revenue leaking per year</div>
+        <div class="big" id="vLost">$118,800</div>
+        <div class="fine">Based on the gap between your current close rate and what a &lt;5-minute reply captures. An AI front desk closes most of that gap automatically.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE ACTIVITY ============ -->
+<section class="band" id="live" style="background:linear-gradient(180deg,#070B1F,#0A1130)">
+  <div class="wrap live">
+    <div class="live-copy reveal">
+      <span class="eyebrow">Live Activity</span>
+      <h2 class="h2">This is your front desk, working while you sleep.</h2>
+      <p class="lead">Calls answered, leads qualified, showings booked — all handled the second they come in, logged into your CRM, and handed to you warm. No lead ever sits till morning again.</p>
+      <div class="hero-cta" style="margin-top:26px">
+        <button class="btn btn-ghost" onclick="openAce()">See it live — ask Ace</button>
+      </div>
+    </div>
+    <div class="feed" aria-hidden="true">
+      <div class="feed-head">
+        <div class="t"><span class="dot-live"></span> Front Desk · Activity</div>
+        <div class="c" id="feedCount">Today · 34 events</div>
+      </div>
+      <div class="feed-list" id="feedList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEET ACE ============ -->
+<section class="band ace-sec">
+  <div class="hero-glow"></div>
+  <div class="wrap ace-grid">
+    <div class="ace-copy reveal">
+      <span class="eyebrow">Meet Ace</span>
+      <h2 class="h2">Ace is the AI front desk. Try it right now.</h2>
+      <p class="lead">Ace is trained on how realtors and lenders actually win deals. Ask it anything — how the system works, what it'd cost you, whether it fits your business. It's the same assistant we'd put on your site.</p>
+      <ul class="ace-points">
+        <li><span class="tick">✓</span><span>Answers every lead <b>in seconds</b>, day or night</span></li>
+        <li><span class="tick">✓</span><span>Qualifies and <b>books the appointment</b> before you're even free</span></li>
+        <li><span class="tick">✓</span><span>Speaks in <b>your voice</b> and hands you the lead warm</span></li>
+      </ul>
+      <button class="btn btn-primary" onclick="openAce()">Chat with Ace →</button>
+    </div>
+    <div class="reveal">
+      <div class="desk" style="max-width:420px;margin:0 auto">
+        <div class="desk-top">
+          <div class="desk-title"><span class="dot-live"></span> Ace · ProyTech</div>
+          <div class="desk-clock">online</div>
+        </div>
+        <div class="desk-feed" style="min-height:270px">
+          <div class="msg in" style="animation-delay:0s"><span class="who">Visitor</span>Do you work with mortgage lenders or just realtors?</div>
+          <div class="msg ai" style="animation-delay:.3s"><span class="who">Ace</span>Both! Lenders love the front desk because it catches pre-qual inquiries after hours and books the call while intent is high. Want me to show you how it'd work for your pipeline?</div>
+          <div class="msg in" style="animation-delay:.6s"><span class="who">Visitor</span>Yeah, what would that cost?</div>
+          <div class="msg ai" style="animation-delay:.9s"><span class="who">Ace</span>The front desk starts at $500/mo. Best next step is a free 30-min audit — want me to grab a time?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="band band-light" id="pricing">
+  <div class="wrap">
+    <div class="price-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2 class="h2">Starting points, not surprises.</h2>
+      <p class="lead">Final numbers are set per client after your free audit. These are the floors — where each offer starts.</p>
+    </div>
+    <div class="price-grid">
+      <div class="pcard reveal">
+        <span class="k">The Wedge</span>
+        <h3>Website</h3>
+        <div class="pre">starting at</div>
+        <div class="amt">$750</div>
+        <ul>
+          <li>Premium, brand-matched design</li>
+          <li>SEO built in from day one</li>
+          <li>Lead capture wired to your CRM</li>
+          <li>Optional care plan from $50/mo</li>
+        </ul>
+        <a href="#book" class="btn btn-dark">Start here</a>
+      </div>
+      <div class="pcard feature reveal">
+        <span class="k">The Core</span>
+        <h3>AI Front Desk</h3>
+        <div class="pre">starting at</div>
+        <div class="amt">$500<small>/mo</small></div>
+        <ul>
+          <li>Missed-call text-back in seconds</li>
+          <li>AI receptionist + automated booking</li>
+          <li>24/7 after-hours coverage</li>
+          <li>Every lead logged to your CRM</li>
+        </ul>
+        <a href="#book" class="btn btn-primary">Book free audit</a>
+      </div>
+      <div class="pcard reveal">
+        <span class="k">The Funnel</span>
+        <h3>Qualified Leads</h3>
+        <div class="pre">starting at</div>
+        <div class="amt">$1,000<small>/mo</small></div>
+        <ul>
+          <li>Video → qualify → book system</li>
+          <li>Show-up nurture sequences</li>
+          <li>Pre-screened, ready-to-talk leads</li>
+          <li>Ad management optional</li>
+        </ul>
+        <a href="#book" class="btn btn-dark">Talk it through</a>
+      </div>
+    </div>
+    <div class="founding reveal">
+      <span class="star">★</span>
+      <p><b>Founding-client rates.</b> We're building our first case studies right now — anchor clients get discounted or waived setup and reduced monthly rates, traded in writing for a testimonial and a couple of warm intros. If you want the best deal we'll ever offer, this is the window.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="band" id="faq">
+  <div class="wrap faq-grid">
+    <div class="reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="h2" style="margin-top:16px">Before you<br>ask Ace.</h2>
+      <p class="lead" style="margin-top:16px">Still curious? The chat's right there in the corner.</p>
+    </div>
+    <div class="reveal">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What does ProyTech actually do? <span class="pm">+</span></div>
+        <div class="faq-a">Two things. We build premium websites that make you look legit, and we install an AI front desk that answers every call, text, and web lead in seconds — qualifying them and booking appointments 24/7, all wired into the CRM you already use.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Do you only work with realtors and lenders? <span class="pm">+</span></div>
+        <div class="faq-a">That's where we start, because speed-to-lead matters most in real estate and mortgage. But the exact same system works for any local business losing calls and leads after hours — so if that's you, let's talk.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Will this replace my current CRM? <span class="pm">+</span></div>
+        <div class="faq-a">No. We build on top of the tools you already use and push leads straight into your existing CRM. We're adding the front desk — not another login you have to babysit.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">I already have a website. Do I need a new one? <span class="pm">+</span></div>
+        <div class="faq-a">Not necessarily. The front desk can bolt onto most existing sites. If your current site is slow, doesn't rank, or doesn't capture leads, we'll tell you honestly in the free audit — no pressure to rebuild.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">How fast can we go live? <span class="pm">+</span></div>
+        <div class="faq-a">Websites can turn around in days. A front desk setup is typically live within a week or two of kickoff, depending on how your calls and CRM are set up. The audit gives you an exact timeline.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="band final" id="book">
+  <div class="hero-glow"></div>
+  <div class="wrap final-inner reveal">
+    <span class="eyebrow" style="justify-content:center">Free Discovery Audit</span>
+    <h2>Let's find the leaks.<br>Then plug them.</h2>
+    <p>30–45 minutes, no pitch. We'll show you exactly where leads are slipping through and what it'd take to catch them. Worst case, you leave with a to-do list.</p>
+    <div class="hero-cta">
+      <a href="mailto:getproytech@gmail.com?subject=Free%20Audit%20Request&body=Hi%20ProyTech%2C%20I'd%20like%20to%20book%20a%20free%20discovery%20audit." class="btn btn-primary">Book my free audit →</a>
+      <button class="btn btn-ghost" onclick="openAce()">Or ask Ace first</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="logo">Proy<b>Tech</b></a>
+        <p>Websites and an AI front desk for realtors, lenders, and local businesses. Built and supported in Wichita, Kansas.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#ladder">What we do</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#book">Free audit</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="mailto:getproytech@gmail.com">getproytech@gmail.com</a>
+        <span>105 N Main St</span>
+        <span>Wichita, KS 67202</span>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> ProyTech. All rights reserved.</span>
+      <span>Your front desk, running itself.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ ACE CHAT WIDGET ============ -->
+<button class="ace-launch" id="aceLaunch" onclick="openAce()">
+  <span class="av">A</span> Talk to Ace
+</button>
+
+<div class="ace-panel" id="acePanel" role="dialog" aria-label="Chat with Ace">
+  <div class="ace-h">
+    <span class="av">A</span>
+    <div class="who"><div class="n">Ace</div><div class="s"><span class="dot-live"></span> ProyTech Front Desk</div></div>
+    <button class="x" onclick="closeAce()" aria-label="Close chat">✕</button>
+  </div>
+  <div class="ace-body" id="aceBody">
+    <div class="cmsg ace">Hey — I'm Ace, ProyTech's AI front desk. I help realtors and lenders stop losing leads to slow replies. What are you working on?</div>
+  </div>
+  <div class="cchips" id="aceChips">
+    <button class="cchip" onclick="quickAsk('How does the AI front desk work?')">How does it work?</button>
+    <button class="cchip" onclick="quickAsk('What would this cost for a solo realtor?')">What's it cost?</button>
+    <button class="cchip" onclick="quickAsk('I want to book a free audit')">Book an audit</button>
+  </div>
+  <div class="ace-foot">
+    <input id="aceInput" type="text" placeholder="Ask Ace anything…" onkeydown="if(event.key==='Enter')sendAce()" />
+    <button onclick="sendAce()" aria-label="Send">↑</button>
+  </div>
+</div>
+
+<script>
+/* ===== year ===== */
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ===== scroll reveal ===== */
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ===== HERO front-desk sequence ===== */
+(function(){
+  const feed=document.getElementById('deskFeed');
+  if(!feed)return;
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const steps=[
+    {t:'in',html:'<span class="who">New lead · 9:47 PM</span>Hi, saw your listing at 214 Elm — is it still available?'},
+    {t:'race',html:'⏱ Average agent replies in 15h 17m…'},
+    {t:'typing'},
+    {t:'ai',html:'<span class="who">Ace</span>Hi! Yes, 214 Elm is available. Would you like to see it this week?<span class="stamp">✓ replied in 0m 08s</span>'},
+    {t:'in',html:'<span class="who">Lead</span>Yes! Is Saturday open?'},
+    {t:'typing'},
+    {t:'ai',html:'<span class="who">Ace</span>Saturday 2:00 PM works — you\'re booked. I\'ll text you a reminder. 🎉'},
+    {t:'booked',html:'✓ Showing booked · Saturday 2:00 PM'}
+  ];
+  function render(){
+    feed.innerHTML='';
+    if(reduce){
+      steps.filter(s=>s.t!=='typing'&&s.t!=='race').forEach(s=>add(s,true));
+      return;
+    }
+    let i=0;
+    function next(){
+      if(i>=steps.length){setTimeout(()=>{i=0;feed.innerHTML='';next()},3200);return;}
+      const s=steps[i++];
+      if(s.t==='typing'){
+        const el=document.createElement('div');el.className='typing';el.innerHTML='<span></span><span></span><span></span>';
+        feed.appendChild(el);setTimeout(()=>{el.remove();next()},1100);
+      }else{add(s);setTimeout(next, s.t==='in'?1200:900);}
+    }
+    next();
+  }
+  function add(s,instant){
+    const el=document.createElement('div');
+    el.className = s.t==='race'?'race': s.t==='booked'?'booked':('msg '+s.t);
+    el.innerHTML=s.html;
+    if(instant)el.style.animation='none';
+    feed.appendChild(el);
+    feed.scrollTop=feed.scrollHeight;
+  }
+  render();
+})();
+
+/* ===== COST OF THE GLUE calculator ===== */
+(function(){
+  const rL=document.getElementById('rLeads'),rC=document.getElementById('rComm'),rR=document.getElementById('rResp');
+  const vL=document.getElementById('vLeads'),vC=document.getElementById('vComm'),vR=document.getElementById('vResp'),vLost=document.getElementById('vLost');
+  if(!rL)return;
+  const respLabels=['Within 5 minutes','Within an hour','A few hours','Next day / when I can'];
+  // close-rate gap vs a <5min responder (fraction of leads lost to slowness)
+  const gap=[0, .06, .12, .18];
+  const fmt=n=>'$'+Math.round(n).toLocaleString();
+  function calc(){
+    const leads=+rL.value, comm=+rC.value, r=+rR.value;
+    vL.textContent=leads;
+    vC.textContent=fmt(comm);
+    vR.textContent=respLabels[r];
+    // yearly lost = leads/mo * 12 * gap * close-value-per-lead(comm) * dampener
+    const lost=leads*12*gap[r]*comm*0.45;
+    vLost.textContent=fmt(lost);
+    [rL,rC,rR].forEach(el=>{const pct=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--p',pct+'%')});
+  }
+  [rL,rC,rR].forEach(el=>el.addEventListener('input',calc));
+  calc();
+})();
+
+/* ===== LIVE ACTIVITY feed ===== */
+(function(){
+  const list=document.getElementById('feedList');
+  if(!list)return;
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const events=[
+    {ic:'call',t:'<b>Missed call captured</b> — texted back in 8s'},
+    {ic:'chat',t:'<b>Website lead answered</b> — 214 Elm St inquiry'},
+    {ic:'book',t:'<b>Showing booked</b> — Saturday 2:00 PM'},
+    {ic:'lead',t:'<b>Pre-qual inquiry</b> qualified & routed to lender'},
+    {ic:'call',t:'<b>After-hours call</b> handled — 11:24 PM'},
+    {ic:'chat',t:'<b>Follow-up sent</b> — day-3 nurture, auto'},
+    {ic:'book',t:'<b>Buyer consult booked</b> — added to calendar'},
+    {ic:'lead',t:'<b>New seller lead</b> logged to CRM'},
+    {ic:'call',t:'<b>Voicemail transcribed</b> & flagged urgent'},
+    {ic:'chat',t:'<b>Question answered</b> — “what\'s my rate?”'}
+  ];
+  const icons={call:'📞',chat:'💬',book:'📅',lead:'✨'};
+  function stamp(){const d=new Date();d.setSeconds(d.getSeconds()-Math.floor(Math.random()*90));return d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});}
+  function seed(){for(let k=0;k<6;k++)push(events[k%events.length],true);}
+  function push(ev,instant){
+    const el=document.createElement('div');el.className='ev';
+    if(instant)el.style.animation='none';
+    el.innerHTML='<div class="ic '+ev.ic+'">'+icons[ev.ic]+'</div><div class="txt">'+ev.t+'</div><div class="tm">'+stamp()+'</div>';
+    list.prepend(el);
+    while(list.children.length>7)list.lastChild.remove();
+  }
+  seed();
+  if(!reduce){let i=6;setInterval(()=>{push(events[i%events.length]);i++},2600);}
+})();
+
+/* ===== ACE CHAT (real Claude via /api/chat) ===== */
+const aceBody=document.getElementById('aceBody');
+const aceInput=document.getElementById('aceInput');
+const acePanel=document.getElementById('acePanel');
+const aceLaunch=document.getElementById('aceLaunch');
+const aceChips=document.getElementById('aceChips');
+let aceHistory=[];
+
+function openAce(){acePanel.classList.add('open');aceLaunch.style.display='none';setTimeout(()=>aceInput.focus(),100);}
+function closeAce(){acePanel.classList.remove('open');aceLaunch.style.display='flex';}
+function quickAsk(q){aceChips.style.display='none';aceInput.value=q;sendAce();}
+
+function bubble(text,cls){
+  const el=document.createElement('div');el.className='cmsg '+cls;el.textContent=text;
+  aceBody.appendChild(el);aceBody.scrollTop=aceBody.scrollHeight;return el;
+}
+function typing(){
+  const el=document.createElement('div');el.className='ctyping';el.innerHTML='<span></span><span></span><span></span>';
+  aceBody.appendChild(el);aceBody.scrollTop=aceBody.scrollHeight;return el;
+}
+async function sendAce(){
+  const text=aceInput.value.trim();if(!text)return;
+  aceChips.style.display='none';
+  aceInput.value='';
+  bubble(text,'user');
+  aceHistory.push({role:'user',content:text});
+  const dots=typing();
+  try{
+    const res=await fetch('/api/chat',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:aceHistory})
+    });
+    dots.remove();
+    if(!res.ok)throw new Error('bad status');
+    const data=await res.json();
+    const reply=data.reply||"Sorry — I hit a snag. Email us at getproytech@gmail.com and we'll jump right on it.";
+    bubble(reply,'ace');
+    aceHistory.push({role:'assistant',content:reply});
+  }catch(e){
+    dots.remove();
+    bubble("I can't reach the server right now — but I'd still love to help. Email getproytech@gmail.com or book a free audit and we'll answer everything.",'ace');
+  }
+}
+</script>
+</body>
+</html>
