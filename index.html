@@ -12,6 +12,11 @@
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#070B1F" />
 
+<!-- Favicon / browser icon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="ProyTech — Your Front Desk, Answering Every Lead in Seconds" />
@@ -164,6 +169,8 @@ header.nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
 .logo{font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:-.01em}
 .logo b{color:var(--orange);font-weight:700}
+.logo-img{height:30px;width:auto;display:block}
+.foot-brand .logo-img{height:28px}
 .nav-links{display:flex;gap:30px;align-items:center}
 .nav-links a{font-size:14.5px;color:var(--text-dim);font-weight:500;transition:color .16s}
 .nav-links a:hover{color:#fff}
@@ -441,6 +448,59 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
 .ctyping span{width:6px;height:6px;border-radius:50%;background:#7b8ac9;animation:blink 1.2s infinite}
 .ctyping span:nth-child(2){animation-delay:.2s}.ctyping span:nth-child(3){animation-delay:.4s}
 
+/* ============================================================
+   THE NUCLEUS (full-integration story)
+   ============================================================ */
+.nucleus{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+@media(max-width:880px){.nucleus{grid-template-columns:1fr;gap:40px}}
+.nucleus-copy h2{margin:16px 0}
+.nucleus-copy .lead{margin-bottom:22px}
+.nuc-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.nuc-list li{display:flex;gap:11px;font-size:15px;color:var(--text-dim)}
+.nuc-list b{color:#fff;font-weight:600}
+.nuc-list .tick{color:var(--orange);font-weight:700;flex-shrink:0}
+.hub{width:100%;max-width:520px;margin:0 auto;display:block}
+.hub .spoke{stroke:var(--line-strong);stroke-width:1.5;fill:none}
+.hub .flow{stroke:var(--cobalt);stroke-width:2;fill:none;stroke-dasharray:5 7;opacity:.9;
+  animation:dash 3s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-48}}
+.hub .node{fill:var(--ink-2);stroke:var(--line-strong);stroke-width:1.5}
+.hub .node-l{font-family:var(--f-mono);font-size:11px;fill:var(--text-dim);text-anchor:middle}
+.hub .core{fill:url(#coreGrad)}
+.hub .core-l{font-family:var(--f-display);font-weight:700;fill:#fff;text-anchor:middle}
+.hub .core-s{font-family:var(--f-mono);font-size:9px;fill:rgba(255,255,255,.7);text-anchor:middle;letter-spacing:.1em}
+.hub .pulse{fill:none;stroke:var(--cobalt);stroke-width:1.5;opacity:0;animation:hubpulse 3s ease-out infinite}
+@keyframes hubpulse{0%{opacity:.5;r:64px}100%{opacity:0;r:110px}}
+
+/* ============================================================
+   WHO WE ARE
+   ============================================================ */
+.team-head{max-width:680px;margin-bottom:14px}
+.team-head h2{margin:16px 0}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:40px 0 34px}
+@media(max-width:720px){.team-grid{grid-template-columns:1fr}}
+.founder{background:var(--ink-2);border:1px solid var(--line);border-radius:20px;padding:30px;
+  transition:border-color .2s,transform .2s}
+.founder:hover{border-color:rgba(255,77,20,.35);transform:translateY(-4px)}
+.founder-top{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.avatar{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;flex-shrink:0;
+  font-family:var(--f-display);font-weight:700;font-size:22px;color:#fff;
+  background:linear-gradient(145deg,var(--cobalt),#1a2fa0);border:1px solid var(--line-strong)}
+.founder.g .avatar{background:linear-gradient(145deg,var(--orange),#c9370c)}
+.founder-top .nm{font-family:var(--f-display);font-weight:600;font-size:20px}
+.founder-top .rl{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt-bright);margin-top:3px}
+.founder.g .rl{color:var(--orange-bright)}
+.founder p{font-size:14.5px;color:var(--text-dim);line-height:1.55}
+.founder .tagline{margin-top:14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;color:var(--text-dim-2);border-top:1px solid var(--line);padding-top:14px}
+.capband{background:var(--ink-2);border:1px solid var(--line);border-radius:18px;padding:24px 28px;
+  display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
+@media(max-width:640px){.capband{grid-template-columns:1fr;gap:16px}}
+.capband .ct{font-family:var(--f-display);font-weight:600;font-size:16px;color:#fff;line-height:1.4;max-width:24ch}
+.capband .ct span{color:var(--text-dim);font-weight:400;font-size:14px}
+.stack{display:flex;flex-wrap:wrap;gap:10px}
+.stack .s{font-family:var(--f-mono);font-size:12px;color:var(--text-dim);
+  background:rgba(255,255,255,.04);border:1px solid var(--line);padding:7px 13px;border-radius:100px}
+
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
   .reveal{opacity:1;transform:none}
@@ -452,7 +512,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
 <!-- ============ NAV ============ -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="#" class="logo">Proy<b>Tech</b></a>
+    <a href="#" class="logo" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy<b>Tech</b>')"></a>
     <nav class="nav-links">
       <a href="#leak">The Problem</a>
       <a href="#ladder">What We Do</a>
@@ -474,7 +534,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
     <div>
       <span class="eyebrow">For Realtors &amp; Lenders</span>
       <h1>78% of buyers hire the <span class="flip">first</span> agent who answers.</h1>
-      <p class="hero-sub">The average agent takes <b style="color:#fff">over 15 hours</b> to reply to a new lead. ProyTech gives you a website that looks the part and an AI front desk that answers every call, text, and form <b style="color:#fff">in seconds</b> — so you're always first.</p>
+      <p class="hero-sub">The average agent takes <b style="color:#fff">over 15 hours</b> to reply to a new lead. ProyTech makes your website the hub of your business — wired into your CRM, calendar, and follow-up — with an AI front desk that answers every call, text, and form <b style="color:#fff">in seconds</b>. So you're always first.</p>
       <div class="hero-cta">
         <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Book my free audit →</a>
         <button class="btn btn-ghost" onclick="openAce()">Ask Ace a question</button>
@@ -500,8 +560,8 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
 <!-- ============ RUN STRIP ============ -->
 <div class="strip">
   <div class="wrap strip-inner">
-    <span>WHAT WE PLUG INTO:</span>
-    <b>Your CRM</b><span>·</span><b>Missed-call text-back</b><span>·</span><b>AI booking</b><span>·</span><b>Website + SEO</b><span>·</span><b>Newsletters</b>
+    <span>ALL CONNECTED:</span>
+    <b>Website</b><span>·</span><b>CRM</b><span>·</span><b>Lead Gen</b><span>·</span><b>Follow-Up</b><span>·</span><b>Booking</b><span>·</span><b>Paid Ads</b><span>·</span><b>Newsletters</b>
   </div>
 </div>
 
@@ -518,6 +578,71 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
       <div class="stat reveal"><div class="num">15 hrs</div><div class="lbl">average time an agent takes to respond to a new online lead.</div><div class="src">Inman 2025</div></div>
       <div class="stat reveal"><div class="num">62%</div><div class="lbl">of inquiries arrive after hours — nights and weekends, when you're off.</div><div class="src">Zillow / NAR</div></div>
       <div class="stat reveal"><div class="num">1.3</div><div class="lbl">follow-ups the average agent makes — when 80% of deals need 5 or more.</div><div class="src">Industry avg</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE NUCLEUS ============ -->
+<section class="band" id="system" style="background:linear-gradient(180deg,#070B1F,#0A1130)">
+  <div class="wrap nucleus">
+    <div class="nucleus-copy reveal">
+      <span class="eyebrow">The System</span>
+      <h2 class="h2">Your website isn't a brochure. It's the nucleus.</h2>
+      <p class="lead">Most agencies hand you a pretty site and walk away. We make your website the command center of your business — wired into your CRM, your lead sources, your calendar, and your follow-up, so the whole operation runs as one connected system instead of ten tools that don't talk.</p>
+      <ul class="nuc-list">
+        <li><span class="tick">→</span><span><b>One connected system.</b> Site, CRM, calendar, and follow-up all in sync.</span></li>
+        <li><span class="tick">→</span><span><b>Every lead captured.</b> From any source, logged and routed automatically.</span></li>
+        <li><span class="tick">→</span><span><b>Nothing falls through.</b> Booking, follow-up, and nurture run on autopilot.</span></li>
+        <li><span class="tick">→</span><span><b>Built to grow.</b> Bolt on ads, funnels, or newsletters — same foundation.</span></li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <svg class="hub" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" aria-label="Your website connected to your CRM, lead generation, follow-up, booking, ads, and newsletters">
+        <defs>
+          <radialGradient id="coreGrad" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#5A82FF"/><stop offset="100%" stop-color="#1a2fa0"/>
+          </radialGradient>
+        </defs>
+        <!-- spokes -->
+        <g class="spoke">
+          <line x1="240" y1="240" x2="240" y2="90"/>
+          <line x1="240" y1="240" x2="370" y2="165"/>
+          <line x1="240" y1="240" x2="370" y2="315"/>
+          <line x1="240" y1="240" x2="240" y2="390"/>
+          <line x1="240" y1="240" x2="110" y2="315"/>
+          <line x1="240" y1="240" x2="110" y2="165"/>
+        </g>
+        <!-- animated flow -->
+        <g class="flow">
+          <line x1="240" y1="240" x2="240" y2="90"/>
+          <line x1="240" y1="240" x2="370" y2="165"/>
+          <line x1="240" y1="240" x2="370" y2="315"/>
+          <line x1="240" y1="240" x2="240" y2="390"/>
+          <line x1="240" y1="240" x2="110" y2="315"/>
+          <line x1="240" y1="240" x2="110" y2="165"/>
+        </g>
+        <!-- outer nodes -->
+        <g>
+          <rect class="node" x="188" y="70" width="104" height="40" rx="12"/>
+          <text class="node-l" x="240" y="95">CRM</text>
+          <rect class="node" x="318" y="145" width="104" height="40" rx="12"/>
+          <text class="node-l" x="370" y="170">LEAD GEN</text>
+          <rect class="node" x="318" y="295" width="104" height="40" rx="12"/>
+          <text class="node-l" x="370" y="320">PAID ADS</text>
+          <rect class="node" x="188" y="370" width="104" height="40" rx="12"/>
+          <text class="node-l" x="240" y="395">FOLLOW-UP</text>
+          <rect class="node" x="58" y="295" width="104" height="40" rx="12"/>
+          <text class="node-l" x="110" y="320">BOOKING</text>
+          <rect class="node" x="58" y="145" width="104" height="40" rx="12"/>
+          <text class="node-l" x="110" y="170">NEWSLETTERS</text>
+        </g>
+        <!-- core -->
+        <circle class="pulse" cx="240" cy="240" r="64"/>
+        <circle class="core" cx="240" cy="240" r="60"/>
+        <text class="core-l" x="240" y="236" font-size="18">YOUR</text>
+        <text class="core-l" x="240" y="258" font-size="18">SITE</text>
+        <text class="core-s" x="240" y="276">THE NUCLEUS</text>
+      </svg>
     </div>
   </div>
 </section>
@@ -700,6 +825,55 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
   </div>
 </section>
 
+<!-- ============ WHO WE ARE ============ -->
+<section class="band" id="team">
+  <div class="wrap">
+    <div class="team-head reveal">
+      <span class="eyebrow">Who We Are</span>
+      <h2 class="h2">The team behind the build.</h2>
+      <p class="lead">ProyTech is an AI integration studio run by two founders who've made systems their obsession — backed by a modern engineering stack and a build process we sharpen on every project. Hire us and you get senior attention on your account, not a junior handoff.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="founder g reveal">
+        <div class="founder-top">
+          <div class="avatar">GV</div>
+          <div>
+            <div class="nm">Garrett Von Flue</div>
+            <div class="rl">Co-Founder · Growth &amp; Strategy</div>
+          </div>
+        </div>
+        <p>Garrett leads strategy, relationships, and growth. He learns your business inside-out and makes sure what we build actually fits how you work — and where you're trying to go next.</p>
+        <div class="tagline">Your point of contact, start to finish</div>
+      </div>
+
+      <div class="founder reveal">
+        <div class="founder-top">
+          <div class="avatar">LS</div>
+          <div>
+            <div class="nm">Logan Sell</div>
+            <div class="rl">Co-Founder · Engineering &amp; Delivery</div>
+          </div>
+        </div>
+        <p>Logan architects and builds the integrations — the systems, automations, and infrastructure that make everything run as one. Every build ships tested, documented, and supported in-house.</p>
+        <div class="tagline">Owns technical delivery, end to end</div>
+      </div>
+    </div>
+
+    <div class="capband reveal">
+      <div class="ct">Enterprise-grade infrastructure.<br><span>Engineered, deployed, and supported in-house — the same modern stack that powers your build.</span></div>
+      <div class="stack">
+        <span class="s">GoHighLevel</span>
+        <span class="s">Vercel</span>
+        <span class="s">Supabase</span>
+        <span class="s">Notion</span>
+        <span class="s">Claude AI</span>
+        <span class="s">Meta Ads</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PRICING ============ -->
 <section class="band band-light" id="pricing">
   <div class="wrap">
@@ -808,7 +982,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="#" class="logo">Proy<b>Tech</b></a>
+        <a href="#" class="logo" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy<b>Tech</b>')"></a>
         <p>Websites and an AI front desk for realtors, lenders, and local businesses. Built and supported in Wichita, Kansas.</p>
       </div>
       <div class="foot-col">
