@@ -29,6 +29,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<!-- Calendly -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <!-- ============ Structured Data: LocalBusiness ============ -->
 <script type="application/ld+json">
@@ -459,7 +462,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
     </nav>
     <div class="nav-cta">
       <button class="btn btn-ghost" onclick="openAce()">Talk to Ace</button>
-      <a href="#book" class="btn btn-primary">Free audit</a>
+      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Free audit</a>
     </div>
   </div>
 </header>
@@ -473,7 +476,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
       <h1>78% of buyers hire the <span class="flip">first</span> agent who answers.</h1>
       <p class="hero-sub">The average agent takes <b style="color:#fff">over 15 hours</b> to reply to a new lead. ProyTech gives you a website that looks the part and an AI front desk that answers every call, text, and form <b style="color:#fff">in seconds</b> — so you're always first.</p>
       <div class="hero-cta">
-        <a href="#book" class="btn btn-primary">Book my free audit →</a>
+        <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Book my free audit →</a>
         <button class="btn btn-ghost" onclick="openAce()">Ask Ace a question</button>
       </div>
       <div class="hero-trust">
@@ -618,7 +621,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
       <h2 class="h2">The "glue" holding your business together is costing you deals.</h2>
       <p class="lead">The glue is you — manually catching calls, replying when you can, remembering to follow up. It works until it doesn't. Slide the numbers and see what slow response time actually costs you in a year.</p>
       <div class="hero-cta" style="margin-top:26px">
-        <a href="#book" class="btn btn-primary">Plug the leak →</a>
+        <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Plug the leak →</a>
       </div>
     </div>
 
@@ -717,7 +720,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
           <li>Lead capture wired to your CRM</li>
           <li>Optional care plan from $50/mo</li>
         </ul>
-        <a href="#book" class="btn btn-dark">Start here</a>
+        <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-dark">Start here</a>
       </div>
       <div class="pcard feature reveal">
         <span class="k">The Core</span>
@@ -730,7 +733,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
           <li>24/7 after-hours coverage</li>
           <li>Every lead logged to your CRM</li>
         </ul>
-        <a href="#book" class="btn btn-primary">Book free audit</a>
+        <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Book free audit</a>
       </div>
       <div class="pcard reveal">
         <span class="k">The Funnel</span>
@@ -743,7 +746,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
           <li>Pre-screened, ready-to-talk leads</li>
           <li>Ad management optional</li>
         </ul>
-        <a href="#book" class="btn btn-dark">Talk it through</a>
+        <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-dark">Talk it through</a>
       </div>
     </div>
     <div class="founding reveal">
@@ -794,7 +797,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
     <h2>Let's find the leaks.<br>Then plug them.</h2>
     <p>30–45 minutes, no pitch. We'll show you exactly where leads are slipping through and what it'd take to catch them. Worst case, you leave with a to-do list.</p>
     <div class="hero-cta">
-      <a href="mailto:getproytech@gmail.com?subject=Free%20Audit%20Request&body=Hi%20ProyTech%2C%20I'd%20like%20to%20book%20a%20free%20discovery%20audit." class="btn btn-primary">Book my free audit →</a>
+      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Book my free audit →</a>
       <button class="btn btn-ghost" onclick="openAce()">Or ask Ace first</button>
     </div>
   </div>
@@ -813,7 +816,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
         <a href="#ladder">What we do</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
-        <a href="#book">Free audit</a>
+        <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()">Free audit</a>
       </div>
       <div class="foot-col">
         <h4>Contact</h4>
@@ -846,7 +849,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
   <div class="cchips" id="aceChips">
     <button class="cchip" onclick="quickAsk('How does the AI front desk work?')">How does it work?</button>
     <button class="cchip" onclick="quickAsk('What would this cost for a solo realtor?')">What's it cost?</button>
-    <button class="cchip" onclick="quickAsk('I want to book a free audit')">Book an audit</button>
+    <button class="cchip" onclick="openCalendly()">Book an audit</button>
   </div>
   <div class="ace-foot">
     <input id="aceInput" type="text" placeholder="Ask Ace anything…" onkeydown="if(event.key==='Enter')sendAce()" />
@@ -969,8 +972,28 @@ let aceHistory=[];
 
 function openAce(){acePanel.classList.add('open');aceLaunch.style.display='none';setTimeout(()=>aceInput.focus(),100);}
 function closeAce(){acePanel.classList.remove('open');aceLaunch.style.display='flex';}
-function quickAsk(q){aceChips.style.display='none';aceInput.value=q;sendAce();}
+const DEFAULT_CHIPS=["How does it work?","What's it cost?","Book a free audit"];
+const CALENDLY_URL="https://calendly.com/getproytech/30min";
+function openCalendly(){
+  if(window.Calendly&&window.Calendly.initPopupWidget){Calendly.initPopupWidget({url:CALENDLY_URL});}
+  else{window.open(CALENDLY_URL,'_blank','noopener');}
+  return false;
+}
+function isBookingChip(t){return /\b(book|schedule)\b/i.test(t)||/grab a time|set up a call|pick a time/i.test(t);}
+function quickAsk(q){aceInput.value=q;sendAce();}
 
+function renderChips(chips){
+  const list=(chips&&chips.length)?chips:DEFAULT_CHIPS;
+  aceChips.innerHTML='';
+  list.slice(0,3).forEach(c=>{
+    const b=document.createElement('button');
+    b.className='cchip';b.type='button';b.textContent=c;
+    if(isBookingChip(c)){b.addEventListener('click',openCalendly);}
+    else{b.addEventListener('click',()=>quickAsk(c));}
+    aceChips.appendChild(b);
+  });
+  aceChips.style.display='flex';
+}
 function bubble(text,cls){
   const el=document.createElement('div');el.className='cmsg '+cls;el.textContent=text;
   aceBody.appendChild(el);aceBody.scrollTop=aceBody.scrollHeight;return el;
@@ -981,7 +1004,7 @@ function typing(){
 }
 async function sendAce(){
   const text=aceInput.value.trim();if(!text)return;
-  aceChips.style.display='none';
+  aceChips.style.display='none';aceChips.innerHTML='';
   aceInput.value='';
   bubble(text,'user');
   aceHistory.push({role:'user',content:text});
@@ -994,12 +1017,14 @@ async function sendAce(){
     dots.remove();
     if(!res.ok)throw new Error('bad status');
     const data=await res.json();
-    const reply=data.reply||"Sorry — I hit a snag. Email us at getproytech@gmail.com and we'll jump right on it.";
+    const reply=data.reply||"Sorry — I hit a snag. Email getproytech@gmail.com and we'll jump right on it.";
     bubble(reply,'ace');
     aceHistory.push({role:'assistant',content:reply});
+    renderChips(data.chips);
   }catch(e){
     dots.remove();
-    bubble("I can't reach the server right now — but I'd still love to help. Email getproytech@gmail.com or book a free audit and we'll answer everything.",'ace');
+    bubble("I can't reach the server right now — but email getproytech@gmail.com or book a free audit and we'll answer everything.",'ace');
+    renderChips(DEFAULT_CHIPS);
   }
 }
 </script>

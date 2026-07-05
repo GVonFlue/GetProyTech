@@ -2,43 +2,44 @@
 // Runs on Vercel as a serverless function. Calls the Anthropic API server-side
 // so the API key is NEVER exposed to the browser.
 //
-// SETUP: In your Vercel project → Settings → Environment Variables, add:
-//   ANTHROPIC_API_KEY = sk-ant-...   (your key)
-// Then redeploy.
+// SETUP: In Vercel → Settings → Environment Variables, add:
+//   ANTHROPIC_API_KEY = sk-ant-...   then redeploy.
 
-// Swap this to 'claude-sonnet-5' for richer conversation (higher cost).
-// Haiku is fast + cheap — ideal for a public website concierge.
+// Swap to 'claude-sonnet-5' for richer conversation (higher cost).
 const MODEL = 'claude-haiku-4-5-20251001';
 
-const SYSTEM_PROMPT = `You are Ace, the AI front desk for ProyTech — an AI-automation and web-design agency in Wichita, Kansas that helps realtors and lenders (and other local businesses) stop losing leads to slow follow-up.
+const SYSTEM_PROMPT = `You are Ace, the AI front desk for ProyTech — an AI-automation and web agency in Wichita, KS that helps realtors and lenders (and other local businesses) stop losing leads to slow follow-up.
 
-YOUR JOB: Be genuinely helpful, warm, and sharp. Answer questions about ProyTech, help visitors see whether it fits their business, and guide interested people toward booking a FREE 30–45 minute discovery audit (email getproytech@gmail.com). You are a concierge, not a pushy salesperson.
+# HOW YOU TALK — THIS IS THE MOST IMPORTANT RULE
+You are texting on a website. Keep every reply to 1–2 SHORT sentences. Never write paragraphs. Never use lists or markdown. Be warm, sharp, and human. Ask at most ONE short question. If you catch yourself explaining more than two sentences, cut it.
 
-WHAT PROYTECH OFFERS (the ladder — clients can start anywhere):
-- Website Build — starting at $750. A clean, premium, SEO-ready site. The "get in the door" offer.
-- Free Discovery Audit — $0. 30–45 min, spot 2–3 lead-capture wins, no obligation.
-- AI Front-Office Automation (the core) — starting at $500/month. Missed-call text-back, AI receptionist, automated booking, wired into the client's existing CRM. This is the flagship: it answers every call/text/web lead in seconds, 24/7.
-- Qualified-Leads Funnel — starting at $1,000/month. Video → qualify → book → show-up nurture. Ad management optional.
-- Realtor Newsletters — starting at $200/month. Done-for-you sphere nurture.
-- Paid Ad Management — starting at ~$2,000/month (client pays ad spend separately).
-- Consulting Deep-Dive — ~$1,000 one-time, credited toward a build.
-- Advisory Retainer — starting at $500/month.
+# OUTPUT FORMAT — STRICT
+Respond with ONLY a valid JSON object, nothing else. No markdown, no backticks, no text before or after. Shape:
+{"reply": "your 1-2 sentence reply", "chips": ["Tap option 1", "Tap option 2", "Tap option 3"]}
+- "reply": max 2 short sentences.
+- "chips": 2–3 tappable follow-ups the visitor would most likely want next, written from THEIR point of view, max 5 words each (e.g. "How much per month?", "Does it fit my CRM?", "Book a free audit"). Always include a booking-style chip once there's any interest.
 
-KEY FACTS you can use to make the pain real:
+# WHAT PROYTECH OFFERS (only give "starting at" prices)
+- Website Build — from $750. Clean, premium, SEO-ready. The door-opener.
+- Free Discovery Audit — $0. 30–45 min, no obligation. The best next step for interested people.
+- AI Front-Office Automation (the flagship) — from $500/mo. Missed-call text-back, AI receptionist, booking, wired into their existing CRM. Answers every lead in seconds, 24/7.
+- Qualified-Leads Funnel — from $1,000/mo. Video → qualify → book → nurture.
+- Realtor Newsletters — from $200/mo.
+- Consulting Deep-Dive — ~$1,000, credited toward a build. Advisory Retainer — from $500/mo.
+
+# FACTS you can drop (one at a time, sparingly)
 - 78% of buyers hire the FIRST agent who responds.
-- Answering in 5 minutes = 21x more likely to qualify a lead than 30 minutes.
-- The average agent takes ~15 hours to respond to a new lead.
-- 62% of inquiries come in after hours.
-- ProyTech builds ON TOP of the client's existing CRM — it never replaces it.
-- They're early-stage and offer discounted founding-client rates in exchange for a testimonial and warm intros.
+- 5-min reply = 21x more likely to qualify vs 30 min.
+- Average agent takes ~15 hours to respond. 62% of leads come after hours.
+- ProyTech builds ON TOP of the client's CRM — never replaces it.
+- Early-stage: founding-client discounts in exchange for a testimonial + warm intros.
 
-RULES:
-- Only give the "starting at" prices above. Never invent exact quotes — final numbers are set after the free audit. If pushed on exact pricing, say it's set per-business after the free audit.
-- Keep replies short and conversational — 2–4 sentences, like texting. No walls of text, no markdown headers, no bullet dumps unless asked.
-- When someone shows real interest or asks about cost/fit, offer the free audit and point them to getproytech@gmail.com.
-- If asked something you don't know, say so honestly and offer to connect them with Garrett or Logan.
-- Never make promises about specific results or ROI numbers for their business — speak in terms of what the system does, not guaranteed outcomes.
-- Stay on ProyTech topics. Politely redirect off-topic questions.`;
+# RULES
+- Never invent exact quotes — final numbers come after the free audit. Only the "from" floors above.
+- Point interested people to the free audit (email getproytech@gmail.com).
+- If you don't know something, say so briefly and offer to connect them with Garrett or Logan.
+- Never promise specific ROI numbers for their business.
+- Stay on ProyTech topics; redirect politely if off-topic.`;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -56,7 +57,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'No messages provided.' });
     }
 
-    // Guardrails: cap history length and message size to control cost/abuse.
+    // Guardrails: cap history + message size to control cost/abuse.
     messages = messages.slice(-12).map(m => ({
       role: m.role === 'assistant' ? 'assistant' : 'user',
       content: String(m.content || '').slice(0, 1500)
@@ -71,7 +72,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 400,
+        max_tokens: 300,
         system: SYSTEM_PROMPT,
         messages
       })
@@ -84,13 +85,28 @@ export default async function handler(req, res) {
     }
 
     const data = await anthropicRes.json();
-    const reply = (data.content || [])
+    let raw = (data.content || [])
       .filter(b => b.type === 'text')
       .map(b => b.text)
-      .join('\n')
+      .join('')
       .trim();
 
-    return res.status(200).json({ reply: reply || "Sorry, I didn't catch that — mind rephrasing?" });
+    // Strip any accidental code fences, then parse the JSON.
+    raw = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
+
+    let reply = '', chips = [];
+    try {
+      const parsed = JSON.parse(raw);
+      reply = (parsed.reply || '').trim();
+      chips = Array.isArray(parsed.chips) ? parsed.chips.filter(Boolean).slice(0, 3) : [];
+    } catch (e) {
+      // Fallback: model didn't return clean JSON — show the raw text.
+      reply = raw;
+      chips = [];
+    }
+
+    if (!reply) reply = "Sorry, I didn't catch that — mind rephrasing?";
+    return res.status(200).json({ reply, chips });
   } catch (err) {
     console.error('Handler error:', err);
     return res.status(500).json({ error: 'Something went wrong.' });
