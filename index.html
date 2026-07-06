@@ -678,7 +678,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
     </div>
 
     <div class="long-cta reveal">
-      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Set up my newsletter →</a>
+      <a href="#fastlane" onclick="startExpress({intent:'newsletter'});return false;" class="btn btn-primary">Set up my newsletter →</a>
       <button class="btn btn-dark" onclick="openAce()">Ask Ace how it works</button>
     </div>
   </div>
@@ -777,7 +777,7 @@ footer{background:var(--ink-2);border-top:1px solid var(--line);padding:60px 0 3
       <div class="pcard reveal" style="--d:.16s">
         <span class="k">The Long Game</span><h3>Newsletters</h3><div class="pre">starting at</div><div class="amt">$200<small>/mo</small></div>
         <ul><li>Custom-branded, done for you</li><li>Nurtures 6–12 month leads</li><li>All value, zero selling</li><li>Keeps you top of mind, on autopilot</li></ul>
-        <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-dark">Talk it through</a>
+        <a href="#fastlane" onclick="startExpress({intent:'newsletter'});return false;" class="btn btn-dark">Set up newsletters</a>
       </div>
     </div>
     <div class="founding reveal">
@@ -1014,8 +1014,25 @@ if(tl){const tio=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecti
     'Leads go cold before they\u2019re ready':'the <b>custom-branded newsletter</b> — keeps you top of mind for the 6\u201312 month crowd'
   };
 
-  async function run(){
+  async function run(preset){
+    preset=preset||{};
     await think(700);
+    if(preset.intent==='newsletter'){
+      bot("Smart move — a newsletter is the cheapest way to stay top of mind with the folks who aren't ready to buy yet. Let's get yours set up 👇");
+      lead.pain='Newsletter setup (6\u201312 mo nurture)';
+      await btns([{label:"Let's do it →"}]);
+      await think(550);
+      bot("Which one's you?");
+      lead.role=await btns([{label:'🏠 Realtor'},{label:'💰 Lender'},{label:'🧰 Other business'}]);
+      await think(600);
+      bot("Roughly how big is your database — the people you'd want to stay in front of?");
+      lead.volume=await btns([{label:'Under 100'},{label:'100–500'},{label:'500+'},{label:"Not sure yet"}]);
+      await think(750);
+      bot("Perfect. Let's get you set up with Garrett — what's your first name?");
+      lead.name=await input('First name','text',v=>v.length>=2,'Need your name 🙂');
+      await collectAndBook();
+      return;
+    }
     bot("Hey — I'm Ace 👋 Sixty seconds and I'll match you to exactly what you need, then get you on Garrett's calendar. Ready?");
     await btns([{label:"Let's go →"}]);
     await think(600);
@@ -1036,6 +1053,10 @@ if(tl){const tio=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecti
     const rec=recMap[lead.pain]||'a connected system built around you';
     bot("Sounds like your play is "+rec+". Let's get you in front of Garrett — what's your first name?");
     lead.name=await input('First name','text',v=>v.length>=2,'Need your name 🙂');
+    await collectAndBook();
+  }
+
+  async function collectAndBook(){
     await think(500);
     bot("Best number to text you at?");
     lead.phone=await input('(316) 555-0123','tel',v=>v.replace(/\D/g,'').length>=10,'Need a 10-digit number');
@@ -1077,8 +1098,11 @@ if(tl){const tio=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecti
     else{window.open(url,'_blank','noopener');}
   }
 
-  // start when scrolled into view
-  const xio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!started){started=true;run();xio.disconnect();}}),{threshold:.35});
+  function begin(preset){started=true;body.innerHTML='';Object.keys(lead).forEach(k=>lead[k]='');run(preset);}
+  window.startExpress=function(preset){const sec=document.getElementById('fastlane');if(sec)sec.scrollIntoView({behavior:reduce?'auto':'smooth'});begin(preset||{});};
+
+  // auto-start when scrolled into view (default flow)
+  const xio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!started){begin({});xio.disconnect();}}),{threshold:.35});
   xio.observe(body);
 })();
 
