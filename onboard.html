@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Welcome aboard · ProyTech client onboarding</title>
+<meta name="description" content="Tell us about your business so we can build your system. About 10 minutes, and you only do it once." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0C2470" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --navy:#0C2470; --blue:#3C78CC; --orange:#FF5500;
+  --white:#FFFFFF; --ink:#050505;
+  --paper:#F5F7FC; --line:#E3E8F2; --muted:#5B6478;
+  --err:#D64545; --maxw:760px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.1;color:var(--navy)}
+a{color:var(--blue)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+/* ---------- top ---------- */
+.topbar{background:var(--navy);padding:18px 0}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between}
+.wordmark{font-family:'Space Grotesk';font-weight:700;font-size:1.25rem;color:#fff;text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center}
+.wordmark b{color:var(--orange)}
+.logo-img{height:44px;width:auto;display:block}
+@media(max-width:520px){.logo-img{height:36px}}
+.topbar .tag{font-size:.8rem;color:rgba(255,255,255,.65);font-weight:500}
+@media(max-width:520px){.topbar .tag{display:none}}
+
+.hero{background:var(--navy);color:#fff;padding:44px 0 110px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(60,120,204,.35), rgba(60,120,204,0) 68%);pointer-events:none}
+.kicker{font-family:'Space Grotesk';font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:#9db9e6;display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
+.kicker::before{content:"";width:24px;height:2px;background:var(--orange)}
+.hero h1{color:#fff;font-size:clamp(2.1rem,6vw,3.2rem);margin-bottom:12px}
+.hero p{color:rgba(255,255,255,.82);font-size:1.08rem;max-width:540px}
+
+/* ---------- card ---------- */
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 60px rgba(12,36,112,.12);
+  margin-top:-70px;position:relative;z-index:2;padding:34px 34px 40px;margin-bottom:80px}
+@media(max-width:600px){.card{padding:26px 20px 32px;border-radius:16px}}
+
+/* ---------- progress ---------- */
+.progress{margin-bottom:30px}
+.ptrack{display:flex;gap:6px;margin-bottom:10px}
+.ptrack i{flex:1;height:6px;border-radius:99px;background:var(--line);transition:background .3s}
+.ptrack i.done{background:var(--orange)}
+.plabel{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--muted)}
+.plabel .cur{color:var(--navy)}
+
+/* ---------- steps ---------- */
+.step{display:none;animation:fadeUp .35s ease both}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.step h2{font-size:1.7rem;margin-bottom:6px}
+.step .lede{color:var(--muted);margin-bottom:26px;font-size:.98rem}
+
+.field{margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+label.lbl{display:block;font-weight:600;font-size:.92rem;margin-bottom:7px;color:var(--ink)}
+label.lbl small{display:block;font-weight:400;color:var(--muted);font-size:.82rem;margin-top:1px}
+.req{color:var(--orange);font-weight:700}
+input[type=text],input[type=tel],input[type=email],input[type=url],select,textarea{
+  width:100%;font:inherit;font-size:1rem;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;
+  background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235B6478' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(60,120,204,.18)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--err)}
+.errmsg{display:none;color:var(--err);font-size:.84rem;font-weight:500;margin-top:6px}
+.field.invalid .errmsg{display:block}
+
+/* chips (multi-select) */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:11px 18px;border:1.5px solid var(--line);border-radius:999px;font-weight:500;font-size:.93rem;
+  color:var(--ink);background:#fff;cursor:pointer;transition:all .15s;user-select:none}
+.chip input:checked + span{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(60,120,204,.3)}
+
+/* segmented yes/no */
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:inline-block;padding:12px 26px;font-weight:600;font-size:.95rem;cursor:pointer;color:var(--muted);transition:all .15s}
+.seg label + label span{border-left:1.5px solid var(--line)}
+.seg input:checked + span{background:var(--orange);color:#fff}
+
+/* slider */
+.sliderbox{padding:4px 2px}
+input[type=range]{width:100%;accent-color:var(--orange);height:28px;cursor:pointer}
+.slider-ends{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);font-weight:500;margin-top:2px}
+.slider-val{text-align:center;font-family:'Space Grotesk';font-weight:600;color:var(--navy);font-size:.95rem;margin-top:6px}
+
+/* assets checklist */
+.asset-list{border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
+.asset{display:flex;align-items:flex-start;gap:14px;padding:15px 18px;cursor:pointer;transition:background .12s}
+.asset + .asset{border-top:1px solid var(--line)}
+.asset:hover{background:var(--paper)}
+.asset input{width:20px;height:20px;margin-top:3px;accent-color:var(--orange);flex:0 0 auto;cursor:pointer}
+.asset b{font-weight:600;font-size:.96rem}
+.asset small{display:block;color:var(--muted);font-size:.84rem}
+.mailrow{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.mailnote{font-size:.9rem;color:var(--muted)}
+
+/* buttons */
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:'Space Grotesk';font-weight:600;font-size:1rem;
+  padding:15px 30px;border-radius:12px;border:0;cursor:pointer;transition:transform .14s,box-shadow .14s,background .14s;text-decoration:none}
+.btn .arw{transition:transform .14s}
+.btn:hover .arw{transform:translateX(4px)}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 26px rgba(255,85,0,.32)}
+.btn-primary:hover{transform:translateY(-2px);background:#ff6a1f;box-shadow:0 14px 34px rgba(255,85,0,.42)}
+.btn-primary:disabled{opacity:.6;cursor:wait;transform:none}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--navy)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{transform:translateY(-2px)}
+
+/* success */
+.success{display:none;text-align:center;padding:30px 0 10px;animation:fadeUp .4s ease both}
+.success.show{display:block}
+.checkwrap{width:110px;height:110px;margin:0 auto 26px}
+.checkwrap svg{width:100%;height:100%}
+.check-circle{stroke:var(--orange);stroke-width:4;fill:none;stroke-dasharray:302;stroke-dashoffset:302;animation:draw .7s .1s ease-out forwards}
+.check-mark{stroke:var(--orange);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .45s .65s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.success h2{font-size:1.9rem;margin-bottom:10px}
+.success p{color:var(--muted);font-size:1.05rem;max-width:440px;margin:0 auto}
+
+/* fallback */
+.fallback{display:none;animation:fadeUp .35s ease both}
+.fallback.show{display:block}
+.fallback h2{font-size:1.5rem;margin-bottom:8px}
+.fallback p{color:var(--muted);margin-bottom:16px;font-size:.95rem}
+.fallback pre{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:18px;font-size:.82rem;
+  line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:340px;overflow:auto;margin-bottom:16px}
+.fbrow{display:flex;flex-wrap:wrap;gap:12px}
+
+footer{padding:34px 0 50px;text-align:center;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy&lt;b&gt;Tech&lt;/b&gt;')"></a>
+    <div class="tag">Client onboarding · ~10 minutes</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Welcome aboard</div>
+    <h1>Let's build your system.</h1>
+    <p>Five quick steps. Answer like you're texting a friend — the more "you" it sounds, the better your AI will sound.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+
+    <div class="progress" id="progress" aria-hidden="true">
+      <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="plabel"><span id="pstep" class="cur">Step 1 of 5</span><span id="pname">The Basics</span></div>
+    </div>
+
+    <form id="onboardForm" novalidate>
+
+      <!-- ================= STEP 1 ================= -->
+      <section class="step active" data-name="The Basics">
+        <h2>The Basics</h2>
+        <p class="lede">The essentials — who you are and how people reach you.</p>
+
+        <div class="field" data-key="business_name" data-required data-msg="We need your business name — it goes on everything we build.">
+          <label class="lbl" for="business_name">Business name <span class="req">*</span></label>
+          <input type="text" id="business_name" name="business_name" autocomplete="organization" placeholder="e.g. Smith Realty Group" />
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-key="owner_name" data-required data-msg="What should we call you?">
+            <label class="lbl" for="owner_name">Your name <span class="req">*</span></label>
+            <input type="text" id="owner_name" name="owner_name" autocomplete="name" placeholder="First and last" />
+            <div class="errmsg"></div>
+          </div>
+          <div class="field" data-key="owner_cell" data-required data-type="phone" data-msg="Garrett texts you here — double-check the digits.">
+            <label class="lbl" for="owner_cell">Your cell <span class="req">*</span></label>
+            <input type="tel" id="owner_cell" name="owner_cell" autocomplete="tel" placeholder="(316) 555-0142" />
+            <div class="errmsg"></div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-key="business_phone" data-type="phone" data-msg="That phone number looks a little short.">
+            <label class="lbl" for="business_phone">Business phone <small>If different from your cell</small></label>
+            <input type="tel" id="business_phone" name="business_phone" placeholder="(316) 555-0100" />
+            <div class="errmsg"></div>
+          </div>
+          <div class="field" data-key="support_email" data-required data-type="email" data-msg="That email doesn't look quite right.">
+            <label class="lbl" for="support_email">Best email <span class="req">*</span></label>
+            <input type="email" id="support_email" name="support_email" autocomplete="email" placeholder="you@yourbusiness.com" />
+            <div class="errmsg"></div>
+          </div>
+        </div>
+
+        <div class="field" data-key="business_address">
+          <label class="lbl" for="business_address">Business address <small>Street, city, state, zip</small></label>
+          <input type="text" id="business_address" name="business_address" autocomplete="street-address" placeholder="123 Main St, Wichita, KS 67202" />
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-key="business_hours">
+            <label class="lbl" for="business_hours">Business hours <small>When are you "on"?</small></label>
+            <input type="text" id="business_hours" name="business_hours" placeholder="Mon–Fri 9–6, Sat by appointment" />
+          </div>
+          <div class="field" data-key="timezone">
+            <label class="lbl" for="timezone">Timezone</label>
+            <select id="timezone" name="timezone">
+              <option value="America/New_York">Eastern (New York)</option>
+              <option value="America/Chicago" selected>Central (Chicago)</option>
+              <option value="America/Denver">Mountain (Denver)</option>
+              <option value="America/Phoenix">Arizona (Phoenix)</option>
+              <option value="America/Los_Angeles">Pacific (Los Angeles)</option>
+              <option value="America/Anchorage">Alaska</option>
+              <option value="Pacific/Honolulu">Hawaii</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field" data-key="website_url">
+          <label class="lbl" for="website_url">Website <small>If you have one — no worries if not</small></label>
+          <input type="url" id="website_url" name="website_url" placeholder="https://yourbusiness.com" />
+        </div>
+      </section>
+
+      <!-- ================= STEP 2 ================= -->
+      <section class="step" data-name="Your Links">
+        <h2>Your Links</h2>
+        <p class="lede">Where clients book, review, and find you. Skip anything you don't have.</p>
+
+        <div class="field" data-key="booking_link">
+          <label class="lbl" for="booking_link">Booking link <small>Calendly, GHL calendar, showing scheduler…</small></label>
+          <input type="url" id="booking_link" name="booking_link" placeholder="https://calendly.com/you" />
+        </div>
+
+        <div class="field" data-key="review_link">
+          <label class="lbl" for="review_link">Google review link <small>Where happy clients leave you stars</small></label>
+          <input type="url" id="review_link" name="review_link" placeholder="https://g.page/r/…" />
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-key="facebook">
+            <label class="lbl" for="facebook">Facebook</label>
+            <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/…" />
+          </div>
+          <div class="field" data-key="instagram">
+            <label class="lbl" for="instagram">Instagram</label>
+            <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/…" />
+          </div>
+        </div>
+
+        <div class="field" data-key="social_other">
+          <label class="lbl" for="social_other">Any other socials <small>LinkedIn, TikTok, YouTube — paste them all</small></label>
+          <input type="text" id="social_other" name="social_other" placeholder="https://linkedin.com/in/… , https://tiktok.com/@…" />
+        </div>
+
+        <div class="field" data-key="current_crm">
+          <label class="lbl" for="current_crm">Current CRM <small>What are you using today?</small></label>
+          <select id="current_crm" name="current_crm">
+            <option value="" selected>Choose one…</option>
+            <option>Follow Up Boss</option>
+            <option>kvCORE</option>
+            <option>BoomTown</option>
+            <option>Brivity</option>
+            <option>Other / None</option>
+          </select>
+        </div>
+
+        <div class="field" data-key="brokerage_name">
+          <label class="lbl" for="brokerage_name">Brokerage <small>For compliance footers and disclosures</small></label>
+          <input type="text" id="brokerage_name" name="brokerage_name" placeholder="e.g. Keller Williams Hometown Partners" />
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-key="license_number">
+            <label class="lbl" for="license_number">License number</label>
+            <input type="text" id="license_number" name="license_number" placeholder="e.g. SP00012345" />
+          </div>
+          <div class="field" data-key="license_state">
+            <label class="lbl" for="license_state">License state</label>
+            <input type="text" id="license_state" name="license_state" placeholder="e.g. KS" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= STEP 3 ================= -->
+      <section class="step" data-name="Sound Like You">
+        <h2>Sound Like You</h2>
+        <p class="lede">This is the fun part. Your AI should text like you — not like a robot in a suit. Don't overthink it.</p>
+
+        <div class="field" data-key="words_use">
+          <label class="lbl" for="words_use">Three words clients use to describe you</label>
+          <input type="text" id="words_use" name="words_use" placeholder="e.g. responsive, honest, fun" />
+        </div>
+
+        <div class="field" data-key="words_avoid">
+          <label class="lbl" for="words_avoid">Three words you'd <em>never</em> want used</label>
+          <input type="text" id="words_avoid" name="words_avoid" placeholder="e.g. pushy, salesy, corporate" />
+        </div>
+
+        <div class="field" data-key="formality">
+          <label class="lbl" for="formality">How do you talk to clients?</label>
+          <div class="sliderbox">
+            <input type="range" id="formality" name="formality" min="1" max="5" step="1" value="3" />
+            <div class="slider-ends"><span>Buttoned-up</span><span>Super casual</span></div>
+            <div class="slider-val" id="formalityVal">Right down the middle</div>
+          </div>
+        </div>
+
+        <div class="field" data-key="emoji_comfort">
+          <label class="lbl">Emojis in your texts?</label>
+          <div class="seg" role="radiogroup" aria-label="Emoji comfort">
+            <label><input type="radio" name="emoji_comfort" value="Yes" /><span>Yes 👍</span></label>
+            <label><input type="radio" name="emoji_comfort" value="No" /><span>No thanks</span></label>
+          </div>
+        </div>
+
+        <div class="field" data-key="text_signoff">
+          <label class="lbl" for="text_signoff">How do you sign off a text? <small>The little thing at the end that's yours</small></label>
+          <input type="text" id="text_signoff" name="text_signoff" placeholder='e.g. "– G", "Talk soon!", "🤙"' />
+        </div>
+
+        <div class="field" data-key="admired_brands">
+          <label class="lbl" for="admired_brands">2–3 brands or agents whose vibe you admire <small>Anyone — Ryan Serhant, a local legend, even Nike</small></label>
+          <input type="text" id="admired_brands" name="admired_brands" placeholder="e.g. Serhant, Glennda Baker" />
+        </div>
+
+        <div class="field" data-key="party_intro">
+          <label class="lbl" for="party_intro">Your one-liner at a party <small>Someone asks what you do — what do you actually say?</small></label>
+          <input type="text" id="party_intro" name="party_intro" placeholder='e.g. "I help first-timers buy houses without losing their minds."' />
+        </div>
+
+        <div class="field" data-key="writing_samples">
+          <label class="lbl" for="writing_samples">Paste 2–3 posts or texts that sound most like you <small>Real ones. Typos welcome — that's the point.</small></label>
+          <textarea id="writing_samples" name="writing_samples" placeholder="Paste them right in here, one after another…"></textarea>
+        </div>
+
+        <div class="field" data-key="industry_term">
+          <label class="lbl" for="industry_term">What do you call a first appointment? <small>Showing, consult, buyer meeting, strategy call…</small></label>
+          <input type="text" id="industry_term" name="industry_term" placeholder="e.g. buyer consult" />
+        </div>
+
+        <div class="field" data-key="after_hours_msg">
+          <label class="lbl" for="after_hours_msg">If you could auto-reply to every after-hours lead, what would it say?</label>
+          <textarea id="after_hours_msg" name="after_hours_msg" placeholder="e.g. Hey! It's late but you matter — I'll call you first thing tomorrow. If it's urgent, text URGENT and I'll jump on."></textarea>
+        </div>
+
+        <div class="field" data-key="reactivation_offer">
+          <label class="lbl" for="reactivation_offer">Any current offer or hook we can use? <small>Free CMA, buyer guide, rate-watch list — anything</small></label>
+          <input type="text" id="reactivation_offer" name="reactivation_offer" placeholder="e.g. Free home valuation, no strings" />
+        </div>
+      </section>
+
+      <!-- ================= STEP 4 ================= -->
+      <section class="step" data-name="Your Assets">
+        <h2>Your Assets</h2>
+        <p class="lede">Send these over whenever you're ready — email or text works. Check off what you're sending so we know what to watch for.</p>
+
+        <div class="field" data-key="assets_sending">
+          <div class="asset-list">
+            <label class="asset"><input type="checkbox" name="assets_sending" value="Logo" /><span><b>Logo</b><small>SVG or vector preferred · PNG works as a minimum</small></span></label>
+            <label class="asset"><input type="checkbox" name="assets_sending" value="Headshot" /><span><b>Headshot</b><small>The one you actually like</small></span></label>
+            <label class="asset"><input type="checkbox" name="assets_sending" value="Team photos" /><span><b>Team photos</b><small>If you have a team</small></span></label>
+            <label class="asset"><input type="checkbox" name="assets_sending" value="Brand colors/fonts" /><span><b>Brand colors &amp; fonts</b><small>If you have them — hex codes are gold</small></span></label>
+            <label class="asset"><input type="checkbox" name="assets_sending" value="Testimonials" /><span><b>5–10 testimonials</b><small>Screenshots are fine</small></span></label>
+            <label class="asset"><input type="checkbox" name="assets_sending" value="Sold-listing photos" /><span><b>Favorite sold-listing photos</b><small>Your best wins</small></span></label>
+          </div>
+        </div>
+
+        <div class="mailrow">
+          <a class="btn btn-blue" id="emailAssetsBtn" href="mailto:getproytech@gmail.com?subject=Onboarding%20assets">
+            Email your files <span class="arw">→</span>
+          </a>
+          <span class="mailnote">…or text them straight to Garrett. Whatever's easiest.</span>
+        </div>
+      </section>
+
+      <!-- ================= STEP 5 ================= -->
+      <section class="step" data-name="Anything Else">
+        <h2>Anything Else</h2>
+        <p class="lede">Last step. Help us see your business the way you do.</p>
+
+        <div class="field" data-key="lead_sources">
+          <label class="lbl">Where do your leads come from? <small>Pick all that apply</small></label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="lead_sources" value="Zillow" /><span>Zillow</span></label>
+            <label class="chip"><input type="checkbox" name="lead_sources" value="Referrals" /><span>Referrals</span></label>
+            <label class="chip"><input type="checkbox" name="lead_sources" value="Sphere" /><span>Sphere</span></label>
+            <label class="chip"><input type="checkbox" name="lead_sources" value="Open houses" /><span>Open houses</span></label>
+            <label class="chip"><input type="checkbox" name="lead_sources" value="Social" /><span>Social</span></label>
+            <label class="chip"><input type="checkbox" name="lead_sources" value="Website" /><span>Website</span></label>
+            <label class="chip"><input type="checkbox" name="lead_sources" value="Other" /><span>Other</span></label>
+          </div>
+        </div>
+
+        <div class="field" data-key="must_know">
+          <label class="lbl" for="must_know">What should we absolutely know about your business?</label>
+          <textarea id="must_know" name="must_know" placeholder="The stuff that doesn't fit in a form — quirks, niches, non-negotiables…"></textarea>
+        </div>
+
+        <div class="field" data-key="win_90_days">
+          <label class="lbl" for="win_90_days">What does a win look like 90 days from now?</label>
+          <textarea id="win_90_days" name="win_90_days" placeholder="Paint the picture — what changed, what's happening that isn't happening today?"></textarea>
+        </div>
+      </section>
+
+      <div class="navrow" id="navrow">
+        <button type="button" class="btn btn-ghost" id="backBtn" style="visibility:hidden">← Back</button>
+        <button type="button" class="btn btn-primary" id="nextBtn">Continue <span class="arw">→</span></button>
+      </div>
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success" id="successScreen" role="status">
+      <div class="checkwrap">
+        <svg viewBox="0 0 110 110" aria-hidden="true">
+          <circle class="check-circle" cx="55" cy="55" r="48"/>
+          <path class="check-mark" d="M34 57 L49 72 L78 41"/>
+        </svg>
+      </div>
+      <h2>That's everything we need. We're building.</h2>
+      <p>Garrett will text you within one business day. Go sell something — we've got it from here.</p>
+    </div>
+
+    <!-- FALLBACK -->
+    <div class="fallback" id="fallbackScreen">
+      <h2>One hiccup — but your answers are safe.</h2>
+      <p>Our server didn't pick up just now. Everything you typed is right here — hit copy, then email it to
+        <a href="mailto:getproytech@gmail.com?subject=My%20onboarding%20answers">getproytech@gmail.com</a>
+        (or text it to Garrett) and we'll take it from there. Nothing lost, promise.</p>
+      <pre id="fallbackData"></pre>
+      <div class="fbrow">
+        <button type="button" class="btn btn-primary" id="copyBtn">Copy my answers</button>
+        <button type="button" class="btn btn-ghost" id="retryBtn">Try sending again</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>ProyTech · AI systems for realtors &amp; lenders · <a href="https://getproytech.com">getproytech.com</a></footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
+  var current = 0;
+
+  // ---- All payload keys (1:1 with GHL Custom Values) ----
+  var FIELD_KEYS = [
+    "business_name","owner_name","owner_cell","business_phone","business_address",
+    "business_hours","timezone","support_email","website_url",
+    "booking_link","review_link","facebook","instagram","social_other",
+    "current_crm","brokerage_name","license_number","license_state",
+    "words_use","words_avoid","formality","emoji_comfort","text_signoff",
+    "admired_brands","party_intro","writing_samples","industry_term",
+    "after_hours_msg","reactivation_offer",
+    "assets_sending","lead_sources","must_know","win_90_days"
+  ];
+
+  // In-memory state — survives back/forward, never touches storage
+  var formData = {};
+
+  function readField(key){
+    var boxes = document.querySelectorAll('input[type=checkbox][name="'+key+'"]');
+    if (boxes.length){
+      var vals = [];
+      Array.prototype.forEach.call(boxes, function(b){ if (b.checked) vals.push(b.value); });
+      return vals.join(", ");
+    }
+    var radio = document.querySelector('input[type=radio][name="'+key+'"]:checked');
+    if (radio) return radio.value;
+    if (document.querySelector('input[type=radio][name="'+key+'"]')) return "";
+    var el = document.getElementById(key);
+    return el ? el.value.trim() : "";
+  }
+
+  function saveAll(){
+    FIELD_KEYS.forEach(function(k){ formData[k] = readField(k); });
+  }
+
+  function buildPayload(){
+    saveAll();
+    var p = {};
+    FIELD_KEYS.forEach(function(k){ p[k] = formData[k] || ""; });
+    return p;
+  }
+  window.__buildPayload = buildPayload; // test hook
+
+  // ---- validation ----
+  function validateField(f){
+    var key = f.getAttribute("data-key");
+    var val = readField(key);
+    var required = f.hasAttribute("data-required");
+    var type = f.getAttribute("data-type");
+    var msg = "";
+    if (required && !val) msg = f.getAttribute("data-msg") || "This one we really need.";
+    else if (val && type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) msg = f.getAttribute("data-msg") || "That email doesn't look quite right.";
+    else if (val && type === "phone" && val.replace(/\D/g,"").length < 10) msg = f.getAttribute("data-msg") || "That number looks a little short.";
+    var err = f.querySelector(".errmsg");
+    if (msg){ f.classList.add("invalid"); if (err) err.textContent = msg; return false; }
+    f.classList.remove("invalid");
+    return true;
+  }
+
+  function validateStep(i){
+    var ok = true, firstBad = null;
+    steps[i].querySelectorAll(".field").forEach(function(f){
+      if (!validateField(f)){ ok = false; if (!firstBad) firstBad = f; }
+    });
+    if (firstBad){
+      try { firstBad.scrollIntoView({behavior:"smooth", block:"center"}); } catch(e){}
+      var inp = firstBad.querySelector("input,select,textarea");
+      if (inp) try { inp.focus({preventScroll:true}); } catch(e){ inp.focus(); }
+    }
+    return ok;
+  }
+
+  // clear error as soon as they fix it
+  document.querySelectorAll(".field[data-required], .field[data-type]").forEach(function(f){
+    f.addEventListener("input", function(){ if (f.classList.contains("invalid")) validateField(f); });
+  });
+
+  // ---- navigation ----
+  var backBtn = document.getElementById("backBtn");
+  var nextBtn = document.getElementById("nextBtn");
+  var ptrack = document.getElementById("ptrack").children;
+
+  function show(i){
+    steps.forEach(function(s, idx){ s.classList.toggle("active", idx === i); });
+    current = i;
+    for (var j = 0; j < ptrack.length; j++) ptrack[j].classList.toggle("done", j <= i);
+    document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + steps.length;
+    document.getElementById("pname").textContent = steps[i].getAttribute("data-name");
+    backBtn.style.visibility = i === 0 ? "hidden" : "visible";
+    nextBtn.innerHTML = i === steps.length - 1
+      ? 'Send it in <span class="arw">→</span>'
+      : 'Continue <span class="arw">→</span>';
+    try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+  }
+
+  backBtn.addEventListener("click", function(){
+    saveAll();
+    if (current > 0) show(current - 1);
+  });
+
+  nextBtn.addEventListener("click", function(){
+    if (!validateStep(current)) return;
+    saveAll();
+    if (current === 2) updateMailto(); // heading into assets step
+    if (current < steps.length - 1) show(current + 1);
+    else submitForm();
+  });
+
+  // ---- assets mailto (personalized with business name) ----
+  function updateMailto(){
+    var biz = readField("business_name") || "my business";
+    document.getElementById("emailAssetsBtn").href =
+      "mailto:getproytech@gmail.com?subject=" + encodeURIComponent("Onboarding assets — " + biz);
+  }
+
+  // ---- formality slider label ----
+  var formality = document.getElementById("formality");
+  var fVal = document.getElementById("formalityVal");
+  var F_LABELS = {1:"Polished & professional",2:"Professional, with warmth",3:"Right down the middle",4:"Casual & friendly",5:"Like texting a buddy"};
+  formality.addEventListener("input", function(){ fVal.textContent = F_LABELS[formality.value]; });
+
+  // ---- submit ----
+  var PRETTY = {
+    business_name:"Business name", owner_name:"Owner", owner_cell:"Owner cell",
+    business_phone:"Business phone", business_address:"Address", business_hours:"Hours",
+    timezone:"Timezone", support_email:"Email", website_url:"Website",
+    booking_link:"Booking link", review_link:"Review link", facebook:"Facebook",
+    instagram:"Instagram", social_other:"Other socials", current_crm:"Current CRM",
+    brokerage_name:"Brokerage", license_number:"License #", license_state:"License state",
+    words_use:"Words that describe them", words_avoid:"Words to avoid", formality:"Formality (1-5)",
+    emoji_comfort:"Emojis", text_signoff:"Text sign-off", admired_brands:"Admired brands",
+    party_intro:"Party one-liner", writing_samples:"Writing samples", industry_term:"First-appointment term",
+    after_hours_msg:"After-hours message", reactivation_offer:"Offer / hook",
+    assets_sending:"Assets they're sending", lead_sources:"Lead sources",
+    must_know:"Must know", win_90_days:"90-day win"
+  };
+
+  function prettyText(p){
+    return FIELD_KEYS.map(function(k){
+      return (PRETTY[k] || k) + ": " + (p[k] || "—");
+    }).join("\n");
+  }
+
+  function submitForm(){
+    var payload = buildPayload();
+    nextBtn.disabled = true;
+    nextBtn.textContent = "Sending…";
+    fetch("/api/onboard", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function(r){
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json ? r.json().catch(function(){ return {}; }) : {};
+    }).then(function(){
+      document.getElementById("onboardForm").style.display = "none";
+      document.getElementById("progress").style.display = "none";
+      document.getElementById("fallbackScreen").classList.remove("show");
+      document.getElementById("successScreen").classList.add("show");
+      try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+    }).catch(function(){
+      nextBtn.disabled = false;
+      nextBtn.innerHTML = 'Send it in <span class="arw">→</span>';
+      document.getElementById("onboardForm").style.display = "none";
+      document.getElementById("progress").style.display = "none";
+      document.getElementById("fallbackData").textContent = prettyText(payload);
+      document.getElementById("fallbackScreen").classList.add("show");
+      try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+    });
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    var text = document.getElementById("fallbackData").textContent;
+    var btn = this;
+    function done(){ btn.textContent = "Copied ✓"; setTimeout(function(){ btn.textContent = "Copy my answers"; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
+    } else fallbackCopy(text, done);
+  });
+
+  function fallbackCopy(text, done){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById("retryBtn").addEventListener("click", function(){
+    document.getElementById("fallbackScreen").classList.remove("show");
+    document.getElementById("onboardForm").style.display = "";
+    document.getElementById("progress").style.display = "";
+    show(steps.length - 1);
+    submitForm();
+  });
+
+  show(0);
+})();
+</script>
+</body>
+</html>
