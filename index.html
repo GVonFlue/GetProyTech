@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://getproytech.com/og-image.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="ProyTech — Websites + AI Front Office for Realtors &amp; Lenders" />
-<meta name="twitter:description" content="Your website, built right and run by AI. Answer every lead in seconds. Stay top of mind for months." />
+<meta name="twitter:description" content="Your website, built right and run by AI. Answer every lead in seconds. From $999 setup + $99/mo. No contracts." />
 <meta name="twitter:image" content="https://getproytech.com/og-image.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,7 +31,7 @@
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"ProyTech","description":"Websites and AI front-office automation for realtors, lenders, and local businesses.","url":"https://getproytech.com/","email":"getproytech@gmail.com","areaServed":"United States","address":{"@type":"PostalAddress","streetAddress":"105 N Main St","addressLocality":"Wichita","addressRegion":"KS","postalCode":"67202","addressCountry":"US"},"makesOffer":[{"@type":"Offer","name":"Website Build","priceCurrency":"USD","price":"750"},{"@type":"Offer","name":"AI Front-Office Automation","priceCurrency":"USD","price":"500"},{"@type":"Offer","name":"Realtor Newsletters","priceCurrency":"USD","price":"200"}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does ProyTech do?","acceptedAnswer":{"@type":"Answer","text":"Two things. First we build your website the right way — lead gen, SEO, and copy built on buyer psychology. Then we layer AI on top to run your front office: answering leads in seconds, following up automatically, and connecting all your tools."}},{"@type":"Question","name":"Do you only work with realtors and lenders?","acceptedAnswer":{"@type":"Answer","text":"That's where we start, because our founder is a realtor who lived these exact problems. The same system works for any local business."}},{"@type":"Question","name":"Will this replace my CRM?","acceptedAnswer":{"@type":"Answer","text":"No. We build on top of the tools you already use and connect them together."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Websites start at $750, the AI front desk at $500/month, newsletters at $200/month. Final numbers come after a free audit."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does ProyTech do?","acceptedAnswer":{"@type":"Answer","text":"Two things. First we build your website the right way — lead gen, SEO, and copy built on buyer psychology. Then we layer AI on top to run your front office: answering leads in seconds, following up automatically, and connecting all your tools."}},{"@type":"Question","name":"Do you only work with realtors and lenders?","acceptedAnswer":{"@type":"Answer","text":"That's where we start, because our founder is a realtor who lived these exact problems. The same system works for any local business."}},{"@type":"Question","name":"Will this replace my CRM?","acceptedAnswer":{"@type":"Answer","text":"No. We build on top of the tools you already use and connect them together."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"The website is $999 setup plus $99/month. The AI front desk is $1,499 setup plus $149/month. Both together are $2,199 setup plus $199/month. Newsletters are $199/month with no setup fee. No contracts \u2014 cancel anytime."}}]}
 </script>
 <style>
 :root{
@@ -355,6 +355,75 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
 .founding p{font-size:14px;color:var(--ink-soft);line-height:1.55}
 .founding b{color:var(--ink)}
 
+/* ---------- pricing extras ---------- */
+.pcard .mo{font-size:15px;color:var(--ink-soft);margin:10px 0 2px;padding-bottom:16px;border-bottom:1px solid var(--line-dark)}
+.pcard .mo b{color:var(--orange);font-weight:700;font-size:17px}
+.pcard.feature .mo{color:var(--text-dim);border-color:var(--line)}
+.pcard .save{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:#8ff0b8;background:rgba(52,209,122,.14);border:1px solid rgba(52,209,122,.3);padding:6px 11px;border-radius:100px;display:inline-block;margin-top:14px}
+.pcard .inc{margin:0 0 22px;padding:14px 16px;background:var(--ivory);border-radius:12px}
+.pcard.feature .inc{background:rgba(255,255,255,.05)}
+.pcard .inc-h{display:block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue,var(--cobalt));margin-bottom:5px;font-weight:700}
+.pcard.feature .inc-h{color:var(--cobalt-bright)}
+.pcard .inc span:last-child{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+.pcard.feature .inc span:last-child{color:var(--text-dim)}
+.pcard ul{margin:20px 0 16px}
+
+/* newsletter add-on */
+.addon{margin-top:20px;background:#fff;border:1.5px solid var(--line-dark);border-radius:20px;padding:26px 30px;display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center}
+@media(max-width:700px){.addon{grid-template-columns:1fr;gap:18px}}
+.addon-k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);font-weight:700}
+.addon h3{font-size:21px;color:var(--ink);margin:8px 0 6px}
+.addon p{font-size:14.5px;color:var(--ink-soft);max-width:52ch;line-height:1.55}
+.addon-r{text-align:right}
+@media(max-width:700px){.addon-r{text-align:left}}
+.addon-amt{font-family:var(--f-display);font-weight:700;font-size:34px;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.addon-amt small{font-size:14px;font-weight:500;color:var(--text-dim-2)}
+.addon-note{font-family:var(--f-mono);font-size:10.5px;color:var(--text-dim-2);margin:4px 0 14px}
+
+/* anchor */
+.anchor{margin-top:20px;background:var(--ink);border-radius:22px;padding:clamp(26px,4vw,44px);color:#fff}
+.anchor .eyebrow{color:#c6d3ff}
+.anchor-h{font-family:var(--f-display);font-weight:600;font-size:clamp(21px,3vw,30px);color:#fff;margin-top:14px;letter-spacing:-.02em;line-height:1.15}
+.anchor-head{margin-bottom:30px;max-width:44ch}
+.anchor-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch}
+@media(max-width:760px){.anchor-grid{grid-template-columns:1fr}}
+.acol{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:24px}
+.acol.good{border-color:rgba(255,85,0,.42);background:rgba(255,85,0,.06)}
+.acol.vs{background:none;border:0;display:grid;place-items:center;padding:0}
+.acol.vs span{font-family:var(--f-mono);font-size:12px;color:var(--text-dim-2);letter-spacing:.1em}
+.acol-k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px}
+.acol-n{font-family:var(--f-display);font-weight:700;font-size:clamp(32px,4.4vw,44px);letter-spacing:-.03em;line-height:1;color:#fff}
+.acol.good .acol-n{color:var(--orange)}
+.acol-n small{font-size:15px;font-weight:500;color:var(--text-dim-2)}
+.acol-d{font-size:13.5px;color:var(--text-dim);margin-top:12px;line-height:1.5}
+.acol-b{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;font-weight:600}
+.acol-b.bad{color:#ff9a7a}
+.acol-b.ok{color:#8ff0b8}
+.anchor-foot{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+.anchor-foot p{font-size:15px;color:var(--text-dim);line-height:1.6}
+.anchor-foot b{color:#fff}
+.anchor-foot i{color:var(--orange);font-style:normal;font-weight:600}
+
+/* guarantee */
+.guarantee{margin-top:20px;background:rgba(52,209,122,.07);border:1.5px solid rgba(52,209,122,.32);border-radius:16px;padding:22px 26px;display:flex;gap:16px;align-items:flex-start}
+.guarantee .g-ic{font-size:22px;line-height:1.2;flex-shrink:0}
+.guarantee .g-t{font-family:var(--f-display);font-weight:600;font-size:17px;color:var(--ink);margin-bottom:5px}
+.guarantee .g-d{font-size:14px;color:var(--ink-soft);line-height:1.55}
+
+/* what the front desk does */
+.fd-head{max-width:660px;margin-bottom:38px}
+.fd-head h2{margin:16px 0}
+.fd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:860px){.fd-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.fd-grid{grid-template-columns:1fr}}
+.fd{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:22px;transition:border-color .2s,transform .2s}
+.fd:hover{border-color:rgba(255,85,0,.4);transform:translateY(-4px)}
+.fd.hero-fd{border-color:rgba(255,85,0,.4);background:rgba(255,85,0,.07)}
+.fd-ic{width:38px;height:38px;border-radius:11px;background:rgba(60,120,204,.16);display:grid;place-items:center;font-size:17px;margin-bottom:14px}
+.fd.hero-fd .fd-ic{background:rgba(255,85,0,.2)}
+.fd-t{font-family:var(--f-display);font-weight:600;font-size:16.5px;color:#fff;margin-bottom:6px}
+.fd-d{font-size:13.5px;color:var(--text-dim);line-height:1.5}
+
 /* ---------- faq ---------- */
 .faq-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:46px}
 @media(max-width:760px){.faq-grid{grid-template-columns:1fr;gap:26px}}
@@ -426,6 +495,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
     <a href="#" class="logo" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy<b>Tech</b>')"></a>
     <nav class="nav-links">
       <a href="#how">How It Works</a>
+      <a href="#frontdesk">Front Desk</a>
       <a href="#fastlane">Fast Match</a>
       <a href="#longgame">Newsletters</a>
       <a href="#pricing">Pricing</a>
@@ -591,6 +661,77 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
     </div>
   </section>
 
+  <!-- WHAT THE FRONT DESK DOES -->
+  <section class="panel panel-navy" id="frontdesk">
+    <div class="fd-head reveal">
+      <span class="eyebrow">Phase 02 · In Detail</span>
+      <h2 class="h2">Everything your front desk handles — so you don't.</h2>
+      <p class="lead">This is the whole job an assistant would do, running around the clock, in your voice, for less than you'd spend on lunch this week.</p>
+    </div>
+    <div class="fd-grid">
+      <div class="fd hero-fd reveal">
+        <div class="fd-ic">⚡</div>
+        <div class="fd-t">Answers in under 10 seconds</div>
+        <div class="fd-d">The whole ballgame. 78% of buyers hire whoever replies first — and the average agent takes 15 hours. You'll never be second again.</div>
+      </div>
+      <div class="fd reveal" style="--d:.04s">
+        <div class="fd-ic">📞</div>
+        <div class="fd-t">Missed-call text-back</div>
+        <div class="fd-d">Can't pick up? They get a text before they've finished dialing your competitor.</div>
+      </div>
+      <div class="fd reveal" style="--d:.08s">
+        <div class="fd-ic">🤖</div>
+        <div class="fd-t">AI receptionist + auto booking</div>
+        <div class="fd-d">Answers questions, handles the back-and-forth, and drops the appointment straight onto your calendar.</div>
+      </div>
+      <div class="fd reveal" style="--d:.12s">
+        <div class="fd-ic">🎯</div>
+        <div class="fd-t">Qualifies before you spend time</div>
+        <div class="fd-d">Asks the questions you'd ask. You walk into every conversation already knowing who you're talking to.</div>
+      </div>
+      <div class="fd reveal" style="--d:.16s">
+        <div class="fd-ic">🔁</div>
+        <div class="fd-t">Follow-up that never quits</div>
+        <div class="fd-d">The average agent follows up 1.3 times. Most deals need 5 or more. This is the quietest, most expensive leak in your business — and it closes it.</div>
+      </div>
+      <div class="fd reveal" style="--d:.2s">
+        <div class="fd-ic">🌙</div>
+        <div class="fd-t">24/7 after-hours coverage</div>
+        <div class="fd-d">62% of leads come in nights and weekends. Those hours stop being lost.</div>
+      </div>
+      <div class="fd reveal" style="--d:.24s">
+        <div class="fd-ic">🔌</div>
+        <div class="fd-t">Connects all your tools</div>
+        <div class="fd-d">Site, CRM, calendar, phone, email — wired into one system instead of ten that don't talk.</div>
+      </div>
+      <div class="fd reveal" style="--d:.28s">
+        <div class="fd-ic">🗣️</div>
+        <div class="fd-t">Trained on your voice</div>
+        <div class="fd-d">We study how you actually text and talk. Clients shouldn't be able to tell — and they can't.</div>
+      </div>
+      <div class="fd reveal" style="--d:.32s">
+        <div class="fd-ic">🗂️</div>
+        <div class="fd-t">Everything logged to your CRM</div>
+        <div class="fd-d">Every call, text, and conversation filed automatically. Zero data entry, forever.</div>
+      </div>
+      <div class="fd reveal" style="--d:.36s">
+        <div class="fd-ic">⏰</div>
+        <div class="fd-t">Appointment reminders</div>
+        <div class="fd-d">Automatic nudges before every appointment. No-shows drop, your calendar stops lying to you.</div>
+      </div>
+      <div class="fd reveal" style="--d:.4s">
+        <div class="fd-ic">⭐</div>
+        <div class="fd-t">Review requests after closing</div>
+        <div class="fd-d">Asks at the exact moment they're happiest. Your reviews compound while you're on to the next deal.</div>
+      </div>
+      <div class="fd reveal" style="--d:.44s">
+        <div class="fd-ic">💬</div>
+        <div class="fd-t">Edits by text</div>
+        <div class="fd-d">Need something changed? Text us like you'd text a friend. Our system drafts it, a human checks it, it ships.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- THE LONG GAME -->
   <section class="panel panel-white" id="longgame">
     <div class="long-head reveal">
@@ -659,7 +800,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
             <div class="msg in" style="animation-delay:0s"><span class="who">Visitor</span>Do you work with mortgage lenders or just realtors?</div>
             <div class="msg ai" style="animation-delay:.3s"><span class="who">Ace</span>Both! Lenders love it — it catches pre-qual inquiries after hours and books the call while intent's high. Want to see how it'd fit your pipeline?</div>
             <div class="msg in" style="animation-delay:.6s"><span class="who">Visitor</span>Yeah, what's it cost?</div>
-            <div class="msg ai" style="animation-delay:.9s"><span class="who">Ace</span>Front desk starts at $500/mo. Best next step is a free 30-min audit — want me to grab a time?</div>
+            <div class="msg ai" style="animation-delay:.9s"><span class="who">Ace</span>$1,499 to build it, then $149/mo to run it. No contract. Want a free 30-min audit to see if it fits?</div>
           </div>
         </div>
       </div>
@@ -695,26 +836,118 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
   <section class="panel panel-ivory" id="pricing">
     <div class="price-head reveal">
       <span class="eyebrow">Pricing</span>
-      <h2 class="h2">Starting points, not surprises.</h2>
-      <p class="lead">Final numbers are set per client after your free audit. These are the floors — where each offer starts.</p>
+      <h2 class="h2">Build it once. Run it for less than your phone bill.</h2>
+      <p class="lead">A one-time setup to build it right, then a small monthly to keep it running, updated, and getting smarter. No contracts. Cancel anytime.</p>
     </div>
+
     <div class="price-grid">
       <div class="pcard reveal">
-        <span class="k">Phase 1 · Foundation</span><h3>Website</h3><div class="pre">starting at</div><div class="amt">$750</div>
-        <ul><li>Premium, brand-matched design</li><li>SEO built in from day one</li><li>Buyer-psychology copy &amp; flow</li><li>Lead capture wired to your CRM</li></ul>
+        <span class="k">Phase 1 · Foundation</span>
+        <h3>Website</h3>
+        <div class="amt">$999</div>
+        <div class="pre">one-time setup</div>
+        <div class="mo">+ <b>$99</b>/month to run it</div>
+        <ul>
+          <li>Premium, brand-matched design</li>
+          <li>Buyer-psychology copy &amp; flow</li>
+          <li>SEO built in from day one</li>
+          <li>Lead capture wired to your CRM</li>
+        </ul>
+        <div class="inc">
+          <span class="inc-h">Every month</span>
+          <span>Hosting, SSL &amp; security · edits by text · updates &amp; monitoring · real human support</span>
+        </div>
         <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-dark">Start here</a>
       </div>
+
       <div class="pcard feature reveal" style="--d:.08s">
-        <span class="k">Phase 2 · Automation</span><h3>AI Front Desk</h3><div class="pre">starting at</div><div class="amt">$500<small>/mo</small></div>
-        <ul><li>Missed-call text-back in seconds</li><li>AI receptionist + auto booking</li><li>24/7 after-hours coverage</li><li>Connects all your tools</li></ul>
+        <span class="k">Phase 1 + 2 · Everything</span>
+        <h3>The Complete System</h3>
+        <div class="amt">$2,199</div>
+        <div class="pre">one-time setup</div>
+        <div class="mo">+ <b>$199</b>/month to run it</div>
+        <div class="save">Save $299 upfront &amp; $49 every month</div>
+        <ul>
+          <li>Everything in the Website</li>
+          <li>Everything in the AI Front Desk</li>
+          <li>Built as one connected system</li>
+          <li>One team, one bill, one number to text</li>
+        </ul>
+        <div class="inc">
+          <span class="inc-h">Every month</span>
+          <span>Everything above, plus AI usage, monthly tuning &amp; priority support</span>
+        </div>
         <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Book free audit</a>
       </div>
+
       <div class="pcard reveal" style="--d:.16s">
-        <span class="k">The Long Game</span><h3>Newsletters</h3><div class="pre">starting at</div><div class="amt">$200<small>/mo</small></div>
-        <ul><li>Custom-branded, done for you</li><li>Nurtures 6–12 month leads</li><li>All value, zero selling</li><li>Keeps you top of mind, on autopilot</li></ul>
+        <span class="k">Phase 2 · Automation</span>
+        <h3>AI Front Desk</h3>
+        <div class="amt">$1,499</div>
+        <div class="pre">one-time setup</div>
+        <div class="mo">+ <b>$149</b>/month to run it</div>
+        <ul>
+          <li>Trained on your voice, not a script</li>
+          <li>Wired into your CRM &amp; calendar</li>
+          <li>Built and tested with you</li>
+          <li>Already have a site? Start here</li>
+        </ul>
+        <div class="inc">
+          <span class="inc-h">Every month</span>
+          <span>AI usage · monthly tuning · edits by text · real human support</span>
+        </div>
+        <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-dark">Add the front desk</a>
+      </div>
+    </div>
+
+    <!-- newsletter add-on -->
+    <div class="addon reveal">
+      <div class="addon-l">
+        <span class="addon-k">Add-on · The Long Game</span>
+        <h3>Realtor Newsletters</h3>
+        <p>Custom-branded, done for you. All value, zero selling — so you're the name they remember 6–12 months from now.</p>
+      </div>
+      <div class="addon-r">
+        <div class="addon-amt">$199<small>/mo</small></div>
+        <div class="addon-note">no setup fee</div>
         <a href="#fastlane" onclick="startExpress({intent:'newsletter'});return false;" class="btn btn-dark">Set up newsletters</a>
       </div>
     </div>
+
+    <!-- anchor -->
+    <div class="anchor reveal">
+      <div class="anchor-head">
+        <span class="eyebrow">Let's put $149 in perspective</span>
+        <h3 class="anchor-h">The math nobody does before they say "it's too expensive."</h3>
+      </div>
+      <div class="anchor-grid">
+        <div class="acol">
+          <div class="acol-k">A full-time receptionist</div>
+          <div class="acol-n">$3,088<small>/mo</small></div>
+          <div class="acol-d">Average US salary — and true cost runs 1.25–1.8× that once you add payroll taxes and benefits.</div>
+          <div class="acol-b bad">~35 hours of actual phone coverage a week</div>
+        </div>
+        <div class="acol vs"><span>vs</span></div>
+        <div class="acol good">
+          <div class="acol-k">Your AI front desk</div>
+          <div class="acol-n">$149<small>/mo</small></div>
+          <div class="acol-d">Never sleeps, never quits, never takes a lunch break, never has a bad day.</div>
+          <div class="acol-b ok">168 hours a week. All of them.</div>
+        </div>
+      </div>
+      <div class="anchor-foot">
+        <p><b>And one more way to look at it:</b> at a $9,000 commission, a single extra closing covers your entire first year — setup included — with thousands left over. It doesn't have to work miracles. It has to catch <i>one</i> deal you'd have lost.</p>
+      </div>
+    </div>
+
+    <div class="guarantee reveal">
+      <span class="g-ic">🤝</span>
+      <div>
+        <div class="g-t">No contracts. Cancel anytime.</div>
+        <div class="g-d">Month to month, always. If it's not earning its keep, you leave — and your website is yours to take with you. We'd rather win you back every month than trap you for a year.</div>
+      </div>
+    </div>
+
     <div class="founding reveal">
       <span class="star">★</span>
       <p><b>Founding-client rates.</b> We're building our first case studies right now — anchor clients get discounted or waived setup and reduced monthly rates, traded in writing for a testimonial and a couple of warm intros. If you want the best deal we'll ever offer, this is the window.</p>
@@ -734,6 +967,8 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
         <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Do you only work with realtors and lenders? <span class="pm">+</span></div><div class="faq-a">That's where we start, because our founder is a working realtor who lived these exact problems. The same system works for any local business losing calls and leads.</div></div>
         <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Will this replace my current CRM? <span class="pm">+</span></div><div class="faq-a">No. We build on top of the tools you already use and connect them together. We're adding the front office — not another login to babysit.</div></div>
         <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">How does the newsletter help? <span class="pm">+</span></div><div class="faq-a">Most of your future clients aren't ready today. A custom-branded newsletter keeps you in their inbox every month with real value — no selling — so when they're finally ready, you're the name they already trust.</div></div>
+        <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">What is the monthly fee actually for? <span class="pm">+</span></div><div class="faq-a">The setup builds it; the monthly runs it. That covers hosting, SSL and security, updates and monitoring, the AI usage itself, monthly tuning as we learn what's converting, edits whenever you text them in, and real human support. It's not a maintenance fee for a file sitting on a server — it's a system that's actively working every day. And it's month to month: no contract, cancel anytime.</div></div>
+        <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Why a setup fee AND a monthly? <span class="pm">+</span></div><div class="faq-a">Because they pay for two different things. The setup is the build — design, copy, SEO, wiring it into your tools, training the AI on your voice. That's real work with a finish line. The monthly is everything that happens after: keeping it running, improving it, and supporting you. We'd rather charge honestly for both than hide one inside the other and mark it up.</div></div>
         <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">How fast can we go live? <span class="pm">+</span></div><div class="faq-a">Websites can turn around in days. A front desk setup is usually live within a week or two. The free audit gives you an exact timeline and honest answers.</div></div>
       </div>
     </div>
