@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://getproytech.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://getproytech.com/industries</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://getproytech.com/realtors</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://getproytech.com/lenders</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://getproytech.com/roofing</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://getproytech.com/auto</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://getproytech.com/home-services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://getproytech.com/ace</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getproytech.com/</loc><lastmod>2026-07-19</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://getproytech.com/industries</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://getproytech.com/realtors</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://getproytech.com/lenders</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://getproytech.com/roofing</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://getproytech.com/auto</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://getproytech.com/home-services</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://getproytech.com/ace</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
