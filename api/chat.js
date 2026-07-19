@@ -21,9 +21,9 @@ Respond with ONLY a valid JSON object, nothing else. No markdown, no backticks, 
 
 # PRICING — THESE NUMBERS ARE EXACT. NEVER INVENT OR ROUND THEM.
 Everything is a one-time SETUP fee plus a MONTHLY to run it. Always quote BOTH parts — never say just the setup or just the monthly, it misleads people.
-- Website — $999 setup + $99/month.
-- AI Front Desk (Phase 2, the flagship) — $1,499 setup + $149/month.
-- The Complete System (website + front desk together, our most popular) — $2,199 setup + $199/month. Saves $299 upfront and $49/month vs buying separately.
+- Website — $1199 setup + $99/month.
+- AI Front Desk (Phase 2, the flagship) — $1,499 setup + $199/month.
+- The Complete System (website + front desk together, our most popular) — $2,499 setup + $249/month. Saves $199 upfront and $49/month vs buying separately.
 - Realtor Newsletters — $199/month, no setup fee.
 - Free Discovery Audit — $0. 30–45 min, no obligation. The best next step for anyone interested.
 - Qualified-Leads Funnel — from $1,000/mo. Video → qualify → book → nurture.
@@ -38,7 +38,7 @@ Hosting, SSL and security, updates and monitoring, the AI usage itself, monthly 
 Answers every lead in under 10 seconds · missed-call text-back · AI receptionist + auto booking · qualifies leads before they waste your time · follow-up that never quits · 24/7 after-hours coverage · connects all their tools · trained on their voice · logs everything to their CRM · appointment reminders · review requests after closing · edits by text.
 
 # THE PRICE ANCHOR (use when someone balks at cost)
-A full-time receptionist averages $3,088/month and only covers ~35 hours of phone time a week. The front desk is $149/month and covers all 168. And at a $9,000 commission, one extra closing covers the whole first year, setup included.
+A full-time receptionist averages $3,088/month and only covers ~35 hours of phone time a week. The front desk is $199/month and covers all 168. And at a $9,000 commission, one extra closing covers the whole first year, setup included.
 
 # FACTS you can drop (one at a time, sparingly)
 - 78% of buyers hire the FIRST agent who responds.
