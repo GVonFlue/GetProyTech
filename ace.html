@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ace — AI Receptionist Demo for Realtors &amp; Lenders | ProyTech</title>
+<meta name="description" content="Try Ace live — the AI front desk that answers real estate and mortgage leads in seconds, qualifies them, and books appointments 24/7. This is the exact assistant ProyTech builds for realtors and lenders." />
+<meta name="keywords" content="AI receptionist demo, AI receptionist for realtors, real estate chatbot, AI front desk, missed call text back demo, mortgage AI assistant" />
+<link rel="canonical" href="https://getproytech.com/ace" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#FFFFFF" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Meet Ace — try ProyTech's AI front desk live" />
+<meta property="og:description" content="The AI receptionist that answers every lead in seconds, in your voice. Ask it anything — it's live on this page." />
+<meta property="og:url" content="https://getproytech.com/ace" />
+<meta property="og:site_name" content="ProyTech" />
+<meta property="og:image" content="https://getproytech.com/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Meet Ace — ProyTech's AI front desk, live demo" />
+<meta name="twitter:description" content="Answers in seconds. Qualifies. Books. Try it right now." />
+<meta name="twitter:image" content="https://getproytech.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Ace — AI Receptionist Demo","url":"https://getproytech.com/ace","description":"Live demo of Ace, ProyTech's AI front desk for realtors and lenders.","isPartOf":{"@type":"WebSite","name":"ProyTech","url":"https://getproytech.com/"}}
+</script>
+<style>
+:root{
+  --ink:#0A0F26;--cobalt:#2E5BFF;--cobalt-bright:#5A82FF;--brand-blue:#1338de;
+  --orange:#FF4D14;--orange-bright:#FF6A38;--ivory:#EEF2FB;
+  --text-dim:#aab4dc;--text-dim-2:#8089ad;--ink-soft:#54607f;
+  --line:rgba(255,255,255,.10);--line-dark:rgba(10,15,38,.12);
+  --f-display:'Space Grotesk',sans-serif;--f-body:'Inter',sans-serif;--f-mono:'Space Mono',monospace;
+  --maxw:1100px;--radius:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:#fff;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--orange);color:#fff}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:6px}
+.page{max-width:var(--maxw);margin:0 auto;padding:0 clamp(12px,2.5vw,26px)}
+.panel{border-radius:var(--radius);margin:16px 0;padding:clamp(30px,5vw,64px) clamp(22px,4vw,56px);position:relative;overflow:hidden}
+.panel-cobalt{background:linear-gradient(150deg,#0d2699 0%,#1338de 48%,#3a5cf0 100%);color:#fff;border:8px solid var(--orange)}
+.panel-ivory{background:var(--ivory);color:var(--ink);border:8px solid #050505}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;font-weight:700;color:#c6d3ff}
+.eyebrow::before{content:"";width:24px;height:2px;background:var(--orange)}
+.panel-ivory .eyebrow{color:var(--cobalt)}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.08;letter-spacing:-.02em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:15px;padding:15px 26px;border-radius:100px;border:1px solid transparent;cursor:pointer;transition:transform .18s,box-shadow .18s;white-space:nowrap}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 8px 30px rgba(255,77,20,.34)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,77,20,.48)}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.btn-ghost:hover{border-color:#fff;transform:translateY(-2px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{transform:translateY(-2px)}
+
+header.nav{position:sticky;top:0;z-index:60;padding:12px clamp(12px,2.5vw,26px)}
+.nav-pill{max-width:1060px;margin:0 auto;background:rgba(10,15,38,.92);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.10);border-radius:100px;box-shadow:0 12px 34px rgba(10,15,38,.22);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 12px 10px 22px}
+.logo-img{height:44px;width:auto;display:block}
+.logo{font-family:var(--f-display);font-weight:700;font-size:24px;color:#fff;display:flex;align-items:center}
+.logo b{color:var(--orange)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.nav-back{font-size:14px;color:var(--text-dim);font-weight:500}
+.nav-back:hover{color:#fff}
+@media(max-width:640px){.nav-back{display:none}.logo-img{height:36px}}
+
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:32px}}
+.hero h1{font-size:clamp(34px,5vw,56px);color:#fff;margin:16px 0}
+.hero h1 span{color:#ffd9cc}
+.hero p{color:rgba(255,255,255,.85);font-size:clamp(15px,1.8vw,18px);max-width:48ch;margin-bottom:26px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{margin-top:18px;font-family:var(--f-mono);font-size:12px;color:rgba(255,255,255,.65)}
+
+/* live chat card */
+.chatcard{background:#0B1027;border:1px solid rgba(255,255,255,.16);border-radius:20px;box-shadow:0 30px 60px rgba(0,0,0,.4);overflow:hidden;max-width:480px;margin-left:auto}
+@media(max-width:900px){.chatcard{margin:0 auto}}
+.chat-h{padding:15px 18px;background:rgba(255,255,255,.04);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.chat-h .av{width:38px;height:38px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-family:var(--f-display);font-weight:700}
+.chat-h .n{font-family:var(--f-display);font-weight:600;font-size:16px;color:#fff}
+.chat-h .s{font-family:var(--f-mono);font-size:10.5px;color:var(--text-dim);display:flex;align-items:center;gap:6px}
+.dot-live{width:8px;height:8px;border-radius:50%;background:#34d17a;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,209,122,.55)}70%{box-shadow:0 0 0 9px rgba(52,209,122,0)}100%{box-shadow:0 0 0 0 rgba(52,209,122,0)}}
+.chat-body{height:380px;overflow-y:auto;overflow-anchor:none;-webkit-overflow-scrolling:touch;padding:18px;display:flex;flex-direction:column;gap:12px}
+.cmsg{max-width:86%;padding:11px 14px;border-radius:14px;font-size:14.5px;line-height:1.5;color:#fff}
+.cmsg.ace{align-self:flex-start;background:#182352;border:1px solid var(--line)}
+.cmsg.user{align-self:flex-end;background:linear-gradient(135deg,var(--cobalt),#1e3fc4)}
+.cchips{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px}
+.cchip{font-size:12.5px;background:rgba(46,91,255,.12);border:1px solid rgba(90,130,255,.3);color:#bcd0ff;padding:7px 12px;border-radius:100px;cursor:pointer;transition:background .15s}
+.cchip:hover{background:rgba(46,91,255,.24)}
+.chat-foot{padding:14px 16px;border-top:1px solid var(--line);display:flex;gap:10px}
+.chat-foot input{flex:1;background:#141c40;border:1px solid var(--line);border-radius:100px;padding:12px 16px;color:#fff;font-family:var(--f-body);font-size:16px;outline:none}
+.chat-foot input:focus{border-color:var(--cobalt)}
+.chat-foot button{background:var(--orange);border:0;border-radius:50%;width:44px;height:44px;color:#fff;cursor:pointer;font-size:17px;flex-shrink:0}
+.ctyping{align-self:flex-start;display:flex;gap:4px;padding:12px 15px;background:#182352;border-radius:14px}
+.ctyping span{width:6px;height:6px;border-radius:50%;background:#7b8ac9;animation:blink 1.2s infinite}
+.ctyping span:nth-child(2){animation-delay:.2s}.ctyping span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+@media(max-width:820px){.grid3{grid-template-columns:1fr}}
+.gcard{background:#fff;border:1px solid var(--line-dark);border-radius:16px;padding:24px}
+.gcard .ic{width:38px;height:38px;border-radius:11px;background:rgba(46,91,255,.1);display:grid;place-items:center;font-size:17px;margin-bottom:14px}
+.gcard h3{font-size:17px;color:var(--ink);margin-bottom:6px}
+.gcard p{font-size:13.5px;color:var(--ink-soft);line-height:1.55}
+.sec-head{max-width:640px}
+.sec-head h2{font-size:clamp(26px,3.8vw,40px);color:var(--ink);margin:14px 0 10px}
+.sec-head p{color:var(--ink-soft);font-size:15.5px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.foot{text-align:center;padding:26px 0 40px;font-size:13px;color:var(--ink-soft)}
+.foot a{color:var(--cobalt);font-weight:600}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-pill">
+    <a href="/" class="logo" aria-label="ProyTech home"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy<b>Tech</b>')"></a>
+    <div class="nav-r">
+      <a href="/" class="nav-back">← Back to site</a>
+      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Get my free leak audit</a>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <section class="panel panel-cobalt hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Live Demo</span>
+        <h1>Meet Ace. <span>Go ahead — try to stump it.</span></h1>
+        <p>This is the exact AI front desk we build for realtors and lenders — answering in seconds, qualifying, and booking 24/7. It's live on this page right now. Ask it anything: pricing, how it works, whether it fits your business.</p>
+        <div class="hero-cta">
+          <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Get my free leak audit →</a>
+          <a href="/" class="btn btn-ghost">See everything we build</a>
+        </div>
+        <div class="hero-note">Yours gets trained on YOUR voice, listings, and process — this one just knows ours.</div>
+      </div>
+
+      <div class="chatcard">
+        <div class="chat-h"><span class="av">A</span><div><div class="n">Ace</div><div class="s"><span class="dot-live"></span> Live · answers in seconds</div></div></div>
+        <div class="chat-body" id="aceBody">
+          <div class="cmsg ace">Hey — I'm Ace 👋 I'm the AI front desk ProyTech builds for realtors and lenders. Ask me anything, or tap a question below. Go on, time me.</div>
+        </div>
+        <div class="cchips" id="aceChips">
+          <button class="cchip" onclick="quickAsk('What exactly do you do for a realtor?')">What do you do?</button>
+          <button class="cchip" onclick="quickAsk('What does the front desk cost?')">What's it cost?</button>
+          <button class="cchip" onclick="openCalendly()">Book a free audit</button>
+        </div>
+        <div class="chat-foot"><input id="aceInput" type="text" placeholder="Ask Ace anything…" onkeydown="if(event.key==='Enter')sendAce()" /><button onclick="sendAce()" aria-label="Send">↑</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel panel-ivory">
+    <div class="sec-head">
+      <span class="eyebrow">What you're seeing</span>
+      <h2>Every reply you just got? Your leads get that speed.</h2>
+      <p>Ace isn't a canned chatbot with five scripted answers. It understands the question, responds like a person, and drives toward a booked appointment — the same way yours will, in your voice.</p>
+    </div>
+    <div class="grid3">
+      <div class="gcard"><div class="ic">⚡</div><h3>Answers in seconds, 24/7</h3><p>Website chats, missed calls, after-hours texts — every lead gets an instant, human-sounding reply while your competitors sleep on it.</p></div>
+      <div class="gcard"><div class="ic">🎯</div><h3>Qualifies while it chats</h3><p>Budget, timeline, area, pre-approval — it asks what you'd ask and hands you the lead warm, with the whole conversation logged to your CRM.</p></div>
+      <div class="gcard"><div class="ic">📅</div><h3>Books straight to your calendar</h3><p>No phone tag. Ace offers real open times and drops the appointment on your calendar with reminders that kill no-shows.</p></div>
+    </div>
+    <div class="cta-row">
+      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Get my free leak audit →</a>
+      <a href="/#pricing" class="btn btn-dark">See pricing</a>
+    </div>
+  </section>
+
+</main>
+
+<div class="foot">Ace is one of the systems ProyTech builds. <a href="/">See the full picture →</a></div>
+
+<script>
+const CALENDLY_URL="https://calendly.com/getproytech/30min";
+function openCalendly(){if(window.Calendly&&window.Calendly.initPopupWidget){Calendly.initPopupWidget({url:CALENDLY_URL});}else{window.open(CALENDLY_URL,'_blank','noopener');}return false;}
+function isBookingChip(t){return /\b(book|schedule)\b/i.test(t)||/grab a time|set up a call|pick a time/i.test(t);}
+
+const aceBody=document.getElementById('aceBody');
+const aceInput=document.getElementById('aceInput');
+const aceChips=document.getElementById('aceChips');
+let aceHistory=[];
+const DEFAULT_CHIPS=["How does it work?","What's it cost?","Book a free audit"];
+
+function quickAsk(q){aceInput.value=q;sendAce();}
+function renderChips(chips){
+  const list=(chips&&chips.length)?chips:DEFAULT_CHIPS;aceChips.innerHTML='';
+  list.slice(0,3).forEach(c=>{const b=document.createElement('button');b.className='cchip';b.type='button';b.textContent=c;
+    if(isBookingChip(c)){b.addEventListener('click',openCalendly);}else{b.addEventListener('click',()=>quickAsk(c));}aceChips.appendChild(b);});
+  aceChips.style.display='flex';
+}
+function bubble(text,cls){const el=document.createElement('div');el.className='cmsg '+cls;el.textContent=text;aceBody.appendChild(el);aceBody.scrollTop=aceBody.scrollHeight;return el;}
+function typing(){const el=document.createElement('div');el.className='ctyping';el.innerHTML='<span></span><span></span><span></span>';aceBody.appendChild(el);aceBody.scrollTop=aceBody.scrollHeight;return el;}
+async function sendAce(){
+  const text=aceInput.value.trim();if(!text)return;
+  aceChips.style.display='none';aceChips.innerHTML='';aceInput.value='';
+  bubble(text,'user');aceHistory.push({role:'user',content:text});
+  const dots=typing();
+  try{
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:aceHistory})});
+    dots.remove();if(!res.ok)throw new Error('bad');
+    const data=await res.json();
+    const reply=data.reply||"Sorry — I hit a snag. Email admin@getproytech.com and we'll jump right on it.";
+    bubble(reply,'ace');aceHistory.push({role:'assistant',content:reply});renderChips(data.chips);
+  }catch(e){dots.remove();bubble("I can't reach the server right now — but email admin@getproytech.com or book a free audit and we'll answer everything.",'ace');renderChips(DEFAULT_CHIPS);}
+}
+</script>
+</body>
+</html>
