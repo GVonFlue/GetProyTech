@@ -371,6 +371,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
 .nav-drop:hover .nav-drop-menu,.nav-drop:focus-within .nav-drop-menu{display:block}
 .nav-drop-menu a{display:block;padding:11px 14px;border-radius:9px;font-size:14px;color:var(--text-dim)}
 .nav-drop-menu a:hover{background:rgba(46,91,255,.14);color:#fff}
+.nav-drop-menu .dd-other{margin-top:6px;border-top:1px solid rgba(255,255,255,.1);color:var(--orange-bright,#FF6A38);font-weight:600}
 
 /* ---------- photo avatars ---------- */
 .avatar{position:relative;overflow:hidden}
@@ -524,14 +525,23 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
     <a href="#" class="logo" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy<b>Tech</b>')"></a>
     <nav class="nav-links">
       <a href="#how">How It Works</a>
-      <a href="#frontdesk">Front Desk</a>
+      <div class="nav-drop">
+        <a href="/industries" class="nav-drop-toggle">Industries <span class="caret">▾</span></a>
+        <div class="nav-drop-menu">
+          <a href="/realtors">Realtors</a>
+          <a href="/lenders">Mortgage &amp; Lending</a>
+          <a href="/roofing">Roofing &amp; Contractors</a>
+          <a href="/auto">Auto &amp; Diesel Shops</a>
+          <a href="/home-services">HVAC · Plumbing · Electrical</a>
+          <a href="/industries" class="dd-other">Other industries →</a>
+        </div>
+      </div>
       <div class="nav-drop">
         <a href="/ace" class="nav-drop-toggle">Demos <span class="caret">▾</span></a>
         <div class="nav-drop-menu">
           <a href="/ace">Ace — AI Front Desk</a>
         </div>
       </div>
-      <a href="#longgame">Newsletters</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
