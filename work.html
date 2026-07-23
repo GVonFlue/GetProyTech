@@ -192,28 +192,33 @@ body.mnav-open{overflow:hidden}
 @media(min-width:981px){.mnav{display:none}}
 @media (prefers-reduced-motion:reduce){.mnav,.mnav-panel,.nav-burger span{transition:none}}
 
-/* ---------- mobile pin sheet ---------- */
+
+/* ---------- mobile: smaller pins (they scale down with the screenshot) ---------- */
+@media(max-width:960px){
+  .pin{width:26px;height:26px;font-size:11.5px;border-width:2px}
+  /* keep a 44px tap target even though the dot is small */
+  .pin::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%}
+}
 .dive-hint{display:none;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--text-dim-2);margin-bottom:10px}
 .dive-hint b{color:var(--orange)}
 @media(max-width:960px){.dive-hint{display:block}}
-.pinsheet{position:fixed;inset:0;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s ease}
-.pinsheet.open{opacity:1;pointer-events:auto}
-.pinsheet-back{position:absolute;inset:0;background:rgba(4,7,18,.66)}
-.pinsheet-card{position:absolute;left:0;right:0;bottom:0;background:#0A0F26;border-top:1px solid rgba(255,255,255,.16);border-radius:24px 24px 0 0;box-shadow:0 -18px 60px rgba(0,0,0,.6);padding:22px 20px calc(20px + env(safe-area-inset-bottom));transform:translateY(102%);transition:transform .26s cubic-bezier(.2,.8,.3,1);max-height:76dvh;overflow-y:auto}
-.pinsheet.open .pinsheet-card{transform:none}
-.pinsheet-grab{width:42px;height:4px;border-radius:100px;background:rgba(255,255,255,.22);margin:-8px auto 16px}
-.pinsheet-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);color:#fff;font-size:15px;cursor:pointer;line-height:1;padding:0}
-.pinsheet-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;padding-right:40px}
-.ps-n{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;font-family:var(--f-mono);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
-.pinsheet-head h4{font-family:var(--f-display);font-weight:600;font-size:19px;line-height:1.2;color:#fff}
-.pinsheet-card p{font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.8)}
-.pinsheet-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
-.ps-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-family:var(--f-body);font-size:14.5px;font-weight:600;padding:11px 18px;border-radius:100px;cursor:pointer;min-width:88px}
-.ps-btn:disabled{opacity:.32;cursor:default}
-.ps-count{font-family:var(--f-mono);font-size:12px;color:var(--text-dim-2)}
-body.ps-open{overflow:hidden}
-@media(min-width:961px){.pinsheet{display:none}}
-@media (prefers-reduced-motion:reduce){.pinsheet,.pinsheet-card{transition:none}}
+
+/* ---------- pin popover (bubble anchored to the pin) ---------- */
+.pinpop{position:absolute;z-index:6;width:270px;background:#0A0F26;border:1px solid rgba(255,255,255,.2);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.6);padding:15px 15px 12px;color:#fff}
+.pinpop[hidden]{display:none}
+.pinpop-arrow{position:absolute;width:14px;height:14px;background:#0A0F26;border-left:1px solid rgba(255,255,255,.2);border-top:1px solid rgba(255,255,255,.2);transform:rotate(45deg)}
+.pinpop.below .pinpop-arrow{top:-8px}
+.pinpop.above .pinpop-arrow{bottom:-8px;transform:rotate(225deg)}
+.pinpop-x{position:absolute;top:9px;right:9px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:12px;line-height:1;cursor:pointer;padding:0}
+.pinpop-head{display:flex;gap:9px;align-items:flex-start;margin-bottom:8px;padding-right:30px}
+.pp-n{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;font-family:var(--f-mono);font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center}
+.pinpop-head h4{font-family:var(--f-display);font-weight:600;font-size:15px;line-height:1.22;color:#fff}
+.pinpop p{font-size:13.4px;line-height:1.55;color:rgba(255,255,255,.82)}
+.pinpop-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.12)}
+.pp-btn{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:15px;font-weight:700;width:38px;height:32px;border-radius:100px;cursor:pointer;padding:0;line-height:1}
+.pp-btn:disabled{opacity:.3;cursor:default}
+.pp-count{font-family:var(--f-mono);font-size:11.5px;color:var(--text-dim-2)}
+@media (prefers-reduced-motion:reduce){.pinpop{transition:none}}
 </style>
 </head>
 <body>
@@ -309,20 +314,7 @@ body.ps-open{overflow:hidden}
   </section>
 
 </main>
-<div class="pinsheet" id="pinsheet" aria-hidden="true">
-  <div class="pinsheet-back" data-ps-close></div>
-  <div class="pinsheet-card" role="dialog" aria-modal="true" aria-labelledby="psTitle" tabindex="-1">
-    <div class="pinsheet-grab"></div>
-    <button class="pinsheet-x" type="button" data-ps-close aria-label="Close">&#10005;</button>
-    <div class="pinsheet-head"><span class="ps-n" id="psN">1</span><h4 id="psTitle"></h4></div>
-    <p id="psText"></p>
-    <div class="pinsheet-nav">
-      <button type="button" class="ps-btn" id="psPrev">&lsaquo; Prev</button>
-      <span class="ps-count" id="psCount"></span>
-      <button type="button" class="ps-btn" id="psNext">Next &rsaquo;</button>
-    </div>
-  </div>
-</div>
+
 
 
 <noscript>
@@ -388,9 +380,9 @@ const SITES = [
     annotations: [
       { n:1,  top:3.9, left:23, title:'The five-second test, passed',
         text:'“Relationship First Real Estate. No suit. No jargon. Just keys.” A stranger knows what this is and who it\'s for before they scroll. No industry language, no mission statement, no stock handshake.' },
-      { n:2,  top:8.7, left:29, title:'Two doors in the first screen',
+      { n:2,  top:8.6, left:32, title:'Two doors in the first screen',
         text:'The free guide serves someone who wants value before giving anything. Schedule a Call serves someone ready right now. One CTA would have lost half of them.' },
-      { n:3,  top:9.8, left:22, title:'A number, not an adjective',
+      { n:3,  top:9.9, left:19, title:'A number, not an adjective',
         text:'“120+ families guided home.” Specific numbers build authority that “experienced” and “trusted” never will, because anyone can type those.' },
       { n:4,  top:5.7, left:70, title:'Trust is a person, not a brand',
         text:'A real video and a real photo. People hire a person. Stock photography signals the opposite of what a relationship-first business is claiming.' },
@@ -568,70 +560,104 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 })();
 
 
+
 /* =====================================================================
-   MOBILE PIN SHEET
-   On narrow screens the legend sits far below the screenshot, so tapping
-   a pin opens a bottom sheet with that annotation instead, with prev/next
-   so you can read straight through without scrolling.
+   PIN POPOVER (mobile)
+   On narrow screens the legend is a long way down the page, so tapping a
+   pin opens a small bubble anchored to that pin instead. It lives inside
+   .shot, so it scrolls with the screenshot and stays attached.
    ===================================================================== */
 const isSmall = () => window.matchMedia('(max-width: 960px)').matches;
-const psEl = {
-  wrap : document.getElementById('pinsheet'),
-  n    : document.getElementById('psN'),
-  title: document.getElementById('psTitle'),
-  text : document.getElementById('psText'),
-  count: document.getElementById('psCount'),
-  prev : document.getElementById('psPrev'),
-  next : document.getElementById('psNext'),
-  card : document.querySelector('.pinsheet-card')
-};
-let psState = {site:null, n:1, dive:null, opener:null};
 
-function renderSheet(){
-  const {site, n} = psState;
-  const a = site.annotations.find(x => x.n === n);
-  if(!a) return;
-  psEl.n.textContent     = a.n;
-  psEl.title.textContent = a.title;
-  psEl.text.textContent  = a.text;
-  psEl.count.textContent = `${a.n} / ${site.annotations.length}`;
-  psEl.prev.disabled = (n <= 1);
-  psEl.next.disabled = (n >= site.annotations.length);
-  if(psState.dive && psState.dive._centrePin) psState.dive._centrePin(n);
-}
-function openSheet(site, n, dive, opener){
-  psState = {site, n, dive, opener};
-  renderSheet();
-  psEl.wrap.classList.add('open');
-  psEl.wrap.setAttribute('aria-hidden','false');
-  document.body.classList.add('ps-open');
-  psEl.card.focus({preventScroll:true});
-}
-function closeSheet(){
-  psEl.wrap.classList.remove('open');
-  psEl.wrap.setAttribute('aria-hidden','true');
-  document.body.classList.remove('ps-open');
-  if(psState.opener) psState.opener.focus({preventScroll:true});
-}
-function stepSheet(d){
-  const max = psState.site.annotations.length;
-  const next = Math.min(max, Math.max(1, psState.n + d));
-  if(next === psState.n) return;
-  psState.n = next;
-  renderSheet();
-}
-if(psEl.wrap){
-  psEl.wrap.querySelectorAll('[data-ps-close]').forEach(el =>
-    el.addEventListener('click', closeSheet));
-  psEl.prev.addEventListener('click', () => stepSheet(-1));
-  psEl.next.addEventListener('click', () => stepSheet(1));
-  document.addEventListener('keydown', e => {
-    if(!psEl.wrap.classList.contains('open')) return;
-    if(e.key === 'Escape')     closeSheet();
-    if(e.key === 'ArrowLeft')  stepSheet(-1);
-    if(e.key === 'ArrowRight') stepSheet(1);
+function makePopover(dive, site, pins, scroller, shot, setActive){
+  const pop = document.createElement('div');
+  pop.className = 'pinpop';
+  pop.hidden = true;
+  pop.setAttribute('role','dialog');
+  pop.innerHTML =
+    '<span class="pinpop-arrow"></span>' +
+    '<button class="pinpop-x" type="button" aria-label="Close">&#10005;</button>' +
+    '<div class="pinpop-head"><span class="pp-n"></span><h4></h4></div>' +
+    '<p></p>' +
+    '<div class="pinpop-nav">' +
+      '<button type="button" class="pp-btn pp-prev" aria-label="Previous annotation">&lsaquo;</button>' +
+      '<span class="pp-count"></span>' +
+      '<button type="button" class="pp-btn pp-next" aria-label="Next annotation">&rsaquo;</button>' +
+    '</div>';
+  shot.appendChild(pop);
+
+  const el = {
+    n: pop.querySelector('.pp-n'), title: pop.querySelector('h4'),
+    text: pop.querySelector('p'),  count: pop.querySelector('.pp-count'),
+    prev: pop.querySelector('.pp-prev'), next: pop.querySelector('.pp-next'),
+    arrow: pop.querySelector('.pinpop-arrow'), x: pop.querySelector('.pinpop-x')
+  };
+  let cur = null;
+
+  function place(n){
+    const pin = pins.find(p => +p.dataset.pin === n);
+    if(!pin) return;
+    const sw = shot.clientWidth || 320;
+    const sh = shot.clientHeight || 0;
+    const pw = Math.min(270, sw - 20);
+    pop.style.width = pw + 'px';
+
+    const px = pin.offsetLeft, py = pin.offsetTop;
+    let left = px - pw / 2;
+    left = Math.max(10, Math.min(left, sw - pw - 10));
+
+    pop.classList.remove('above','below');
+    pop.style.top = '0px';
+    pop.style.left = left + 'px';
+    pop.classList.add('below');
+    const ph = pop.offsetHeight || 190;
+
+    let top = py + 24;
+    if(sh && top + ph > sh - 10){          /* not enough room below -> flip */
+      pop.classList.remove('below'); pop.classList.add('above');
+      top = Math.max(6, py - ph - 24);
+    }
+    pop.style.top = top + 'px';
+    el.arrow.style.left = Math.max(12, Math.min(px - left - 7, pw - 26)) + 'px';
+  }
+
+  function show(n){
+    const a = site.annotations.find(x => x.n === n);
+    if(!a) return;
+    cur = n;
+    el.n.textContent = a.n;
+    el.title.textContent = a.title;
+    el.text.textContent = a.text;
+    el.count.textContent = a.n + ' / ' + site.annotations.length;
+    el.prev.disabled = (n <= 1);
+    el.next.disabled = (n >= site.annotations.length);
+    pop.hidden = false;
+    place(n);
+    setActive(n, false);
+    /* bring the pin (and the bubble under it) into view */
+    const pin = pins.find(p => +p.dataset.pin === n);
+    if(pin && scroller.clientHeight){
+      scroller.scrollTo({top: Math.max(0, pin.offsetTop - scroller.clientHeight * 0.3),
+                         behavior: REDUCED ? 'auto' : 'smooth'});
+    }
+  }
+  function hide(){ pop.hidden = true; cur = null; }
+  function step(d){
+    const max = site.annotations.length;
+    const n = Math.min(max, Math.max(1, (cur || 1) + d));
+    if(n !== cur) show(n);
+  }
+
+  el.x.addEventListener('click', e => { e.stopPropagation(); hide(); });
+  el.prev.addEventListener('click', e => { e.stopPropagation(); step(-1); });
+  el.next.addEventListener('click', e => { e.stopPropagation(); step(1); });
+  pop.addEventListener('click', e => e.stopPropagation());
+  scroller.addEventListener('click', e => {
+    if(!e.target.classList.contains('pin') && !pop.contains(e.target)) hide();
   });
-  window.addEventListener('resize', () => { if(!isSmall()) closeSheet(); });
+  window.addEventListener('resize', () => { if(!isSmall()) hide(); else if(cur) place(cur); });
+
+  return {show, hide};
 }
 
 /* =====================================================================
@@ -656,11 +682,12 @@ document.querySelectorAll('[data-dive]').forEach(dive => {
     legs.forEach(l => l.classList.toggle('active', +l.dataset.leg === n));
     if(scrollLegend){
       const leg = legs.find(l => +l.dataset.leg === n);
-      if(leg) leg.scrollIntoView({block:'nearest', behavior: REDUCED ? 'auto' : 'smooth'});
+      if(leg && leg.scrollIntoView) leg.scrollIntoView({block:'nearest', behavior: REDUCED ? 'auto' : 'smooth'});
     }
   }
 
   const site = SITES.find(x => x.slug === dive.dataset.dive);
+  const pop  = makePopover(dive, site, pins, scroller, shot, setActive);
 
   /* Bring a pin to the middle of the frame (used by the sheet + legend). */
   function centrePin(n){
@@ -677,7 +704,7 @@ document.querySelectorAll('[data-dive]').forEach(dive => {
   pins.forEach(p => p.addEventListener('click', () => {
     const n = +p.dataset.pin;
     setActive(n, !isSmall());
-    if(isSmall()) openSheet(site, n, dive, p);
+    if(isSmall()) pop.show(n);
   }));
   /* Hover/focus -> highlight. Don't yank the legend around on touch. */
   pins.forEach(p => {
