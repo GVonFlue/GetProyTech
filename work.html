@@ -309,6 +309,21 @@ body.ps-open{overflow:hidden}
   </section>
 
 </main>
+<div class="pinsheet" id="pinsheet" aria-hidden="true">
+  <div class="pinsheet-back" data-ps-close></div>
+  <div class="pinsheet-card" role="dialog" aria-modal="true" aria-labelledby="psTitle" tabindex="-1">
+    <div class="pinsheet-grab"></div>
+    <button class="pinsheet-x" type="button" data-ps-close aria-label="Close">&#10005;</button>
+    <div class="pinsheet-head"><span class="ps-n" id="psN">1</span><h4 id="psTitle"></h4></div>
+    <p id="psText"></p>
+    <div class="pinsheet-nav">
+      <button type="button" class="ps-btn" id="psPrev">&lsaquo; Prev</button>
+      <span class="ps-count" id="psCount"></span>
+      <button type="button" class="ps-btn" id="psNext">Next &rsaquo;</button>
+    </div>
+  </div>
+</div>
+
 
 <noscript>
   <div style="max-width:1160px;margin:0 auto;padding:24px">
@@ -759,19 +774,6 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 })();
 </script>
 
-<div class="pinsheet" id="pinsheet" aria-hidden="true">
-  <div class="pinsheet-back" data-ps-close></div>
-  <div class="pinsheet-card" role="dialog" aria-modal="true" aria-labelledby="psTitle" tabindex="-1">
-    <div class="pinsheet-grab"></div>
-    <button class="pinsheet-x" type="button" data-ps-close aria-label="Close">&#10005;</button>
-    <div class="pinsheet-head"><span class="ps-n" id="psN">1</span><h4 id="psTitle"></h4></div>
-    <p id="psText"></p>
-    <div class="pinsheet-nav">
-      <button type="button" class="ps-btn" id="psPrev">&lsaquo; Prev</button>
-      <span class="ps-count" id="psCount"></span>
-      <button type="button" class="ps-btn" id="psNext">Next &rsaquo;</button>
-    </div>
-  </div>
-</div>
+
 </body>
 </html>
