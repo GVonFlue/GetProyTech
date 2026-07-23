@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Website build brief · ProyTech</title>
+<meta name="description" content="Everything we need to build your site. We pre-filled what we could find — you're mostly just confirming." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0C2470" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --navy:#0C2470; --blue:#3C78CC; --orange:#FF5500;
+  --white:#FFFFFF; --ink:#050505;
+  --paper:#F5F7FC; --line:#E3E8F2; --muted:#5B6478;
+  --err:#D64545; --maxw:760px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.1;color:var(--navy)}
+a{color:var(--blue)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+.topbar{background:var(--navy);padding:18px 0}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between}
+.wordmark{font-family:'Space Grotesk';font-weight:700;font-size:1.25rem;color:#fff;text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center}
+.wordmark b{color:var(--orange)}
+.logo-img{height:44px;width:auto;display:block}
+@media(max-width:520px){.logo-img{height:36px}}
+.topbar .tag{font-size:.8rem;color:rgba(255,255,255,.65);font-weight:500}
+@media(max-width:520px){.topbar .tag{display:none}}
+
+.hero{background:var(--navy);color:#fff;padding:44px 0 110px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(60,120,204,.35), rgba(60,120,204,0) 68%);pointer-events:none}
+.kicker{font-family:'Space Grotesk';font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:#9db9e6;display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
+.kicker::before{content:"";width:24px;height:2px;background:var(--orange)}
+.hero h1{color:#fff;font-size:clamp(2.1rem,6vw,3.2rem);margin-bottom:12px}
+.hero p{color:rgba(255,255,255,.82);font-size:1.08rem;max-width:560px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 60px rgba(12,36,112,.12);
+  margin-top:-70px;position:relative;z-index:2;padding:34px 34px 40px;margin-bottom:80px}
+@media(max-width:600px){.card{padding:26px 20px 32px;border-radius:16px}}
+
+.progress{margin-bottom:30px}
+.ptrack{display:flex;gap:6px;margin-bottom:10px}
+.ptrack i{flex:1;height:6px;border-radius:99px;background:var(--line);transition:background .3s}
+.ptrack i.done{background:var(--orange)}
+.plabel{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--muted)}
+.plabel .cur{color:var(--navy)}
+
+.step{display:none;animation:fadeUp .35s ease both}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.step h2{font-size:1.7rem;margin-bottom:6px}
+.step .lede{color:var(--muted);margin-bottom:26px;font-size:.98rem}
+
+.field{margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+label.lbl{display:block;font-weight:600;font-size:.92rem;margin-bottom:7px;color:var(--ink)}
+label.lbl small{display:block;font-weight:400;color:var(--muted);font-size:.82rem;margin-top:1px}
+.req{color:var(--orange);font-weight:700}
+input[type=text],input[type=tel],input[type=email],input[type=url],select,textarea{
+  width:100%;font:inherit;font-size:1rem;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;
+  background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235B6478' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(60,120,204,.18)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--err)}
+.errmsg{display:none;color:var(--err);font-size:.84rem;font-weight:500;margin-top:6px}
+.field.invalid .errmsg{display:block}
+
+/* brand block header */
+.brandhead{display:flex;align-items:center;gap:10px;margin:30px 0 18px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.brandhead:first-of-type{margin-top:6px}
+.brandhead h3{font-size:1.12rem;color:var(--navy)}
+.brandhead .pill{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--paper);color:var(--muted)}
+
+/* prefill note */
+.prefill{background:#F0F5FF;border:1.5px solid #D3E1F7;border-left:4px solid var(--blue);border-radius:12px;padding:14px 16px;margin-bottom:24px;font-size:.9rem;color:var(--ink)}
+.prefill b{color:var(--navy)}
+.flagbox{background:#FFF6F0;border:1.5px solid #FFD9C2;border-left:4px solid var(--orange);border-radius:12px;padding:14px 16px;margin-bottom:18px;font-size:.9rem}
+.flagbox b{color:var(--navy)}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:11px 18px;border:1.5px solid var(--line);border-radius:999px;font-weight:500;font-size:.93rem;
+  color:var(--ink);background:#fff;cursor:pointer;transition:all .15s;user-select:none}
+.chip input:checked + span{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(60,120,204,.3)}
+
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;flex-wrap:wrap}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:inline-block;padding:12px 22px;font-weight:600;font-size:.93rem;cursor:pointer;color:var(--muted);transition:all .15s}
+.seg label + label span{border-left:1.5px solid var(--line)}
+.seg input:checked + span{background:var(--orange);color:#fff}
+
+.asset-list{border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
+.asset{display:flex;align-items:flex-start;gap:14px;padding:15px 18px;cursor:pointer;transition:background .12s}
+.asset + .asset{border-top:1px solid var(--line)}
+.asset:hover{background:var(--paper)}
+.asset input{width:20px;height:20px;margin-top:3px;accent-color:var(--orange);flex:0 0 auto;cursor:pointer}
+.asset b{font-weight:600;font-size:.96rem}
+.asset small{display:block;color:var(--muted);font-size:.84rem}
+.mailrow{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.mailnote{font-size:.9rem;color:var(--muted)}
+
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:'Space Grotesk';font-weight:600;font-size:1rem;
+  padding:15px 30px;border-radius:12px;border:0;cursor:pointer;transition:transform .14s,box-shadow .14s,background .14s;text-decoration:none}
+.btn .arw{transition:transform .14s}
+.btn:hover .arw{transform:translateX(4px)}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 26px rgba(255,85,0,.32)}
+.btn-primary:hover{transform:translateY(-2px);background:#ff6a1f;box-shadow:0 14px 34px rgba(255,85,0,.42)}
+.btn-primary:disabled{opacity:.6;cursor:wait;transform:none}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--navy)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{transform:translateY(-2px)}
+
+.success{display:none;text-align:center;padding:30px 0 10px;animation:fadeUp .4s ease both}
+.success.show{display:block}
+.checkwrap{width:110px;height:110px;margin:0 auto 26px}
+.checkwrap svg{width:100%;height:100%}
+.check-circle{stroke:var(--orange);stroke-width:4;fill:none;stroke-dasharray:302;stroke-dashoffset:302;animation:draw .7s .1s ease-out forwards}
+.check-mark{stroke:var(--orange);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .45s .65s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.success h2{font-size:1.9rem;margin-bottom:10px}
+.success p{color:var(--muted);font-size:1.05rem;max-width:460px;margin:0 auto 18px}
+
+.fallback{display:none;animation:fadeUp .35s ease both}
+.fallback.show{display:block}
+.fallback h2{font-size:1.5rem;margin-bottom:8px}
+.fallback p{color:var(--muted);margin-bottom:16px;font-size:.95rem}
+.fallback pre{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:18px;font-size:.82rem;
+  line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:340px;overflow:auto;margin-bottom:16px}
+.fbrow{display:flex;flex-wrap:wrap;gap:12px}
+footer{padding:34px 0 50px;text-align:center;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy&lt;b&gt;Tech&lt;/b&gt;')"></a>
+    <div class="tag">Website build brief · ~12 minutes</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Part 1 of 2 · Your websites</div>
+    <h1>Let's get your sites built.</h1>
+    <p>We already pulled everything we could find from your current sites, so most of this is just confirming we got it right. Fix anything that's wrong and fill the gaps.</p>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="card">
+
+  <div class="progress" id="progress" aria-hidden="true">
+    <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="plabel"><span id="pstep" class="cur">Step 1 of 6</span><span id="pname">The Facts</span></div>
+  </div>
+
+  <form id="onboardForm" novalidate>
+
+  <!-- ================= STEP 1 ================= -->
+  <section class="step active" data-name="The Facts">
+    <h2>The Facts</h2>
+    <p class="lede">This is the stuff that ends up in your footer, your contact page, and your Google listing. It has to be exactly right.</p>
+
+    <div class="prefill">
+      <b>We pre-filled this from your current sites.</b> Read it over and correct anything that's off — it's faster than typing it fresh.
+    </div>
+
+    <div class="brandhead"><h3>Agent Kidd</h3><span class="pill">Real estate</span></div>
+
+    <div class="grid2">
+      <div class="field" data-key="ak_name" data-required data-msg="We need the name that goes on the site.">
+        <label class="lbl" for="ak_name">Brand name <span class="req">*</span></label>
+        <input type="text" id="ak_name" name="ak_name" value="Agent Kidd" />
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="ak_domain" data-required data-msg="Which domain is this site on?">
+        <label class="lbl" for="ak_domain">Domain <span class="req">*</span></label>
+        <input type="text" id="ak_domain" name="ak_domain" value="agentkidd.com" />
+        <div class="errmsg"></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="ak_phone" data-type="phone" data-required data-msg="That number looks a little short.">
+        <label class="lbl" for="ak_phone">Phone <span class="req">*</span></label>
+        <input type="tel" id="ak_phone" name="ak_phone" value="(316) 390-2120" />
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="ak_brokerage" data-required data-msg="Required on every page by law.">
+        <label class="lbl" for="ak_brokerage">Brokerage <span class="req">*</span></label>
+        <input type="text" id="ak_brokerage" name="ak_brokerage" value="Real Broker, LLC" />
+        <div class="errmsg"></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="ak_license" data-required data-msg="Required on every page by law.">
+        <label class="lbl" for="ak_license">License number <span class="req">*</span></label>
+        <input type="text" id="ak_license" name="ak_license" value="00251163" />
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="ak_license_state" data-required data-msg="Which state issued it?">
+        <label class="lbl" for="ak_license_state">License state <span class="req">*</span></label>
+        <input type="text" id="ak_license_state" name="ak_license_state" value="KS" />
+        <div class="errmsg"></div>
+      </div>
+    </div>
+
+    <div class="field" data-key="ak_address" data-required data-msg="Needed for your Google listing and footer.">
+      <label class="lbl" for="ak_address">Office address <span class="req">*</span> <small>The one that should show publicly</small></label>
+      <input type="text" id="ak_address" name="ak_address" value="201 S Oliver Ave, Wichita, KS 67218" />
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="brandhead"><h3>Cornerstone Management</h3><span class="pill">Property management</span></div>
+
+    <div class="field" data-key="cs_name" data-required data-msg="We need the name that goes on the site.">
+      <label class="lbl" for="cs_name">Brand name <span class="req">*</span></label>
+      <input type="text" id="cs_name" name="cs_name" value="Cornerstone Management" />
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="cs_leasing_phone" data-type="phone">
+        <label class="lbl" for="cs_leasing_phone">Leasing phone</label>
+        <input type="tel" id="cs_leasing_phone" name="cs_leasing_phone" value="(316) 390-1009" />
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="cs_sales_phone" data-type="phone">
+        <label class="lbl" for="cs_sales_phone">Sales phone</label>
+        <input type="tel" id="cs_sales_phone" name="cs_sales_phone" value="(316) 390-2120" />
+        <div class="errmsg"></div>
+      </div>
+    </div>
+
+    <div class="field" data-key="cs_address">
+      <label class="lbl" for="cs_address">Office address <small>If different from above</small></label>
+      <input type="text" id="cs_address" name="cs_address" placeholder="Same as Agent Kidd, or enter a different one" />
+    </div>
+
+    <div class="field" data-key="cs_legal_entity">
+      <label class="lbl" for="cs_legal_entity">Legal entity name <small>For the copyright line — e.g. Cornerstone Management LLC</small></label>
+      <input type="text" id="cs_legal_entity" name="cs_legal_entity" placeholder="e.g. Cornerstone Management, LLC" />
+    </div>
+
+    <div class="brandhead"><h3>Contact &amp; numbers</h3><span class="pill">Both brands</span></div>
+
+    <div class="field" data-key="best_email" data-type="email" data-required data-msg="That email doesn't look quite right.">
+      <label class="lbl" for="best_email">Best email <span class="req">*</span></label>
+      <input type="email" id="best_email" name="best_email" value="justus.cornerstone@yahoo.com" />
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="doors_count" data-required data-msg="This one's going in your headline — we need the real number.">
+        <label class="lbl" for="doors_count">Doors under management <span class="req">*</span></label>
+        <input type="text" id="doors_count" name="doors_count" placeholder="e.g. 500" />
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="hoa_count">
+        <label class="lbl" for="hoa_count">How many HOAs?</label>
+        <input type="text" id="hoa_count" name="hoa_count" placeholder="e.g. 4" />
+      </div>
+    </div>
+
+    <div class="field" data-key="hoa_units">
+      <label class="lbl" for="hoa_units">HOA size range <small>Smallest to largest, in units</small></label>
+      <input type="text" id="hoa_units" name="hoa_units" placeholder="e.g. 60 to 200 units" />
+    </div>
+  </section>
+
+  <!-- ================= STEP 2 ================= -->
+  <section class="step" data-name="Look &amp; Feel">
+    <h2>Look &amp; Feel</h2>
+    <p class="lede">This is the part that decides whether your site looks like everyone else's or like yours. Take a couple minutes here.</p>
+
+    <div class="prefill">
+      <b>The three sites matter most.</b> They tell us more in thirty seconds than a paragraph of description ever could. Any industry — they don't have to be real estate.
+    </div>
+
+    <div class="field" data-key="ref_site_1" data-required data-msg="Give us at least one — this drives the whole design.">
+      <label class="lbl" for="ref_site_1">Site you like #1 <span class="req">*</span></label>
+      <input type="text" id="ref_site_1" name="ref_site_1" placeholder="Paste the URL" />
+      <div class="errmsg"></div>
+    </div>
+    <div class="field" data-key="ref_site_2">
+      <label class="lbl" for="ref_site_2">Site you like #2</label>
+      <input type="text" id="ref_site_2" name="ref_site_2" placeholder="Paste the URL" />
+    </div>
+    <div class="field" data-key="ref_site_3">
+      <label class="lbl" for="ref_site_3">Site you like #3</label>
+      <input type="text" id="ref_site_3" name="ref_site_3" placeholder="Paste the URL" />
+    </div>
+
+    <div class="field" data-key="ref_likes" data-required data-msg="Even one line helps a lot.">
+      <label class="lbl" for="ref_likes">What do you actually like about them? <span class="req">*</span> <small>The colors, how clean it is, the photos, how it's laid out — whatever caught you</small></label>
+      <textarea id="ref_likes" name="ref_likes" placeholder="e.g. The first one is really clean and I like that you know exactly what to do. The second one has great photos…"></textarea>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="dislikes">
+      <label class="lbl" for="dislikes">Anything you can't stand? <small>Styles, colors, a site you've seen that made you cringe</small></label>
+      <textarea id="dislikes" name="dislikes" placeholder="e.g. Hate stock photos of people shaking hands. Don't want it looking like every other Zillow agent page."></textarea>
+    </div>
+
+    <div class="field" data-key="vibe">
+      <label class="lbl">Pick the words that fit what you want <small>Choose as many as apply</small></label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="vibe" value="Clean and modern" /><span>Clean &amp; modern</span></label>
+        <label class="chip"><input type="checkbox" name="vibe" value="Bold" /><span>Bold</span></label>
+        <label class="chip"><input type="checkbox" name="vibe" value="Warm and personal" /><span>Warm &amp; personal</span></label>
+        <label class="chip"><input type="checkbox" name="vibe" value="Premium" /><span>Premium</span></label>
+        <label class="chip"><input type="checkbox" name="vibe" value="Straightforward" /><span>Straightforward</span></label>
+        <label class="chip"><input type="checkbox" name="vibe" value="Local and grounded" /><span>Local &amp; grounded</span></label>
+        <label class="chip"><input type="checkbox" name="vibe" value="Corporate and buttoned-up" /><span>Buttoned-up</span></label>
+        <label class="chip"><input type="checkbox" name="vibe" value="Photo-heavy" /><span>Photo-heavy</span></label>
+      </div>
+    </div>
+
+    <div class="brandhead"><h3>Colors &amp; type</h3><span class="pill">Skip if unsure</span></div>
+
+    <div class="grid2">
+      <div class="field" data-key="ak_colors">
+        <label class="lbl" for="ak_colors">Agent Kidd colors <small>Hex codes if you have them, or just describe it</small></label>
+        <input type="text" id="ak_colors" name="ak_colors" placeholder="e.g. #1A3D5C, or 'match my logo'" />
+      </div>
+      <div class="field" data-key="cs_colors">
+        <label class="lbl" for="cs_colors">Cornerstone colors</label>
+        <input type="text" id="cs_colors" name="cs_colors" placeholder="e.g. match the current site" />
+      </div>
+    </div>
+
+    <div class="field" data-key="brand_distinction">
+      <label class="lbl">How different should the two sites look?</label>
+      <div class="seg" role="radiogroup" aria-label="Brand distinction">
+        <label><input type="radio" name="brand_distinction" value="Nearly identical" /><span>Nearly identical</span></label>
+        <label><input type="radio" name="brand_distinction" value="Clearly related, different color" /><span>Related, different color</span></label>
+        <label><input type="radio" name="brand_distinction" value="Quite different" /><span>Quite different</span></label>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="fonts_pref">
+        <label class="lbl" for="fonts_pref">Fonts <small>If you have brand fonts. Otherwise leave it to us.</small></label>
+        <input type="text" id="fonts_pref" name="fonts_pref" placeholder="e.g. no idea, pick something good" />
+      </div>
+      <div class="field" data-key="logo_format">
+        <label class="lbl" for="logo_format">What logo files do you have?</label>
+        <select id="logo_format" name="logo_format">
+          <option value="" selected>Choose one…</option>
+          <option>Vector (SVG, AI, EPS)</option>
+          <option>High-res PNG</option>
+          <option>Only a low-res or screenshot</option>
+          <option>No logo — need one made</option>
+          <option>Not sure what I have</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STEP 3 ================= -->
+  <section class="step" data-name="What You Do">
+    <h2>What You Do</h2>
+    <p class="lede">The services, the territory, and the numbers that prove you're good at it.</p>
+
+    <div class="field" data-key="ak_services">
+      <label class="lbl">Agent Kidd — what do you offer? <small>Check all that apply</small></label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="ak_services" value="Buyer representation" /><span>Buyers</span></label>
+        <label class="chip"><input type="checkbox" name="ak_services" value="Seller representation" /><span>Sellers</span></label>
+        <label class="chip"><input type="checkbox" name="ak_services" value="Investment analysis" /><span>Investment analysis</span></label>
+        <label class="chip"><input type="checkbox" name="ak_services" value="First-time buyers" /><span>First-time buyers</span></label>
+        <label class="chip"><input type="checkbox" name="ak_services" value="Luxury" /><span>Luxury</span></label>
+        <label class="chip"><input type="checkbox" name="ak_services" value="Commercial" /><span>Commercial</span></label>
+        <label class="chip"><input type="checkbox" name="ak_services" value="New construction" /><span>New construction</span></label>
+        <label class="chip"><input type="checkbox" name="ak_services" value="Relocation" /><span>Relocation</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="cs_services">
+      <label class="lbl">Cornerstone — what do you offer? <small>Check all that apply</small></label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="cs_services" value="Single-family management" /><span>Single-family</span></label>
+        <label class="chip"><input type="checkbox" name="cs_services" value="Multifamily management" /><span>Multifamily</span></label>
+        <label class="chip"><input type="checkbox" name="cs_services" value="HOA management" /><span>HOA management</span></label>
+        <label class="chip"><input type="checkbox" name="cs_services" value="Commercial leasing" /><span>Commercial leasing</span></label>
+        <label class="chip"><input type="checkbox" name="cs_services" value="Tenant placement only" /><span>Tenant placement</span></label>
+        <label class="chip"><input type="checkbox" name="cs_services" value="Maintenance coordination" /><span>Maintenance</span></label>
+        <label class="chip"><input type="checkbox" name="cs_services" value="Rent collection" /><span>Rent collection</span></label>
+        <label class="chip"><input type="checkbox" name="cs_services" value="Owner reporting" /><span>Owner reporting</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="service_area" data-required data-msg="This drives your whole local search setup.">
+      <label class="lbl" for="service_area">Where do you work? <span class="req">*</span> <small>Cities, counties, neighborhoods — list them all, this is how people find you on Google</small></label>
+      <textarea id="service_area" name="service_area" placeholder="e.g. Wichita, Andover, Derby, Maize, Goddard, Park City, Sedgwick County…"></textarea>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="years_in_business">
+        <label class="lbl" for="years_in_business">Years doing this</label>
+        <input type="text" id="years_in_business" name="years_in_business" placeholder="e.g. 9" />
+      </div>
+      <div class="field" data-key="transactions_stat">
+        <label class="lbl" for="transactions_stat">Deals per year <small>Roughly</small></label>
+        <input type="text" id="transactions_stat" name="transactions_stat" placeholder="e.g. 25 to 30" />
+      </div>
+    </div>
+
+    <div class="field" data-key="other_stats">
+      <label class="lbl" for="other_stats">Any other numbers worth bragging about? <small>Showings, total volume, units leased, average days on market — real numbers beat adjectives every time</small></label>
+      <textarea id="other_stats" name="other_stats" placeholder="e.g. thousands of showings, 98% occupancy across the portfolio…"></textarea>
+    </div>
+
+    <div class="field" data-key="commercial_space">
+      <label class="lbl" for="commercial_space">The commercial space you need leased <small>You mentioned vacant office space on our call. Want it featured on the site?</small></label>
+      <textarea id="commercial_space" name="commercial_space" placeholder="Address, square footage, asking rate, and whether you want it on the site"></textarea>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="nar_member">
+        <label class="lbl">NAR member? <small>Decides whether we can use the REALTOR® mark</small></label>
+        <div class="seg" role="radiogroup" aria-label="NAR member">
+          <label><input type="radio" name="nar_member" value="Yes" /><span>Yes</span></label>
+          <label><input type="radio" name="nar_member" value="No" /><span>No</span></label>
+          <label><input type="radio" name="nar_member" value="Not sure" /><span>Not sure</span></label>
+        </div>
+      </div>
+      <div class="field" data-key="pm_license">
+        <label class="lbl" for="pm_license">Property management license # <small>If Kansas requires a separate one</small></label>
+        <input type="text" id="pm_license" name="pm_license" placeholder="Leave blank if not applicable" />
+      </div>
+    </div>
+
+    <div class="field" data-key="awards">
+      <label class="lbl" for="awards">Awards, certifications, designations <small>Elite Certified Agent, GRI, CRS, local awards, anything</small></label>
+      <input type="text" id="awards" name="awards" placeholder="e.g. Elite Certified Agent" />
+    </div>
+
+    <div class="field" data-key="team">
+      <label class="lbl" for="team">Anyone else who should be on the site? <small>Name and role — assistants, leasing agents, maintenance leads</small></label>
+      <textarea id="team" name="team" placeholder="e.g. Just me. Or: Sarah Miller, leasing coordinator"></textarea>
+    </div>
+
+    <div class="field" data-key="testimonial_permission">
+      <label class="lbl">Can we use the three reviews from your current site? <small>Marcia Burns, Vance Burns, Jonathan Metzger</small></label>
+      <div class="seg" role="radiogroup" aria-label="Testimonial permission">
+        <label><input type="radio" name="testimonial_permission" value="Yes, use all three" /><span>Yes, all three</span></label>
+        <label><input type="radio" name="testimonial_permission" value="Some — I'll say which" /><span>Some of them</span></label>
+        <label><input type="radio" name="testimonial_permission" value="No" /><span>No</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="new_testimonials">
+      <label class="lbl" for="new_testimonials">Got any others? <small>Paste them here, or drop screenshots in your assets folder. Owners and HOA board members are worth the most — we have none of those yet.</small></label>
+      <textarea id="new_testimonials" name="new_testimonials" placeholder="Paste them in, name and text…"></textarea>
+    </div>
+  </section>
+
+  <!-- ================= STEP 4 ================= -->
+  <section class="step" data-name="Domains &amp; Tech">
+    <h2>Domains &amp; Tech</h2>
+    <p class="lede">The boring plumbing. Getting this right is what keeps your email working when we flip the sites over.</p>
+
+    <div class="flagbox">
+      <b>Read this one carefully.</b> If your email runs on either domain, we have to preserve those settings when we move the sites. Getting it wrong takes your email down. If you're unsure, say so — we'll check it ourselves.
+    </div>
+
+    <div class="field" data-key="domains_owned" data-required data-msg="List everything you own so nothing gets orphaned.">
+      <label class="lbl" for="domains_owned">Every domain you own <span class="req">*</span> <small>Including ones you're not using</small></label>
+      <textarea id="domains_owned" name="domains_owned" placeholder="e.g. agentkidd.com, cornerstonemgmt.co, cornerstonemanagementks.com…"></textarea>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="registrar" data-required data-msg="We need to know where the domains live.">
+        <label class="lbl" for="registrar">Where did you buy them? <span class="req">*</span></label>
+        <select id="registrar" name="registrar">
+          <option value="" selected>Choose one…</option>
+          <option>GoDaddy</option>
+          <option>Namecheap</option>
+          <option>Google Domains / Squarespace</option>
+          <option>Cloudflare</option>
+          <option>Network Solutions</option>
+          <option>Bought through my website company</option>
+          <option>Different ones in different places</option>
+          <option>Not sure</option>
+        </select>
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="current_host">
+        <label class="lbl" for="current_host">Who hosts the sites now?</label>
+        <input type="text" id="current_host" name="current_host" placeholder="e.g. Lofty for one, Duda for the other" />
+      </div>
+    </div>
+
+    <div class="field" data-key="email_on_domain" data-required data-msg="We really need this one before we touch anything.">
+      <label class="lbl">Does your email run on either domain? <span class="req">*</span> <small>Meaning an address like you@agentkidd.com, not Yahoo or Gmail</small></label>
+      <div class="seg" role="radiogroup" aria-label="Email on domain">
+        <label><input type="radio" name="email_on_domain" value="Yes" /><span>Yes</span></label>
+        <label><input type="radio" name="email_on_domain" value="No" /><span>No</span></label>
+        <label><input type="radio" name="email_on_domain" value="Not sure" /><span>Not sure</span></label>
+      </div>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="email_provider">
+      <label class="lbl" for="email_provider">If yes, who provides it? <small>Google Workspace, Microsoft 365, your host, etc.</small></label>
+      <input type="text" id="email_provider" name="email_provider" placeholder="e.g. Google Workspace" />
+    </div>
+
+    <div class="brandhead"><h3>Listings &amp; software</h3><span class="pill">Both brands</span></div>
+
+    <div class="field" data-key="idx_status">
+      <label class="lbl" for="idx_status">Home search on the agent site <small>Your current site pulls live MLS listings through Lofty. That feed is licensed separately, so tell us what you want.</small></label>
+      <select id="idx_status" name="idx_status">
+        <option value="" selected>Choose one…</option>
+        <option>Keep Lofty running and link to it</option>
+        <option>I want live search built into the new site — let's talk cost</option>
+        <option>Don't need home search at all</option>
+        <option>Not sure — walk me through it</option>
+      </select>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="mls_name">
+        <label class="lbl" for="mls_name">Your MLS</label>
+        <input type="text" id="mls_name" name="mls_name" placeholder="e.g. South Central Kansas MLS" />
+      </div>
+      <div class="field" data-key="pm_software">
+        <label class="lbl" for="pm_software">Property management software</label>
+        <input type="text" id="pm_software" name="pm_software" value="AppFolio" />
+      </div>
+    </div>
+
+    <div class="field" data-key="rental_listings">
+      <label class="lbl" for="rental_listings">How should rental availability work? <small>Right now it's inside AppFolio</small></label>
+      <select id="rental_listings" name="rental_listings">
+        <option value="" selected>Choose one…</option>
+        <option>Pull listings onto the new site if AppFolio allows it</option>
+        <option>Styled page that links out to AppFolio is fine</option>
+        <option>Not sure — recommend something</option>
+      </select>
+    </div>
+
+    <div class="brandhead"><h3>Where leads land</h3><span class="pill">Important</span></div>
+
+    <div class="grid2">
+      <div class="field" data-key="leads_email" data-type="email" data-msg="That email doesn't look quite right.">
+        <label class="lbl" for="leads_email">Email for new leads</label>
+        <input type="email" id="leads_email" name="leads_email" placeholder="Where should we send the alert?" />
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="leads_phone" data-type="phone">
+        <label class="lbl" for="leads_phone">Cell for text alerts</label>
+        <input type="tel" id="leads_phone" name="leads_phone" placeholder="(316) 555-0142" />
+        <div class="errmsg"></div>
+      </div>
+    </div>
+
+    <div class="field" data-key="gbp_status">
+      <label class="lbl">Do you have a Google Business Profile? <small>The listing that shows up in Maps. Big deal for local search.</small></label>
+      <div class="seg" role="radiogroup" aria-label="Google Business Profile">
+        <label><input type="radio" name="gbp_status" value="Yes, both brands" /><span>Yes, both</span></label>
+        <label><input type="radio" name="gbp_status" value="Yes, one brand" /><span>Just one</span></label>
+        <label><input type="radio" name="gbp_status" value="No" /><span>No</span></label>
+        <label><input type="radio" name="gbp_status" value="Not sure" /><span>Not sure</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STEP 5 ================= -->
+  <section class="step" data-name="Your Words">
+    <h2>Your Words</h2>
+    <p class="lede">We write the copy, but it has to sound like you and say what you'd actually say. This is the section that makes the difference.</p>
+
+    <div class="field" data-key="top_questions" data-required data-msg="Even three or four is plenty to work with.">
+      <label class="lbl" for="top_questions">What do people ask you over and over? <span class="req">*</span> <small>Owners, tenants, buyers, board members. These become your FAQ and they train your chatbot.</small></label>
+      <textarea id="top_questions" name="top_questions" placeholder="e.g. What do you charge to manage a property? How fast can you fill a vacancy? Do I have to sign a long contract? What happens if a tenant stops paying?"></textarea>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="what_different" data-required data-msg="This becomes your homepage headline — give us something real.">
+      <label class="lbl" for="what_different">Why do people pick you over the other guy? <span class="req">*</span> <small>Say it plainly, the way you'd say it to a friend</small></label>
+      <textarea id="what_different" name="what_different" placeholder="e.g. I actually answer. And I can run the numbers on a rental in ten minutes and tell you if it's a bad deal."></textarea>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="who_not_serve">
+      <label class="lbl" for="who_not_serve">Who's not a fit? <small>Helps us write copy that filters instead of attracting everybody</small></label>
+      <textarea id="who_not_serve" name="who_not_serve" placeholder="e.g. Owners who want to micromanage every repair. Out-of-state investors chasing the cheapest possible fee."></textarea>
+    </div>
+
+    <div class="field" data-key="ak_primary_action">
+      <label class="lbl">Agent Kidd — what's the one thing a visitor should do? <small>We build the whole page around this</small></label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="ak_primary_action" value="Request a home valuation" /><span>Get a home valuation</span></label>
+        <label class="chip"><input type="checkbox" name="ak_primary_action" value="Start a home search" /><span>Start a search</span></label>
+        <label class="chip"><input type="checkbox" name="ak_primary_action" value="Book a call" /><span>Book a call</span></label>
+        <label class="chip"><input type="checkbox" name="ak_primary_action" value="Call or text directly" /><span>Just call me</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="cs_primary_action">
+      <label class="lbl">Cornerstone — what's the one thing a visitor should do?</label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="cs_primary_action" value="Request a free rent analysis" /><span>Free rent analysis</span></label>
+        <label class="chip"><input type="checkbox" name="cs_primary_action" value="Request an HOA review" /><span>HOA review</span></label>
+        <label class="chip"><input type="checkbox" name="cs_primary_action" value="Browse available rentals" /><span>Browse rentals</span></label>
+        <label class="chip"><input type="checkbox" name="cs_primary_action" value="Book a call" /><span>Book a call</span></label>
+      </div>
+    </div>
+
+    <div class="prefill">
+      <b>On the HOA page.</b> You told us you don't want to be the guy who shows up and pitches himself. We're building that page as pure value for board members with only a small credential line at the bottom. If there's anything specific board members need to hear, tell us here.
+    </div>
+
+    <div class="field" data-key="hoa_notes">
+      <label class="lbl" for="hoa_notes">Anything HOA boards should know? <small>What they usually get wrong, what you wish they asked, what you'd tell them for free</small></label>
+      <textarea id="hoa_notes" name="hoa_notes" placeholder="e.g. Most boards have no idea their reserve study is out of date…"></textarea>
+    </div>
+
+    <div class="field" data-key="never_say">
+      <label class="lbl" for="never_say">Anything the site should never say? <small>Claims you don't want made, promises you can't keep, words you hate</small></label>
+      <textarea id="never_say" name="never_say" placeholder="e.g. Don't promise a 24-hour response time. Don't call me a 'luxury specialist.'"></textarea>
+    </div>
+
+    <div class="field" data-key="must_include">
+      <label class="lbl" for="must_include">Anything that has to be on there? <small>A story, a line you always use, something you're proud of</small></label>
+      <textarea id="must_include" name="must_include" placeholder="Whatever we'd never think to ask about…"></textarea>
+    </div>
+  </section>
+
+  <!-- ================= STEP 6 ================= -->
+  <section class="step" data-name="Your Files">
+    <h2>Your Files</h2>
+    <p class="lede">We made you a folder. Drop things in and check them off so we know what's coming.</p>
+
+    <div class="prefill">
+      <b>Your folder is ready.</b> Labeled subfolders inside, so just drop each thing where it goes. Nothing to name, nothing to zip.
+    </div>
+
+    <div class="mailrow" style="margin:0 0 24px">
+      <a class="btn btn-blue" id="driveBtn" href="https://drive.google.com/drive/folders/1aETVo7rudsJtv46xsJ9yPSkPWprNSyNI" target="_blank" rel="noopener">
+        Open my folder <span class="arw">→</span>
+      </a>
+      <span class="mailnote">Or text them to Garrett if that's easier.</span>
+    </div>
+
+    <div class="field" data-key="assets_uploaded">
+      <label class="lbl">What are you sending? <small>Check what you've uploaded or plan to</small></label>
+      <div class="asset-list">
+        <label class="asset"><input type="checkbox" name="assets_uploaded" value="Logos" /><span><b>Logos</b><small>Both brands · vector if you have it, PNG is fine</small></span></label>
+        <label class="asset"><input type="checkbox" name="assets_uploaded" value="Headshot" /><span><b>Headshot</b><small>The one you actually like. Goes on both sites.</small></span></label>
+        <label class="asset"><input type="checkbox" name="assets_uploaded" value="Team photos" /><span><b>Team photos</b><small>If anyone else is on the site</small></span></label>
+        <label class="asset"><input type="checkbox" name="assets_uploaded" value="Property photos" /><span><b>Property photos</b><small>Your best listings and rentals. Beats stock every time.</small></span></label>
+        <label class="asset"><input type="checkbox" name="assets_uploaded" value="Testimonials" /><span><b>Testimonials</b><small>Screenshots are fine</small></span></label>
+        <label class="asset"><input type="checkbox" name="assets_uploaded" value="Brand guide" /><span><b>Brand guide</b><small>Colors, fonts, anything from a designer</small></span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="assets_notes">
+      <label class="lbl" for="assets_notes">Anything we should know about the files? <small>Or tell us what you don't have and we'll sort it out</small></label>
+      <textarea id="assets_notes" name="assets_notes" placeholder="e.g. No good headshot. Need to get one taken."></textarea>
+    </div>
+  </section>
+
+  <div class="navrow" id="navrow">
+    <button type="button" class="btn btn-ghost" id="backBtn" style="visibility:hidden">← Back</button>
+    <button type="button" class="btn btn-primary" id="nextBtn">Continue <span class="arw">→</span></button>
+  </div>
+  </form>
+
+  <!-- SUCCESS -->
+  <div class="success" id="successScreen" role="status">
+    <div class="checkwrap">
+      <svg viewBox="0 0 110 110" aria-hidden="true">
+        <circle class="check-circle" cx="55" cy="55" r="48"/>
+        <path class="check-mark" d="M34 57 L49 72 L78 41"/>
+      </svg>
+    </div>
+    <h2>Got it. We're building.</h2>
+    <p>Garrett will text you within one business day. Part 2 covers your AI setup and comes separately — no rush on it, the site build starts now.</p>
+    <a class="btn btn-blue" href="https://drive.google.com/drive/folders/1aETVo7rudsJtv46xsJ9yPSkPWprNSyNI" target="_blank" rel="noopener">Upload your files <span class="arw">→</span></a>
+  </div>
+
+  <!-- FALLBACK -->
+  <div class="fallback" id="fallbackScreen">
+    <h2>One hiccup — but your answers are safe.</h2>
+    <p>Our server didn't pick up just now. Everything you typed is right here — hit copy, then email it to
+      <a href="mailto:getproytech@gmail.com?subject=Website%20brief%20answers">getproytech@gmail.com</a>
+      (or text it to Garrett) and we'll take it from there. Nothing lost, promise.</p>
+    <pre id="fallbackData"></pre>
+    <div class="fbrow">
+      <button type="button" class="btn btn-primary" id="copyBtn">Copy my answers</button>
+      <button type="button" class="btn btn-ghost" id="retryBtn">Try sending again</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>ProyTech · AI systems for realtors &amp; lenders · <a href="https://getproytech.com">getproytech.com</a></footer>
+
+<script>
+(function(){
+"use strict";
+
+var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
+var current = 0;
+
+var FIELD_KEYS = [
+  "ak_name","ak_domain","ak_phone","ak_brokerage","ak_license","ak_license_state","ak_address",
+  "cs_name","cs_leasing_phone","cs_sales_phone","cs_address","cs_legal_entity",
+  "best_email","doors_count","hoa_count","hoa_units",
+  "ref_site_1","ref_site_2","ref_site_3","ref_likes","dislikes","vibe",
+  "ak_colors","cs_colors","brand_distinction","fonts_pref","logo_format",
+  "ak_services","cs_services","service_area","years_in_business","transactions_stat",
+  "other_stats","commercial_space","nar_member","pm_license","awards","team",
+  "testimonial_permission","new_testimonials",
+  "domains_owned","registrar","current_host","email_on_domain","email_provider",
+  "idx_status","mls_name","pm_software","rental_listings",
+  "leads_email","leads_phone","gbp_status",
+  "top_questions","what_different","who_not_serve","ak_primary_action","cs_primary_action",
+  "hoa_notes","never_say","must_include",
+  "assets_uploaded","assets_notes"
+];
+
+var formData = {};
+
+function readField(key){
+  var boxes = document.querySelectorAll('input[type=checkbox][name="'+key+'"]');
+  if (boxes.length){
+    var vals = [];
+    Array.prototype.forEach.call(boxes, function(b){ if (b.checked) vals.push(b.value); });
+    return vals.join(", ");
+  }
+  var radio = document.querySelector('input[type=radio][name="'+key+'"]:checked');
+  if (radio) return radio.value;
+  if (document.querySelector('input[type=radio][name="'+key+'"]')) return "";
+  var el = document.getElementById(key);
+  return el ? el.value.trim() : "";
+}
+
+function saveAll(){
+  FIELD_KEYS.forEach(function(k){ formData[k] = readField(k); });
+}
+
+function buildPayload(){
+  saveAll();
+  var p = { form_type: "website_v1", client: "Justus Kidd" };
+  FIELD_KEYS.forEach(function(k){ p[k] = formData[k] || ""; });
+  return p;
+}
+window.__buildPayload = buildPayload;
+
+function validateField(f){
+  var key = f.getAttribute("data-key");
+  var val = readField(key);
+  var required = f.hasAttribute("data-required");
+  var type = f.getAttribute("data-type");
+  var msg = "";
+  if (required && !val) msg = f.getAttribute("data-msg") || "This one we really need.";
+  else if (val && type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) msg = f.getAttribute("data-msg") || "That email doesn't look quite right.";
+  else if (val && type === "phone" && val.replace(/\D/g,"").length < 10) msg = f.getAttribute("data-msg") || "That number looks a little short.";
+  var err = f.querySelector(".errmsg");
+  if (msg){ f.classList.add("invalid"); if (err) err.textContent = msg; return false; }
+  f.classList.remove("invalid");
+  return true;
+}
+
+function validateStep(i){
+  var ok = true, firstBad = null;
+  Array.prototype.forEach.call(steps[i].querySelectorAll(".field"), function(f){
+    if (!validateField(f)){ ok = false; if (!firstBad) firstBad = f; }
+  });
+  if (firstBad){
+    try { firstBad.scrollIntoView({behavior:"smooth", block:"center"}); } catch(e){}
+    var inp = firstBad.querySelector("input,select,textarea");
+    if (inp) try { inp.focus({preventScroll:true}); } catch(e){ inp.focus(); }
+  }
+  return ok;
+}
+
+Array.prototype.forEach.call(document.querySelectorAll(".field[data-required], .field[data-type]"), function(f){
+  f.addEventListener("input", function(){ if (f.classList.contains("invalid")) validateField(f); });
+  f.addEventListener("change", function(){ if (f.classList.contains("invalid")) validateField(f); });
+});
+
+var backBtn = document.getElementById("backBtn");
+var nextBtn = document.getElementById("nextBtn");
+var ptrack = document.getElementById("ptrack").children;
+
+function show(i){
+  steps.forEach(function(s, idx){ s.classList.toggle("active", idx === i); });
+  current = i;
+  for (var j = 0; j < ptrack.length; j++) ptrack[j].classList.toggle("done", j <= i);
+  document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + steps.length;
+  document.getElementById("pname").textContent = steps[i].getAttribute("data-name");
+  backBtn.style.visibility = i === 0 ? "hidden" : "visible";
+  nextBtn.innerHTML = i === steps.length - 1
+    ? 'Send it in <span class="arw">→</span>'
+    : 'Continue <span class="arw">→</span>';
+  try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+}
+
+backBtn.addEventListener("click", function(){
+  saveAll();
+  if (current > 0) show(current - 1);
+});
+
+nextBtn.addEventListener("click", function(){
+  if (!validateStep(current)) return;
+  saveAll();
+  if (current < steps.length - 1) show(current + 1);
+  else submitForm();
+});
+
+var PRETTY = {
+  ak_name:"Agent Kidd — name", ak_domain:"Agent Kidd — domain", ak_phone:"Agent Kidd — phone",
+  ak_brokerage:"Brokerage", ak_license:"License #", ak_license_state:"License state", ak_address:"Agent Kidd — address",
+  cs_name:"Cornerstone — name", cs_leasing_phone:"Cornerstone — leasing phone",
+  cs_sales_phone:"Cornerstone — sales phone", cs_address:"Cornerstone — address", cs_legal_entity:"Legal entity",
+  best_email:"Best email", doors_count:"Doors under management",
+  hoa_count:"HOA count", hoa_units:"HOA unit range",
+  ref_site_1:"Reference site 1", ref_site_2:"Reference site 2", ref_site_3:"Reference site 3",
+  ref_likes:"What he likes", dislikes:"What he dislikes", vibe:"Vibe words",
+  ak_colors:"Agent Kidd colors", cs_colors:"Cornerstone colors", brand_distinction:"Brand distinction",
+  fonts_pref:"Fonts", logo_format:"Logo files on hand",
+  ak_services:"Agent Kidd services", cs_services:"Cornerstone services", service_area:"Service area",
+  years_in_business:"Years in business", transactions_stat:"Deals per year", other_stats:"Other stats",
+  commercial_space:"Commercial space", nar_member:"NAR member", pm_license:"PM license #",
+  awards:"Awards", team:"Team", testimonial_permission:"Testimonial permission", new_testimonials:"New testimonials",
+  domains_owned:"Domains owned", registrar:"Registrar", current_host:"Current host",
+  email_on_domain:"Email on domain", email_provider:"Email provider",
+  idx_status:"IDX preference", mls_name:"MLS", pm_software:"PM software", rental_listings:"Rental listings approach",
+  leads_email:"Leads email", leads_phone:"Leads phone", gbp_status:"Google Business Profile",
+  top_questions:"Top questions", what_different:"What makes him different", who_not_serve:"Not a fit",
+  ak_primary_action:"Agent Kidd primary CTA", cs_primary_action:"Cornerstone primary CTA",
+  hoa_notes:"HOA notes", never_say:"Never say", must_include:"Must include",
+  assets_uploaded:"Assets uploaded", assets_notes:"Asset notes"
+};
+
+function prettyText(p){
+  return FIELD_KEYS.map(function(k){
+    return (PRETTY[k] || k) + ": " + (p[k] || "—");
+  }).join("\n");
+}
+
+function submitForm(){
+  var payload = buildPayload();
+  nextBtn.disabled = true;
+  nextBtn.textContent = "Sending…";
+
+  fetch("/api/onboard", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).then(function(r){
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json ? r.json().catch(function(){ return {}; }) : {};
+  }).then(function(){
+    document.getElementById("onboardForm").style.display = "none";
+    document.getElementById("progress").style.display = "none";
+    document.getElementById("fallbackScreen").classList.remove("show");
+    document.getElementById("successScreen").classList.add("show");
+    try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+  }).catch(function(){
+    nextBtn.disabled = false;
+    nextBtn.innerHTML = 'Send it in <span class="arw">→</span>';
+    document.getElementById("onboardForm").style.display = "none";
+    document.getElementById("progress").style.display = "none";
+    document.getElementById("fallbackData").textContent = prettyText(payload);
+    document.getElementById("fallbackScreen").classList.add("show");
+    try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+  });
+}
+
+document.getElementById("copyBtn").addEventListener("click", function(){
+  var text = document.getElementById("fallbackData").textContent;
+  var btn = this;
+  function done(){ btn.textContent = "Copied ✓"; setTimeout(function(){ btn.textContent = "Copy my answers"; }, 2000); }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
+  } else fallbackCopy(text, done);
+});
+
+function fallbackCopy(text, done){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+document.getElementById("retryBtn").addEventListener("click", function(){
+  document.getElementById("fallbackScreen").classList.remove("show");
+  document.getElementById("onboardForm").style.display = "";
+  document.getElementById("progress").style.display = "";
+  show(steps.length - 1);
+  submitForm();
+});
+
+show(0);
+})();
+</script>
+</body>
+</html>
