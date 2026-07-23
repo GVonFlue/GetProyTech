@@ -161,6 +161,29 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
 .final .hero-cta{justify-content:center}
 .footer{background:var(--ink);color:#fff}.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}@media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}.foot-brand .logo-img{height:56px;margin-bottom:14px}.foot-brand p{font-size:14px;color:var(--text-dim);max-width:34ch}.foot-col h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim-2);margin-bottom:16px}.foot-col a,.foot-col span{display:block;font-size:14px;color:var(--text-dim);margin-bottom:10px}.foot-col a:hover{color:#fff}.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;padding-top:24px;border-top:1px solid var(--line);font-size:12.5px;color:var(--text-dim-2)}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}.xmsg{opacity:1;transform:none}}
+
+/* ---------- mobile nav ---------- */
+.nav-burger{display:none;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;flex-shrink:0}
+.nav-burger span{display:block;width:17px;height:2px;background:#fff;border-radius:2px;transition:transform .24s ease,opacity .18s ease}
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:980px){.nav-burger{display:flex}.nav-back{display:none}}
+.mnav{position:fixed;inset:0;z-index:59;background:rgba(4,7,18,.62);opacity:0;pointer-events:none;transition:opacity .22s ease}
+.mnav.open{opacity:1;pointer-events:auto}
+.mnav-panel{position:absolute;top:80px;left:12px;right:12px;max-height:calc(100dvh - 96px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:#0A0F26;border:1px solid rgba(255,255,255,.14);border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.55);padding:12px;transform:translateY(-12px);transition:transform .24s ease}
+.mnav.open .mnav-panel{transform:none}
+.mnav a{display:block;padding:14px 16px;border-radius:12px;font-size:16.5px;color:#fff;font-weight:600;line-height:1.2}
+.mnav a:hover,.mnav a:active{background:rgba(46,91,255,.16)}
+.mnav .mgroup{margin-top:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.09)}
+.mnav .mlabel{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8089ad;padding:6px 16px 4px}
+.mnav a.msub{padding:12px 16px 12px 26px;font-size:15px;font-weight:500;color:#aab4dc}
+.mnav a.msub:hover,.mnav a.msub:active{color:#fff}
+.mnav-cta{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.09)}
+.mnav-cta .btn{width:100%;font-size:16px}
+body.mnav-open{overflow:hidden}
+@media(min-width:981px){.mnav{display:none}}
+@media (prefers-reduced-motion:reduce){.mnav,.mnav-panel,.nav-burger span{transition:none}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://getproytech.com/"},{"@type":"ListItem","position":2,"name":"Industries","item":"https://getproytech.com/industries"},{"@type":"ListItem","position":3,"name":"Realtors","item":"https://getproytech.com/realtors"}]}
@@ -173,9 +196,37 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
     <div class="nav-r">
       <a href="/" class="nav-back">← All industries</a>
       <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Get my free leak audit</a>
+    
+      <button class="nav-burger" id="navBurger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
+<div class="mnav" id="mnav" aria-hidden="true">
+  <div class="mnav-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+    <a href="/">Home</a>
+    <a href="/#how">How It Works</a>
+    <a href="/work">Our Work</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#faq">FAQ</a>
+    <div class="mgroup">
+      <div class="mlabel">Industries</div>
+      <a class="msub" href="/realtors">Realtors</a>
+      <a class="msub" href="/lenders">Mortgage &amp; Lending</a>
+      <a class="msub" href="/roofing">Roofing &amp; Contractors</a>
+      <a class="msub" href="/auto">Auto &amp; Diesel Shops</a>
+      <a class="msub" href="/home-services">HVAC · Plumbing · Electrical</a>
+      <a class="msub" href="/industries">All industries →</a>
+    </div>
+    <div class="mgroup">
+      <div class="mlabel">Demos</div>
+      <a class="msub" href="/ace">Ace — AI Front Desk</a>
+    </div>
+    <div class="mnav-cta">
+      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" class="btn btn-primary">Get my free leak audit →</a>
+    </div>
+  </div>
+</div>
+
 <main class="page">
 
   <section class="panel panel-cobalt hero">
@@ -359,6 +410,25 @@ function openCalendly(){if(window.Calendly&&window.Calendly.initPopupWidget){Cal
   function openCal(q){const u=CALENDLY_URL+q;if(window.Calendly&&window.Calendly.initPopupWidget){Calendly.initPopupWidget({url:u});}else{window.open(u,'_blank','noopener');}}
   const xio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!started){started=true;run();xio.disconnect();}}),{threshold:.35});
   xio.observe(body);
+})();
+</script>
+
+<script>
+/* mobile nav */
+(function(){
+  var b=document.getElementById('navBurger'), m=document.getElementById('mnav');
+  if(!b||!m) return;
+  function set(open){
+    b.setAttribute('aria-expanded', open?'true':'false');
+    b.setAttribute('aria-label', open?'Close menu':'Open menu');
+    m.classList.toggle('open', open);
+    m.setAttribute('aria-hidden', open?'false':'true');
+    document.body.classList.toggle('mnav-open', open);
+  }
+  b.addEventListener('click', function(){ set(b.getAttribute('aria-expanded')!=='true'); });
+  m.addEventListener('click', function(e){ if(e.target===m || e.target.tagName==='A') set(false); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') set(false); });
+  window.addEventListener('resize', function(){ if(window.innerWidth>980) set(false); });
 })();
 </script>
 </body>
