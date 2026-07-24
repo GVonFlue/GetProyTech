@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Landing page setup · ProyTech</title>
+<meta name="description" content="Tell us about you and we'll build your personal brand landing page. About 5 minutes." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0C2470" />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --navy:#0C2470; --blue:#3C78CC; --orange:#FF5500;
+  --white:#FFFFFF; --ink:#050505;
+  --paper:#F5F7FC; --line:#E3E8F2; --muted:#5B6478;
+  --err:#D64545; --maxw:760px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.1;color:var(--navy)}
+a{color:var(--blue)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+.topbar{background:var(--navy);padding:18px 0}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between}
+.wordmark{font-family:'Space Grotesk';font-weight:700;font-size:1.25rem;color:#fff;text-decoration:none;letter-spacing:-.01em;display:flex;align-items:center}
+.wordmark b{color:var(--orange)}
+.logo-img{height:44px;width:auto;display:block}
+@media(max-width:520px){.logo-img{height:36px}}
+.topbar .tag{font-size:.8rem;color:rgba(255,255,255,.65);font-weight:500}
+@media(max-width:520px){.topbar .tag{display:none}}
+
+.hero{background:var(--navy);color:#fff;padding:44px 0 110px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(60,120,204,.35), rgba(60,120,204,0) 68%);pointer-events:none}
+.kicker{font-family:'Space Grotesk';font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:#9db9e6;display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
+.kicker::before{content:"";width:24px;height:2px;background:var(--orange)}
+.hero h1{color:#fff;font-size:clamp(2.1rem,6vw,3.2rem);margin-bottom:12px}
+.hero p{color:rgba(255,255,255,.82);font-size:1.08rem;max-width:540px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 60px rgba(12,36,112,.12);
+  margin-top:-70px;position:relative;z-index:2;padding:34px 34px 40px;margin-bottom:80px}
+@media(max-width:600px){.card{padding:26px 20px 32px;border-radius:16px}}
+
+.progress{margin-bottom:30px}
+.ptrack{display:flex;gap:6px;margin-bottom:10px}
+.ptrack i{flex:1;height:6px;border-radius:99px;background:var(--line);transition:background .3s}
+.ptrack i.done{background:var(--orange)}
+.plabel{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--muted)}
+.plabel .cur{color:var(--navy)}
+
+.step{display:none;animation:fadeUp .35s ease both}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.step h2{font-size:1.7rem;margin-bottom:6px}
+.step .lede{color:var(--muted);margin-bottom:26px;font-size:.98rem}
+
+.field{margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+label.lbl{display:block;font-weight:600;font-size:.92rem;margin-bottom:7px;color:var(--ink)}
+label.lbl small{display:block;font-weight:400;color:var(--muted);font-size:.82rem;margin-top:1px}
+.req{color:var(--orange);font-weight:700}
+input[type=text],input[type=tel],input[type=email],input[type=url],select,textarea{
+  width:100%;font:inherit;font-size:1rem;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;
+  background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235B6478' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(60,120,204,.18)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--err)}
+.errmsg{display:none;color:var(--err);font-size:.84rem;font-weight:500;margin-top:6px}
+.field.invalid .errmsg{display:block}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:11px 18px;border:1.5px solid var(--line);border-radius:999px;font-weight:500;font-size:.93rem;
+  color:var(--ink);background:#fff;cursor:pointer;transition:all .15s;user-select:none}
+.chip input:checked + span{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(60,120,204,.3)}
+
+.note{background:var(--paper);border:1.5px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;
+  padding:14px 16px;font-size:.9rem;color:var(--muted);margin-bottom:22px}
+.note b{color:var(--navy)}
+.note.scope{border-left-color:var(--orange)}
+.note ul{margin:8px 0 0 18px}
+.note li{margin-bottom:5px}
+.mailrow{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.mailnote{font-size:.9rem;color:var(--muted)}
+
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:'Space Grotesk';font-weight:600;font-size:1rem;
+  padding:15px 30px;border-radius:12px;border:0;cursor:pointer;transition:transform .14s,box-shadow .14s,background .14s;text-decoration:none}
+.btn .arw{transition:transform .14s}
+.btn:hover .arw{transform:translateX(4px)}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 26px rgba(255,85,0,.32)}
+.btn-primary:hover{transform:translateY(-2px);background:#ff6a1f;box-shadow:0 14px 34px rgba(255,85,0,.42)}
+.btn-primary:disabled{opacity:.6;cursor:wait;transform:none}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--navy)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{transform:translateY(-2px)}
+
+.success{display:none;text-align:center;padding:30px 0 10px;animation:fadeUp .4s ease both}
+.success.show{display:block}
+.checkwrap{width:110px;height:110px;margin:0 auto 26px}
+.checkwrap svg{width:100%;height:100%}
+.check-circle{stroke:var(--orange);stroke-width:4;fill:none;stroke-dasharray:302;stroke-dashoffset:302;animation:draw .7s .1s ease-out forwards}
+.check-mark{stroke:var(--orange);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .45s .65s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.success h2{font-size:1.9rem;margin-bottom:10px}
+.success p{color:var(--muted);font-size:1.05rem;max-width:460px;margin:0 auto 18px}
+.success .nextlist{max-width:430px;margin:0 auto;text-align:left;background:var(--paper);border:1.5px solid var(--line);
+  border-radius:14px;padding:18px 20px}
+.success .nextlist b{display:block;font-family:'Space Grotesk';color:var(--navy);font-size:.95rem;margin-bottom:10px}
+.success .nextlist li{font-size:.92rem;color:var(--muted);margin-left:18px;margin-bottom:7px}
+
+.fallback{display:none;animation:fadeUp .35s ease both}
+.fallback.show{display:block}
+.fallback h2{font-size:1.5rem;margin-bottom:8px}
+.fallback p{color:var(--muted);margin-bottom:16px;font-size:.95rem}
+.fallback pre{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:18px;font-size:.82rem;
+  line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:340px;overflow:auto;margin-bottom:16px}
+.fbrow{display:flex;flex-wrap:wrap;gap:12px}
+
+footer{padding:34px 0 50px;text-align:center;color:var(--muted);font-size:.85rem}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy<b>Tech</b>')"></a>
+    <div class="tag">Landing page setup · ~5 minutes</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">Landing page</div>
+    <h1>Tell us about you.</h1>
+    <p>Five short sections and we'll build your page from your answers. Write like you'd say it out loud — we'll shape the wording.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+
+    <div class="progress" id="progress" aria-hidden="true">
+      <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="plabel"><span id="pstep" class="cur">Step 1 of 5</span><span id="pname">You</span></div>
+    </div>
+
+    <form id="landingForm" novalidate>
+
+      <!-- ================= 1. YOU ================= -->
+      <section class="step active" data-name="You">
+        <h2>You</h2>
+        <p class="lede">The basics — who this page is for and how people reach you.</p>
+
+        <div class="note scope">
+          <b>What's included</b>
+          <ul>
+            <li>One personal brand landing page, built from your answers here.</li>
+            <li>Once it's live, changes are $29 each — or move onto a monthly care package any time.</li>
+          </ul>
+        </div>
+
+        <div class="field" data-key="full_name" data-required data-msg="We need your name — it's the headline of the page.">
+          <label class="lbl" for="full_name">Your full name <span class="req">*</span><small>Exactly as you want it displayed</small></label>
+          <input type="text" id="full_name" name="full_name" autocomplete="name" placeholder="e.g. Alexandra Vance" />
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="field" data-key="professional_title" data-required data-msg="What should sit under your name?">
+          <label class="lbl" for="professional_title">Title or role <span class="req">*</span><small>What sits directly under your name</small></label>
+          <input type="text" id="professional_title" name="professional_title" placeholder="e.g. Business Advisor &amp; Investor" />
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-key="contact_email" data-required data-type="email" data-msg="We need a working email.">
+            <label class="lbl" for="contact_email">Email <span class="req">*</span><small>Where we send the draft</small></label>
+            <input type="email" id="contact_email" name="contact_email" autocomplete="email" placeholder="you@example.com" />
+            <div class="errmsg"></div>
+          </div>
+          <div class="field" data-key="contact_phone" data-type="phone">
+            <label class="lbl" for="contact_phone">Phone<small>Optional</small></label>
+            <input type="tel" id="contact_phone" name="contact_phone" autocomplete="tel" placeholder="(316) 555-0123" />
+            <div class="errmsg"></div>
+          </div>
+        </div>
+
+        <div class="field" data-key="show_email">
+          <label class="lbl">Show your email publicly on the page?</label>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="show_email" value="Yes" checked /><span>Yes</span></label>
+            <label class="chip"><input type="radio" name="show_email" value="No — use a form" /><span>No — use a form</span></label>
+          </div>
+        </div>
+
+        <div class="field" data-key="location">
+          <label class="lbl" for="location">Location<small>Leave blank if you'd rather not say</small></label>
+          <input type="text" id="location" name="location" placeholder="e.g. Wichita, KS" />
+        </div>
+      </section>
+
+      <!-- ================= 2. YOUR STORY ================= -->
+      <section class="step" data-name="Your story">
+        <h2>Your story</h2>
+        <p class="lede">This is the actual content of the page. Don't polish it — just get it down and we'll do the polishing.</p>
+
+        <div class="field" data-key="tagline" data-required data-msg="One line — it's the first thing anyone reads.">
+          <label class="lbl" for="tagline">One line that says what you do <span class="req">*</span><small>A stranger should get it in five seconds. Plain words beat clever ones.</small></label>
+          <input type="text" id="tagline" name="tagline" placeholder="e.g. I help founders sell their companies without leaving money on the table." />
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="field" data-key="about_you" data-required data-msg="A few sentences is plenty — this becomes your About section.">
+          <label class="lbl" for="about_you">Tell us about you <span class="req">*</span><small>A few sentences. How you got here, what you're known for.</small></label>
+          <textarea id="about_you" name="about_you" placeholder="Write it like you're telling someone at dinner, not like a bio."></textarea>
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="field" data-key="what_you_do" data-required data-msg="What should we list here?">
+          <label class="lbl" for="what_you_do">What you offer <span class="req">*</span><small>List them out, one per line. Two to four is ideal.</small></label>
+          <textarea id="what_you_do" name="what_you_do" placeholder="e.g.&#10;Advisory retainers for founder-led companies&#10;Board seats&#10;Speaking"></textarea>
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="field" data-key="credentials">
+          <label class="lbl" for="credentials">Credentials, numbers, proof<small>Years in the game, deals closed, companies built, awards, notable names you can mention</small></label>
+          <textarea id="credentials" name="credentials" placeholder="Specific numbers beat adjectives. '22 years, 40+ exits' says more than 'experienced'."></textarea>
+        </div>
+
+        <div class="field" data-key="testimonials">
+          <label class="lbl" for="testimonials">Anything people have said about you<small>Paste them in with a name and title if you have permission to use them</small></label>
+          <textarea id="testimonials" name="testimonials" placeholder="Leave blank if there's nothing you can use yet — that's fine."></textarea>
+        </div>
+      </section>
+
+      <!-- ================= 3. LINKS & THE ONE ACTION ================= -->
+      <section class="step" data-name="Links &amp; action">
+        <h2>Links &amp; the one action</h2>
+        <p class="lede">A landing page should ask for one thing. Let's decide what that is.</p>
+
+        <div class="field" data-key="primary_goal" data-required data-msg="Pick the one thing this page should make happen.">
+          <label class="lbl">What should someone do on this page? <span class="req">*</span><small>Pick the single most important one</small></label>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="primary_goal" value="Book a call" /><span>Book a call</span></label>
+            <label class="chip"><input type="radio" name="primary_goal" value="Send a message" /><span>Send a message</span></label>
+            <label class="chip"><input type="radio" name="primary_goal" value="Connect on LinkedIn" /><span>Connect on LinkedIn</span></label>
+            <label class="chip"><input type="radio" name="primary_goal" value="Call or text" /><span>Call or text</span></label>
+            <label class="chip"><input type="radio" name="primary_goal" value="Something else" /><span>Something else</span></label>
+          </div>
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-key="cta_label">
+            <label class="lbl" for="cta_label">Button wording<small>We'll suggest one if you leave it blank</small></label>
+            <input type="text" id="cta_label" name="cta_label" placeholder="e.g. Book a 20-minute call" />
+          </div>
+          <div class="field" data-key="cta_destination">
+            <label class="lbl" for="cta_destination">Where it goes<small>Calendly link, email, phone, LinkedIn</small></label>
+            <input type="text" id="cta_destination" name="cta_destination" placeholder="Paste the link" />
+          </div>
+        </div>
+
+        <div class="field" data-key="who_is_this_for">
+          <label class="lbl" for="who_is_this_for">Who's this page for?<small>And is there anyone you'd rather it didn't attract?</small></label>
+          <textarea id="who_is_this_for" name="who_is_this_for" placeholder="e.g. founders doing $5M+ thinking about an exit. Not startups looking for free advice."></textarea>
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-key="current_website">
+            <label class="lbl" for="current_website">Current website<small>If there is one</small></label>
+            <input type="text" id="current_website" name="current_website" placeholder="yoursite.com" />
+          </div>
+          <div class="field" data-key="linkedin">
+            <label class="lbl" for="linkedin">LinkedIn</label>
+            <input type="text" id="linkedin" name="linkedin" placeholder="linkedin.com/in/…" />
+          </div>
+        </div>
+
+        <div class="field" data-key="other_links">
+          <label class="lbl" for="other_links">Any other links<small>Instagram, X, YouTube, podcast, book, press — one per line</small></label>
+          <textarea id="other_links" name="other_links" placeholder="Paste anything you'd want linked from the page."></textarea>
+        </div>
+      </section>
+
+      <!-- ================= 4. LOOK & FEEL ================= -->
+      <section class="step" data-name="Look &amp; feel">
+        <h2>Look &amp; feel</h2>
+        <p class="lede">So it feels like you and not like a template.</p>
+
+        <div class="note">
+          <b>Photos are the one thing we can't write for you.</b> A good headshot carries this whole page.
+          Paste a link below, or email the files — either works.
+          <div class="mailrow">
+            <a class="btn btn-blue" id="emailAssetsBtn" href="mailto:admin@getproytech.com?subject=Landing%20page%20assets">Email my photos instead</a>
+            <span class="mailnote">Goes to admin@getproytech.com</span>
+          </div>
+        </div>
+
+        <div class="field" data-key="headshot">
+          <label class="lbl" for="headshot">Headshot<small>The bigger the file the better. A link to a folder is perfect.</small></label>
+          <input type="text" id="headshot" name="headshot" placeholder="Paste a link — or leave blank and email it" />
+        </div>
+
+        <div class="field" data-key="logo_file">
+          <label class="lbl" for="logo_file">Logo<small>If you have one. Plenty of personal brands don't.</small></label>
+          <input type="text" id="logo_file" name="logo_file" placeholder="Paste a link — or leave blank" />
+        </div>
+
+        <div class="field" data-key="vibe" data-required data-msg="Pick at least one — it's how we choose the whole look.">
+          <label class="lbl">What should it feel like? <span class="req">*</span><small>Pick one or two</small></label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="vibe" value="Minimal &amp; clean" /><span>Minimal &amp; clean</span></label>
+            <label class="chip"><input type="checkbox" name="vibe" value="Bold &amp; confident" /><span>Bold &amp; confident</span></label>
+            <label class="chip"><input type="checkbox" name="vibe" value="Warm &amp; personal" /><span>Warm &amp; personal</span></label>
+            <label class="chip"><input type="checkbox" name="vibe" value="Corporate &amp; polished" /><span>Corporate &amp; polished</span></label>
+            <label class="chip"><input type="checkbox" name="vibe" value="Editorial" /><span>Editorial</span></label>
+            <label class="chip"><input type="checkbox" name="vibe" value="Luxury" /><span>Luxury</span></label>
+          </div>
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="field" data-key="brand_colors">
+          <label class="lbl" for="brand_colors">Colours<small>Hex codes, or just describe them. "Whatever suits" is a valid answer.</small></label>
+          <input type="text" id="brand_colors" name="brand_colors" placeholder="e.g. deep green and cream, or #14342B" />
+        </div>
+
+        <div class="field" data-key="reference_sites">
+          <label class="lbl" for="reference_sites">Sites you like<small>One or two links, and a word on what you like about them. This is the single most useful thing on this form.</small></label>
+          <textarea id="reference_sites" name="reference_sites" placeholder="e.g. example.com — love how much white space it has"></textarea>
+        </div>
+
+        <div class="field" data-key="avoid">
+          <label class="lbl" for="avoid">Anything to avoid?<small>Words, colours, styles, claims you don't want on there</small></label>
+          <textarea id="avoid" name="avoid" placeholder="e.g. don't call me a guru, no stock photos of handshakes"></textarea>
+        </div>
+      </section>
+
+      <!-- ================= 5. DOMAIN & TIMING ================= -->
+      <section class="step" data-name="Domain &amp; timing">
+        <h2>Domain &amp; timing</h2>
+        <p class="lede">Last one. Where it lives and when you need it.</p>
+
+        <div class="field" data-key="domain_status" data-required data-msg="Pick whichever is closest.">
+          <label class="lbl">Do you have a domain? <span class="req">*</span></label>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="domain_status" value="Yes, I own it" /><span>Yes, I own it</span></label>
+            <label class="chip"><input type="radio" name="domain_status" value="No, I need one" /><span>No, I need one</span></label>
+            <label class="chip"><input type="radio" name="domain_status" value="Not sure" /><span>Not sure</span></label>
+          </div>
+          <div class="errmsg"></div>
+        </div>
+
+        <div class="field" data-key="domain_name">
+          <label class="lbl" for="domain_name">Which domain?<small>Or what you'd want if you don't have one yet</small></label>
+          <input type="text" id="domain_name" name="domain_name" placeholder="e.g. alexandravance.com" />
+        </div>
+
+        <div class="field" data-key="target_date">
+          <label class="lbl" for="target_date">Any date you need it by?<small>An event, a launch, a meeting</small></label>
+          <input type="text" id="target_date" name="target_date" placeholder="e.g. before the conference on the 14th" />
+        </div>
+
+        <div class="field" data-key="must_include">
+          <label class="lbl" for="must_include">Anything that must be on the page<small>A specific line, a disclaimer, a logo, a link</small></label>
+          <textarea id="must_include" name="must_include" placeholder="Anything non-negotiable goes here."></textarea>
+        </div>
+
+        <div class="field" data-key="anything_else">
+          <label class="lbl" for="anything_else">Anything else we should know?</label>
+          <textarea id="anything_else" name="anything_else" placeholder="Whatever didn't fit above."></textarea>
+        </div>
+
+        <div class="field" data-key="referred_by">
+          <label class="lbl" for="referred_by">Who sent you our way?<small>So we can thank them properly</small></label>
+          <input type="text" id="referred_by" name="referred_by" placeholder="Name" />
+        </div>
+      </section>
+
+      <div class="navrow" id="navrow">
+        <button type="button" class="btn btn-ghost" id="backBtn" style="visibility:hidden">← Back</button>
+        <button type="button" class="btn btn-primary" id="nextBtn">Continue <span class="arw">→</span></button>
+      </div>
+    </form>
+
+    <div class="success" id="successScreen" role="status">
+      <div class="checkwrap">
+        <svg viewBox="0 0 110 110" aria-hidden="true">
+          <circle class="check-circle" cx="55" cy="55" r="48"/>
+          <path class="check-mark" d="M34 57 L49 72 L78 41"/>
+        </svg>
+      </div>
+      <h2>Got it. We're on it.</h2>
+      <p>That's everything we need to start building.</p>
+      <div class="nextlist">
+        <b>What happens next</b>
+        <ul>
+          <li>We'll send you a first draft to look at.</li>
+          <li>You tell us what to change, we change it, we publish.</li>
+          <li>If you're emailing photos, send them to admin@getproytech.com whenever.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fallback" id="fallbackScreen">
+      <h2>One hiccup — but your answers are safe.</h2>
+      <p>Our server didn't pick up just now. Everything you typed is right here — hit copy, then email it to
+        <a href="mailto:admin@getproytech.com?subject=My%20landing%20page%20answers">admin@getproytech.com</a>
+        and we'll take it from there. Nothing lost, promise.</p>
+      <pre id="fallbackData"></pre>
+      <div class="fbrow">
+        <button type="button" class="btn btn-primary" id="copyBtn">Copy my answers</button>
+        <button type="button" class="btn btn-ghost" id="retryBtn">Try sending again</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>ProyTech · AI systems for realtors &amp; lenders · <a href="https://getproytech.com">getproytech.com</a></footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
+  var current = 0;
+
+  /* Sheet column headers AND the keys the Cowork prompt looks for.
+     Don't rename them casually. */
+  var FIELD_KEYS = [
+    "full_name","professional_title","contact_email","contact_phone","show_email","location",
+    "tagline","about_you","what_you_do","credentials","testimonials",
+    "primary_goal","cta_label","cta_destination","who_is_this_for",
+    "current_website","linkedin","other_links",
+    "headshot","logo_file","vibe","brand_colors","reference_sites","avoid",
+    "domain_status","domain_name","target_date","must_include","anything_else","referred_by"
+  ];
+
+  var formData = {};
+
+  function readField(key){
+    var boxes = document.querySelectorAll('input[type=checkbox][name="'+key+'"]');
+    if (boxes.length){
+      var vals = [];
+      Array.prototype.forEach.call(boxes, function(b){ if (b.checked) vals.push(b.value); });
+      return vals.join(", ");
+    }
+    var radio = document.querySelector('input[type=radio][name="'+key+'"]:checked');
+    if (radio) return radio.value;
+    if (document.querySelector('input[type=radio][name="'+key+'"]')) return "";
+    var el = document.getElementById(key);
+    return el ? el.value.trim() : "";
+  }
+
+  function saveAll(){ FIELD_KEYS.forEach(function(k){ formData[k] = readField(k); }); }
+
+  function buildPayload(){
+    saveAll();
+    var p = {};
+    FIELD_KEYS.forEach(function(k){ p[k] = formData[k] || ""; });
+    return p;
+  }
+  window.__buildPayload = buildPayload;   /* test hook */
+
+  function validateField(f){
+    var key = f.getAttribute("data-key");
+    var val = readField(key);
+    var required = f.hasAttribute("data-required");
+    var type = f.getAttribute("data-type");
+    var msg = "";
+    if (required && !val) msg = f.getAttribute("data-msg") || "This one we really need.";
+    else if (val && type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) msg = "That email doesn't look quite right.";
+    else if (val && type === "phone" && val.replace(/\D/g,"").length < 10) msg = "That number looks a little short.";
+    var err = f.querySelector(".errmsg");
+    if (msg){ f.classList.add("invalid"); if (err) err.textContent = msg; return false; }
+    f.classList.remove("invalid");
+    return true;
+  }
+
+  function validateStep(i){
+    var ok = true, firstBad = null;
+    steps[i].querySelectorAll(".field").forEach(function(f){
+      if (!validateField(f)){ ok = false; if (!firstBad) firstBad = f; }
+    });
+    if (firstBad){
+      try { firstBad.scrollIntoView({behavior:"smooth", block:"center"}); } catch(e){}
+      var inp = firstBad.querySelector("input,select,textarea");
+      if (inp) try { inp.focus({preventScroll:true}); } catch(e){ inp.focus(); }
+    }
+    return ok;
+  }
+
+  document.querySelectorAll(".field[data-required], .field[data-type]").forEach(function(f){
+    f.addEventListener("input",  function(){ if (f.classList.contains("invalid")) validateField(f); });
+    f.addEventListener("change", function(){ if (f.classList.contains("invalid")) validateField(f); });
+  });
+
+  var backBtn = document.getElementById("backBtn");
+  var nextBtn = document.getElementById("nextBtn");
+  var ptrack  = document.getElementById("ptrack").children;
+
+  function show(i){
+    steps.forEach(function(s, idx){ s.classList.toggle("active", idx === i); });
+    current = i;
+    for (var j = 0; j < ptrack.length; j++) ptrack[j].classList.toggle("done", j <= i);
+    document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + steps.length;
+    document.getElementById("pname").innerHTML = steps[i].getAttribute("data-name");
+    backBtn.style.visibility = i === 0 ? "hidden" : "visible";
+    nextBtn.innerHTML = i === steps.length - 1
+      ? 'Send it in <span class="arw">→</span>'
+      : 'Continue <span class="arw">→</span>';
+    try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+  }
+
+  backBtn.addEventListener("click", function(){ saveAll(); if (current > 0) show(current - 1); });
+
+  nextBtn.addEventListener("click", function(){
+    if (!validateStep(current)) return;
+    saveAll();
+    if (current === 2) updateMailto();
+    if (current < steps.length - 1) show(current + 1);
+    else submitForm();
+  });
+
+  function updateMailto(){
+    var who = readField("full_name") || "landing page";
+    document.getElementById("emailAssetsBtn").href =
+      "mailto:admin@getproytech.com?subject=" + encodeURIComponent("Landing page assets — " + who);
+  }
+
+  var PRETTY = {
+    full_name:"Name", professional_title:"Title", contact_email:"Email", contact_phone:"Phone",
+    show_email:"Show email publicly", location:"Location",
+    tagline:"One-liner", about_you:"About", what_you_do:"What they offer",
+    credentials:"Credentials / proof", testimonials:"Testimonials",
+    primary_goal:"Primary action", cta_label:"Button wording", cta_destination:"Button destination",
+    who_is_this_for:"Audience", current_website:"Current site", linkedin:"LinkedIn", other_links:"Other links",
+    headshot:"Headshot", logo_file:"Logo", vibe:"Vibe", brand_colors:"Colours",
+    reference_sites:"Reference sites", avoid:"Avoid",
+    domain_status:"Domain status", domain_name:"Domain", target_date:"Target date",
+    must_include:"Must include", anything_else:"Anything else", referred_by:"Referred by"
+  };
+
+  function prettyText(p){
+    return FIELD_KEYS.map(function(k){ return (PRETTY[k] || k) + ": " + (p[k] || "—"); }).join("\n");
+  }
+
+  function submitForm(){
+    var payload = buildPayload();
+    nextBtn.disabled = true;
+    nextBtn.textContent = "Sending…";
+    fetch("/api/landing-onboard", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function(r){
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json ? r.json().catch(function(){ return {}; }) : {};
+    }).then(function(){
+      document.getElementById("landingForm").style.display = "none";
+      document.getElementById("progress").style.display = "none";
+      document.getElementById("fallbackScreen").classList.remove("show");
+      document.getElementById("successScreen").classList.add("show");
+      try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+    }).catch(function(){
+      nextBtn.disabled = false;
+      nextBtn.innerHTML = 'Send it in <span class="arw">→</span>';
+      document.getElementById("landingForm").style.display = "none";
+      document.getElementById("progress").style.display = "none";
+      document.getElementById("fallbackData").textContent = prettyText(payload);
+      document.getElementById("fallbackScreen").classList.add("show");
+      try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+    });
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    var text = document.getElementById("fallbackData").textContent;
+    var btn = this;
+    function done(){ btn.textContent = "Copied ✓"; setTimeout(function(){ btn.textContent = "Copy my answers"; }, 2000); }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
+    } else fallbackCopy(text, done);
+  });
+
+  function fallbackCopy(text, done){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById("retryBtn").addEventListener("click", function(){
+    document.getElementById("fallbackScreen").classList.remove("show");
+    document.getElementById("landingForm").style.display = "";
+    document.getElementById("progress").style.display = "";
+    show(steps.length - 1);
+    submitForm();
+  });
+
+  show(0);
+})();
+</script>
+</body>
+</html>
