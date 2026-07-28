@@ -539,6 +539,49 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
 body.mnav-open{overflow:hidden}
 @media(min-width:981px){.mnav{display:none}}
 @media (prefers-reduced-motion:reduce){.mnav,.mnav-panel,.nav-burger span{transition:none}}
+
+/* ---------- framework comparison section ---------- */
+.fw-head{max-width:760px;margin-bottom:30px}
+.fw-head h2{margin:16px 0 14px}
+.fw-legend{display:none;gap:12px;margin-top:22px}
+.fw-leg{flex:1;text-align:center;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:12px;border-radius:12px}
+.fw-leg.most{color:var(--ink-soft);border:1.5px solid var(--line-dark)}
+.fw-leg.right{color:#fff;background:var(--cobalt);border:1.5px solid var(--cobalt)}
+@media(min-width:781px){.fw-legend{display:flex}.fw-legend .fw-leg.most{margin-left:0}}
+
+.fw-groups{display:flex;flex-direction:column;gap:30px}
+.fw-group{}
+.fw-gname{font-family:var(--f-mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt);
+  font-weight:700;background:rgba(46,91,255,.08);border-radius:12px;padding:11px 16px;margin-bottom:16px}
+.fw-row{margin-bottom:18px}
+.fw-row:last-child{margin-bottom:0}
+.fw-law{text-align:center;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-dim-2);font-weight:700;margin-bottom:9px}
+.fw-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fw-cell{border-radius:14px;padding:18px 20px;font-size:15.5px;line-height:1.5;position:relative;border:1.5px solid}
+.fw-cell .fw-tag{display:none;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;margin-bottom:7px}
+.fw-cell.most{background:#fff;border-color:var(--line-dark);color:var(--ink-soft)}
+.fw-cell.right{background:#fff;border-color:var(--cobalt);color:var(--ink);font-weight:500;box-shadow:0 6px 20px rgba(46,91,255,.10)}
+.fw-cell.right::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:4px;border-radius:100px;background:var(--cobalt)}
+
+@media(max-width:780px){
+  .fw-pair{grid-template-columns:1fr;gap:11px}
+  .fw-law{text-align:left}
+  .fw-cell{padding:15px 16px 15px 18px;font-size:15px}
+  .fw-cell .fw-tag{display:block}
+  .fw-cell.most .fw-tag{color:var(--text-dim-2)}
+  .fw-cell.right .fw-tag{color:var(--cobalt)}
+  .fw-cell.right::before{display:none}
+}
+
+.fw-punch{margin-top:34px;background:var(--ink);border-radius:20px;padding:30px 32px;display:flex;
+  align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.fw-punch p{color:#fff;font-family:var(--f-display);font-weight:500;font-size:clamp(18px,2.4vw,23px);line-height:1.35;max-width:60ch;margin:0}
+.fw-punch p b{color:var(--orange-bright)}
+.fw-punch .btn{flex-shrink:0}
+@media(max-width:640px){.fw-punch{padding:24px 20px}.fw-punch .btn{width:100%}}
+
 </style>
 </head>
 <body>
@@ -638,39 +681,120 @@ body.mnav-open{overflow:hidden}
   </section>
 
   <!-- THE LEAK -->
-  <section class="panel panel-navy" id="leak">
-    <div class="leak-head reveal">
-      <span class="eyebrow">The Leak</span>
-      <h2 class="h2">You're not short on leads.<br>You're losing the ones you have.</h2>
-      <p class="lead">Every unanswered call, every after-hours form that waits till morning, every lead you followed up with once and forgot — that's commission walking out the door.</p>
-    </div>
-    <div class="stat-grid">
-      <div class="stat reveal"><div class="num"><span data-count="21" data-suffix="×">21×</span></div><div class="lbl">more likely to qualify a lead when you answer in 5 minutes vs. 30.</div><div class="src">MIT / InsideSales</div></div>
-      <div class="stat reveal" style="--d:.08s"><div class="num"><span data-count="15" data-suffix=" hrs">15 hrs</span></div><div class="lbl">average time an <span data-realtor="agent" data-lender="agent or LO">agent</span> takes to respond to a new online lead.</div><div class="src">Inman 2025</div></div>
-      <div class="stat reveal" style="--d:.16s"><div class="num"><span data-count="62" data-suffix="%">62%</span></div><div class="lbl">of inquiries arrive after hours — nights and weekends, when you're off.</div><div class="src">Zillow / NAR</div></div>
-      <div class="stat reveal" style="--d:.24s"><div class="num"><span data-count="1.3" data-decimals="1">1.3</span></div><div class="lbl">follow-ups the average agent makes — when 80% of deals need 5 or more.</div><div class="src">Industry avg</div></div>
-    </div>
-  </section>
 
-  <!-- COST OF THE GLUE -->
-  <section class="panel panel-ivory" id="glue">
-    <div class="glue">
-      <div class="glue-copy reveal">
-        <span class="eyebrow">The Cost of the Glue</span>
-        <h2 class="h2">The "glue" holding it all together is you.</h2>
-        <p class="lead">Catching calls, replying when you can, remembering to follow up. It works — until it doesn't. Slide the numbers and see what slow response time quietly costs you in a year.</p>
-        <div class="hero-cta" style="margin-top:24px"><a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Get my free leak audit →</a></div>
-      </div>
-      <div class="calc reveal">
-        <div class="calc-row"><div class="top"><label>New leads per month</label><span class="val" id="vLeads">40</span></div><input type="range" id="rLeads" min="5" max="150" value="40" /></div>
-        <div class="calc-row"><div class="top"><label id="commLabel">Average commission / deal</label><span class="val" id="vComm">$9,000</span></div><input type="range" id="rComm" min="2000" max="20000" step="500" value="9000" /></div>
-        <div class="calc-row"><div class="top"><label>How fast do you reply now?</label><span class="val" id="vResp">A few hours</span></div><input type="range" id="rResp" min="0" max="3" step="1" value="2" /></div>
-        <div class="calc-result"><div class="cap">Estimated revenue leaking per year</div><div class="big" id="vLost">$118,800</div><div class="fine">Based on the gap between your current close rate and what a &lt;5-minute reply captures. A connected front desk closes most of that gap automatically.</div></div>
+  <!-- ============ WHY YOUR WEBSITE SUCKS — the framework ============ -->
+  <section class="panel panel-ivory" id="framework">
+    <div class="fw-head reveal">
+      <span class="eyebrow">The framework</span>
+      <h2 class="h2">Why most websites <span class="orange">quietly lose</span> the deal.</h2>
+      <p class="lead">Nine things decide whether a visitor becomes a buyer. Most sites get them backwards without ever knowing. Here's the difference between a site that sits there and one that's built to convert — and it's exactly how we build yours.</p>
+      <div class="fw-legend" aria-hidden="true">
+        <span class="fw-leg most">Most sites</span>
+        <span class="fw-leg right">Built right</span>
       </div>
     </div>
-  </section>
 
-  <!-- HOW IT WORKS: TWO PHASES -->
+    <div class="fw-groups reveal">
+
+      <!-- CONSUMER PSYCHOLOGY -->
+      <div class="fw-group">
+        <h3 class="fw-gname">Consumer psychology</h3>
+
+        <div class="fw-row">
+          <div class="fw-law">Hick's Law</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>Seven competing buttons. Every extra choice adds hesitation.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>One primary action per screen. Everything else recedes.</div>
+          </div>
+        </div>
+
+        <div class="fw-row">
+          <div class="fw-law">Loss Aversion</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>Lists features and benefits.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>Names the cost of waiting. Loss pulls twice as hard as gain.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISUAL FLOW -->
+      <div class="fw-group">
+        <h3 class="fw-gname">Visual flow</h3>
+
+        <div class="fw-row">
+          <div class="fw-law">Hierarchy</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>Everything is bold, so nothing is.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>One element per screen is the brightest thing on it.</div>
+          </div>
+        </div>
+
+        <div class="fw-row">
+          <div class="fw-law">Gutenberg Diagram</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>The button landed wherever it fit.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>The reading path ends where the action sits. On purpose.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COPY -->
+      <div class="fw-group">
+        <h3 class="fw-gname">Copy</h3>
+
+        <div class="fw-row">
+          <div class="fw-law">Pronoun Ratio</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>We, our, us. Forty times.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>You outnumbers we, four to one. We count it.</div>
+          </div>
+        </div>
+
+        <div class="fw-row">
+          <div class="fw-law">Specificity</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>Quality service. Trusted expertise.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>Answered in 8 seconds. Live in days. Real numbers, not adjectives.</div>
+          </div>
+        </div>
+
+        <div class="fw-row">
+          <div class="fw-law">Objection Order</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>An FAQ nobody asked for.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>Cost, risk and timeline answered before they think it.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEAD CAPTURE -->
+      <div class="fw-group">
+        <h3 class="fw-gname">Lead capture</h3>
+
+        <div class="fw-row">
+          <div class="fw-law">Redundant Paths</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>One form at the bottom.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>Form, text, call, chat, calendar. No scroll depth without a door.</div>
+          </div>
+        </div>
+
+        <div class="fw-row">
+          <div class="fw-law">Speed to Lead</div>
+          <div class="fw-pair">
+            <div class="fw-cell most"><span class="fw-tag">Most sites</span>Sits in an inbox until someone checks.</div>
+            <div class="fw-cell right"><span class="fw-tag">Built right</span>Sheet, CRM and follow-up fire in seconds.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="fw-punch reveal">
+      <p>Nobody says no. They say <b>"I'll think about it."</b> That's not doubt — that's missing information. We build the site that answers it before they leave.</p>
+      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-light">Get my free leak audit →</a>
+    </div>
+  </section>
   <section class="panel panel-navy" id="how">
     <div class="phase-head reveal">
       <span class="eyebrow">How It Works</span>
