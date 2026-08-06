@@ -1,7 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="14" fill="#070B1F"/>
-  <text x="50%" y="50%" dy="0.02em" text-anchor="middle" dominant-baseline="central"
-        font-family="'Space Grotesk','Arial Black',sans-serif" font-weight="700" font-size="30" letter-spacing="-1">
-    <tspan fill="#FFFFFF">P</tspan><tspan fill="#FF4D14">T</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="15" fill="#12142B"/>
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="none" stroke="#3A4AE0" stroke-opacity=".35" stroke-width="1.5"/>
+  <text x="50%" y="53%" dominant-baseline="central" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="40" font-weight="700" fill="#FF4D14">P</text>
 </svg>
