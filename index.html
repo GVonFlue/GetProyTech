@@ -263,6 +263,66 @@ h1 .line{display:block;overflow:hidden}h1 .line span{display:block;transform:tra
   .footer .fbot{flex-direction:column;text-align:center}
   .marquee .track{font-size:18px;gap:30px}
 }
+
+/* ===== Ace chat widget ===== */
+#aceLauncher{position:fixed;right:20px;bottom:20px;z-index:9998;display:flex;align-items:center;gap:10px;
+  background:var(--sb);color:#fff;border:none;border-radius:100px;padding:13px 20px 13px 15px;cursor:pointer;
+  box-shadow:var(--shadow);font:600 15px/1 inherit;transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s}
+#aceLauncher:hover{transform:translateY(-3px)}
+#aceLauncher .ace-orb{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6d8bff,var(--indigo));
+  position:relative;flex-shrink:0;box-shadow:0 0 0 3px rgba(255,255,255,.12)}
+#aceLauncher .ace-orb::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:acePulse 2.4s ease-out infinite}
+@keyframes acePulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.9);opacity:0}}
+#aceLauncher.hide{display:none}
+
+#acePanel{position:fixed;right:20px;bottom:20px;z-index:9999;width:380px;max-width:calc(100vw - 32px);
+  height:600px;max-height:calc(100vh - 40px);background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);display:none;flex-direction:column;overflow:hidden}
+#acePanel.open{display:flex;animation:aceIn .28s cubic-bezier(.2,.7,.2,1)}
+@keyframes aceIn{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+
+.ace-head{background:var(--sb);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.ace-head .ace-orb{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6d8bff,var(--indigo));flex-shrink:0}
+.ace-head h4{font:700 16px/1.1 inherit;margin:0}
+.ace-head .ace-sub{font:400 12px/1.3 inherit;color:rgba(255,255,255,.6);margin-top:2px}
+.ace-head .ace-status{width:8px;height:8px;border-radius:50%;background:#3ad07a;box-shadow:0 0 0 3px rgba(58,208,122,.2);margin-left:auto}
+.ace-x{background:none;border:none;color:rgba(255,255,255,.7);font-size:20px;cursor:pointer;padding:2px 6px;line-height:1;border-radius:8px}
+.ace-x:hover{background:rgba(255,255,255,.1);color:#fff}
+
+.ace-feed{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;background:var(--bg)}
+.ace-msg{max-width:82%;padding:11px 14px;border-radius:15px;font-size:14.5px;line-height:1.45;word-wrap:break-word}
+.ace-msg.bot{background:var(--card);border:1px solid var(--line);color:var(--ink);align-self:flex-start;border-bottom-left-radius:5px}
+.ace-msg.user{background:var(--indigo);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.ace-typing{align-self:flex-start;background:var(--card);border:1px solid var(--line);padding:13px 16px;border-radius:15px;border-bottom-left-radius:5px;display:flex;gap:4px}
+.ace-typing span{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:aceBounce 1.2s infinite}
+.ace-typing span:nth-child(2){animation-delay:.2s}.ace-typing span:nth-child(3){animation-delay:.4s}
+@keyframes aceBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+
+.ace-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px;background:var(--bg)}
+.ace-chip{background:var(--card);border:1.5px solid var(--indigo-soft);color:var(--indigo);border-radius:100px;
+  padding:9px 14px;font:600 13px/1 inherit;cursor:pointer;transition:all .15s}
+.ace-chip:hover{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+
+.ace-input{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:var(--card)}
+.ace-input input{flex:1;border:1.5px solid var(--line);border-radius:100px;padding:11px 16px;font:inherit;font-size:14.5px;outline:none;color:var(--ink)}
+.ace-input input:focus{border-color:var(--indigo)}
+.ace-send{background:var(--accent);color:#fff;border:none;border-radius:50%;width:42px;height:42px;flex-shrink:0;cursor:pointer;font-size:17px;transition:transform .15s,background .15s}
+.ace-send:hover{transform:scale(1.06)}
+.ace-send:disabled{opacity:.5;cursor:default;transform:none}
+
+.ace-captured{margin:4px 18px 14px;background:rgba(58,208,122,.1);border:1px solid rgba(58,208,122,.3);border-radius:14px;padding:12px 14px;font-size:13.5px;color:#1a7a43;display:flex;gap:9px;align-items:flex-start}
+.ace-captured b{color:#0f5c30}
+
+@media(max-width:480px){
+  #acePanel{right:8px;bottom:8px;width:calc(100vw - 16px);height:calc(100vh - 16px);max-height:none}
+  #aceLauncher{right:14px;bottom:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  #aceLauncher .ace-orb::after{animation:none}
+  #acePanel.open{animation:none}
+  .ace-typing span{animation:none}
+}
+
 </style></head>
 <body>
 <div id="prog"></div><div id="glow"></div>
@@ -545,4 +605,145 @@ if(matchMedia('(max-width:760px)').matches){setStage(0);var _mi=0;setInterval(fu
 else{addEventListener('scroll',onScroll,{passive:true});onScroll();}}
 else{addEventListener('scroll',function(){if(prog)prog.style.width=(document.documentElement.scrollTop/(document.documentElement.scrollHeight-innerHeight)*100)+'%';},{passive:true});}
 </script>
+
+<!-- ===== Ace chat widget ===== -->
+<button id="aceLauncher" aria-label="Chat with Ace">
+  <span class="ace-orb" aria-hidden="true"></span>
+  <span>Talk to Ace</span>
+</button>
+
+<div id="acePanel" role="dialog" aria-label="Chat with Ace" aria-modal="false">
+  <div class="ace-head">
+    <span class="ace-orb" aria-hidden="true"></span>
+    <div>
+      <h4>Ace</h4>
+      <div class="ace-sub">ProyTech front desk</div>
+    </div>
+    <span class="ace-status" title="Online" aria-hidden="true"></span>
+    <button class="ace-x" id="aceClose" aria-label="Close chat">&#10005;</button>
+  </div>
+  <div class="ace-feed" id="aceFeed"></div>
+  <div class="ace-chips" id="aceChips"></div>
+  <div class="ace-input">
+    <input id="aceInput" type="text" placeholder="Ask about growing your business…" autocomplete="off" aria-label="Your message" />
+    <button class="ace-send" id="aceSend" aria-label="Send">&#8593;</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var launcher=document.getElementById('aceLauncher');
+  var panel=document.getElementById('acePanel');
+  var feed=document.getElementById('aceFeed');
+  var chipsWrap=document.getElementById('aceChips');
+  var input=document.getElementById('aceInput');
+  var sendBtn=document.getElementById('aceSend');
+  var closeBtn=document.getElementById('aceClose');
+  if(!launcher||!panel) return;
+
+  var history=[];            // {role, content} sent to /api/chat
+  var leadCaptured=false;    // stop re-firing once a lead is in
+  var busy=false;
+  var opened=false;
+
+  var GREETING="Hey — I'm Ace. Tell me what you do and where deals slip through the cracks, and I'll show you how we'd fix it. What's your business?";
+  var GREET_CHIPS=["I'm a realtor","I'm a lender","How does it all work?"];
+
+  function scrollDown(){ feed.scrollTop=feed.scrollHeight; }
+
+  function addMsg(text,who){
+    var d=document.createElement('div');
+    d.className='ace-msg '+(who==='user'?'user':'bot');
+    d.textContent=text;
+    feed.appendChild(d); scrollDown();
+    return d;
+  }
+  function showTyping(){
+    var t=document.createElement('div');
+    t.className='ace-typing'; t.id='aceTyping';
+    t.innerHTML='<span></span><span></span><span></span>';
+    feed.appendChild(t); scrollDown();
+  }
+  function hideTyping(){ var t=document.getElementById('aceTyping'); if(t) t.remove(); }
+
+  function renderChips(chips){
+    chipsWrap.innerHTML='';
+    (chips||[]).forEach(function(c){
+      var b=document.createElement('button');
+      b.className='ace-chip'; b.type='button'; b.textContent=c;
+      b.addEventListener('click',function(){ send(c); });
+      chipsWrap.appendChild(b);
+    });
+  }
+
+  function showCaptured(){
+    var d=document.createElement('div');
+    d.className='ace-captured';
+    d.innerHTML='<span aria-hidden="true">&#9989;</span><div><b>You&rsquo;re on the list.</b> Garrett or Logan will reach out shortly to set up your free Pipeline Teardown.</div>';
+    feed.appendChild(d); scrollDown();
+  }
+
+  function setBusy(b){
+    busy=b; sendBtn.disabled=b; input.disabled=b;
+  }
+
+  function send(text){
+    text=(text||input.value||'').trim();
+    if(!text||busy) return;
+    input.value='';
+    addMsg(text,'user');
+    history.push({role:'user',content:text});
+    renderChips([]);
+    setBusy(true); showTyping();
+
+    fetch('/api/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:history, leadCaptured:leadCaptured})
+    }).then(function(r){ return r.json().catch(function(){return {};}); })
+      .then(function(data){
+        hideTyping(); setBusy(false);
+        if(data.error){ addMsg("I'm having a hiccup — try again in a sec, or tap Free Teardown up top.",'bot'); return; }
+        var reply=data.reply||"Sorry, I didn't catch that — mind rephrasing?";
+        addMsg(reply,'bot');
+        history.push({role:'assistant',content:reply});
+        if(data.captured && !leadCaptured){ leadCaptured=true; showCaptured(); renderChips([]); }
+        else { renderChips(data.chips); }
+        input.focus();
+      }).catch(function(){
+        hideTyping(); setBusy(false);
+        addMsg("Connection glitch — mind trying that again?",'bot');
+      });
+  }
+
+  function open(){
+    panel.classList.add('open'); launcher.classList.add('hide'); opened=true;
+    if(feed.children.length===0){
+      addMsg(GREETING,'bot');
+      history.push({role:'assistant',content:GREETING});
+      renderChips(GREET_CHIPS);
+    }
+    setTimeout(function(){ input.focus(); },200);
+  }
+  function close(){ panel.classList.remove('open'); launcher.classList.remove('hide'); }
+
+  launcher.addEventListener('click',open);
+  closeBtn.addEventListener('click',close);
+  sendBtn.addEventListener('click',function(){ send(); });
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); send(); } });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && panel.classList.contains('open')) close(); });
+
+  // Wire any "Talk to Ace" button on the page to open the widget.
+  document.querySelectorAll('button, a').forEach(function(el){
+    if(el.id==='aceLauncher'||el.closest('#acePanel')) return;
+    if((el.textContent||'').trim().toLowerCase()==='talk to ace'){
+      el.addEventListener('click',function(e){ e.preventDefault(); open(); });
+    }
+  });
+
+  window.openAce=open;   // so anything can call openAce()
+})();
+</script>
+
 </body></html>
