@@ -1,58 +1,42 @@
-# Event tile backgrounds — getproytech.com/events
+# Lighter gradients — events.html
 
-## Upload
+**Only `events.html` changed.** The images are already uploaded and untouched.
 
-| From the zip | Goes to |
-|---|---|
-| `events.html` | repo root (replaces the existing one) |
-| `images/suite-night-*.webp` and `*.jpg` | `images/` |
+## What moved
 
-Static site, no build step — Vercel redeploys on commit.
+Tints dropped from roughly **75% to 22–34%** — about a third of what they were.
+The photos now read as photos.
 
-## What changed
+## How the text stays legible at that opacity
 
-**Three CSS lines in `events.html`.** No markup changes at all — the existing
-`.ev-media-thunder`, `.ev-media-military` and `.ev-media-past` blocks already
-existed as flat gradients, so the photos slot straight in behind them.
+The darkening moved off the whole picture and onto the heading:
 
-## The one decision worth knowing
+- **`.ev-media::after`** — a soft radial pool of shade centred behind the title,
+  fading to nothing at the edges. Invisible as a shape, but it keeps white type
+  readable on all three.
+- **`text-shadow`** on the heading and subtitle for the last bit of contrast.
 
-The photo sits **under** the existing gradient, not instead of it.
+That's what makes the low tint possible. Darkening the whole image to protect
+text in the middle is what buried the photos in the first place.
 
-Your headings are centred over that block, and both the Wind Surge sunset and
-the Thunder ice are brightest in exactly the middle where the text sits.
-Dropping the gradient for a raw photo would make white type disappear into the
-image. The gradients are the same colours as before, just eased back enough
-(≈70–85% opacity) to read the photo through them.
+Wind Surge desaturation eased from `.55` to `.7` — still visibly "past", but you
+can see the sunset now.
 
-Each background is a stack:
+## If you want them lighter still
 
+Each tile's tint is the first `linear-gradient` in its `background` stack:
+
+```css
+.ev-media-thunder{background:
+  linear-gradient(160deg,rgba(0,93,166,.24),rgba(4,38,63,.34)),   /* ← this */
+  image-set(...),
+  linear-gradient(160deg,#005DA6,#04263f)}                        /* fallback */
 ```
-tint gradient  →  photo  →  original solid gradient
-```
 
-The last layer is the original colour, so a slow connection shows what the page
-shows today rather than an empty block. Nothing regresses if an image 404s.
+Drop those two decimals toward `.10` for more photo. **Don't remove the line
+entirely** — the last gradient in each stack is the original flat colour and
+only shows if an image fails to load, so it isn't a substitute.
 
-**The past tile is desaturated** (`filter:saturate(.55)`) so Wind Surge reads as
-over without the copy having to say so twice — "Sold out · done" already does
-that work once.
-
-## Sizes
-
-Your source PNGs were ~2 MB each — **6.5 MB for three tiles**, slow on a phone.
-These are 1200×800, 66–92 KB in WebP with JPEG fallbacks served via `image-set`,
-so browsers that can't do WebP get the JPEG with no markup change.
-
-Total added: **~610 KB**, and only ~250 KB of that is what a modern browser
-actually downloads.
-
-## Worth checking after deploy
-
-- The Military tile has bright white flag stripes across the top. The heading
-  sits centred so it should be clear, but if it ever reads thin, deepen the
-  first gradient stop from `.68` to about `.78`.
-- Tiles are 190px tall on desktop, 170px under 640px. The photos are 3:2, so
-  they crop top and bottom at that height — all three are composed with the
-  interesting part in the middle, so this is fine, but it's why they're not
-  taller.
+Below about `.15` the Military tile gets difficult: the flag's white stripes sit
+right where "Military Suite Night" does. If you push it that far, deepen the
+`::after` pool from `.58` to about `.7` instead.
