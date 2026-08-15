@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Events | ProyTech</title>
+<meta name="description" content="Suite Night and ProyTech events in Wichita. Private-suite networking nights done different."/>
+<meta property="og:title" content="ProyTech Events"/>
+<meta property="og:description" content="Private-suite networking nights in Wichita. Business networking done different."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://getproytech.com/events"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{--bg:#FBFAF8;--ink:#12142B;--muted:#63667A;--line:#ECE9E3;--card:#fff;--accent:#FF4D14;--r:22px}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+.serif{font-family:Fraunces,Georgia,serif;font-weight:500;letter-spacing:-.01em}
+.accent{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+.pt-nav{position:sticky;top:14px;z-index:80;margin:14px auto 0;max-width:1180px;padding:0 20px;font-family:Inter,system-ui,sans-serif}
+.pt-nav-inner{position:relative;display:flex;align-items:center;gap:22px;background:rgba(255,255,255,.94);backdrop-filter:blur(16px) saturate(1.4);border:1px solid #ECE9E3;border-radius:40px;padding:11px 12px 11px 22px;box-shadow:0 16px 40px -20px rgba(20,22,55,.4)}
+.pt-logo{font-weight:700;font-size:19px;letter-spacing:-.02em;color:#12142B;text-decoration:none}
+.pt-accent{color:#FF4D14}
+.pt-logo-img{height:28px;width:auto;display:block}
+.pt-nav-links{display:flex;gap:22px;margin-left:8px;font-size:14px}
+.pt-nav-links a{color:#63667A;text-decoration:none;transition:.2s}
+.pt-nav-links a:hover{color:#12142B}
+.pt-nav-links a.tn-navon{color:#FF4D14;font-weight:600}
+.pt-nav-cta{margin-left:auto;display:flex;gap:8px}
+.pt-btn{border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:14px;border-radius:30px;padding:11px 20px;transition:transform .25s,box-shadow .25s;text-decoration:none;display:inline-flex;align-items:center}
+.pt-btn-primary{background:#FF4D14;color:#fff;box-shadow:0 12px 26px -10px rgba(255,77,20,.6)}
+.pt-btn-primary:hover{transform:translateY(-2px)}
+.pt-btn-ghost{background:transparent;color:#12142B;border:1px solid #ECE9E3}
+.pt-burger{display:none;margin-left:auto;width:42px;height:42px;border:1px solid #ECE9E3;border-radius:13px;background:#fff;cursor:pointer;place-items:center;flex:none}
+.pt-burger span,.pt-burger span::before,.pt-burger span::after{display:block;width:18px;height:2px;background:#12142B;border-radius:2px;position:relative}
+.pt-burger span::before,.pt-burger span::after{content:"";position:absolute;left:0}.pt-burger span::before{top:-6px}.pt-burger span::after{top:6px}
+.pt-nav-inner.open .pt-burger span{background:transparent}
+.pt-drop{display:none;position:absolute;top:calc(100% + 10px);left:0;right:0;background:#fff;border:1px solid #ECE9E3;border-radius:22px;box-shadow:0 26px 54px -20px rgba(20,22,55,.44);padding:12px;flex-direction:column;gap:2px;z-index:90}
+.pt-nav-inner.open .pt-drop{display:flex}
+.pt-drop a{padding:13px 14px;border-radius:13px;color:#12142B;font-size:16px;font-weight:500;text-decoration:none}.pt-drop a:hover{background:#FBFAF8}
+@media(max-width:920px){.pt-nav-links,.pt-nav-cta{display:none}.pt-burger{display:grid}}
+
+.ev-head{text-align:center;padding:70px 0 10px}
+.ev-eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.ev-h1{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:-.02em;margin:14px 0 0;line-height:1.05}
+.ev-sub{color:var(--muted);max-width:560px;margin:16px auto 0;font-size:17px}
+
+.ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0 90px}
+.ev-tile{position:relative;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 20px 50px -30px rgba(20,22,55,.35);transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s;text-decoration:none;color:inherit}
+.ev-tile:hover{transform:translateY(-6px);box-shadow:0 34px 70px -30px rgba(20,22,55,.5)}
+.ev-media{position:relative;height:190px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:26px}
+.ev-media-thunder{background:radial-gradient(120% 90% at 50% -10%,#2E86C8,transparent 60%),linear-gradient(160deg,#005DA6,#04263f)}
+.ev-media-military{background:linear-gradient(160deg,#0A3161,#0C2470 60%,#050505)}
+.ev-media-past{background:linear-gradient(160deg,#12142B,#2a2d52)}
+.ev-media h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.7rem;color:#fff;text-align:center;line-height:1.05;letter-spacing:-.01em;text-shadow:0 4px 20px rgba(0,0,0,.4);z-index:2}
+.ev-media .ev-media-sub{display:block;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:8px}
+.ev-badge{position:absolute;top:14px;left:14px;z-index:3;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px)}
+.ev-badge-live{background:#FF4D14;border-color:#FF4D14}
+.ev-badge-past{background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)}
+.ev-body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.ev-date{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.ev-title{font-family:Fraunces,serif;font-size:1.35rem;margin:8px 0 6px;letter-spacing:-.01em}
+.ev-desc{color:var(--muted);font-size:14.5px;line-height:1.6;flex:1}
+.ev-cta{margin-top:18px;display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:14px;color:var(--accent)}
+.ev-tile:hover .ev-cta{gap:11px}
+.ev-tile-disabled{cursor:default;opacity:.85}
+.ev-tile-disabled:hover{transform:none;box-shadow:0 20px 50px -30px rgba(20,22,55,.35)}
+
+.footer{background:var(--ink);color:#fff;padding:52px 0 26px;margin-top:20px}
+.footer .fg{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.footer .flogo{font-size:22px;font-weight:700}
+.footer .ftag{color:#9a97bd;font-size:14px;margin-top:10px;max-width:320px}
+.footer .fbot{border-top:1px solid rgba(255,255,255,.12);margin-top:30px;padding-top:18px;color:#8f8cb0;font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer a{color:#C9CAD8;text-decoration:none}.footer a:hover{color:#fff}
+
+@media(max-width:920px){.ev-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="pt-nav"><div class="pt-nav-inner">
+  <a href="index.html" class="pt-logo" aria-label="ProyTech home"><img src="/proytechlogo.png" alt="ProyTech" class="pt-logo-img"></a>
+  <div class="pt-nav-links">
+    <a href="lenders.html">Lenders</a>
+    <a href="realtors.html">Realtors</a>
+    <a href="businesses.html">Local Business</a>
+    <a href="suite.html">Business Suite</a>
+    <a href="events.html" >Events</a>
+  </div>
+  <div class="pt-nav-cta"><a class="pt-btn pt-btn-ghost" href="index.html#pricing">Pricing</a><a class="pt-btn pt-btn-primary" href="events.html">Events</a></div>
+  <button class="pt-burger" aria-label="Menu" onclick="this.closest('.pt-nav-inner').classList.toggle('open')"><span></span></button>
+  <div class="pt-drop">
+    <a href="lenders.html">Lenders</a><a href="realtors.html">Realtors</a><a href="businesses.html">Local Business</a><a href="suite.html">Business Suite</a><a href="events.html">Events</a><a href="index.html#pricing">Pricing</a>
+  </div>
+</div></nav>
+
+<header class="ev-head wrap">
+  <div class="ev-eyebrow">ProyTech Presents</div>
+  <h1 class="ev-h1">Suite Night <span class="accent">Events</span></h1>
+  <p class="ev-sub">Private-suite networking nights in Wichita. Real rooms, real people, business networking done different.</p>
+</header>
+
+<div class="wrap">
+  <div class="ev-grid">
+
+    <a class="ev-tile" href="suitenight.html">
+      <div class="ev-media ev-media-thunder">
+        <span class="ev-badge ev-badge-live">Reserving now</span>
+        <h3>Suite Night at the Thunder<span class="ev-media-sub">Opening Night on Ice</span></h3>
+      </div>
+      <div class="ev-body">
+        <div class="ev-date">Oct 17, 2026 &middot; INTRUST Bank Arena</div>
+        <div class="ev-title">Business Networking Done Different</div>
+        <p class="ev-desc">A private suite for the Wichita Thunder's opening faceoff. A curated room of business owners, catered, with the game all night.</p>
+        <span class="ev-cta">Reserve your seat &rarr;</span>
+      </div>
+    </a>
+
+    <a class="ev-tile" href="https://gvonflue.vercel.app/militarysuitenight">
+      <div class="ev-media ev-media-military">
+        <span class="ev-badge ev-badge-live">Open now</span>
+        <h3>Military Suite Night<span class="ev-media-sub">For Those Who Served</span></h3>
+      </div>
+      <div class="ev-body">
+        <div class="ev-date">Sept 11, 2026 &middot; Equity Bank Park</div>
+        <div class="ev-title">A Free Night For Our Military</div>
+        <p class="ev-desc">Free suite seats for active duty and veterans, drawn live. On the field for the anthem, catered, funded by local sponsors.</p>
+        <span class="ev-cta">Enter the drawing &rarr;</span>
+      </div>
+    </a>
+
+    <div class="ev-tile ev-tile-disabled">
+      <div class="ev-media ev-media-past">
+        <span class="ev-badge ev-badge-past">Past event</span>
+        <h3>Suite Night at the Wind Surge<span class="ev-media-sub">Where It Started</span></h3>
+      </div>
+      <div class="ev-body">
+        <div class="ev-date">Aug 12, 2026 &middot; Equity Bank Park</div>
+        <div class="ev-title">The First One</div>
+        <p class="ev-desc">Twenty Wichita business owners, one suite, one night. The room that started it all. More coming soon.</p>
+        <span class="ev-cta" style="color:var(--muted)">Sold out &middot; done</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer"><div class="wrap">
+  <div class="fg">
+    <div>
+      <div class="flogo">Proy<span class="accent">Tech</span></div>
+      <p class="ftag">Done-for-you websites, AI, and automation for Wichita businesses. Plus the best networking room in town.</p>
+    </div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="events.html">Events</a>
+      <a href="suite.html">Business Suite</a>
+      <a href="index.html#pricing">Pricing</a>
+    </div>
+  </div>
+  <div class="fbot"><span>&copy; 2026 ProyTech</span><span>Hosted by Garrett Von Flue &amp; Logan Sell</span></div>
+</div></footer>
+
+</body>
+</html>

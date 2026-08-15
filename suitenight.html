@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Suite Night · Thunder Opening Night · Oct 17 | ProyTech</title>
+<meta name="description" content="Business Networking Done Different. A private suite for the Wichita Thunder opening night. A curated room of Wichita business owners, catered, with the game all night."/>
+<meta property="og:title" content="Suite Night · Business Networking Done Different"/>
+<meta property="og:description" content="A private suite for the Thunder's opening night. A curated room of Wichita business owners. Oct 17 at INTRUST Bank Arena."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://getproytech.com/suitenight"/>
+<meta property="og:image" content="https://getproytech.com/images/suitenight-og.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#020a12}
+
+.pt-nav{position:sticky;top:14px;z-index:80;margin:14px auto 0;max-width:1180px;padding:0 20px;font-family:Inter,system-ui,sans-serif}
+.pt-nav-inner{position:relative;display:flex;align-items:center;gap:22px;background:rgba(255,255,255,.94);backdrop-filter:blur(16px) saturate(1.4);border:1px solid #ECE9E3;border-radius:40px;padding:11px 12px 11px 22px;box-shadow:0 16px 40px -20px rgba(20,22,55,.5)}
+.pt-logo{font-weight:700;font-size:19px;letter-spacing:-.02em;color:#12142B;text-decoration:none}
+.pt-accent{color:#FF4D14}
+.pt-logo-img{height:28px;width:auto;display:block}
+.pt-nav-links{display:flex;gap:22px;margin-left:8px;font-size:14px}
+.pt-nav-links a{color:#63667A;text-decoration:none;transition:.2s}
+.pt-nav-links a:hover{color:#12142B}
+.pt-nav-links a.tn-navon{color:#FF4D14;font-weight:600}
+.pt-nav-cta{margin-left:auto;display:flex;gap:8px}
+.pt-btn{border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:14px;border-radius:30px;padding:11px 20px;transition:transform .25s,box-shadow .25s;text-decoration:none;display:inline-flex;align-items:center}
+.pt-btn-primary{background:#FF4D14;color:#fff;box-shadow:0 12px 26px -10px rgba(255,77,20,.6)}
+.pt-btn-primary:hover{transform:translateY(-2px)}
+.pt-btn-ghost{background:transparent;color:#12142B;border:1px solid #ECE9E3}
+.pt-burger{display:none;margin-left:auto;width:42px;height:42px;border:1px solid #ECE9E3;border-radius:13px;background:#fff;cursor:pointer;place-items:center;flex:none}
+.pt-burger span,.pt-burger span::before,.pt-burger span::after{display:block;width:18px;height:2px;background:#12142B;border-radius:2px;position:relative}
+.pt-burger span::before,.pt-burger span::after{content:"";position:absolute;left:0}.pt-burger span::before{top:-6px}.pt-burger span::after{top:6px}
+.pt-nav-inner.open .pt-burger span{background:transparent}
+.pt-drop{display:none;position:absolute;top:calc(100% + 10px);left:0;right:0;background:#fff;border:1px solid #ECE9E3;border-radius:22px;box-shadow:0 26px 54px -20px rgba(20,22,55,.44);padding:12px;flex-direction:column;gap:2px;z-index:90}
+.pt-nav-inner.open .pt-drop{display:flex}
+.pt-drop a{padding:13px 14px;border-radius:13px;color:#12142B;font-size:16px;font-weight:500;text-decoration:none}.pt-drop a:hover{background:#FBFAF8}
+@media(max-width:920px){.pt-nav-links,.pt-nav-cta{display:none}.pt-burger{display:grid}}
+
+
+.tn{
+  --blue:#005DA6;--blue-lite:#2E86C8;--ice:#38BDF8;--ice-2:#7DD3FC;--frost:#EAF6FF;
+  --mid:#083253;--deep:#04263f;--ink:#03151f;--near:#020a12;
+  --o:#FF6B35;--o-deep:#E4551F;--muted:#9fb8cc;--txt:#dceaf5;
+  --disp:'Space Grotesk',system-ui,-apple-system,sans-serif;--body:'Inter',system-ui,-apple-system,sans-serif;
+  font-family:var(--body);background:var(--near);color:var(--txt);overflow-x:clip
+}
+.tn *{box-sizing:border-box}
+.tn-wrap{max-width:1180px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+.tn-reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.tn-reveal.tn-in{opacity:1;transform:none}
+.tn-h2{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.02;font-size:clamp(2rem,4vw,3.4rem);color:var(--frost);margin:14px 0 0}
+.tn-h2-light{color:#fff}
+.tn-kicker{display:inline-block;font-weight:700;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ice)}
+.tn-kicker-ice{color:var(--ice-2)}
+.tn-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--body);font-weight:700;font-size:1rem;line-height:1;border:none;border-radius:999px;cursor:pointer;padding:1.05rem 1.8rem;transition:.24s ease;white-space:nowrap}
+.tn-btn-orange{background:var(--o);color:#fff;box-shadow:0 10px 30px rgba(255,107,53,.4)}
+.tn-btn-orange:hover{background:var(--o-deep);transform:translateY(-2px);box-shadow:0 16px 44px rgba(255,107,53,.55)}
+.tn-btn-orange:disabled{opacity:.6;cursor:wait;transform:none}
+.tn-btn-block{width:100%}
+.tn-btn-lg{padding:1.2rem 2.4rem;font-size:1.1rem}
+.tn-btn-sm{padding:.7rem 1.25rem;font-size:.9rem}
+
+/* HERO */
+.tn-hero{position:relative;padding:190px 0 0;overflow:hidden;background:linear-gradient(180deg,#041c30 0%,#03151f 60%,#020a12 100%);isolation:isolate}
+.tn-ice{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(120% 80% at 50% -10%, rgba(56,189,248,.28), transparent 60%),
+  radial-gradient(90% 60% at 15% 20%, rgba(0,93,166,.5), transparent 65%),
+  radial-gradient(90% 70% at 85% 15%, rgba(45,134,200,.42), transparent 62%),
+  linear-gradient(180deg, #05263f, #03151f);
+  transform:scale(1.05);animation:tn-drift 24s ease-in-out infinite alternate}
+@keyframes tn-drift{to{transform:scale(1.12) translate3d(0,-12px,0)}}
+.tn-aurora{position:absolute;inset:-20% -10% auto -10%;height:70%;z-index:0;pointer-events:none;filter:blur(48px);opacity:.55;
+  background:conic-gradient(from 120deg at 50% 40%, rgba(56,189,248,.0), rgba(56,189,248,.55), rgba(0,93,166,.0), rgba(125,211,252,.5), rgba(56,189,248,.0));
+  animation:tn-aurora 18s ease-in-out infinite}
+@keyframes tn-aurora{0%,100%{transform:translateX(-6%) translateY(0) rotate(0deg)}50%{transform:translateX(6%) translateY(3%) rotate(4deg)}}
+
+/* Arena light beams sweeping from the top */
+.tn-beams{position:absolute;inset:0 0 auto 0;height:90%;z-index:0;pointer-events:none;opacity:.5;mix-blend-mode:screen;
+  background:
+    conic-gradient(from 90deg at 20% -10%, transparent 0 8deg, rgba(125,211,252,.16) 9deg 11deg, transparent 12deg 20deg),
+    conic-gradient(from 90deg at 50% -10%, transparent 0 6deg, rgba(56,189,248,.18) 7deg 9deg, transparent 10deg 18deg),
+    conic-gradient(from 90deg at 80% -10%, transparent 0 8deg, rgba(125,211,252,.14) 9deg 11deg, transparent 12deg 20deg);
+  animation:tn-beams 12s ease-in-out infinite alternate;transform-origin:50% 0}
+@keyframes tn-beams{0%{transform:translateX(-2%) scaleY(1)}100%{transform:translateX(2%) scaleY(1.05)}}
+
+/* Faint ice-crack texture on the lower half */
+.tn-cracks{position:absolute;inset:auto 0 0 0;height:55%;z-index:0;pointer-events:none;opacity:.12;
+  background-image:
+    linear-gradient(115deg, transparent 49.6%, rgba(234,246,255,.6) 49.8%, transparent 50%),
+    linear-gradient(65deg, transparent 49.7%, rgba(234,246,255,.5) 49.85%, transparent 50%),
+    linear-gradient(160deg, transparent 49.7%, rgba(234,246,255,.4) 49.9%, transparent 50%);
+  background-size:220px 220px, 300px 300px, 180px 180px;background-position:10% 90%, 70% 100%, 40% 80%;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000);mask-image:linear-gradient(180deg,transparent,#000)}
+
+/* A glowing puck streak that glides across the hero */
+.tn-streak{position:absolute;left:-10%;top:64%;z-index:1;width:120px;height:6px;pointer-events:none;border-radius:999px;
+  background:linear-gradient(90deg, transparent, rgba(125,211,252,.9), #fff);
+  box-shadow:0 0 18px rgba(125,211,252,.9),0 0 40px rgba(56,189,248,.6);
+  filter:blur(.3px);opacity:0;animation:tn-streak 7s ease-in-out infinite}
+@keyframes tn-streak{0%{left:-12%;opacity:0}8%{opacity:1}42%{left:112%;opacity:0}100%{left:112%;opacity:0}}
+.tn-sheen{position:absolute;top:0;left:-60%;width:60%;height:100%;z-index:1;pointer-events:none;
+  background:linear-gradient(105deg, transparent, rgba(234,246,255,.10) 45%, rgba(234,246,255,.18) 50%, rgba(234,246,255,.10) 55%, transparent);
+  animation:tn-sheen 9s ease-in-out infinite}
+@keyframes tn-sheen{0%{left:-60%}55%,100%{left:120%}}
+.tn-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(2,10,18,.75) 100%)}
+.tn-snow{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.tn-flake{position:absolute;top:-6%;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#fff,rgba(255,255,255,.2));opacity:.7;animation:tn-fall linear infinite}
+@keyframes tn-fall{0%{transform:translate3d(0,-10vh,0);opacity:0}10%{opacity:.85}100%{transform:translate3d(14px,110vh,0);opacity:0}}
+.tn-flake-0{left:6%;width:6px;height:6px;animation-duration:11s;animation-delay:0s}
+.tn-flake-1{left:16%;width:10px;height:10px;animation-duration:15s;animation-delay:2s}
+.tn-flake-2{left:27%;width:5px;height:5px;animation-duration:9s;animation-delay:1s}
+.tn-flake-3{left:38%;width:9px;height:9px;animation-duration:13s;animation-delay:4s}
+.tn-flake-4{left:49%;width:6px;height:6px;animation-duration:12s;animation-delay:.5s}
+.tn-flake-5{left:58%;width:11px;height:11px;animation-duration:17s;animation-delay:3s}
+.tn-flake-6{left:66%;width:5px;height:5px;animation-duration:10s;animation-delay:2.5s}
+.tn-flake-7{left:73%;width:8px;height:8px;animation-duration:14s;animation-delay:1.5s}
+.tn-flake-8{left:81%;width:7px;height:7px;animation-duration:12s;animation-delay:5s}
+.tn-flake-9{left:88%;width:10px;height:10px;animation-duration:16s;animation-delay:.8s}
+.tn-flake-10{left:93%;width:6px;height:6px;animation-duration:11s;animation-delay:3.5s}
+.tn-flake-11{left:12%;width:7px;height:7px;animation-duration:13s;animation-delay:6s}
+.tn-flake-12{left:34%;width:5px;height:5px;animation-duration:10s;animation-delay:2.2s}
+.tn-flake-13{left:44%;width:9px;height:9px;animation-duration:15s;animation-delay:4.5s}
+.tn-flake-14{left:62%;width:6px;height:6px;animation-duration:12s;animation-delay:1.2s}
+.tn-flake-15{left:77%;width:8px;height:8px;animation-duration:14s;animation-delay:3.2s}
+.tn-flake-16{left:22%;width:6px;height:6px;animation-duration:11s;animation-delay:5.5s}
+.tn-flake-17{left:85%;width:7px;height:7px;animation-duration:13s;animation-delay:.3s}
+.tn-hero-inner{position:relative;z-index:3;max-width:1180px;margin:0 auto;padding:0 28px}
+.tn-hero-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:48px;align-items:stretch}
+.tn-hero-main{display:flex;flex-direction:column;justify-content:flex-end}
+.tn-side{display:flex;flex-direction:column;justify-content:flex-start;gap:20px}
+.tn-eyebrow{display:inline-flex;align-self:flex-start;align-items:center;gap:9px;font-weight:700;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.3);backdrop-filter:blur(8px);padding:.55rem 1rem;border-radius:999px}
+.tn-puck{width:12px;height:8px;border-radius:3px;background:linear-gradient(#0b0f14,#020507);box-shadow:0 0 0 1px rgba(255,255,255,.15),0 0 12px rgba(56,189,248,.6)}
+.tn-h1{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.94;font-size:clamp(2.8rem,6.4vw,5.8rem);margin:22px 0 0;
+  color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.5)}
+.tn-h1 em{font-style:normal;background:linear-gradient(100deg,var(--ice-2),#fff 40%,var(--ice) 60%,var(--ice-2));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:tn-shimmer 6s linear infinite}
+@keyframes tn-shimmer{to{background-position:220% center}}
+.tn-hero-sub{font-size:clamp(1.02rem,1.4vw,1.22rem);line-height:1.55;color:rgba(220,234,245,.72);margin:24px 0 0;max-width:48ch}
+.tn-hero-cta{display:flex;align-items:center;gap:20px;margin:34px 0 0;flex-wrap:wrap}
+.tn-seat-pill{display:flex;align-items:center;gap:12px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.28);backdrop-filter:blur(10px);border-radius:16px;padding:.7rem 1.1rem}
+.tn-seat-pill strong{font-family:var(--disp);font-size:2rem;color:var(--ice);line-height:1}
+.tn-seat-pill span{font-size:.72rem;line-height:1.25;color:rgba(220,234,245,.7);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+.tn-glass{background:rgba(10,40,64,.5);border:1px solid rgba(125,211,252,.22);backdrop-filter:blur(14px);border-radius:20px;padding:20px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 20px 50px rgba(0,0,0,.4)}
+.tn-glass-label{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(220,234,245,.6);margin-bottom:14px}
+.tn-glass-label-sp{margin-top:18px}
+.tn-brandstack{display:flex;flex-direction:column;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:20px 18px}
+.tn-brand-primary{display:flex;align-items:center;justify-content:center;transition:.24s ease}
+.tn-brand-primary img{height:46px;width:auto;object-fit:contain}
+.tn-brand-primary:hover{transform:translateY(-2px)}
+.tn-brand-secondary{display:flex;align-items:center;justify-content:center;padding-top:12px;border-top:1px solid rgba(3,21,31,.12);width:100%;transition:.24s ease}
+.tn-brand-secondary img{height:26px;width:auto;object-fit:contain;opacity:.92}
+.tn-brand-secondary:hover{transform:translateY(-2px)}
+.tn-side-sponsors{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.tn-side-slot{display:flex;align-items:center;justify-content:center;height:44px;padding:6px;background:#fff;border:none;border-radius:9px;text-decoration:none;cursor:pointer;transition:.24s ease}
+.tn-side-slot img{max-height:30px;max-width:100%;object-fit:contain}
+.tn-side-slot:hover{transform:translateY(-2px)}
+.tn-side-slot-open{background:rgba(56,189,248,.08);border:1.5px dashed rgba(125,211,252,.4);font-family:var(--disp);font-weight:700;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ice-2)}
+.tn-side-slot-open:hover{border-color:var(--ice);background:rgba(56,189,248,.16)}
+
+.tn-bubble{position:relative;z-index:3;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:24px;align-items:center;margin:52px 0 0;background:rgba(10,40,64,.55);border:1px solid rgba(125,211,252,.24);backdrop-filter:blur(14px);border-radius:22px;padding:24px 30px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.tn-bub-cell span{display:block;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px}
+.tn-bub-cell strong{font-family:var(--disp);font-weight:600;font-size:1rem;color:var(--frost);line-height:1.2;display:block}
+
+.tn-marquee{position:relative;z-index:3;margin-top:70px;background:var(--blue);color:#fff;padding:16px 0;overflow:hidden;transform:rotate(-1.2deg) scale(1.05);border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15)}
+.tn-track{display:flex;width:max-content;animation:tn-scroll 26s linear infinite}
+.tn-track-half{display:flex;white-space:nowrap;font-family:var(--disp);font-weight:600;font-size:1.1rem;letter-spacing:.05em}
+.tn-track-half span{padding-right:1rem;display:inline-flex;align-items:center}
+.tn-track-half i{color:var(--ice-2);font-style:normal;margin:0 .55rem}
+@keyframes tn-scroll{to{transform:translateX(-50%)}}
+
+.tn-what{position:relative;padding:130px 0 110px;background:linear-gradient(180deg,#020a12,#04202f);overflow:hidden}
+.tn-what-glow{position:absolute;inset:auto -10% -40% auto;width:70%;height:80%;z-index:0;background:radial-gradient(45% 55% at 70% 40%,rgba(0,93,166,.35),transparent 70%),radial-gradient(40% 50% at 90% 80%,rgba(56,189,248,.28),transparent 70%);filter:blur(20px)}
+.tn-what-h{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.98;font-size:clamp(2.3rem,5.4vw,4.4rem);color:#fff;margin:16px 0 0}
+.tn-what-h em{font-style:normal;color:var(--ice)}
+.tn-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+.tn-chips span{font-family:var(--disp);font-weight:600;font-size:.9rem;letter-spacing:.03em;color:var(--ice-2);background:rgba(56,189,248,.08);border:1.5px solid rgba(56,189,248,.28);padding:.55rem 1rem;border-radius:999px}
+.tn-what-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:50px}
+.tn-lede{font-family:var(--disp);font-weight:500;font-size:clamp(1.25rem,1.9vw,1.65rem);line-height:1.3;color:var(--frost);letter-spacing:-.01em;border-left:4px solid var(--ice);padding-left:24px}
+.tn-body{font-size:1.05rem;line-height:1.72;color:var(--muted)}
+
+.tn-stack{padding:110px 0;background:#020a12}
+.tn-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+.tn-card{border-radius:20px;padding:32px 26px 28px;transition:transform .3s ease,box-shadow .3s ease;border:1px solid rgba(125,211,252,.18)}
+.tn-card-blue{background:linear-gradient(160deg,rgba(0,93,166,.35),rgba(4,38,63,.6));box-shadow:0 20px 46px rgba(0,0,0,.4)}
+.tn-card-ice{background:linear-gradient(160deg,rgba(56,189,248,.16),rgba(4,38,63,.6));box-shadow:0 20px 46px rgba(0,0,0,.4)}
+.tn-card:hover{transform:translateY(-8px);box-shadow:0 0 0 1px rgba(56,189,248,.4),0 28px 60px rgba(0,93,166,.4)}
+.tn-card-n{font-family:var(--disp);font-size:.85rem;font-weight:700;letter-spacing:.14em;color:var(--ice)}
+.tn-card h3{font-family:var(--disp);font-weight:600;font-size:1.35rem;margin:14px 0 12px;letter-spacing:-.01em;color:#fff}
+.tn-card p{font-size:.97rem;line-height:1.66;color:var(--muted)}
+
+.tn-sponsors{padding:110px 0;background:linear-gradient(180deg,#020a12,#04202f)}
+.tn-sponsors-lede{max-width:640px;margin:20px 0 0;font-size:1.05rem;line-height:1.6;color:var(--muted)}
+.tn-sponsor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.tn-sponsor-card{display:flex;flex-direction:column;align-items:center;gap:16px;background:rgba(10,40,64,.5);border:1px solid rgba(125,211,252,.2);border-radius:20px;padding:24px 18px;transition:transform .3s ease,box-shadow .3s ease}
+.tn-sponsor-card:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(56,189,248,.4),0 22px 50px rgba(0,93,166,.35)}
+.tn-sponsor-openbtn{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;background:none;border:none;padding:0;cursor:pointer;font-family:inherit}
+.tn-sponsor-logo{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1/1;background:#fff;border-radius:14px}
+.tn-sponsor-logo img{max-height:80%;max-width:80%;object-fit:contain}
+.tn-sponsor-logo-open{background:rgba(56,189,248,.06);border:1.5px dashed rgba(125,211,252,.4)}
+.tn-sponsor-logo-open span{font-family:var(--disp);font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ice-2)}
+.tn-sponsor-link{font-family:var(--disp);font-weight:700;font-size:.86rem;color:var(--ice);text-decoration:none;text-align:center;transition:.2s}
+.tn-sponsor-card:hover .tn-sponsor-link{color:var(--ice-2)}
+
+.tn-reserve{background:#020a12;padding:110px 0}
+.tn-reserve-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.tn-reserve-copy p{color:rgba(220,234,245,.72);font-size:1.05rem;line-height:1.7;margin-top:22px}
+.tn-reserve-copy strong{color:var(--ice)}
+.tn-reserve-copy .tn-small{font-size:.95rem;color:rgba(220,234,245,.5)}
+.tn-badge-row{display:flex;align-items:center;gap:12px;margin-top:32px;flex-wrap:wrap}
+.tn-badge-row span{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.26);padding:.55rem 1rem;border-radius:999px}
+.tn-badge-row i{color:var(--ice);font-style:normal;font-weight:700}
+.tn-form-card{background:rgba(10,40,64,.55);border:1px solid rgba(125,211,252,.24);backdrop-filter:blur(14px);border-radius:24px;padding:40px 36px;box-shadow:0 40px 90px rgba(0,0,0,.5)}
+.tn-form-card h3{font-family:var(--disp);font-weight:600;font-size:1.7rem;color:#fff;letter-spacing:-.02em}
+.tn-form-note{font-size:.88rem;color:var(--ice);font-weight:700;margin:8px 0 26px}
+.tn-form-card label{display:block;margin-bottom:16px;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tn-form-card label b{color:var(--o)}
+.tn-form-card input,.tn-form-card select{width:100%;margin-top:8px;padding:.9rem 1rem;font-family:var(--body);font-size:1rem;font-weight:500;color:var(--frost);text-transform:none;letter-spacing:0;background:rgba(2,10,18,.6);border:1.5px solid rgba(125,211,252,.2);border-radius:12px;transition:.2s ease;outline:none}
+.tn-form-card input::placeholder{color:rgba(159,184,204,.5)}
+.tn-form-card input:focus,.tn-form-card select:focus{border-color:var(--ice);background:rgba(2,10,18,.85);box-shadow:0 0 0 4px rgba(56,189,248,.14)}
+.tn-form-card select option{background:#04202f;color:var(--frost)}
+.tn-form-card small{display:block;margin-top:7px;font-size:.75rem;font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted)}
+.tn-err{background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.4);color:#ffb59a;font-size:.9rem;font-weight:600;padding:.8rem 1rem;border-radius:12px;margin-bottom:16px}
+.tn-fine{margin-top:14px;font-size:.78rem;color:var(--muted);text-align:center;line-height:1.5}
+.tn-success{text-align:left}
+.tn-success-mark{width:56px;height:56px;border-radius:50%;background:var(--ice);color:#03151f;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;margin-bottom:20px;animation:tn-pop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes tn-pop{from{transform:scale(0)}}
+.tn-success h3{font-family:var(--disp);font-weight:600;font-size:1.6rem;color:#fff}
+.tn-success p{margin-top:12px;color:var(--muted);line-height:1.65}
+.tn-success ol{margin:22px 0 18px;padding-left:20px}
+.tn-success li{margin-bottom:12px;color:var(--muted);line-height:1.6}
+.tn-success li strong{color:var(--frost)}
+.tn-success .tn-small{font-size:.82rem}
+
+.tn-host{padding:110px 0;background:linear-gradient(180deg,#04202f,#020a12)}
+.tn-host-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.tn-host-copy p{margin-top:20px;font-size:1.05rem;line-height:1.72;color:var(--muted)}
+.tn-host-line{font-family:var(--disp);font-weight:600;font-size:1.3rem;color:var(--frost);border-left:4px solid var(--o);padding-left:20px;line-height:1.35}
+.tn-host-panel{position:relative;overflow:hidden;background:rgba(10,40,64,.6);border:1px solid rgba(125,211,252,.24);border-radius:26px;padding:42px 36px;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.tn-panel-glow{position:absolute;inset:auto -20% -40% auto;width:80%;height:70%;background:radial-gradient(50% 60% at 60% 50%,rgba(56,189,248,.4),transparent 72%);filter:blur(16px)}
+.tn-stat{position:relative;z-index:1;display:flex;align-items:baseline;gap:18px;padding:18px 0;border-bottom:1px solid rgba(125,211,252,.14)}
+.tn-stat strong{font-family:var(--disp);font-weight:700;font-size:2.4rem;line-height:1;color:var(--ice);letter-spacing:-.03em;min-width:96px}
+.tn-stat:last-of-type{border-bottom:none}
+.tn-stat span{font-size:.95rem;line-height:1.4;color:var(--muted);font-weight:500}
+.tn-panel-tags{position:relative;z-index:1;display:flex;gap:8px;margin-top:26px;flex-wrap:wrap}
+.tn-panel-tags span{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.24);padding:.5rem .85rem;border-radius:999px}
+
+.tn-faq{padding:110px 0;background:#020a12}
+.tn-faq-list{margin-top:44px;border-top:1px solid rgba(125,211,252,.16)}
+.tn-faq-row{border-bottom:1px solid rgba(125,211,252,.16)}
+.tn-faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;background:none;border:none;cursor:pointer;padding:26px 0;text-align:left;font-family:var(--disp);font-weight:600;font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--frost);letter-spacing:-.01em;transition:color .2s}
+.tn-faq-q:hover{color:var(--ice)}
+.tn-faq-plus{position:relative;width:18px;height:18px;flex-shrink:0}
+.tn-faq-plus:before,.tn-faq-plus:after{content:"";position:absolute;background:var(--ice);border-radius:2px;transition:transform .3s ease}
+.tn-faq-plus:before{top:8px;left:0;width:18px;height:2px}
+.tn-faq-plus:after{left:8px;top:0;width:2px;height:18px}
+.tn-faq-open .tn-faq-plus:after{transform:rotate(90deg)}
+.tn-faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.7,.2,1)}
+.tn-faq-open .tn-faq-a{max-height:360px}
+.tn-faq-a p{padding:0 60px 28px 0;font-size:1.02rem;line-height:1.72;color:var(--muted)}
+
+.tn-final{position:relative;background:linear-gradient(180deg,#04202f,#020a12);padding:120px 0;text-align:center;overflow:hidden}
+.tn-final h2{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.98;font-size:clamp(2.6rem,6.4vw,5.4rem);color:#fff}
+.tn-final em{font-style:normal;color:var(--ice)}
+.tn-final p{margin:24px 0 36px;font-size:1.1rem;color:var(--muted)}
+
+.tn-bar{position:fixed;left:16px;right:16px;bottom:16px;z-index:70;display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(4,30,48,.92);border:1px solid rgba(125,211,252,.3);backdrop-filter:blur(10px);border-radius:999px;padding:.7rem .7rem .7rem 1.4rem;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:translateY(140%);opacity:0;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .35s;max-width:520px;margin:0 auto}
+.tn-bar-in{transform:none;opacity:1}
+.tn-bar span{font-size:.9rem;color:var(--muted);font-weight:600}
+.tn-bar strong{color:var(--ice);font-family:var(--disp);font-size:1.15rem}
+
+/* MODAL */
+.tn-modal{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:24px}
+.tn-modal-scrim{position:absolute;inset:0;background:rgba(2,8,16,.8);backdrop-filter:blur(4px);animation:tn-fade .25s ease}
+@keyframes tn-fade{from{opacity:0}}
+.tn-modal-card{position:relative;z-index:1;width:100%;max-width:720px;max-height:88vh;overflow-y:auto;background:linear-gradient(180deg,#06263d,#04202f);border:1px solid rgba(125,211,252,.3);border-radius:24px;padding:40px;box-shadow:0 40px 120px rgba(0,0,0,.6);animation:tn-modal-in .32s cubic-bezier(.2,.9,.3,1)}
+@keyframes tn-modal-in{from{opacity:0;transform:translateY(24px) scale(.98)}}
+.tn-modal-x{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(125,211,252,.25);background:rgba(2,10,18,.6);color:var(--frost);font-size:1rem;cursor:pointer;transition:.2s}
+.tn-modal-x:hover{background:var(--o);color:#fff;border-color:var(--o);transform:rotate(90deg)}
+.tn-modal-h{font-family:var(--disp);font-weight:600;font-size:clamp(1.5rem,3vw,2.1rem);color:#fff;letter-spacing:-.02em;margin:10px 0 0}
+.tn-modal-price{display:flex;align-items:baseline;gap:12px;margin:18px 0 4px;padding:14px 20px;background:rgba(2,10,18,.6);border:1px solid rgba(125,211,252,.2);border-radius:16px;width:fit-content}
+.tn-modal-price strong{font-family:var(--disp);font-weight:700;font-size:2.2rem;color:var(--ice);line-height:1}
+.tn-modal-price span{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tn-modal-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:24px}
+.tn-modal-colh{font-family:var(--disp);font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.tn-modal-colh-blue{color:var(--ice)}
+.tn-modal-colh-ice{color:var(--ice-2)}
+.tn-modal-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.tn-modal-list li{position:relative;padding-left:24px;font-size:.96rem;line-height:1.5;color:var(--txt)}
+.tn-modal-list li:before{content:"❯";position:absolute;left:0;top:1px;color:var(--ice);font-size:.75rem}
+.tn-modal-contact{margin-top:28px;padding-top:22px;border-top:1px solid rgba(125,211,252,.16)}
+.tn-modal-contact-label{font-size:.95rem;color:var(--muted);margin-bottom:14px;font-weight:600}
+.tn-modal-contact-row{display:flex;flex-wrap:wrap;gap:10px}
+.tn-modal-btn{display:inline-flex;align-items:center;font-family:var(--disp);font-weight:600;font-size:.92rem;color:var(--frost);text-decoration:none;background:rgba(2,10,18,.6);border:1.5px solid rgba(125,211,252,.22);border-radius:999px;padding:.72rem 1.2rem;transition:.2s}
+.tn-modal-btn:hover{border-color:var(--ice);transform:translateY(-2px)}
+.tn-modal-btn-primary{background:var(--o);color:#fff;border-color:var(--o)}
+.tn-modal-btn-primary:hover{background:var(--o-deep);border-color:var(--o-deep)}
+
+@media(max-width:900px){
+.tn-hero{padding:130px 0 0}
+.tn-hero-grid{grid-template-columns:1fr;gap:30px;align-items:start}
+.tn-hero-main{justify-content:flex-start}
+.tn-brand-panel{max-width:360px}
+.tn-bubble{grid-template-columns:1fr 1fr;gap:18px;padding:22px 20px;margin-top:38px}
+.tn-flake-10,.tn-flake-11,.tn-flake-12,.tn-flake-13,.tn-flake-14,.tn-flake-15,.tn-flake-16,.tn-flake-17{display:none}
+.tn-marquee{margin-top:50px}
+.tn-what{padding:80px 0 70px}
+.tn-what-grid{grid-template-columns:1fr;gap:24px}
+.tn-stack{padding:80px 0}
+.tn-cards{grid-template-columns:1fr;gap:14px}
+.tn-sponsors{padding:80px 0}
+.tn-sponsor-grid{grid-template-columns:1fr 1fr;gap:14px}
+.tn-reserve{padding:80px 0}
+.tn-reserve-grid{grid-template-columns:1fr;gap:40px}
+.tn-form-card{padding:30px 22px}
+.tn-host{padding:80px 0}
+.tn-host-grid{grid-template-columns:1fr;gap:40px}
+.tn-faq{padding:80px 0}
+.tn-faq-a p{padding-right:0}
+.tn-final{padding:80px 0}
+.tn-modal-card{padding:28px 20px}
+.tn-modal-cols{grid-template-columns:1fr;gap:20px}
+}
+@media(prefers-reduced-motion:reduce){
+.tn-reveal{opacity:1;transform:none;transition:none}
+.tn-ice,.tn-aurora,.tn-sheen,.tn-flake,.tn-track,.tn-h1 em,.tn-beams,.tn-streak{animation:none}
+.tn-snow{display:none}
+}
+
+/* seat counter */
+.tn-seatcount{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);border-radius:999px;padding:.6rem 1.1rem;font-family:var(--body)}
+.tn-seatcount .dot{width:9px;height:9px;border-radius:50%;background:#37e39a;box-shadow:0 0 10px #37e39a;animation:tn-pulse 2s ease-in-out infinite}
+@keyframes tn-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.tn-seatcount strong{font-family:var(--disp);color:var(--frost);font-size:1rem;font-weight:600}
+.tn-seatcount span{color:var(--muted);font-size:.85rem;font-weight:600}
+</style>
+</head>
+<body>
+<nav class="pt-nav"><div class="pt-nav-inner">
+  <a href="index.html" class="pt-logo" aria-label="ProyTech home"><img src="/proytechlogo.png" alt="ProyTech" class="pt-logo-img"></a>
+  <div class="pt-nav-links">
+    <a href="lenders.html">Lenders</a>
+    <a href="realtors.html">Realtors</a>
+    <a href="businesses.html">Local Business</a>
+    <a href="suite.html">Business Suite</a>
+    <a href="events.html" class="tn-navon">Events</a>
+  </div>
+  <div class="pt-nav-cta"><a class="pt-btn pt-btn-ghost" href="index.html#pricing">Pricing</a><a class="pt-btn pt-btn-primary" href="events.html">Events</a></div>
+  <button class="pt-burger" aria-label="Menu" onclick="this.closest('.pt-nav-inner').classList.toggle('open')"><span></span></button>
+  <div class="pt-drop">
+    <a href="lenders.html">Lenders</a><a href="realtors.html">Realtors</a><a href="businesses.html">Local Business</a><a href="suite.html">Business Suite</a><a href="events.html">Events</a><a href="index.html#pricing">Pricing</a>
+  </div>
+</div></nav>
+
+<main class="tn">
+  <!-- HERO -->
+  <section class="tn-hero">
+    <div class="tn-ice"></div><div class="tn-beams"></div><div class="tn-cracks"></div>
+    <div class="tn-aurora"></div><div class="tn-sheen"></div><div class="tn-streak"></div>
+    <div class="tn-snow" aria-hidden="true"><span class="tn-flake tn-flake-0"></span><span class="tn-flake tn-flake-1"></span><span class="tn-flake tn-flake-2"></span><span class="tn-flake tn-flake-3"></span><span class="tn-flake tn-flake-4"></span><span class="tn-flake tn-flake-5"></span><span class="tn-flake tn-flake-0"></span><span class="tn-flake tn-flake-1"></span><span class="tn-flake tn-flake-2"></span><span class="tn-flake tn-flake-3"></span><span class="tn-flake tn-flake-4"></span><span class="tn-flake tn-flake-5"></span><span class="tn-flake tn-flake-0"></span><span class="tn-flake tn-flake-1"></span><span class="tn-flake tn-flake-2"></span><span class="tn-flake tn-flake-3"></span><span class="tn-flake tn-flake-4"></span><span class="tn-flake tn-flake-5"></span></div>
+    <div class="tn-vignette"></div>
+    <div class="tn-hero-inner">
+      <div class="tn-hero-grid">
+        <div class="tn-hero-main">
+          <div class="tn-eyebrow"><i class="tn-puck"></i> Suite Night · Thunder Opening Night · October 17, 2026</div>
+          <h1 class="tn-h1">Business Networking<br><em>Done Different.</em></h1>
+          <p class="tn-hero-sub">A private suite for the Thunder's opening faceoff. A curated room of Wichita business owners, catered, with the game all night. This is what networking should feel like.</p>
+          <div class="tn-seatcount"><i class="dot"></i><strong id="seatCount">25 of 25 seats</strong><span>available</span></div>
+          <div class="tn-hero-cta">
+            <button class="tn-btn tn-btn-orange" onclick="scrollToForm()">Reserve your seat</button>
+            <div class="tn-seat-pill"><strong>$50</strong><span>a seat<br>in the suite</span></div>
+          </div>
+        </div>
+        <aside class="tn-side">
+          <div class="tn-glass tn-brand-panel">
+            <p class="tn-glass-label">Brought to you by</p>
+            <div class="tn-brandstack">
+              <a class="tn-brand-primary" href="https://getproytech.com" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech"></a>
+              <a class="tn-brand-secondary" href="https://gvonflue.vercel.app" aria-label="GVonFlue Real Estate"><img src="/logos/gvonflue-logo.png" alt="GVonFlue Real Estate"></a>
+            </div>
+            <p class="tn-glass-label tn-glass-label-sp">Sponsors</p>
+            <div class="tn-side-sponsors">
+              <button class="tn-side-slot tn-side-slot-open" onclick="openSponsor()">Open</button>
+              <button class="tn-side-slot tn-side-slot-open" onclick="openSponsor()">Open</button>
+              <button class="tn-side-slot tn-side-slot-open" onclick="openSponsor()">Open</button>
+              <button class="tn-side-slot tn-side-slot-open" onclick="openSponsor()">Open</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="tn-bubble">
+        <div class="tn-bub-cell"><span>Where</span><strong>INTRUST Bank Arena</strong></div>
+        <div class="tn-bub-cell"><span>Puck drop</span><strong>6:05 PM</strong></div>
+        <div class="tn-bub-cell"><span>When</span><strong>Sat · Oct 17</strong></div>
+        <div class="tn-bub-cell"><span>A seat</span><strong>$50 · covers the night</strong></div>
+      </div>
+    </div>
+    <div class="tn-marquee"><div class="tn-track">
+      <div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#10052;</i></span><span>OPENING NIGHT<i>&#10052;</i></span><span>35TH SEASON<i>&#10052;</i></span><span>PRIVATE SUITE<i>&#10052;</i></span><span>PUCK DROP 6:05<i>&#10052;</i></span><span>THE THUNDER<i>&#10052;</i></span></div><div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#10052;</i></span><span>OPENING NIGHT<i>&#10052;</i></span><span>35TH SEASON<i>&#10052;</i></span><span>PRIVATE SUITE<i>&#10052;</i></span><span>PUCK DROP 6:05<i>&#10052;</i></span><span>THE THUNDER<i>&#10052;</i></span></div>
+    </div></div>
+  </section>
+
+  <!-- WHAT THIS IS -->
+  <section class="tn-what">
+    <div class="tn-what-glow"></div>
+    <div class="tn-wrap">
+      <span class="tn-kicker tn-reveal">01 &middot; What this is</span>
+      <h2 class="tn-what-h tn-reveal">Business networking,<br><em>at center ice.</em></h2>
+      <div class="tn-chips tn-reveal"><span>Private suite</span><span>Curated room</span><span>Opening night</span><span>No pitch</span></div>
+      <div class="tn-what-grid">
+        <p class="tn-lede tn-reveal">The best rooms in this city do not happen at a conference table. They happen when the right people share a night worth remembering.</p>
+        <p class="tn-body tn-reveal">So we took a private suite for the Thunder's opening night and filled it with Wichita business owners and leaders. One night, a great game, catered food, and a small room of people actually worth knowing. No pitch. No pressure. Just the kind of connection that turns into real business three months later.<br><br>Opening night. 35th season. A room that gets it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE STACK -->
+  <section class="tn-stack">
+    <div class="tn-wrap">
+      <span class="tn-kicker tn-kicker-ice tn-reveal">02 &middot; What you get</span>
+      <h2 class="tn-h2 tn-h2-light tn-reveal">Everything in the suite.</h2>
+      <div class="tn-cards">
+        <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">01</span><h3>A private suite for opening night</h3><p>Watch the Thunder drop the puck on their 35th season from a private suite at INTRUST Bank Arena. Your seat, your view, all night.</p></article>
+        <article class="tn-card tn-reveal tn-card-ice"><span class="tn-card-n">02</span><h3>A room worth being in</h3><p>A curated group of Wichita business owners and leaders. Not a mixer. A small room of people actually worth knowing, with a hockey game as the backdrop.</p></article>
+        <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">03</span><h3>Real connection, zero pressure</h3><p>One night, good people, great hockey. No pitch, no name-tag shuffle. Just conversations that turn into something later.</p></article>
+        <article class="tn-card tn-reveal tn-card-ice"><span class="tn-card-n">04</span><h3>Catered in the suite</h3><p>Food and drinks handled so you can focus on the room and the game.</p></article>
+        <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">05</span><h3>Captured on camera</h3><p>Our videographer is in the suite all night. You leave with content, not just a memory.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section class="tn-sponsors">
+    <div class="tn-wrap">
+      <span class="tn-kicker tn-kicker-ice tn-reveal">Put your brand on the ice</span>
+      <h2 class="tn-h2 tn-reveal">Sponsor the night.</h2>
+      <p class="tn-sponsors-lede tn-reveal">Get your brand in front of a curated room of Wichita business owners, and on every piece of promotion leading up to opening night. Four spots.</p>
+      <div class="tn-sponsor-grid">
+        <div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVE -->
+  <section class="tn-reserve" id="reserve">
+    <div class="tn-wrap">
+      <div class="tn-reserve-grid">
+        <div class="tn-reserve-copy tn-reveal">
+          <span class="tn-kicker tn-kicker-ice">03 &middot; Reserve</span>
+          <h2 class="tn-h2 tn-h2-light">Grab your seat.</h2>
+          <p>Straight up, before you type anything: <strong>$50 reserves your seat</strong> in the suite for opening night. That covers the suite, the catered food, and the game.</p>
+          <p class="tn-small">You are not paying on this page. Fill this out, I text you to confirm the seat and send a simple payment link. The seat locks once payment is in.</p>
+          <div class="tn-badge-row"><span>Reserve</span><i>&rarr;</i><span>I text you</span><i>&rarr;</i><span>Pay &middot; seat locked</span></div>
+        </div>
+        <div class="tn-form-card tn-reveal">
+          <div id="formWrap">
+            <form id="reserveForm" novalidate>
+              <h3>Reserve your seat</h3>
+              <p class="tn-form-note">$50 a seat &middot; payment comes by text</p>
+              <label>Full name <b>*</b><input name="name" placeholder="Jordan Reyes"></label>
+              <label>Email <b>*</b><input name="email" type="email" placeholder="you@email.com"></label>
+              <label>Phone <b>*</b><input name="phone" type="tel" placeholder="316.555.0134"><small>This is how I confirm your seat.</small></label>
+              <label>Business<input name="business" placeholder="Your company"></label>
+              <label>What do you do? <b>*</b>
+                <select name="role">
+                  <option value="">Pick one</option>
+                  <option>Business owner</option><option>Executive / Leadership</option><option>Realtor</option><option>Lender / Finance</option><option>Other</option>
+                </select>
+              </label>
+              <label>How many seats?
+                <select name="seats">
+                  <option value="">Pick one</option>
+                  <option>1 seat</option><option>2 seats</option><option>3 seats</option><option>4+ (I'll bring a group)</option>
+                </select>
+              </label>
+              <label>Anything I should know?<input name="note" placeholder="Optional"></label>
+              <div id="formErr" class="tn-err" style="display:none"></div>
+              <button class="tn-btn tn-btn-orange tn-btn-block" type="submit" id="submitBtn">Reserve my seat</button>
+              <p class="tn-fine">Reserving doesn't charge you. I text to confirm first.</p>
+            </form>
+          </div>
+          <div id="successWrap" class="tn-success" style="display:none">
+            <div class="tn-success-mark">&#10003;</div>
+            <h3>Seat held. Watch your phone.</h3>
+            <p id="successName">You're on the list. Here's what's next.</p>
+            <ol>
+              <li><strong>I text you.</strong> From my real number, usually within a few hours.</li>
+              <li><strong>I send a payment link.</strong> $50 reserves your seat.</li>
+              <li><strong>Payment lands, seat locks.</strong> Full details a few days out.</li>
+            </ol>
+            <p class="tn-small">Don't hear from me by tomorrow? Text 901.335.3905.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOST -->
+  <section class="tn-host">
+    <div class="tn-wrap">
+      <div class="tn-host-grid">
+        <div class="tn-host-copy tn-reveal">
+          <span class="tn-kicker">04 &middot; Who's hosting</span>
+          <h2 class="tn-h2">The guy who shows up.</h2>
+          <p>I'm Garrett Von Flue. REALTOR&reg; with Real Broker LLC, co-CEO of ProyTech, and the guy who'd rather build a room than rent one.</p>
+          <p>Suite Night started at the ballpark and it's become the thing I'm proudest of, real rooms of real people who leave actually knowing each other. This one trades the diamond for the ice, and opening night is the perfect stage for it.</p>
+          <p class="tn-host-line">No pitch. Even if we never work together.</p>
+        </div>
+        <div class="tn-host-panel tn-reveal">
+          <div class="tn-panel-glow"></div>
+          <div class="tn-stat"><strong>25</strong><span>seats in the suite</span></div>
+          <div class="tn-stat"><strong>1</strong><span>private suite, opening night</span></div>
+          <div class="tn-stat"><strong>35th</strong><span>Thunder season faceoff</span></div>
+          <div class="tn-panel-tags"><span>Real Broker LLC</span><span>ProyTech</span><span>Suite Night</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="tn-faq">
+    <div class="tn-wrap">
+      <span class="tn-kicker tn-reveal">05 &middot; Before you ask</span>
+      <h2 class="tn-h2 tn-reveal">The honest answers.</h2>
+      <div class="tn-faq-list tn-reveal" id="faqList">
+        <div class="tn-faq-row tn-faq-open"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>What is this, exactly?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Suite Night is a private-suite networking night at a Wichita game. This one is the Thunder's opening night on October 17, 2026. A small, curated room of business owners and leaders, catered, with the game from the suite.</p></div></div>
+        <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>What does a seat cost?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>A seat in the suite is $50. That covers your spot for the whole night, the suite, the catered food, and the game. You will see the exact amount before you submit anything.</p></div></div>
+        <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Do I pay on this page?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>No. You reserve here, I text you to confirm your seat and send a simple payment link. The seat locks once payment is in. That is the only reason payment exists, so everyone who says yes actually shows up.</p></div></div>
+        <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Who is in the room?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Wichita business owners, executives, and a few of the people who quietly move this city. It is curated on purpose and kept small.</p></div></div>
+        <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>When is it?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>October 17, 2026 at INTRUST Bank Arena. Puck drops at 6:05 PM. Plan to arrive a little before for the room and the food.</p></div></div>
+        <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Can I bring my team?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Absolutely. Grab multiple seats when you reserve. Bringing a few key people to a room like this is one of the better moves you can make.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="tn-final">
+    <div class="tn-wrap tn-reveal">
+      <h2>Opening night.<br><em>Center ice.</em></h2>
+      <p>October 17, 2026 &middot; INTRUST Bank Arena</p>
+      <button class="tn-btn tn-btn-orange tn-btn-lg" onclick="scrollToForm()">Reserve your seat</button>
+    </div>
+  </section>
+
+  <!-- STICKY BAR -->
+  <div class="tn-bar" id="stickyBar"><span><strong>$50</strong> a seat &middot; Oct 17</span><button class="tn-btn tn-btn-orange tn-btn-sm" onclick="scrollToForm()">Reserve</button></div>
+
+  <!-- SPONSOR MODAL -->
+  <div class="tn-modal" id="sponsorModal" role="dialog" aria-modal="true" aria-label="Become a sponsor" style="display:none">
+    <div class="tn-modal-scrim" onclick="closeSponsor()"></div>
+    <div class="tn-modal-card">
+      <button type="button" class="tn-modal-x" onclick="closeSponsor()" aria-label="Close">&#10005;</button>
+      <span class="tn-kicker tn-kicker-ice">Become a sponsor</span>
+      <h3 class="tn-modal-h">Put your brand on the ice.</h3>
+      <div class="tn-modal-price"><strong>$250</strong><span>one sponsor spot &middot; includes 1 ticket</span></div>
+      <div class="tn-modal-cols">
+        <div class="tn-modal-col"><h4 class="tn-modal-colh tn-modal-colh-blue">What you get</h4><ul class="tn-modal-list">
+          <li>Your logo on the website</li><li>Your logo on every social post for this event</li><li>Your own dedicated shoutout post</li><li>1 ticket to Suite Night in the suite</li><li>Your brand featured inside the suite</li><li>Face time with a curated room of business owners</li>
+        </ul></div>
+        <div class="tn-modal-col"><h4 class="tn-modal-colh tn-modal-colh-ice">Why it works</h4><ul class="tn-modal-list">
+          <li>A small, high-level room, not a crowd</li><li>Weeks of promotion with your name on it</li><li>Opening night visibility, 35th season</li><li>You're in the room, not just on a banner</li>
+        </ul></div>
+      </div>
+      <div class="tn-modal-contact">
+        <p class="tn-modal-contact-label">Ready, or have questions? Reach me directly.</p>
+        <div class="tn-modal-contact-row">
+          <a class="tn-modal-btn tn-modal-btn-primary" href="tel:19013353905">Call or text &middot; 901-335-3905</a>
+          <a class="tn-modal-btn" href="https://www.instagram.com/gvonflue" target="_blank" rel="noopener">Instagram &middot; @gvonflue</a>
+          <a class="tn-modal-btn" href="https://www.facebook.com/GarrettVonFlue" target="_blank" rel="noopener">Facebook &middot; Garrett Von Flue</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmN-Ay_a19_I5qKMWGEDw4p9OLKPttyzVDrkQe2EF0oa3xZtU6d8TcctCsKLdRK-1L/exec";
+var WEB3FORMS_KEY = "e87c5fc0-d3e8-47e8-a1ab-5be73241a042";
+var SEATS_TOTAL = 25;
+
+function scrollToForm(){document.getElementById('reserve').scrollIntoView({behavior:'smooth'});}
+function openSponsor(){document.getElementById('sponsorModal').style.display='flex';}
+function closeSponsor(){document.getElementById('sponsorModal').style.display='none';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSponsor();});
+
+function toggleFaq(btn){
+  var row=btn.closest('.tn-faq-row');
+  var open=row.classList.contains('tn-faq-open');
+  document.querySelectorAll('.tn-faq-row').forEach(function(r){r.classList.remove('tn-faq-open');});
+  if(!open)row.classList.add('tn-faq-open');
+}
+
+/* scroll reveal */
+(function(){
+  var els=document.querySelectorAll('.tn-reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('tn-in');});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('tn-in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -60px'});
+  els.forEach(function(el){io.observe(el);});
+})();
+
+/* sticky bar */
+window.addEventListener('scroll',function(){
+  document.getElementById('stickyBar').classList.toggle('tn-bar-in', window.scrollY>700);
+},{passive:true});
+
+/* seat counter: reads taken from Apps Script ?thunderseats=1 -> {taken} ; falls back to full */
+(function(){
+  if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL.indexOf('PASTE_')===0)return;
+  fetch(APPS_SCRIPT_URL+'?thunderseats=1').then(function(r){return r.json();}).then(function(d){
+    var taken=(d&&typeof d.taken==='number')?d.taken:0;
+    var avail=Math.max(SEATS_TOTAL-taken,0);
+    var el=document.getElementById('seatCount');
+    if(el)el.textContent=avail+' of '+SEATS_TOTAL+' seats';
+  }).catch(function(){});
+})();
+
+/* form submit */
+document.getElementById('reserveForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=e.target, err=document.getElementById('formErr');
+  err.style.display='none';
+  var name=f.name.value.trim(),email=f.email.value.trim(),phone=f.phone.value.trim(),role=f.role.value;
+  if(!name||!email||!phone||!role){err.textContent='Name, email, phone and role are required.';err.style.display='block';return;}
+  var btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='Holding your seat...';
+  var payload={name:name,email:email,phone:phone,business:f.business.value.trim(),role:role,seats:f.seats.value,note:f.note.value.trim(),source:'thunder',submittedAt:new Date().toISOString()};
+  if(APPS_SCRIPT_URL&&APPS_SCRIPT_URL.indexOf('PASTE_')!==0){
+    fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).catch(function(){});
+  }
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.assign({access_key:WEB3FORMS_KEY,subject:'\ud83c\udfd2 New Thunder Suite Night Reservation',from_name:'Suite Night · Thunder Opening Night'},payload))})
+  .then(function(r){return r.json();}).then(function(data){
+    if(!data.success)throw new Error('fail');
+    document.getElementById('formWrap').style.display='none';
+    var s=document.getElementById('successWrap');s.style.display='block';
+    document.getElementById('successName').textContent="You're on the list, "+name.split(' ')[0]+". Here's what's next.";
+    s.scrollIntoView({behavior:'smooth',block:'center'});
+  }).catch(function(){
+    err.textContent="That didn't go through. Text me at 901.335.3905 and I'll hold the seat.";err.style.display='block';
+    btn.disabled=false;btn.textContent='Reserve my seat';
+  });
+});
+</script>
+</body>
+</html>
