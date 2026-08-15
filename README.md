@@ -1,49 +1,58 @@
-# ProyTech Website
+# Event tile backgrounds — getproytech.com/events
 
-Premium marketing site + real AI front-desk chatbot ("Ace") for realtors & lenders.
-Static `index.html` with one Vercel serverless function for the live Claude-powered chat.
+## Upload
+
+| From the zip | Goes to |
+|---|---|
+| `events.html` | repo root (replaces the existing one) |
+| `images/suite-night-*.webp` and `*.jpg` | `images/` |
+
+Static site, no build step — Vercel redeploys on commit.
+
+## What changed
+
+**Three CSS lines in `events.html`.** No markup changes at all — the existing
+`.ev-media-thunder`, `.ev-media-military` and `.ev-media-past` blocks already
+existed as flat gradients, so the photos slot straight in behind them.
+
+## The one decision worth knowing
+
+The photo sits **under** the existing gradient, not instead of it.
+
+Your headings are centred over that block, and both the Wind Surge sunset and
+the Thunder ice are brightest in exactly the middle where the text sits.
+Dropping the gradient for a raw photo would make white type disappear into the
+image. The gradients are the same colours as before, just eased back enough
+(≈70–85% opacity) to read the photo through them.
+
+Each background is a stack:
 
 ```
-proytech-site/
-├── index.html        ← the whole site (self-contained)
-├── api/
-│   └── chat.js        ← serverless function that powers Ace (calls Anthropic)
-├── vercel.json        ← minimal config + security headers
-├── robots.txt
-└── sitemap.xml
+tint gradient  →  photo  →  original solid gradient
 ```
 
-## Deploy in ~5 minutes
+The last layer is the original colour, so a slow connection shows what the page
+shows today rather than an empty block. Nothing regresses if an image 404s.
 
-**1. Push to GitHub**
-- Create a new repo (e.g. `proytech-site`)
-- Upload every file above, keeping the `api/` folder intact
+**The past tile is desaturated** (`filter:saturate(.55)`) so Wind Surge reads as
+over without the copy having to say so twice — "Sold out · done" already does
+that work once.
 
-**2. Import into Vercel**
-- vercel.com → **Add New → Project** → import the repo
-- Framework preset: **Other** (no build step needed) → **Deploy**
+## Sizes
 
-**3. Turn Ace on (required for the chatbot)**
-- In Vercel → your project → **Settings → Environment Variables**
-- Add: `ANTHROPIC_API_KEY` = your Anthropic key (a new/separate key from the CRM is fine)
-- **Redeploy** so the new variable takes effect
-- ⚠️ This is a **new** Vercel project, so it does NOT share the CRM's env vars — you must add the key here too.
+Your source PNGs were ~2 MB each — **6.5 MB for three tiles**, slow on a phone.
+These are 1200×800, 66–92 KB in WebP with JPEG fallbacks served via `image-set`,
+so browsers that can't do WebP get the JPEG with no markup change.
 
-**4. Point the domain**
-- Vercel → **Settings → Domains** → add `getproytech.com`
-- Update the DNS records at your registrar as Vercel instructs
+Total added: **~610 KB**, and only ~250 KB of that is what a modern browser
+actually downloads.
 
-That's it. The site is live and Ace is answering.
+## Worth checking after deploy
 
-## Notes
-
-- **Ace's model** is set at the top of `api/chat.js` (`MODEL`). Default is Haiku 4.5 (fast + cheap). Swap to `claude-sonnet-5` for richer conversation.
-- **Ace's brain** (offers, pricing, tone, rules) lives in `SYSTEM_PROMPT` in `api/chat.js` — edit that to change how Ace talks or what it knows.
-- Before deploy, opening `index.html` locally will show the full site, but Ace will say it "can't reach the server" — that's expected until it's live on Vercel with the key set.
-- **OG image:** add an `og-image.png` (1200×630) to the repo root for link previews. Referenced in `<head>`.
-- All prices shown are the **"starting at"** floors, matching the offering doc.
-
-## To edit later
-- Copy: search `index.html` for the headline / section you want.
-- Colors: all in the `:root` block at the top of `index.html` (`--cobalt`, `--orange`, etc.).
-- Ace: everything in `api/chat.js`.
+- The Military tile has bright white flag stripes across the top. The heading
+  sits centred so it should be clear, but if it ever reads thin, deepen the
+  first gradient stop from `.68` to about `.78`.
+- Tiles are 190px tall on desktop, 170px under 640px. The photos are 3:2, so
+  they crop top and bottom at that height — all three are composed with the
+  interesting part in the middle, so this is fine, but it's why they're not
+  taller.
