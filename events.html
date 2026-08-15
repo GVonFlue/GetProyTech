@@ -3,12 +3,147 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Events | ProyTech</title>
-<meta name="description" content="Suite Night and ProyTech events in Wichita. Private-suite networking nights done different."/>
-<meta property="og:title" content="ProyTech Events"/>
-<meta property="og:description" content="Private-suite networking nights in Wichita. Business networking done different."/>
+<title>Business Networking Events in Wichita | Suite Night by ProyTech</title>
+<meta name="description" content="Private-suite business networking nights in Wichita, Kansas. Suite Night at INTRUST Bank Arena and Equity Bank Park — twenty local business owners, one suite, catered. Free Military Suite Night for veterans and active duty."/>
+<link rel="canonical" href="https://getproytech.com/events"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+
+<meta property="og:title" content="Suite Night — Business Networking in Wichita"/>
+<meta property="og:description" content="Private-suite networking nights in Wichita. Twenty business owners, one suite, catered. Real rooms, real people."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://getproytech.com/events"/>
+<meta property="og:site_name" content="ProyTech"/>
+<meta property="og:locale" content="en_US"/>
+<!-- Without this a shared link unfurls as a grey box in Messenger and on
+     Facebook, which is where most Suite Night traffic comes from. -->
+<meta property="og:image" content="https://getproytech.com/images/suite-night-windsurge.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="800"/>
+<meta property="og:image:alt" content="A private suite overlooking the field at Equity Bank Park at sunset"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Suite Night — Business Networking in Wichita"/>
+<meta name="twitter:description" content="Twenty Wichita business owners, one private suite, catered. Networking done different."/>
+<meta name="twitter:image" content="https://getproytech.com/images/suite-night-windsurge.jpg"/>
+
+<meta name="geo.region" content="US-KS"/>
+<meta name="geo.placename" content="Wichita, Kansas"/>
+
+<!-- Event schema. This is what puts these in Google's event listings — the
+     rich results with date, venue and a link that sit above normal results.
+     Without it Google sees three cards and cannot tell they are events.
+     eventAttendanceMode and eventStatus are required for eligibility, not
+     optional. Dates are ISO 8601 with the Central Time offset; a bare date
+     gets interpreted as UTC and can show as the wrong day. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://getproytech.com/#org",
+      "name": "ProyTech",
+      "url": "https://getproytech.com",
+      "logo": "https://getproytech.com/images/proytechlogo.png",
+      "areaServed": { "@type": "City", "name": "Wichita", "containedInPlace": { "@type": "State", "name": "Kansas" } }
+    },
+    {
+      "@type": "BusinessEvent",
+      "name": "Suite Night at the Thunder",
+      "description": "A private suite for the Wichita Thunder's opening faceoff. A curated room of business owners, catered, with the game all night.",
+      "startDate": "2026-10-17T18:00:00-05:00",
+      "endDate": "2026-10-17T22:00:00-05:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "image": "https://getproytech.com/images/suite-night-thunder.jpg",
+      "url": "https://getproytech.com/suitenight.html",
+      "organizer": { "@id": "https://getproytech.com/#org" },
+      "location": {
+        "@type": "Place",
+        "name": "INTRUST Bank Arena",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "500 E Waterman St",
+          "addressLocality": "Wichita",
+          "addressRegion": "KS",
+          "postalCode": "67202",
+          "addressCountry": "US"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://getproytech.com/suitenight.html",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "USD",
+        "price": "60",
+        "validFrom": "2026-08-01T00:00:00-05:00"
+      }
+    },
+    {
+      "@type": "BusinessEvent",
+      "name": "Military Suite Night",
+      "description": "Free suite seats for active duty and veterans, drawn live. On the field for the anthem, catered, funded by local sponsors.",
+      "startDate": "2026-09-11T18:00:00-05:00",
+      "endDate": "2026-09-11T22:00:00-05:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "image": "https://getproytech.com/images/suite-night-military.jpg",
+      "url": "https://gvonflue.vercel.app/militarysuitenight",
+      "organizer": { "@id": "https://getproytech.com/#org" },
+      "location": {
+        "@type": "Place",
+        "name": "Equity Bank Park",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "300 S Sycamore St",
+          "addressLocality": "Wichita",
+          "addressRegion": "KS",
+          "postalCode": "67213",
+          "addressCountry": "US"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://gvonflue.vercel.app/militarysuitenight",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "USD",
+        "price": "0",
+        "validFrom": "2026-08-01T00:00:00-05:00"
+      }
+    },
+    {
+      "@type": "BusinessEvent",
+      "name": "Suite Night at the Wind Surge",
+      "description": "Twenty Wichita business owners, one suite, one night. The room that started it all.",
+      "startDate": "2026-08-12T18:00:00-05:00",
+      "endDate": "2026-08-12T22:00:00-05:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "image": "https://getproytech.com/images/suite-night-windsurge.jpg",
+      "url": "https://getproytech.com/events",
+      "organizer": { "@id": "https://getproytech.com/#org" },
+      "location": {
+        "@type": "Place",
+        "name": "Equity Bank Park",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "300 S Sycamore St",
+          "addressLocality": "Wichita",
+          "addressRegion": "KS",
+          "postalCode": "67213",
+          "addressCountry": "US"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://getproytech.com/events",
+        "availability": "https://schema.org/SoldOut",
+        "priceCurrency": "USD",
+        "price": "60"
+      }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -78,7 +213,16 @@ body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-seri
   background:radial-gradient(75% 60% at 50% 55%,rgba(0,1,16,.58),rgba(0,1,16,.18) 70%,transparent 100%)}
 .ev-media h3{text-shadow:0 2px 10px rgba(0,1,16,.65),0 1px 3px rgba(0,1,16,.5)}
 .ev-media .ev-media-sub{text-shadow:0 1px 6px rgba(0,1,16,.7)}
+.ev-about{padding:0 20px 80px;max-width:760px}
+.ev-about h2{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:1.7rem;letter-spacing:-.01em;margin-bottom:14px}
+.ev-about p{color:var(--muted);font-size:16px;line-height:1.7;margin-bottom:14px}
+.ev-about strong{color:var(--ink);font-weight:600}
+.ev-about-cta a{color:var(--accent);font-weight:600;text-decoration:none}
+.ev-about-cta a:hover{text-decoration:underline}
 @media (max-width:640px){
+  .ev-about{padding:0 22px 56px}
+  .ev-about h2{font-size:1.4rem}
+  .ev-about p{font-size:15px}
   .ev-media{height:170px}
   /* 20px was the only side padding at any width. On a 390px phone the cards
      sat almost against the screen edge and the subhead ran off the right. */
@@ -140,7 +284,7 @@ body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-seri
 <header class="ev-head wrap">
   <div class="ev-eyebrow">ProyTech Presents</div>
   <h1 class="ev-h1">Suite Night <span class="accent">Events</span></h1>
-  <p class="ev-sub">Private-suite networking nights in Wichita. Real rooms, real people, business networking done different.</p>
+  <p class="ev-sub">Private-suite business networking nights in Wichita, Kansas. Real rooms, real people, business networking done different.</p>
 </header>
 
 <div class="wrap">
@@ -187,6 +331,20 @@ body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-seri
 
   </div>
 </div>
+
+<section class="wrap ev-about">
+  <h2>Business networking events in Wichita</h2>
+  <p>Suite Night is a private-suite networking night for Wichita business owners. Instead of a
+  ballroom and a name tag, it's twenty people in a suite at
+  <strong>Equity Bank Park</strong> or <strong>INTRUST Bank Arena</strong> — catered, with the
+  game on, for an evening. Realtors, lenders, contractors, insurance, home services: the room is
+  curated so you're not pitching the same three people you met last month.</p>
+  <p>Every event is hosted by ProyTech and funded by local sponsors, which is how
+  <strong>Military Suite Night</strong> stays free for active duty and veterans. If you run a
+  business in Wichita, Derby, Andover, Maize or Goddard and you'd rather build ten real
+  relationships than collect fifty cards, this is built for you.</p>
+  <p class="ev-about-cta"><a href="suitenight.html">Reserve a seat at the next one &rarr;</a></p>
+</section>
 
 <footer class="footer"><div class="wrap">
   <div class="fg">

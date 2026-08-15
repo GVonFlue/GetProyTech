@@ -1,43 +1,65 @@
-# Mobile spacing — events.html
+# Local SEO — events.html
 
-**Only `events.html` changed.** Images untouched.
+**Only `events.html` changed.** No new files.
 
-## What was wrong
+## Straight answer: there was almost none
 
-`.wrap` had `padding:0 20px` at **every** screen width — nothing ever increased
-it for phones. The grid collapsed to one column at 920px and that was the whole
-mobile treatment. So on a 390px screen the cards sat almost against the glass.
+The page had a title, a description and three Open Graph tags. Everything that
+actually surfaces an event in search was missing.
 
-The subhead was worse: `max-width:560px` does nothing on a screen narrower than
-560px, so it was only ever held in by that 20px wrapper. That's why "Real rooms,"
-ran off the right edge in your screenshot.
+## The big one — Event schema
 
-## What changed
+There was **no structured data at all**, so Google saw three styled cards and
+had no way to know they were events, when they were, or where.
 
-A proper `max-width:640px` block:
+Added `BusinessEvent` JSON-LD for all three, plus an `Organization` node they
+all reference. That's what makes a page eligible for Google's **event rich
+results** — the listings with date, venue and a link that appear above ordinary
+results for searches like "networking events wichita."
 
-| | Was | Now |
-|---|---|---|
-| Side padding | 20px | 22px |
-| Subhead | 17px, unconstrained | 15.5px, `max-width:100%`, tighter line-height |
-| H1 | `clamp(2.4rem, 5vw, 3.8rem)` | `clamp(2rem, 9vw, 2.6rem)` |
-| Header padding | 70px top | 44px |
-| Grid gap | 24px | 18px |
-| Card body | 22px | 18px |
-| Media padding | 26px | 20px 18px |
-| Card heading | 1.7rem | 1.45rem |
-| Badge | 14px inset | 12px, slightly smaller |
+Details that matter and are easy to get wrong:
 
-The grid `gap` matters more than it looks — once the layout is a single column
-it's the *vertical* space between cards, not just horizontal.
+- `eventAttendanceMode` and `eventStatus` are **required** for eligibility, not
+  optional extras.
+- Dates carry the Central offset (`-05:00`). A bare `2026-10-17` is read as UTC
+  and can display as the wrong day.
+- Real street addresses for both venues — this is the local signal.
+- Wind Surge is marked `SoldOut`, which is correct and better than removing it.
+  A past event with honest status still carries authority for the series.
 
-## Why the H1 changed
+**Verify after deploy:** paste the URL into Google's Rich Results Test. It'll
+show three valid events or tell you exactly what's wrong.
 
-`5vw` on a 390px phone computes to ~19.5px, so the clamp was always pinned at
-its 2.4rem floor. Switching to `9vw` lets it actually scale between 2rem and
-2.6rem instead of being a fixed size wearing a clamp.
+## Sharing
 
-## Worth checking
+There was **no `og:image`**, so every link you post unfurled as a grey box —
+including in Messenger and on Facebook, which is where most of your Suite Night
+traffic comes from. Added the image, dimensions, alt text, and a Twitter card.
 
-Desktop should be pixel-identical — every change is inside the 640px block, and
-the existing 920px rule that collapses the grid is untouched.
+## Also added
+
+- `<link rel="canonical">` — was missing entirely
+- A real title: *"Business Networking Events in Wichita | Suite Night by
+  ProyTech"* instead of *"Events | ProyTech"*, which was competing for nothing
+- A description that names both venues and the military night
+- `geo.region` / `geo.placename`
+- `max-image-preview:large` so the photos can appear in results
+
+## On-page copy
+
+Google needs words, not just cards. "Wichita" appeared **once** on the whole
+page. There's now a short section under the grid naming both venues, the
+surrounding towns (Derby, Andover, Maize, Goddard) and the trades you actually
+want in the room. Counts now: Wichita 8, networking 7, Equity Bank Park 3,
+INTRUST 2 — present without reading like keyword stuffing.
+
+## The one thing I did not fix
+
+**All three events share one URL.** Nothing can rank for "military networking
+night wichita" specifically because there's no page for it to rank.
+
+The Thunder night points at `suitenight.html`; the military night points at a
+`gvonflue.vercel.app` subdomain, which sends its authority to a different
+domain entirely. Giving each event its own page on getproytech.com — with its
+own schema, title and description — is worth more than everything above
+combined. Worth doing before October.
