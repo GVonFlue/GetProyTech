@@ -298,4 +298,5 @@ function onScroll(){var rect=showcase.getBoundingClientRect(),total=showcase.off
 if(matchMedia('(max-width:760px)').matches){setStage(0);var _mi=0;setInterval(function(){_mi=(_mi+1)%4;setStage(_mi);},4200);addEventListener('scroll',function(){if(prog)prog.style.width=(document.documentElement.scrollTop/(document.documentElement.scrollHeight-innerHeight)*100)+'%';},{passive:true});}
 else{addEventListener('scroll',onScroll,{passive:true});onScroll();}}
 else{addEventListener('scroll',function(){if(prog)prog.style.width=(document.documentElement.scrollTop/(document.documentElement.scrollHeight-innerHeight)*100)+'%';},{passive:true});}
-</script></body></html>
+</script><script defer src="/ace.js"></script>
+</body></html>

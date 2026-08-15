@@ -264,6 +264,18 @@ h1 .line{display:block;overflow:hidden}h1 .line span{display:block;transform:tra
   .marquee .track{font-size:18px;gap:30px}
 }
 
+
+.acehero{background:linear-gradient(180deg,#fff, #FBFAF8)}
+.acehero-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.acehero-copy h2{font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.05;margin:14px 0 0}
+.acehero-copy .sub{margin-top:16px}
+.ace-points{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.ace-points li{position:relative;padding-left:26px;font-size:15px;line-height:1.55;color:var(--muted)}
+.ace-points li b{color:var(--ink)}
+.ace-points li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;border-radius:4px;background:var(--indigo-soft);border:2px solid var(--indigo)}
+.ace-try{margin-top:22px;font-size:14px;color:var(--indigo);font-weight:600}
+@media(max-width:920px){.acehero-grid{grid-template-columns:1fr;gap:30px}}
+
 /* ===== Ace chat widget ===== */
 #aceLauncher{position:fixed;right:20px;bottom:20px;z-index:9998;display:flex;align-items:center;gap:10px;
   background:var(--sb);color:#fff;border:none;border-radius:100px;padding:13px 20px 13px 15px;cursor:pointer;
@@ -360,6 +372,25 @@ h1 .line{display:block;overflow:hidden}h1 .line span{display:block;transform:tra
   </div>
 </header>
 <div class="marquee"><div class="track"><span>Realtors</span><span>·</span><span>Loan officers</span><span>·</span><span>Local businesses</span><span>·</span><span>Home services</span><span>·</span><span>Contractors</span><span>·</span><span>Auto shops</span><span>·</span><span>Agencies</span><span>·</span><span>Realtors</span><span>·</span><span>Loan officers</span><span>·</span><span>Local businesses</span><span>·</span><span>Home services</span><span>·</span><span>Contractors</span><span>·</span><span>Auto shops</span><span>·</span><span>Agencies</span><span>·</span></div></div>
+
+
+<!-- ===== ACE INLINE DEMO (under hero) ===== -->
+<section class="section acehero" id="ace" style="padding-top:26px">
+  <div class="wrap acehero-grid">
+    <div class="acehero-copy">
+      <span class="eyebrow"><span class="ace-orb" style="width:16px;height:16px;display:inline-block;vertical-align:-3px;margin-right:7px"></span>Meet Ace</span>
+      <h2 class="serif">Every site we build<br>comes with an <em class="accent">AI front desk</em>.</h2>
+      <p class="sub">Ace answers your leads the second they land — day or night — books the appointment, and drops the lead into your pipeline. No more deals slipping through at 9 PM.</p>
+      <ul class="ace-points">
+        <li><b>Trained on your business.</b> Your services, your pricing, your offers — Ace knows them cold.</li>
+        <li><b>Speaks in your voice.</b> We tune it to your brand so it sounds like your best team member, not a robot.</li>
+        <li><b>Built into every website.</b> It is not an add-on. Every site we deliver ships with Ace already working.</li>
+      </ul>
+      <p class="ace-try">Try it now — this is Ace trained on <b>ProyTech</b>. Ask it anything. &rarr;</p>
+    </div>
+    <div class="acehero-chat"><div id="aceHero"></div></div>
+  </div>
+</section>
 
 <!-- ANIMATED PRODUCT SHOWCASE -->
 <section class="showcase" id="showcase"><div class="pin"><div class="show-grid">
@@ -746,4 +777,6 @@ else{addEventListener('scroll',function(){if(prog)prog.style.width=(document.doc
 })();
 </script>
 
+<script defer src="/ace.js"></script>
+<script>window.addEventListener("load",function(){ if(window.Ace) Ace.mountInline("aceHero"); });</script>
 </body></html>
