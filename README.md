@@ -1,42 +1,43 @@
-# Lighter gradients — events.html
+# Mobile spacing — events.html
 
-**Only `events.html` changed.** The images are already uploaded and untouched.
+**Only `events.html` changed.** Images untouched.
 
-## What moved
+## What was wrong
 
-Tints dropped from roughly **75% to 22–34%** — about a third of what they were.
-The photos now read as photos.
+`.wrap` had `padding:0 20px` at **every** screen width — nothing ever increased
+it for phones. The grid collapsed to one column at 920px and that was the whole
+mobile treatment. So on a 390px screen the cards sat almost against the glass.
 
-## How the text stays legible at that opacity
+The subhead was worse: `max-width:560px` does nothing on a screen narrower than
+560px, so it was only ever held in by that 20px wrapper. That's why "Real rooms,"
+ran off the right edge in your screenshot.
 
-The darkening moved off the whole picture and onto the heading:
+## What changed
 
-- **`.ev-media::after`** — a soft radial pool of shade centred behind the title,
-  fading to nothing at the edges. Invisible as a shape, but it keeps white type
-  readable on all three.
-- **`text-shadow`** on the heading and subtitle for the last bit of contrast.
+A proper `max-width:640px` block:
 
-That's what makes the low tint possible. Darkening the whole image to protect
-text in the middle is what buried the photos in the first place.
+| | Was | Now |
+|---|---|---|
+| Side padding | 20px | 22px |
+| Subhead | 17px, unconstrained | 15.5px, `max-width:100%`, tighter line-height |
+| H1 | `clamp(2.4rem, 5vw, 3.8rem)` | `clamp(2rem, 9vw, 2.6rem)` |
+| Header padding | 70px top | 44px |
+| Grid gap | 24px | 18px |
+| Card body | 22px | 18px |
+| Media padding | 26px | 20px 18px |
+| Card heading | 1.7rem | 1.45rem |
+| Badge | 14px inset | 12px, slightly smaller |
 
-Wind Surge desaturation eased from `.55` to `.7` — still visibly "past", but you
-can see the sunset now.
+The grid `gap` matters more than it looks — once the layout is a single column
+it's the *vertical* space between cards, not just horizontal.
 
-## If you want them lighter still
+## Why the H1 changed
 
-Each tile's tint is the first `linear-gradient` in its `background` stack:
+`5vw` on a 390px phone computes to ~19.5px, so the clamp was always pinned at
+its 2.4rem floor. Switching to `9vw` lets it actually scale between 2rem and
+2.6rem instead of being a fixed size wearing a clamp.
 
-```css
-.ev-media-thunder{background:
-  linear-gradient(160deg,rgba(0,93,166,.24),rgba(4,38,63,.34)),   /* ← this */
-  image-set(...),
-  linear-gradient(160deg,#005DA6,#04263f)}                        /* fallback */
-```
+## Worth checking
 
-Drop those two decimals toward `.10` for more photo. **Don't remove the line
-entirely** — the last gradient in each stack is the original flat colour and
-only shows if an image fails to load, so it isn't a substitute.
-
-Below about `.15` the Military tile gets difficult: the flag's white stripes sit
-right where "Military Suite Night" does. If you push it that far, deepen the
-`::after` pool from `.58` to about `.7` instead.
+Desktop should be pixel-identical — every change is inside the 640px block, and
+the existing 920px rule that collapses the grid is untouched.
