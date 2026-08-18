@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Client Onboarding — ProyTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1338DE; --blue-dk:#0F2CB4; --orange:#FB6926; --amber:#D97706;
+  --navy:#000110; --ink:#111528; --mute:#5A6478;
+  --paper:#F7F8FA; --card:#FFFFFF; --hair:#E2E5EC; --good:#137A46;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:16px/1.65 'Inter',system-ui,-apple-system,sans-serif;
+  padding:1.5rem 1rem 5rem; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto}
+
+/* ── frame: the ProyTech signature ── */
+.frame{
+  border:6px solid var(--blue); border-radius:22px;
+  background:var(--card); overflow:hidden;
+}
+.band{background:var(--navy);color:#fff;padding:1.6rem 1.9rem}
+.mark{font:700 1.3rem/1 'Space Grotesk',sans-serif;letter-spacing:-.01em}
+.mark span{color:var(--orange)}
+.band p{margin:.45rem 0 0;font:400 .82rem 'Space Mono',monospace;letter-spacing:.06em;color:#B9BECD}
+
+.pad{padding:1.9rem}
+h1{font:700 clamp(1.6rem,4vw,2.15rem)/1.12 'Space Grotesk',sans-serif;margin:0 0 .5rem;letter-spacing:-.02em}
+.lede{color:var(--mute);margin:0 0 .4rem;font-size:.97rem}
+.time{font:400 .8rem 'Space Mono',monospace;color:var(--blue);letter-spacing:.05em}
+
+/* ── progress ── */
+.prog{height:4px;background:var(--hair);border-radius:99px;overflow:hidden;margin:1.5rem 0 .5rem}
+.prog i{display:block;height:100%;width:0;background:var(--orange);transition:width .45s cubic-bezier(.22,.61,.36,1)}
+.stepno{font:400 .74rem 'Space Mono',monospace;color:var(--mute);letter-spacing:.1em;text-transform:uppercase}
+
+/* ── steps ── */
+.step{display:none;animation:in .35s cubic-bezier(.16,1,.3,1) both}
+.step.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+h2{font:700 1.3rem 'Space Grotesk',sans-serif;margin:1.4rem 0 .3rem;letter-spacing:-.01em}
+.sect-note{color:var(--mute);font-size:.9rem;margin:0 0 1.4rem}
+
+.f{margin-bottom:1.35rem}
+label.lab{display:block;font:600 .95rem 'Space Grotesk',sans-serif;margin-bottom:.3rem}
+.req{color:var(--orange)}
+.help{display:block;color:var(--mute);font-size:.85rem;margin:-.1rem 0 .5rem;line-height:1.5}
+input[type=text],input[type=url],textarea,select{
+  width:100%;font:400 .97rem 'Inter',sans-serif;color:var(--ink);
+  padding:.78rem .95rem;border:1px solid var(--hair);border-radius:10px;background:#fff;
+  transition:border-color .2s,box-shadow .2s;
+}
+textarea{min-height:120px;resize:vertical;line-height:1.6}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--blue);box-shadow:0 0 0 3px rgba(19,56,222,.12);outline:none;
+}
+input.bad,textarea.bad{border-color:var(--orange);box-shadow:0 0 0 3px rgba(251,105,38,.12)}
+.err{color:var(--orange);font-size:.83rem;margin-top:.3rem;display:none}
+.err.on{display:block}
+
+/* choices */
+.opt{
+  display:flex;gap:.7rem;align-items:flex-start;padding:.7rem .9rem;
+  border:1px solid var(--hair);border-radius:10px;margin-bottom:.5rem;cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.opt:hover{border-color:var(--blue)}
+.opt input{margin:.25rem 0 0;accent-color:var(--blue);flex:0 0 auto}
+.opt span{font-size:.94rem}
+.opt.sel{border-color:var(--blue);background:rgba(19,56,222,.04)}
+
+/* quote block */
+.quote{
+  border-left:3px solid var(--blue);background:var(--paper);
+  padding:1rem 1.2rem;border-radius:0 10px 10px 0;margin:0 0 1rem;
+  font-size:.95rem;line-height:1.7;color:var(--ink);
+}
+
+/* ── upload ── */
+.drop{
+  border:1.5px dashed var(--blue);border-radius:14px;background:var(--paper);
+  padding:1.4rem;text-align:center;cursor:pointer;
+  transition:background .2s,border-color .2s;
+}
+.drop:hover,.drop.over{background:rgba(19,56,222,.05);border-color:var(--blue-dk)}
+.drop b{display:block;font:600 .95rem 'Space Grotesk',sans-serif;color:var(--blue);margin-bottom:.2rem}
+.drop small{color:var(--mute);font-size:.82rem}
+.drop input[type=file]{display:none}
+.files{list-style:none;margin:.7rem 0 0;padding:0}
+.files li{
+  display:flex;align-items:center;gap:.7rem;padding:.6rem .8rem;
+  background:#fff;border:1px solid var(--hair);border-radius:9px;margin-bottom:.4rem;font-size:.87rem;
+}
+.files .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.files .sz{color:var(--mute);font:400 .78rem 'Space Mono',monospace;flex:0 0 auto}
+.files .rm{
+  flex:0 0 auto;border:0;background:none;cursor:pointer;color:var(--mute);
+  font-size:1.1rem;line-height:1;padding:0 .2rem;
+}
+.files .rm:hover{color:var(--orange)}
+.thumb{width:34px;height:34px;border-radius:6px;object-fit:cover;flex:0 0 auto;background:var(--hair)}
+
+/* ── nav ── */
+.nav{display:flex;gap:.7rem;align-items:center;margin-top:1.9rem;padding-top:1.4rem;border-top:1px solid var(--hair)}
+button.btn{
+  font:500 .8rem/1 'Space Mono',monospace;letter-spacing:.09em;text-transform:uppercase;
+  cursor:pointer;border:0;border-radius:999px;padding:.95rem 1.7rem;
+  background:var(--blue);color:#fff;transition:background .2s,transform .2s,opacity .2s;
+}
+button.btn:hover:not(:disabled){background:var(--blue-dk);transform:translateY(-1px)}
+button.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--hair)}
+button.ghost:hover:not(:disabled){border-color:var(--blue);color:var(--blue);background:transparent;}
+.spacer{flex:1}
+.save{font:400 .78rem 'Space Mono',monospace;color:var(--mute)}
+
+/* ── result ── */
+.result{display:none;text-align:center;padding:2.5rem 1rem}
+.result.on{display:block}
+.tick{
+  width:64px;height:64px;border-radius:50%;background:var(--good);color:#fff;
+  display:grid;place-items:center;margin:0 auto 1.2rem;font-size:1.9rem;
+}
+.result h2{margin:0 0 .5rem}
+.result p{color:var(--mute);max-width:44ch;margin:0 auto}
+.bar-err{
+  background:#FFF3F0;border-left:3px solid var(--orange);
+  padding:.9rem 1.1rem;border-radius:0 10px 10px 0;margin:1rem 0 0;
+  font-size:.9rem;display:none;text-align:left;
+}
+.bar-err.on{display:block}
+.foot{text-align:center;color:var(--mute);font-size:.78rem;margin-top:1.2rem}
+
+@media (max-width:560px){
+  body{padding:1rem .75rem 4rem}
+  .frame{border-width:4px;border-radius:16px}
+  .pad{padding:1.3rem}
+  .band{padding:1.3rem}
+  .nav{flex-wrap:wrap}
+  button.btn{flex:1;text-align:center;padding:.95rem 1rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="frame">
+
+  <div class="band">
+    <div class="mark">Proy<span>Tech</span></div>
+    <p id="bandSub">CLIENT ONBOARDING</p>
+  </div>
+
+  <div class="pad">
+
+    <div id="form">
+      <h1 id="title">Let's get your site finished.</h1>
+      <p class="lede" id="lede">A few details and a couple of photos. Everything goes straight to your project folder.</p>
+      <p class="time">About 5 minutes · your answers save as you go</p>
+
+      <div class="prog"><i id="bar"></i></div>
+      <p class="stepno"><span id="stepNow">1</span> of <span id="stepAll">7</span></p>
+
+      <!-- 1 TEAM -->
+      <section class="step on" data-step>
+        <h2>Your team</h2>
+        <p class="sect-note">Every person on your site gets their own direct line published, so visitors need to know who to call for what.</p>
+        <div class="f">
+          <label class="lab" for="chName">Charlene — full name <span class="req">*</span></label>
+          <span class="help">Spelled how you'd want it to appear on the website.</span>
+          <input type="text" id="chName" data-req data-key="charleneName" autocomplete="off">
+          <p class="err">We need this one.</p>
+        </div>
+        <div class="f">
+          <label class="lab" for="chTitle">Charlene — job title <span class="req">*</span></label>
+          <span class="help">Account Manager, Service Specialist, whatever fits what she actually does.</span>
+          <input type="text" id="chTitle" data-req data-key="charleneTitle" autocomplete="off">
+          <p class="err">We need this one.</p>
+        </div>
+        <div class="f">
+          <label class="lab" for="jnName">Jean — full name <span class="req">*</span></label>
+          <input type="text" id="jnName" data-req data-key="jeanName" autocomplete="off">
+          <p class="err">We need this one.</p>
+        </div>
+        <div class="f">
+          <label class="lab" for="jnTitle">Jean — job title <span class="req">*</span></label>
+          <input type="text" id="jnTitle" data-req data-key="jeanTitle" autocomplete="off">
+          <p class="err">We need this one.</p>
+        </div>
+      </section>
+
+      <!-- 2 PHOTOS -->
+      <section class="step" data-step>
+        <h2>Photos</h2>
+        <p class="sect-note">A plain background works best. A clear phone photo is completely fine — we handle the rest.</p>
+        <div class="f">
+          <label class="lab">Charlene's headshot <span class="req">*</span></label>
+          <div class="drop" data-drop="charlene">
+            <b>Choose a photo</b>
+            <small>or drag it here · JPG, PNG or HEIC</small>
+            <input type="file" accept="image/*,.heic,.heif" data-file="charlene">
+          </div>
+          <ul class="files" data-list="charlene"></ul>
+          <p class="err">A headshot for Charlene is needed.</p>
+        </div>
+        <div class="f">
+          <label class="lab">Jean's headshot <span class="req">*</span></label>
+          <div class="drop" data-drop="jean">
+            <b>Choose a photo</b>
+            <small>or drag it here · JPG, PNG or HEIC</small>
+            <input type="file" accept="image/*,.heic,.heif" data-file="jean">
+          </div>
+          <ul class="files" data-list="jean"></ul>
+          <p class="err">A headshot for Jean is needed.</p>
+        </div>
+        <div class="f">
+          <label class="lab">Anything else you'd like on the site</label>
+          <span class="help">Office, team shots, anything you're proud of. Optional.</span>
+          <div class="drop" data-drop="extra">
+            <b>Add photos</b><small>you can pick more than one</small>
+            <input type="file" accept="image/*,.heic,.heif,application/pdf" multiple data-file="extra">
+          </div>
+          <ul class="files" data-list="extra"></ul>
+        </div>
+      </section>
+
+      <!-- 3 LINKS -->
+      <section class="step" data-step>
+        <h2>Links</h2>
+        <p class="sect-note">These two go on the "Already a customer?" section so your clients can help themselves.</p>
+        <div class="f">
+          <label class="lab" for="payUrl">Farmers payment link <span class="req">*</span></label>
+          <span class="help">Where your customers go to pay a bill. It may be specific to your agency — worth grabbing from your agent dashboard rather than the general Farmers site.</span>
+          <input type="text" id="payUrl" data-req data-key="paymentUrl" placeholder="https://" autocomplete="off">
+          <p class="err">We need this one.</p>
+        </div>
+        <div class="f">
+          <label class="lab" for="claimUrl">Farmers claims link <span class="req">*</span></label>
+          <span class="help">Where your customers go to file a claim.</span>
+          <input type="text" id="claimUrl" data-req data-key="claimsUrl" placeholder="https://" autocomplete="off">
+          <p class="err">We need this one.</p>
+        </div>
+        <div class="f">
+          <label class="lab" for="fb">Social links</label>
+          <span class="help">Any you'd like on the site. Leave blank what you don't use.</span>
+          <input type="text" id="fb" data-key="facebook" placeholder="Facebook" style="margin-bottom:.5rem" autocomplete="off">
+          <input type="text" id="ig" data-key="instagram" placeholder="Instagram" style="margin-bottom:.5rem" autocomplete="off">
+          <input type="text" id="li" data-key="linkedin" placeholder="LinkedIn" style="margin-bottom:.5rem" autocomplete="off">
+          <input type="text" id="gb" data-key="googleProfile" placeholder="Google Business Profile" autocomplete="off">
+        </div>
+      </section>
+
+      <!-- 4 DOMAIN -->
+      <section class="step" data-step>
+        <h2>Your web address</h2>
+        <p class="sect-note">The site is live on a temporary address right now. This is what it becomes.</p>
+        <div class="f" data-group="domain">
+          <label class="lab">Which would you like? <span class="req">*</span></label>
+          <label class="opt"><input type="radio" name="domain" value="poppellinsurance.com"><span>poppellinsurance.com</span></label>
+          <label class="opt"><input type="radio" name="domain" value="poppellinsuranceagency.com"><span>poppellinsuranceagency.com</span></label>
+          <label class="opt"><input type="radio" name="domain" value="I already own one"><span>I already own one</span></label>
+          <label class="opt"><input type="radio" name="domain" value="Not sure — pick for me"><span>Not sure — pick the better one for me</span></label>
+          <p class="err">Pick one so we can get it registered.</p>
+        </div>
+        <div class="f" id="ownedWrap" style="display:none">
+          <label class="lab" for="owned">What's the address you own?</label>
+          <input type="text" id="owned" data-key="domainOwned" placeholder="yoursite.com" autocomplete="off">
+        </div>
+      </section>
+
+      <!-- 5 SPECIALTY -->
+      <section class="step" data-step>
+        <h2>Specialty coverage</h2>
+        <p class="sect-note">We put these on the site based on your Farmers appointments. Tick what's actually right.</p>
+        <div class="f" data-group="spec">
+          <label class="lab">Which of these do you write? <span class="req">*</span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Umbrella"><span>Umbrella</span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Recreational"><span>Recreational — boats, ATVs, RVs, motorcycles</span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Condo & renters"><span>Condo &amp; renters</span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Landlord / rental property"><span>Landlord / rental property</span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Classic & collector vehicles"><span>Classic &amp; collector vehicles</span></label>
+          <label class="opt"><input type="checkbox" name="spec" value="Flood"><span>Flood</span></label>
+          <p class="err">Tick at least one.</p>
+        </div>
+        <div class="f">
+          <label class="lab" for="specNote">Anything we've missed, or anything to take off?</label>
+          <textarea id="specNote" data-key="specialtyNotes" style="min-height:90px"></textarea>
+        </div>
+      </section>
+
+      <!-- 6 LIFE -->
+      <section class="step" data-step>
+        <h2>Life insurance wording</h2>
+        <p class="sect-note">We drafted this from your notes but haven't published it. It's your voice, so it's your call.</p>
+        <div class="quote">
+          Life insurance isn't really about you. It's about the people who depend on you.
+          I'll help you understand your options and build protection that makes sense for
+          your family, your budget, and the life you're building.
+        </div>
+        <div class="f" data-group="life">
+          <label class="lab">Does that sound like you? <span class="req">*</span></label>
+          <label class="opt"><input type="radio" name="life" value="Use as-is"><span>Yes — use it as it is</span></label>
+          <label class="opt"><input type="radio" name="life" value="Tweak"><span>Close — I'll adjust it below</span></label>
+          <label class="opt"><input type="radio" name="life" value="Rewrite"><span>No — I'll write my own</span></label>
+          <p class="err">Let us know either way.</p>
+        </div>
+        <div class="f" id="lifeWrap" style="display:none">
+          <label class="lab" for="lifeText">Your version</label>
+          <textarea id="lifeText" data-key="lifeCustom"></textarea>
+        </div>
+      </section>
+
+      <!-- 7 ABOUT -->
+      <section class="step" data-step>
+        <h2>About you</h2>
+        <p class="sect-note">Your Farmers bio is the same paragraph every agent on that platform gets. This is the part that makes your site sound like a person.</p>
+        <div class="f">
+          <label class="lab" for="story">How did the agency start? <span class="req">*</span></label>
+          <span class="help">A few sentences in your own words. It doesn't need to be polished — we'll tidy it up. Yours will read better than anything we invent.</span>
+          <textarea id="story" data-req data-key="agencyStory"></textarea>
+          <p class="err">Even a couple of rough sentences is plenty.</p>
+        </div>
+        <div class="f">
+          <label class="lab" for="ideal">Who do you most enjoy working with?</label>
+          <span class="help">First-time buyers, business owners, families — whoever you light up talking about.</span>
+          <textarea id="ideal" data-key="idealClients" style="min-height:90px"></textarea>
+        </div>
+        <div class="f">
+          <label class="lab" for="awards">Awards, designations or years in business worth featuring</label>
+          <textarea id="awards" data-key="awards" style="min-height:80px"></textarea>
+        </div>
+        <div class="f">
+          <label class="lab">Logo source files</label>
+          <span class="help">If you can get the original layered files from whoever designed your logo, it lets us animate more of your artwork. Usually a two-minute ask.</span>
+          <div class="drop" data-drop="logo">
+            <b>Add files</b><small>AI, EPS, SVG, PSD, PDF or a ZIP</small>
+            <input type="file" multiple data-file="logo">
+          </div>
+          <ul class="files" data-list="logo"></ul>
+        </div>
+        <div class="f">
+          <label class="lab" for="misc">Anything else we haven't asked about?</label>
+          <textarea id="misc" data-key="anythingElse" style="min-height:80px"></textarea>
+        </div>
+      </section>
+
+      <div class="nav">
+        <button class="btn ghost" id="back" type="button" disabled>Back</button>
+        <span class="spacer"></span>
+        <span class="save" id="saveNote"></span>
+        <button class="btn" id="next" type="button">Continue</button>
+      </div>
+      <div class="bar-err" id="sendErr"></div>
+    </div>
+
+    <div class="result" id="done">
+      <div class="tick">✓</div>
+      <h2>That's everything.</h2>
+      <p id="doneMsg">Thanks — it's all landed in your project folder. We'll take it from here and come back to you with the updated site.</p>
+    </div>
+
+  </div>
+</div>
+<p class="foot">Built by ProyTech</p>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ══════════════════════════════════════════════════════════════════════
+   CONFIG — the only part that changes per client.
+   `client` must match a key in the Apps Script CLIENTS map, which is what
+   decides the destination folder. The folder id deliberately does NOT live
+   here: this file is public, and a folder id in public JavaScript means
+   anyone can post files into a client's Drive.
+   ══════════════════════════════════════════════════════════════════════ */
+var CONFIG = {
+  client:   'poppell',
+  brand:    'Poppell Insurance Agency',
+  endpoint: 'https://script.google.com/macros/s/AKfycbzileBDdMpZceHXQwYIJa-rAwuz7xkRpt3Wgao-BSgOqdJ-izEI4C1RopsQ3fFSKX4S0Q/exec'
+};
+
+var MAX_MB   = 12;         // per file, after downscaling
+var MAX_EDGE = 2000;       // px — plenty for a headshot, kills 8MB phone photos
+
+document.getElementById('bandSub').textContent = CONFIG.brand.toUpperCase();
+
+var $  = function(s,r){return (r||document).querySelector(s);};
+var $$ = function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+
+var steps = $$('[data-step]');
+var idx = 0, files = {}, sending = false;
+$('#stepAll').textContent = steps.length;
+
+/* ── autosave. Text only — files are never stored, they'd blow the quota
+      and they are somebody's photographs. ── */
+var KEY = 'proytech-onboard-' + CONFIG.client;
+function save(){
+  try{
+    var d = {};
+    $$('[data-key]').forEach(function(el){ if(el.value) d[el.dataset.key] = el.value; });
+    ['domain','life'].forEach(function(n){
+      var c = $('input[name="'+n+'"]:checked'); if(c) d[n] = c.value;
+    });
+    d.spec = $$('input[name="spec"]:checked').map(function(c){return c.value;});
+    d._step = idx;
+    localStorage.setItem(KEY, JSON.stringify(d));
+    var s = $('#saveNote'); s.textContent = 'Saved';
+    clearTimeout(save._t); save._t = setTimeout(function(){ s.textContent=''; }, 1600);
+  }catch(e){ /* private mode — autosave is a nicety, not a requirement */ }
+}
+function restore(){
+  try{
+    var d = JSON.parse(localStorage.getItem(KEY) || '{}');
+    $$('[data-key]').forEach(function(el){ if(d[el.dataset.key]) el.value = d[el.dataset.key]; });
+    ['domain','life'].forEach(function(n){
+      if(!d[n]) return;
+      var c = $('input[name="'+n+'"][value="'+d[n].replace(/"/g,'\\"')+'"]');
+      if(c){ c.checked = true; c.closest('.opt').classList.add('sel'); }
+    });
+    (d.spec||[]).forEach(function(v){
+      var c = $('input[name="spec"][value="'+v.replace(/"/g,'\\"')+'"]');
+      if(c){ c.checked = true; c.closest('.opt').classList.add('sel'); }
+    });
+    toggles();
+    if(typeof d._step === 'number' && d._step < steps.length) go(d._step);
+  }catch(e){}
+}
+
+/* ── conditionals ── */
+function toggles(){
+  var dm = $('input[name="domain"]:checked');
+  $('#ownedWrap').style.display = (dm && dm.value === 'I already own one') ? '' : 'none';
+  var lf = $('input[name="life"]:checked');
+  $('#lifeWrap').style.display = (lf && lf.value !== 'Use as-is') ? '' : 'none';
+}
+
+/* ── steps ── */
+function go(n){
+  idx = Math.max(0, Math.min(n, steps.length - 1));
+  steps.forEach(function(s,i){ s.classList.toggle('on', i === idx); });
+  $('#bar').style.width = ((idx) / (steps.length - 1) * 100) + '%';
+  $('#stepNow').textContent = idx + 1;
+  $('#back').disabled = idx === 0;
+  $('#next').textContent = idx === steps.length - 1 ? 'Send it over' : 'Continue';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function clearErr(el){
+  el.classList.remove('bad');
+  var e = el.closest('.f') && el.closest('.f').querySelector('.err');
+  if(e) e.classList.remove('on');
+}
+function showErr(node){
+  var f = node.closest('.f') || node;
+  var e = f.querySelector('.err'); if(e) e.classList.add('on');
+  var inp = f.querySelector('input[type=text],textarea');
+  if(inp) inp.classList.add('bad');
+  f.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+function valid(){
+  var s = steps[idx], ok = true;
+  $$('[data-req]', s).forEach(function(el){
+    if(!el.value.trim()){ if(ok) showErr(el); ok = false; }
+  });
+  // required uploads
+  if(s === steps[1]){
+    ['charlene','jean'].forEach(function(k){
+      if(!files[k] || !files[k].length){
+        if(ok) showErr($('[data-list="'+k+'"]').closest('.f'));
+        ok = false;
+      }
+    });
+  }
+  $$('[data-group]', s).forEach(function(g){
+    var n = g.dataset.group === 'spec' ? 'spec' : g.dataset.group;
+    if(!$('input[name="'+n+'"]:checked')){ if(ok) showErr(g); ok = false; }
+  });
+  return ok;
+}
+
+/* ══ files ══
+   Images are downscaled in the browser before upload. A modern phone photo
+   is 4–8MB and base64 inflates it by a third; without this a two-headshot
+   submission would exceed what Apps Script will accept and fail at the very
+   end, after she has filled the whole form in. */
+function readable(b){
+  return b > 1048576 ? (b/1048576).toFixed(1)+' MB' : Math.max(1,Math.round(b/1024))+' KB';
+}
+
+function shrink(file){
+  return new Promise(function(resolve){
+    if(!/^image\//.test(file.type) || /heic|heif/i.test(file.type)){
+      // HEIC cannot be decoded by canvas in most browsers. Pass it through
+      // untouched rather than corrupting it — the size check still applies.
+      return resolve({ blob:file, name:file.name, type:file.type||'application/octet-stream' });
+    }
+    var img = new Image(), url = URL.createObjectURL(file);
+    img.onload = function(){
+      var w = img.width, h = img.height, s = Math.min(1, MAX_EDGE/Math.max(w,h));
+      if(s === 1 && file.size < 1.5*1048576){ URL.revokeObjectURL(url); return resolve({blob:file,name:file.name,type:file.type}); }
+      var c = document.createElement('canvas');
+      c.width = Math.round(w*s); c.height = Math.round(h*s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      c.toBlob(function(b){
+        URL.revokeObjectURL(url);
+        var nm = file.name.replace(/\.[^.]+$/,'') + '.jpg';
+        resolve(b ? {blob:b,name:nm,type:'image/jpeg'} : {blob:file,name:file.name,type:file.type});
+      }, 'image/jpeg', 0.86);
+    };
+    img.onerror = function(){ URL.revokeObjectURL(url); resolve({blob:file,name:file.name,type:file.type||'application/octet-stream'}); };
+    img.src = url;
+  });
+}
+
+function paint(slot){
+  var ul = $('[data-list="'+slot+'"]'); if(!ul) return;
+  var arr = files[slot] || [];
+  ul.innerHTML = '';
+  arr.forEach(function(f, i){
+    var li = document.createElement('li');
+    var thumb = /^image\/(jpeg|png|gif|webp)$/.test(f.type)
+      ? '<img class="thumb" alt="" src="'+URL.createObjectURL(f.blob)+'">'
+      : '<span class="thumb"></span>';
+    li.innerHTML = thumb +
+      '<span class="nm"></span><span class="sz">'+readable(f.blob.size)+'</span>' +
+      '<button class="rm" type="button" aria-label="Remove">×</button>';
+    li.querySelector('.nm').textContent = f.name;
+    li.querySelector('.rm').addEventListener('click', function(){
+      files[slot].splice(i,1); paint(slot);
+    });
+    ul.appendChild(li);
+  });
+}
+
+function accept(slot, list, multiple){
+  var f = $('[data-drop="'+slot+'"]');
+  clearErr(f);
+  var jobs = [].slice.call(list).map(shrink);
+  Promise.all(jobs).then(function(out){
+    var kept = [], rejected = [];
+    out.forEach(function(o){
+      if(o.blob.size > MAX_MB*1048576) rejected.push(o.name); else kept.push(o);
+    });
+    files[slot] = multiple ? (files[slot]||[]).concat(kept) : kept.slice(0,1);
+    paint(slot);
+    if(rejected.length){
+      var e = f.closest('.f').querySelector('.err');
+      if(e){ e.textContent = rejected.join(', ') + ' — too large even after resizing. Under '+MAX_MB+'MB please.'; e.classList.add('on'); }
+    }
+  });
+}
+
+$$('[data-drop]').forEach(function(d){
+  var slot = d.dataset.drop;
+  var input = $('input[type=file]', d);
+  var multi = input.hasAttribute('multiple');
+  d.addEventListener('click', function(){ input.click(); });
+  input.addEventListener('change', function(){ if(input.files.length) accept(slot, input.files, multi); input.value=''; });
+  ['dragenter','dragover'].forEach(function(ev){
+    d.addEventListener(ev, function(e){ e.preventDefault(); d.classList.add('over'); });
+  });
+  ['dragleave','drop'].forEach(function(ev){
+    d.addEventListener(ev, function(e){ e.preventDefault(); d.classList.remove('over'); });
+  });
+  d.addEventListener('drop', function(e){
+    if(e.dataTransfer.files.length) accept(slot, e.dataTransfer.files, multi);
+  });
+});
+
+/* ── inputs ── */
+$$('[data-key]').forEach(function(el){
+  el.addEventListener('input', function(){ clearErr(el); save(); });
+});
+$$('.opt input').forEach(function(i){
+  i.addEventListener('change', function(){
+    if(i.type === 'radio'){
+      $$('input[name="'+i.name+'"]').forEach(function(o){ o.closest('.opt').classList.remove('sel'); });
+    }
+    i.closest('.opt').classList.toggle('sel', i.checked);
+    var g = i.closest('[data-group]');
+    if(g){ var e = g.querySelector('.err'); if(e) e.classList.remove('on'); }
+    toggles(); save();
+  });
+});
+
+/* ── submit ── */
+function b64(blob){
+  return new Promise(function(res, rej){
+    var r = new FileReader();
+    r.onload = function(){ res(String(r.result).split(',')[1]); };
+    r.onerror = rej;
+    r.readAsDataURL(blob);
+  });
+}
+
+async function send(){
+  if(sending) return;
+  sending = true;
+  var btn = $('#next'), err = $('#sendErr');
+  err.classList.remove('on');
+  btn.disabled = true; $('#back').disabled = true;
+  btn.textContent = 'Sending…';
+
+  try{
+    var answers = { client: CONFIG.client, brand: CONFIG.brand };
+    $$('[data-key]').forEach(function(el){ answers[el.dataset.key] = el.value.trim(); });
+    ['domain','life'].forEach(function(n){
+      var c = $('input[name="'+n+'"]:checked'); answers[n] = c ? c.value : '';
+    });
+    answers.spec = $$('input[name="spec"]:checked').map(function(c){return c.value;}).join(', ');
+
+    var payload = [];
+    for(var slot in files){
+      for(var i=0;i<(files[slot]||[]).length;i++){
+        var f = files[slot][i];
+        btn.textContent = 'Uploading…';
+        payload.push({ slot:slot, name:f.name, type:f.type, data: await b64(f.blob) });
+      }
+    }
+
+    var r = await fetch(CONFIG.endpoint, {
+      method:'POST',
+      headers:{ 'content-type':'text/plain;charset=utf-8' },
+      body: JSON.stringify({ answers: answers, files: payload })
+    });
+    var txt = await r.text();
+    var j = null; try{ j = JSON.parse(txt); }catch(e){}
+
+    // A 200 is not proof. A Google sign-in page is also a 200.
+    if(!j || !j.ok) throw new Error(j && j.error ? j.error : 'The upload did not go through.');
+
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    $('#form').style.display = 'none';
+    $('#done').classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(e){
+    err.innerHTML = '<b>That didn\'t send.</b> Nothing was lost — your answers are still ' +
+      'here and still saved. Try again, and if it keeps failing email ' +
+      '<a href="mailto:getproytech@gmail.com">getproytech@gmail.com</a> and we\'ll sort it.';
+    err.classList.add('on');
+    btn.disabled = false; $('#back').disabled = false;
+    btn.textContent = 'Try again';
+    sending = false;
+  }
+}
+
+$('#next').addEventListener('click', function(){
+  if(!valid()) return;
+  if(idx === steps.length - 1){ send(); } else { go(idx+1); save(); }
+});
+$('#back').addEventListener('click', function(){ go(idx-1); });
+
+restore(); go(idx); toggles();
+})();
+</script>
+</body>
+</html>
