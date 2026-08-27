@@ -99,6 +99,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--indigo);
 .seg label + label span{border-left:1.5px solid var(--line)}
 .seg input:checked + span{background:var(--accent);color:#fff}
 
+.subhead{display:flex;align-items:center;gap:10px;margin:34px 0 18px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.subhead:first-of-type{margin-top:8px}
+.subhead h3{font-size:1.06rem}
+.subhead .pill{font-size:.67rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--bg);color:var(--muted)}
+
 /* repeater */
 .rep{border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
 .rep-row{display:flex;gap:10px;align-items:flex-start;padding:12px 14px}
@@ -166,7 +171,7 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
   <div class="wrap">
     <div class="kicker">ProyTech onboarding · Business Suite</div>
     <h1>Let&rsquo;s build this around how you work.</h1>
-    <p>Six short steps. We&rsquo;re asking how your business actually runs today &mdash; messy answers are the useful ones.</p>
+    <p>Seven short steps, and the last few are quick. We&rsquo;re asking how your business actually runs today &mdash; messy answers are the useful ones.</p>
   </div>
 </div>
 
@@ -174,8 +179,8 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
 <div class="card">
 
   <div class="progress" id="progress">
-    <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="plabel"><span id="pstep" class="cur">Step 1 of 6</span><span id="pname">The basics</span></div>
+    <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="plabel"><span id="pstep" class="cur">Step 1 of 7</span><span id="pname">The basics</span></div>
   </div>
 
   <p style="display:none;margin:-14px 0 22px;font-size:.9rem;color:var(--muted)">Prepared for <b id="clientLabel"></b></p>
@@ -421,11 +426,124 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
       <textarea id="after_won" placeholder="Book the crew, send the deposit invoice, add to the calendar. After the job: final invoice, then ask for a Google review. Re-stripe reminder about 11 months later."></textarea>
     </div>
 
+    <div class="field" data-key="lead_assignment">
+      <label class="lbl">When a lead comes in, who owns it?
+        <small>Different from who gets told. Ownership is what stops a lead sitting there because everyone assumed someone else had it.</small>
+      </label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-group="lead_assignment" value="Always one person"><span>Always one person</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_assignment" value="Round robin"><span>Round robin</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_assignment" value="By territory or area"><span>By territory or area</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_assignment" value="By service type"><span>By service type</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_assignment" value="Whoever picks it up first"><span>Whoever grabs it first</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_assignment" value="Not sure yet"><span>Not sure yet</span></label>
+      </div>
+    </div>
+
     <div class="field" data-key="notify_who">
       <label class="lbl">When a new lead comes in, who needs to know — and how?
         <small>The single most important automation in the whole system, and the easiest one to get wrong.</small>
       </label>
       <input type="text" id="notify_who" placeholder="Text me immediately. Email the office. Foreman only once it's scheduled.">
+    </div>
+  </section>
+
+  <!-- ============ SETUP & BRAND ============ -->
+  <section class="step" data-name="Setup &amp; brand">
+    <h2>Setup and branding.</h2>
+    <p class="lede">All of this is optional &mdash; skip anything that doesn&rsquo;t apply or you don&rsquo;t know yet. Nothing here blocks us starting.</p>
+
+    <div class="subhead"><h3>Where it lives</h3><span class="pill">Optional</span></div>
+
+    <div class="field" data-key="suite_domain">
+      <label class="lbl">Where should the suite live?
+        <small>Most clients use a subdomain of their own site, like <b>app.yourbusiness.com</b>. Leave blank and we&rsquo;ll host it on ours &mdash; that can be changed later.</small>
+      </label>
+      <input type="text" id="suite_domain" placeholder="app.kleenstripe.com">
+    </div>
+
+    <div class="field" data-key="office_address">
+      <label class="lbl">Business address
+        <small>Goes on quotes and invoices, and in the footer of anything the system sends out.</small>
+      </label>
+      <input type="text" id="office_address" placeholder="1420 S West St, Wichita, KS 67213">
+    </div>
+
+    <div class="subhead"><h3>How it should look</h3><span class="pill">Optional</span></div>
+
+    <div class="field" data-key="logo_link">
+      <label class="lbl">Your logo
+        <small>Paste a link to the file, or leave it blank and we&rsquo;ll pull it off your website. Same as the other form &mdash; no uploading here.</small>
+      </label>
+      <input type="text" id="logo_link" placeholder="https://drive.google.com/... — or leave blank">
+    </div>
+
+    <div class="field" data-key="brand_colors">
+      <label class="lbl">Brand colours
+        <small>Exact codes if you have them. Otherwise name them and we&rsquo;ll match what&rsquo;s on your site and trucks.</small>
+      </label>
+      <input type="text" id="brand_colors" placeholder="Safety yellow #FFD200 and black">
+    </div>
+
+    <div class="field" data-key="headshots">
+      <label class="lbl">Team photos or headshots
+        <small>Used on quotes and the customer-facing side, so people see who they&rsquo;re dealing with. A link, or tell us you don&rsquo;t have any.</small>
+      </label>
+      <input type="text" id="headshots" placeholder="In the same Drive folder — or 'we don't have any'">
+    </div>
+
+    <div class="subhead"><h3>Scheduling</h3><span class="pill">Optional</span></div>
+
+    <div class="field" data-key="booking_wanted">
+      <label class="lbl">Should customers be able to book time with you directly?</label>
+      <div class="seg">
+        <label><input type="radio" name="booking_wanted" value="Yes"><span>Yes</span></label>
+        <label><input type="radio" name="booking_wanted" value="No, we call them"><span>No, we call them</span></label>
+        <label><input type="radio" name="booking_wanted" value="Maybe later"><span>Maybe later</span></label>
+      </div>
+    </div>
+
+    <div data-show-when="booking_wanted=Yes">
+      <div class="field" data-key="calendar_account">
+        <label class="lbl">Whose calendar should it book against?
+          <small>Name the person, or the Google account it should sync with.</small>
+        </label>
+        <input type="text" id="calendar_account" placeholder="Jane's calendar — jane@kleenstripe.com">
+      </div>
+    </div>
+
+    <div class="field" data-key="modules_off">
+      <label class="lbl">Anything you know you don&rsquo;t want switched on?
+        <small>We&rsquo;d rather leave it off than have you scroll past it every day. Easy to turn on later.</small>
+      </label>
+      <textarea id="modules_off" placeholder="No customer portal for now. Don't need inventory."></textarea>
+    </div>
+
+    <div class="subhead"><h3>Rules and compliance</h3><span class="pill">Skip if none</span></div>
+
+    <div class="field" data-key="consent_tracking">
+      <label class="lbl">Should we track consent and opt-outs on every contact?
+        <small>If you ever text or email customers in bulk, the answer is yes &mdash; it&rsquo;s what keeps you the right side of the rules, and it&rsquo;s far easier to switch on now than to backfill.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="consent_tracking" value="Yes"><span>Yes</span></label>
+        <label><input type="radio" name="consent_tracking" value="No"><span>No</span></label>
+        <label><input type="radio" name="consent_tracking" value="Not sure"><span>Not sure</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="footer_wording">
+      <label class="lbl">Any wording that must appear on what you send
+        <small>Licence numbers, insurance details, required disclosures &mdash; anything a regulator or your industry body expects to see.</small>
+      </label>
+      <textarea id="footer_wording" placeholder="Fully licensed and insured. KS Contractor Lic #12345."></textarea>
+    </div>
+
+    <div class="field" data-key="data_restrictions">
+      <label class="lbl">Anything we should never store?
+        <small>Card numbers, social security numbers, anything a customer or contract says you can&rsquo;t keep. Rare, but expensive to get wrong.</small>
+      </label>
+      <input type="text" id="data_restrictions" placeholder="Never store card details.">
     </div>
   </section>
 
@@ -583,7 +701,7 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
 <script>
 window.ENDPOINT  = "/api/business-suite";
 window.FORM_TYPE = "business_suite_v1";
-window.PRETTY    = {"full_name":"Your name","business_name":"Business name — exactly as you want it written","email":"Email","phone":"Phone","best_contact":"Best way to reach you during setup","websites":"Your web addresses","more_sites":"Think again — any others?","more_sites_detail":"Tell us what you can remember","track_today":"What you use today","track_detail":"Walk us through how it actually works","biggest_pain":"What falls through the cracks most often?","lead_sources":"Where do leads come from?","tools_keep":"Anything you want to keep using?","import_data":"Do you have a customer list to bring across?","import_link":"Link to it, or tell us where it lives","stages":"Your stages, in order","stages_notes":"Anything unusual about how a job moves?","after_won":"What happens once a job is won?","notify_who":"When a new lead comes in, who needs to know — and how?","team":"Everyone who needs a login","team_growth":"Anyone joining soon, or seasonal help?","team_notes":"Anything else about the team","voice_tone":"Pick the tone","voice_line":"In a sentence — how should a message from you read?","words_use":"Words you always use","words_avoid":"Words we should never use","signoff":"How should texts and emails sign off?","google_account":"Which Google account should we share the setup with?","notes":"Anything else"};
+window.PRETTY    = {"full_name":"Your name","business_name":"Business name — exactly as you want it written","email":"Email","phone":"Phone","best_contact":"Best way to reach you during setup","websites":"Your web addresses","more_sites":"Think again — any others?","more_sites_detail":"Tell us what you can remember","track_today":"What you use today","track_detail":"Walk us through how it actually works","biggest_pain":"What falls through the cracks most often?","lead_sources":"Where do leads come from?","tools_keep":"Anything you want to keep using?","import_data":"Do you have a customer list to bring across?","import_link":"Link to it, or tell us where it lives","stages":"Your stages, in order","stages_notes":"Anything unusual about how a job moves?","after_won":"What happens once a job is won?","lead_assignment":"When a lead comes in, who owns it?","notify_who":"When a new lead comes in, who needs to know — and how?","suite_domain":"Where should the suite live?","office_address":"Business address","logo_link":"Your logo","brand_colors":"Brand colours","headshots":"Team photos or headshots","booking_wanted":"Should customers be able to book time with you directly?","calendar_account":"Whose calendar should it book against?","modules_off":"Anything you know you don't want switched on?","consent_tracking":"Should we track consent and opt-outs on every contact?","footer_wording":"Any wording that must appear on what you send","data_restrictions":"Anything we should never store?","team":"Everyone who needs a login","team_growth":"Anyone joining soon, or seasonal help?","team_notes":"Anything else about the team","voice_tone":"Pick the tone","voice_line":"In a sentence — how should a message from you read?","words_use":"Words you always use","words_avoid":"Words we should never use","signoff":"How should texts and emails sign off?","google_account":"Which Google account should we share the setup with?","notes":"Anything else"};
 </script>
 <script>
 (function(){
