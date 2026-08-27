@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Website build brief · ProyTech</title>
+<meta name="description" content="Everything we need to build your site. About eight minutes." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#181530" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#FBFAF8; --ink:#12142B; --muted:#63667A; --line:#ECE9E3; --card:#fff;
+  --accent:#FF4D14; --accent-soft:rgba(255,77,20,.13);
+  --indigo:#3A4AE0; --indigo-soft:rgba(58,74,224,.12);
+  --sb:#181530; --err:#C0392B; --good:#137A46;
+  --shadow:0 34px 80px -36px rgba(20,22,55,.34); --r:22px; --maxw:780px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.015em;line-height:1.12;color:var(--ink)}
+a{color:var(--indigo)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+.topbar{background:var(--sb);padding:16px 0}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.wordmark{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.2rem;color:#fff;text-decoration:none;display:flex;align-items:center}
+.wordmark b{color:var(--accent)}
+.logo-img{height:40px;width:auto;display:block}
+@media(max-width:520px){.logo-img{height:32px}}
+.topbar .tag{font-size:.8rem;color:rgba(255,255,255,.6);font-weight:500}
+@media(max-width:560px){.topbar .tag{display:none}}
+
+.hero{background:var(--sb);color:#fff;padding:40px 0 108px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-150px;top:-160px;width:440px;height:440px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(58,74,224,.42), rgba(58,74,224,0) 68%);pointer-events:none}
+.kicker{font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:.7rem;color:#A9AECD;display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+.kicker::before{content:"";width:22px;height:2px;background:var(--accent)}
+.hero h1{color:#fff;font-size:clamp(2rem,5.6vw,3rem);margin-bottom:12px}
+.hero p{color:rgba(255,255,255,.78);font-size:1.05rem;max-width:580px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+  margin-top:-68px;position:relative;z-index:2;padding:34px 34px 40px;margin-bottom:70px}
+@media(max-width:600px){.card{padding:26px 20px 32px;border-radius:16px}}
+
+.progress{margin-bottom:28px}
+.ptrack{display:flex;gap:6px;margin-bottom:10px}
+.ptrack i{flex:1;height:6px;border-radius:99px;background:var(--line);transition:background .3s}
+.ptrack i.done{background:var(--accent)}
+.plabel{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--muted);gap:12px}
+.plabel .cur{color:var(--ink)}
+
+.step{display:none;animation:fadeUp .35s ease both}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.step h2{font-size:1.65rem;margin-bottom:6px}
+.step .lede{color:var(--muted);margin-bottom:24px;font-size:.97rem}
+
+.field{margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+label.lbl{display:block;font-weight:600;font-size:.92rem;margin-bottom:7px;color:var(--ink)}
+label.lbl small{display:block;font-weight:400;color:var(--muted);font-size:.83rem;margin-top:2px;line-height:1.45}
+.req{color:var(--accent);font-weight:700}
+input[type=text],input[type=tel],input[type=email],input[type=url],select,textarea{
+  width:100%;font:inherit;font-size:1rem;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;
+  background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2363667A' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;padding-right:40px}
+textarea{min-height:108px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px var(--indigo-soft)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--err)}
+.errmsg{display:none;color:var(--err);font-size:.84rem;font-weight:500;margin-top:6px}
+.field.invalid .errmsg{display:block}
+
+.note{background:#F4F2FF;border:1.5px solid #DDD9F7;border-left:4px solid var(--indigo);border-radius:12px;padding:14px 16px;margin-bottom:22px;font-size:.9rem}
+.note b{color:var(--ink)}
+.flag{background:#FFF4EF;border:1.5px solid #FFDCCB;border-left:4px solid var(--accent);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:.9rem}
+.flag b{color:var(--ink)}
+
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:10px 17px;border:1.5px solid var(--line);border-radius:999px;font-weight:500;font-size:.92rem;
+  color:var(--ink);background:#fff;cursor:pointer;transition:all .15s;user-select:none}
+.chip input:checked + span{background:var(--sb);border-color:var(--sb);color:#fff}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px var(--indigo-soft)}
+
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;flex-wrap:wrap;background:#fff}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:inline-block;padding:12px 20px;font-weight:600;font-size:.92rem;cursor:pointer;color:var(--muted);transition:all .15s}
+.seg label + label span{border-left:1.5px solid var(--line)}
+.seg input:checked + span{background:var(--accent);color:#fff}
+
+/* repeater */
+.rep{border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.rep-row{display:flex;gap:10px;align-items:flex-start;padding:12px 14px}
+.rep-row + .rep-row{border-top:1px solid var(--line)}
+.rep-row .grow{flex:1 1 auto;min-width:0}
+.rep-row select{flex:0 0 172px;width:172px}
+@media(max-width:600px){.rep-row{flex-wrap:wrap}.rep-row select{flex:1 1 100%;width:100%}}
+.rep-del{flex:0 0 auto;width:42px;height:48px;border:0;background:transparent;color:var(--muted);font-size:1.35rem;cursor:pointer;border-radius:10px;line-height:1}
+.rep-del:hover{background:#FFF4EF;color:var(--err)}
+.rep-add{margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px dashed var(--line);color:var(--ink);
+  font-weight:600;font-size:.92rem;padding:12px 18px;border-radius:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.rep-add:hover{border-color:var(--accent);color:var(--accent)}
+
+.stack{display:flex;flex-direction:column;gap:10px}
+.chkline{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;background:#fff;transition:background .12s}
+.chkline:hover{background:var(--bg)}
+.chkline input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:0 0 auto;cursor:pointer}
+.chkline b{font-weight:600;font-size:.95rem}
+.chkline small{display:block;color:var(--muted);font-size:.84rem;line-height:1.45}
+
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:1rem;font-family:inherit;
+  padding:15px 30px;border-radius:12px;border:0;cursor:pointer;transition:transform .14s,box-shadow .14s,background .14s;text-decoration:none}
+.btn .arw{transition:transform .14s}
+.btn:hover .arw{transform:translateX(4px)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 26px -8px rgba(255,77,20,.55)}
+.btn-primary:hover{transform:translateY(-2px);background:#ff6231}
+.btn-primary:disabled{opacity:.6;cursor:wait;transform:none}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-indigo{background:var(--indigo);color:#fff}
+.btn-indigo:hover{transform:translateY(-2px)}
+
+.success{display:none;text-align:center;padding:28px 0 10px;animation:fadeUp .4s ease both}
+.success.show{display:block}
+.checkwrap{width:104px;height:104px;margin:0 auto 24px}
+.checkwrap svg{width:100%;height:100%}
+.check-circle{stroke:var(--accent);stroke-width:4;fill:none;stroke-dasharray:302;stroke-dashoffset:302;animation:draw .7s .1s ease-out forwards}
+.check-mark{stroke:var(--accent);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .45s .65s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.success h2{font-size:1.85rem;margin-bottom:10px}
+.success p{color:var(--muted);font-size:1.03rem;max-width:470px;margin:0 auto 18px}
+
+.fallback{display:none;animation:fadeUp .35s ease both}
+.fallback.show{display:block}
+.fallback h2{font-size:1.45rem;margin-bottom:8px}
+.fallback p{color:var(--muted);margin-bottom:16px;font-size:.94rem}
+.fallback pre{background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:18px;font-size:.82rem;
+  line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:340px;overflow:auto;margin-bottom:16px}
+.fbrow{display:flex;flex-wrap:wrap;gap:12px}
+footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy&lt;b&gt;Tech&lt;/b&gt;')"></a>
+    <div class="tag">Website build brief · ~8 minutes</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">ProyTech onboarding · Website build</div>
+    <h1>Let&rsquo;s get your site built.</h1>
+    <p>Six short steps. Nothing here is a trick question &mdash; if you don&rsquo;t know an answer, skip it or say so and we&rsquo;ll work it out together.</p>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="card">
+
+  <div class="progress" id="progress">
+    <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="plabel"><span id="pstep" class="cur">Step 1 of 6</span><span id="pname">The basics</span></div>
+  </div>
+
+  <p style="display:none;margin:-14px 0 22px;font-size:.9rem;color:var(--muted)">Prepared for <b id="clientLabel"></b></p>
+
+  <form id="mainForm" novalidate>
+
+  <!-- ============ STEP 1 ============ -->
+  <section class="step active" data-name="The basics">
+    <h2>First, the basics.</h2>
+    <p class="lede">Four quick ones, then it opens up. Takes about eight minutes start to finish.</p>
+
+    <div class="field" data-key="full_name" data-required data-msg="We need a name to put on this.">
+      <label class="lbl" for="full_name">Your name <span class="req">*</span></label>
+      <input type="text" id="full_name" autocomplete="name" placeholder="Jane Rivera">
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="business_name" data-required data-msg="This is the one we really can't guess.">
+      <label class="lbl" for="business_name">Business name — exactly as you want it written <span class="req">*</span>
+        <small>Type it the way it should appear on the site, down to the capitals. &ldquo;Kleen Stripe&rdquo;, &ldquo;KleenStripe&rdquo; and &ldquo;Kleen Stripe LLC&rdquo; are three different answers and we'll use whichever you type here.</small>
+      </label>
+      <input type="text" id="business_name" placeholder="Kleen Stripe">
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="email" data-type="email" data-required>
+        <label class="lbl" for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" autocomplete="email" placeholder="you@yourbusiness.com">
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="phone" data-type="phone" data-required>
+        <label class="lbl" for="phone">Phone <span class="req">*</span></label>
+        <input type="tel" id="phone" autocomplete="tel" placeholder="(316) 555-0142">
+        <div class="errmsg"></div>
+      </div>
+    </div>
+
+    <div class="field" data-key="best_contact">
+      <label class="lbl">Best way to reach you while we build
+        <small>We'll have questions. This is how we'll ask them.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="best_contact" value="Text"><span>Text</span></label>
+        <label><input type="radio" name="best_contact" value="Call"><span>Call</span></label>
+        <label><input type="radio" name="best_contact" value="Email"><span>Email</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 2 ============ -->
+  <section class="step" data-name="Your websites">
+    <h2>Every website you have.</h2>
+    <p class="lede">Not just the main one. This is the question people get wrong most often.</p>
+
+    <div class="flag">
+      <b>Read this one carefully.</b> Most businesses own more web addresses than they remember. A separate reviews site, an old site from a previous builder, a one-page landing page from an ad campaign, a booking page, a Facebook page doing the job of a website. If we miss one, it either keeps running with stale information or quietly competes with your new site in Google.
+    </div>
+
+    <div class="field" data-key="websites" data-required data-msg="Add at least one — or type &quot;none&quot; if you truly have no web presence yet.">
+      <label class="lbl">Your web addresses <span class="req">*</span>
+        <small>One per row. Add a row for each. Tell us what each one is for — that matters more than you'd think.</small>
+      </label>
+      <div class="rep" data-rep="websites">
+        <div class="rep-row">
+          <div class="grow"><input type="text" placeholder="yourbusiness.com"></div>
+          <select aria-label="What this site is">
+            <option value="">What is it?</option>
+            <option>Main site</option>
+            <option>Reviews site</option>
+            <option>Landing page from an ad</option>
+            <option>Old site we still own</option>
+            <option>Booking / scheduling page</option>
+            <option>Facebook page we use as our site</option>
+            <option>Domain we own but never built</option>
+            <option>Other</option>
+          </select>
+          <button type="button" class="rep-del" aria-label="Remove this row">&times;</button>
+        </div>
+      </div>
+      <button type="button" class="rep-add" data-rep-add="websites">+ Add another website</button>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="more_sites">
+      <label class="lbl">Now think again — are there any others?
+        <small>Old domains, a site a family member built years ago, something from a franchise or a directory, an address you bought and never used.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="more_sites" value="No, that is all of them"><span>That's all of them</span></label>
+        <label><input type="radio" name="more_sites" value="Yes, there are more"><span>Actually, yes</span></label>
+        <label><input type="radio" name="more_sites" value="Not sure"><span>Not sure</span></label>
+      </div>
+    </div>
+
+    <div data-show-when="more_sites=Yes, there are more|Not sure">
+      <div class="field" data-key="more_sites_detail">
+        <label class="lbl">Tell us what you can remember
+          <small>Even a half-remembered name helps — we can find the rest.</small>
+        </label>
+        <textarea id="more_sites_detail" placeholder="There's an old one from 2019, something like kleenstripewichita.com — I'm not sure if it's still up."></textarea>
+      </div>
+    </div>
+
+    <div class="field" data-key="domain_control">
+      <label class="lbl">Who controls the domain, and where is it registered?
+        <small>GoDaddy, Namecheap, Wix, &ldquo;my nephew set it up&rdquo; — all valid answers. We can't launch without this, so if you don't know, say so and we'll track it down.</small>
+      </label>
+      <input type="text" id="domain_control" placeholder="GoDaddy, I have the login">
+    </div>
+
+    <div class="field" data-key="domain_email">
+      <label class="lbl">Does your email run on that domain?
+        <small>If your email ends in @yourbusiness.com we have to be careful during the move, or your email stops.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="domain_email" value="Yes"><span>Yes</span></label>
+        <label><input type="radio" name="domain_email" value="No, I use Gmail/Yahoo"><span>No, Gmail or similar</span></label>
+        <label><input type="radio" name="domain_email" value="Not sure"><span>Not sure</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 3 ============ -->
+  <section class="step" data-name="What you do">
+    <h2>What you do, and who you want calling.</h2>
+    <p class="lede">This is the part that decides what the site actually says.</p>
+
+    <div class="field" data-key="services" data-required data-msg="Even a rough list gets us moving.">
+      <label class="lbl">What you sell, in your own words <span class="req">*</span>
+        <small>Plain language beats industry terms. Write it how you'd say it to a neighbour.</small>
+      </label>
+      <textarea id="services" placeholder="Parking lot striping, re-striping, ADA stalls, fire lanes, curb painting, sealcoating. Mostly commercial."></textarea>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="phone_ringing_for" data-required data-msg="This is the whole point of the site — give us a sentence.">
+      <label class="lbl">When the phone rings because of this site, what do you want it to be? <span class="req">*</span>
+        <small>The job you want more of. If the site works, this is what's on the other end of the line.</small>
+      </label>
+      <textarea id="phone_ringing_for" placeholder="Big commercial lots — shopping centres, warehouses, schools. Repeat annual re-stripe contracts more than one-off jobs."></textarea>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="not_a_fit">
+      <label class="lbl">And what would you rather <em>not</em> get?
+        <small>Just as useful. We can write the site so these calls mostly stop coming.</small>
+      </label>
+      <textarea id="not_a_fit" placeholder="Single-driveway residential jobs. Anything more than an hour out."></textarea>
+    </div>
+
+    <div class="field" data-key="service_area" data-required data-msg="Towns or a radius, either is fine.">
+      <label class="lbl">Service area <span class="req">*</span>
+        <small>Towns, counties, or &ldquo;X miles from Y&rdquo;. This is what makes you show up in local searches.</small>
+      </label>
+      <input type="text" id="service_area" placeholder="Wichita plus 60 miles — Derby, Andover, Newton, El Dorado">
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="primary_action">
+      <label class="lbl">What should a visitor do first?
+        <small>Pick as many as truly apply, but the fewer the better — the top one becomes the big button.</small>
+      </label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-group="primary_action" value="Call"><span>Call</span></label>
+        <label class="chip"><input type="checkbox" data-group="primary_action" value="Text"><span>Text</span></label>
+        <label class="chip"><input type="checkbox" data-group="primary_action" value="Request a quote"><span>Request a quote</span></label>
+        <label class="chip"><input type="checkbox" data-group="primary_action" value="Book online"><span>Book online</span></label>
+        <label class="chip"><input type="checkbox" data-group="primary_action" value="Message on Facebook"><span>Message on Facebook</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="lead_destination" data-required data-msg="Without this, a form on your site has nowhere to send anything.">
+      <label class="lbl">Where should a new enquiry land? <span class="req">*</span>
+        <small>The email address and/or cell that should get pinged the moment someone fills out a form. Can be different from the contact details above.</small>
+      </label>
+      <input type="text" id="lead_destination" placeholder="office@kleenstripe.com and text 316-555-0142">
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="gbp_status">
+      <label class="lbl">Google Business Profile
+        <small>The listing with your reviews that shows on the map. For local work it sends more calls than the website does — we want to point them at each other.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="gbp_status" value="Yes, and I have access"><span>Have it, have access</span></label>
+        <label><input type="radio" name="gbp_status" value="Exists but I have no access"><span>Exists, locked out</span></label>
+        <label><input type="radio" name="gbp_status" value="No"><span>Don't have one</span></label>
+        <label><input type="radio" name="gbp_status" value="Not sure"><span>Not sure</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 4 ============ -->
+  <section class="step" data-name="Look &amp; feel">
+    <h2>What it should look like.</h2>
+    <p class="lede">Showing beats describing. Two or three links tells us more than a paragraph.</p>
+
+    <div class="field" data-key="ref_sites">
+      <label class="lbl">Any site whose look you like
+        <small>They don't need to be in your industry — often better if they aren't. One per line.</small>
+      </label>
+      <textarea id="ref_sites" placeholder="stripe.com&#10;that roofing company my competitor uses — jmroofingict.com&#10;apple.com, honestly"></textarea>
+    </div>
+
+    <div class="field" data-key="ref_likes">
+      <label class="lbl">What is it you like about them?
+        <small>&ldquo;Clean&rdquo;, &ldquo;the big photos&rdquo;, &ldquo;it doesn't look cheap&rdquo; — all useful.</small>
+      </label>
+      <textarea id="ref_likes" placeholder="Lots of white space, big photos, not much text, obvious phone number."></textarea>
+    </div>
+
+    <div class="field" data-key="dislikes">
+      <label class="lbl">Anything you definitely don't want
+        <small>Sites you hate, colours that are off the table, a look you're tired of seeing.</small>
+      </label>
+      <textarea id="dislikes" placeholder="No stock photos of people in hard hats pointing at clipboards. No dark backgrounds."></textarea>
+    </div>
+
+    <div class="field" data-key="vibe">
+      <label class="lbl">Pick a few words that should describe it</label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-group="vibe" value="Clean"><span>Clean</span></label>
+        <label class="chip"><input type="checkbox" data-group="vibe" value="Bold"><span>Bold</span></label>
+        <label class="chip"><input type="checkbox" data-group="vibe" value="Premium"><span>Premium</span></label>
+        <label class="chip"><input type="checkbox" data-group="vibe" value="Rugged"><span>Rugged</span></label>
+        <label class="chip"><input type="checkbox" data-group="vibe" value="Friendly"><span>Friendly</span></label>
+        <label class="chip"><input type="checkbox" data-group="vibe" value="Corporate"><span>Corporate</span></label>
+        <label class="chip"><input type="checkbox" data-group="vibe" value="Family-run"><span>Family-run</span></label>
+        <label class="chip"><input type="checkbox" data-group="vibe" value="High-tech"><span>High-tech</span></label>
+        <label class="chip"><input type="checkbox" data-group="vibe" value="No-nonsense"><span>No-nonsense</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="colors_fonts">
+      <label class="lbl">Colours or fonts we should stick to
+        <small>If you have brand colours, exact codes are ideal. If not, name them and we'll pick.</small>
+      </label>
+      <input type="text" id="colors_fonts" placeholder="Safety yellow and black, like our trucks">
+    </div>
+  </section>
+
+  <!-- ============ STEP 5 ============ -->
+  <section class="step" data-name="Photos &amp; logo">
+    <h2>Your photos and logo.</h2>
+    <p class="lede">Real photos of your own work beat anything we could buy. Even phone photos.</p>
+
+    <div class="note">
+      <b>No uploading here on purpose.</b> Send us a link to a folder instead — it's faster for you and nothing gets stuck at an attachment limit. If you don't have a folder, tick the box and we'll make one and send it over.
+    </div>
+
+    <div class="field" data-key="assets_link">
+      <label class="lbl">Link to a Google Drive or Dropbox folder
+        <small>Set it to &ldquo;anyone with the link can view&rdquo; and paste it here.</small>
+      </label>
+      <input type="text" id="assets_link" placeholder="https://drive.google.com/drive/folders/...">
+    </div>
+
+    <div class="field" data-key="assets_help">
+      <label class="lbl">Don't have one?</label>
+      <div class="stack">
+        <label class="chkline"><input type="checkbox" data-group="assets_help" value="Send me a folder to drop things into">
+          <span><b>Send me a folder</b><small>We'll create one, share it with the email above, and you drag things in whenever.</small></span></label>
+        <label class="chkline"><input type="checkbox" data-group="assets_help" value="Photos are on my phone - I will text them">
+          <span><b>They're on my phone — I'll text them</b><small>Text to (316) 799-0169. Send more than you think we need.</small></span></label>
+        <label class="chkline"><input type="checkbox" data-group="assets_help" value="Pull them from my Facebook / current site">
+          <span><b>Just pull them off my Facebook or current site</b><small>We'll take what's there. Quality varies, but it's a start.</small></span></label>
+        <label class="chkline"><input type="checkbox" data-group="assets_help" value="I have no photos - need a shoot">
+          <span><b>I don't really have any</b><small>We'll talk about getting some taken. It's worth it.</small></span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="assets_where">
+      <label class="lbl">Where do your photos live right now?
+        <small>Helps us know what we're dealing with before we go looking.</small>
+      </label>
+      <textarea id="assets_where" placeholder="Mostly my phone camera roll. Some on the Facebook page. The logo is in an email from the guy who designed it in 2018."></textarea>
+    </div>
+
+    <div class="field" data-key="logo_status">
+      <label class="lbl">Your logo</label>
+      <div class="seg">
+        <label><input type="radio" name="logo_status" value="I have the original vector file"><span>Have the original file</span></label>
+        <label><input type="radio" name="logo_status" value="Only a PNG or JPG"><span>Only a PNG/JPG</span></label>
+        <label><input type="radio" name="logo_status" value="Only on my truck or shirts"><span>Only on trucks/shirts</span></label>
+        <label><input type="radio" name="logo_status" value="No logo yet"><span>No logo yet</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 6 ============ -->
+  <section class="step" data-name="Voice &amp; anything else">
+    <h2>How you want to sound.</h2>
+    <p class="lede">Last step. The words matter as much as the look.</p>
+
+    <div class="field" data-key="voice_tone">
+      <label class="lbl">Pick the tone</label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Straight-talking"><span>Straight-talking</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Warm and personal"><span>Warm and personal</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Professional"><span>Professional</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Confident, a bit bold"><span>Confident, a bit bold</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Funny"><span>Funny</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Technical and precise"><span>Technical and precise</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="voice_line">
+      <label class="lbl">In a sentence — how should the site sound?
+        <small>Finish this: &ldquo;It should sound like…&rdquo;</small>
+      </label>
+      <textarea id="voice_line" placeholder="Like a guy who's done this for 20 years, knows what he's talking about, and isn't going to waste your time."></textarea>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="words_use">
+        <label class="lbl">Words or phrases you always use</label>
+        <textarea id="words_use" placeholder="'Striping', never 'line marking'. 'Crew', not 'team'."></textarea>
+      </div>
+      <div class="field" data-key="words_avoid">
+        <label class="lbl">Words we should never use</label>
+        <textarea id="words_avoid" placeholder="Don't call us 'contractors'. Never say 'cheap'."></textarea>
+      </div>
+    </div>
+
+    <div class="field" data-key="notes">
+      <label class="lbl">Anything else
+        <small>Anything we didn't ask that matters. Deadlines, a competitor you're chasing, something that went wrong with the last site, a thing you've always wanted on there. This box is genuinely read.</small>
+      </label>
+      <textarea id="notes" style="min-height:150px" placeholder="Type away."></textarea>
+    </div>
+  </section>
+
+    <div class="navrow">
+      <button type="button" class="btn btn-ghost" id="backBtn">Back</button>
+      <button type="button" class="btn btn-primary" id="nextBtn">Continue <span class="arw">&rarr;</span></button>
+    </div>
+  </form>
+
+  <div class="success" id="successScreen">
+    <div class="checkwrap">
+      <svg viewBox="0 0 110 110" aria-hidden="true">
+        <circle class="check-circle" cx="55" cy="55" r="48"/>
+        <path class="check-mark" d="M34 57 L48 71 L76 41"/>
+      </svg>
+    </div>
+    <h2>Got it — thank you.</h2>
+    <p>That&rsquo;s everything we need to start. We&rsquo;ll be in touch within one business day &mdash; and if we spot a website you forgot to mention, we&rsquo;ll ask.</p>
+    <a class="btn btn-indigo" href="/">Back to ProyTech</a>
+  </div>
+
+  <div class="fallback" id="fallbackScreen">
+    <h2>That didn't go through.</h2>
+    <p>Your answers are safe below — nothing is lost. Copy them and email them to
+       <a href="mailto:hello@getproytech.com">hello@getproytech.com</a>, or hit retry.</p>
+    <pre id="fallbackData"></pre>
+    <div class="fbrow">
+      <button type="button" class="btn btn-primary" id="copyBtn">Copy my answers</button>
+      <button type="button" class="btn btn-ghost" id="retryBtn">Try sending again</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>ProyTech · Wichita, KS · <a href="/">getproytech.com</a></footer>
+
+<script>
+window.ENDPOINT  = "/api/website-build";
+window.FORM_TYPE = "website_build_v1";
+window.PRETTY    = {"full_name":"Your name","business_name":"Business name — exactly as you want it written","email":"Email","phone":"Phone","best_contact":"Best way to reach you while we build","websites":"Your web addresses","more_sites":"Now think again — are there any others?","more_sites_detail":"Tell us what you can remember","domain_control":"Who controls the domain, and where is it registered?","domain_email":"Does your email run on that domain?","services":"What you sell, in your own words","phone_ringing_for":"When the phone rings because of this site, what do you want it to be?","not_a_fit":"And what would you rather not get?","service_area":"Service area","primary_action":"What should a visitor do first?","lead_destination":"Where should a new enquiry land?","gbp_status":"Google Business Profile","ref_sites":"Any site whose look you like","ref_likes":"What is it you like about them?","dislikes":"Anything you definitely don't want","vibe":"Pick a few words that should describe it","colors_fonts":"Colours or fonts we should stick to","assets_link":"Link to a Google Drive or Dropbox folder","assets_help":"Don't have one?","assets_where":"Where do your photos live right now?","logo_status":"Your logo","voice_tone":"Pick the tone","voice_line":"In a sentence — how should the site sound?","words_use":"Words or phrases you always use","words_avoid":"Words we should never use","notes":"Anything else"};
+</script>
+<script>
+(function(){
+"use strict";
+
+var steps   = Array.prototype.slice.call(document.querySelectorAll(".step"));
+var current = 0;
+var formData = {};
+
+/* ---------- repeaters ---------- */
+function repRows(rep){ return Array.prototype.slice.call(rep.querySelectorAll(".rep-row")); }
+
+function repSerialize(rep){
+  var out = [];
+  repRows(rep).forEach(function(row){
+    var txt = row.querySelector("input[type=text],input[type=url],input[type=tel]");
+    var sel = row.querySelector("select");
+    var v = txt ? txt.value.trim() : "";
+    if (!v) return;
+    out.push(sel && sel.value ? v + " — " + sel.value : v);
+  });
+  return out.join("\n");
+}
+
+function repSyncDelete(rep){
+  var rows = repRows(rep);
+  rows.forEach(function(row){
+    var del = row.querySelector(".rep-del");
+    if (del) del.style.visibility = rows.length > 1 ? "visible" : "hidden";
+  });
+}
+
+function repAddRow(rep, value, selValue, focus){
+  var tpl = rep.getAttribute("data-tpl") || "";
+  var row = document.createElement("div");
+  row.className = "rep-row";
+  row.innerHTML = tpl;
+  rep.appendChild(row);
+  var txt = row.querySelector("input");
+  var sel = row.querySelector("select");
+  if (txt && value) txt.value = value;
+  if (sel && selValue) sel.value = selValue;
+  var del = row.querySelector(".rep-del");
+  if (del) del.addEventListener("click", function(){
+    if (repRows(rep).length <= 1){
+      var t = row.querySelector("input"); if (t) t.value = "";
+      var s = row.querySelector("select"); if (s) s.selectedIndex = 0;
+      return;
+    }
+    row.remove();
+    repSyncDelete(rep);
+  });
+  repSyncDelete(rep);
+  if (focus && txt) try { txt.focus(); } catch(e){}
+  return row;
+}
+
+Array.prototype.forEach.call(document.querySelectorAll(".rep"), function(rep){
+  /* capture the first row's markup as the template, then wire existing rows */
+  var first = rep.querySelector(".rep-row");
+  if (first && !rep.getAttribute("data-tpl")) rep.setAttribute("data-tpl", first.innerHTML);
+  repRows(rep).forEach(function(row){
+    var del = row.querySelector(".rep-del");
+    if (del) del.addEventListener("click", function(){
+      if (repRows(rep).length <= 1){
+        var t = row.querySelector("input"); if (t) t.value = "";
+        var s = row.querySelector("select"); if (s) s.selectedIndex = 0;
+        return;
+      }
+      row.remove(); repSyncDelete(rep);
+    });
+  });
+  repSyncDelete(rep);
+});
+
+Array.prototype.forEach.call(document.querySelectorAll("[data-rep-add]"), function(btn){
+  btn.addEventListener("click", function(){
+    var rep = document.querySelector('.rep[data-rep="'+btn.getAttribute("data-rep-add")+'"]');
+    if (rep) repAddRow(rep, "", "", true);
+  });
+});
+
+/* ---------- reading values ---------- */
+function readField(key){
+  var rep = document.querySelector('.rep[data-rep="'+key+'"]');
+  if (rep) return repSerialize(rep);
+
+  var boxes = document.querySelectorAll('input[type=checkbox][data-group="'+key+'"]');
+  if (boxes.length){
+    var vals = [];
+    Array.prototype.forEach.call(boxes, function(b){ if (b.checked) vals.push(b.value); });
+    return vals.join(", ");
+  }
+  var radio = document.querySelector('input[type=radio][name="'+key+'"]:checked');
+  if (radio) return radio.value;
+  if (document.querySelector('input[type=radio][name="'+key+'"]')) return "";
+
+  var el = document.getElementById(key);
+  return el ? String(el.value).trim() : "";
+}
+
+var FIELD_KEYS = [];
+Array.prototype.forEach.call(document.querySelectorAll("[data-key]"), function(f){
+  var k = f.getAttribute("data-key");
+  if (k && FIELD_KEYS.indexOf(k) === -1) FIELD_KEYS.push(k);
+});
+
+function saveAll(){ FIELD_KEYS.forEach(function(k){ formData[k] = readField(k); }); }
+
+function buildPayload(){
+  saveAll();
+  var p = { form_type: window.FORM_TYPE || "", page: location.pathname };
+  FIELD_KEYS.forEach(function(k){ p[k] = formData[k] || ""; });
+  return p;
+}
+window.__buildPayload = buildPayload;
+
+/* ---------- conditional reveals ---------- */
+function syncReveals(){
+  Array.prototype.forEach.call(document.querySelectorAll("[data-show-when]"), function(el){
+    var spec = el.getAttribute("data-show-when").split("=");
+    var val  = readField(spec[0]);
+    var want = spec.slice(1).join("=");
+    var on   = want.split("|").indexOf(val) !== -1;
+    el.style.display = on ? "" : "none";
+  });
+}
+document.addEventListener("change", syncReveals);
+document.addEventListener("input", syncReveals);
+
+/* ---------- validation ---------- */
+function validateField(f){
+  if (f.offsetParent === null && f.style.display === "none") return true; /* hidden reveal */
+  var key = f.getAttribute("data-key");
+  var val = readField(key);
+  var required = f.hasAttribute("data-required");
+  var type = f.getAttribute("data-type");
+  var msg = "";
+  if (required && !val) msg = f.getAttribute("data-msg") || "This one we really need.";
+  else if (val && type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) msg = f.getAttribute("data-msg") || "That email doesn't look quite right.";
+  else if (val && type === "phone" && val.replace(/\D/g,"").length < 10) msg = f.getAttribute("data-msg") || "That number looks a little short.";
+  var err = f.querySelector(".errmsg");
+  if (msg){ f.classList.add("invalid"); if (err) err.textContent = msg; return false; }
+  f.classList.remove("invalid");
+  return true;
+}
+
+function validateStep(i){
+  var ok = true, firstBad = null;
+  Array.prototype.forEach.call(steps[i].querySelectorAll(".field"), function(f){
+    if (!validateField(f)){ ok = false; if (!firstBad) firstBad = f; }
+  });
+  if (firstBad){
+    try { firstBad.scrollIntoView({behavior:"smooth", block:"center"}); } catch(e){}
+    var inp = firstBad.querySelector("input,select,textarea");
+    if (inp) try { inp.focus({preventScroll:true}); } catch(e){ inp.focus(); }
+  }
+  return ok;
+}
+
+Array.prototype.forEach.call(document.querySelectorAll(".field[data-required], .field[data-type]"), function(f){
+  f.addEventListener("input",  function(){ if (f.classList.contains("invalid")) validateField(f); });
+  f.addEventListener("change", function(){ if (f.classList.contains("invalid")) validateField(f); });
+});
+
+/* ---------- navigation ---------- */
+var backBtn = document.getElementById("backBtn");
+var nextBtn = document.getElementById("nextBtn");
+var ptrack  = document.getElementById("ptrack").children;
+
+function show(i){
+  steps.forEach(function(s, idx){ s.classList.toggle("active", idx === i); });
+  current = i;
+  for (var j = 0; j < ptrack.length; j++) ptrack[j].classList.toggle("done", j <= i);
+  document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + steps.length;
+  document.getElementById("pname").textContent = steps[i].getAttribute("data-name");
+  backBtn.style.visibility = i === 0 ? "hidden" : "visible";
+  nextBtn.innerHTML = i === steps.length - 1
+    ? 'Send it in <span class="arw">&rarr;</span>'
+    : 'Continue <span class="arw">&rarr;</span>';
+  try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+}
+
+backBtn.addEventListener("click", function(){ saveAll(); if (current > 0) show(current - 1); });
+nextBtn.addEventListener("click", function(){
+  if (!validateStep(current)) return;
+  saveAll();
+  if (current < steps.length - 1) show(current + 1); else submitForm();
+});
+
+/* Enter advances instead of submitting the form early */
+document.getElementById("mainForm").addEventListener("keydown", function(e){
+  if (e.key === "Enter" && e.target.tagName !== "TEXTAREA"){ e.preventDefault(); nextBtn.click(); }
+});
+
+/* ---------- prefill from URL (?business_name=...&websites=a.com,b.com) ---------- */
+(function prefill(){
+  var q;
+  try { q = new URLSearchParams(location.search); } catch(e){ return; }
+  q.forEach(function(value, key){
+    if (!value) return;
+    var rep = document.querySelector('.rep[data-rep="'+key+'"]');
+    if (rep){
+      var parts = value.split(",").map(function(s){ return s.trim(); }).filter(Boolean);
+      if (!parts.length) return;
+      repRows(rep).forEach(function(r, i){ if (i > 0) r.remove(); });
+      var firstRow = repRows(rep)[0];
+      var firstInput = firstRow && firstRow.querySelector("input");
+      if (firstInput) firstInput.value = parts[0];
+      parts.slice(1).forEach(function(p){ repAddRow(rep, p, "", false); });
+      repSyncDelete(rep);
+      return;
+    }
+    var el = document.getElementById(key);
+    if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT")) el.value = value;
+  });
+  var who = q.get("client_label");
+  if (who){
+    var slot = document.getElementById("clientLabel");
+    if (slot){ slot.textContent = who; slot.parentElement.style.display = ""; }
+  }
+  syncReveals();
+})();
+
+/* ---------- submit ---------- */
+function prettyText(p){
+  return FIELD_KEYS.map(function(k){
+    var label = (window.PRETTY && window.PRETTY[k]) || k.replace(/_/g," ");
+    return label + ": " + (p[k] || "—");
+  }).join("\n");
+}
+
+function submitForm(){
+  var payload = buildPayload();
+  nextBtn.disabled = true;
+  nextBtn.textContent = "Sending…";
+
+  fetch(window.ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).then(function(r){
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json ? r.json().catch(function(){ return {}; }) : {};
+  }).then(function(){
+    document.getElementById("mainForm").style.display = "none";
+    document.getElementById("progress").style.display = "none";
+    document.getElementById("fallbackScreen").classList.remove("show");
+    document.getElementById("successScreen").classList.add("show");
+    try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+  }).catch(function(){
+    nextBtn.disabled = false;
+    nextBtn.innerHTML = 'Send it in <span class="arw">&rarr;</span>';
+    document.getElementById("mainForm").style.display = "none";
+    document.getElementById("progress").style.display = "none";
+    document.getElementById("fallbackData").textContent = prettyText(payload);
+    document.getElementById("fallbackScreen").classList.add("show");
+    try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+  });
+}
+
+document.getElementById("copyBtn").addEventListener("click", function(){
+  var text = document.getElementById("fallbackData").textContent;
+  var btn = this;
+  function done(){ btn.textContent = "Copied ✓"; setTimeout(function(){ btn.textContent = "Copy my answers"; }, 2000); }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
+  } else fallbackCopy(text, done);
+});
+
+function fallbackCopy(text, done){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+document.getElementById("retryBtn").addEventListener("click", function(){
+  document.getElementById("fallbackScreen").classList.remove("show");
+  document.getElementById("mainForm").style.display = "";
+  document.getElementById("progress").style.display = "";
+  show(steps.length - 1);
+  submitForm();
+});
+
+syncReveals();
+show(0);
+})();
+
+</script>
+</body>
+</html>

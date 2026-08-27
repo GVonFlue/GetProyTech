@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Business Suite setup · ProyTech</title>
+<meta name="description" content="How your business actually runs, so we can build the system around it. About ten minutes." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#181530" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#FBFAF8; --ink:#12142B; --muted:#63667A; --line:#ECE9E3; --card:#fff;
+  --accent:#FF4D14; --accent-soft:rgba(255,77,20,.13);
+  --indigo:#3A4AE0; --indigo-soft:rgba(58,74,224,.12);
+  --sb:#181530; --err:#C0392B; --good:#137A46;
+  --shadow:0 34px 80px -36px rgba(20,22,55,.34); --r:22px; --maxw:780px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.015em;line-height:1.12;color:var(--ink)}
+a{color:var(--indigo)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+.topbar{background:var(--sb);padding:16px 0}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.wordmark{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.2rem;color:#fff;text-decoration:none;display:flex;align-items:center}
+.wordmark b{color:var(--accent)}
+.logo-img{height:40px;width:auto;display:block}
+@media(max-width:520px){.logo-img{height:32px}}
+.topbar .tag{font-size:.8rem;color:rgba(255,255,255,.6);font-weight:500}
+@media(max-width:560px){.topbar .tag{display:none}}
+
+.hero{background:var(--sb);color:#fff;padding:40px 0 108px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-150px;top:-160px;width:440px;height:440px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(58,74,224,.42), rgba(58,74,224,0) 68%);pointer-events:none}
+.kicker{font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:.7rem;color:#A9AECD;display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+.kicker::before{content:"";width:22px;height:2px;background:var(--accent)}
+.hero h1{color:#fff;font-size:clamp(2rem,5.6vw,3rem);margin-bottom:12px}
+.hero p{color:rgba(255,255,255,.78);font-size:1.05rem;max-width:580px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
+  margin-top:-68px;position:relative;z-index:2;padding:34px 34px 40px;margin-bottom:70px}
+@media(max-width:600px){.card{padding:26px 20px 32px;border-radius:16px}}
+
+.progress{margin-bottom:28px}
+.ptrack{display:flex;gap:6px;margin-bottom:10px}
+.ptrack i{flex:1;height:6px;border-radius:99px;background:var(--line);transition:background .3s}
+.ptrack i.done{background:var(--accent)}
+.plabel{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--muted);gap:12px}
+.plabel .cur{color:var(--ink)}
+
+.step{display:none;animation:fadeUp .35s ease both}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.step h2{font-size:1.65rem;margin-bottom:6px}
+.step .lede{color:var(--muted);margin-bottom:24px;font-size:.97rem}
+
+.field{margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+label.lbl{display:block;font-weight:600;font-size:.92rem;margin-bottom:7px;color:var(--ink)}
+label.lbl small{display:block;font-weight:400;color:var(--muted);font-size:.83rem;margin-top:2px;line-height:1.45}
+.req{color:var(--accent);font-weight:700}
+input[type=text],input[type=tel],input[type=email],input[type=url],select,textarea{
+  width:100%;font:inherit;font-size:1rem;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;
+  background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2363667A' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;padding-right:40px}
+textarea{min-height:108px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px var(--indigo-soft)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--err)}
+.errmsg{display:none;color:var(--err);font-size:.84rem;font-weight:500;margin-top:6px}
+.field.invalid .errmsg{display:block}
+
+.note{background:#F4F2FF;border:1.5px solid #DDD9F7;border-left:4px solid var(--indigo);border-radius:12px;padding:14px 16px;margin-bottom:22px;font-size:.9rem}
+.note b{color:var(--ink)}
+.flag{background:#FFF4EF;border:1.5px solid #FFDCCB;border-left:4px solid var(--accent);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:.9rem}
+.flag b{color:var(--ink)}
+
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:10px 17px;border:1.5px solid var(--line);border-radius:999px;font-weight:500;font-size:.92rem;
+  color:var(--ink);background:#fff;cursor:pointer;transition:all .15s;user-select:none}
+.chip input:checked + span{background:var(--sb);border-color:var(--sb);color:#fff}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px var(--indigo-soft)}
+
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;flex-wrap:wrap;background:#fff}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:inline-block;padding:12px 20px;font-weight:600;font-size:.92rem;cursor:pointer;color:var(--muted);transition:all .15s}
+.seg label + label span{border-left:1.5px solid var(--line)}
+.seg input:checked + span{background:var(--accent);color:#fff}
+
+/* repeater */
+.rep{border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.rep-row{display:flex;gap:10px;align-items:flex-start;padding:12px 14px}
+.rep-row + .rep-row{border-top:1px solid var(--line)}
+.rep-row .grow{flex:1 1 auto;min-width:0}
+.rep-row select{flex:0 0 172px;width:172px}
+@media(max-width:600px){.rep-row{flex-wrap:wrap}.rep-row select{flex:1 1 100%;width:100%}}
+.rep-del{flex:0 0 auto;width:42px;height:48px;border:0;background:transparent;color:var(--muted);font-size:1.35rem;cursor:pointer;border-radius:10px;line-height:1}
+.rep-del:hover{background:#FFF4EF;color:var(--err)}
+.rep-add{margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px dashed var(--line);color:var(--ink);
+  font-weight:600;font-size:.92rem;padding:12px 18px;border-radius:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.rep-add:hover{border-color:var(--accent);color:var(--accent)}
+
+.stack{display:flex;flex-direction:column;gap:10px}
+.chkline{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;background:#fff;transition:background .12s}
+.chkline:hover{background:var(--bg)}
+.chkline input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:0 0 auto;cursor:pointer}
+.chkline b{font-weight:600;font-size:.95rem}
+.chkline small{display:block;color:var(--muted);font-size:.84rem;line-height:1.45}
+
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:1rem;font-family:inherit;
+  padding:15px 30px;border-radius:12px;border:0;cursor:pointer;transition:transform .14s,box-shadow .14s,background .14s;text-decoration:none}
+.btn .arw{transition:transform .14s}
+.btn:hover .arw{transform:translateX(4px)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 26px -8px rgba(255,77,20,.55)}
+.btn-primary:hover{transform:translateY(-2px);background:#ff6231}
+.btn-primary:disabled{opacity:.6;cursor:wait;transform:none}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-indigo{background:var(--indigo);color:#fff}
+.btn-indigo:hover{transform:translateY(-2px)}
+
+.success{display:none;text-align:center;padding:28px 0 10px;animation:fadeUp .4s ease both}
+.success.show{display:block}
+.checkwrap{width:104px;height:104px;margin:0 auto 24px}
+.checkwrap svg{width:100%;height:100%}
+.check-circle{stroke:var(--accent);stroke-width:4;fill:none;stroke-dasharray:302;stroke-dashoffset:302;animation:draw .7s .1s ease-out forwards}
+.check-mark{stroke:var(--accent);stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw .45s .65s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.success h2{font-size:1.85rem;margin-bottom:10px}
+.success p{color:var(--muted);font-size:1.03rem;max-width:470px;margin:0 auto 18px}
+
+.fallback{display:none;animation:fadeUp .35s ease both}
+.fallback.show{display:block}
+.fallback h2{font-size:1.45rem;margin-bottom:8px}
+.fallback p{color:var(--muted);margin-bottom:16px;font-size:.94rem}
+.fallback pre{background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:18px;font-size:.82rem;
+  line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:340px;overflow:auto;margin-bottom:16px}
+.fbrow{display:flex;flex-wrap:wrap;gap:12px}
+footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="ProyTech"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy&lt;b&gt;Tech&lt;/b&gt;')"></a>
+    <div class="tag">Business Suite setup · ~10 minutes</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">ProyTech onboarding · Business Suite</div>
+    <h1>Let&rsquo;s build this around how you work.</h1>
+    <p>Six short steps. We&rsquo;re asking how your business actually runs today &mdash; messy answers are the useful ones.</p>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="card">
+
+  <div class="progress" id="progress">
+    <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="plabel"><span id="pstep" class="cur">Step 1 of 6</span><span id="pname">The basics</span></div>
+  </div>
+
+  <p style="display:none;margin:-14px 0 22px;font-size:.9rem;color:var(--muted)">Prepared for <b id="clientLabel"></b></p>
+
+  <form id="mainForm" novalidate>
+
+  <!-- ============ STEP 1 ============ -->
+  <section class="step active" data-name="The basics">
+    <h2>First, the basics.</h2>
+    <p class="lede">Four quick ones. The whole thing takes about ten minutes.</p>
+
+    <div class="field" data-key="full_name" data-required data-msg="We need a name to put on this.">
+      <label class="lbl" for="full_name">Your name <span class="req">*</span></label>
+      <input type="text" id="full_name" autocomplete="name" placeholder="Jane Rivera">
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="business_name" data-required data-msg="This is the one we really can't guess.">
+      <label class="lbl" for="business_name">Business name — exactly as you want it written <span class="req">*</span>
+        <small>This goes on every quote, invoice and automatic email the system sends out, so type it the way it should appear — capitals and all.</small>
+      </label>
+      <input type="text" id="business_name" placeholder="Kleen Stripe">
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="email" data-type="email" data-required>
+        <label class="lbl" for="email">Email <span class="req">*</span>
+          <small>This becomes your owner login.</small>
+        </label>
+        <input type="email" id="email" autocomplete="email" placeholder="you@yourbusiness.com">
+        <div class="errmsg"></div>
+      </div>
+      <div class="field" data-key="phone" data-type="phone" data-required>
+        <label class="lbl" for="phone">Phone <span class="req">*</span></label>
+        <input type="tel" id="phone" autocomplete="tel" placeholder="(316) 555-0142">
+        <div class="errmsg"></div>
+      </div>
+    </div>
+
+    <div class="field" data-key="best_contact">
+      <label class="lbl">Best way to reach you during setup</label>
+      <div class="seg">
+        <label><input type="radio" name="best_contact" value="Text"><span>Text</span></label>
+        <label><input type="radio" name="best_contact" value="Call"><span>Call</span></label>
+        <label><input type="radio" name="best_contact" value="Email"><span>Email</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 2 ============ -->
+  <section class="step" data-name="Your websites">
+    <h2>Every website you have.</h2>
+    <p class="lede">The suite has to talk to all of them, not just the main one.</p>
+
+    <div class="flag">
+      <b>Worth slowing down here.</b> Every site you own is a place a lead can come in from. If we don't know a site exists, its enquiries never reach the system — they keep landing in an inbox nobody checks. Separate reviews sites, old sites, ad landing pages and booking pages all count.
+    </div>
+
+    <div class="field" data-key="websites" data-required data-msg="Add at least one — or type &quot;none&quot; if you have no web presence yet.">
+      <label class="lbl">Your web addresses <span class="req">*</span>
+        <small>One per row, and tell us what each is for.</small>
+      </label>
+      <div class="rep" data-rep="websites">
+        <div class="rep-row">
+          <div class="grow"><input type="text" placeholder="yourbusiness.com"></div>
+          <select aria-label="What this site is">
+            <option value="">What is it?</option>
+            <option>Main site</option>
+            <option>Reviews site</option>
+            <option>Landing page from an ad</option>
+            <option>Old site we still own</option>
+            <option>Booking / scheduling page</option>
+            <option>Facebook page we use as our site</option>
+            <option>Domain we own but never built</option>
+            <option>Other</option>
+          </select>
+          <button type="button" class="rep-del" aria-label="Remove this row">&times;</button>
+        </div>
+      </div>
+      <button type="button" class="rep-add" data-rep-add="websites">+ Add another website</button>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="more_sites">
+      <label class="lbl">Think again — any others?
+        <small>Old domains, something a family member built, a directory or franchise page, an address you bought and never used.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="more_sites" value="No, that is all of them"><span>That's all of them</span></label>
+        <label><input type="radio" name="more_sites" value="Yes, there are more"><span>Actually, yes</span></label>
+        <label><input type="radio" name="more_sites" value="Not sure"><span>Not sure</span></label>
+      </div>
+    </div>
+
+    <div data-show-when="more_sites=Yes, there are more|Not sure">
+      <div class="field" data-key="more_sites_detail">
+        <label class="lbl">Tell us what you can remember</label>
+        <textarea id="more_sites_detail" placeholder="There's an old one from 2019, something like kleenstripewichita.com."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 3 ============ -->
+  <section class="step" data-name="What you track today">
+    <h2>How you keep track right now.</h2>
+    <p class="lede">Be honest — &ldquo;a notebook and my memory&rdquo; is a completely normal answer, and it's easier to work with than a half-abandoned system.</p>
+
+    <div class="field" data-key="track_today">
+      <label class="lbl">What you use today
+        <small>Tick everything that's actually in use, even the scrappy ones.</small>
+      </label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Paper notebook"><span>Paper notebook</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Whiteboard"><span>Whiteboard</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Texts"><span>Texts</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Notes app on my phone"><span>Notes app</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Spreadsheet"><span>Spreadsheet</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Email inbox"><span>My inbox</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="QuickBooks"><span>QuickBooks</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Jobber / Housecall / ServiceTitan"><span>Jobber / Housecall / ServiceTitan</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Another CRM"><span>Another CRM</span></label>
+        <label class="chip"><input type="checkbox" data-group="track_today" value="Nothing formal"><span>Nothing formal</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="track_detail" data-required data-msg="A couple of sentences is plenty — this shapes the whole build.">
+      <label class="lbl">Walk us through how it actually works <span class="req">*</span>
+        <small>A call comes in — then what? Where does the name get written down, who writes it, and how does anyone know to follow up? Warts and all.</small>
+      </label>
+      <textarea id="track_detail" style="min-height:130px" placeholder="Call comes to my cell. I write it on a legal pad in the truck. If I remember, I text the address to my foreman that night. Quotes go out from my email. Half the time I forget to follow up on the ones that don't call back."></textarea>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="biggest_pain">
+      <label class="lbl">What falls through the cracks most often?
+        <small>The thing that annoys you every week. This is usually the first thing we fix.</small>
+      </label>
+      <textarea id="biggest_pain" placeholder="Quotes I sent and never chased. I know I'm losing jobs to it."></textarea>
+    </div>
+
+    <div class="field" data-key="lead_sources">
+      <label class="lbl">Where do leads come from?
+        <small>So we can wire each one into the system instead of leaving it in a separate app.</small>
+      </label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Phone calls"><span>Phone calls</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Website form"><span>Website form</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Facebook / Instagram"><span>Facebook / Instagram</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Google Business Profile"><span>Google listing</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Angi / Thumbtack / HomeAdvisor"><span>Angi / Thumbtack</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Word of mouth / referrals"><span>Referrals</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Repeat customers"><span>Repeat customers</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Bids / tenders"><span>Bids / tenders</span></label>
+        <label class="chip"><input type="checkbox" data-group="lead_sources" value="Trucks and signage"><span>Trucks & signage</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="tools_keep">
+      <label class="lbl">Anything you want to keep using?
+        <small>QuickBooks usually stays. Tell us what's working so we build around it instead of over it.</small>
+      </label>
+      <input type="text" id="tools_keep" placeholder="Keep QuickBooks for invoicing. Everything else can go.">
+    </div>
+
+    <div class="field" data-key="import_data">
+      <label class="lbl">Do you have a customer list to bring across?</label>
+      <div class="seg">
+        <label><input type="radio" name="import_data" value="Yes, in a spreadsheet or export"><span>Yes, I have a list</span></label>
+        <label><input type="radio" name="import_data" value="Yes, but it is messy or on paper"><span>Yes, but it's messy</span></label>
+        <label><input type="radio" name="import_data" value="No, start fresh"><span>Start fresh</span></label>
+      </div>
+    </div>
+
+    <div data-show-when="import_data=Yes, in a spreadsheet or export|Yes, but it is messy or on paper">
+      <div class="field" data-key="import_link">
+        <label class="lbl">Link to it, or tell us where it lives
+          <small>Drive or Dropbox link is easiest. If it's paper, just say so — we'll sort it out.</small>
+        </label>
+        <input type="text" id="import_link" placeholder="https://drive.google.com/... — or 'it's a QuickBooks export I can send'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 4 ============ -->
+  <section class="step" data-name="Your pipeline">
+    <h2>The stages a job moves through.</h2>
+    <p class="lede">These become the columns on your board — where every lead sits at a glance.</p>
+
+    <div class="note">
+      <b>We've filled in the usual ones.</b> Don't start from a blank page. Change the wording to match what you'd actually say out loud, delete any you don't use, add the ones we missed. If a customer would recognise the word, it's the right word.
+    </div>
+
+    <div class="field" data-key="stages" data-required data-msg="Leave at least one stage in place.">
+      <label class="lbl">Your stages, in order <span class="req">*</span>
+        <small>Top to bottom, first contact through to done and paid.</small>
+      </label>
+      <div class="rep" data-rep="stages">
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="New lead" placeholder="Stage name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Contacted" placeholder="Stage name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Quoted" placeholder="Stage name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Scheduled" placeholder="Stage name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Job done" placeholder="Stage name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Invoiced" placeholder="Stage name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Paid" placeholder="Stage name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+      </div>
+      <button type="button" class="rep-add" data-rep-add="stages">+ Add a stage</button>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="stages_notes">
+      <label class="lbl">Anything unusual about how a job moves?
+        <small>Site visits before quoting, deposits, permits, a second crew, weather delays, seasonal work — the things a generic pipeline gets wrong.</small>
+      </label>
+      <textarea id="stages_notes" placeholder="Commercial jobs need a walk-through and a written bid before quoting. Anything over $5k takes a 30% deposit. We can't stripe below 50 degrees, so November to March jobs get parked."></textarea>
+    </div>
+
+    <div class="field" data-key="after_won">
+      <label class="lbl">What happens once a job is won?
+        <small>Most systems stop at &ldquo;won&rdquo; and that's exactly where the money is. Deposits, scheduling the crew, invoicing, asking for the review, the follow-up next season.</small>
+      </label>
+      <textarea id="after_won" placeholder="Book the crew, send the deposit invoice, add to the calendar. After the job: final invoice, then ask for a Google review. Re-stripe reminder about 11 months later."></textarea>
+    </div>
+
+    <div class="field" data-key="notify_who">
+      <label class="lbl">When a new lead comes in, who needs to know — and how?
+        <small>The single most important automation in the whole system, and the easiest one to get wrong.</small>
+      </label>
+      <input type="text" id="notify_who" placeholder="Text me immediately. Email the office. Foreman only once it's scheduled.">
+    </div>
+  </section>
+
+  <!-- ============ STEP 5 ============ -->
+  <section class="step" data-name="Your team">
+    <h2>Who's on the team.</h2>
+    <p class="lede">And, more to the point, what each of them should be able to see.</p>
+
+    <div class="note">
+      <b>The access column is the one to think about.</b> Most owners don't want the crew seeing what a job sold for, or one salesperson seeing another's leads. Set it here and we build it in from day one — it's fiddly to unpick later.
+    </div>
+
+    <div class="field" data-key="team" data-required data-msg="At least yourself — you're on the team too.">
+      <label class="lbl">Everyone who needs a login <span class="req">*</span>
+        <small>Name and role in the first box, access level on the right. Include yourself.</small>
+      </label>
+      <div class="rep" data-rep="team">
+        <div class="rep-row">
+          <div class="grow"><input type="text" placeholder="Jane Rivera — owner"></div>
+          <select aria-label="What this person can see">
+            <option value="">What can they see?</option>
+            <option>Everything, including money</option>
+            <option>Everything except money</option>
+            <option>Their own leads and jobs only</option>
+            <option>Their team&#39;s leads and jobs</option>
+            <option>Schedule and job details, no pricing</option>
+            <option>Read-only</option>
+          </select>
+          <button type="button" class="rep-del" aria-label="Remove this person">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" placeholder="Name — role"></div>
+          <select aria-label="What this person can see">
+            <option value="">What can they see?</option>
+            <option>Everything, including money</option>
+            <option>Everything except money</option>
+            <option>Their own leads and jobs only</option>
+            <option>Their team&#39;s leads and jobs</option>
+            <option>Schedule and job details, no pricing</option>
+            <option>Read-only</option>
+          </select>
+          <button type="button" class="rep-del" aria-label="Remove this person">&times;</button>
+        </div>
+      </div>
+      <button type="button" class="rep-add" data-rep-add="team">+ Add someone</button>
+      <div class="errmsg"></div>
+    </div>
+
+    <div class="field" data-key="team_growth">
+      <label class="lbl">Anyone joining soon, or seasonal help?
+        <small>Cheaper to plan the seats now than to retrofit in spring.</small>
+      </label>
+      <input type="text" id="team_growth" placeholder="Two seasonal crew every April. Hiring an office manager this fall.">
+    </div>
+
+    <div class="field" data-key="team_notes">
+      <label class="lbl">Anything else about the team
+        <small>Who's comfortable with tech and who isn't, who works from a phone in a truck all day, anyone who'll need hand-holding. Genuinely changes how we build it.</small>
+      </label>
+      <textarea id="team_notes" placeholder="My foreman is 58 and hates apps. If it's not one button on a phone he won't use it."></textarea>
+    </div>
+  </section>
+
+  <!-- ============ STEP 6 ============ -->
+  <section class="step" data-name="Voice &amp; anything else">
+    <h2>How it should sound.</h2>
+    <p class="lede">The system sends quotes, reminders and follow-ups in your name. Last step.</p>
+
+    <div class="field" data-key="voice_tone">
+      <label class="lbl">Pick the tone</label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Straight-talking"><span>Straight-talking</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Warm and personal"><span>Warm and personal</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Professional"><span>Professional</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Confident, a bit bold"><span>Confident, a bit bold</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Funny"><span>Funny</span></label>
+        <label class="chip"><input type="checkbox" data-group="voice_tone" value="Technical and precise"><span>Technical and precise</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="voice_line">
+      <label class="lbl">In a sentence — how should a message from you read?
+        <small>Finish this: &ldquo;A text from us should sound like…&rdquo;</small>
+      </label>
+      <textarea id="voice_line" placeholder="Like it came from me, not a robot. Short. First names. No 'Dear Valued Customer'."></textarea>
+    </div>
+
+    <div class="grid2">
+      <div class="field" data-key="words_use">
+        <label class="lbl">Words you always use</label>
+        <textarea id="words_use" placeholder="'Crew', not 'team'. 'Job', not 'project'."></textarea>
+      </div>
+      <div class="field" data-key="words_avoid">
+        <label class="lbl">Words we should never use</label>
+        <textarea id="words_avoid" placeholder="Never 'Dear Valued Customer'. No exclamation marks."></textarea>
+      </div>
+    </div>
+
+    <div class="field" data-key="signoff">
+      <label class="lbl">How should texts and emails sign off?
+        <small>Exactly as you'd type it.</small>
+      </label>
+      <input type="text" id="signoff" placeholder="— Jane, Kleen Stripe">
+    </div>
+
+    <div class="field" data-key="google_account">
+      <label class="lbl">Which Google account should we share the setup with?
+        <small>Calendar and Drive hook into the suite. If it's the same as your email above, leave this blank.</small>
+      </label>
+      <input type="text" id="google_account" placeholder="office@kleenstripe.com">
+    </div>
+
+    <div class="field" data-key="notes">
+      <label class="lbl">Anything else
+        <small>Anything we didn't ask that matters. A report you wish you had, a number you can never find, something a previous system did badly. This box is genuinely read.</small>
+      </label>
+      <textarea id="notes" style="min-height:150px" placeholder="Type away."></textarea>
+    </div>
+  </section>
+
+    <div class="navrow">
+      <button type="button" class="btn btn-ghost" id="backBtn">Back</button>
+      <button type="button" class="btn btn-primary" id="nextBtn">Continue <span class="arw">&rarr;</span></button>
+    </div>
+  </form>
+
+  <div class="success" id="successScreen">
+    <div class="checkwrap">
+      <svg viewBox="0 0 110 110" aria-hidden="true">
+        <circle class="check-circle" cx="55" cy="55" r="48"/>
+        <path class="check-mark" d="M34 57 L48 71 L76 41"/>
+      </svg>
+    </div>
+    <h2>Got it — thank you.</h2>
+    <p>That&rsquo;s everything we need to start. We&rsquo;ll be in touch within one business day to walk you through what we&rsquo;re building.</p>
+    <a class="btn btn-indigo" href="/">Back to ProyTech</a>
+  </div>
+
+  <div class="fallback" id="fallbackScreen">
+    <h2>That didn't go through.</h2>
+    <p>Your answers are safe below — nothing is lost. Copy them and email them to
+       <a href="mailto:hello@getproytech.com">hello@getproytech.com</a>, or hit retry.</p>
+    <pre id="fallbackData"></pre>
+    <div class="fbrow">
+      <button type="button" class="btn btn-primary" id="copyBtn">Copy my answers</button>
+      <button type="button" class="btn btn-ghost" id="retryBtn">Try sending again</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>ProyTech · Wichita, KS · <a href="/">getproytech.com</a></footer>
+
+<script>
+window.ENDPOINT  = "/api/business-suite";
+window.FORM_TYPE = "business_suite_v1";
+window.PRETTY    = {"full_name":"Your name","business_name":"Business name — exactly as you want it written","email":"Email","phone":"Phone","best_contact":"Best way to reach you during setup","websites":"Your web addresses","more_sites":"Think again — any others?","more_sites_detail":"Tell us what you can remember","track_today":"What you use today","track_detail":"Walk us through how it actually works","biggest_pain":"What falls through the cracks most often?","lead_sources":"Where do leads come from?","tools_keep":"Anything you want to keep using?","import_data":"Do you have a customer list to bring across?","import_link":"Link to it, or tell us where it lives","stages":"Your stages, in order","stages_notes":"Anything unusual about how a job moves?","after_won":"What happens once a job is won?","notify_who":"When a new lead comes in, who needs to know — and how?","team":"Everyone who needs a login","team_growth":"Anyone joining soon, or seasonal help?","team_notes":"Anything else about the team","voice_tone":"Pick the tone","voice_line":"In a sentence — how should a message from you read?","words_use":"Words you always use","words_avoid":"Words we should never use","signoff":"How should texts and emails sign off?","google_account":"Which Google account should we share the setup with?","notes":"Anything else"};
+</script>
+<script>
+(function(){
+"use strict";
+
+var steps   = Array.prototype.slice.call(document.querySelectorAll(".step"));
+var current = 0;
+var formData = {};
+
+/* ---------- repeaters ---------- */
+function repRows(rep){ return Array.prototype.slice.call(rep.querySelectorAll(".rep-row")); }
+
+function repSerialize(rep){
+  var out = [];
+  repRows(rep).forEach(function(row){
+    var txt = row.querySelector("input[type=text],input[type=url],input[type=tel]");
+    var sel = row.querySelector("select");
+    var v = txt ? txt.value.trim() : "";
+    if (!v) return;
+    out.push(sel && sel.value ? v + " — " + sel.value : v);
+  });
+  return out.join("\n");
+}
+
+function repSyncDelete(rep){
+  var rows = repRows(rep);
+  rows.forEach(function(row){
+    var del = row.querySelector(".rep-del");
+    if (del) del.style.visibility = rows.length > 1 ? "visible" : "hidden";
+  });
+}
+
+function repAddRow(rep, value, selValue, focus){
+  var tpl = rep.getAttribute("data-tpl") || "";
+  var row = document.createElement("div");
+  row.className = "rep-row";
+  row.innerHTML = tpl;
+  rep.appendChild(row);
+  var txt = row.querySelector("input");
+  var sel = row.querySelector("select");
+  if (txt && value) txt.value = value;
+  if (sel && selValue) sel.value = selValue;
+  var del = row.querySelector(".rep-del");
+  if (del) del.addEventListener("click", function(){
+    if (repRows(rep).length <= 1){
+      var t = row.querySelector("input"); if (t) t.value = "";
+      var s = row.querySelector("select"); if (s) s.selectedIndex = 0;
+      return;
+    }
+    row.remove();
+    repSyncDelete(rep);
+  });
+  repSyncDelete(rep);
+  if (focus && txt) try { txt.focus(); } catch(e){}
+  return row;
+}
+
+Array.prototype.forEach.call(document.querySelectorAll(".rep"), function(rep){
+  /* capture the first row's markup as the template, then wire existing rows */
+  var first = rep.querySelector(".rep-row");
+  if (first && !rep.getAttribute("data-tpl")) rep.setAttribute("data-tpl", first.innerHTML);
+  repRows(rep).forEach(function(row){
+    var del = row.querySelector(".rep-del");
+    if (del) del.addEventListener("click", function(){
+      if (repRows(rep).length <= 1){
+        var t = row.querySelector("input"); if (t) t.value = "";
+        var s = row.querySelector("select"); if (s) s.selectedIndex = 0;
+        return;
+      }
+      row.remove(); repSyncDelete(rep);
+    });
+  });
+  repSyncDelete(rep);
+});
+
+Array.prototype.forEach.call(document.querySelectorAll("[data-rep-add]"), function(btn){
+  btn.addEventListener("click", function(){
+    var rep = document.querySelector('.rep[data-rep="'+btn.getAttribute("data-rep-add")+'"]');
+    if (rep) repAddRow(rep, "", "", true);
+  });
+});
+
+/* ---------- reading values ---------- */
+function readField(key){
+  var rep = document.querySelector('.rep[data-rep="'+key+'"]');
+  if (rep) return repSerialize(rep);
+
+  var boxes = document.querySelectorAll('input[type=checkbox][data-group="'+key+'"]');
+  if (boxes.length){
+    var vals = [];
+    Array.prototype.forEach.call(boxes, function(b){ if (b.checked) vals.push(b.value); });
+    return vals.join(", ");
+  }
+  var radio = document.querySelector('input[type=radio][name="'+key+'"]:checked');
+  if (radio) return radio.value;
+  if (document.querySelector('input[type=radio][name="'+key+'"]')) return "";
+
+  var el = document.getElementById(key);
+  return el ? String(el.value).trim() : "";
+}
+
+var FIELD_KEYS = [];
+Array.prototype.forEach.call(document.querySelectorAll("[data-key]"), function(f){
+  var k = f.getAttribute("data-key");
+  if (k && FIELD_KEYS.indexOf(k) === -1) FIELD_KEYS.push(k);
+});
+
+function saveAll(){ FIELD_KEYS.forEach(function(k){ formData[k] = readField(k); }); }
+
+function buildPayload(){
+  saveAll();
+  var p = { form_type: window.FORM_TYPE || "", page: location.pathname };
+  FIELD_KEYS.forEach(function(k){ p[k] = formData[k] || ""; });
+  return p;
+}
+window.__buildPayload = buildPayload;
+
+/* ---------- conditional reveals ---------- */
+function syncReveals(){
+  Array.prototype.forEach.call(document.querySelectorAll("[data-show-when]"), function(el){
+    var spec = el.getAttribute("data-show-when").split("=");
+    var val  = readField(spec[0]);
+    var want = spec.slice(1).join("=");
+    var on   = want.split("|").indexOf(val) !== -1;
+    el.style.display = on ? "" : "none";
+  });
+}
+document.addEventListener("change", syncReveals);
+document.addEventListener("input", syncReveals);
+
+/* ---------- validation ---------- */
+function validateField(f){
+  if (f.offsetParent === null && f.style.display === "none") return true; /* hidden reveal */
+  var key = f.getAttribute("data-key");
+  var val = readField(key);
+  var required = f.hasAttribute("data-required");
+  var type = f.getAttribute("data-type");
+  var msg = "";
+  if (required && !val) msg = f.getAttribute("data-msg") || "This one we really need.";
+  else if (val && type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) msg = f.getAttribute("data-msg") || "That email doesn't look quite right.";
+  else if (val && type === "phone" && val.replace(/\D/g,"").length < 10) msg = f.getAttribute("data-msg") || "That number looks a little short.";
+  var err = f.querySelector(".errmsg");
+  if (msg){ f.classList.add("invalid"); if (err) err.textContent = msg; return false; }
+  f.classList.remove("invalid");
+  return true;
+}
+
+function validateStep(i){
+  var ok = true, firstBad = null;
+  Array.prototype.forEach.call(steps[i].querySelectorAll(".field"), function(f){
+    if (!validateField(f)){ ok = false; if (!firstBad) firstBad = f; }
+  });
+  if (firstBad){
+    try { firstBad.scrollIntoView({behavior:"smooth", block:"center"}); } catch(e){}
+    var inp = firstBad.querySelector("input,select,textarea");
+    if (inp) try { inp.focus({preventScroll:true}); } catch(e){ inp.focus(); }
+  }
+  return ok;
+}
+
+Array.prototype.forEach.call(document.querySelectorAll(".field[data-required], .field[data-type]"), function(f){
+  f.addEventListener("input",  function(){ if (f.classList.contains("invalid")) validateField(f); });
+  f.addEventListener("change", function(){ if (f.classList.contains("invalid")) validateField(f); });
+});
+
+/* ---------- navigation ---------- */
+var backBtn = document.getElementById("backBtn");
+var nextBtn = document.getElementById("nextBtn");
+var ptrack  = document.getElementById("ptrack").children;
+
+function show(i){
+  steps.forEach(function(s, idx){ s.classList.toggle("active", idx === i); });
+  current = i;
+  for (var j = 0; j < ptrack.length; j++) ptrack[j].classList.toggle("done", j <= i);
+  document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + steps.length;
+  document.getElementById("pname").textContent = steps[i].getAttribute("data-name");
+  backBtn.style.visibility = i === 0 ? "hidden" : "visible";
+  nextBtn.innerHTML = i === steps.length - 1
+    ? 'Send it in <span class="arw">&rarr;</span>'
+    : 'Continue <span class="arw">&rarr;</span>';
+  try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+}
+
+backBtn.addEventListener("click", function(){ saveAll(); if (current > 0) show(current - 1); });
+nextBtn.addEventListener("click", function(){
+  if (!validateStep(current)) return;
+  saveAll();
+  if (current < steps.length - 1) show(current + 1); else submitForm();
+});
+
+/* Enter advances instead of submitting the form early */
+document.getElementById("mainForm").addEventListener("keydown", function(e){
+  if (e.key === "Enter" && e.target.tagName !== "TEXTAREA"){ e.preventDefault(); nextBtn.click(); }
+});
+
+/* ---------- prefill from URL (?business_name=...&websites=a.com,b.com) ---------- */
+(function prefill(){
+  var q;
+  try { q = new URLSearchParams(location.search); } catch(e){ return; }
+  q.forEach(function(value, key){
+    if (!value) return;
+    var rep = document.querySelector('.rep[data-rep="'+key+'"]');
+    if (rep){
+      var parts = value.split(",").map(function(s){ return s.trim(); }).filter(Boolean);
+      if (!parts.length) return;
+      repRows(rep).forEach(function(r, i){ if (i > 0) r.remove(); });
+      var firstRow = repRows(rep)[0];
+      var firstInput = firstRow && firstRow.querySelector("input");
+      if (firstInput) firstInput.value = parts[0];
+      parts.slice(1).forEach(function(p){ repAddRow(rep, p, "", false); });
+      repSyncDelete(rep);
+      return;
+    }
+    var el = document.getElementById(key);
+    if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT")) el.value = value;
+  });
+  var who = q.get("client_label");
+  if (who){
+    var slot = document.getElementById("clientLabel");
+    if (slot){ slot.textContent = who; slot.parentElement.style.display = ""; }
+  }
+  syncReveals();
+})();
+
+/* ---------- submit ---------- */
+function prettyText(p){
+  return FIELD_KEYS.map(function(k){
+    var label = (window.PRETTY && window.PRETTY[k]) || k.replace(/_/g," ");
+    return label + ": " + (p[k] || "—");
+  }).join("\n");
+}
+
+function submitForm(){
+  var payload = buildPayload();
+  nextBtn.disabled = true;
+  nextBtn.textContent = "Sending…";
+
+  fetch(window.ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).then(function(r){
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json ? r.json().catch(function(){ return {}; }) : {};
+  }).then(function(){
+    document.getElementById("mainForm").style.display = "none";
+    document.getElementById("progress").style.display = "none";
+    document.getElementById("fallbackScreen").classList.remove("show");
+    document.getElementById("successScreen").classList.add("show");
+    try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+  }).catch(function(){
+    nextBtn.disabled = false;
+    nextBtn.innerHTML = 'Send it in <span class="arw">&rarr;</span>';
+    document.getElementById("mainForm").style.display = "none";
+    document.getElementById("progress").style.display = "none";
+    document.getElementById("fallbackData").textContent = prettyText(payload);
+    document.getElementById("fallbackScreen").classList.add("show");
+    try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
+  });
+}
+
+document.getElementById("copyBtn").addEventListener("click", function(){
+  var text = document.getElementById("fallbackData").textContent;
+  var btn = this;
+  function done(){ btn.textContent = "Copied ✓"; setTimeout(function(){ btn.textContent = "Copy my answers"; }, 2000); }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text, done); });
+  } else fallbackCopy(text, done);
+});
+
+function fallbackCopy(text, done){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+document.getElementById("retryBtn").addEventListener("click", function(){
+  document.getElementById("fallbackScreen").classList.remove("show");
+  document.getElementById("mainForm").style.display = "";
+  document.getElementById("progress").style.display = "";
+  show(steps.length - 1);
+  submitForm();
+});
+
+syncReveals();
+show(0);
+})();
+
+</script>
+</body>
+</html>
