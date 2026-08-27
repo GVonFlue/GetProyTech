@@ -35,8 +35,9 @@ New routes added here:
 | `onboarding/website-build.html`  | `/api/website-build`   | `website_build`  | `Website Build`  |
 | `onboarding/business-suite.html` | `/api/business-suite`  | `business_suite` | `Business Suite` |
 
-Both new functions also send a `tab` field naming the destination tab, so a
-router can use that instead of maintaining a `type` map.
+Routing is on `type` alone, matching the existing `TABS` map in the Apps
+Script. (An earlier version also sent a redundant `tab` field; it was removed
+because it only added a constant column to every row.)
 
 > One exception worth knowing about: `onboarding/poppell.html` posts *directly*
 > to a different, hard-coded Apps Script URL. It is a one-off client form on its

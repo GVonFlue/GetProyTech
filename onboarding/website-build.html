@@ -113,6 +113,12 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--indigo);
 @media(max-width:600px){.rep-row{flex-wrap:wrap}.rep-row select{flex:1 1 100%;width:100%}}
 .rep-del{flex:0 0 auto;width:42px;height:48px;border:0;background:transparent;color:var(--muted);font-size:1.35rem;cursor:pointer;border-radius:10px;line-height:1}
 .rep-del:hover{background:#FFF4EF;color:var(--err)}
+.rep-head{display:flex;gap:10px;padding:10px 14px 0;font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rep-head span{flex:1 1 auto;min-width:0}
+.rep-head .spacer{flex:0 0 42px}
+@media(max-width:600px){.rep-head{display:none}}
+.rep-row .sidelbl{display:none;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+@media(max-width:600px){.rep-row .sidelbl{display:block}}
 .rep-add{margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px dashed var(--line);color:var(--ink);
   font-weight:600;font-size:.92rem;padding:12px 18px;border-radius:12px;cursor:pointer;transition:all .15s;font-family:inherit}
 .rep-add:hover{border-color:var(--accent);color:var(--accent)}
@@ -552,13 +558,13 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
 window.ENDPOINT  = "/api/website-build";
 window.FORM_TYPE = "website_build_v1";
 window.PRETTY    = {"full_name":"Your name","business_name":"Business name — exactly as you want it written","email":"Email","phone":"Phone","best_contact":"Best way to reach you while we build","websites":"Your web addresses","more_sites":"Now think again — are there any others?","more_sites_detail":"Tell us what you can remember","domain_control":"Who controls the domain, and where is it registered?","domain_email":"Does your email run on that domain?","services":"What you sell, in your own words","phone_ringing_for":"When the phone rings because of this site, what do you want it to be?","not_a_fit":"And what would you rather not get?","service_area":"Service area","primary_action":"What should a visitor do first?","lead_destination":"Where should a new enquiry land?","gbp_status":"Google Business Profile","ref_sites":"Any site whose look you like","ref_likes":"What is it you like about them?","dislikes":"Anything you definitely don't want","vibe":"Pick a few words that should describe it","colors_fonts":"Colours or fonts we should stick to","assets_link":"Link to a Google Drive or Dropbox folder","assets_help":"Don't have one?","assets_where":"Where do your photos live right now?","logo_status":"Your logo","voice_tone":"Pick the tone","voice_line":"In a sentence — how should the site sound?","words_use":"Words or phrases you always use","words_avoid":"Words we should never use","notes":"Anything else"};
+window.ROLE_OPTIONS_BY_VERTICAL = null;
 </script>
 <script>
 (function(){
 "use strict";
 
 var steps   = Array.prototype.slice.call(document.querySelectorAll(".step"));
-var current = 0;
 var formData = {};
 
 /* ---------- repeaters ---------- */
@@ -567,11 +573,14 @@ function repRows(rep){ return Array.prototype.slice.call(rep.querySelectorAll(".
 function repSerialize(rep){
   var out = [];
   repRows(rep).forEach(function(row){
-    var txt = row.querySelector("input[type=text],input[type=url],input[type=tel]");
-    var sel = row.querySelector("select");
-    var v = txt ? txt.value.trim() : "";
-    if (!v) return;
-    out.push(sel && sel.value ? v + " — " + sel.value : v);
+    var parts = [];
+    Array.prototype.forEach.call(
+      row.querySelectorAll("input[type=text],input[type=url],input[type=tel],select"),
+      function(el){ var v = String(el.value).trim(); if (v) parts.push(v); }
+    );
+    var first = row.querySelector("input[type=text],input[type=url],input[type=tel]");
+    if (first && !String(first.value).trim()) return;   /* blank row = skip */
+    if (parts.length) out.push(parts.join(" — "));
   });
   return out.join("\n");
 }
@@ -590,10 +599,11 @@ function repAddRow(rep, value, selValue, focus){
   row.className = "rep-row";
   row.innerHTML = tpl;
   rep.appendChild(row);
-  var txt = row.querySelector("input");
-  var sel = row.querySelector("select");
-  if (txt && value) txt.value = value;
-  if (sel && selValue) sel.value = selValue;
+  var txts = row.querySelectorAll("input[type=text],input[type=url],input[type=tel]");
+  var sel  = row.querySelector("select");
+  if (txts[0] && value)    txts[0].value = value;
+  if (txts[1] && selValue) txts[1].value = selValue;   /* paired-label rows */
+  else if (sel && selValue) sel.value = selValue;
   var del = row.querySelector(".rep-del");
   if (del) del.addEventListener("click", function(){
     if (repRows(rep).length <= 1){
@@ -659,7 +669,23 @@ Array.prototype.forEach.call(document.querySelectorAll("[data-key]"), function(f
   if (k && FIELD_KEYS.indexOf(k) === -1) FIELD_KEYS.push(k);
 });
 
-function saveAll(){ FIELD_KEYS.forEach(function(k){ formData[k] = readField(k); }); }
+/* A field inside a branch the client never saw must not ship its pre-filled
+   defaults — otherwise a realtor's row carries the generic stage list too, and
+   a plumber's carries the real-estate one. Walk up and check every gate. */
+function keyAsked(key){
+  var el = document.querySelector('[data-key="'+key+'"]');
+  if (!el) return true;
+  for (var n = el; n && n !== document.body; n = n.parentElement){
+    if (n.hasAttribute && n.hasAttribute("data-show-when")){
+      if (!matches(n.getAttribute("data-show-when"))) return false;
+    }
+  }
+  return true;
+}
+
+function saveAll(){
+  FIELD_KEYS.forEach(function(k){ formData[k] = keyAsked(k) ? readField(k) : ""; });
+}
 
 function buildPayload(){
   saveAll();
@@ -668,6 +694,29 @@ function buildPayload(){
   return p;
 }
 window.__buildPayload = buildPayload;
+
+/* ---------- vertical-specific access levels (one `team` column, swapped options) ---------- */
+function applyVerticalRoles(){
+  var map = window.ROLE_OPTIONS_BY_VERTICAL;
+  if (!map) return;
+  var rep = document.querySelector('.rep[data-rep="team"]');
+  if (!rep) return;
+  var v = readField("vertical");
+  var opts = map[v] || map._default;
+  if (!opts) return;
+  var html = '<option value="">What can they see?</option>' +
+    opts.map(function(o){ return '<option>' + o + '</option>'; }).join("");
+  Array.prototype.forEach.call(rep.querySelectorAll("select"), function(sel){
+    var keep = sel.value;
+    sel.innerHTML = html;
+    if (keep && opts.indexOf(keep) !== -1) sel.value = keep;
+  });
+  var first = rep.querySelector(".rep-row");
+  if (first) rep.setAttribute("data-tpl", first.innerHTML);   /* new rows inherit */
+}
+document.addEventListener("change", function(e){
+  if (e.target && e.target.name === "vertical"){ applyVerticalRoles(); refreshProgress(); }
+});
 
 /* ---------- conditional reveals ---------- */
 function syncReveals(){
@@ -684,7 +733,7 @@ document.addEventListener("input", syncReveals);
 
 /* ---------- validation ---------- */
 function validateField(f){
-  if (f.offsetParent === null && f.style.display === "none") return true; /* hidden reveal */
+  if (f.offsetParent === null) return true;   /* inside a collapsed branch — not asked, not required */
   var key = f.getAttribute("data-key");
   var val = readField(key);
   var required = f.hasAttribute("data-required");
@@ -699,9 +748,9 @@ function validateField(f){
   return true;
 }
 
-function validateStep(i){
+function validateStep(el){
   var ok = true, firstBad = null;
-  Array.prototype.forEach.call(steps[i].querySelectorAll(".field"), function(f){
+  Array.prototype.forEach.call(el.querySelectorAll(".field"), function(f){
     if (!validateField(f)){ ok = false; if (!firstBad) firstBad = f; }
   });
   if (firstBad){
@@ -720,26 +769,62 @@ Array.prototype.forEach.call(document.querySelectorAll(".field[data-required], .
 /* ---------- navigation ---------- */
 var backBtn = document.getElementById("backBtn");
 var nextBtn = document.getElementById("nextBtn");
-var ptrack  = document.getElementById("ptrack").children;
+var ptrackEl = document.getElementById("ptrack");
 
-function show(i){
-  steps.forEach(function(s, idx){ s.classList.toggle("active", idx === i); });
-  current = i;
-  for (var j = 0; j < ptrack.length; j++) ptrack[j].classList.toggle("done", j <= i);
-  document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + steps.length;
-  document.getElementById("pname").textContent = steps[i].getAttribute("data-name");
+/* A step can carry data-show-when just like a field — a vertical the client
+   isn't gets skipped entirely, and the progress bar counts only what they see. */
+function matches(spec){
+  if (!spec) return true;
+  var parts = spec.split("=");
+  var val   = readField(parts[0]);
+  return parts.slice(1).join("=").split("|").indexOf(val) !== -1;
+}
+function visibleSteps(){
+  return steps.filter(function(s){ return matches(s.getAttribute("data-show-when")); });
+}
+
+var currentEl = steps[0];
+
+/* Progress bar and buttons only — safe to call mid-step (no scroll, no step
+   change), which is what a vertical switch needs: it can add or remove a step
+   while the client is standing on step 1. */
+function refreshProgress(){
+  var vis = visibleSteps();
+  var i   = vis.indexOf(currentEl);
+  if (i === -1) return;
+  if (ptrackEl.children.length !== vis.length){
+    ptrackEl.innerHTML = new Array(vis.length + 1).join("<i></i>");
+  }
+  for (var j = 0; j < ptrackEl.children.length; j++){
+    ptrackEl.children[j].classList.toggle("done", j <= i);
+  }
+  document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + vis.length;
+  document.getElementById("pname").textContent = currentEl.getAttribute("data-name");
   backBtn.style.visibility = i === 0 ? "hidden" : "visible";
-  nextBtn.innerHTML = i === steps.length - 1
+  nextBtn.innerHTML = i === vis.length - 1
     ? 'Send it in <span class="arw">&rarr;</span>'
     : 'Continue <span class="arw">&rarr;</span>';
+}
+
+function show(el){
+  var vis = visibleSteps();
+  if (vis.indexOf(el) === -1) el = vis[0];
+  currentEl = el;
+  steps.forEach(function(s){ s.classList.toggle("active", s === el); });
+  refreshProgress();
   try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
 }
 
-backBtn.addEventListener("click", function(){ saveAll(); if (current > 0) show(current - 1); });
-nextBtn.addEventListener("click", function(){
-  if (!validateStep(current)) return;
+backBtn.addEventListener("click", function(){
   saveAll();
-  if (current < steps.length - 1) show(current + 1); else submitForm();
+  var vis = visibleSteps(), i = vis.indexOf(currentEl);
+  if (i > 0) show(vis[i - 1]);
+});
+nextBtn.addEventListener("click", function(){
+  if (!validateStep(currentEl)) return;
+  saveAll();
+  var vis = visibleSteps(), i = vis.indexOf(currentEl);
+  if (i < vis.length - 1) show(vis[i + 1]); else submitForm();
 });
 
 /* Enter advances instead of submitting the form early */
@@ -763,6 +848,23 @@ document.getElementById("mainForm").addEventListener("keydown", function(e){
       if (firstInput) firstInput.value = parts[0];
       parts.slice(1).forEach(function(p){ repAddRow(rep, p, "", false); });
       repSyncDelete(rep);
+      return;
+    }
+    /* radio group (e.g. ?vertical=realtor) — match case-insensitively */
+    var radios = document.querySelectorAll('input[type=radio][name="'+key+'"]');
+    if (radios.length){
+      var want = value.toLowerCase().replace(/[^a-z]/g,"");
+      var hit = null;
+      Array.prototype.forEach.call(radios, function(r){
+        if (!hit && r.value.toLowerCase().replace(/[^a-z]/g,"") === want) hit = r;
+      });
+      if (hit){
+        hit.checked = true;
+        /* preselected from the link — don't ask the question again */
+        var fieldEl = hit.closest(".field");
+        if (fieldEl && fieldEl.hasAttribute("data-hide-when-prefilled")) fieldEl.style.display = "none";
+        applyVerticalRoles();
+      }
       return;
     }
     var el = document.getElementById(key);
@@ -834,12 +936,13 @@ document.getElementById("retryBtn").addEventListener("click", function(){
   document.getElementById("fallbackScreen").classList.remove("show");
   document.getElementById("mainForm").style.display = "";
   document.getElementById("progress").style.display = "";
-  show(steps.length - 1);
+  var v = visibleSteps(); show(v[v.length - 1]);
   submitForm();
 });
 
+applyVerticalRoles();
 syncReveals();
-show(0);
+show(steps[0]);
 })();
 
 </script>

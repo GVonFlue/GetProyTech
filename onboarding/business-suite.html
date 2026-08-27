@@ -113,6 +113,12 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--indigo);
 @media(max-width:600px){.rep-row{flex-wrap:wrap}.rep-row select{flex:1 1 100%;width:100%}}
 .rep-del{flex:0 0 auto;width:42px;height:48px;border:0;background:transparent;color:var(--muted);font-size:1.35rem;cursor:pointer;border-radius:10px;line-height:1}
 .rep-del:hover{background:#FFF4EF;color:var(--err)}
+.rep-head{display:flex;gap:10px;padding:10px 14px 0;font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rep-head span{flex:1 1 auto;min-width:0}
+.rep-head .spacer{flex:0 0 42px}
+@media(max-width:600px){.rep-head{display:none}}
+.rep-row .sidelbl{display:none;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+@media(max-width:600px){.rep-row .sidelbl{display:block}}
 .rep-add{margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1.5px dashed var(--line);color:var(--ink);
   font-weight:600;font-size:.92rem;padding:12px 18px;border-radius:12px;cursor:pointer;transition:all .15s;font-family:inherit}
 .rep-add:hover{border-color:var(--accent);color:var(--accent)}
@@ -171,7 +177,7 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
   <div class="wrap">
     <div class="kicker">ProyTech onboarding · Business Suite</div>
     <h1>Let&rsquo;s build this around how you work.</h1>
-    <p>Seven short steps, and the last few are quick. We&rsquo;re asking how your business actually runs today &mdash; messy answers are the useful ones.</p>
+    <p>A handful of short steps, and the last few are quick. We&rsquo;re asking how your business actually runs today &mdash; messy answers are the useful ones.</p>
   </div>
 </div>
 
@@ -179,8 +185,8 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
 <div class="card">
 
   <div class="progress" id="progress">
-    <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="plabel"><span id="pstep" class="cur">Step 1 of 7</span><span id="pname">The basics</span></div>
+    <div class="ptrack" id="ptrack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="plabel"><span id="pstep" class="cur">Step 1 of 8</span><span id="pname">The basics</span></div>
   </div>
 
   <p style="display:none;margin:-14px 0 22px;font-size:.9rem;color:var(--muted)">Prepared for <b id="clientLabel"></b></p>
@@ -219,6 +225,19 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
         <input type="tel" id="phone" autocomplete="tel" placeholder="(316) 555-0142">
         <div class="errmsg"></div>
       </div>
+    </div>
+
+    <div class="field" data-key="vertical" data-required data-msg="Pick the closest one — it changes what we ask next." data-hide-when-prefilled>
+      <label class="lbl">What kind of business is this? <span class="req">*</span>
+        <small>Pick the closest fit. If you&rsquo;re a realtor we&rsquo;ll ask a few questions specific to how real estate actually works; everything else gets the standard set.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="vertical" value="Realtor"><span>Realtor</span></label>
+        <label><input type="radio" name="vertical" value="Lender"><span>Lender</span></label>
+        <label><input type="radio" name="vertical" value="Insurance agency"><span>Insurance agency</span></label>
+        <label><input type="radio" name="vertical" value="Everything else"><span>Everything else</span></label>
+      </div>
+      <div class="errmsg"></div>
     </div>
 
     <div class="field" data-key="best_contact">
@@ -367,13 +386,20 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
 
   <!-- ============ STEP 4 ============ -->
   <section class="step" data-name="Your pipeline">
-    <h2>The stages a job moves through.</h2>
-    <p class="lede">These become the columns on your board — where every lead sits at a glance.</p>
+    <div data-show-when="vertical=Lender|Insurance agency|Everything else">
+      <h2>The stages a job moves through.</h2>
+      <p class="lede">These become the columns on your board — where every lead sits at a glance.</p>
+    </div>
+    <div data-show-when="vertical=Realtor">
+      <h2>How a deal moves.</h2>
+      <p class="lede">Two boards: leads before contract, and the closing pipeline after. Both are already built — you're confirming the labels.</p>
+    </div>
 
-    <div class="note">
+    <div class="note" data-show-when="vertical=Lender|Insurance agency|Everything else">
       <b>We've filled in the usual ones.</b> Don't start from a blank page. Change the wording to match what you'd actually say out loud, delete any you don't use, add the ones we missed. If a customer would recognise the word, it's the right word.
     </div>
 
+    <div data-show-when="vertical=Lender|Insurance agency|Everything else">
     <div class="field" data-key="stages" data-required data-msg="Leave at least one stage in place.">
       <label class="lbl">Your stages, in order <span class="req">*</span>
         <small>Top to bottom, first contact through to done and paid.</small>
@@ -419,11 +445,133 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
       <textarea id="stages_notes" placeholder="Commercial jobs need a walk-through and a written bid before quoting. Anything over $5k takes a 30% deposit. We can't stripe below 50 degrees, so November to March jobs get parked."></textarea>
     </div>
 
-    <div class="field" data-key="after_won">
+    <div class="field" data-key="after_won" data-show-when="vertical=Lender|Insurance agency|Everything else">
       <label class="lbl">What happens once a job is won?
         <small>Most systems stop at &ldquo;won&rdquo; and that's exactly where the money is. Deposits, scheduling the crew, invoicing, asking for the review, the follow-up next season.</small>
       </label>
       <textarea id="after_won" placeholder="Book the crew, send the deposit invoice, add to the calendar. After the job: final invoice, then ask for a Google review. Re-stripe reminder about 11 months later."></textarea>
+    </div>
+    </div>
+
+    <div data-show-when="vertical=Realtor">
+
+      <div class="note">
+        <b>These are the stages Dwell already runs.</b> We&rsquo;ve built this twice, so you&rsquo;re not starting from a blank page &mdash; you&rsquo;re confirming ours match yours. Buyer and seller run <em>one</em> pipeline with a label for each side, because a lead is at the same point in the funnel either way. Change any wording, delete what you don&rsquo;t use.
+      </div>
+
+      <div class="field" data-key="stages_re" data-required data-msg="Leave at least one stage in place.">
+        <label class="lbl">Your lead pipeline <span class="req">*</span>
+          <small>Each row is one stage, with what you call it on each side.</small>
+        </label>
+        <div class="rep-head"><span>Seller side</span><span>Buyer side</span><span class="spacer"></span></div>
+        <div class="rep" data-rep="stages_re">
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="New Lead" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="New Lead" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="Contacted / Nurturing" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="Contacted / Nurturing" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="Listing Appt Set" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="Buyer Consult Set" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="Listing Appt Held" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="Buyer Consult Held" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="Listing Agreement Signed" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="Buyer Agreement Signed" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="Live on Market" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="Actively Showing" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="Offer Received" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="Offer Submitted" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="Under Contract" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="Under Contract" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><div class="sidelbl">Seller side</div><input type="text" value="Lost / Withdrawn" placeholder="Seller-side label"></div>
+          <div class="grow"><div class="sidelbl">Buyer side</div><input type="text" value="Lost" placeholder="Buyer-side label"></div>
+          <button type="button" class="rep-del" aria-label="Remove this stage">&times;</button>
+        </div>
+        </div>
+        <button type="button" class="rep-add" data-rep-add="stages_re">+ Add a stage</button>
+        <div class="errmsg"></div>
+      </div>
+
+      <div class="field" data-key="phases_re" data-required data-msg="Leave at least one phase in place.">
+        <label class="lbl">Your closing pipeline <span class="req">*</span>
+          <small>Once a deal goes under contract it moves onto its own board. This is the part a transaction coordinator lives in.</small>
+        </label>
+        <div class="rep" data-rep="phases_re">
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Under Contract" placeholder="Phase name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this phase">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Inspection" placeholder="Phase name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this phase">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Appraisal" placeholder="Phase name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this phase">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Financing" placeholder="Phase name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this phase">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Clear to Close" placeholder="Phase name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this phase">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Closed" placeholder="Phase name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this phase">&times;</button>
+        </div>
+        <div class="rep-row">
+          <div class="grow"><input type="text" value="Fell Through" placeholder="Phase name"></div>
+          <button type="button" class="rep-del" aria-label="Remove this phase">&times;</button>
+        </div>
+        </div>
+        <button type="button" class="rep-add" data-rep-add="phases_re">+ Add a phase</button>
+        <div class="errmsg"></div>
+      </div>
+
+      <div class="field" data-key="dates_match">
+        <label class="lbl">Do our standard contract deadlines match your market?
+          <small>Dwell counts these from the binding date unless noted: earnest money 3 business days, inspection period ends day 10, objections day 12, seller response day 14, appraisal ordered 7 business days, appraisal received day 21, financing commitment day 25, title commitment day 14, title objections day 19, survey day 17, HOA docs day 10, HOA review day 15, final walkthrough the day before closing.</small>
+        </label>
+        <div class="seg">
+          <label><input type="radio" name="dates_match" value="Yes, those look right"><span>Those look right</span></label>
+          <label><input type="radio" name="dates_match" value="Some are different"><span>Some are different</span></label>
+          <label><input type="radio" name="dates_match" value="Not sure - check with me"><span>Not sure</span></label>
+        </div>
+      </div>
+
+      <div data-show-when="dates_match=Some are different">
+        <div class="field" data-key="dates_detail">
+          <label class="lbl">Which ones differ, and what are yours?
+            <small>Getting these wrong means a missed deadline, so it&rsquo;s worth the minute.</small>
+          </label>
+          <textarea id="dates_detail" placeholder="Inspection is 7 days here, not 10. We don't use a survey deadline."></textarea>
+        </div>
+      </div>
     </div>
 
     <div class="field" data-key="lead_assignment">
@@ -445,6 +593,69 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
         <small>The single most important automation in the whole system, and the easiest one to get wrong.</small>
       </label>
       <input type="text" id="notify_who" placeholder="Text me immediately. Email the office. Foreman only once it's scheduled.">
+    </div>
+  </section>
+
+  <!-- ============ REAL ESTATE ONLY ============ -->
+  <section class="step" data-name="Real estate" data-show-when="vertical=Realtor">
+    <h2>A few real-estate specifics.</h2>
+    <p class="lede">Six questions that only make sense for real estate. Everything here already exists in what we&rsquo;ve built &mdash; we&rsquo;re setting your numbers, not inventing a system.</p>
+
+    <div class="field" data-key="team_structure" data-required data-msg="This one decides how much of the rest applies.">
+      <label class="lbl">How is the business set up? <span class="req">*</span>
+        <small>This decides whether splits, lead pools and team-wide reporting apply at all.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="team_structure" value="Solo agent"><span>Solo agent</span></label>
+        <label><input type="radio" name="team_structure" value="Small team"><span>Small team</span></label>
+        <label><input type="radio" name="team_structure" value="Brokerage"><span>Brokerage</span></label>
+      </div>
+      <div class="errmsg"></div>
+    </div>
+
+    <div data-show-when="team_structure=Small team|Brokerage">
+      <div class="field" data-key="splits_caps">
+        <label class="lbl">Splits and caps
+          <small>Our default is the agent keeping 85% before cap and 100% after it, with a per-agent cap you set. Tell us yours &mdash; and if a team split comes off before or after the brokerage split, say which, because that ordering changes every payout.</small>
+        </label>
+        <textarea id="splits_caps" placeholder="70/30 until a $18,000 cap, then 100% with a $250 per-deal fee. Team split of 10% comes off first."></textarea>
+      </div>
+
+      <div class="field" data-key="pools_re">
+        <label class="lbl">Do you run lead pools?
+          <small>Unclaimed leads sitting in a shared bucket that agents claim from, rather than being assigned to one person up front.</small>
+        </label>
+        <input type="text" id="pools_re" placeholder="Yes — 'Sign calls' and 'Zillow'. Or: no, everything gets assigned.">
+      </div>
+
+      <div class="field" data-key="coordinator_re">
+        <label class="lbl">Do you have a transaction coordinator?
+          <small>We have a role built for exactly this: sees every deal and every deadline, can work all of them, and sees no commission numbers at all.</small>
+        </label>
+        <div class="seg">
+          <label><input type="radio" name="coordinator_re" value="Yes"><span>Yes</span></label>
+          <label><input type="radio" name="coordinator_re" value="No"><span>No</span></label>
+          <label><input type="radio" name="coordinator_re" value="Want one"><span>Want one</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field" data-key="pcs_re">
+      <label class="lbl">Do you work military relocation?
+        <small>We&rsquo;ve built a whole module for PCS moves around McConnell &mdash; the timeline hangs off the report date rather than a contract, which starts months before there&rsquo;s a property. If you do this work, say so and we&rsquo;ll switch it on.</small>
+      </label>
+      <div class="seg">
+        <label><input type="radio" name="pcs_re" value="Yes, regularly"><span>Yes, regularly</span></label>
+        <label><input type="radio" name="pcs_re" value="Occasionally"><span>Occasionally</span></label>
+        <label><input type="radio" name="pcs_re" value="No"><span>No</span></label>
+      </div>
+    </div>
+
+    <div class="field" data-key="mls_re">
+      <label class="lbl">Which MLS or board are you on?
+        <small>And your licence number, if you want it on what the system sends out.</small>
+      </label>
+      <input type="text" id="mls_re" placeholder="South Central Kansas MLS">
     </div>
   </section>
 
@@ -701,14 +912,14 @@ footer{padding:30px 0 48px;text-align:center;color:var(--muted);font-size:.84rem
 <script>
 window.ENDPOINT  = "/api/business-suite";
 window.FORM_TYPE = "business_suite_v1";
-window.PRETTY    = {"full_name":"Your name","business_name":"Business name — exactly as you want it written","email":"Email","phone":"Phone","best_contact":"Best way to reach you during setup","websites":"Your web addresses","more_sites":"Think again — any others?","more_sites_detail":"Tell us what you can remember","track_today":"What you use today","track_detail":"Walk us through how it actually works","biggest_pain":"What falls through the cracks most often?","lead_sources":"Where do leads come from?","tools_keep":"Anything you want to keep using?","import_data":"Do you have a customer list to bring across?","import_link":"Link to it, or tell us where it lives","stages":"Your stages, in order","stages_notes":"Anything unusual about how a job moves?","after_won":"What happens once a job is won?","lead_assignment":"When a lead comes in, who owns it?","notify_who":"When a new lead comes in, who needs to know — and how?","suite_domain":"Where should the suite live?","office_address":"Business address","logo_link":"Your logo","brand_colors":"Brand colours","headshots":"Team photos or headshots","booking_wanted":"Should customers be able to book time with you directly?","calendar_account":"Whose calendar should it book against?","modules_off":"Anything you know you don't want switched on?","consent_tracking":"Should we track consent and opt-outs on every contact?","footer_wording":"Any wording that must appear on what you send","data_restrictions":"Anything we should never store?","team":"Everyone who needs a login","team_growth":"Anyone joining soon, or seasonal help?","team_notes":"Anything else about the team","voice_tone":"Pick the tone","voice_line":"In a sentence — how should a message from you read?","words_use":"Words you always use","words_avoid":"Words we should never use","signoff":"How should texts and emails sign off?","google_account":"Which Google account should we share the setup with?","notes":"Anything else"};
+window.PRETTY    = {"full_name":"Your name","business_name":"Business name — exactly as you want it written","email":"Email","phone":"Phone","vertical":"What kind of business is this?","best_contact":"Best way to reach you during setup","websites":"Your web addresses","more_sites":"Think again — any others?","more_sites_detail":"Tell us what you can remember","track_today":"What you use today","track_detail":"Walk us through how it actually works","biggest_pain":"What falls through the cracks most often?","lead_sources":"Where do leads come from?","tools_keep":"Anything you want to keep using?","import_data":"Do you have a customer list to bring across?","import_link":"Link to it, or tell us where it lives","stages":"Your stages, in order","stages_notes":"Anything unusual about how a job moves?","after_won":"What happens once a job is won?","stages_re":"Your lead pipeline","phases_re":"Your closing pipeline","dates_match":"Do our standard contract deadlines match your market?","dates_detail":"Which ones differ, and what are yours?","lead_assignment":"When a lead comes in, who owns it?","notify_who":"When a new lead comes in, who needs to know — and how?","team_structure":"How is the business set up?","splits_caps":"Splits and caps","pools_re":"Do you run lead pools?","coordinator_re":"Do you have a transaction coordinator?","pcs_re":"Do you work military relocation?","mls_re":"Which MLS or board are you on?","suite_domain":"Where should the suite live?","office_address":"Business address","logo_link":"Your logo","brand_colors":"Brand colours","headshots":"Team photos or headshots","booking_wanted":"Should customers be able to book time with you directly?","calendar_account":"Whose calendar should it book against?","modules_off":"Anything you know you don't want switched on?","consent_tracking":"Should we track consent and opt-outs on every contact?","footer_wording":"Any wording that must appear on what you send","data_restrictions":"Anything we should never store?","team":"Everyone who needs a login","team_growth":"Anyone joining soon, or seasonal help?","team_notes":"Anything else about the team","voice_tone":"Pick the tone","voice_line":"In a sentence — how should a message from you read?","words_use":"Words you always use","words_avoid":"Words we should never use","signoff":"How should texts and emails sign off?","google_account":"Which Google account should we share the setup with?","notes":"Anything else"};
+window.ROLE_OPTIONS_BY_VERTICAL = {"Realtor":["Team leader — everything, team-wide commission, settings","Agent — own contacts and pools, own deals, own commission","Transaction coordinator — every deal and deadline, no commission"],"_default":["Everything, including money","Everything except money","Their own leads and jobs only","Their team's leads and jobs","Schedule and job details, no pricing","Read-only"]};
 </script>
 <script>
 (function(){
 "use strict";
 
 var steps   = Array.prototype.slice.call(document.querySelectorAll(".step"));
-var current = 0;
 var formData = {};
 
 /* ---------- repeaters ---------- */
@@ -717,11 +928,14 @@ function repRows(rep){ return Array.prototype.slice.call(rep.querySelectorAll(".
 function repSerialize(rep){
   var out = [];
   repRows(rep).forEach(function(row){
-    var txt = row.querySelector("input[type=text],input[type=url],input[type=tel]");
-    var sel = row.querySelector("select");
-    var v = txt ? txt.value.trim() : "";
-    if (!v) return;
-    out.push(sel && sel.value ? v + " — " + sel.value : v);
+    var parts = [];
+    Array.prototype.forEach.call(
+      row.querySelectorAll("input[type=text],input[type=url],input[type=tel],select"),
+      function(el){ var v = String(el.value).trim(); if (v) parts.push(v); }
+    );
+    var first = row.querySelector("input[type=text],input[type=url],input[type=tel]");
+    if (first && !String(first.value).trim()) return;   /* blank row = skip */
+    if (parts.length) out.push(parts.join(" — "));
   });
   return out.join("\n");
 }
@@ -740,10 +954,11 @@ function repAddRow(rep, value, selValue, focus){
   row.className = "rep-row";
   row.innerHTML = tpl;
   rep.appendChild(row);
-  var txt = row.querySelector("input");
-  var sel = row.querySelector("select");
-  if (txt && value) txt.value = value;
-  if (sel && selValue) sel.value = selValue;
+  var txts = row.querySelectorAll("input[type=text],input[type=url],input[type=tel]");
+  var sel  = row.querySelector("select");
+  if (txts[0] && value)    txts[0].value = value;
+  if (txts[1] && selValue) txts[1].value = selValue;   /* paired-label rows */
+  else if (sel && selValue) sel.value = selValue;
   var del = row.querySelector(".rep-del");
   if (del) del.addEventListener("click", function(){
     if (repRows(rep).length <= 1){
@@ -809,7 +1024,23 @@ Array.prototype.forEach.call(document.querySelectorAll("[data-key]"), function(f
   if (k && FIELD_KEYS.indexOf(k) === -1) FIELD_KEYS.push(k);
 });
 
-function saveAll(){ FIELD_KEYS.forEach(function(k){ formData[k] = readField(k); }); }
+/* A field inside a branch the client never saw must not ship its pre-filled
+   defaults — otherwise a realtor's row carries the generic stage list too, and
+   a plumber's carries the real-estate one. Walk up and check every gate. */
+function keyAsked(key){
+  var el = document.querySelector('[data-key="'+key+'"]');
+  if (!el) return true;
+  for (var n = el; n && n !== document.body; n = n.parentElement){
+    if (n.hasAttribute && n.hasAttribute("data-show-when")){
+      if (!matches(n.getAttribute("data-show-when"))) return false;
+    }
+  }
+  return true;
+}
+
+function saveAll(){
+  FIELD_KEYS.forEach(function(k){ formData[k] = keyAsked(k) ? readField(k) : ""; });
+}
 
 function buildPayload(){
   saveAll();
@@ -818,6 +1049,29 @@ function buildPayload(){
   return p;
 }
 window.__buildPayload = buildPayload;
+
+/* ---------- vertical-specific access levels (one `team` column, swapped options) ---------- */
+function applyVerticalRoles(){
+  var map = window.ROLE_OPTIONS_BY_VERTICAL;
+  if (!map) return;
+  var rep = document.querySelector('.rep[data-rep="team"]');
+  if (!rep) return;
+  var v = readField("vertical");
+  var opts = map[v] || map._default;
+  if (!opts) return;
+  var html = '<option value="">What can they see?</option>' +
+    opts.map(function(o){ return '<option>' + o + '</option>'; }).join("");
+  Array.prototype.forEach.call(rep.querySelectorAll("select"), function(sel){
+    var keep = sel.value;
+    sel.innerHTML = html;
+    if (keep && opts.indexOf(keep) !== -1) sel.value = keep;
+  });
+  var first = rep.querySelector(".rep-row");
+  if (first) rep.setAttribute("data-tpl", first.innerHTML);   /* new rows inherit */
+}
+document.addEventListener("change", function(e){
+  if (e.target && e.target.name === "vertical"){ applyVerticalRoles(); refreshProgress(); }
+});
 
 /* ---------- conditional reveals ---------- */
 function syncReveals(){
@@ -834,7 +1088,7 @@ document.addEventListener("input", syncReveals);
 
 /* ---------- validation ---------- */
 function validateField(f){
-  if (f.offsetParent === null && f.style.display === "none") return true; /* hidden reveal */
+  if (f.offsetParent === null) return true;   /* inside a collapsed branch — not asked, not required */
   var key = f.getAttribute("data-key");
   var val = readField(key);
   var required = f.hasAttribute("data-required");
@@ -849,9 +1103,9 @@ function validateField(f){
   return true;
 }
 
-function validateStep(i){
+function validateStep(el){
   var ok = true, firstBad = null;
-  Array.prototype.forEach.call(steps[i].querySelectorAll(".field"), function(f){
+  Array.prototype.forEach.call(el.querySelectorAll(".field"), function(f){
     if (!validateField(f)){ ok = false; if (!firstBad) firstBad = f; }
   });
   if (firstBad){
@@ -870,26 +1124,62 @@ Array.prototype.forEach.call(document.querySelectorAll(".field[data-required], .
 /* ---------- navigation ---------- */
 var backBtn = document.getElementById("backBtn");
 var nextBtn = document.getElementById("nextBtn");
-var ptrack  = document.getElementById("ptrack").children;
+var ptrackEl = document.getElementById("ptrack");
 
-function show(i){
-  steps.forEach(function(s, idx){ s.classList.toggle("active", idx === i); });
-  current = i;
-  for (var j = 0; j < ptrack.length; j++) ptrack[j].classList.toggle("done", j <= i);
-  document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + steps.length;
-  document.getElementById("pname").textContent = steps[i].getAttribute("data-name");
+/* A step can carry data-show-when just like a field — a vertical the client
+   isn't gets skipped entirely, and the progress bar counts only what they see. */
+function matches(spec){
+  if (!spec) return true;
+  var parts = spec.split("=");
+  var val   = readField(parts[0]);
+  return parts.slice(1).join("=").split("|").indexOf(val) !== -1;
+}
+function visibleSteps(){
+  return steps.filter(function(s){ return matches(s.getAttribute("data-show-when")); });
+}
+
+var currentEl = steps[0];
+
+/* Progress bar and buttons only — safe to call mid-step (no scroll, no step
+   change), which is what a vertical switch needs: it can add or remove a step
+   while the client is standing on step 1. */
+function refreshProgress(){
+  var vis = visibleSteps();
+  var i   = vis.indexOf(currentEl);
+  if (i === -1) return;
+  if (ptrackEl.children.length !== vis.length){
+    ptrackEl.innerHTML = new Array(vis.length + 1).join("<i></i>");
+  }
+  for (var j = 0; j < ptrackEl.children.length; j++){
+    ptrackEl.children[j].classList.toggle("done", j <= i);
+  }
+  document.getElementById("pstep").textContent = "Step " + (i+1) + " of " + vis.length;
+  document.getElementById("pname").textContent = currentEl.getAttribute("data-name");
   backBtn.style.visibility = i === 0 ? "hidden" : "visible";
-  nextBtn.innerHTML = i === steps.length - 1
+  nextBtn.innerHTML = i === vis.length - 1
     ? 'Send it in <span class="arw">&rarr;</span>'
     : 'Continue <span class="arw">&rarr;</span>';
+}
+
+function show(el){
+  var vis = visibleSteps();
+  if (vis.indexOf(el) === -1) el = vis[0];
+  currentEl = el;
+  steps.forEach(function(s){ s.classList.toggle("active", s === el); });
+  refreshProgress();
   try { window.scrollTo({top:0, behavior:"smooth"}); } catch(e){}
 }
 
-backBtn.addEventListener("click", function(){ saveAll(); if (current > 0) show(current - 1); });
-nextBtn.addEventListener("click", function(){
-  if (!validateStep(current)) return;
+backBtn.addEventListener("click", function(){
   saveAll();
-  if (current < steps.length - 1) show(current + 1); else submitForm();
+  var vis = visibleSteps(), i = vis.indexOf(currentEl);
+  if (i > 0) show(vis[i - 1]);
+});
+nextBtn.addEventListener("click", function(){
+  if (!validateStep(currentEl)) return;
+  saveAll();
+  var vis = visibleSteps(), i = vis.indexOf(currentEl);
+  if (i < vis.length - 1) show(vis[i + 1]); else submitForm();
 });
 
 /* Enter advances instead of submitting the form early */
@@ -913,6 +1203,23 @@ document.getElementById("mainForm").addEventListener("keydown", function(e){
       if (firstInput) firstInput.value = parts[0];
       parts.slice(1).forEach(function(p){ repAddRow(rep, p, "", false); });
       repSyncDelete(rep);
+      return;
+    }
+    /* radio group (e.g. ?vertical=realtor) — match case-insensitively */
+    var radios = document.querySelectorAll('input[type=radio][name="'+key+'"]');
+    if (radios.length){
+      var want = value.toLowerCase().replace(/[^a-z]/g,"");
+      var hit = null;
+      Array.prototype.forEach.call(radios, function(r){
+        if (!hit && r.value.toLowerCase().replace(/[^a-z]/g,"") === want) hit = r;
+      });
+      if (hit){
+        hit.checked = true;
+        /* preselected from the link — don't ask the question again */
+        var fieldEl = hit.closest(".field");
+        if (fieldEl && fieldEl.hasAttribute("data-hide-when-prefilled")) fieldEl.style.display = "none";
+        applyVerticalRoles();
+      }
       return;
     }
     var el = document.getElementById(key);
@@ -984,12 +1291,13 @@ document.getElementById("retryBtn").addEventListener("click", function(){
   document.getElementById("fallbackScreen").classList.remove("show");
   document.getElementById("mainForm").style.display = "";
   document.getElementById("progress").style.display = "";
-  show(steps.length - 1);
+  var v = visibleSteps(); show(v[v.length - 1]);
   submitForm();
 });
 
+applyVerticalRoles();
 syncReveals();
-show(0);
+show(steps[0]);
 })();
 
 </script>

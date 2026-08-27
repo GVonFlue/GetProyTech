@@ -24,7 +24,6 @@ export default async function handler(req, res) {
   const payload = {
     ...body,
     type: 'website_build',                 // routes to the Website Build tab
-    tab: 'Website Build',                  // explicit tab name for the newer router
     submitted_at: new Date().toISOString()
   };
 

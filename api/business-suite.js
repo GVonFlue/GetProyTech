@@ -24,7 +24,6 @@ export default async function handler(req, res) {
   const payload = {
     ...body,
     type: 'business_suite',                 // routes to the Business Suite tab
-    tab: 'Business Suite',                  // explicit tab name for the newer router
     submitted_at: new Date().toISOString()
   };
 
