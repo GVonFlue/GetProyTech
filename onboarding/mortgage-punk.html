@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mortgage Punk — Onboarding | ProyTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1338DE; --orange:#FB6926; --navy:#000110;
+  --ink:#111528; --muted:#5B6478; --tint:#F1F4FE; --line:#DFE4F5;
+  --ok:#0E8A5F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif; color:var(--ink);
+  background:var(--navy); line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:940px;margin:0 auto;padding:20px 16px 60px}
+.shell{border:6px solid var(--blue);border-radius:22px;background:#fff;overflow:hidden}
+
+/* ---------- header ---------- */
+.hd{background:var(--navy);color:#fff;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hd .brand{display:flex;align-items:center;gap:11px}
+.hd .mark{width:26px;height:26px;flex:none}
+.hd .wm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em}
+.hd .wm i{color:var(--orange);font-style:normal}
+.hd .tag{font-size:12px;font-weight:600;text-align:right;line-height:1.45}
+.hd .tag span{color:#9AA3C4;font-weight:400}
+
+/* ---------- intro ---------- */
+.intro{padding:30px 30px 24px;border-bottom:1px solid var(--line)}
+.kicker{font-family:'Space Mono',monospace;font-weight:700;font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--blue);margin-bottom:11px}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,4.6vw,38px);line-height:1.08;letter-spacing:-.02em}
+h1 em{color:var(--orange);font-style:normal}
+.lede{color:var(--muted);font-size:15px;margin-top:12px;max-width:64ch}
+.lede b{color:var(--ink);font-weight:600}
+.meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.chip{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  background:var(--tint);color:var(--blue);border:1px solid #C9D3F7;border-radius:999px;padding:6px 12px}
+.chip.warm{background:#FFF3EC;color:var(--orange);border-color:#F5C9AF}
+
+/* ---------- progress ---------- */
+.prog{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:12px 30px}
+.bar{height:5px;background:var(--tint);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--blue);border-radius:99px;transition:width .3s ease}
+.steps{display:flex;gap:4px;margin-top:11px;overflow-x:auto;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.steps button{
+  font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid transparent;border-radius:8px;padding:6px 9px;color:var(--muted);cursor:pointer;white-space:nowrap
+}
+.steps button:hover{color:var(--ink);background:var(--tint)}
+.steps button[aria-current="true"]{background:var(--blue);color:#fff}
+.steps button.done{color:var(--ok)}
+.steps button.done:before{content:'\2713  '}
+
+/* ---------- sections ---------- */
+.pane{display:none;padding:28px 30px 8px}
+.pane.on{display:block}
+.pane h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.015em}
+.pane .sub{color:var(--muted);font-size:14px;margin-top:7px;max-width:66ch}
+.pane .sub b{color:var(--ink);font-weight:600}
+.grp{margin-top:24px;border-top:1px solid var(--line);padding-top:20px}
+.grp:first-of-type{border-top:none;padding-top:0}
+.grp > .gl{font-family:'Space Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+
+.f{margin-bottom:17px}
+.f > label,.f > .q{display:block;font-weight:600;font-size:14.5px;margin-bottom:5px}
+.f .help{font-size:13px;color:var(--muted);margin-bottom:8px}
+.req{color:var(--orange);font-weight:700;margin-left:3px}
+input[type=text],input[type=email],input[type=tel],input[type=url],input[type=date],textarea,select{
+  width:100%;font-family:inherit;font-size:15px;color:var(--ink);
+  border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff;transition:border-color .15s,box-shadow .15s
+}
+textarea{resize:vertical;min-height:92px;line-height:1.6}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(19,56,222,.12)}
+input.bad,textarea.bad,select.bad{border-color:var(--orange);box-shadow:0 0 0 3px rgba(251,105,38,.13)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
+@media(max-width:660px){.row,.row3{grid-template-columns:1fr}}
+
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{
+  display:inline-flex;align-items:center;gap:8px;font-size:14px;
+  border:1px solid var(--line);border-radius:10px;padding:9px 13px;cursor:pointer;background:#fff;transition:.15s
+}
+.opts label:hover{border-color:#B9C4EE;background:var(--tint)}
+.opts input{accent-color:var(--blue);width:16px;height:16px;flex:none}
+.opts input:checked + span{font-weight:600;color:var(--blue)}
+.opts.stack{flex-direction:column;align-items:stretch}
+.opts.stack label{width:100%}
+
+.note{background:var(--tint);border:1px solid #C9D3F7;border-radius:12px;padding:14px 16px;font-size:14px;color:var(--ink);margin:16px 0}
+.note b{font-weight:600}
+.note.warm{background:#FFF8F4;border-color:#F5C9AF}
+.note a{color:var(--blue);font-weight:600}
+.note .t{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:6px}
+.note.warm .t{color:var(--orange)}
+.note.warm a{color:var(--orange)}
+
+.ref{border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-bottom:11px;background:#FAFBFF}
+.ref .n{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:9px}
+
+/* ---------- nav ---------- */
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 30px 28px;border-top:1px solid var(--line);margin-top:22px;flex-wrap:wrap}
+.btn{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:11px;padding:13px 24px;cursor:pointer;transition:.15s}
+.btn.p{background:var(--blue);color:#fff}
+.btn.p:hover{background:#0F2CB4}
+.btn.g{background:#fff;color:var(--muted);border:1px solid var(--line)}
+.btn.g:hover{color:var(--ink);border-color:#B9C4EE}
+.btn.o{background:var(--orange);color:#fff}
+.btn.o:hover{background:#E4551A}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.saved{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.saved b{color:var(--ok)}
+
+.err{background:#FFF3EC;border:1px solid #F5C9AF;color:#B3400F;border-radius:11px;padding:12px 15px;font-size:14px;font-weight:500;margin:0 30px 4px;display:none}
+.err.on{display:block}
+
+/* ---------- done ---------- */
+.done{display:none;padding:56px 30px 60px;text-align:center}
+.done.on{display:block}
+.done .tick{width:60px;height:60px;border-radius:50%;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 20px}
+.done h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:29px;letter-spacing:-.015em}
+.done p{color:var(--muted);margin-top:12px;max-width:52ch;margin-inline:auto;font-size:15px}
+
+.ft{background:var(--navy);color:#fff;padding:17px 26px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.ft .l{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px}
+.ft .l em{color:var(--orange);font-style:normal}
+.ft .r{font-size:12.5px;text-align:right;line-height:1.5}
+.ft .r span{color:#9AA3C4}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="shell">
+
+  <div class="hd">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="52" r="15" fill="#22C7F5"/>
+        <g stroke="#7B5CFF" stroke-width="3" stroke-dasharray="5 5" fill="none">
+          <path d="M50 52 L50 18"/><path d="M50 52 L20 74"/><path d="M50 52 L80 74"/>
+        </g>
+        <circle cx="50" cy="15" r="7" fill="none" stroke="#8B5CF6" stroke-width="3"/>
+        <circle cx="17" cy="76" r="7" fill="none" stroke="#5B7CFA" stroke-width="3"/>
+        <circle cx="83" cy="76" r="7" fill="none" stroke="#22D3EE" stroke-width="3"/>
+      </svg>
+      <div class="wm">Proy<i>Tech</i></div>
+    </div>
+    <div class="tag">Websites + AI Front Office.<br><span>Built by a working realtor.</span></div>
+  </div>
+
+  <div class="intro">
+    <div class="kicker">Onboarding &middot; Mortgage Punk &middot; Three Sites</div>
+    <h1>Let's get everything<br><em>out of your head.</em></h1>
+    <p class="lede">Six short sections and a one-page sign-off. About thirty minutes, and you do not have to finish in one sitting &mdash; <b>your answers save automatically in this browser.</b> Everything you type here goes straight into the build, so the more specific you are, the less back-and-forth in revision week.</p>
+    <div class="meta">
+      <span class="chip">Due Sept 4</span>
+      <span class="chip">6 sections</span>
+      <span class="chip">~30 minutes</span>
+      <span class="chip warm">Saves as you go</span>
+    </div>
+  </div>
+
+  <div class="prog">
+    <div class="bar"><i id="barfill"></i></div>
+    <div class="steps" id="steps"></div>
+  </div>
+
+  <div class="err" id="err"></div>
+
+  <form id="form" novalidate>
+
+  <!-- ============ 0 ============ -->
+  <section class="pane on" data-step="0" data-name="Who">
+    <h2>Who we're working with</h2>
+    <p class="sub">So we know who to text when we have a question, and whose answer is the final one.</p>
+
+    <div class="grp">
+      <div class="f"><label>Your name<span class="req">*</span></label><input type="text" name="your_name" required></div>
+      <div class="row">
+        <div class="f"><label>Your role<span class="req">*</span></label>
+          <select name="your_role" required>
+            <option value="">Choose one</option>
+            <option>Chris Waipa</option><option>Ashley Thill</option>
+            <option>Mortgage Punk team member</option><option>Other</option>
+          </select>
+        </div>
+        <div class="f"><label>Email<span class="req">*</span></label><input type="email" name="your_email" required></div>
+      </div>
+      <div class="row">
+        <div class="f"><label>Best mobile number<span class="req">*</span></label><input type="tel" name="your_phone" required></div>
+        <div class="f"><label>Best way to reach you fast</label>
+          <div class="opts">
+            <label><input type="radio" name="contact_pref" value="Text"><span>Text</span></label>
+            <label><input type="radio" name="contact_pref" value="Email"><span>Email</span></label>
+            <label><input type="radio" name="contact_pref" value="Call"><span>Call</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="f"><label>Who has final say on design decisions?<span class="req">*</span></label>
+        <div class="help">One name. When two people disagree about a color, this is who we go with.</div>
+        <input type="text" name="decision_maker" required>
+      </div>
+      <div class="f"><label>Anyone else we should copy on updates? Name and email.</label>
+        <textarea name="cc_people" placeholder="One per line."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 1 ============ -->
+  <section class="pane" data-step="1" data-name="Brand">
+    <h2>The brand core</h2>
+    <p class="sub">This section applies to all three sites. Get it right once and it carries everywhere.</p>
+
+    <div class="note"><span class="t">Upload your files here</span>
+      Drop logos, headshots, event photos, and anything else into the shared folder we opened for you:
+      <a href="https://drive.google.com/drive/folders/1g6a2d13pIkPy-V97ZTzerGIbFImarvqU" target="_blank" rel="noopener">Mortgage Punk &mdash; Brand Assets</a>.
+      Do that <b>before</b> you submit this form so we can start on the 5th.
+    </div>
+
+    <div class="grp"><div class="gl">Identity</div>
+      <div class="f"><label>Have you uploaded your logo files to the folder?<span class="req">*</span></label>
+        <div class="opts">
+          <label><input type="radio" name="logo_status" value="Yes, uploaded" required><span>Yes, uploaded</span></label>
+          <label><input type="radio" name="logo_status" value="Will upload before Sept 4"><span>Will upload before Sept 4</span></label>
+          <label><input type="radio" name="logo_status" value="Only have low-res versions"><span>Only low-res versions</span></label>
+          <label><input type="radio" name="logo_status" value="No usable logo files"><span>No usable files</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Brand colors, if you know them</label>
+        <div class="help">Hex codes if you have them. If not, describe them or name a site that uses them.</div>
+        <input type="text" name="brand_colors" placeholder="e.g. #FF2D55 red, black, off-white">
+      </div>
+      <div class="f"><label>Fonts you use, or want to use</label>
+        <input type="text" name="brand_fonts" placeholder="Name them, or say &quot;you pick&quot;">
+      </div>
+      <div class="f"><label>Do you have a written brand guide?</label>
+        <div class="opts">
+          <label><input type="radio" name="brand_guide" value="Yes, in the folder"><span>Yes, in the folder</span></label>
+          <label><input type="radio" name="brand_guide" value="Yes, will send"><span>Yes, will send</span></label>
+          <label><input type="radio" name="brand_guide" value="No"><span>No</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="grp"><div class="gl">Voice and story</div>
+      <div class="f"><label>The Mortgage Punk origin story<span class="req">*</span></label>
+        <div class="help">How it started and why. Write it the way you'd tell it out loud, not the way you'd write it for a brochure. This becomes real copy.</div>
+        <textarea name="origin_story" required></textarea>
+      </div>
+      <div class="f"><label>What does Mortgage Punk stand for?<span class="req">*</span></label>
+        <div class="help">One paragraph. If someone had never heard of you, what is the point of the whole thing?</div>
+        <textarea name="what_it_stands_for" required></textarea>
+      </div>
+      <div class="f"><label>Five things you always say<span class="req">*</span></label>
+        <div class="help">Phrases, beliefs, lines you repeat on stage. The AI chat learns your voice from these.</div>
+        <textarea name="always_say" required placeholder="One per line."></textarea>
+      </div>
+      <div class="f"><label>Three things we should never say<span class="req">*</span></label>
+        <div class="help">Words, claims, or promises that are off-limits. Compliance, personal, or just not you. We audit every line of copy against this.</div>
+        <textarea name="never_say" required placeholder="One per line."></textarea>
+      </div>
+      <div class="f"><div class="q">Who is this actually for?<span class="req">*</span></div>
+        <div class="opts">
+          <label><input type="checkbox" name="audience" value="First-time buyers"><span>First-time buyers</span></label>
+          <label><input type="checkbox" name="audience" value="Move-up buyers"><span>Move-up buyers</span></label>
+          <label><input type="checkbox" name="audience" value="Realtors"><span>Realtors</span></label>
+          <label><input type="checkbox" name="audience" value="Loan officers"><span>Loan officers</span></label>
+          <label><input type="checkbox" name="audience" value="Veterans"><span>Veterans</span></label>
+          <label><input type="checkbox" name="audience" value="Investors"><span>Investors</span></label>
+          <label><input type="checkbox" name="audience" value="Industry / peers"><span>Industry, peers</span></label>
+        </div>
+      </div>
+      <div class="f"><label>If you had to pick one of those as the primary audience, which?<span class="req">*</span></label>
+        <input type="text" name="audience_primary" required>
+      </div>
+    </div>
+
+    <div class="grp"><div class="gl">Compliance</div>
+      <div class="f"><div class="row">
+        <div><label>NMLS number(s)</label><input type="text" name="nmls"></div>
+        <div><label>Legal company or brokerage name</label><input type="text" name="legal_name"></div>
+      </div></div>
+      <div class="f"><label>Required disclosure lines</label>
+        <div class="help">Anything legal or compliance requires on every page. Paste it exactly as it must appear &mdash; we will not paraphrase it.</div>
+        <textarea name="disclosures"></textarea>
+      </div>
+      <div class="f"><div class="q">Required marks</div>
+        <div class="opts">
+          <label><input type="checkbox" name="marks" value="Equal Housing Opportunity"><span>Equal Housing Opportunity</span></label>
+          <label><input type="checkbox" name="marks" value="Equal Housing Lender"><span>Equal Housing Lender</span></label>
+          <label><input type="checkbox" name="marks" value="NMLS Consumer Access link"><span>NMLS Consumer Access link</span></label>
+          <label><input type="checkbox" name="marks" value="Not sure"><span>Not sure</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="grp"><div class="gl">Social profiles</div>
+      <div class="help" style="margin-bottom:12px">Full URLs. Leave blank anything you don't use &mdash; blank means we won't show the icon, which is better than an icon that goes nowhere.</div>
+      <div class="row">
+        <div class="f"><label>Facebook</label><input type="url" name="soc_facebook"></div>
+        <div class="f"><label>Instagram</label><input type="url" name="soc_instagram"></div>
+        <div class="f"><label>YouTube</label><input type="url" name="soc_youtube"></div>
+        <div class="f"><label>TikTok</label><input type="url" name="soc_tiktok"></div>
+        <div class="f"><label>LinkedIn</label><input type="url" name="soc_linkedin"></div>
+        <div class="f"><label>X</label><input type="url" name="soc_x"></div>
+        <div class="f"><label>Podcast</label><input type="url" name="soc_podcast"></div>
+        <div class="f"><label>Anything else</label><input type="url" name="soc_other"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section class="pane" data-step="2" data-name="Flagship">
+    <h2>mortgagepunk.com</h2>
+    <p class="sub">The flagship. This is the one we build first, and whatever it locks, the other two inherit.</p>
+
+    <div class="grp"><div class="gl">The education library</div>
+      <div class="note"><span class="t">How it will work</span>
+        Videos live on YouTube and get embedded on your site. You add a link in the dashboard, pick a topic, and it appears. <b>Nothing is uploaded to the website itself</b>, which is why the library can grow forever without ever costing you storage.
+      </div>
+      <div class="f"><label>Roughly how many videos to start with?<span class="req">*</span></label>
+        <div class="opts">
+          <label><input type="radio" name="lib_count" value="Under 25" required><span>Under 25</span></label>
+          <label><input type="radio" name="lib_count" value="25 to 75"><span>25&ndash;75</span></label>
+          <label><input type="radio" name="lib_count" value="75 to 200"><span>75&ndash;200</span></label>
+          <label><input type="radio" name="lib_count" value="200 plus"><span>200+</span></label>
+        </div>
+      </div>
+      <div class="f"><div class="q">Where does the teaching live right now?</div>
+        <div class="opts">
+          <label><input type="checkbox" name="lib_where" value="YouTube"><span>YouTube</span></label>
+          <label><input type="checkbox" name="lib_where" value="Instagram"><span>Instagram</span></label>
+          <label><input type="checkbox" name="lib_where" value="TikTok"><span>TikTok</span></label>
+          <label><input type="checkbox" name="lib_where" value="Facebook"><span>Facebook</span></label>
+          <label><input type="checkbox" name="lib_where" value="Podcast"><span>Podcast</span></label>
+          <label><input type="checkbox" name="lib_where" value="Somewhere else"><span>Somewhere else</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Is everything you want in the library already on YouTube?<span class="req">*</span></label>
+        <div class="help">If some of it only exists on Instagram or TikTok, someone has to upload it to YouTube before it can be embedded. Worth knowing now.</div>
+        <div class="opts stack">
+          <label><input type="radio" name="lib_on_yt" value="Yes, all of it is on YouTube" required><span>Yes, all of it is on YouTube</span></label>
+          <label><input type="radio" name="lib_on_yt" value="Most of it, some needs uploading"><span>Most of it, some needs uploading</span></label>
+          <label><input type="radio" name="lib_on_yt" value="No, most of it lives elsewhere"><span>No, most of it lives elsewhere</span></label>
+          <label><input type="radio" name="lib_on_yt" value="Not sure"><span>Not sure</span></label>
+        </div>
+      </div>
+      <div class="f"><label>What topics should the library be grouped by?<span class="req">*</span></label>
+        <div class="help">Your categories, in your words. This is the shelf we build. Six to ten is the sweet spot.</div>
+        <textarea name="lib_topics" required placeholder="One per line. e.g. First-time buyer basics / Credit / VA loans / Rates explained / Realtor training"></textarea>
+      </div>
+      <div class="f"><label>Who on your team will be adding videos going forward?</label>
+        <input type="text" name="lib_owner" placeholder="Name and email &mdash; they get a dashboard sign-in">
+      </div>
+      <div class="f"><label>Link to your YouTube channel or a playlist to start from</label>
+        <input type="url" name="lib_channel"></div>
+    </div>
+
+    <div class="grp"><div class="gl">Leads and your CRM</div>
+      <div class="row">
+        <div class="f"><label>What CRM do you use?<span class="req">*</span></label>
+          <input type="text" name="crm_name" required placeholder="Name it even if you're not sure of the exact product"></div>
+        <div class="f"><label>Does it offer an API key or webhook?</label>
+          <select name="crm_api">
+            <option value="">Choose one</option>
+            <option>Yes, I can get one</option>
+            <option>Not sure &mdash; here's who to ask</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+      <div class="f"><label>If you're not sure, who do we ask?</label>
+        <div class="help">Your account rep, your admin, or a support email. We'll handle the conversation.</div>
+        <input type="text" name="crm_contact">
+      </div>
+      <div class="f"><label>Which email address should also get every lead?<span class="req">*</span></label>
+        <input type="email" name="lead_email" required></div>
+    </div>
+
+    <div class="grp"><div class="gl">The AI chat</div>
+      <div class="f"><div class="q">What should it be able to do?<span class="req">*</span></div>
+        <div class="opts">
+          <label><input type="checkbox" name="ai_can" value="Answer questions about Mortgage Punk"><span>Answer questions about the brand</span></label>
+          <label><input type="checkbox" name="ai_can" value="Explain loan and mortgage basics"><span>Explain loan basics</span></label>
+          <label><input type="checkbox" name="ai_can" value="Point people to the right video"><span>Point people to the right video</span></label>
+          <label><input type="checkbox" name="ai_can" value="Collect contact info"><span>Collect contact info</span></label>
+          <label><input type="checkbox" name="ai_can" value="Route to the right person"><span>Route to the right person</span></label>
+          <label><input type="checkbox" name="ai_can" value="Answer questions about events"><span>Answer event questions</span></label>
+        </div>
+      </div>
+      <div class="f"><label>What must it never do?<span class="req">*</span></label>
+        <div class="help">Quote rates, promise approval, give legal advice &mdash; name it. We write these in as hard rules.</div>
+        <textarea name="ai_never" required></textarea>
+      </div>
+      <div class="f"><label>Links to your best content, so it sounds like you</label>
+        <div class="help">Three to five. Videos, posts, or a talk. The more it reads, the closer it gets to your voice.</div>
+        <textarea name="ai_voice_source" placeholder="One link per line."></textarea>
+      </div>
+      <div class="f"><label>Who should it hand off to when it can't help?</label>
+        <input type="text" name="ai_handoff" placeholder="Name, phone, or email"></div>
+    </div>
+
+    <div class="grp"><div class="gl">Merch</div>
+      <div class="row">
+        <div class="f"><label>Do you sell merch today?</label>
+          <select name="merch_status">
+            <option value="">Choose one</option>
+            <option>Yes, on a platform already</option>
+            <option>Yes, but it's manual</option>
+            <option>No, not yet</option>
+          </select>
+        </div>
+        <div class="f"><label>Which platform?</label>
+          <input type="text" name="merch_platform" placeholder="Printful, Shopify, Square, Etsy, other"></div>
+      </div>
+      <div class="row">
+        <div class="f"><label>Store URL, if it exists</label><input type="url" name="merch_url"></div>
+        <div class="f"><label>Whose account is it under?</label><input type="text" name="merch_owner"></div>
+      </div>
+    </div>
+
+    <div class="grp"><div class="gl">Look and feel</div>
+      <div class="note warm"><span class="t">This is the most important question on the form</span>
+        Three sites get built off whatever we decide here. "Make it like that site" is not enough on its own &mdash; tell us <b>what specifically</b> about it. The texture? The typography? The way it moves? The energy?
+      </div>
+      <div class="ref"><div class="n">Reference 1</div>
+        <div class="f"><label>Site or link<span class="req">*</span></label><input type="text" name="ref1_url" required></div>
+        <div class="f"><label>What specifically about it?<span class="req">*</span></label><textarea name="ref1_why" required style="min-height:70px"></textarea></div>
+      </div>
+      <div class="ref"><div class="n">Reference 2</div>
+        <div class="f"><label>Site or link</label><input type="text" name="ref2_url"></div>
+        <div class="f"><label>What specifically about it?</label><textarea name="ref2_why" style="min-height:70px"></textarea></div>
+      </div>
+      <div class="ref"><div class="n">Reference 3</div>
+        <div class="f"><label>Site or link</label><input type="text" name="ref3_url"></div>
+        <div class="f"><label>What specifically about it?</label><textarea name="ref3_why" style="min-height:70px"></textarea></div>
+      </div>
+      <div class="f"><label>Anything you actively dislike?</label>
+        <div class="help">Just as useful as what you like. Sites, styles, or things other people in your industry do.</div>
+        <textarea name="dislikes" style="min-height:70px"></textarea>
+      </div>
+      <div class="f"><label>Anything on the current mortgagepunk.com worth keeping?</label>
+        <textarea name="keep_flagship" style="min-height:70px" placeholder="Copy, a page, a graphic. Or &quot;nothing, start clean&quot;."></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section class="pane" data-step="3" data-name="Live">
+    <h2>mortgagepunklive.com</h2>
+    <p class="sub">The stage. Built to be updated all year rather than rebuilt every year.</p>
+
+    <div class="grp"><div class="gl">The next event</div>
+      <div class="row">
+        <div class="f"><label>Event name</label><input type="text" name="ev_name" placeholder="e.g. The American Dream"></div>
+        <div class="f"><label>Date</label><input type="text" name="ev_date" placeholder="Or &quot;TBD&quot;"></div>
+      </div>
+      <div class="row">
+        <div class="f"><label>City</label><input type="text" name="ev_city"></div>
+        <div class="f"><label>Venue</label><input type="text" name="ev_venue"></div>
+      </div>
+      <div class="f"><label>What is it, in two sentences?</label>
+        <textarea name="ev_pitch" style="min-height:70px"></textarea></div>
+      <div class="row">
+        <div class="f"><label>Ticketed or free?</label>
+          <select name="ev_ticketed">
+            <option value="">Choose one</option>
+            <option>Free</option><option>Ticketed</option>
+            <option>Free with registration</option><option>Not decided</option>
+          </select>
+        </div>
+        <div class="f"><label>Existing ticketing platform, if any</label>
+          <input type="text" name="ev_ticket_platform" placeholder="Eventbrite, Luma, other, or none"></div>
+      </div>
+      <div class="f"><label>Speakers for the next event</label>
+        <div class="help">Name, title, and whether you have a headshot for them. If it's not locked yet, say so &mdash; the dashboard lets you add them later.</div>
+        <textarea name="ev_speakers" placeholder="One per line."></textarea>
+      </div>
+      <div class="f"><label>Sponsors</label>
+        <div class="help">Name, tier if you have tiers, and whether you have their logo. Upload logos to the shared folder.</div>
+        <textarea name="ev_sponsors" placeholder="One per line."></textarea>
+      </div>
+    </div>
+
+    <div class="grp"><div class="gl">Past events</div>
+      <div class="f"><label>How many past events do you want archived on the site?</label>
+        <div class="opts">
+          <label><input type="radio" name="ev_past_count" value="None"><span>None</span></label>
+          <label><input type="radio" name="ev_past_count" value="1"><span>1</span></label>
+          <label><input type="radio" name="ev_past_count" value="2 to 3"><span>2&ndash;3</span></label>
+          <label><input type="radio" name="ev_past_count" value="4 or more"><span>4 or more</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Do photos and recaps already exist for them?<span class="req">*</span></label>
+        <div class="help">If someone has to write recaps from scratch, that is worth knowing before September 5, not during revision week.</div>
+        <div class="opts stack">
+          <label><input type="radio" name="ev_past_assets" value="Yes, photos and recaps both exist" required><span>Yes, photos and written recaps both exist</span></label>
+          <label><input type="radio" name="ev_past_assets" value="Photos yes, recaps need writing"><span>Photos yes, recaps need writing</span></label>
+          <label><input type="radio" name="ev_past_assets" value="Neither, both need creating"><span>Neither, both need creating</span></label>
+          <label><input type="radio" name="ev_past_assets" value="Not applicable"><span>Not applicable</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Where do those assets live?</label>
+        <input type="text" name="ev_past_where" placeholder="A Drive link, a photographer, a phone. Or upload to the shared folder."></div>
+    </div>
+
+    <div class="grp"><div class="gl">Registration</div>
+      <div class="f"><div class="q">What should the registration form collect?</div>
+        <div class="opts">
+          <label><input type="checkbox" name="reg_fields" value="Name"><span>Name</span></label>
+          <label><input type="checkbox" name="reg_fields" value="Email"><span>Email</span></label>
+          <label><input type="checkbox" name="reg_fields" value="Phone"><span>Phone</span></label>
+          <label><input type="checkbox" name="reg_fields" value="Company"><span>Company</span></label>
+          <label><input type="checkbox" name="reg_fields" value="Role"><span>Role</span></label>
+          <label><input type="checkbox" name="reg_fields" value="How they heard about it"><span>How they heard</span></label>
+          <label><input type="checkbox" name="reg_fields" value="Guest count"><span>Guest count</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Anything else it should ask?</label><input type="text" name="reg_extra"></div>
+      <div class="f"><label>Anything on the current mortgagepunklive.com worth keeping?</label>
+        <textarea name="keep_live" style="min-height:70px"></textarea></div>
+    </div>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section class="pane" data-step="4" data-name="National">
+    <h2>chriswaipanational.com</h2>
+    <p class="sub">The public figure site. This is the one that books the stage, the podcast, and the press.</p>
+
+    <div class="note warm"><span class="t">One decision we need before we touch this site</span>
+      There is content on this domain today. We are not going to delete anything without you telling us to, so tell us what you want to happen to it.
+    </div>
+
+    <div class="grp"><div class="gl">The existing site</div>
+      <div class="f"><label>What happens to what's on chriswaipanational.com now?<span class="req">*</span></label>
+        <div class="opts stack">
+          <label><input type="radio" name="existing_site" value="Keep it as an archive page on the new site" required><span>Keep it as an archive page on the new site</span></label>
+          <label><input type="radio" name="existing_site" value="Move it behind a private link"><span>Move it behind a private link</span></label>
+          <label><input type="radio" name="existing_site" value="Retire it entirely"><span>Retire it entirely</span></label>
+          <label><input type="radio" name="existing_site" value="Not sure, let's discuss"><span>Not sure &mdash; let's discuss it</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Anything on it you specifically want kept?</label>
+        <textarea name="existing_keep" style="min-height:70px"></textarea></div>
+    </div>
+
+    <div class="grp"><div class="gl">The story</div>
+      <div class="f"><label>Short bio<span class="req">*</span></label>
+        <div class="help">About fifty words. The one an event uses in a program.</div>
+        <textarea name="bio_short" required style="min-height:80px"></textarea>
+      </div>
+      <div class="f"><label>Long bio</label>
+        <div class="help">About two hundred words. The one that goes on the About page.</div>
+        <textarea name="bio_long"></textarea>
+      </div>
+      <div class="f"><label>The mission, in your words<span class="req">*</span></label>
+        <div class="help">What are you actually trying to change? This is the sentence the whole site hangs on.</div>
+        <textarea name="mission" required style="min-height:80px"></textarea>
+      </div>
+    </div>
+
+    <div class="grp"><div class="gl">The media kit</div>
+      <div class="f"><label>Speaking topics<span class="req">*</span></label>
+        <div class="help">The talks you give, or would give. Title plus a line on each.</div>
+        <textarea name="speaking_topics" required placeholder="One per line."></textarea>
+      </div>
+      <div class="f"><label>Do you have a speaker one-sheet or media kit?</label>
+        <div class="opts">
+          <label><input type="radio" name="media_kit" value="Yes, in the folder"><span>Yes, in the folder</span></label>
+          <label><input type="radio" name="media_kit" value="Yes, will send"><span>Yes, will send</span></label>
+          <label><input type="radio" name="media_kit" value="No, build one"><span>No &mdash; build one</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Press, features, podcasts, and appearances to list</label>
+        <div class="help">Outlet, what it was, and a link if there is one. Logos to the shared folder.</div>
+        <textarea name="press_list" placeholder="One per line."></textarea>
+      </div>
+      <div class="f"><label>Have you uploaded headshots?</label>
+        <div class="opts">
+          <label><input type="radio" name="headshots" value="Yes, uploaded"><span>Yes, uploaded</span></label>
+          <label><input type="radio" name="headshots" value="Will upload before Sept 4"><span>Will upload before Sept 4</span></label>
+          <label><input type="radio" name="headshots" value="Need new ones taken"><span>Need new ones taken</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="grp"><div class="gl">Where inquiries go</div>
+      <div class="row">
+        <div class="f"><label>Speaking and booking inquiries &mdash; email<span class="req">*</span></label><input type="email" name="booking_email" required></div>
+        <div class="f"><label>Speaking and booking &mdash; phone</label><input type="tel" name="booking_phone"></div>
+      </div>
+      <div class="row">
+        <div class="f"><label>Press inquiries &mdash; email</label><input type="email" name="press_email" placeholder="Same as booking if you like"></div>
+        <div class="f"><label>Who handles these day to day?</label><input type="text" name="inquiry_owner"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section class="pane" data-step="5" data-name="Access">
+    <h2>Domains and access</h2>
+    <p class="sub">Boring, and the single most common reason a launch date slips. Ten minutes now saves a bad week later.</p>
+
+    <div class="note"><span class="t">What we already have</span>
+      We hold DNS access for <b>chriswaipanational.com</b>. We need the other two before go-live week, not during it.
+    </div>
+
+    <div class="grp"><div class="gl">mortgagepunk.com</div>
+      <div class="row">
+        <div class="f"><label>Who is the registrar?<span class="req">*</span></label>
+          <div class="help">GoDaddy, Namecheap, Google Domains, or "bought through my old web company".</div>
+          <input type="text" name="dom1_registrar" required></div>
+        <div class="f"><label>Who has the login?</label><input type="text" name="dom1_login"></div>
+      </div>
+      <div class="f"><label>Does email run on this domain?<span class="req">*</span></label>
+        <div class="help">If anyone has an @mortgagepunk.com address, we have to protect the mail records during the cutover. Getting this wrong stops your email.</div>
+        <div class="opts">
+          <label><input type="radio" name="dom1_email" value="Yes" required><span>Yes</span></label>
+          <label><input type="radio" name="dom1_email" value="No"><span>No</span></label>
+          <label><input type="radio" name="dom1_email" value="Not sure"><span>Not sure</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Who hosts the current site?</label>
+        <input type="text" name="dom1_host" placeholder="And should we cancel it after launch?"></div>
+    </div>
+
+    <div class="grp"><div class="gl">mortgagepunklive.com</div>
+      <div class="row">
+        <div class="f"><label>Who is the registrar?<span class="req">*</span></label><input type="text" name="dom2_registrar" required></div>
+        <div class="f"><label>Who has the login?</label><input type="text" name="dom2_login"></div>
+      </div>
+      <div class="f"><label>Does email run on this domain?<span class="req">*</span></label>
+        <div class="opts">
+          <label><input type="radio" name="dom2_email" value="Yes" required><span>Yes</span></label>
+          <label><input type="radio" name="dom2_email" value="No"><span>No</span></label>
+          <label><input type="radio" name="dom2_email" value="Not sure"><span>Not sure</span></label>
+        </div>
+      </div>
+      <div class="f"><label>Who hosts the current site?</label><input type="text" name="dom2_host"></div>
+    </div>
+
+    <div class="grp"><div class="gl">Everything else</div>
+      <div class="row">
+        <div class="f"><label>Existing Google Analytics?</label>
+          <select name="ga">
+            <option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option>
+          </select></div>
+        <div class="f"><label>Google Business Profile?</label>
+          <select name="gbp">
+            <option value="">Choose one</option><option>Yes</option><option>No</option><option>Not sure</option>
+          </select></div>
+      </div>
+      <div class="f"><label>Any other tool that needs to connect to these sites?</label>
+        <div class="help">Email platform, calendar, scheduler, webinar tool, anything.</div>
+        <textarea name="other_tools" style="min-height:70px"></textarea>
+      </div>
+      <div class="f"><label>Anything we haven't asked about that we should know?</label>
+        <div class="help">Ideas, worries, a deadline we don't know about, someone whose opinion matters. Anything.</div>
+        <textarea name="anything_else"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section class="pane" data-step="6" data-name="Confirm">
+    <h2>One last thing</h2>
+    <p class="sub">So we are both working from the same plan. Nothing here is new &mdash; it is the build plan, in short.</p>
+
+    <div class="note"><span class="t">The schedule</span>
+      Payment and this form by <b>Sept 4</b>. Flagship V1 on <b>Sept 11</b>, design direction confirmed by <b>Sept 12</b>. The other two sites on <b>Sept 17</b>. One markup window <b>Sept 21&ndash;25</b>, one revision round <b>Sept 28&ndash;30</b>. Live <b>Oct 1</b>.
+    </div>
+    <div class="note"><span class="t">How changes work after launch</span>
+      Text, images, links, events, library videos, dates and prices are unlimited &mdash; text us and it ships. New pages, new sections, new integrations, and design changes get quoted first and agreed before anything is built. The Care Plan is <b>$249/mo</b> from Oct 1 across all three sites.
+    </div>
+    <div class="note warm"><span class="t">Not in this build</span>
+      The full merch store, the automation layer, the contractor brand dashboard, and the $1,000 marketing seat. All named in your proposal, none forgotten, each priced on its own when you want it.
+    </div>
+
+    <div class="grp">
+      <div class="f"><div class="q">Confirm<span class="req">*</span></div>
+        <div class="opts stack">
+          <label><input type="checkbox" name="ack_schedule" value="Yes" required><span>I've read the build plan and I understand the schedule</span></label>
+          <label><input type="checkbox" name="ack_scope" value="Yes" required><span>I understand what is in this build and what is not</span></label>
+          <label><input type="checkbox" name="ack_markup" value="Yes" required><span>I understand there is one markup window and one revision round</span></label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="f"><label>Type your name<span class="req">*</span></label><input type="text" name="sign_name" required></div>
+        <div class="f"><label>Today's date<span class="req">*</span></label><input type="date" name="sign_date" required></div>
+      </div>
+    </div>
+  </section>
+
+  </form>
+
+  <div class="nav" id="nav">
+    <button type="button" class="btn g" id="back">Back</button>
+    <span class="saved" id="saved"></span>
+    <button type="button" class="btn p" id="next">Next</button>
+  </div>
+
+  <div class="done" id="done">
+    <div class="tick">&#10003;</div>
+    <h2>That's everything. Thank you.</h2>
+    <p>It's in front of us now. If anything in there raises a question we'll text you rather than sit on it. Next thing you'll hear from us is the flagship on September 11.</p>
+    <p style="margin-top:18px;font-size:14px">Still to do: get your files into the shared folder, and make sure the invoice is paid by the 4th.</p>
+  </div>
+
+  <div class="ft">
+    <div class="l">Let's find the leaks, <em>then plug them.</em></div>
+    <div class="r"><b>getproytech.com</b><br><span>Garrett Von Flue &middot; 901.335.3905</span></div>
+  </div>
+
+</div></div>
+
+<script>
+(function(){
+  var ENDPOINT = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+  var KEY = 'proytech_mortgagepunk_onboarding_v1';
+
+  var form  = document.getElementById('form');
+  var panes = Array.prototype.slice.call(document.querySelectorAll('.pane'));
+  var steps = document.getElementById('steps');
+  var fill  = document.getElementById('barfill');
+  var back  = document.getElementById('back');
+  var next  = document.getElementById('next');
+  var err   = document.getElementById('err');
+  var saved = document.getElementById('saved');
+  var nav   = document.getElementById('nav');
+  var done  = document.getElementById('done');
+  var i = 0, last = panes.length - 1;
+
+  panes.forEach(function(p, n){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = (n+1) + '. ' + p.dataset.name;
+    b.onclick = function(){ go(n); };
+    steps.appendChild(b);
+  });
+  var tabs = Array.prototype.slice.call(steps.children);
+
+  function paint(){
+    panes.forEach(function(p,n){ p.classList.toggle('on', n===i); });
+    tabs.forEach(function(t,n){
+      t.setAttribute('aria-current', n===i ? 'true' : 'false');
+      t.classList.toggle('done', n < i);
+    });
+    fill.style.width = ((i)/(last)*100) + '%';
+    back.style.visibility = i===0 ? 'hidden' : 'visible';
+    next.textContent = i===last ? 'Submit' : 'Next';
+    next.className = i===last ? 'btn o' : 'btn p';
+    err.classList.remove('on');
+  }
+  function go(n){
+    if(n > i && !valid()) return;
+    i = Math.max(0, Math.min(last, n));
+    paint();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function valid(){
+    var pane = panes[i], bad = [], seen = {};
+    Array.prototype.slice.call(pane.querySelectorAll('[required]')).forEach(function(el){
+      el.classList.remove('bad');
+      if(el.type === 'radio' || el.type === 'checkbox'){
+        if(seen[el.name]) return;
+        seen[el.name] = 1;
+        var any = pane.querySelector('[name="'+el.name+'"]:checked');
+        if(!any) bad.push(el);
+      } else if(!String(el.value).trim()){
+        bad.push(el);
+      } else if(el.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value)){
+        bad.push(el);
+      }
+    });
+    if(bad.length){
+      bad.forEach(function(el){
+        if(el.type==='radio'||el.type==='checkbox'){
+          var w = el.closest('.f'); if(w) w.querySelectorAll('.opts label').forEach(function(l){ l.style.borderColor='#F5C9AF'; });
+        } else el.classList.add('bad');
+      });
+      err.textContent = bad.length===1
+        ? 'One thing is still missing on this page.'
+        : bad.length + ' things are still missing on this page.';
+      err.classList.add('on');
+      var f = bad[0].closest('.f') || bad[0];
+      f.scrollIntoView({behavior:'smooth', block:'center'});
+      return false;
+    }
+    return true;
+  }
+
+  function collect(){
+    var out = {};
+    Array.prototype.slice.call(form.elements).forEach(function(el){
+      if(!el.name) return;
+      if(el.type === 'checkbox'){
+        if(el.checked){ out[el.name] = out[el.name] ? out[el.name] + ', ' + el.value : el.value; }
+        else if(!(el.name in out)) out[el.name] = '';
+      } else if(el.type === 'radio'){
+        if(el.checked) out[el.name] = el.value;
+        else if(!(el.name in out)) out[el.name] = '';
+      } else out[el.name] = el.value;
+    });
+    return out;
+  }
+  function restore(){
+    var raw; try{ raw = localStorage.getItem(KEY); }catch(e){ return; }
+    if(!raw) return;
+    var d; try{ d = JSON.parse(raw); }catch(e){ return; }
+    Array.prototype.slice.call(form.elements).forEach(function(el){
+      if(!el.name || !(el.name in d)) return;
+      var v = d[el.name];
+      if(el.type === 'checkbox') el.checked = String(v).split(', ').indexOf(el.value) > -1;
+      else if(el.type === 'radio') el.checked = (v === el.value);
+      else el.value = v;
+    });
+    saved.innerHTML = '<b>Saved.</b> Picked up where you left off.';
+  }
+  var t;
+  function autosave(){
+    clearTimeout(t);
+    t = setTimeout(function(){
+      try{ localStorage.setItem(KEY, JSON.stringify(collect())); }catch(e){}
+      saved.innerHTML = '<b>Saved</b> ' + new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+    }, 500);
+  }
+  form.addEventListener('input', autosave);
+  form.addEventListener('change', autosave);
+
+  function submit(){
+    if(!valid()) return;
+    next.disabled = true; back.disabled = true;
+    next.textContent = 'Sending...';
+    var payload = collect();
+    payload._form = 'Mortgage Punk Onboarding';
+    payload._submitted_at = new Date().toISOString();
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.text(); })
+      .then(function(){ finish(); })
+      .catch(function(){
+        // Apps Script CORS fallback: fire and forget
+        fetch(ENDPOINT, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload)})
+          .then(finish).catch(finish);
+      });
+  }
+  function finish(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    form.style.display = 'none';
+    document.querySelector('.prog').style.display = 'none';
+    nav.style.display = 'none';
+    err.classList.remove('on');
+    done.classList.add('on');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  next.onclick = function(){ i === last ? submit() : go(i+1); };
+  back.onclick = function(){ go(i-1); };
+
+  var d = document.querySelector('[name="sign_date"]');
+  if(d && !d.value) d.value = new Date().toISOString().slice(0,10);
+
+  restore();
+  paint();
+})();
+</script>
+</body>
+</html>
