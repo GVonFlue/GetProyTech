@@ -137,24 +137,60 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 
 /* --- attract ---------------------------------------------- */
 #attract{justify-content:center;gap:14px;text-align:center;align-items:center}
-.hero{
-  position:relative;
-  width:min(64vh,96vw);aspect-ratio:1;
-  background:url('images/hero.jpg') center/contain no-repeat;
-  /* the image dissolves into the blurred arena behind it instead of sitting in a box */
-  mask-image:radial-gradient(closest-side, #000 58%, rgba(0,0,0,.55) 78%, transparent 97%);
-  -webkit-mask-image:radial-gradient(closest-side, #000 58%, rgba(0,0,0,.55) 78%, transparent 97%);
-  filter:drop-shadow(0 0 60px rgba(60,150,255,.35));
-  margin-bottom:-6vh;
+
+/* --- the animated lockup ---------------------------------- */
+.lock{position:relative;width:min(62vh,96vw);aspect-ratio:1;margin-bottom:-5vh}
+.lock img{position:absolute;display:block;width:auto;opacity:0}
+.lock .l-pt{left:13.9%;top:12.3%;width:72.6%}
+.lock .l-th{left:16.3%;top:61.8%;width:71.0%}
+.lock .l-x {left:37.4%;top:36.2%;width:26.4%}
+
+.lock.play .l-pt{animation:dropIn .85s cubic-bezier(.16,1,.3,1) .10s both}
+.lock.play .l-th{animation:riseIn .85s cubic-bezier(.16,1,.3,1) .30s both}
+.lock.play .l-x {animation:ignite .70s cubic-bezier(.2,1.5,.35,1) .62s both,
+                            throb 3.4s ease-in-out 1.4s infinite}
+
+@keyframes dropIn{from{opacity:0;transform:translateY(-46px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes riseIn{from{opacity:0;transform:translateY(46px)  scale(.96)}to{opacity:1;transform:none}}
+@keyframes ignite{
+  0%  {opacity:0;transform:scale(.3) rotate(-14deg);filter:brightness(3) blur(7px)}
+  55% {opacity:1;transform:scale(1.16) rotate(3deg);filter:brightness(1.9) blur(0)}
+  100%{opacity:1;transform:none;filter:none}
 }
+@keyframes throb{0%,100%{filter:drop-shadow(0 0 10px rgba(90,180,255,.5))}
+                 50%    {filter:drop-shadow(0 0 34px rgba(120,205,255,.95))}}
+
 /* one light sweep across the ice, every few seconds */
-.hero::after{
+.lock::after{
   content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(102deg, transparent 38%, rgba(190,230,255,.16) 48%, transparent 58%);
+  background:linear-gradient(102deg, transparent 38%, rgba(190,230,255,.15) 48%, transparent 58%);
   transform:translateX(-120%);
-  animation:sweep 7s ease-in-out infinite;
+  animation:sweep 7s ease-in-out 2s infinite;
 }
 @keyframes sweep{0%,62%{transform:translateX(-120%)}88%,100%{transform:translateX(120%)}}
+
+.entryno{
+  font-family:var(--display);font-weight:600;font-size:15px;color:var(--glacier);
+  letter-spacing:.02em;opacity:.9
+}
+
+/* --- booth control ---------------------------------------- */
+#admin{justify-content:center;gap:0;max-width:520px}
+#admin h2{margin-bottom:18px}
+.stat{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:11px 0;border-bottom:1px solid rgba(124,199,255,.14);font-size:15px;color:var(--muted)}
+.stat b{font-family:var(--display);font-size:20px;color:var(--ice-white);font-variant-numeric:tabular-nums}
+.stat b.warn{color:#FFB27A}
+.mini{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.mini button{
+  flex:1 1 44%;min-height:56px;border-radius:14px;
+  border:1.5px solid var(--line);background:rgba(8,24,48,.62);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  color:var(--ice-white);font:600 15px var(--body);cursor:pointer;
+}
+.mini button.on{border-color:var(--glacier);background:rgba(27,98,196,.5)}
+.qr{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.6;word-break:break-all}
+.qr b{color:var(--glacier);font-weight:600}
 .prize{font-family:var(--display);font-weight:600;font-size:clamp(20px,3.4vw,28px);line-height:1.2}
 .prize span{display:block;font-family:var(--body);font-weight:500;font-size:16px;color:var(--glacier);margin-top:8px}
 
@@ -286,6 +322,10 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 .count b{display:inline-block;min-width:2ch;color:var(--glacier);font-family:var(--display);font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
 
 #confetti{position:fixed;inset:0;z-index:30;pointer-events:none;display:none}
+
+/* invisible corner target: five taps anywhere in the flow reopens booth control */
+#hotspot{position:fixed;left:0;top:0;width:96px;height:96px;z-index:45;
+  background:transparent;border:0;padding:0;cursor:default}
 #confetti.on{display:block}
 
 /* --- queue / status pill --------------------------------- */
@@ -298,16 +338,6 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 }
 #pill.on{opacity:1}
 
-/* --- staff panel (hidden, 5 taps on the rail) ------------- */
-#staff{position:fixed;inset:0;z-index:50;display:none;background:rgba(2,8,18,.94);
-  padding:40px 24px;overflow-y:auto}
-#staff.on{display:block}
-#staff .sheet{margin:0 auto}
-#staff dl{display:grid;grid-template-columns:1fr auto;gap:10px 16px;font-size:15px;margin:16px 0 22px}
-#staff dt{color:var(--muted)}
-#staff dd{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
-#staff button{width:100%;min-height:56px;border-radius:14px;border:1.5px solid var(--line);
-  background:rgba(10,30,58,.8);color:var(--ice-white);font:600 16px inherit;margin-bottom:10px;font-family:inherit}
 
 :focus-visible{outline:3px solid var(--glacier);outline-offset:3px}
 
@@ -346,15 +376,48 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 
   <div class="stage">
 
+    <!-- BOOTH CONTROL -------------------------------------------- -->
+    <section class="screen on scrollable" id="admin">
+      <div class="kicker">ProyTech x Wichita Thunder</div>
+      <h2>Booth control</h2>
+
+      <div class="stat"><span>Completed entries</span><b id="aDone">0</b></div>
+      <div class="stat"><span>Partial and abandoned</span><b id="aPartial">0</b></div>
+      <div class="stat"><span>Waiting to sync</span><b id="aQueue">0</b></div>
+      <div class="stat"><span>Business owners</span><b id="aOwners">0</b></div>
+      <div class="stat"><span>Season ticket leads</span><b id="aSeason">0</b></div>
+      <div class="stat"><span>Connection</span><b id="aNet">online</b></div>
+      <div class="stat"><span>Saving to sheet</span><b id="aEnd">checking</b></div>
+
+      <div class="mini">
+        <button id="aHorn">Goal horn: on</button>
+        <button id="aSync">Sync now</button>
+        <button id="aCsv">Backup CSV</button>
+        <button id="aFull">Full screen</button>
+      </div>
+
+      <div class="qr">Phone entry link for the QR sign:<br><b id="aQr">getproytech.com/thunder?src=qr</b></div>
+
+      <div class="foot">
+        <button class="cta" id="aStart">Open the kiosk</button>
+      </div>
+      <div class="hint" style="text-align:center;margin-top:10px">Tap the top left corner five times to come back here.</div>
+    </section>
+
     <!-- 0 ATTRACT ------------------------------------------------ -->
     <section class="screen on" id="attract">
-      <div class="hero"></div>
+      <div class="lock" id="lock">
+        <img class="l-pt" src="images/lock-proytech.png" alt="ProyTech">
+        <img class="l-th" src="images/lock-thunder.png" alt="Wichita Thunder">
+        <img class="l-x"  src="images/lock-x.png" alt="">
+      </div>
       <div class="prize" id="prizeLine">
         Win the Thunder Fan Pack
         <span id="prizeItems">Game tickets, team gear and local goodies</span>
       </div>
       <button class="cta" id="startBtn">Enter to win</button>
       <div class="hint">Takes about 30 seconds</div>
+      <div class="entryno" id="entryNo" style="display:none"></div>
     </section>
 
     <!-- 1 NAME + PHONE ------------------------------------------ -->
@@ -496,8 +559,8 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
         <svg viewBox="0 0 24 24" fill="none" stroke="#04101F" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
       <h1 id="doneName">You are in.</h1>
-      <p class="sub" style="text-align:center;margin:0 auto">Check your email for confirmation. The winner gets a call after the drawing.</p>
-      <p class="count">Next entry in <b id="cd">10</b></p>
+      <p class="sub" id="doneSub" style="text-align:center;margin:0 auto">Check your email for confirmation. The winner gets a call after the drawing.</p>
+      <p class="count" id="cdLine">Next entry in <b id="cd">10</b></p>
       <button class="ghost" id="againBtn">Start the next entry now</button>
     </section>
 
@@ -537,24 +600,7 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
   </div>
 </div>
 
-<!-- staff panel -->
-<div id="staff">
-  <div class="sheet">
-    <h3>Booth status</h3>
-    <dl>
-      <dt>Completed entries</dt><dd id="stDone">0</dd>
-      <dt>Partial entries saved</dt><dd id="stPartial">0</dd>
-      <dt>Waiting to sync</dt><dd id="stQueue">0</dd>
-      <dt>Connection</dt><dd id="stNet">online</dd>
-      <dt>Business owners</dt><dd id="stOwners">0</dd>
-      <dt>Season ticket leads</dt><dd id="stSeason">0</dd>
-    </dl>
-    <button id="stSync">Sync now</button>
-    <button id="stExport">Download backup CSV</button>
-    <button id="stClose">Close</button>
-    <p class="hint" style="margin-top:14px">Nothing is ever deleted from this iPad until you clear it. The backup CSV is your safety net if the sheet ever looks short.</p>
-  </div>
-</div>
+<button id="hotspot" aria-label="Booth control"></button>
 
 <div id="pill"></div>
 
@@ -576,6 +622,7 @@ const CONFIG = {
 
   DRAWING_DATE: 'Monday, September 21, 2026',
   EVENT: 'Open Streets ICT 2026',
+  GOAL_HORN: true,          // booth control can flip this at any time
 
   RESET_SECONDS: 10,   // celebration screen countdown
   IDLE_SECONDS: 45,    // abandoned form auto reset
@@ -585,6 +632,9 @@ const CONFIG = {
 /* ============================================================
    STATE
    ============================================================ */
+/* Phones that scan the QR sign get ?src=qr. Same form, no kiosk cycling. */
+const PERSONAL = new URLSearchParams(location.search).get('src') === 'qr';
+
 const LS_QUEUE = 'ptt_queue_v1';
 const LS_LOG   = 'ptt_log_v1';
 const LS_PHONE = 'ptt_phones_v1';
@@ -613,6 +663,7 @@ const STEP = { s1:1, s2:2, s3:3, s4:4, s5:5, s5b:5, s6:5 };
 
 /* which photo belongs behind which screen */
 const BG = {
+  admin:   'images/hero-blur.jpg',
   attract: 'images/hero-blur.jpg',
   s1:      'images/bg-anthem.jpg',
   s2:      'images/bg-anthem.jpg',
@@ -632,7 +683,7 @@ function setBg(id){
   phNow = src;
   const next = phTop ? $('#phA') : $('#phB');
   const prev = phTop ? $('#phB') : $('#phA');
-  const idle = (id === 'attract' || id === 'done');
+  const idle = ['admin','attract','done'].includes(id);
   next.style.backgroundImage = "url('" + src + "')";
   next.classList.toggle('drift', idle);
   next.classList.add('on');
@@ -648,11 +699,17 @@ function show(id){
   $$('.screen').forEach(s => s.classList.remove('on'));
   $('#' + id).classList.add('on');
 
-  const inForm = !['attract','done','dupe'].includes(id);
+  const inForm = !['admin','attract','done','dupe'].includes(id);
   $('#bar').classList.toggle('on', inForm);
   $('#rail i').style.width = (inForm ? (STEP[id] || 5) / 5 * 100 : 0) + '%';
 
   setBg(id);
+
+  if (id === 'attract'){
+    const L = $('#lock');
+    L.classList.remove('play'); void L.offsetWidth; L.classList.add('play');
+    paintEntryNo();
+  }
 
   if (path[path.length - 1] !== id) path.push(id);
 
@@ -671,9 +728,19 @@ function back(){
   show(prev);
 }
 
+/* Only show the running count once it flatters the booth. */
+function paintEntryNo(){
+  const n = store.get(LS_LOG, []).length;
+  const el = $('#entryNo');
+  if (PERSONAL || n < 10){ el.style.display = 'none'; return; }
+  el.textContent = 'You will be entry number ' + (n + 1);
+  el.style.display = 'block';
+}
+
 function resetIdle(id){
   clearTimeout(idleTimer);
-  if (['attract','done','dupe'].includes(id)) return;
+  if (['admin','attract','done','dupe'].includes(id)) return;
+  if (PERSONAL) return;               // a phone is not a kiosk, never yank the form away
   idleTimer = setTimeout(() => {
     if (D.phone) { D.status = 'abandoned'; enqueue(D); }
     hardReset();
@@ -727,10 +794,11 @@ $('#startBtn').addEventListener('click', () => {
   D = {
     entry_id: 'e_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8),
     started_at: new Date().toISOString(),
-    event: CONFIG.EVENT,
+    event: CONFIG.EVENT + (PERSONAL ? ' - QR phone' : ' - Booth iPad'),
     status: 'partial'
   };
   keepAwake();
+  goFull();
   show('s1');
 });
 
@@ -813,7 +881,14 @@ $('#submitBtn').addEventListener('click', () => {
   $('#doneName').textContent = (D.first_name ? D.first_name + ', you are in.' : 'You are in.');
   show('done');
   celebrate();
-  countdown();
+  horn();
+  if (PERSONAL){
+    $('#doneSub').textContent = 'Check your email for confirmation. The winner gets a call after the drawing. Come say hi at the ProyTech and Thunder booth.';
+    $('#cdLine').style.display = 'none';
+    $('#againBtn').style.display = 'none';
+  } else {
+    countdown();
+  }
 });
 
 $('#againBtn').addEventListener('click', hardReset);
@@ -909,26 +984,79 @@ syncTimer = setInterval(flush, 15000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) flush(); });
 
 /* ============================================================
-   STAFF PANEL  —  five taps on the progress rail
+   FULL SCREEN
+   Browsers only allow this from a user gesture, which is
+   exactly what "Open the kiosk" is.
    ============================================================ */
-let taps = 0, tapT;
-$('#bar').addEventListener('click', () => {
-  taps++; clearTimeout(tapT); tapT = setTimeout(() => taps = 0, 1400);
-  if (taps >= 5){ taps = 0; paintStaff(); $('#staff').classList.add('on'); }
+function isFull(){
+  return !!(document.fullscreenElement || document.webkitFullscreenElement);
+}
+function goFull(){
+  if (isFull()) return;
+  const el = document.documentElement;
+  const req = el.requestFullscreen || el.webkitRequestFullscreen
+           || el.mozRequestFullScreen || el.msRequestFullscreen;
+  if (!req) return;                  // iOS Chrome has no Fullscreen API; use Safari there
+  try { const r = req.call(el); if (r && r.catch) r.catch(() => {}); } catch (e){}
+}
+
+/* ============================================================
+   BOOTH CONTROL
+   ============================================================ */
+$('#aStart').addEventListener('click', () => {
+  goFull();
+  keepAwake();
+  primeAudio();
+  hardReset();
 });
-$('#stClose').addEventListener('click', () => { $('#staff').classList.remove('on'); resetIdle('s1'); });
-$('#stSync').addEventListener('click', () => { flush(); pill('Syncing.'); });
-$('#stExport').addEventListener('click', exportCsv);
+
+let taps = 0, tapT;
+function tapForAdmin(){
+  if (PERSONAL) return;
+  taps++; clearTimeout(tapT); tapT = setTimeout(() => taps = 0, 1400);
+  if (taps >= 5){
+    taps = 0;
+    clearTimeout(idleTimer); clearInterval(cdTimer);
+    paintStaff();
+    show('admin');
+  }
+}
+$('#hotspot').addEventListener('click', tapForAdmin);
+$('#bar').addEventListener('click', tapForAdmin);
+
+$('#aSync').addEventListener('click', () => { flush(); pill('Syncing.'); });
+$('#aCsv').addEventListener('click', exportCsv);
+$('#aFull').addEventListener('click', goFull);
+$('#aHorn').addEventListener('click', () => {
+  CONFIG.GOAL_HORN = !CONFIG.GOAL_HORN;
+  paintStaff();
+  if (CONFIG.GOAL_HORN){ primeAudio(); horn(); }
+});
 
 function paintStaff(){
   const log = store.get(LS_LOG, []);
   const q   = store.get(LS_QUEUE, []);
-  $('#stDone').textContent    = log.length;
-  $('#stPartial').textContent = q.filter(x => x.status !== 'complete').length;
-  $('#stQueue').textContent   = q.length;
-  $('#stNet').textContent     = navigator.onLine ? 'online' : 'offline';
-  $('#stOwners').textContent  = log.filter(x => x.is_owner && x.is_owner !== 'No').length;
-  $('#stSeason').textContent  = log.filter(x => ['Wants pricing','Considering'].includes(x.season_interest)).length;
+  const set = (id, v, warn) => {
+    const el = $(id); if (!el) return;
+    el.textContent = v; el.classList.toggle('warn', !!warn);
+  };
+  set('#aDone',    log.length);
+  set('#aPartial', q.filter(x => x.status !== 'complete').length);
+  set('#aQueue',   q.length, q.length > 10);
+  set('#aOwners',  log.filter(x => x.is_owner && x.is_owner !== 'No').length);
+  set('#aSeason',  log.filter(x => ['Wants pricing','Considering'].includes(x.season_interest)).length);
+  set('#aNet',     navigator.onLine ? 'online' : 'offline', !navigator.onLine);
+
+  const wired = CONFIG.ENDPOINT.indexOf('PASTE_') !== 0;
+  set('#aEnd', wired ? 'connected' : 'NOT SET', !wired);
+
+  const hornBtn = $('#aHorn');
+  if (hornBtn){
+    hornBtn.textContent = 'Goal horn: ' + (CONFIG.GOAL_HORN ? 'on' : 'off');
+    hornBtn.classList.toggle('on', CONFIG.GOAL_HORN);
+  }
+  const qr = $('#aQr');
+  if (qr) qr.textContent = location.origin.replace(/^https?:\/\//,'') + location.pathname + '?src=qr';
 }
 
 function exportCsv(){
@@ -942,6 +1070,55 @@ function exportCsv(){
   a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
   a.download = 'thunder-proytech-entries-backup.csv';
   a.click();
+}
+
+/* ============================================================
+   GOAL HORN
+   Synthesised, so there is no audio file to load and nothing
+   to license. Two detuned brass stacks and a low rumble.
+   ============================================================ */
+let AC = null;
+function primeAudio(){
+  try {
+    if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === 'suspended') AC.resume();
+  } catch (e){}
+}
+
+function horn(){
+  if (!CONFIG.GOAL_HORN) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  primeAudio();
+  if (!AC) return;
+
+  const t = AC.currentTime;
+  const out = AC.createGain();
+  out.gain.setValueAtTime(0, t);
+  out.gain.linearRampToValueAtTime(.30, t + .07);
+  out.gain.setValueAtTime(.30, t + 1.15);
+  out.gain.exponentialRampToValueAtTime(.001, t + 1.85);
+
+  const shaper = AC.createBiquadFilter();
+  shaper.type = 'lowpass';
+  shaper.frequency.setValueAtTime(1100, t);
+  shaper.frequency.linearRampToValueAtTime(2600, t + .25);
+  shaper.Q.value = 1.1;
+
+  out.connect(shaper); shaper.connect(AC.destination);
+
+  // brass stack: a fifth over the root, each slightly detuned so it beats
+  [116.5, 174.6, 233.1, 349.2].forEach((f, i) => {
+    [-6, 6].forEach(cents => {
+      const o = AC.createOscillator();
+      const g = AC.createGain();
+      o.type = i < 2 ? 'sawtooth' : 'square';
+      o.frequency.value = f;
+      o.detune.value = cents;
+      g.gain.value = [.34, .30, .20, .09][i];
+      o.connect(g); g.connect(out);
+      o.start(t); o.stop(t + 1.9);
+    });
+  });
 }
 
 /* ============================================================
@@ -1016,6 +1193,11 @@ document.addEventListener('keydown', e => {
 });
 addEventListener('resize', () => { if (cv.classList.contains('on')){ cv.width = innerWidth*devicePixelRatio; cv.height = innerHeight*devicePixelRatio; } });
 
+if (PERSONAL){
+  show('attract');
+} else {
+  show('admin');
+}
 flush();
 paintStaff();
 </script>
