@@ -98,7 +98,8 @@ input,textarea{user-select:text;-webkit-user-select:text}
 /* --- app shell ------------------------------------------- */
 .app{
   position:relative;z-index:1;
-  height:100dvh;height:100vh;
+  /* --vh tracks the visual viewport, so the keyboard never buries the button */
+  height:var(--vh, 100dvh);
   display:flex;flex-direction:column;
   padding:calc(env(safe-area-inset-top) + 14px) 24px calc(env(safe-area-inset-bottom) + 18px);
 }
@@ -212,7 +213,27 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
   padding:14px 18px;cursor:pointer;font-family:inherit;
 }
 
-.foot{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px}
+.foot{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding-top:14px;position:sticky;bottom:0;z-index:6;
+}
+/* the sticky footer needs something behind it once content scrolls under */
+.scrollable .foot::before{
+  content:"";position:absolute;left:-24px;right:-24px;top:-18px;bottom:-20px;z-index:-1;
+  background:linear-gradient(180deg, rgba(4,16,31,0) 0%, rgba(4,16,31,.82) 42%, rgba(4,16,31,.94) 100%);
+  pointer-events:none;
+}
+
+/* --- keyboard open: tighten everything so the button stays reachable --- */
+body.kb .screen{justify-content:flex-start;padding-top:4px}
+body.kb .kicker{margin-bottom:6px;font-size:13px}
+body.kb h2{font-size:clamp(21px,3.2vw,26px);margin-bottom:4px}
+body.kb .sub{display:none}
+body.kb .field{margin-bottom:11px}
+body.kb .field label{margin-bottom:5px;font-size:13px}
+body.kb .field input{min-height:60px;font-size:19px}
+body.kb .foot{padding-top:8px}
+body.kb .cta{min-height:70px;font-size:23px}
 .foot .cta{max-width:none;flex:1}
 
 /* --- inputs ----------------------------------------------- */
@@ -390,6 +411,8 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
       <div class="stat"><span>Season ticket leads</span><b id="aSeason">0</b></div>
       <div class="stat"><span>Connection</span><b id="aNet">online</b></div>
       <div class="stat"><span>Saving to sheet</span><b id="aEnd">checking</b></div>
+      <div class="stat"><span>Display mode</span><b id="aMode">-</b></div>
+      <p class="hint" id="aTip" style="display:none;text-align:left;margin-top:14px;line-height:1.55"></p>
 
       <div class="mini">
         <button id="aHorn">Goal horn: on</button>
@@ -629,7 +652,7 @@ const CONFIG = {
 
   RESET_SECONDS: 10,   // celebration screen countdown
   IDLE_SECONDS: 45,    // abandoned form auto reset
-  ONE_PER_PHONE: true
+  ONE_PER_PHONE: false     // true blocks a repeat entry from the same number
 };
 
 /* ============================================================
@@ -994,7 +1017,7 @@ function isFull(){
   return !!(document.fullscreenElement || document.webkitFullscreenElement);
 }
 function goFull(){
-  if (isFull()) return;
+  if (!USE_FS_API || isFull()) return;
   const el = document.documentElement;
   const req = el.requestFullscreen || el.webkitRequestFullscreen
            || el.mozRequestFullScreen || el.msRequestFullscreen;
@@ -1008,7 +1031,18 @@ function goFull(){
    makes Chrome flicker, so this runs on one event, throttled, never re-entrant. */
 let kioskLive = false, fsPending = false, fsLast = 0;
 
+/* iOS is a special case. Safari force-exits the Fullscreen API the moment the
+   software keyboard appears, so on an iPad the API is a fight you always lose.
+   Launched from the home screen the page is already chrome-free and needs none
+   of it. So: never call requestFullscreen on iOS, and tell the operator why. */
+const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+         || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const STANDALONE = window.navigator.standalone === true
+         || window.matchMedia('(display-mode: standalone)').matches;
+const USE_FS_API = !IOS && !STANDALONE;
+
 function reclaimFull(){
+  if (!USE_FS_API) return;
   if (!CONFIG.LOCK_FULLSCREEN || !kioskLive || PERSONAL) return;
   if (isFull() || fsPending) return;
   const now = Date.now();
@@ -1061,7 +1095,7 @@ $('#bar').addEventListener('click', tapForAdmin);
 
 $('#aSync').addEventListener('click', () => { flush(); pill('Syncing.'); });
 $('#aCsv').addEventListener('click', exportCsv);
-$('#aFull').addEventListener('click', goFull);
+$('#aFull').addEventListener('click', () => { goFull(); paintStaff(); });
 $('#aHorn').addEventListener('click', () => {
   CONFIG.GOAL_HORN = !CONFIG.GOAL_HORN;
   paintStaff();
@@ -1084,6 +1118,26 @@ function paintStaff(){
 
   const wired = CONFIG.ENDPOINT.indexOf('PASTE_') !== 0;
   set('#aEnd', wired ? 'connected' : 'NOT SET', !wired);
+
+  const tip = $('#aTip'), fullBtn = $('#aFull');
+  if (STANDALONE){
+    set('#aMode', 'home screen app');
+    if (tip) tip.style.display = 'none';
+    if (fullBtn){ fullBtn.textContent = 'Already full screen'; fullBtn.classList.add('on'); }
+  } else if (IOS){
+    set('#aMode', 'Safari tab', true);
+    if (tip){
+      tip.style.display = 'block';
+      tip.textContent = 'iOS drops full screen whenever the keyboard opens, so the browser bar will keep coming back. '
+        + 'Tap Share, then Add to Home Screen, then launch the kiosk from that icon. That runs with no browser chrome at all '
+        + 'and the keyboard cannot interrupt it. Finish with Guided Access.';
+    }
+    if (fullBtn){ fullBtn.textContent = 'Use Add to Home Screen'; fullBtn.classList.remove('on'); }
+  } else {
+    set('#aMode', isFull() ? 'full screen' : 'windowed');
+    if (tip) tip.style.display = 'none';
+    if (fullBtn){ fullBtn.textContent = 'Full screen'; fullBtn.classList.toggle('on', isFull()); }
+  }
 
   const hornBtn = $('#aHorn');
   if (hornBtn){
@@ -1214,6 +1268,40 @@ function draw(){
   if (live) raf = requestAnimationFrame(draw);
   else { ctx.clearRect(0, 0, innerWidth, innerHeight); cv.classList.remove('on'); }
 }
+
+/* ============================================================
+   KEYBOARD: keep the button above it
+   When the keyboard opens the visible area shrinks. We shrink the
+   app to match and tighten the layout, so the content rides up and
+   the Next button is never buried.
+   ============================================================ */
+const vv = window.visualViewport;
+
+function fitViewport(){
+  const h = vv ? vv.height : window.innerHeight;
+  document.documentElement.style.setProperty('--vh', h + 'px');
+  const shrunk = (window.innerHeight - h) > 120;
+  document.body.classList.toggle('kb', shrunk);
+}
+
+if (vv){
+  vv.addEventListener('resize', fitViewport);
+  vv.addEventListener('scroll', fitViewport);
+}
+window.addEventListener('orientationchange', () => setTimeout(fitViewport, 350));
+fitViewport();
+
+/* focusing a field should also bring the button into view */
+$$('input').forEach(i => {
+  i.addEventListener('focus', () => {
+    setTimeout(() => {
+      fitViewport();
+      const foot = $('#' + path[path.length - 1] + ' .foot');
+      if (foot && foot.scrollIntoView) foot.scrollIntoView({block:'nearest', behavior:'smooth'});
+    }, 320);
+  });
+  i.addEventListener('blur', () => setTimeout(fitViewport, 200));
+});
 
 /* ============================================================
    MISC HARDENING
