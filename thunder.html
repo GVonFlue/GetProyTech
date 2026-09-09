@@ -127,7 +127,7 @@ input,textarea{user-select:text;-webkit-user-select:text}
 .screen.on{display:flex;animation:slide .34s cubic-bezier(.2,.7,.3,1) both}
 @keyframes slide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
-.scrollable{overflow-y:auto;-webkit-overflow-scrolling:touch}
+.scrollable{overflow-y:auto;-webkit-overflow-scrolling:touch;scroll-padding-bottom:120px}
 
 /* --- type ------------------------------------------------- */
 .kicker{font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--glacier);margin-bottom:10px}
@@ -366,6 +366,102 @@ body.kb .cta{min-height:70px;font-size:23px}
 
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+
+/* ---------- phones ---------------------------------------- */
+@media (max-width:700px){
+  :root{ --tap:64px }
+
+  .app{padding:calc(env(safe-area-inset-top) + 10px) 16px calc(env(safe-area-inset-bottom) + 12px)}
+  .scrollable .foot::before{left:-16px;right:-16px}
+
+  .chip{height:34px}
+  .chip-x{font-size:12px}
+  .rail{margin-top:12px;height:3px}
+
+  h1{font-size:clamp(26px,7.6vw,34px)}
+  h2{font-size:clamp(22px,6.2vw,28px)}
+  .sub{font-size:15.5px}
+  .kicker{font-size:12.5px;margin-bottom:7px}
+
+  .lock{width:min(46vh,94vw);margin-bottom:-3vh}
+  .prize{font-size:20px}
+  .prize span{font-size:14px}
+
+  .cta{min-height:68px;font-size:21px}
+  .foot{gap:8px}
+  .ghost{padding:12px 10px;font-size:14px}
+
+  .field input{font-size:19px;padding:0 16px}
+  .field label{font-size:13px}
+
+  .tiles{gap:10px;margin-top:16px}
+  .tile{min-height:64px;padding:13px 16px;font-size:17px;gap:12px}
+  .tile em{font-size:13.5px}
+  .puck{width:22px;height:22px}
+  .tile.sel .puck{box-shadow:inset 0 0 0 3px var(--panel)}
+
+  .prices{gap:7px;margin-top:14px}
+  .prices div{padding:11px 6px;border-radius:12px}
+  .prices span{font-size:11px}
+  .prices strong{font-size:21px;margin:3px 0 1px}
+  .prices em{font-size:10.5px}
+
+  .consent{padding:14px 16px;gap:13px;margin-bottom:10px}
+  .consent p{font-size:15px}
+  .consent p small{font-size:12.5px}
+  .box{width:27px;height:27px}
+  .consent.on .box::after{left:8.5px;top:4px;width:6px;height:12px;border-width:0 3px 3px 0}
+
+  .badge{width:104px;height:104px}
+  .badge svg{width:50px;height:50px}
+
+  .sheet{padding:22px 18px;border-radius:18px;max-height:86dvh}
+  .sheet h3{font-size:20px}
+  .sheet p{font-size:14px}
+  #rules,#chart{padding:18px 14px}
+
+  .stat{padding:9px 0;font-size:14px}
+  .stat b{font-size:17px}
+  .mini button{flex:1 1 100%;min-height:52px;font-size:14px}
+}
+
+/* short viewports: a phone turned sideways, or the keyboard eating the screen */
+@media (max-height:520px){
+  .app{padding-top:calc(env(safe-area-inset-top) + 6px);padding-bottom:calc(env(safe-area-inset-bottom) + 8px)}
+  .chip{height:28px}
+  .chip-x{font-size:11px}
+  .rail{margin-top:8px}
+  .screen{justify-content:flex-start}
+  .kicker{font-size:12px;margin-bottom:5px}
+  h2{font-size:20px;margin-bottom:4px}
+  .sub{font-size:14px;line-height:1.4}
+  .tiles{gap:8px;margin-top:12px}
+  .tile{min-height:56px;font-size:16px;padding:11px 14px}
+  .tile em{font-size:13px;margin-top:2px}
+  .consent{padding:11px 14px;margin-bottom:8px;gap:11px}
+  .consent p{font-size:14px}
+  .consent p small{font-size:12px;margin-top:3px}
+  .box{width:24px;height:24px}
+  .consent.on .box::after{left:7.5px;top:3.5px;width:6px;height:11px}
+  .cta{min-height:60px;font-size:19px}
+  .field{margin-bottom:9px}
+  .field input{min-height:56px;font-size:18px}
+  .lock{width:min(62vh,58vw);margin-bottom:0}
+  .prize{font-size:17px}
+  .prices div{padding:8px 5px}
+  .prices strong{font-size:18px}
+  .rules-link{padding:6px 0;font-size:13px}
+  .badge{width:78px;height:78px}
+  .badge svg{width:38px;height:38px}
+}
+
+/* very narrow phones */
+@media (max-width:380px){
+  h2{font-size:21px}
+  .tile{font-size:16px;min-height:60px}
+  .prices strong{font-size:19px}
+  .cta{font-size:19px}
 }
 
 /* landscape iPad: keep the hero from eating the CTA */
@@ -635,7 +731,8 @@ body.kb .cta{min-height:70px;font-size:23px}
    ============================================================ */
 const CONFIG = {
 
-  // Paste the Apps Script Web App URL here after you deploy it.
+  // Live Apps Script Web App. If you ever redeploy as a NEW deployment (rather
+  // than a new version of the existing one) you get a new URL and it goes here.
   ENDPOINT: 'https://script.google.com/macros/s/AKfycbyk6Mg1elamn4BWgrcOnkiss_j_dv8Bvq0E4iL5kTlHcpt4o1MIxEv39t1e0a5Y3us/exec',
 
   // Prize copy shown on the opening screen
@@ -658,8 +755,14 @@ const CONFIG = {
 /* ============================================================
    STATE
    ============================================================ */
-/* Phones that scan the QR sign get ?src=qr. Same form, no kiosk cycling. */
-const PERSONAL = new URLSearchParams(location.search).get('src') === 'qr';
+/* Phones get the personal experience: no booth control, no kiosk cycling,
+   no idle timeout. Either because they scanned the QR sign (?src=qr) or
+   simply because the screen is phone sized. ?admin=1 forces booth control
+   onto any device if you ever need it. */
+const Q = new URLSearchParams(location.search);
+const FORCE_ADMIN = Q.get('admin') === '1';
+const SMALL = Math.min(window.innerWidth, window.innerHeight) < 700;
+const PERSONAL = !FORCE_ADMIN && (Q.get('src') === 'qr' || SMALL);
 
 const LS_QUEUE = 'ptt_queue_v1';
 const LS_LOG   = 'ptt_log_v1';
@@ -1317,6 +1420,7 @@ document.addEventListener('keydown', e => {
 addEventListener('resize', () => { if (cv.classList.contains('on')){ cv.width = innerWidth*devicePixelRatio; cv.height = innerHeight*devicePixelRatio; } });
 
 if (PERSONAL){
+  kioskLive = false;
   show('attract');
 } else {
   show('admin');
