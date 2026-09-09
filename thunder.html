@@ -324,8 +324,10 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 #confetti{position:fixed;inset:0;z-index:30;pointer-events:none;display:none}
 
 /* invisible corner target: five taps anywhere in the flow reopens booth control */
-#hotspot{position:fixed;left:0;top:0;width:96px;height:96px;z-index:45;
-  background:transparent;border:0;padding:0;cursor:default}
+#hotspot{position:fixed;left:0;top:0;width:58px;height:58px;z-index:45;
+  background:none;border:0;padding:0;margin:0;font-size:0;line-height:0;color:transparent;
+  appearance:none;-webkit-appearance:none;outline:none;box-shadow:none;
+  opacity:0;cursor:default;-webkit-tap-highlight-color:transparent}
 #confetti.on{display:block}
 
 /* --- queue / status pill --------------------------------- */
@@ -583,7 +585,7 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
     <p><b>Eligibility.</b> Open to legal residents of Kansas who are 18 years of age or older at the time of entry. Employees of the sponsor and the Wichita Thunder and their immediate families are not eligible.</p>
     <p><b>How to enter.</b> Complete the entry form at the ProyTech and Wichita Thunder booth at Open Streets ICT on Sunday, September 20, 2026, between 12:00 PM and 4:00 PM Central. Limit one entry per person. Duplicate entries will be removed.</p>
     <p><b>Prize.</b> One prize package as described at the booth. The prize has no cash value and is not transferable or exchangeable. Odds of winning depend on the number of eligible entries received.</p>
-    <p><b>Drawing and notification.</b> The winner will be selected at random on <span id="rDate">Monday, September 21, 2026</span> and notified by phone and email using the information provided at entry. If the winner cannot be reached within five days, an alternate winner may be drawn.</p>
+    <p><b>Drawing and notification.</b> The winner will be selected at random on <span id="rDate">Tuesday, September 22, 2026</span> and notified by phone and email using the information provided at entry. If the winner cannot be reached within five days, an alternate winner may be drawn.</p>
     <p><b>Your information.</b> Entry information is collected by ProyTech Business Solutions LLC and shared with the Wichita Thunder. Marketing contact by text or automated call happens only if you check the optional consent box, and that consent is never required to enter. You may opt out at any time by replying STOP to a text or using the unsubscribe link in any email.</p>
     <p><b>Void where prohibited.</b> This promotion is a sweepstakes, not a lottery, and is void where prohibited by law.</p>
     <p style="margin-top:18px"><button class="cta" id="rulesClose" style="min-height:64px;font-size:20px">Close</button></p>
@@ -620,7 +622,7 @@ const CONFIG = {
   // 2026-27 published pricing. Update here if the Thunder change it.
   SEASON_HOOK: '36 home games. A full season seat starts at $550, which comes out to about $15 a game.',
 
-  DRAWING_DATE: 'Monday, September 21, 2026',
+  DRAWING_DATE: 'Tuesday, September 22, 2026',
   EVENT: 'Open Streets ICT 2026',
   GOAL_HORN: true,          // booth control can flip this at any time
 
@@ -798,7 +800,6 @@ $('#startBtn').addEventListener('click', () => {
     status: 'partial'
   };
   keepAwake();
-  goFull();
   show('s1');
 });
 
@@ -1000,10 +1001,26 @@ function goFull(){
   try { const r = req.call(el); if (r && r.catch) r.catch(() => {}); } catch (e){}
 }
 
+/* Once the booth is running we treat full screen as the only acceptable state.
+   Escape, a focus change, a stray gesture, whatever drops us out: the very next
+   touch anywhere on the glass puts it back, before any other handler runs. */
+let kioskLive = false;
+
+function reclaimFull(){
+  if (!kioskLive || PERSONAL || isFull()) return;
+  goFull();
+}
+['pointerdown','touchstart','mousedown','click'].forEach(evt => {
+  document.addEventListener(evt, reclaimFull, true);   // capture phase, fires first
+});
+document.addEventListener('fullscreenchange', reclaimFull);
+document.addEventListener('webkitfullscreenchange', reclaimFull);
+
 /* ============================================================
    BOOTH CONTROL
    ============================================================ */
 $('#aStart').addEventListener('click', () => {
+  kioskLive = true;
   goFull();
   keepAwake();
   primeAudio();
@@ -1017,6 +1034,7 @@ function tapForAdmin(){
   if (taps >= 5){
     taps = 0;
     clearTimeout(idleTimer); clearInterval(cdTimer);
+    kioskLive = false;          // booth control is the one place we allow escaping
     paintStaff();
     show('admin');
   }
