@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wichita Thunder x ProyTech | Enter to Win</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Thunder Entry">
+<meta name="theme-color" content="#04101F">
+<link rel="apple-touch-icon" href="images/thunder/chip-thunder.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   THUNDER x PROYTECH  —  OPEN STREETS ICT KIOSK
+   ============================================================ */
+
+:root{
+  --rink-night:#04101F;
+  --deep-ice:#0A1E3A;
+  --panel:#0C2444;
+  --glacier:#7CC7FF;
+  --thunder-blue:#1B62C4;
+  --proy-blue:#1338DE;
+  --orange:#FB6926;
+  --ice-white:#EAF3FF;
+  --muted:#8FAAC9;
+  --line:rgba(124,199,255,.24);
+
+  --display:'Space Grotesk','Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+
+  --tap:76px;
+  --r:20px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  height:100%;
+  overflow:hidden;
+  overscroll-behavior:none;
+  background:var(--rink-night);
+}
+
+body{
+  font-family:var(--body);
+  color:var(--ice-white);
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+  user-select:none;
+  touch-action:manipulation;
+}
+
+input,textarea{user-select:text;-webkit-user-select:text}
+
+/* --- rink environment ------------------------------------ */
+.rink{
+  position:fixed;inset:0;z-index:0;overflow:hidden;
+  background:
+    radial-gradient(120% 70% at 50% -10%, rgba(80,170,255,.30) 0%, rgba(10,30,58,0) 62%),
+    radial-gradient(90% 60% at 50% 118%, rgba(124,199,255,.20) 0%, rgba(4,16,31,0) 60%),
+    linear-gradient(180deg,#04101F 0%,#08203C 52%,#04101F 100%);
+}
+.rink::after{
+  /* faint ice scoring, sits low so text stays legible */
+  content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(97deg, rgba(180,220,255,.05) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(-3deg, rgba(180,220,255,.035) 0 1px, transparent 1px 78px);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 45%,#000 100%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 45%,#000 100%);
+}
+
+/* --- app shell ------------------------------------------- */
+.app{
+  position:relative;z-index:1;
+  height:100dvh;height:100vh;
+  display:flex;flex-direction:column;
+  padding:calc(env(safe-area-inset-top) + 14px) 24px calc(env(safe-area-inset-bottom) + 18px);
+}
+
+/* --- header (chips + progress rail) ---------------------- */
+.bar{display:none;flex:0 0 auto}
+.bar.on{display:block}
+.chips{display:flex;align-items:center;justify-content:center;gap:16px}
+.chip{height:48px;width:auto;border-radius:8px;display:block;
+  box-shadow:0 0 0 1px rgba(124,199,255,.35), 0 6px 18px rgba(0,0,0,.45)}
+.chip-x{font-family:var(--display);font-weight:700;font-size:15px;color:var(--glacier);opacity:.7}
+
+.rail{margin-top:16px;height:4px;border-radius:99px;background:rgba(124,199,255,.16);overflow:hidden}
+.rail i{display:block;height:100%;width:0%;border-radius:99px;
+  background:linear-gradient(90deg,var(--thunder-blue),var(--glacier));
+  transition:width .34s cubic-bezier(.4,0,.2,1)}
+
+/* --- screens --------------------------------------------- */
+.stage{flex:1 1 auto;display:flex;min-height:0}
+.screen{
+  display:none;flex:1 1 auto;flex-direction:column;
+  justify-content:center;align-items:stretch;
+  width:100%;max-width:660px;margin:0 auto;min-height:0;
+}
+.screen.on{display:flex;animation:slide .34s cubic-bezier(.2,.7,.3,1) both}
+@keyframes slide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.scrollable{overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+/* --- type ------------------------------------------------- */
+.kicker{font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--glacier);margin-bottom:10px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,5.2vw,46px);line-height:1.06;letter-spacing:-.02em}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);line-height:1.14;letter-spacing:-.015em;margin-bottom:8px}
+.sub{font-size:17px;line-height:1.5;color:var(--muted);max-width:52ch}
+
+/* --- attract ---------------------------------------------- */
+#attract{justify-content:center;gap:26px;text-align:center;align-items:center}
+.hero{
+  width:min(61vh,88vw);aspect-ratio:1;border-radius:26px;
+  background:url('images/thunder/hero.jpg') center/cover no-repeat;
+  box-shadow:0 0 0 1px rgba(124,199,255,.4), 0 26px 70px rgba(0,0,0,.6), 0 0 90px rgba(60,150,255,.22);
+}
+.prize{font-family:var(--display);font-weight:600;font-size:clamp(20px,3.4vw,28px);line-height:1.2}
+.prize span{display:block;font-family:var(--body);font-weight:500;font-size:16px;color:var(--glacier);margin-top:8px}
+
+/* --- buttons ---------------------------------------------- */
+.cta{
+  width:100%;max-width:520px;min-height:88px;border:0;border-radius:var(--r);
+  font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:.01em;
+  color:#fff;background:var(--orange);
+  box-shadow:0 12px 34px rgba(251,105,38,.38);
+  cursor:pointer;transition:transform .12s ease, box-shadow .12s ease;
+}
+.cta:active{transform:scale(.975);box-shadow:0 6px 18px rgba(251,105,38,.3)}
+.cta[disabled]{background:#2A3F5E;color:#6E88A8;box-shadow:none}
+#attract .cta{animation:breathe 2.6s ease-in-out infinite}
+@keyframes breathe{0%,100%{box-shadow:0 12px 34px rgba(251,105,38,.34)}50%{box-shadow:0 12px 46px rgba(251,105,38,.62)}}
+
+.ghost{
+  background:none;border:0;color:var(--muted);font-size:15px;font-weight:500;
+  padding:14px 18px;cursor:pointer;font-family:inherit;
+}
+
+.foot{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px}
+.foot .cta{max-width:none;flex:1}
+
+/* --- inputs ----------------------------------------------- */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:14px;font-weight:600;color:var(--glacier);margin-bottom:8px}
+.field input{
+  width:100%;min-height:var(--tap);
+  background:rgba(10,30,58,.78);
+  border:1.5px solid var(--line);border-radius:16px;
+  padding:0 20px;color:var(--ice-white);
+  font-family:inherit;font-size:22px;font-weight:500;
+  transition:border-color .15s ease, background .15s ease;
+}
+.field input::placeholder{color:#587296}
+.field input:focus{outline:none;border-color:var(--glacier);background:rgba(14,40,76,.92)}
+.field input.bad{border-color:#FF6B6B}
+.hint{font-size:13px;color:var(--muted);margin-top:8px}
+.err{font-size:14px;color:#FF8E8E;margin-top:8px;display:none}
+.err.on{display:block}
+
+/* --- tap tiles -------------------------------------------- */
+.tiles{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.tile{
+  display:flex;align-items:center;gap:16px;
+  min-height:var(--tap);width:100%;text-align:left;
+  background:rgba(10,30,58,.72);
+  border:1.5px solid var(--line);border-radius:16px;
+  padding:16px 20px;color:var(--ice-white);
+  font-family:inherit;font-size:20px;font-weight:600;line-height:1.25;
+  cursor:pointer;transition:transform .1s ease,border-color .15s ease,background .15s ease;
+}
+.tile:active{transform:scale(.985)}
+.tile.sel{border-color:var(--glacier);background:rgba(27,98,196,.34)}
+.tile .txt{flex:1 1 auto;min-width:0}
+.tile b{display:block;font-weight:700}
+.tile em{display:block;font-style:normal;font-weight:400;font-size:15px;color:var(--muted);margin-top:4px}
+.puck{
+  flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+  border:2px solid rgba(124,199,255,.5);
+}
+.tile.sel .puck{border-color:var(--glacier);background:var(--glacier);
+  box-shadow:inset 0 0 0 4px var(--panel)}
+
+/* --- consent ---------------------------------------------- */
+.consent{
+  display:flex;gap:16px;align-items:flex-start;
+  background:rgba(10,30,58,.72);border:1.5px solid var(--line);
+  border-radius:16px;padding:18px 20px;margin-bottom:12px;cursor:pointer;
+}
+.consent.req{border-color:rgba(251,105,38,.42)}
+.consent.on{border-color:var(--glacier);background:rgba(27,98,196,.3)}
+.box{
+  flex:0 0 auto;width:30px;height:30px;border-radius:9px;
+  border:2px solid rgba(124,199,255,.55);position:relative;margin-top:1px;
+}
+.consent.on .box{background:var(--glacier);border-color:var(--glacier)}
+.consent.on .box::after{
+  content:"";position:absolute;left:9.5px;top:5px;width:7px;height:13px;
+  border:solid var(--rink-night);border-width:0 3px 3px 0;transform:rotate(42deg);
+}
+.consent p{font-size:16px;line-height:1.45}
+.consent p small{display:block;font-size:13px;color:var(--muted);margin-top:5px;line-height:1.4}
+
+.rules-link{background:none;border:0;color:var(--glacier);font:inherit;font-size:14px;
+  text-decoration:underline;padding:10px 0;cursor:pointer}
+
+/* --- season price strip ----------------------------------- */
+.prices{display:flex;gap:10px;margin-top:18px}
+.prices div{
+  flex:1;background:rgba(27,98,196,.22);border:1px solid rgba(124,199,255,.3);
+  border-radius:14px;padding:14px 12px;text-align:center;
+}
+.prices span{display:block;font-size:13px;font-weight:600;color:var(--glacier);letter-spacing:.01em}
+.prices strong{display:block;font-family:var(--display);font-weight:700;font-size:27px;margin:4px 0 2px;
+  color:var(--ice-white);font-variant-numeric:tabular-nums}
+.prices em{display:block;font-style:normal;font-size:12.5px;color:var(--muted)}
+#chart img{width:100%;height:auto;border-radius:12px;display:block}
+
+/* --- rules sheet ------------------------------------------ */
+#rules{
+  position:fixed;inset:0;z-index:40;display:none;
+  background:rgba(2,8,18,.86);backdrop-filter:blur(6px);
+  padding:32px 24px calc(env(safe-area-inset-bottom) + 24px);
+}
+#rules.on{display:flex;align-items:center;justify-content:center}
+.sheet{
+  background:var(--deep-ice);border:1px solid var(--line);border-radius:24px;
+  max-width:620px;width:100%;max-height:82dvh;overflow-y:auto;padding:30px 28px;
+}
+.sheet h3{font-family:var(--display);font-size:24px;margin-bottom:14px}
+.sheet p{font-size:15px;line-height:1.6;color:#C3D7EE;margin-bottom:12px}
+
+/* --- done ------------------------------------------------- */
+#done{text-align:center;align-items:center;justify-content:center;gap:20px}
+.badge{
+  width:132px;height:132px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #7CC7FF, #1B62C4);
+  display:grid;place-items:center;
+  box-shadow:0 0 0 12px rgba(124,199,255,.13), 0 0 70px rgba(90,180,255,.5);
+  animation:pop .55s cubic-bezier(.2,1.5,.4,1) both;
+}
+@keyframes pop{from{transform:scale(.35);opacity:0}to{transform:scale(1);opacity:1}}
+.badge svg{width:62px;height:62px}
+.count{font-size:16px;color:var(--muted);margin-top:4px}
+.count b{display:inline-block;min-width:2ch;color:var(--glacier);font-family:var(--display);font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+
+#confetti{position:fixed;inset:0;z-index:30;pointer-events:none;display:none}
+#confetti.on{display:block}
+
+/* --- queue / status pill --------------------------------- */
+#pill{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(env(safe-area-inset-bottom) + 10px);z-index:35;
+  font-size:12px;font-weight:600;color:var(--muted);
+  background:rgba(10,30,58,.9);border:1px solid var(--line);
+  padding:7px 14px;border-radius:99px;opacity:0;transition:opacity .3s;
+}
+#pill.on{opacity:1}
+
+/* --- staff panel (hidden, 5 taps on the rail) ------------- */
+#staff{position:fixed;inset:0;z-index:50;display:none;background:rgba(2,8,18,.94);
+  padding:40px 24px;overflow-y:auto}
+#staff.on{display:block}
+#staff .sheet{margin:0 auto}
+#staff dl{display:grid;grid-template-columns:1fr auto;gap:10px 16px;font-size:15px;margin:16px 0 22px}
+#staff dt{color:var(--muted)}
+#staff dd{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+#staff button{width:100%;min-height:56px;border-radius:14px;border:1.5px solid var(--line);
+  background:rgba(10,30,58,.8);color:var(--ice-white);font:600 16px inherit;margin-bottom:10px;font-family:inherit}
+
+:focus-visible{outline:3px solid var(--glacier);outline-offset:3px}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+
+/* landscape iPad: keep the hero from eating the CTA */
+@media (orientation:landscape) and (max-height:820px){
+  .hero{width:min(46vh,44vw)}
+  h1{font-size:clamp(26px,3.6vw,38px)}
+  .tiles{gap:10px}
+  .tile{min-height:66px;font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="rink"></div>
+<canvas id="confetti"></canvas>
+
+<div class="app">
+
+  <!-- header -->
+  <div class="bar" id="bar">
+    <div class="chips">
+      <img class="chip" src="images/thunder/chip-proytech.jpg" alt="ProyTech">
+      <span class="chip-x">X</span>
+      <img class="chip" src="images/thunder/chip-thunder.jpg" alt="Wichita Thunder">
+    </div>
+    <div class="rail" id="rail"><i></i></div>
+  </div>
+
+  <div class="stage">
+
+    <!-- 0 ATTRACT ------------------------------------------------ -->
+    <section class="screen on" id="attract">
+      <div class="hero"></div>
+      <div class="prize" id="prizeLine">
+        Win the Thunder Fan Pack
+        <span id="prizeItems">Game tickets, team gear and local goodies</span>
+      </div>
+      <button class="cta" id="startBtn">Enter to win</button>
+      <div class="hint">Takes about 30 seconds</div>
+    </section>
+
+    <!-- 1 NAME + PHONE ------------------------------------------ -->
+    <section class="screen scrollable" id="s1">
+      <div class="kicker">Entry 1 of 5</div>
+      <h2>Who are we cheering for?</h2>
+      <p class="sub">We need a name and a number so we can reach the winner.</p>
+      <div style="height:26px"></div>
+      <div class="field">
+        <label for="fname">First name</label>
+        <input id="fname" type="text" autocomplete="given-name" autocapitalize="words" autocorrect="off" spellcheck="false" placeholder="Jordan" enterkeyhint="next">
+      </div>
+      <div class="field">
+        <label for="lname">Last name</label>
+        <input id="lname" type="text" autocomplete="family-name" autocapitalize="words" autocorrect="off" spellcheck="false" placeholder="Reed" enterkeyhint="next">
+      </div>
+      <div class="field">
+        <label for="phone">Mobile number</label>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(316) 555-0142" maxlength="14" enterkeyhint="done">
+        <div class="err" id="e1"></div>
+      </div>
+      <div class="foot">
+        <button class="ghost" data-back>Back</button>
+        <button class="cta" data-next="s1">Next</button>
+      </div>
+    </section>
+
+    <!-- 2 EMAIL -------------------------------------------------- -->
+    <section class="screen scrollable" id="s2">
+      <div class="kicker">Entry 2 of 5</div>
+      <h2>Where do we send the good news?</h2>
+      <p class="sub">One email confirming your entry. That is it.</p>
+      <div style="height:26px"></div>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="you@email.com" enterkeyhint="done">
+        <div class="err" id="e2"></div>
+      </div>
+      <div class="foot">
+        <button class="ghost" data-back>Back</button>
+        <button class="cta" data-next="s2">Next</button>
+      </div>
+    </section>
+
+    <!-- 3 BEEN TO A GAME ----------------------------------------- -->
+    <section class="screen scrollable" id="s3">
+      <div class="kicker">Entry 3 of 5</div>
+      <h2>Ever been to a Thunder game?</h2>
+      <div class="tiles" data-q="been_to_game" data-next-screen="s4">
+        <button class="tile" data-v="Never been"><span class="puck"></span><span class="txt"><b>Never been</b></span></button>
+        <button class="tile" data-v="Once or twice"><span class="puck"></span><span class="txt"><b>Once or twice</b></span></button>
+        <button class="tile" data-v="A few times a season"><span class="puck"></span><span class="txt"><b>A few times a season</b></span></button>
+        <button class="tile" data-v="Season ticket holder"><span class="puck"></span><span class="txt"><b>I am a season ticket holder</b></span></button>
+      </div>
+      <div class="foot"><button class="ghost" data-back>Back</button></div>
+    </section>
+
+    <!-- 4 SEASON TICKETS ----------------------------------------- -->
+    <section class="screen scrollable" id="s4">
+      <div class="kicker">Entry 4 of 5</div>
+      <h2 id="seasonQ">Season tickets cost less than people think.</h2>
+      <p class="sub" id="seasonHook">36 home games. A full season seat starts at $550, which comes out to about $15 a game.</p>
+
+      <div class="prices">
+        <div><span>Goal zones</span><strong>$550</strong><em>about $15 a game</em></div>
+        <div><span>Sides</span><strong>$800</strong><em>about $22 a game</em></div>
+        <div><span>On the glass</span><strong>$1,200</strong><em>about $33 a game</em></div>
+      </div>
+      <button class="rules-link" id="chartBtn" style="text-align:center">See every section and half or quarter plans</button>
+
+      <div class="tiles" data-q="season_interest" data-next-screen="s5">
+        <button class="tile" data-v="Wants pricing"><span class="puck"></span><span class="txt"><b>That is cheaper than I thought</b><em>Send me the details</em></span></button>
+        <button class="tile" data-v="Considering"><span class="puck"></span><span class="txt"><b>I have thought about it</b><em>Have a rep reach out</em></span></button>
+        <button class="tile" data-v="Group or partial"><span class="puck"></span><span class="txt"><b>More of a group or partial plan person</b></span></button>
+        <button class="tile" data-v="Not now"><span class="puck"></span><span class="txt"><b>Not right now</b></span></button>
+      </div>
+      <div class="foot"><button class="ghost" data-back>Back</button></div>
+    </section>
+
+    <!-- 5 BUSINESS OWNER ----------------------------------------- -->
+    <section class="screen scrollable" id="s5">
+      <div class="kicker">Entry 5 of 5</div>
+      <h2>Do you own or run a business?</h2>
+      <div class="tiles" data-q="is_owner">
+        <button class="tile" data-v="Yes" data-goto="s5b"><span class="puck"></span><span class="txt"><b>Yes</b></span></button>
+        <button class="tile" data-v="Starting one" data-goto="s5b"><span class="puck"></span><span class="txt"><b>Getting one off the ground</b></span></button>
+        <button class="tile" data-v="No" data-goto="s6"><span class="puck"></span><span class="txt"><b>No</b></span></button>
+      </div>
+      <div class="foot"><button class="ghost" data-back>Back</button></div>
+    </section>
+
+    <!-- 5b BUSINESS PAIN ----------------------------------------- -->
+    <section class="screen scrollable" id="s5b">
+      <div class="kicker">Last one</div>
+      <h2>What eats the most time in a week?</h2>
+      <div class="tiles" data-q="business_pain" data-next-screen="s6">
+        <button class="tile" data-v="Missed calls"><span class="puck"></span><span class="txt"><b>Calls we miss</b></span></button>
+        <button class="tile" data-v="Follow up"><span class="puck"></span><span class="txt"><b>Following up with leads</b></span></button>
+        <button class="tile" data-v="Social content"><span class="puck"></span><span class="txt"><b>Posting and social content</b></span></button>
+        <button class="tile" data-v="Admin and paperwork"><span class="puck"></span><span class="txt"><b>Admin and paperwork</b></span></button>
+      </div>
+      <div class="foot"><button class="ghost" data-back>Back</button></div>
+    </section>
+
+    <!-- 6 CONSENT + SUBMIT --------------------------------------- -->
+    <section class="screen scrollable" id="s6">
+      <h2>One tap and you are in.</h2>
+      <div style="height:20px"></div>
+
+      <div class="consent req" id="cRules" data-c="consent_rules">
+        <span class="box"></span>
+        <p>I am 18 or older and I agree to the official rules.
+          <small>Required to enter the drawing.</small></p>
+      </div>
+
+      <div class="consent" id="cText" data-c="consent_sms">
+        <span class="box"></span>
+        <p>Text and email me Thunder deals and ProyTech tips.
+          <small>You agree ProyTech Business Solutions and the Wichita Thunder may contact you at the number and email above, including by automated text. Consent is not required to enter. Message and data rates may apply. Reply STOP to stop.</small></p>
+      </div>
+
+      <div class="consent" id="cSuite" data-c="suite_night">
+        <span class="box"></span>
+        <p>Invite me to Thunder Opening Night Suite Night.
+          <small>October 17 at INTRUST Bank Arena. Hosted by ProyTech, limited seats.</small></p>
+      </div>
+
+      <button class="rules-link" id="rulesBtn">Read the official rules</button>
+
+      <div class="foot">
+        <button class="ghost" data-back>Back</button>
+        <button class="cta" id="submitBtn" disabled>Enter the drawing</button>
+      </div>
+    </section>
+
+    <!-- 7 DONE ---------------------------------------------------- -->
+    <section class="screen" id="done">
+      <div class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#04101F" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h1 id="doneName">You are in.</h1>
+      <p class="sub" style="text-align:center;margin:0 auto">Check your email for confirmation. The winner gets a call after the drawing.</p>
+      <p class="count">Next entry in <b id="cd">10</b></p>
+      <button class="ghost" id="againBtn">Start the next entry now</button>
+    </section>
+
+    <!-- DUPLICATE -------------------------------------------------- -->
+    <section class="screen" id="dupe" style="text-align:center;align-items:center;justify-content:center;gap:18px">
+      <h1>Already entered.</h1>
+      <p class="sub" style="text-align:center;margin:0 auto">That number is in the drawing. One entry per person keeps it fair.</p>
+      <button class="cta" id="dupeBtn">Back to start</button>
+    </section>
+
+  </div>
+</div>
+
+<!-- rules sheet -->
+<div id="rules">
+  <div class="sheet">
+    <h3>Official rules</h3>
+    <p><b>Sponsor.</b> ProyTech Business Solutions LLC, Wichita, Kansas, in partnership with the Wichita Thunder.</p>
+    <p><b>No purchase necessary.</b> No purchase or payment of any kind is necessary to enter or win. A purchase does not improve your chance of winning.</p>
+    <p><b>Eligibility.</b> Open to legal residents of Kansas who are 18 years of age or older at the time of entry. Employees of the sponsor and the Wichita Thunder and their immediate families are not eligible.</p>
+    <p><b>How to enter.</b> Complete the entry form at the ProyTech and Wichita Thunder booth at Open Streets ICT on Sunday, September 20, 2026, between 12:00 PM and 4:00 PM Central. Limit one entry per person. Duplicate entries will be removed.</p>
+    <p><b>Prize.</b> One prize package as described at the booth. The prize has no cash value and is not transferable or exchangeable. Odds of winning depend on the number of eligible entries received.</p>
+    <p><b>Drawing and notification.</b> The winner will be selected at random on <span id="rDate">Monday, September 21, 2026</span> and notified by phone and email using the information provided at entry. If the winner cannot be reached within five days, an alternate winner may be drawn.</p>
+    <p><b>Your information.</b> Entry information is collected by ProyTech Business Solutions LLC and shared with the Wichita Thunder. Marketing contact by text or automated call happens only if you check the optional consent box, and that consent is never required to enter. You may opt out at any time by replying STOP to a text or using the unsubscribe link in any email.</p>
+    <p><b>Void where prohibited.</b> This promotion is a sweepstakes, not a lottery, and is void where prohibited by law.</p>
+    <p style="margin-top:18px"><button class="cta" id="rulesClose" style="min-height:64px;font-size:20px">Close</button></p>
+  </div>
+</div>
+
+<!-- season pricing chart -->
+<div id="chart" style="position:fixed;inset:0;z-index:41;display:none;background:rgba(2,8,18,.9);padding:32px 24px;align-items:center;justify-content:center">
+  <div class="sheet">
+    <h3>2026-27 season ticket pricing</h3>
+    <img src="images/thunder/season-pricing.jpg" alt="Wichita Thunder season ticket pricing by section">
+    <p style="margin-top:14px">Full season is 36 games, half is 18, quarter is 9. Every plan includes complimentary tickets, playoff priority and a personal account rep. Questions go to the Thunder at (316) 264-4625.</p>
+    <p><button class="cta" id="chartClose" style="min-height:64px;font-size:20px">Close</button></p>
+  </div>
+</div>
+
+<!-- staff panel -->
+<div id="staff">
+  <div class="sheet">
+    <h3>Booth status</h3>
+    <dl>
+      <dt>Completed entries</dt><dd id="stDone">0</dd>
+      <dt>Partial entries saved</dt><dd id="stPartial">0</dd>
+      <dt>Waiting to sync</dt><dd id="stQueue">0</dd>
+      <dt>Connection</dt><dd id="stNet">online</dd>
+      <dt>Business owners</dt><dd id="stOwners">0</dd>
+      <dt>Season ticket leads</dt><dd id="stSeason">0</dd>
+    </dl>
+    <button id="stSync">Sync now</button>
+    <button id="stExport">Download backup CSV</button>
+    <button id="stClose">Close</button>
+    <p class="hint" style="margin-top:14px">Nothing is ever deleted from this iPad until you clear it. The backup CSV is your safety net if the sheet ever looks short.</p>
+  </div>
+</div>
+
+<div id="pill"></div>
+
+<script>
+/* ============================================================
+   CONFIG  —  the only block you need to edit
+   ============================================================ */
+const CONFIG = {
+
+  // Paste the Apps Script Web App URL here after you deploy it.
+  ENDPOINT: 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE',
+
+  // Prize copy shown on the opening screen
+  PRIZE_TITLE: 'Win the Thunder Fan Pack',
+  PRIZE_ITEMS: 'Game tickets, team gear and local goodies',
+
+  // 2026-27 published pricing. Update here if the Thunder change it.
+  SEASON_HOOK: '36 home games. A full season seat starts at $550, which comes out to about $15 a game.',
+
+  DRAWING_DATE: 'Monday, September 21, 2026',
+  EVENT: 'Open Streets ICT 2026',
+
+  RESET_SECONDS: 10,   // celebration screen countdown
+  IDLE_SECONDS: 45,    // abandoned form auto reset
+  ONE_PER_PHONE: true
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const LS_QUEUE = 'ptt_queue_v1';
+const LS_LOG   = 'ptt_log_v1';
+const LS_PHONE = 'ptt_phones_v1';
+
+let D = {};                 // current entry
+let path = ['attract'];     // screen history
+let idleTimer, cdTimer, syncTimer;
+
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const store = {
+  get(k, f){ try{ return JSON.parse(localStorage.getItem(k)) ?? f }catch(e){ return f } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch(e){} }
+};
+
+/* boot copy */
+$('#prizeLine').firstChild.textContent = CONFIG.PRIZE_TITLE + ' ';
+$('#prizeItems').textContent = CONFIG.PRIZE_ITEMS;
+$('#seasonHook').textContent = CONFIG.SEASON_HOOK;
+$('#rDate').textContent = CONFIG.DRAWING_DATE;
+
+/* ============================================================
+   SCREEN CONTROL
+   ============================================================ */
+const STEP = { s1:1, s2:2, s3:3, s4:4, s5:5, s5b:5, s6:5 };
+
+function show(id){
+  $$('.screen').forEach(s => s.classList.remove('on'));
+  $('#' + id).classList.add('on');
+
+  const inForm = !['attract','done','dupe'].includes(id);
+  $('#bar').classList.toggle('on', inForm);
+  $('#rail i').style.width = (inForm ? (STEP[id] || 5) / 5 * 100 : 0) + '%';
+
+  if (path[path.length - 1] !== id) path.push(id);
+
+  // let the ice settle before focusing, or iOS scrolls the layout
+  const first = $('#' + id + ' input');
+  if (first) setTimeout(() => first.focus({preventScroll:true}), 260);
+
+  resetIdle(id);
+}
+
+function back(){
+  if (path.length < 2) return;
+  path.pop();
+  const prev = path[path.length - 1];
+  path.pop();
+  show(prev);
+}
+
+function resetIdle(id){
+  clearTimeout(idleTimer);
+  if (['attract','done','dupe'].includes(id)) return;
+  idleTimer = setTimeout(() => {
+    if (D.phone) { D.status = 'abandoned'; enqueue(D); }
+    hardReset();
+  }, CONFIG.IDLE_SECONDS * 1000);
+}
+
+function hardReset(){
+  clearTimeout(idleTimer); clearInterval(cdTimer);
+  D = {};
+  path = ['attract'];
+  $$('.tile').forEach(t => t.classList.remove('sel'));
+  $$('.consent').forEach(c => c.classList.remove('on'));
+  $$('input').forEach(i => { i.value = ''; i.classList.remove('bad'); });
+  $$('.err').forEach(e => e.classList.remove('on'));
+  $('#submitBtn').disabled = true;
+  $('#confetti').classList.remove('on');
+  $('#rules').classList.remove('on');
+  $('#chart').style.display = 'none';
+  show('attract');
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+}
+
+/* ============================================================
+   VALIDATION
+   ============================================================ */
+const digits = s => (s || '').replace(/\D/g, '');
+
+function fmtPhone(v){
+  const d = digits(v).slice(0, 10);
+  if (d.length < 4) return d;
+  if (d.length < 7) return '(' + d.slice(0,3) + ') ' + d.slice(3);
+  return '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
+}
+
+$('#phone').addEventListener('input', e => { e.target.value = fmtPhone(e.target.value); });
+
+function validEmail(v){
+  return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test((v || '').trim());
+}
+
+function fail(input, box, msg){
+  input.classList.add('bad');
+  box.textContent = msg; box.classList.add('on');
+  return false;
+}
+
+/* ============================================================
+   FLOW
+   ============================================================ */
+$('#startBtn').addEventListener('click', () => {
+  D = {
+    entry_id: 'e_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8),
+    started_at: new Date().toISOString(),
+    event: CONFIG.EVENT,
+    status: 'partial'
+  };
+  keepAwake();
+  show('s1');
+});
+
+$$('[data-back]').forEach(b => b.addEventListener('click', back));
+
+$$('[data-next]').forEach(b => b.addEventListener('click', () => {
+  const from = b.dataset.next;
+
+  if (from === 's1'){
+    const f = $('#fname'), l = $('#lname'), p = $('#phone'), e = $('#e1');
+    [f,l,p].forEach(i => i.classList.remove('bad')); e.classList.remove('on');
+    if (!f.value.trim()) return fail(f, e, 'We need a first name.');
+    if (digits(p.value).length !== 10) return fail(p, e, 'That number needs 10 digits.');
+
+    D.first_name = f.value.trim();
+    D.last_name  = l.value.trim();
+    D.phone      = fmtPhone(p.value);
+    D.phone_raw  = digits(p.value);
+
+    if (CONFIG.ONE_PER_PHONE && store.get(LS_PHONE, []).includes(D.phone_raw)){
+      return show('dupe');
+    }
+    enqueue(D);            // progressive save the moment we have a reachable lead
+    return show('s2');
+  }
+
+  if (from === 's2'){
+    const m = $('#email'), e = $('#e2');
+    m.classList.remove('bad'); e.classList.remove('on');
+    if (!validEmail(m.value)) return fail(m, e, 'Check that email address.');
+    D.email = m.value.trim().toLowerCase();
+    enqueue(D);
+    return show('s3');
+  }
+}));
+
+/* tile groups */
+$$('.tiles').forEach(group => {
+  group.addEventListener('click', ev => {
+    const tile = ev.target.closest('.tile');
+    if (!tile) return;
+    group.querySelectorAll('.tile').forEach(t => t.classList.remove('sel'));
+    tile.classList.add('sel');
+    D[group.dataset.q] = tile.dataset.v;
+    const dest = tile.dataset.goto || group.dataset.nextScreen;
+    setTimeout(() => show(dest), 190);   // let the selection register visually
+  });
+});
+
+/* consent toggles */
+$$('.consent').forEach(c => {
+  c.addEventListener('click', () => {
+    c.classList.toggle('on');
+    D[c.dataset.c] = c.classList.contains('on');
+    $('#submitBtn').disabled = !$('#cRules').classList.contains('on');
+    resetIdle('s6');
+  });
+});
+
+$('#rulesBtn').addEventListener('click', () => $('#rules').classList.add('on'));
+$('#rulesClose').addEventListener('click', () => $('#rules').classList.remove('on'));
+
+$('#chartBtn').addEventListener('click', () => { $('#chart').style.display = 'flex'; resetIdle('s4'); });
+$('#chartClose').addEventListener('click', () => { $('#chart').style.display = 'none'; resetIdle('s4'); });
+
+/* submit */
+$('#submitBtn').addEventListener('click', () => {
+  D.status        = 'complete';
+  D.completed_at  = new Date().toISOString();
+  D.seconds       = Math.round((Date.now() - new Date(D.started_at)) / 1000);
+  D.consent_text  = 'Confirmed 18+ and agreed to official rules at kiosk. SMS/email marketing consent: '
+                    + (D.consent_sms ? 'GRANTED' : 'declined') + '.';
+
+  const phones = store.get(LS_PHONE, []);
+  if (D.phone_raw && !phones.includes(D.phone_raw)){ phones.push(D.phone_raw); store.set(LS_PHONE, phones); }
+
+  enqueue(D);
+  logEntry(D);
+
+  $('#doneName').textContent = (D.first_name ? D.first_name + ', you are in.' : 'You are in.');
+  show('done');
+  celebrate();
+  countdown();
+});
+
+$('#againBtn').addEventListener('click', hardReset);
+$('#dupeBtn').addEventListener('click', hardReset);
+
+function countdown(){
+  let n = CONFIG.RESET_SECONDS;
+  $('#cd').textContent = n;
+  clearInterval(cdTimer);
+  cdTimer = setInterval(() => {
+    n--; $('#cd').textContent = Math.max(n, 0);
+    if (n <= 0){ clearInterval(cdTimer); hardReset(); }
+  }, 1000);
+}
+
+/* ============================================================
+   OFFLINE QUEUE  —  nothing is ever lost at the booth
+   ============================================================ */
+function enqueue(entry){
+  const q = store.get(LS_QUEUE, []);
+  const i = q.findIndex(x => x.entry_id === entry.entry_id);
+  const row = Object.assign({}, entry, { queued_at: new Date().toISOString() });
+  if (i > -1) q[i] = row; else q.push(row);
+  store.set(LS_QUEUE, q);
+  flush();
+  paintStaff();
+}
+
+function logEntry(entry){
+  const log = store.get(LS_LOG, []);
+  log.push(entry);
+  store.set(LS_LOG, log);
+}
+
+let flushing = false;
+async function flush(){
+  if (flushing) return;
+  const q = store.get(LS_QUEUE, []);
+  if (!q.length) return;
+  if (!navigator.onLine){ pill('Saved on this iPad. Will sync when signal returns.'); return; }
+  if (CONFIG.ENDPOINT.indexOf('PASTE_') === 0) return;
+
+  flushing = true;
+  const done = [];
+  const bumped = {};
+
+  for (const row of q){
+    let ok = false;
+    // 1) normal CORS post, so we can actually read the confirmation
+    try {
+      const res = await fetch(CONFIG.ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids the CORS preflight
+        body: JSON.stringify(row)
+      });
+      ok = res.ok;
+    } catch (err){
+      // 2) blocked or offline. Fire and forget, same as the Suite Night page does.
+      //    Apps Script de-dupes on entry_id so a repeat send can never double a row.
+      try {
+        await fetch(CONFIG.ENDPOINT, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(row)
+        });
+        bumped[row.entry_id] = (row.attempts || 0) + 1;
+        if (bumped[row.entry_id] >= 2) ok = true;   // almost certainly landed; CSV still holds it
+      } catch (e2){
+        break;                                      // truly offline, stop and retry later
+      }
+    }
+    if (ok) done.push(row.entry_id);
+  }
+
+  const next = store.get(LS_QUEUE, [])
+    .filter(x => !done.includes(x.entry_id))
+    .map(x => bumped[x.entry_id] ? Object.assign({}, x, { attempts: bumped[x.entry_id] }) : x);
+  store.set(LS_QUEUE, next);
+
+  flushing = false;
+  paintStaff();
+}
+
+function pill(msg){
+  const p = $('#pill');
+  p.textContent = msg; p.classList.add('on');
+  clearTimeout(p._t); p._t = setTimeout(() => p.classList.remove('on'), 3200);
+}
+
+window.addEventListener('online',  () => { pill('Back online. Syncing.'); flush(); });
+window.addEventListener('offline', () => pill('No signal. Entries are saving on this iPad.'));
+syncTimer = setInterval(flush, 15000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) flush(); });
+
+/* ============================================================
+   STAFF PANEL  —  five taps on the progress rail
+   ============================================================ */
+let taps = 0, tapT;
+$('#bar').addEventListener('click', () => {
+  taps++; clearTimeout(tapT); tapT = setTimeout(() => taps = 0, 1400);
+  if (taps >= 5){ taps = 0; paintStaff(); $('#staff').classList.add('on'); }
+});
+$('#stClose').addEventListener('click', () => { $('#staff').classList.remove('on'); resetIdle('s1'); });
+$('#stSync').addEventListener('click', () => { flush(); pill('Syncing.'); });
+$('#stExport').addEventListener('click', exportCsv);
+
+function paintStaff(){
+  const log = store.get(LS_LOG, []);
+  const q   = store.get(LS_QUEUE, []);
+  $('#stDone').textContent    = log.length;
+  $('#stPartial').textContent = q.filter(x => x.status !== 'complete').length;
+  $('#stQueue').textContent   = q.length;
+  $('#stNet').textContent     = navigator.onLine ? 'online' : 'offline';
+  $('#stOwners').textContent  = log.filter(x => x.is_owner && x.is_owner !== 'No').length;
+  $('#stSeason').textContent  = log.filter(x => ['Wants pricing','Considering'].includes(x.season_interest)).length;
+}
+
+function exportCsv(){
+  const rows = store.get(LS_QUEUE, []).concat(store.get(LS_LOG, []));
+  const cols = ['entry_id','status','started_at','completed_at','first_name','last_name','phone','email',
+                'been_to_game','season_interest','is_owner','business_pain','consent_rules','consent_sms',
+                'suite_night','seconds','event'];
+  const esc = v => '"' + String(v === undefined ? '' : v).replace(/"/g,'""') + '"';
+  const csv = [cols.join(',')].concat(rows.map(r => cols.map(c => esc(r[c])).join(','))).join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+  a.download = 'thunder-proytech-entries-backup.csv';
+  a.click();
+}
+
+/* ============================================================
+   KEEP THE SCREEN ON
+   ============================================================ */
+let lock = null;
+async function keepAwake(){
+  try { if ('wakeLock' in navigator && !lock) lock = await navigator.wakeLock.request('screen'); } catch(e){}
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden) keepAwake(); });
+
+/* ============================================================
+   CONFETTI
+   ============================================================ */
+const cv = $('#confetti'), ctx = cv.getContext('2d');
+let bits = [], raf;
+
+function celebrate(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  cv.classList.add('on');
+  cv.width = innerWidth * devicePixelRatio;
+  cv.height = innerHeight * devicePixelRatio;
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+
+  const colors = ['#7CC7FF','#1B62C4','#FFFFFF','#FB6926','#B9DEFF'];
+  bits = [];
+  // two cannons from the bottom corners, so the centre of the screen stays readable
+  for (let i = 0; i < 220; i++){
+    const left = i % 2 === 0;
+    bits.push({
+      x: left ? -10 : innerWidth + 10,
+      y: innerHeight + 10,
+      vx: (left ? 1 : -1) * (9 + Math.random() * 12),
+      vy: -(20 + Math.random() * 13),
+      w: 6 + Math.random() * 8,
+      h: 8 + Math.random() * 12,
+      r: Math.random() * Math.PI,
+      vr: (Math.random() - .5) * .3,
+      c: colors[(Math.random() * colors.length) | 0]
+    });
+  }
+  cancelAnimationFrame(raf);
+  draw();
+}
+
+function draw(){
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  let live = 0;
+  for (const b of bits){
+    b.vy += .42; b.x += b.vx; b.y += b.vy; b.vx *= .992; b.r += b.vr;
+    if (b.y < innerHeight + 60) live++;
+    ctx.save();
+    ctx.translate(b.x, b.y); ctx.rotate(b.r);
+    ctx.fillStyle = b.c;
+    ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+    ctx.restore();
+  }
+  if (live) raf = requestAnimationFrame(draw);
+  else { ctx.clearRect(0, 0, innerWidth, innerHeight); cv.classList.remove('on'); }
+}
+
+/* ============================================================
+   MISC HARDENING
+   ============================================================ */
+document.addEventListener('gesturestart', e => e.preventDefault());          // no pinch zoom
+document.addEventListener('touchstart', () => resetIdle(path[path.length-1]), {passive:true});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const cur = path[path.length - 1];
+  const btn = $('#' + cur + ' .cta:not([disabled])');
+  if (btn) { e.preventDefault(); btn.click(); }
+});
+addEventListener('resize', () => { if (cv.classList.contains('on')){ cv.width = innerWidth*devicePixelRatio; cv.height = innerHeight*devicePixelRatio; } });
+
+flush();
+paintStaff();
+</script>
+</body>
+</html>
