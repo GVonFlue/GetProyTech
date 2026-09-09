@@ -625,6 +625,7 @@ const CONFIG = {
   DRAWING_DATE: 'Tuesday, September 22, 2026',
   EVENT: 'Open Streets ICT 2026',
   GOAL_HORN: true,          // booth control can flip this at any time
+  LOCK_FULLSCREEN: true,    // set false if a device fights the fullscreen request
 
   RESET_SECONDS: 10,   // celebration screen countdown
   IDLE_SECONDS: 45,    // abandoned form auto reset
@@ -1001,20 +1002,36 @@ function goFull(){
   try { const r = req.call(el); if (r && r.catch) r.catch(() => {}); } catch (e){}
 }
 
-/* Once the booth is running we treat full screen as the only acceptable state.
-   Escape, a focus change, a stray gesture, whatever drops us out: the very next
-   touch anywhere on the glass puts it back, before any other handler runs. */
-let kioskLive = false;
+/* Once the booth is running, a stray exit from full screen is repaired on the
+   next deliberate touch. Deliberately minimal: browsers only honour a
+   fullscreen request from a real gesture, and firing several at once is what
+   makes Chrome flicker, so this runs on one event, throttled, never re-entrant. */
+let kioskLive = false, fsPending = false, fsLast = 0;
 
 function reclaimFull(){
-  if (!kioskLive || PERSONAL || isFull()) return;
-  goFull();
+  if (!CONFIG.LOCK_FULLSCREEN || !kioskLive || PERSONAL) return;
+  if (isFull() || fsPending) return;
+  const now = Date.now();
+  if (now - fsLast < 900) return;
+  fsLast = now;
+
+  const el = document.documentElement;
+  const req = el.requestFullscreen || el.webkitRequestFullscreen
+           || el.mozRequestFullScreen || el.msRequestFullscreen;
+  if (!req) return;
+
+  fsPending = true;
+  try {
+    const r = req.call(el);
+    if (r && r.then) r.then(() => { fsPending = false; }, () => { fsPending = false; });
+    else setTimeout(() => { fsPending = false; }, 400);
+  } catch (e){
+    fsPending = false;
+  }
 }
-['pointerdown','touchstart','mousedown','click'].forEach(evt => {
-  document.addEventListener(evt, reclaimFull, true);   // capture phase, fires first
-});
-document.addEventListener('fullscreenchange', reclaimFull);
-document.addEventListener('webkitfullscreenchange', reclaimFull);
+
+/* One event, capture phase, passive so it can never block a tap from landing. */
+document.addEventListener('pointerdown', reclaimFull, { capture: true, passive: true });
 
 /* ============================================================
    BOOTH CONTROL
@@ -1030,7 +1047,7 @@ $('#aStart').addEventListener('click', () => {
 let taps = 0, tapT;
 function tapForAdmin(){
   if (PERSONAL) return;
-  taps++; clearTimeout(tapT); tapT = setTimeout(() => taps = 0, 1400);
+  taps++; clearTimeout(tapT); tapT = setTimeout(() => taps = 0, 1100);
   if (taps >= 5){
     taps = 0;
     clearTimeout(idleTimer); clearInterval(cdTimer);
