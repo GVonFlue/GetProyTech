@@ -67,14 +67,32 @@ input,textarea{user-select:text;-webkit-user-select:text}
     radial-gradient(90% 60% at 50% 118%, rgba(124,199,255,.20) 0%, rgba(4,16,31,0) 60%),
     linear-gradient(180deg,#04101F 0%,#08203C 52%,#04101F 100%);
 }
-.rink::after{
-  /* faint ice scoring, sits low so text stays legible */
+
+/* two stacked photo layers that crossfade as you move through the flow */
+.ph{
+  position:fixed;inset:-4%;z-index:0;opacity:0;
+  background-position:center;background-size:cover;background-repeat:no-repeat;
+  transition:opacity .7s ease;
+  will-change:opacity,transform;
+}
+.ph.on{opacity:1}
+.ph.drift{animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.07)}}
+
+/* contrast scrim so type never fights the photo */
+.scrim{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(4,16,31,.74) 0%, rgba(4,16,31,.22) 30%, rgba(4,16,31,.38) 68%, rgba(4,16,31,.88) 100%),
+    radial-gradient(130% 90% at 50% 48%, rgba(4,16,31,0) 38%, rgba(4,16,31,.52) 100%);
+}
+.scrim::after{
   content:"";position:absolute;inset:0;
   background:
-    repeating-linear-gradient(97deg, rgba(180,220,255,.05) 0 1px, transparent 1px 46px),
-    repeating-linear-gradient(-3deg, rgba(180,220,255,.035) 0 1px, transparent 1px 78px);
-  mask-image:linear-gradient(180deg,transparent 0%,#000 45%,#000 100%);
-  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 45%,#000 100%);
+    repeating-linear-gradient(97deg, rgba(180,220,255,.045) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(-3deg, rgba(180,220,255,.03) 0 1px, transparent 1px 78px);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 55%,#000 100%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 55%,#000 100%);
 }
 
 /* --- app shell ------------------------------------------- */
@@ -90,7 +108,7 @@ input,textarea{user-select:text;-webkit-user-select:text}
 .bar.on{display:block}
 .chips{display:flex;align-items:center;justify-content:center;gap:16px}
 .chip{height:48px;width:auto;border-radius:8px;display:block;
-  box-shadow:0 0 0 1px rgba(124,199,255,.35), 0 6px 18px rgba(0,0,0,.45)}
+  box-shadow:0 0 0 1px rgba(124,199,255,.4), 0 6px 22px rgba(0,0,0,.6)}
 .chip-x{font-family:var(--display);font-weight:700;font-size:15px;color:var(--glacier);opacity:.7}
 
 .rail{margin-top:16px;height:4px;border-radius:99px;background:rgba(124,199,255,.16);overflow:hidden}
@@ -112,17 +130,31 @@ input,textarea{user-select:text;-webkit-user-select:text}
 
 /* --- type ------------------------------------------------- */
 .kicker{font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--glacier);margin-bottom:10px}
+h1,h2{text-shadow:0 2px 22px rgba(2,10,22,.75)}
 h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,5.2vw,46px);line-height:1.06;letter-spacing:-.02em}
 h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);line-height:1.14;letter-spacing:-.015em;margin-bottom:8px}
-.sub{font-size:17px;line-height:1.5;color:var(--muted);max-width:52ch}
+.sub{font-size:17px;line-height:1.5;color:#B4CBE4;max-width:52ch;text-shadow:0 1px 14px rgba(2,10,22,.7)}
 
 /* --- attract ---------------------------------------------- */
-#attract{justify-content:center;gap:26px;text-align:center;align-items:center}
+#attract{justify-content:center;gap:14px;text-align:center;align-items:center}
 .hero{
-  width:min(61vh,88vw);aspect-ratio:1;border-radius:26px;
-  background:url('images/hero.jpg') center/cover no-repeat;
-  box-shadow:0 0 0 1px rgba(124,199,255,.4), 0 26px 70px rgba(0,0,0,.6), 0 0 90px rgba(60,150,255,.22);
+  position:relative;
+  width:min(64vh,96vw);aspect-ratio:1;
+  background:url('images/hero.jpg') center/contain no-repeat;
+  /* the image dissolves into the blurred arena behind it instead of sitting in a box */
+  mask-image:radial-gradient(closest-side, #000 58%, rgba(0,0,0,.55) 78%, transparent 97%);
+  -webkit-mask-image:radial-gradient(closest-side, #000 58%, rgba(0,0,0,.55) 78%, transparent 97%);
+  filter:drop-shadow(0 0 60px rgba(60,150,255,.35));
+  margin-bottom:-6vh;
 }
+/* one light sweep across the ice, every few seconds */
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(102deg, transparent 38%, rgba(190,230,255,.16) 48%, transparent 58%);
+  transform:translateX(-120%);
+  animation:sweep 7s ease-in-out infinite;
+}
+@keyframes sweep{0%,62%{transform:translateX(-120%)}88%,100%{transform:translateX(120%)}}
 .prize{font-family:var(--display);font-weight:600;font-size:clamp(20px,3.4vw,28px);line-height:1.2}
 .prize span{display:block;font-family:var(--body);font-weight:500;font-size:16px;color:var(--glacier);margin-top:8px}
 
@@ -152,14 +184,14 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 .field label{display:block;font-size:14px;font-weight:600;color:var(--glacier);margin-bottom:8px}
 .field input{
   width:100%;min-height:var(--tap);
-  background:rgba(10,30,58,.78);
+  background:rgba(8,24,48,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border:1.5px solid var(--line);border-radius:16px;
   padding:0 20px;color:var(--ice-white);
   font-family:inherit;font-size:22px;font-weight:500;
   transition:border-color .15s ease, background .15s ease;
 }
 .field input::placeholder{color:#587296}
-.field input:focus{outline:none;border-color:var(--glacier);background:rgba(14,40,76,.92)}
+.field input:focus{outline:none;border-color:var(--glacier);background:rgba(14,40,76,.86)}
 .field input.bad{border-color:#FF6B6B}
 .hint{font-size:13px;color:var(--muted);margin-top:8px}
 .err{font-size:14px;color:#FF8E8E;margin-top:8px;display:none}
@@ -170,14 +202,14 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 .tile{
   display:flex;align-items:center;gap:16px;
   min-height:var(--tap);width:100%;text-align:left;
-  background:rgba(10,30,58,.72);
+  background:rgba(8,24,48,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border:1.5px solid var(--line);border-radius:16px;
   padding:16px 20px;color:var(--ice-white);
   font-family:inherit;font-size:20px;font-weight:600;line-height:1.25;
   cursor:pointer;transition:transform .1s ease,border-color .15s ease,background .15s ease;
 }
 .tile:active{transform:scale(.985)}
-.tile.sel{border-color:var(--glacier);background:rgba(27,98,196,.34)}
+.tile.sel{border-color:var(--glacier);background:rgba(27,98,196,.52)}
 .tile .txt{flex:1 1 auto;min-width:0}
 .tile b{display:block;font-weight:700}
 .tile em{display:block;font-style:normal;font-weight:400;font-size:15px;color:var(--muted);margin-top:4px}
@@ -191,11 +223,12 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 /* --- consent ---------------------------------------------- */
 .consent{
   display:flex;gap:16px;align-items:flex-start;
-  background:rgba(10,30,58,.72);border:1.5px solid var(--line);
+  background:rgba(8,24,48,.64);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1.5px solid var(--line);
   border-radius:16px;padding:18px 20px;margin-bottom:12px;cursor:pointer;
 }
 .consent.req{border-color:rgba(251,105,38,.42)}
-.consent.on{border-color:var(--glacier);background:rgba(27,98,196,.3)}
+.consent.on{border-color:var(--glacier);background:rgba(27,98,196,.46)}
 .box{
   flex:0 0 auto;width:30px;height:30px;border-radius:9px;
   border:2px solid rgba(124,199,255,.55);position:relative;margin-top:1px;
@@ -214,7 +247,8 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 /* --- season price strip ----------------------------------- */
 .prices{display:flex;gap:10px;margin-top:18px}
 .prices div{
-  flex:1;background:rgba(27,98,196,.22);border:1px solid rgba(124,199,255,.3);
+  flex:1;background:rgba(27,98,196,.34);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(124,199,255,.34);
   border-radius:14px;padding:14px 12px;text-align:center;
 }
 .prices span{display:block;font-size:13px;font-weight:600;color:var(--glacier);letter-spacing:.01em}
@@ -293,6 +327,9 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 <body>
 
 <div class="rink"></div>
+<div class="ph" id="phA"></div>
+<div class="ph" id="phB"></div>
+<div class="scrim"></div>
 <canvas id="confetti"></canvas>
 
 <div class="app">
@@ -528,7 +565,7 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,36px);l
 const CONFIG = {
 
   // Paste the Apps Script Web App URL here after you deploy it.
-  ENDPOINT: 'https://script.google.com/macros/s/AKfycbyk6Mg1elamn4BWgrcOnkiss_j_dv8Bvq0E4iL5kTlHcpt4o1MIxEv39t1e0a5Y3us/exec',
+  ENDPOINT: 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE',
 
   // Prize copy shown on the opening screen
   PRIZE_TITLE: 'Win the Thunder Fan Pack',
@@ -574,6 +611,39 @@ $('#rDate').textContent = CONFIG.DRAWING_DATE;
    ============================================================ */
 const STEP = { s1:1, s2:2, s3:3, s4:4, s5:5, s5b:5, s6:5 };
 
+/* which photo belongs behind which screen */
+const BG = {
+  attract: 'images/hero-blur.jpg',
+  s1:      'images/bg-anthem.jpg',
+  s2:      'images/bg-anthem.jpg',
+  s3:      'images/bg-arena.jpg',
+  s4:      'images/bg-action.jpg',
+  s5:      'images/bg-grit.jpg',
+  s5b:     'images/bg-grit.jpg',
+  s6:      'images/bg-action.jpg',
+  done:    'images/hero-blur.jpg',
+  dupe:    'images/bg-anthem.jpg'
+};
+
+let phTop = false, phNow = '';
+function setBg(id){
+  const src = BG[id];
+  if (!src || src === phNow) return;
+  phNow = src;
+  const next = phTop ? $('#phA') : $('#phB');
+  const prev = phTop ? $('#phB') : $('#phA');
+  const idle = (id === 'attract' || id === 'done');
+  next.style.backgroundImage = "url('" + src + "')";
+  next.classList.toggle('drift', idle);
+  next.classList.add('on');
+  prev.classList.remove('on');
+  prev.classList.remove('drift');
+  phTop = !phTop;
+}
+
+/* warm every photo into cache on load so nothing pops in at the booth */
+Object.values(BG).forEach(src => { const i = new Image(); i.src = src; });
+
 function show(id){
   $$('.screen').forEach(s => s.classList.remove('on'));
   $('#' + id).classList.add('on');
@@ -581,6 +651,8 @@ function show(id){
   const inForm = !['attract','done','dupe'].includes(id);
   $('#bar').classList.toggle('on', inForm);
   $('#rail i').style.width = (inForm ? (STEP[id] || 5) / 5 * 100 : 0) + '%';
+
+  setBg(id);
 
   if (path[path.length - 1] !== id) path.push(id);
 
