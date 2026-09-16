@@ -367,6 +367,87 @@ body{background:#020a12}
 }
 @media(prefers-reduced-motion:reduce){.tn-kid-glow{filter:none}}
 
+/* ============ STORM THEME: lit suite backdrop + lightning ============ */
+.tn{background:transparent;position:relative}
+body{background:#010710}
+.tn-storm{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#010710}
+.tn-storm-img{position:absolute;inset:-3%;background:image-set(url(/images/suitenight-bg.webp) type("image/webp"),url(/images/suitenight-bg.jpg) type("image/jpeg")) center 40%/cover no-repeat;background-image:url(/images/suitenight-bg.jpg);background-image:image-set(url(/images/suitenight-bg.webp) type("image/webp"),url(/images/suitenight-bg.jpg) type("image/jpeg"));filter:saturate(1.15) brightness(.62);transform:scale(1.04);animation:tn-breathe 22s ease-in-out infinite alternate}
+@keyframes tn-breathe{to{transform:scale(1.1) translate3d(-1%,-1%,0)}}
+.tn-storm-shade{position:absolute;inset:0;background:
+  radial-gradient(90% 70% at 50% 45%,rgba(1,7,16,.15),rgba(1,7,16,.78) 100%),
+  linear-gradient(180deg,rgba(1,7,16,.55) 0%,rgba(1,7,16,.2) 35%,rgba(1,7,16,.35) 70%,rgba(1,7,16,.85) 100%)}
+.tn-storm-frost{position:absolute;inset:0;opacity:.35;mix-blend-mode:screen;background:
+  radial-gradient(40% 35% at 0% 100%,rgba(125,211,252,.35),transparent 70%),
+  radial-gradient(35% 30% at 100% 100%,rgba(125,211,252,.28),transparent 70%),
+  radial-gradient(30% 25% at 0% 0%,rgba(56,189,248,.25),transparent 70%)}
+.tn-storm svg{position:absolute;inset:0;width:100%;height:100%}
+.tn-bolt path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tn-bolt-main{stroke:#eaf6ff;stroke-width:2.6}
+.tn-bolt-br{stroke:#bfe6ff;stroke-width:1.3}
+.tn-bolt{filter:url(#tnGlow);opacity:.18;animation:tn-strike 9s infinite}
+.tn-bolt-b{animation-delay:3.1s;animation-duration:11s}
+.tn-bolt-c{animation-delay:6.4s;animation-duration:13s}
+.tn-bolt-d{animation-delay:8.2s;animation-duration:15s}
+@keyframes tn-strike{0%,88%,100%{opacity:.18}89%{opacity:1}90%{opacity:.3}91.5%{opacity:.95}94%{opacity:.4}97%{opacity:.18}}
+.tn-flash{position:absolute;inset:0;background:radial-gradient(70% 60% at 30% 10%,rgba(190,230,255,.22),transparent 70%);opacity:0;animation:tn-flash 9s infinite}
+.tn-flash-2{background:radial-gradient(70% 60% at 80% 15%,rgba(190,230,255,.2),transparent 70%);animation-delay:3.1s;animation-duration:11s}
+@keyframes tn-flash{0%,88%,100%{opacity:0}89%{opacity:1}90%{opacity:.2}91.5%{opacity:.8}96%{opacity:0}}
+.tn>section,.tn>.tn-bar{position:relative;z-index:1}
+.tn>.tn-bar{position:fixed;z-index:70}
+
+/* sections float over the storm */
+.tn-hero,.tn-what,.tn-stack,.tn-sponsors,.tn-reserve,.tn-host,.tn-faq,.tn-final,.tn-kid{background:transparent;border-top:0}
+.tn-hero .tn-ice{background:radial-gradient(120% 80% at 50% -10%,rgba(56,189,248,.22),transparent 60%),radial-gradient(90% 60% at 15% 20%,rgba(0,93,166,.3),transparent 65%);opacity:.8}
+.tn-hero .tn-vignette{background:radial-gradient(120% 90% at 50% 30%,transparent 50%,rgba(1,7,16,.6) 100%)}
+.tn-cracks{opacity:.08}
+.tn-what-glow,.tn-kid-glow{opacity:.6}
+
+/* glass slabs */
+.tn-slab{position:relative;background:linear-gradient(160deg,rgba(6,28,48,.72),rgba(2,10,20,.78));border:1px solid rgba(125,211,252,.2);border-radius:28px;padding:64px 56px;backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 40px 100px rgba(0,0,0,.55)}
+.tn-slab::before{content:"";position:absolute;left:40px;right:40px;top:-1px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--ice-2),#fff,var(--ice),transparent);box-shadow:0 0 18px rgba(125,211,252,.9);opacity:.85;animation:tn-arc 5s ease-in-out infinite}
+.tn-slab-o::before{background:linear-gradient(90deg,transparent,var(--o),#ffd2bd,var(--o),transparent);box-shadow:0 0 18px rgba(255,107,53,.9)}
+@keyframes tn-arc{0%,100%{opacity:.5}46%{opacity:.5}48%{opacity:1}50%{opacity:.6}52%{opacity:1}}
+.tn-what{padding:100px 0 60px}
+.tn-stack,.tn-sponsors,.tn-reserve,.tn-host,.tn-faq{padding:60px 0}
+.tn-kid{padding:60px 0}
+.tn-final{padding:120px 0 140px}
+
+/* electric type */
+.tn-h1{text-shadow:0 0 30px rgba(56,189,248,.35),0 4px 40px rgba(0,0,0,.6)}
+.tn-h2,.tn-what-h,.tn-kid-h{text-shadow:0 0 28px rgba(56,189,248,.28)}
+.tn-final h2{font-size:clamp(3rem,8vw,6.6rem);text-shadow:0 0 40px rgba(56,189,248,.5),0 6px 40px rgba(0,0,0,.7)}
+.tn-final em{color:#fff;animation:tn-zap 7s infinite}
+@keyframes tn-zap{0%,86%,100%{color:var(--ice);text-shadow:0 0 30px rgba(56,189,248,.6)}87%{color:#fff;text-shadow:0 0 12px #fff,0 0 60px #7dd3fc,0 0 120px #38bdf8}89%{color:var(--ice)}90.5%{color:#fff;text-shadow:0 0 12px #fff,0 0 60px #7dd3fc}93%{color:var(--ice)}}
+.tn-final p{color:var(--txt)}
+.tn-kicker{text-shadow:0 0 14px currentColor}
+.tn-track-half i{color:#fff;text-shadow:0 0 10px var(--ice-2);font-size:1.25em}
+.tn-marquee{background:linear-gradient(90deg,#004a86,#0a6fc2 50%,#004a86);box-shadow:0 0 40px rgba(56,189,248,.45)}
+.tn-card{background-color:rgba(2,10,20,.35)}
+.tn-card:hover{box-shadow:0 0 0 1px rgba(125,211,252,.6),0 0 40px rgba(56,189,248,.35),0 28px 60px rgba(0,0,0,.5)}
+.tn-btn-orange{box-shadow:0 10px 30px rgba(255,107,53,.45),0 0 0 1px rgba(255,180,150,.25) inset}
+.tn-kid-poster img{box-shadow:0 0 0 6px rgba(255,107,53,.08),0 30px 80px rgba(0,0,0,.7),0 0 110px rgba(56,189,248,.25)}
+.tn-final-bolt{display:block;width:44px;height:64px;margin:0 auto 18px;filter:drop-shadow(0 0 14px #7dd3fc)}
+.tn-kid-h{font-size:clamp(2rem,3vw,2.7rem)}
+.tn-hero-main{position:relative}
+.tn-hero-main::before{content:"";position:absolute;inset:-40px -60px -40px -80px;z-index:-1;background:radial-gradient(60% 60% at 35% 55%,rgba(1,7,16,.7),transparent 75%);pointer-events:none}
+.tn-hero-sub{color:rgba(234,246,255,.86)}
+.tn-reserve .tn-form-card{background:rgba(2,14,26,.75)}
+
+@media(max-width:900px){
+.tn-storm-img{background-image:url(/images/suitenight-bg-m.jpg);background-image:image-set(url(/images/suitenight-bg-m.webp) type("image/webp"),url(/images/suitenight-bg-m.jpg) type("image/jpeg"));background-position:center;animation:none;transform:none;inset:0}
+.tn-slab{padding:40px 22px;border-radius:22px}
+.tn-slab::before{left:22px;right:22px}
+.tn-what{padding:60px 0 30px}
+.tn-stack,.tn-sponsors,.tn-reserve,.tn-host,.tn-faq,.tn-kid{padding:30px 0}
+.tn-final{padding:80px 0 120px}
+.tn-bolt-c,.tn-bolt-d{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+.tn-storm-img,.tn-bolt,.tn-flash,.tn-slab::before,.tn-final em{animation:none}
+.tn-bolt{opacity:.35}
+.tn-flash{opacity:0}
+}
+
 /* seat counter */
 .tn-seatcount{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);border-radius:999px;padding:.6rem 1.1rem;font-family:var(--body)}
 .tn-seatcount .dot{width:9px;height:9px;border-radius:50%;background:#37e39a;box-shadow:0 0 10px #37e39a;animation:tn-pulse 2s ease-in-out infinite}
@@ -393,6 +474,13 @@ body{background:#020a12}
 </div></nav>
 
 <main class="tn">
+  <div class="tn-storm" aria-hidden="true">
+    <div class="tn-storm-img"></div>
+    <div class="tn-storm-shade"></div>
+    <div class="tn-storm-frost"></div>
+    <div class="tn-flash"></div><div class="tn-flash tn-flash-2"></div>
+    <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice"><defs><filter id="tnGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b1"/><feGaussianBlur stdDeviation="10" result="b2"/><feMerge><feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g class="tn-bolt tn-bolt-a"><path class="tn-bolt-main" d="M-20 -20 L-21 -13 L-17 -7 L-12 -2 L-7 1 L-0 2 L6 5 L13 4 L18 9 L16 15 L17 22 L23 25 L27 30 L30 36 L33 41 L34 47 L32 54 L31 60 L32 67 L35 74 L39 79 L45 83 L49 88 L56 87 L62 91 L59 98 L61 105 L63 112 L69 116 L72 123 L69 130 L64 134 L59 140 L62 145 L66 149 L69 155 L71 160 L77 162 L83 162 L85 169 L91 172 L91 178 L91 184 L95 189 L97 195 L104 197 L108 201 L113 205 L116 210 L122 213 L126 219 L132 217 L139 219 L144 223 L146 229 L147 235 L152 239 L156 244 L161 248 L167 251 L173 250 L177 255 L184 256 L191 256 L196 253 L202 256 L203 263 L202 269 L205 275 L210 279 L210 286 L212 292 L216 296 L210 300 L207 306 L207 313 L208 320 L211 325 L213 331 L218 336 L218 343 L225 345 L228 350 L231 355 L235 360 L239 364 L241 370 L241 377 L242 383 L245 388 L245 394 L250 397 L253 403 L258 406 L262 411 L262 417 L265 422 L269 427 L273 432 L277 436 L281 441 L287 442 L293 444 L299 445 L305 446 L309 451 L312 456 L316 460 L319 465 L324 470 L331 470 L333 476 L337 480 L343 483 L346 488 L352 490 L358 493 L361 498 L362 505 L368 508 L373 512 L378 507 L385 508 L392 509 L398 507 L404 510 L410 512 L415 516 L420 520"/><path class="tn-bolt-br" d="M202 269 L209 272 L217 275 L223 281 L231 282 L240 284 L246 291 L249 299 L252 307 L257 314 L261 322 L262 330 L260 339 L269 340 L277 344 L284 350 L286 360 L293 364 L302 364 L309 359 L317 356 L325 360 L331 366 L339 363 L348 366 L356 366 L362 372 L370 375 L377 376 L386 373 L393 378 L401 381 L406 388"/><path class="tn-bolt-br" d="M191 256 L195 264 L197 273 L203 280 L207 289 L204 297 L200 306 L199 316 L202 325 L203 335 L210 341 L217 347 L223 353 L232 357 L235 366 L239 374 L246 380 L246 389 L244 398 L236 404 L231 412 L228 420 L229 429 L232 438 L229 447 L232 455 L238 462 L241 471 L241 480 L241 489 L240 497 L241 506 L240 515"/><path class="tn-bolt-br" d="M258 406 L265 413 L274 418 L277 427 L282 436 L280 445 L284 454 L285 464 L287 473 L290 483 L288 492 L294 500 L301 507 L300 517 L305 525 L308 533 L311 542 L314 552 L321 558 L329 563 L336 570 L344 576 L354 576 L363 581 L367 591 L374 597 L378 606 L380 615 L387 622 L392 630 L392 640 L401 645 L407 653"/></g><g class="tn-bolt tn-bolt-b"><path class="tn-bolt-main" d="M1640 -30 L1639 -24 L1634 -20 L1631 -15 L1631 -9 L1624 -8 L1618 -9 L1614 -5 L1609 -1 L1609 5 L1605 9 L1601 12 L1597 16 L1592 19 L1590 25 L1584 24 L1579 28 L1578 34 L1573 37 L1572 42 L1568 47 L1565 51 L1561 54 L1556 58 L1551 60 L1546 59 L1540 61 L1535 64 L1530 66 L1528 72 L1525 77 L1520 80 L1518 85 L1512 87 L1508 92 L1508 98 L1506 104 L1505 110 L1502 115 L1499 120 L1493 122 L1492 129 L1488 134 L1493 138 L1492 145 L1490 151 L1484 154 L1479 157 L1478 164 L1473 167 L1468 171 L1469 177 L1465 183 L1458 185 L1456 192 L1450 191 L1443 191 L1438 194 L1432 194 L1430 200 L1425 204 L1419 206 L1413 205 L1408 208 L1402 208 L1398 212 L1397 219 L1394 224 L1389 228 L1386 233 L1380 235 L1374 238 L1373 244 L1366 245 L1362 250 L1356 251 L1350 253 L1345 253 L1339 253 L1332 253 L1327 255 L1325 261 L1324 266 L1322 272 L1325 278 L1328 284 L1326 290 L1325 296 L1326 302 L1320 304 L1315 308 L1313 314 L1309 318 L1307 324 L1306 330 L1303 336 L1296 338 L1295 344 L1290 347 L1287 352 L1283 354 L1281 360 L1277 364 L1272 366 L1267 369 L1261 371 L1255 370 L1250 374 L1246 378 L1245 384 L1240 388 L1240 394 L1238 399 L1234 403 L1229 406 L1224 409 L1223 415 L1220 421 L1223 427 L1220 432 L1216 436 L1210 437 L1204 435 L1198 437 L1193 440 L1187 443 L1183 448 L1182 454 L1180 460"/><path class="tn-bolt-br" d="M1492 145 L1499 149 L1503 155 L1507 160 L1514 163 L1520 160 L1527 161 L1534 162 L1541 161 L1542 167 L1543 173 L1547 179 L1550 184 L1554 190 L1555 197 L1561 201 L1567 204 L1574 203 L1580 207 L1584 213 L1585 220 L1588 226 L1593 229 L1597 234 L1602 237 L1604 244 L1611 246 L1618 245 L1623 249 L1630 248 L1636 248 L1642 252 L1647 255"/><path class="tn-bolt-br" d="M1325 278 L1322 286 L1317 294 L1312 301 L1303 304 L1297 311 L1292 318 L1292 327 L1291 336 L1287 344 L1288 353 L1289 361 L1286 370 L1284 379 L1278 386 L1271 391 L1264 396 L1264 405 L1263 413 L1263 422 L1257 429 L1252 437 L1251 445 L1245 451 L1243 460 L1245 469 L1251 476 L1249 485 L1250 494 L1244 501 L1239 509 L1235 517 L1235 526"/><path class="tn-bolt-br" d="M1465 183 L1468 190 L1471 197 L1469 205 L1471 213 L1475 220 L1474 228 L1472 235 L1470 243 L1467 250 L1467 258 L1468 266 L1473 273 L1472 281 L1468 288 L1468 296 L1473 303 L1477 310 L1485 313 L1487 322 L1495 326 L1497 334 L1497 342 L1497 350 L1498 358 L1498 366 L1495 374 L1498 382 L1498 390 L1504 395 L1508 403 L1513 408 L1518 415"/></g><g class="tn-bolt tn-bolt-c"><path class="tn-bolt-main" d="M1640 300 L1636 303 L1633 307 L1628 309 L1624 312 L1625 317 L1622 322 L1622 327 L1619 331 L1618 336 L1619 340 L1617 345 L1619 350 L1618 355 L1615 359 L1615 364 L1618 368 L1618 373 L1617 378 L1616 384 L1620 387 L1616 391 L1613 395 L1612 400 L1612 405 L1610 410 L1611 415 L1609 419 L1605 423 L1602 426 L1600 431 L1595 431 L1591 435 L1590 440 L1588 444 L1587 449 L1583 452 L1580 455 L1577 459 L1574 463 L1574 468 L1570 472 L1571 477 L1567 481 L1564 484 L1560 487 L1556 489 L1555 494 L1551 497 L1546 498 L1542 501 L1537 501 L1532 501 L1529 505 L1524 506 L1519 507 L1516 511 L1513 515 L1508 518 L1503 520 L1498 519 L1493 520 L1490 525 L1487 530 L1487 535 L1484 539 L1479 541 L1478 546 L1477 551 L1474 555 L1471 558 L1468 562 L1467 567 L1464 571 L1460 573 L1455 575 L1452 579 L1447 580 L1442 578 L1437 579 L1433 583 L1430 587 L1427 590 L1424 594 L1424 599 L1419 600 L1415 603 L1411 606 L1409 611 L1405 614 L1402 617 L1398 621 L1394 622 L1390 625 L1385 625 L1380 624 L1375 627 L1378 631 L1376 636 L1378 641 L1378 646 L1375 650 L1373 655 L1369 658 L1368 663 L1363 665 L1360 668 L1357 673 L1356 677 L1351 680 L1347 682 L1346 687 L1344 692 L1346 696 L1347 701 L1346 707 L1343 711 L1346 715 L1347 720 L1346 725 L1344 730 L1342 735 L1341 740 L1336 742 L1334 747 L1330 750 L1326 752 L1324 757 L1320 760"/><path class="tn-bolt-br" d="M1419 600 L1420 607 L1418 614 L1415 620 L1409 624 L1407 631 L1405 637 L1400 641 L1397 647 L1390 648 L1385 652 L1379 656 L1373 659 L1367 660 L1362 666 L1358 671 L1353 675 L1350 681 L1351 688 L1347 694 L1346 701 L1341 705 L1338 711 L1331 712 L1326 718 L1324 724 L1323 730 L1319 735 L1318 742 L1319 748 L1318 755 L1317 761 L1315 767"/><path class="tn-bolt-br" d="M1390 625 L1395 628 L1398 633 L1397 639 L1399 645 L1400 651 L1401 656 L1406 660 L1410 664 L1416 666 L1419 672 L1424 674 L1430 674 L1432 679 L1437 683 L1440 688 L1445 691 L1450 694 L1456 694 L1462 695 L1468 696 L1475 694 L1478 688 L1484 691 L1491 689 L1495 692 L1500 696 L1504 700 L1507 705 L1512 709 L1516 713 L1522 715 L1528 716"/></g><g class="tn-bolt tn-bolt-d"><path class="tn-bolt-main" d="M-30 520 L-26 522 L-23 527 L-19 529 L-14 530 L-10 532 L-5 533 L-2 537 L0 541 L2 546 L1 550 L6 552 L8 557 L11 561 L12 566 L14 570 L17 574 L21 576 L26 577 L28 582 L32 585 L36 587 L39 591 L44 592 L48 594 L47 599 L46 604 L50 608 L52 613 L51 618 L54 623 L58 625 L61 630 L65 633 L69 636 L74 637 L79 637 L81 641 L83 645 L87 648 L90 652 L93 655 L96 660 L95 665 L97 669 L98 674 L99 679 L104 680 L107 684 L112 684 L116 687 L119 691 L124 691 L128 695 L129 700 L134 699 L139 702 L140 707 L144 710 L148 713 L151 716 L151 721 L153 725 L157 729 L161 731 L164 736 L162 741 L163 746 L161 750 L163 755 L164 760 L164 765 L161 769 L163 774 L161 779 L162 783 L162 788 L159 792 L159 798 L161 802 L163 807 L165 811 L168 815 L173 817 L175 822 L177 826 L181 829 L184 833 L186 838 L189 842 L189 847 L188 852 L190 856 L191 861 L191 866 L196 869 L198 874 L202 878 L203 883 L205 887 L208 892 L213 895 L214 900 L220 901 L224 904 L229 904 L235 905 L239 902 L245 903 L250 903 L255 907 L260 909 L263 914 L267 916 L272 918 L276 921 L279 925 L282 930 L282 935 L286 940 L291 941 L288 946 L289 952 L292 956 L294 961 L292 966 L293 972 L298 975 L300 980"/><path class="tn-bolt-br" d="M184 833 L185 838 L181 842 L181 847 L177 850 L173 850 L168 852 L165 856 L161 859 L164 863 L167 866 L170 871 L169 876 L170 881 L167 885 L165 890 L162 894 L163 898 L168 900 L170 904 L169 908 L174 908 L178 912 L178 917 L180 921 L181 926 L185 929 L182 934 L180 938 L180 942 L181 947 L185 949 L189 952"/><path class="tn-bolt-br" d="M129 700 L132 705 L136 710 L139 715 L143 720 L147 725 L153 727 L157 732 L158 739 L161 744 L165 749 L169 754 L171 760 L176 763 L179 769 L183 773 L187 778 L193 781 L199 782 L204 786 L207 792 L213 794 L216 800 L223 800 L228 804 L234 805 L241 803 L247 806 L252 810 L257 814 L263 816 L268 819 L273 824"/></g></svg>
+  </div>
   <!-- HERO -->
   <section class="tn-hero">
     <div class="tn-ice"></div><div class="tn-beams"></div><div class="tn-cracks"></div>
@@ -437,14 +525,14 @@ body{background:#020a12}
       </div>
     </div>
     <div class="tn-marquee"><div class="tn-track">
-      <div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#10052;</i></span><span>OPENING NIGHT<i>&#10052;</i></span><span>35TH SEASON<i>&#10052;</i></span><span>PRIVATE SUITE<i>&#10052;</i></span><span>PUCK DROP 6:05<i>&#10052;</i></span><span>YOUNGEST ENTREPRENEUR<i>&#10052;</i></span><span>THE THUNDER<i>&#10052;</i></span></div><div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#10052;</i></span><span>OPENING NIGHT<i>&#10052;</i></span><span>35TH SEASON<i>&#10052;</i></span><span>PRIVATE SUITE<i>&#10052;</i></span><span>PUCK DROP 6:05<i>&#10052;</i></span><span>YOUNGEST ENTREPRENEUR<i>&#10052;</i></span><span>THE THUNDER<i>&#10052;</i></span></div>
+      <div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#991;</i></span><span>OPENING NIGHT<i>&#991;</i></span><span>35TH SEASON<i>&#991;</i></span><span>PRIVATE SUITE<i>&#991;</i></span><span>PUCK DROP 6:05<i>&#991;</i></span><span>YOUNGEST ENTREPRENEUR<i>&#991;</i></span><span>THE THUNDER<i>&#991;</i></span></div><div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#991;</i></span><span>OPENING NIGHT<i>&#991;</i></span><span>35TH SEASON<i>&#991;</i></span><span>PRIVATE SUITE<i>&#991;</i></span><span>PUCK DROP 6:05<i>&#991;</i></span><span>YOUNGEST ENTREPRENEUR<i>&#991;</i></span><span>THE THUNDER<i>&#991;</i></span></div>
     </div></div>
   </section>
 
   <!-- WHAT THIS IS -->
   <section class="tn-what">
     <div class="tn-what-glow"></div>
-    <div class="tn-wrap">
+    <div class="tn-wrap"><div class="tn-slab">
       <span class="tn-kicker tn-reveal">01 &middot; What this is</span>
       <h2 class="tn-what-h tn-reveal">Business networking,<br><em>at center ice.</em></h2>
       <div class="tn-chips tn-reveal"><span>Private suite</span><span>Curated room</span><span>Opening night</span><span>No pitch</span></div>
@@ -452,13 +540,13 @@ body{background:#020a12}
         <p class="tn-lede tn-reveal">The best rooms in this city do not happen at a conference table. They happen when the right people share a night worth remembering.</p>
         <p class="tn-body tn-reveal">So we took a private suite for the Thunder's opening night and filled it with Wichita business owners and leaders. One night, a great game, catered food, and a small room of people actually worth knowing. No pitch. No pressure. Just the kind of connection that turns into real business three months later.<br><br>Opening night. 35th season. A room that gets it.</p>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- YOUNGEST ENTREPRENEUR -->
   <section class="tn-kid" id="youngest-entrepreneur">
     <div class="tn-kid-glow" aria-hidden="true"></div>
-    <div class="tn-wrap">
+    <div class="tn-wrap"><div class="tn-slab tn-slab-o">
       <div class="tn-kid-grid">
         <figure class="tn-kid-poster tn-reveal">
           <picture>
@@ -479,12 +567,12 @@ body{background:#020a12}
           <div class="tn-kid-cta tn-reveal"><button class="tn-btn tn-btn-orange" onclick="scrollToForm()">Sit in that room</button></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- VALUE STACK -->
   <section class="tn-stack">
-    <div class="tn-wrap">
+    <div class="tn-wrap"><div class="tn-slab">
       <span class="tn-kicker tn-kicker-ice tn-reveal">02 &middot; What you get</span>
       <h2 class="tn-h2 tn-h2-light tn-reveal">Everything in the suite.</h2>
       <div class="tn-cards">
@@ -494,24 +582,24 @@ body{background:#020a12}
         <article class="tn-card tn-reveal tn-card-ice"><span class="tn-card-n">04</span><h3>Catered in the suite</h3><p>Food and drinks handled so you can focus on the room and the game.</p></article>
         <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">05</span><h3>Captured on camera</h3><p>Our videographer is in the suite all night. You leave with content, not just a memory.</p></article>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- SPONSORS -->
   <section class="tn-sponsors">
-    <div class="tn-wrap">
+    <div class="tn-wrap"><div class="tn-slab">
       <span class="tn-kicker tn-kicker-ice tn-reveal">Put your brand on the ice</span>
       <h2 class="tn-h2 tn-reveal">Sponsor the night.</h2>
       <p class="tn-sponsors-lede tn-reveal">Get your brand in front of a curated room of Wichita business owners, and on every piece of promotion leading up to opening night. Four spots.</p>
       <div class="tn-sponsor-grid">
         <div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- RESERVE -->
   <section class="tn-reserve" id="reserve">
-    <div class="tn-wrap">
+    <div class="tn-wrap"><div class="tn-slab">
       <div class="tn-reserve-grid">
         <div class="tn-reserve-copy tn-reveal">
           <span class="tn-kicker tn-kicker-ice">03 &middot; Reserve</span>
@@ -560,17 +648,17 @@ body{background:#020a12}
           </div>
         </div>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- HOST -->
   <section class="tn-host">
-    <div class="tn-wrap">
+    <div class="tn-wrap"><div class="tn-slab">
       <div class="tn-host-grid">
         <div class="tn-host-copy tn-reveal">
           <span class="tn-kicker">04 &middot; Who's hosting</span>
           <h2 class="tn-h2">The guy who shows up.</h2>
-          <p>I'm Garrett Von Flue.  Co-CEO of ProyTech, and the guy who'd rather build a room than rent one.</p>
+          <p>I'm Garrett Von Flue, co-CEO of ProyTech, and the guy who'd rather build a room than rent one.</p>
           <p>Suite Night started at the ballpark and it's become the thing I'm proudest of, real rooms of real people who leave actually knowing each other. This one trades the diamond for the ice, and opening night is the perfect stage for it.</p>
           <p class="tn-host-line">No pitch. Even if we never work together.</p>
         </div>
@@ -579,15 +667,15 @@ body{background:#020a12}
           <div class="tn-stat"><strong>25</strong><span>seats in the suite</span></div>
           <div class="tn-stat"><strong>1</strong><span>private suite, opening night</span></div>
           <div class="tn-stat"><strong>35th</strong><span>Thunder season faceoff</span></div>
-          <div class="tn-panel-tags"></span><span>ProyTech</span><span>Suite Night</span></div>
+          <div class="tn-panel-tags"><span>ProyTech</span><span>Wichita Thunder</span><span>Suite Night</span></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- FAQ -->
   <section class="tn-faq">
-    <div class="tn-wrap">
+    <div class="tn-wrap"><div class="tn-slab">
       <span class="tn-kicker tn-reveal">05 &middot; Before you ask</span>
       <h2 class="tn-h2 tn-reveal">The honest answers.</h2>
       <div class="tn-faq-list tn-reveal" id="faqList">
@@ -599,12 +687,13 @@ body{background:#020a12}
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Who's the kid in the suite?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>The winner of the Society of Child Entrepreneurs Pitch Challenge, crowned live at Goddard Fall Fest on October 10. They join us with a parent. Wichita's next generation of business owners, sitting in the same room as this one.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Can I bring my team?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Absolutely. Grab multiple seats when you reserve. Bringing a few key people to a room like this is one of the better moves you can make.</p></div></div>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- FINAL -->
   <section class="tn-final">
     <div class="tn-wrap tn-reveal">
+      <svg class="tn-final-bolt" viewBox="0 0 44 64" aria-hidden="true"><path d="M27 0 L4 36 H20 L14 64 L40 24 H24 Z" fill="#eaf6ff"/></svg>
       <h2>Opening night.<br><em>Center ice.</em></h2>
       <p>October 17, 2026 &middot; INTRUST Bank Arena</p>
       <button class="tn-btn tn-btn-orange tn-btn-lg" onclick="scrollToForm()">Reserve your seat</button>
