@@ -10,6 +10,9 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://getproytech.com/suitenight"/>
 <meta property="og:image" content="https://getproytech.com/images/suitenight-og.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:image" content="https://getproytech.com/images/suitenight-og.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -332,6 +335,38 @@ body{background:#020a12}
 .tn-snow{display:none}
 }
 
+/* youngest entrepreneur feature */
+.tn-kid{position:relative;padding:120px 0;background:linear-gradient(180deg,#04202f 0%,#020a12 100%);overflow:hidden;border-top:1px solid rgba(255,107,53,.18)}
+.tn-kid-glow{position:absolute;left:-15%;top:10%;width:70%;height:80%;z-index:0;background:radial-gradient(50% 50% at 50% 50%,rgba(255,107,53,.22),transparent 70%);filter:blur(30px);pointer-events:none}
+.tn-kid .tn-wrap{position:relative;z-index:1}
+.tn-kid-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:center}
+.tn-kid-poster{position:relative;margin:0}
+.tn-kid-poster img{display:block;width:100%;height:auto;border-radius:22px;border:1px solid rgba(255,107,53,.35);box-shadow:0 0 0 6px rgba(255,107,53,.07),0 30px 80px rgba(0,0,0,.6),0 0 90px rgba(255,107,53,.18)}
+.tn-kicker-o{color:var(--o)}
+.tn-kid-h{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.98;font-size:clamp(2.1rem,3.6vw,3.2rem);color:#fff;margin:16px 0 0}
+.tn-kid-h em{font-style:normal;color:var(--o)}
+.tn-kid-copy .tn-body{margin:26px 0 0;color:var(--txt)}
+.tn-kid-note{margin:18px 0 0;font-family:var(--disp);font-weight:600;font-size:1.15rem;color:var(--frost)}
+.tn-kid-steps{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:0;counter-reset:none}
+.tn-kid-steps li{position:relative;padding:22px 16px 0 0;border-top:2px solid rgba(125,211,252,.25)}
+.tn-kid-steps li::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--ice)}
+.tn-kid-steps li.tn-kid-last{border-top-color:var(--o)}
+.tn-kid-steps li.tn-kid-last::before{background:var(--o);box-shadow:0 0 14px var(--o)}
+.tn-kid-steps strong{display:block;font-family:var(--disp);font-weight:700;font-size:1.05rem;color:#fff}
+.tn-kid-steps span{display:block;margin-top:6px;font-size:.92rem;line-height:1.45;color:var(--muted)}
+.tn-kid-cta{margin-top:40px}
+.tn-hero-kid{margin:14px 0 0;font-weight:600;color:var(--o);font-size:1rem}
+@media(max-width:900px){
+.tn-kid{padding:80px 0}
+.tn-kid-grid{grid-template-columns:1fr;gap:40px}
+.tn-kid-poster{max-width:460px}
+.tn-kid-steps{grid-template-columns:1fr;gap:0}
+.tn-kid-steps li{padding:0 0 22px 26px;border-top:0;border-left:2px solid rgba(125,211,252,.25)}
+.tn-kid-steps li::before{top:2px;left:-7px}
+.tn-kid-steps li.tn-kid-last{border-left-color:var(--o);padding-bottom:0}
+}
+@media(prefers-reduced-motion:reduce){.tn-kid-glow{filter:none}}
+
 /* seat counter */
 .tn-seatcount{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);border-radius:999px;padding:.6rem 1.1rem;font-family:var(--body)}
 .tn-seatcount .dot{width:9px;height:9px;border-radius:50%;background:#37e39a;box-shadow:0 0 10px #37e39a;animation:tn-pulse 2s ease-in-out infinite}
@@ -370,6 +405,7 @@ body{background:#020a12}
           <div class="tn-eyebrow"><i class="tn-puck"></i> Suite Night · Thunder Opening Night · October 17, 2026</div>
           <h1 class="tn-h1">Business Networking<br><em>Done Different.</em></h1>
           <p class="tn-hero-sub">A private suite for the Thunder's opening faceoff. A curated room of Wichita business owners, catered, with the game all night. This is what networking should feel like.</p>
+          <p class="tn-hero-kid"><a href="#youngest-entrepreneur" style="color:inherit;text-decoration:underline;text-underline-offset:4px">Plus one seat for Wichita's youngest entrepreneur.</a></p>
           <div class="tn-seatcount"><i class="dot"></i><strong id="seatCount">25 of 25 seats</strong><span>available</span></div>
           <div class="tn-hero-cta">
             <button class="tn-btn tn-btn-orange" onclick="scrollToForm()">Reserve your seat</button>
@@ -401,7 +437,7 @@ body{background:#020a12}
       </div>
     </div>
     <div class="tn-marquee"><div class="tn-track">
-      <div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#10052;</i></span><span>OPENING NIGHT<i>&#10052;</i></span><span>35TH SEASON<i>&#10052;</i></span><span>PRIVATE SUITE<i>&#10052;</i></span><span>PUCK DROP 6:05<i>&#10052;</i></span><span>THE THUNDER<i>&#10052;</i></span></div><div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#10052;</i></span><span>OPENING NIGHT<i>&#10052;</i></span><span>35TH SEASON<i>&#10052;</i></span><span>PRIVATE SUITE<i>&#10052;</i></span><span>PUCK DROP 6:05<i>&#10052;</i></span><span>THE THUNDER<i>&#10052;</i></span></div>
+      <div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#10052;</i></span><span>OPENING NIGHT<i>&#10052;</i></span><span>35TH SEASON<i>&#10052;</i></span><span>PRIVATE SUITE<i>&#10052;</i></span><span>PUCK DROP 6:05<i>&#10052;</i></span><span>YOUNGEST ENTREPRENEUR<i>&#10052;</i></span><span>THE THUNDER<i>&#10052;</i></span></div><div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#10052;</i></span><span>OPENING NIGHT<i>&#10052;</i></span><span>35TH SEASON<i>&#10052;</i></span><span>PRIVATE SUITE<i>&#10052;</i></span><span>PUCK DROP 6:05<i>&#10052;</i></span><span>YOUNGEST ENTREPRENEUR<i>&#10052;</i></span><span>THE THUNDER<i>&#10052;</i></span></div>
     </div></div>
   </section>
 
@@ -415,6 +451,33 @@ body{background:#020a12}
       <div class="tn-what-grid">
         <p class="tn-lede tn-reveal">The best rooms in this city do not happen at a conference table. They happen when the right people share a night worth remembering.</p>
         <p class="tn-body tn-reveal">So we took a private suite for the Thunder's opening night and filled it with Wichita business owners and leaders. One night, a great game, catered food, and a small room of people actually worth knowing. No pitch. No pressure. Just the kind of connection that turns into real business three months later.<br><br>Opening night. 35th season. A room that gets it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUNGEST ENTREPRENEUR -->
+  <section class="tn-kid" id="youngest-entrepreneur">
+    <div class="tn-kid-glow" aria-hidden="true"></div>
+    <div class="tn-wrap">
+      <div class="tn-kid-grid">
+        <figure class="tn-kid-poster tn-reveal">
+          <picture>
+            <source srcset="/images/suitenight-kid.webp" type="image/webp">
+            <img src="/images/suitenight-kid.jpg" width="1080" height="1350" loading="lazy" alt="ProyTech presents: Wichita's youngest entrepreneur earns a seat at the table. The Child Entrepreneur Pitch Challenge winner and their parent join Suite Night on October 17 at INTRUST Bank Arena.">
+          </picture>
+        </figure>
+        <div class="tn-kid-copy">
+          <span class="tn-kicker tn-kicker-o tn-reveal">The only pitch in the room</span>
+          <h2 class="tn-kid-h tn-reveal">Wichita's youngest entrepreneur<br><em>earns a seat at the table.</em></h2>
+          <p class="tn-body tn-reveal">The Society of Child Entrepreneurs runs the Child Entrepreneur Pitch Challenge for kids ages 6 to 17. Local business leaders pick the finalists, and the kids pitch live in front of judges at Goddard Fall Fest. One young founder comes out on top, and ProyTech is putting that winner and their parent in the suite with us on opening night.</p>
+          <p class="tn-kid-note tn-reveal">We said no pitch in this room. We made one exception.</p>
+          <ol class="tn-kid-steps tn-reveal">
+            <li><strong>Oct 7</strong><span>Finalists announced</span></li>
+            <li><strong>Oct 10</strong><span>Live pitch at Goddard Fall Fest</span></li>
+            <li class="tn-kid-last"><strong>Oct 17</strong><span>The winner takes a seat in the suite</span></li>
+          </ol>
+          <div class="tn-kid-cta tn-reveal"><button class="tn-btn tn-btn-orange" onclick="scrollToForm()">Sit in that room</button></div>
+        </div>
       </div>
     </div>
   </section>
@@ -533,6 +596,7 @@ body{background:#020a12}
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Do I pay on this page?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>No. You reserve here, I text you to confirm your seat and send a simple payment link. The seat locks once payment is in. That is the only reason payment exists, so everyone who says yes actually shows up.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Who is in the room?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Wichita business owners, executives, and a few of the people who quietly move this city. It is curated on purpose and kept small.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>When is it?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>October 17, 2026 at INTRUST Bank Arena. Puck drops at 6:05 PM. Plan to arrive a little before for the room and the food.</p></div></div>
+        <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Who's the kid in the suite?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>The winner of the Society of Child Entrepreneurs Pitch Challenge, crowned live at Goddard Fall Fest on October 10. They join us with a parent. Wichita's next generation of business owners, sitting in the same room as this one.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Can I bring my team?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Absolutely. Grab multiple seats when you reserve. Bringing a few key people to a room like this is one of the better moves you can make.</p></div></div>
       </div>
     </div>
