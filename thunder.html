@@ -505,6 +505,7 @@ body.kb .cta{min-height:70px;font-size:23px}
       <div class="stat"><span>Waiting to sync</span><b id="aQueue">0</b></div>
       <div class="stat"><span>Business owners</span><b id="aOwners">0</b></div>
       <div class="stat"><span>Season ticket leads</span><b id="aSeason">0</b></div>
+      <div class="stat"><span>Suite and group leads</span><b id="aPremium">0</b></div>
       <div class="stat"><span>Connection</span><b id="aNet">online</b></div>
       <div class="stat"><span>Saving to sheet</span><b id="aEnd">checking</b></div>
       <div class="stat"><span>Display mode</span><b id="aMode">-</b></div>
@@ -543,7 +544,7 @@ body.kb .cta{min-height:70px;font-size:23px}
 
     <!-- 1 NAME + PHONE ------------------------------------------ -->
     <section class="screen scrollable" id="s1">
-      <div class="kicker">Entry 1 of 5</div>
+      <div class="kicker">Entry 1 of 6</div>
       <h2>Who are we cheering for?</h2>
       <p class="sub">We need a name and a number so we can reach the winner.</p>
       <div style="height:26px"></div>
@@ -568,7 +569,7 @@ body.kb .cta{min-height:70px;font-size:23px}
 
     <!-- 2 EMAIL -------------------------------------------------- -->
     <section class="screen scrollable" id="s2">
-      <div class="kicker">Entry 2 of 5</div>
+      <div class="kicker">Entry 2 of 6</div>
       <h2>Where do we send the good news?</h2>
       <p class="sub">One email confirming your entry. That is it.</p>
       <div style="height:26px"></div>
@@ -585,7 +586,7 @@ body.kb .cta{min-height:70px;font-size:23px}
 
     <!-- 3 BEEN TO A GAME ----------------------------------------- -->
     <section class="screen scrollable" id="s3">
-      <div class="kicker">Entry 3 of 5</div>
+      <div class="kicker">Entry 3 of 6</div>
       <h2>Ever been to a Thunder game?</h2>
       <div class="tiles" data-q="been_to_game" data-next-screen="s4">
         <button class="tile" data-v="Never been"><span class="puck"></span><span class="txt"><b>Never been</b></span></button>
@@ -598,7 +599,7 @@ body.kb .cta{min-height:70px;font-size:23px}
 
     <!-- 4 SEASON TICKETS ----------------------------------------- -->
     <section class="screen scrollable" id="s4">
-      <div class="kicker">Entry 4 of 5</div>
+      <div class="kicker">Entry 4 of 6</div>
       <h2 id="seasonQ">Season tickets cost less than people think.</h2>
       <p class="sub" id="seasonHook">36 home games. A full season seat starts at $550, which comes out to about $15 a game.</p>
 
@@ -609,7 +610,7 @@ body.kb .cta{min-height:70px;font-size:23px}
       </div>
       <button class="rules-link" id="chartBtn" style="text-align:center">See every section and half or quarter plans</button>
 
-      <div class="tiles" data-q="season_interest" data-next-screen="s5">
+      <div class="tiles" data-q="season_interest" data-next-screen="s4b">
         <button class="tile" data-v="Wants pricing"><span class="puck"></span><span class="txt"><b>That is cheaper than I thought</b><em>Send me the details</em></span></button>
         <button class="tile" data-v="Considering"><span class="puck"></span><span class="txt"><b>I have thought about it</b><em>Have a rep reach out</em></span></button>
         <button class="tile" data-v="Group or partial"><span class="puck"></span><span class="txt"><b>More of a group or partial plan person</b></span></button>
@@ -618,9 +619,23 @@ body.kb .cta{min-height:70px;font-size:23px}
       <div class="foot"><button class="ghost" data-back>Back</button></div>
     </section>
 
+    <!-- 4b PREMIUM HOSPITALITY ----------------------------------- -->
+    <section class="screen scrollable" id="s4b">
+      <div class="kicker">Entry 5 of 6</div>
+      <h2>Suites, party areas and group nights.</h2>
+      <p class="sub">The Thunder host private suites, the glass suite and group outings for companies, teams and birthdays.</p>
+      <div class="tiles" data-q="premium_interest" data-next-screen="s5">
+        <button class="tile" data-v="Company suite"><span class="puck"></span><span class="txt"><b>A suite for my company</b><em>Clients, staff or a corporate night</em></span></button>
+        <button class="tile" data-v="Group outing"><span class="puck"></span><span class="txt"><b>A group night</b><em>Friends, family, team or birthday</em></span></button>
+        <button class="tile" data-v="Send options"><span class="puck"></span><span class="txt"><b>Just send me the options</b></span></button>
+        <button class="tile" data-v="Not for me"><span class="puck"></span><span class="txt"><b>Not for me</b></span></button>
+      </div>
+      <div class="foot"><button class="ghost" data-back>Back</button></div>
+    </section>
+
     <!-- 5 BUSINESS OWNER ----------------------------------------- -->
     <section class="screen scrollable" id="s5">
-      <div class="kicker">Entry 5 of 5</div>
+      <div class="kicker">Entry 6 of 6</div>
       <h2>Do you own or run a business?</h2>
       <div class="tiles" data-q="is_owner">
         <button class="tile" data-v="Yes" data-goto="s5b"><span class="puck"></span><span class="txt"><b>Yes</b></span></button>
@@ -788,7 +803,7 @@ $('#rDate').textContent = CONFIG.DRAWING_DATE;
 /* ============================================================
    SCREEN CONTROL
    ============================================================ */
-const STEP = { s1:1, s2:2, s3:3, s4:4, s5:5, s5b:5, s6:5 };
+const STEP = { s1:1, s2:2, s3:3, s4:4, s4b:5, s5:6, s5b:6, s6:6 };
 
 /* which photo belongs behind which screen */
 const BG = {
@@ -798,6 +813,7 @@ const BG = {
   s2:      'images/bg-anthem.jpg',
   s3:      'images/bg-arena.jpg',
   s4:      'images/bg-action.jpg',
+  s4b:     'images/bg-arena.jpg',
   s5:      'images/bg-grit.jpg',
   s5b:     'images/bg-grit.jpg',
   s6:      'images/bg-action.jpg',
@@ -830,7 +846,7 @@ function show(id){
 
   const inForm = !['admin','attract','done','dupe'].includes(id);
   $('#bar').classList.toggle('on', inForm);
-  $('#rail i').style.width = (inForm ? (STEP[id] || 5) / 5 * 100 : 0) + '%';
+  $('#rail i').style.width = (inForm ? (STEP[id] || 6) / 6 * 100 : 0) + '%';
 
   setBg(id);
 
@@ -1217,6 +1233,7 @@ function paintStaff(){
   set('#aQueue',   q.length, q.length > 10);
   set('#aOwners',  log.filter(x => x.is_owner && x.is_owner !== 'No').length);
   set('#aSeason',  log.filter(x => ['Wants pricing','Considering'].includes(x.season_interest)).length);
+  set('#aPremium', log.filter(x => x.premium_interest && x.premium_interest !== 'Not for me').length);
   set('#aNet',     navigator.onLine ? 'online' : 'offline', !navigator.onLine);
 
   const wired = CONFIG.ENDPOINT.indexOf('PASTE_') !== 0;
@@ -1254,7 +1271,7 @@ function paintStaff(){
 function exportCsv(){
   const rows = store.get(LS_QUEUE, []).concat(store.get(LS_LOG, []));
   const cols = ['entry_id','status','started_at','completed_at','first_name','last_name','phone','email',
-                'been_to_game','season_interest','is_owner','business_pain','consent_rules','consent_sms',
+                'been_to_game','season_interest','premium_interest','is_owner','business_pain','consent_rules','consent_sms',
                 'suite_night','seconds','event'];
   const esc = v => '"' + String(v === undefined ? '' : v).replace(/"/g,'""') + '"';
   const csv = [cols.join(',')].concat(rows.map(r => cols.map(c => esc(r[c])).join(','))).join('\n');
