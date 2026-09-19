@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Partner Program | ProyTech</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Send us a business. We'll send you $200. Every referred business that becomes a ProyTech client earns you $200. No cap, no expiration.">
+<meta name="theme-color" content="#050B18">
+<link rel="icon" href="images/proytechlogo.png">
+
+<meta property="og:title" content="ProyTech Partner Program — Send us a business, we'll send you $200">
+<meta property="og:description" content="Every referred business that becomes a client earns you $200. No cap. No expiration.">
+<meta property="og:image" content="https://getproytech.com/images/proytech-dog.png">
+<meta property="og:url" content="https://getproytech.com/partner">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#050B18;
+  --ink-2:#0A1426;
+  --panel:#0C1A33;
+  --blue:#2E9BFF;
+  --blue-deep:#1338DE;
+  --orange:#FB6926;
+  --white:#F2F7FF;
+  --gray:#8FAAC9;
+  --line:rgba(46,155,255,.22);
+
+  --display:'Space Grotesk','Inter',-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+
+  --wrap:1120px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* ---------- circuit field ---------- */
+.circuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+.circuit svg{width:100%;height:100%}
+.glowfield{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 50% at 18% 8%, rgba(46,155,255,.16) 0%, transparent 60%),
+    radial-gradient(50% 45% at 88% 32%, rgba(251,105,38,.10) 0%, transparent 62%),
+    radial-gradient(70% 60% at 50% 112%, rgba(19,56,222,.18) 0%, transparent 65%);
+}
+
+.wrap{position:relative;z-index:2;max-width:var(--wrap);margin:0 auto;padding:0 28px}
+
+/* ---------- nav ---------- */
+nav{position:relative;z-index:5;padding:26px 0}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
+nav img{height:42px;width:auto}
+.nav-link{
+  font-size:15px;font-weight:600;color:var(--gray);text-decoration:none;
+  padding:10px 18px;border:1px solid var(--line);border-radius:10px;
+  transition:color .15s,border-color .15s,background .15s;white-space:nowrap;
+}
+.nav-link:hover{color:var(--white);border-color:var(--blue);background:rgba(46,155,255,.1)}
+
+/* ---------- type ---------- */
+.kicker{
+  font-family:var(--body);font-size:12.5px;font-weight:700;color:var(--blue);
+  letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px;
+  display:flex;align-items:center;gap:14px;
+}
+.kicker::after{content:"";flex:1;height:1px;max-width:190px;
+  background:linear-gradient(90deg,var(--blue),transparent)}
+
+h1{font-family:var(--display);font-weight:700;font-size:clamp(36px,5.4vw,66px);
+  line-height:1.02;letter-spacing:-.025em}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.9vw,42px);
+  line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:10px}
+.lede{font-size:clamp(17px,1.9vw,20px);color:var(--gray);max-width:54ch;line-height:1.6}
+.amount{color:var(--orange)}
+
+/* ---------- hero ---------- */
+header{position:relative;padding:54px 0 84px}
+.hero{display:grid;grid-template-columns:1.22fr .78fr;gap:46px;align-items:center}
+.hero-copy h1{margin-bottom:22px}
+.hero .lede{margin-bottom:34px}
+.dog{position:relative}
+.dog img{width:100%;filter:drop-shadow(0 30px 70px rgba(0,0,0,.65))}
+.dog::before{
+  content:"";position:absolute;inset:6% 8%;border-radius:50%;
+  background:radial-gradient(circle, rgba(46,155,255,.28) 0%, transparent 68%);
+  filter:blur(46px);z-index:-1;
+}
+
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--display);font-weight:700;font-size:17px;
+  padding:19px 34px;border-radius:13px;text-decoration:none;border:0;cursor:pointer;
+  transition:transform .12s, box-shadow .12s, background .15s;
+}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 14px 34px rgba(251,105,38,.34)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(251,105,38,.46)}
+.btn-ghost{background:transparent;color:var(--white);border:1.5px solid var(--line);font-weight:600}
+.btn-ghost:hover{border-color:var(--blue);background:rgba(46,155,255,.1)}
+
+/* ---------- payout strip ---------- */
+.strip{
+  position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(12,26,51,.72), rgba(5,11,24,.72));
+  backdrop-filter:blur(8px);
+}
+.strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:34px;padding-bottom:34px}
+.stat{text-align:center}
+.stat b{display:block;font-family:var(--display);font-weight:700;
+  font-size:clamp(30px,4vw,44px);line-height:1;color:var(--white)}
+.stat b.o{color:var(--orange)}
+.stat span{display:block;margin-top:9px;font-size:13.5px;color:var(--gray);
+  letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+
+/* ---------- sections ---------- */
+section{position:relative;z-index:2;padding:86px 0}
+.section-head{max-width:62ch;margin-bottom:46px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
+.step{
+  position:relative;padding:34px 30px 30px;border-radius:18px;
+  background:linear-gradient(180deg, rgba(12,26,51,.85), rgba(8,18,36,.85));
+  border:1px solid var(--line);
+}
+.step::before{
+  counter-increment:s;content:"0" counter(s);
+  position:absolute;top:-16px;left:28px;
+  font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink);
+  background:var(--blue);padding:6px 13px;border-radius:8px;
+  box-shadow:0 0 26px rgba(46,155,255,.55);
+}
+.step p{color:var(--gray);font-size:15.5px}
+
+/* who to send */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.card{
+  padding:32px 30px;border-radius:18px;border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(12,26,51,.8), rgba(8,18,36,.8));
+}
+.card.accent{border-color:rgba(251,105,38,.34)}
+ul.ticks{list-style:none;margin-top:6px}
+ul.ticks li{position:relative;padding-left:30px;margin-bottom:13px;color:var(--gray);font-size:15.5px}
+ul.ticks li::before{
+  content:"";position:absolute;left:0;top:8px;width:15px;height:8px;
+  border-left:2.5px solid var(--blue);border-bottom:2.5px solid var(--blue);
+  transform:rotate(-45deg);
+}
+ul.ticks.warm li::before{border-color:var(--orange)}
+
+/* what they get */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.mini{padding:28px 26px;border-radius:16px;border:1px solid var(--line);
+  background:rgba(10,20,38,.62)}
+.mini h3{font-size:18px}
+.mini p{color:var(--gray);font-size:15px}
+
+/* form */
+.form-wrap{
+  display:grid;grid-template-columns:.95fr 1.05fr;gap:44px;align-items:start;
+  padding:44px;border-radius:22px;border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(12,26,51,.9), rgba(6,14,28,.9));
+}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--blue);
+  letter-spacing:.09em;text-transform:uppercase;margin-bottom:8px}
+.field input,.field textarea{
+  width:100%;background:rgba(5,11,24,.8);border:1.5px solid var(--line);
+  border-radius:12px;padding:15px 17px;color:var(--white);
+  font-family:inherit;font-size:16.5px;transition:border-color .15s,background .15s;
+}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);background:rgba(10,22,44,.95)}
+.field input.bad,.field textarea.bad{border-color:#FF6B6B}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-note{font-size:13px;color:var(--gray);margin-top:14px;line-height:1.55}
+#formMsg{margin-top:16px;font-size:15px;font-weight:600;display:none}
+#formMsg.ok{display:block;color:var(--blue)}
+#formMsg.err{display:block;color:#FF8E8E}
+
+/* contact */
+.people{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px}
+.person{padding:24px 26px;border-radius:15px;border:1px solid var(--line);
+  background:rgba(10,20,38,.62)}
+.person b{display:block;font-family:var(--display);font-size:19px;font-weight:700}
+.person span{display:block;font-size:13.5px;color:var(--blue);font-weight:600;margin:3px 0 12px}
+.person a{display:inline-block;font-family:var(--display);font-size:20px;font-weight:600;
+  color:var(--white);text-decoration:none}
+.person a:hover{color:var(--blue)}
+
+/* fine print */
+.fine{border-top:1px solid var(--line);padding-top:34px;margin-top:10px}
+.fine p{font-size:14px;color:var(--gray);max-width:78ch;margin-bottom:10px}
+
+footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:38px 0 46px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+footer img{height:34px;width:auto;opacity:.9}
+footer p{font-size:13.5px;color:var(--gray)}
+
+:focus-visible{outline:2.5px solid var(--blue);outline-offset:3px}
+
+@media (max-width:920px){
+  .hero{grid-template-columns:1fr;gap:34px}
+  .dog{order:-1;max-width:440px;margin:0 auto}
+  .steps,.grid3{grid-template-columns:1fr}
+  .two,.form-wrap,.people{grid-template-columns:1fr}
+  .form-wrap{padding:30px 24px}
+  .strip .wrap{grid-template-columns:1fr;gap:26px}
+  section{padding:62px 0}
+  .wrap{padding:0 20px}
+}
+@media (max-width:560px){
+  .row2{grid-template-columns:1fr}
+  .btn{width:100%}
+  nav img{height:34px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- circuit trace field -->
+<div class="circuit" aria-hidden="true">
+<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="t" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2E9BFF" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#1338DE" stop-opacity=".18"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#t)" stroke-width="1.1" fill="none">
+    <path d="M0 120 H210 L260 70 H520 L560 110 H900"/>
+    <path d="M1440 210 H1160 L1110 260 H860 L820 220 H520"/>
+    <path d="M0 400 H150 L200 350 H430 L470 390 H690 L730 350 H1010"/>
+    <path d="M1440 520 H1210 L1160 570 H940"/>
+    <path d="M0 660 H280 L330 710 H610 L650 670 H1000 L1040 710 H1440"/>
+    <path d="M120 0 V180 L170 230 V420"/>
+    <path d="M1290 0 V150 L1240 200 V430 L1290 480 V900"/>
+    <path d="M620 900 V760 L670 710 V520"/>
+    <path d="M940 120 V300 L990 350 V600 L940 650 V900"/>
+    <path d="M380 900 V800 L330 750 V600"/>
+  </g>
+  <g fill="#2E9BFF">
+    <circle cx="260" cy="70" r="3.4"/><circle cx="560" cy="110" r="3.4"/>
+    <circle cx="1110" cy="260" r="3.4"/><circle cx="820" cy="220" r="3.4"/>
+    <circle cx="200" cy="350" r="3.4"/><circle cx="470" cy="390" r="3.4"/>
+    <circle cx="730" cy="350" r="3.4"/><circle cx="1160" cy="570" r="3.4"/>
+    <circle cx="330" cy="710" r="3.4"/><circle cx="650" cy="670" r="3.4"/>
+    <circle cx="1040" cy="710" r="3.4"/><circle cx="170" cy="230" r="3.4"/>
+    <circle cx="1240" cy="200" r="3.4"/><circle cx="990" cy="350" r="3.4"/>
+    <circle cx="670" cy="710" r="3.4"/><circle cx="330" cy="750" r="3.4"/>
+  </g>
+  <g stroke="#2E9BFF" stroke-opacity=".16" stroke-width="1" fill="none">
+    <path d="M1180 640 l34 -20 l34 20 v40 l-34 20 l-34 -20 z"/>
+    <path d="M150 520 l30 -17 l30 17 v35 l-30 17 l-30 -17 z"/>
+    <path d="M760 180 l28 -16 l28 16 v33 l-28 16 l-28 -16 z"/>
+    <path d="M500 800 l26 -15 l26 15 v31 l-26 15 l-26 -15 z"/>
+  </g>
+</svg>
+</div>
+<div class="glowfield" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap">
+    <a href="/"><img src="images/proytechlogo.png" alt="ProyTech"></a>
+    <a class="nav-link" href="#refer">Send a referral</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <div class="kicker">Partner Program</div>
+      <h1>Send us a business.<br>We'll send you <span class="amount">$200</span>.</h1>
+      <p class="lede">Every business you send us that becomes a client puts $200 in your pocket. No cap. No expiration. You don't have to sell anything, pitch anything, or know the first thing about what we build. Just make the introduction.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#refer">Send a referral</a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
+      </div>
+    </div>
+    <div class="dog">
+      <picture>
+        <source srcset="images/proytech-dog.webp" type="image/webp">
+        <img src="images/proytech-dog.png" alt="The ProyTech mascot, a black Labrador in tech goggles and harness" width="840" height="777">
+      </picture>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="stat"><b class="o">$200</b><span>Per business that signs</span></div>
+    <div class="stat"><b>No cap</b><span>Refer as many as you want</span></div>
+    <div class="stat"><b>No expiration</b><span>Your intro counts whenever it closes</span></div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">How it works</div>
+      <h2>Three steps. That's the whole program.</h2>
+      <p class="lede">We kept this simple on purpose. There's no portal to log into, no code to track, and no hoops.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3>Make the intro</h3>
+        <p>Use the form below, text one of us, or just connect us in a group message. A name and a number is enough. We take it from there.</p>
+      </div>
+      <div class="step">
+        <h3>We do the work</h3>
+        <p>We reach out, listen to what's actually slowing them down, and show them what we'd build. No pressure and no pitch deck. If we're not the right fit, we'll say so and point them somewhere better.</p>
+      </div>
+      <div class="step">
+        <h3>They sign, you get paid</h3>
+        <p>When they become a client, you get $200. Cash, Venmo, or check, your call. We pay within seven days of their first invoice clearing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Who to send us</div>
+      <h2>You already know these people.</h2>
+      <p class="lede">You don't need to qualify anyone. If something here sounds like a business you know, that's a referral worth making.</p>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>The tell</h3>
+        <ul class="ticks">
+          <li>They miss calls during the workday and lose the job to whoever answered</li>
+          <li>Leads live in a phone, a notebook, and three text threads</li>
+          <li>They keep meaning to follow up and keep running out of week</li>
+          <li>Their website hasn't been touched since it was built</li>
+          <li>They're the bottleneck, and they know it</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>The fit</h3>
+        <ul class="ticks warm">
+          <li>Home services, trades and contractors</li>
+          <li>Real estate agents, teams and brokerages</li>
+          <li>Lenders, insurance and financial offices</li>
+          <li>Local service businesses with one to twenty employees</li>
+          <li>Anyone growing faster than their systems can handle</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">What they get</div>
+      <h2>We build the systems that let them grow without hiring.</h2>
+      <p class="lede">You're not sending someone into a sales pitch. You're handing them the thing that gives them their week back.</p>
+    </div>
+    <div class="grid3">
+      <div class="mini">
+        <h3>Business Suite</h3>
+        <p>One place where every lead, conversation, task and client lives. Nothing falls through, because nothing lives outside the CRM.</p>
+      </div>
+      <div class="mini">
+        <h3>Automation &amp; AI</h3>
+        <p>Missed calls answered, follow up that runs itself, and reminders that go out whether or not anyone remembers. The work that used to need a salary.</p>
+      </div>
+      <div class="mini">
+        <h3>Websites that convert</h3>
+        <p>Fast, clean, and built to turn a visitor into a booked job. Wired into the same system as everything else.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="refer">
+  <div class="wrap">
+    <div class="form-wrap">
+      <div>
+        <div class="kicker">Send a referral</div>
+        <h2 style="font-size:clamp(26px,3.2vw,34px)">Who should we talk to?</h2>
+        <p class="lede" style="font-size:17px">Fill this out in thirty seconds. We'll reach out to them within one business day and keep you posted either way.</p>
+
+        <div class="people">
+          <div class="person">
+            <b>Garrett Von Flue</b><span>Co-Founder</span>
+            <a href="tel:9013353905">901-335-3905</a>
+          </div>
+          <div class="person">
+            <b>Logan Sell</b><span>Co-Founder</span>
+            <a href="tel:9132374403">913-237-4403</a>
+          </div>
+        </div>
+        <p class="form-note" style="margin-top:18px">Would rather just text it to us? Either number works. A name and a number is plenty.</p>
+      </div>
+
+      <div>
+        <div class="row2">
+          <div class="field">
+            <label for="yn">Your name</label>
+            <input id="yn" type="text" autocomplete="name" placeholder="Jordan Reed">
+          </div>
+          <div class="field">
+            <label for="yp">Your phone</label>
+            <input id="yp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(316) 555-0142">
+          </div>
+        </div>
+        <div class="field">
+          <label for="ye">Your email</label>
+          <input id="ye" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com">
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="rn">Their name</label>
+            <input id="rn" type="text" placeholder="Sam at Sam's Roofing">
+          </div>
+          <div class="field">
+            <label for="rp">Their phone</label>
+            <input id="rp" type="tel" inputmode="tel" placeholder="(316) 555-0188">
+          </div>
+        </div>
+        <div class="field">
+          <label for="rb">Their business</label>
+          <input id="rb" type="text" placeholder="Sam's Roofing, Wichita">
+        </div>
+        <div class="field">
+          <label for="nt">Anything we should know</label>
+          <textarea id="nt" placeholder="He mentioned he's losing calls while he's up on a roof all day."></textarea>
+        </div>
+
+        <button class="btn btn-primary" id="send" style="width:100%">Send the referral</button>
+        <div id="formMsg"></div>
+        <p class="form-note">We'll never cold blast anyone. We reach out once, mention you sent us, and if they're not interested that's the end of it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="fine">
+      <div class="kicker">The fine print, in plain English</div>
+      <p><strong style="color:var(--white)">What counts.</strong> A referral is a business you introduce us to that we hadn't already been talking to. If two people send us the same business, the first introduction gets the $200.</p>
+      <p><strong style="color:var(--white)">When you get paid.</strong> Within seven days of their first invoice clearing. Cash, Venmo or check, whichever you prefer.</p>
+      <p><strong style="color:var(--white)">How much.</strong> $200 per business that becomes a client. There is no cap, no tier system, and no expiration on an introduction you made.</p>
+      <p><strong style="color:var(--white)">What we won't do.</strong> We won't hound anyone you send us, and we won't use your name as leverage. One honest conversation, and if it isn't a fit we'll tell them so and point them to someone who is.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="images/proytechlogo.png" alt="ProyTech">
+    <p>ProyTech Business Solutions LLC &middot; Wichita, Kansas &middot; <a href="/" style="color:var(--blue);text-decoration:none">getproytech.com</a></p>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   Referral submission.
+   Set ENDPOINT to an Apps Script web app (or any URL that
+   accepts a JSON POST) and it posts there. Leave it blank and
+   the form falls back to opening a pre-filled email, so the
+   page works from day one either way.
+   ========================================================= */
+const ENDPOINT = '';
+const FALLBACK_EMAIL = 'admin@getproytech.com';
+
+const $ = s => document.querySelector(s);
+const digits = s => (s || '').replace(/\D/g, '');
+
+function fmtPhone(v){
+  const d = digits(v).slice(0, 10);
+  if (d.length < 4) return d;
+  if (d.length < 7) return '(' + d.slice(0,3) + ') ' + d.slice(3);
+  return '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
+}
+['#yp','#rp'].forEach(sel => {
+  $(sel).addEventListener('input', e => { e.target.value = fmtPhone(e.target.value); });
+});
+
+function msg(text, ok){
+  const m = $('#formMsg');
+  m.textContent = text;
+  m.className = ok ? 'ok' : 'err';
+}
+
+$('#send').addEventListener('click', async () => {
+  const f = {
+    your_name:      $('#yn').value.trim(),
+    your_phone:     $('#yp').value.trim(),
+    your_email:     $('#ye').value.trim(),
+    referral_name:  $('#rn').value.trim(),
+    referral_phone: $('#rp').value.trim(),
+    referral_biz:   $('#rb').value.trim(),
+    notes:          $('#nt').value.trim(),
+    source:         'partner-page',
+    submitted_at:   new Date().toISOString()
+  };
+
+  document.querySelectorAll('input,textarea').forEach(i => i.classList.remove('bad'));
+
+  if (!f.your_name){ $('#yn').classList.add('bad'); return msg('We need your name so we know who to pay.', false); }
+  if (digits(f.your_phone).length !== 10 && !f.your_email){
+    $('#yp').classList.add('bad');
+    return msg('Leave us a phone number or an email so we can reach you.', false);
+  }
+  if (!f.referral_name){ $('#rn').classList.add('bad'); return msg('Who are we reaching out to?', false); }
+  if (digits(f.referral_phone).length !== 10){
+    $('#rp').classList.add('bad');
+    return msg('We need a working number for them.', false);
+  }
+
+  const btn = $('#send');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  if (ENDPOINT){
+    try {
+      await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(f)
+      });
+      done(f);
+      return;
+    } catch (e){ /* fall through to email */ }
+  }
+
+  const body =
+    'Referral from ' + f.your_name + '\n\n' +
+    'THEIR INFO\n' +
+    'Name: ' + f.referral_name + '\n' +
+    'Business: ' + (f.referral_biz || '-') + '\n' +
+    'Phone: ' + f.referral_phone + '\n' +
+    'Notes: ' + (f.notes || '-') + '\n\n' +
+    'MY INFO\n' +
+    'Name: ' + f.your_name + '\n' +
+    'Phone: ' + (f.your_phone || '-') + '\n' +
+    'Email: ' + (f.your_email || '-') + '\n';
+
+  window.location.href = 'mailto:' + FALLBACK_EMAIL +
+    '?subject=' + encodeURIComponent('Partner referral: ' + f.referral_name) +
+    '&body=' + encodeURIComponent(body);
+
+  done(f);
+});
+
+function done(f){
+  const btn = $('#send');
+  btn.textContent = 'Referral sent';
+  msg('Got it. We\u2019ll reach out to ' + f.referral_name + ' within one business day and keep you posted.', true);
+  setTimeout(() => {
+    document.querySelectorAll('input,textarea').forEach(i => i.value = '');
+    btn.disabled = false;
+    btn.textContent = 'Send the referral';
+  }, 4000);
+}
+</script>
+</body>
+</html>
