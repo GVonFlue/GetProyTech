@@ -10,7 +10,7 @@
 
 <meta property="og:title" content="ProyTech Partner Program — Send us a business, we'll send you $200">
 <meta property="og:description" content="Every referred business that becomes a client earns you $200. No cap. No expiration.">
-<meta property="og:image" content="https://getproytech.com/images/proytech-dog.png">
+<meta property="og:image" content="https://getproytech.com/images/proytech-dog.jpg">
 <meta property="og:url" content="https://getproytech.com/partner">
 <meta property="og:type" content="website">
 
@@ -79,7 +79,7 @@ nav img{height:42px;width:auto}
 .kicker::after{content:"";flex:1;height:1px;max-width:190px;
   background:linear-gradient(90deg,var(--blue),transparent)}
 
-h1{font-family:var(--display);font-weight:700;font-size:clamp(36px,5.4vw,66px);
+h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,4.3vw,57px);
   line-height:1.02;letter-spacing:-.025em}
 h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.9vw,42px);
   line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
@@ -89,15 +89,20 @@ h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.01
 
 /* ---------- hero ---------- */
 header{position:relative;padding:54px 0 84px}
-.hero{display:grid;grid-template-columns:1.22fr .78fr;gap:46px;align-items:center}
+.hero{display:grid;grid-template-columns:1.06fr .94fr;gap:34px;align-items:center}
 .hero-copy h1{margin-bottom:22px}
 .hero .lede{margin-bottom:34px}
-.dog{position:relative}
-.dog img{width:100%;filter:drop-shadow(0 30px 70px rgba(0,0,0,.65))}
+.dog{position:relative;max-width:780px;justify-self:end;width:100%;margin-right:-40px}
+.dog img{
+  width:100%;height:auto;
+  /* the black plate dissolves into the page instead of sitting in a box */
+  -webkit-mask-image:radial-gradient(68% 62% at 50% 44%, #000 38%, rgba(0,0,0,.55) 66%, transparent 86%);
+  mask-image:radial-gradient(68% 62% at 50% 44%, #000 38%, rgba(0,0,0,.55) 66%, transparent 86%);
+}
 .dog::before{
-  content:"";position:absolute;inset:6% 8%;border-radius:50%;
-  background:radial-gradient(circle, rgba(46,155,255,.28) 0%, transparent 68%);
-  filter:blur(46px);z-index:-1;
+  content:"";position:absolute;inset:10% 12% 18%;border-radius:50%;
+  background:radial-gradient(circle, rgba(46,155,255,.26) 0%, transparent 66%);
+  filter:blur(52px);z-index:-1;
 }
 
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
@@ -215,7 +220,7 @@ footer p{font-size:13.5px;color:var(--gray)}
 
 @media (max-width:920px){
   .hero{grid-template-columns:1fr;gap:34px}
-  .dog{order:-1;max-width:440px;margin:0 auto}
+  .dog{order:-1;max-width:430px;margin:0 auto;justify-self:center;margin-right:auto}
   .steps,.grid3{grid-template-columns:1fr}
   .two,.form-wrap,.people{grid-template-columns:1fr}
   .form-wrap{padding:30px 24px}
@@ -293,10 +298,7 @@ footer p{font-size:13.5px;color:var(--gray)}
       </div>
     </div>
     <div class="dog">
-      <picture>
-        <source srcset="images/proytech-dog.webp" type="image/webp">
-        <img src="images/proytech-dog.png" alt="The ProyTech mascot, a black Labrador in tech goggles and harness" width="840" height="777">
-      </picture>
+      <img src="images/proytech-dog.jpg" alt="The ProyTech mascot, a black Labrador in tech goggles and harness" width="1600" height="1467">
     </div>
   </div>
 </header>
