@@ -96,8 +96,10 @@ header{position:relative;padding:54px 0 84px}
 .dog img{
   width:100%;height:auto;
   /* the black plate dissolves into the page instead of sitting in a box */
-  -webkit-mask-image:radial-gradient(68% 62% at 50% 44%, #000 38%, rgba(0,0,0,.55) 66%, transparent 86%);
-  mask-image:radial-gradient(68% 62% at 50% 44%, #000 38%, rgba(0,0,0,.55) 66%, transparent 86%);
+  /* the source carries black margin on every side, so this fade eats empty
+     space and reaches fully transparent before the image edge */
+  -webkit-mask-image:radial-gradient(70% 68% at 50% 47%, #000 50%, rgba(0,0,0,.42) 72%, transparent 88%);
+  mask-image:radial-gradient(70% 68% at 50% 47%, #000 50%, rgba(0,0,0,.42) 72%, transparent 88%);
 }
 .dog::before{
   content:"";position:absolute;inset:10% 12% 18%;border-radius:50%;
@@ -330,7 +332,7 @@ footer p{font-size:13.5px;color:var(--gray)}
       </div>
     </div>
     <div class="dog">
-      <img src="images/proytech-dog.jpg" alt="The ProyTech mascot, a black Labrador in tech goggles and harness" width="1600" height="1467">
+      <img src="images/proytech-dog.jpg" alt="The ProyTech mascot, a black Labrador in tech goggles and harness" width="1500" height="1373">
     </div>
   </div>
 </header>
