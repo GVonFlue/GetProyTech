@@ -1,0 +1,267 @@
+/* ==========================================================
+   ProyTech design system
+   Dark technical identity: circuit field, electric blue,
+   one disciplined orange. Shared by every page.
+   ========================================================== */
+
+:root{
+  --ink:#050B18;
+  --ink-2:#0A1426;
+  --panel:#0C1A33;
+
+  --blue:#2E9BFF;
+  --blue-deep:#1338DE;
+  --orange:#FB6926;
+  --white:#F2F7FF;
+  --gray:#8FAAC9;
+  --gray-2:#6E88A8;
+  --line:rgba(46,155,255,.22);
+  --line-soft:rgba(46,155,255,.13);
+
+  --display:'Space Grotesk','Inter',-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  --mono:'Space Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --wrap:1160px;
+  --nav-h:78px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 20px)}
+body{
+  background:var(--ink);color:var(--white);
+  font-family:var(--body);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit}
+
+/* ---------- ambient background ---------- */
+.circuit{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+.circuit svg{width:100%;height:100%}
+.glowfield{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 50% at 16% 6%, rgba(46,155,255,.16) 0%, transparent 60%),
+    radial-gradient(50% 45% at 88% 30%, rgba(251,105,38,.09) 0%, transparent 62%),
+    radial-gradient(70% 60% at 50% 110%, rgba(19,56,222,.17) 0%, transparent 65%);
+}
+.wrap{position:relative;z-index:2;max-width:var(--wrap);margin:0 auto;padding:0 28px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:40;height:var(--nav-h);
+  display:flex;align-items:center;
+  background:rgba(5,11,24,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;transition:border-color .25s, background .25s;
+}
+.nav.stuck{border-bottom-color:var(--line-soft);background:rgba(5,11,24,.9)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:22px;width:100%}
+.nav .brand img{height:38px;width:auto}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{
+  font-size:15px;font-weight:500;color:var(--gray);text-decoration:none;
+  padding:9px 14px;border-radius:9px;transition:color .15s,background .15s;
+}
+.nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--white);background:rgba(46,155,255,.1)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;
+  width:44px;height:44px;cursor:pointer;position:relative}
+.burger span{position:absolute;left:11px;right:11px;height:2px;background:var(--white);
+  transition:transform .22s,opacity .22s}
+.burger span:nth-child(1){top:15px}
+.burger span:nth-child(2){top:21px}
+.burger span:nth-child(3){top:27px}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* ---------- type ---------- */
+.kicker{
+  font-family:var(--body);font-size:12.5px;font-weight:700;color:var(--blue);
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px;
+  display:flex;align-items:center;gap:14px;
+}
+.kicker::after{content:"";flex:1;height:1px;max-width:180px;
+  background:linear-gradient(90deg,var(--blue),transparent)}
+.kicker.center{justify-content:center}
+.kicker.center::after{display:none}
+
+h1{font-family:var(--display);font-weight:700;font-size:clamp(33px,4vw,53px);
+  line-height:1.03;letter-spacing:-.028em}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(27px,3.6vw,42px);
+  line-height:1.09;letter-spacing:-.022em;margin-bottom:16px}
+h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:10px}
+h4{font-family:var(--display);font-weight:600;font-size:17px;margin-bottom:7px}
+.lede{font-size:clamp(17px,1.8vw,20px);color:var(--gray);max-width:56ch;line-height:1.6}
+.amount{color:var(--orange)}
+.hl{color:var(--blue)}
+
+section{position:relative;z-index:2;padding:82px 0}
+section.tight{padding:62px 0}
+.section-head{max-width:64ch;margin-bottom:48px}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--display);font-weight:700;font-size:16.5px;
+  padding:18px 32px;border-radius:13px;text-decoration:none;border:0;cursor:pointer;
+  transition:transform .12s, box-shadow .12s, background .15s, border-color .15s;
+}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 14px 34px rgba(251,105,38,.32)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(251,105,38,.45)}
+.btn-ghost{background:transparent;color:var(--white);border:1.5px solid var(--line);font-weight:600}
+.btn-ghost:hover{border-color:var(--blue);background:rgba(46,155,255,.1)}
+.btn-sm{padding:12px 20px;font-size:15px;border-radius:10px}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.cta-note{font-size:14px;color:var(--gray-2);margin-top:14px}
+
+/* ---------- panels ---------- */
+.card{
+  padding:32px 30px;border-radius:18px;border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(12,26,51,.82), rgba(8,18,36,.82));
+}
+.card p{color:var(--gray);font-size:15.5px}
+.card.accent{border-color:rgba(251,105,38,.32)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+
+/* numbered steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
+.step{position:relative;padding:36px 30px 30px;border-radius:18px;
+  background:linear-gradient(180deg, rgba(12,26,51,.85), rgba(8,18,36,.85));
+  border:1px solid var(--line)}
+.step::before{
+  counter-increment:s;content:"0" counter(s);
+  position:absolute;top:-15px;left:28px;
+  font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink);
+  background:var(--blue);padding:6px 13px;border-radius:8px;
+  box-shadow:0 0 26px rgba(46,155,255,.5);
+}
+.step p{color:var(--gray);font-size:15.5px}
+
+/* ticks */
+ul.ticks{list-style:none}
+ul.ticks li{position:relative;padding-left:30px;margin-bottom:13px;color:var(--gray);font-size:15.5px}
+ul.ticks li::before{content:"";position:absolute;left:0;top:8px;width:15px;height:8px;
+  border-left:2.5px solid var(--blue);border-bottom:2.5px solid var(--blue);transform:rotate(-45deg)}
+ul.ticks.warm li::before{border-color:var(--orange)}
+ul.crosses{list-style:none}
+ul.crosses li{position:relative;padding-left:30px;margin-bottom:13px;color:var(--gray-2);font-size:15.5px}
+ul.crosses li::before{content:"–";position:absolute;left:4px;top:-1px;color:#5A6B82;font-size:20px}
+
+/* ---------- logo wall ---------- */
+.logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 54px}
+.logos img{height:42px;width:auto;opacity:.78;transition:opacity .2s}
+.logos img:hover{opacity:1}
+.logos img[alt="Mortgage Punk"]{height:50px}
+.logo-type{
+  font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.01em;
+  color:var(--white);opacity:.6;line-height:1.1;text-align:center;transition:opacity .2s;
+}
+.logo-type:hover{opacity:1}
+.photo{border-radius:20px;border:1px solid var(--line);aspect-ratio:4/5;object-fit:cover;object-position:center 22%;width:100%}
+.logo-type small{display:block;font-family:var(--body);font-weight:500;font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gray);margin-top:3px}
+
+/* ---------- stat strip ---------- */
+.strip{
+  position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(12,26,51,.7), rgba(5,11,24,.7));
+  backdrop-filter:blur(8px);
+}
+.strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:34px;padding-bottom:34px}
+.stat{text-align:center}
+.stat b{display:block;font-family:var(--display);font-weight:700;
+  font-size:clamp(28px,3.6vw,42px);line-height:1;color:var(--white)}
+.stat b.o{color:var(--orange)}
+.stat span{display:block;margin-top:9px;font-size:13px;color:var(--gray);
+  letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+
+/* ---------- door cards (the three services) ---------- */
+.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.door{
+  position:relative;display:flex;flex-direction:column;
+  padding:36px 32px 30px;border-radius:20px;text-decoration:none;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(12,26,51,.85), rgba(8,18,36,.9));
+  transition:transform .2s, border-color .2s, box-shadow .2s;
+  overflow:hidden;
+}
+.door::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;
+  background:radial-gradient(70% 50% at 50% 0%, rgba(46,155,255,.18), transparent 70%);
+}
+.door:hover{transform:translateY(-5px);border-color:var(--blue);
+  box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.door:hover::after{opacity:1}
+.door .num{font-family:var(--mono);font-size:12.5px;color:var(--blue);letter-spacing:.14em;margin-bottom:16px}
+.door h3{font-size:24px;margin-bottom:8px}
+.door .pain{font-size:14.5px;color:var(--gray-2);font-style:italic;margin-bottom:14px}
+.door p{color:var(--gray);font-size:15.5px;flex:1}
+.door .go{margin-top:20px;font-family:var(--display);font-weight:600;font-size:15px;color:var(--blue)}
+.door:hover .go{color:var(--white)}
+
+/* ---------- reveal on scroll ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.08s}.rv-d2{transition-delay:.16s}.rv-d3{transition-delay:.24s}
+
+/* ---------- footer ---------- */
+.foot{position:relative;z-index:2;border-top:1px solid var(--line);padding:56px 0 40px;margin-top:20px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:34px}
+.foot h5{font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.foot a{display:block;font-size:15px;color:var(--gray);text-decoration:none;margin-bottom:9px}
+.foot a:hover{color:var(--white)}
+.foot img{height:34px;width:auto;margin-bottom:16px}
+.foot p{font-size:14.5px;color:var(--gray);max-width:34ch}
+.foot-base{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
+  margin-top:40px;padding-top:24px;border-top:1px solid var(--line-soft);
+  font-size:13.5px;color:var(--gray-2)}
+
+/* ---------- sticky mobile CTA ---------- */
+.mobile-cta{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:45;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg, rgba(5,11,24,0), rgba(5,11,24,.96) 32%);
+}
+.mobile-cta .btn{width:100%}
+
+:focus-visible{outline:2.5px solid var(--blue);outline-offset:3px}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .grid3,.grid4,.doors,.steps{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .strip .wrap{grid-template-columns:1fr;gap:26px}
+  section{padding:66px 0}
+  .wrap{padding:0 20px}
+  .nav-links{
+    display:none;position:absolute;top:var(--nav-h);left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:2px;padding:14px 20px 20px;
+    background:rgba(5,11,24,.98);border-bottom:1px solid var(--line);
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:14px 12px;font-size:16.5px}
+  .burger{display:block}
+  .nav-cta .btn{display:none}
+  .mobile-cta{display:block}
+  body{padding-bottom:76px}
+}
+@media (max-width:560px){
+  .foot-grid{grid-template-columns:1fr}
+  .logos{gap:14px 30px}
+  .logos img{height:32px}
+  .logos img[alt="Mortgage Punk"]{height:38px}
+  .btn{width:100%}
+  .cta-row{flex-direction:column;align-items:stretch}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
