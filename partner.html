@@ -211,6 +211,33 @@ ul.ticks.warm li::before{border-color:var(--orange)}
 .fine{border-top:1px solid var(--line);padding-top:34px;margin-top:10px}
 .fine p{font-size:14px;color:var(--gray);max-width:78ch;margin-bottom:10px}
 
+/* terms sheet */
+.link-btn{
+  background:none;border:0;padding:0;cursor:pointer;font:inherit;
+  color:var(--blue);text-decoration:underline;text-underline-offset:3px;
+}
+.link-btn:hover{color:var(--white)}
+#terms{
+  position:fixed;inset:0;z-index:60;display:none;
+  background:rgba(2,6,14,.9);backdrop-filter:blur(8px);
+  padding:40px 20px;
+}
+#terms.on{display:flex;align-items:center;justify-content:center}
+.sheet{
+  width:100%;max-width:780px;max-height:86vh;overflow-y:auto;
+  background:linear-gradient(180deg,#0C1A33,#070F1E);
+  border:1px solid var(--line);border-radius:22px;padding:40px 42px 34px;
+}
+.sheet h3{font-family:var(--display);font-size:30px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.sheet .eff{font-size:13px;color:var(--gray);margin-bottom:26px}
+.sheet h4{font-family:var(--display);font-size:17px;font-weight:600;color:var(--blue);
+  margin:26px 0 8px;letter-spacing:-.01em}
+.sheet p{font-size:15px;line-height:1.65;color:#C3D7EE;margin-bottom:11px}
+.sheet p strong{color:var(--white)}
+.sheet .close-row{position:sticky;bottom:-34px;padding:22px 0 0;margin-top:14px;
+  background:linear-gradient(180deg,rgba(7,15,30,0),#070F1E 38%)}
+.consent-note{font-size:13px;color:var(--gray);line-height:1.55;margin-top:14px}
+
 footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:38px 0 46px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
 footer img{height:34px;width:auto;opacity:.9}
@@ -227,6 +254,11 @@ footer p{font-size:13.5px;color:var(--gray)}
   .strip .wrap{grid-template-columns:1fr;gap:26px}
   section{padding:62px 0}
   .wrap{padding:0 20px}
+  #terms{padding:20px 14px}
+  .sheet{padding:28px 22px 24px;max-height:90vh;border-radius:18px}
+  .sheet h3{font-size:24px}
+  .sheet h4{font-size:16px;margin:22px 0 7px}
+  .sheet p{font-size:14.5px}
 }
 @media (max-width:560px){
   .row2{grid-template-columns:1fr}
@@ -450,6 +482,7 @@ footer p{font-size:13.5px;color:var(--gray)}
         <button class="btn btn-primary" id="send" style="width:100%">Send the referral</button>
         <div id="formMsg"></div>
         <p class="form-note">We'll never cold blast anyone. We reach out once, mention you sent us, and if they're not interested that's the end of it.</p>
+        <p class="consent-note">By submitting, you confirm you know this person, that you think they'd be open to hearing from us, and that you agree to the <button class="link-btn" data-terms>Partner Program Terms</button>.</p>
       </div>
     </div>
   </div>
@@ -463,6 +496,7 @@ footer p{font-size:13.5px;color:var(--gray)}
       <p><strong style="color:var(--white)">When you get paid.</strong> Within seven days of their first invoice clearing. Cash, Venmo or check, whichever you prefer.</p>
       <p><strong style="color:var(--white)">How much.</strong> $200 per business that becomes a client. There is no cap, no tier system, and no expiration on an introduction you made.</p>
       <p><strong style="color:var(--white)">What we won't do.</strong> We won't hound anyone you send us, and we won't use your name as leverage. One honest conversation, and if it isn't a fit we'll tell them so and point them to someone who is.</p>
+      <p style="margin-top:20px"><button class="link-btn" data-terms style="font-size:15px;font-weight:600">Read the full Partner Program Terms</button></p>
     </div>
   </div>
 </section>
@@ -470,7 +504,9 @@ footer p{font-size:13.5px;color:var(--gray)}
 <footer>
   <div class="wrap">
     <img src="images/proytechlogo.png" alt="ProyTech">
-    <p>ProyTech Business Solutions LLC &middot; Wichita, Kansas &middot; <a href="/" style="color:var(--blue);text-decoration:none">getproytech.com</a></p>
+    <p>ProyTech Business Solutions LLC &middot; Wichita, Kansas &middot;
+      <a href="/" style="color:var(--blue);text-decoration:none">getproytech.com</a> &middot;
+      <button class="link-btn" data-terms>Program Terms</button></p>
   </div>
 </footer>
 
@@ -576,5 +612,76 @@ function done(f){
   }, 4000);
 }
 </script>
+
+<!-- ========== PARTNER PROGRAM TERMS ========== -->
+<div id="terms" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+  <div class="sheet">
+    <h3 id="termsTitle">Partner Program Terms</h3>
+    <p class="eff">ProyTech Business Solutions LLC &middot; Wichita, Kansas &middot; Effective September 19, 2026</p>
+
+    <p>We wrote these in plain English on purpose. If something here is unclear, call either of us and we&rsquo;ll explain it rather than hide behind it.</p>
+
+    <h4>1. Who can participate</h4>
+    <p>Anyone 18 or older may refer a business, with two exceptions: current ProyTech owners and employees, and anyone referring a business they themselves own or control. Referring your own company to collect $200 on your own purchase does not qualify.</p>
+    <p>If you hold a professional license or work under an employer, brokerage, or association, it is your responsibility to confirm that accepting a referral payment is permitted under your own rules before you participate. Some industries restrict this and we have no way of knowing your situation.</p>
+
+    <h4>2. What counts as a qualified referral</h4>
+    <p>A qualified referral is a business you personally introduce to ProyTech that we were not already in active conversation with, and that subsequently becomes a paying ProyTech client.</p>
+    <p>To count, we need the business name and a working phone number or email, submitted through this page or sent directly to one of us. A name alone is not enough for us to act on.</p>
+    <p><strong>Already in progress.</strong> If we were already talking with that business before your introduction, it does not qualify. We will tell you honestly if that is the case rather than let you wonder.</p>
+    <p><strong>Duplicates.</strong> If two people introduce the same business, the earliest introduction we received is the one that gets paid. Time of receipt as recorded by us governs.</p>
+
+    <h4>3. What you get paid, and when</h4>
+    <p><strong>$200 per qualified referral</strong> that becomes a paying client. There is no cap on how many you can refer and no expiration on an introduction you have already made.</p>
+    <p>Payment is issued within seven days of that client&rsquo;s first invoice clearing. If a client signs but never pays, or cancels before their first invoice clears, no payment is due. We will keep you informed either way.</p>
+    <p>You choose the method: cash, Venmo, or check.</p>
+
+    <h4>4. Taxes</h4>
+    <p>Referral payments are income to you, not a discount or rebate. If we pay you <strong>$600 or more in a calendar year</strong>, U.S. tax rules require us to collect a completed <strong>Form W-9</strong> from you and issue you a <strong>Form 1099-NEC</strong> for that year. We will request the W-9 before issuing any payment that would put you at or above that threshold, and we cannot pay out past it until we have one on file.</p>
+    <p>You are responsible for reporting and paying any tax owed on what you receive. We are not able to give you tax advice.</p>
+
+    <h4>5. How you may refer</h4>
+    <p>Refer people you actually know, using normal one-to-one communication: a text, a call, an email, or an introduction in person. That is the whole spirit of this program.</p>
+    <p>You may not: purchase advertising using ProyTech&rsquo;s name or trademarks, send bulk or unsolicited email or text messages, scrape or purchase contact lists, misrepresent what we do or what we charge, promise outcomes or pricing on our behalf, or present yourself as an employee, agent, or authorized representative of ProyTech.</p>
+    <p>Referrals we believe were obtained through spam, purchased lists, or misrepresentation will not be paid.</p>
+
+    <h4>6. The information you submit</h4>
+    <p>When you send us someone&rsquo;s contact information, you are confirming that you have a genuine relationship with that person and a good-faith belief they would be open to hearing from us. We use what you give us only to make one direct outreach about ProyTech&rsquo;s services. We do not sell, rent, or trade it, and we do not add referred contacts to bulk marketing lists without their own consent.</p>
+    <p>If someone tells us they are not interested, that is the end of it. We will let you know how it went.</p>
+
+    <h4>7. Our relationship</h4>
+    <p>Participating in this program does not make you an employee, partner, joint venturer, agent, or franchisee of ProyTech. You have no authority to enter agreements, quote pricing, or make commitments on our behalf. You are acting independently, on your own initiative.</p>
+
+    <h4>8. Eligibility decisions</h4>
+    <p>ProyTech determines in good faith whether a referral qualifies, whether a duplicate exists, and when a client relationship has begun. We will explain our reasoning if you ask. We reserve the right to decline payment where a referral was obtained in violation of these terms.</p>
+
+    <h4>9. Changes to the program</h4>
+    <p>We may modify or end this program at any time. Any referral you submitted before a change takes effect will be honored under the terms in place when you submitted it. The version posted on this page governs, and the effective date above tells you when it was last updated.</p>
+
+    <h4>10. Odds and ends</h4>
+    <p>This program is void where prohibited by law. It is offered by ProyTech Business Solutions LLC and governed by the laws of the State of Kansas, without regard to conflict of law rules. If any part of these terms is found unenforceable, the rest still applies.</p>
+    <p>These terms are the entire agreement between you and ProyTech regarding the Partner Program and replace anything said or written previously about it.</p>
+
+    <h4>Questions</h4>
+    <p>Garrett Von Flue, 901-335-3905 &middot; Logan Sell, 913-237-4403 &middot; admin@getproytech.com</p>
+
+    <div class="close-row">
+      <button class="btn btn-primary" id="termsClose" style="width:100%">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const sheet = document.getElementById('terms');
+  const open  = () => { sheet.classList.add('on'); document.body.style.overflow = 'hidden'; };
+  const shut  = () => { sheet.classList.remove('on'); document.body.style.overflow = ''; };
+  document.querySelectorAll('[data-terms]').forEach(b => b.addEventListener('click', open));
+  document.getElementById('termsClose').addEventListener('click', shut);
+  sheet.addEventListener('click', e => { if (e.target === sheet) shut(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+})();
+</script>
+
 </body>
 </html>
