@@ -144,6 +144,8 @@ body.stagemode .edit{display:none}
 
 /* ---------- winner reveal ---------- */
 #flash{position:fixed;inset:0;background:#dff3ff;opacity:0;pointer-events:none;z-index:20}
+#flash.on2{animation:flash2 1.1s ease-out}
+@keyframes flash2{0%{opacity:1}8%{opacity:.1}16%{opacity:.85}26%{opacity:.15}36%{opacity:.6}100%{opacity:0}}
 #flash.on{animation:flash .7s ease-out}
 @keyframes flash{0%{opacity:.9}12%{opacity:.2}22%{opacity:.7}100%{opacity:0}}
 #win{position:fixed;inset:0;z-index:15;display:none;place-items:center;padding:20px;background:rgba(2,10,18,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -162,7 +164,27 @@ body.stagemode .edit{display:none}
 .bar{width:min(340px,60%);height:6px;margin:6px auto 26px;border-radius:99px;background:linear-gradient(90deg,transparent,var(--o),transparent);box-shadow:0 0 20px rgba(255,107,53,.8)}
 .card .btns{justify-content:center}
 .card .btn-go{flex:0 1 auto;font-size:22px;padding:16px 26px}
-#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:16}
+
+/* goal celebration */
+#goal{position:fixed;inset:0;pointer-events:none;z-index:14;opacity:0;mix-blend-mode:screen;
+  background:conic-gradient(from 0deg at 50% 50%, rgba(255,40,20,.55), transparent 16%, transparent 50%, rgba(255,40,20,.55) 50%, transparent 66%, transparent)}
+#goal.on{animation:goalspin 3.4s linear}
+@keyframes goalspin{0%{opacity:0;transform:rotate(0) scale(2)}6%{opacity:1}85%{opacity:.9}100%{opacity:0;transform:rotate(1440deg) scale(2)}}
+#goalEdge{position:fixed;inset:0;pointer-events:none;z-index:14;opacity:0;box-shadow:inset 0 0 160px 40px rgba(255,60,30,.75)}
+#goalEdge.on{animation:edge .42s ease-in-out 8}
+@keyframes edge{50%{opacity:1}}
+.page.shake{animation:shake .7s cubic-bezier(.36,.07,.19,.97)}
+@keyframes shake{10%,90%{transform:translate3d(-3px,2px,0)}20%,80%{transform:translate3d(6px,-4px,0)}30%,50%,70%{transform:translate3d(-12px,6px,0)}40%,60%{transform:translate3d(12px,-6px,0)}}
+.shock{position:fixed;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;pointer-events:none;z-index:13;
+  border:6px solid #bfe8ff;box-shadow:0 0 40px #38BDF8,inset 0 0 30px #38BDF8;animation:shock .9s cubic-bezier(.1,.7,.3,1) forwards}
+.shock.o{border-color:#FF6B35;box-shadow:0 0 40px #FF6B35,inset 0 0 30px #FF6B35}
+@keyframes shock{0%{transform:scale(.2);opacity:1}100%{transform:scale(40);opacity:0;border-width:1px}}
+.card.hype{animation:slam .55s cubic-bezier(.2,1.5,.35,1), hype 1.1s ease-in-out .6s infinite}
+@keyframes hype{50%{box-shadow:0 0 0 1px #020a12,0 0 110px rgba(56,189,248,.9),0 0 220px rgba(255,107,53,.45),inset 0 0 60px rgba(56,189,248,.35)}}
+#winName.pop{animation:namepop .7s cubic-bezier(.2,1.8,.3,1) .15s both}
+@keyframes namepop{0%{transform:skewX(-7deg) scale(.3);opacity:0}100%{transform:skewX(-7deg) scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){#goal.on,#goalEdge.on,.page.shake,.shock,.card.hype,#winName.pop{animation:none}}
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:17}
 
 @media (max-width:960px){
   main{grid-template-columns:1fr}
@@ -238,6 +260,8 @@ body.stagemode .edit{display:none}
 </div>
 
 <div id="flash"></div>
+<div id="goal"></div>
+<div id="goalEdge"></div>
 <div id="win" role="dialog" aria-modal="true" aria-labelledby="winName">
   <div class="card">
     <div class="mini">
@@ -461,29 +485,86 @@ body.stagemode .edit{display:none}
   /* ---------- sound ---------- */
   let actx = null;
   const ac = () => (actx = actx || new (window.AudioContext||window.webkitAudioContext)());
+  let master = null, lastTickAt = 0;
+  function out(){
+    const a = ac();
+    if(!master){
+      const comp = a.createDynamicsCompressor();
+      comp.threshold.value = -14; comp.knee.value = 8; comp.ratio.value = 6; comp.attack.value = .003; comp.release.value = .25;
+      master = a.createGain(); master.gain.value = 1;
+      master.connect(comp); comp.connect(a.destination);
+    }
+    if(a.state === 'suspended') a.resume();
+    return master;
+  }
+  // soft wooden "tock" as the peg passes the pointer, throttled so it never buzzes
   function tick(){
-    try{ const a = ac(), o = a.createOscillator(), g = a.createGain();
-      o.type = 'square'; o.frequency.value = 1500;
-      g.gain.setValueAtTime(.05,a.currentTime); g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.03);
-      o.connect(g); g.connect(a.destination); o.start(); o.stop(a.currentTime+.035); }catch(e){}
+    try{
+      const a = ac(), now = a.currentTime;
+      if(now - lastTickAt < .045) return;
+      lastTickAt = now;
+      const o = a.createOscillator(), g = a.createGain(), f = a.createBiquadFilter();
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(620, now); o.frequency.exponentialRampToValueAtTime(330, now + .03);
+      f.type = 'lowpass'; f.frequency.value = 1400;
+      g.gain.setValueAtTime(.0001, now); g.gain.exponentialRampToValueAtTime(.09, now + .003);
+      g.gain.exponentialRampToValueAtTime(.0001, now + .06);
+      o.connect(f); f.connect(g); g.connect(out()); o.start(now); o.stop(now + .07);
+    }catch(e){}
   }
+  function noiseBuf(sec){
+    const a = ac(), len = Math.floor(a.sampleRate*sec), buf = a.createBuffer(1,len,a.sampleRate), d = buf.getChannelData(0);
+    for(let i=0;i<len;i++) d[i] = Math.random()*2-1;
+    return buf;
+  }
+  // thunder crack + low boom
   function thunder(){
-    try{ const a = ac(), len = a.sampleRate*2.2, buf = a.createBuffer(1,len,a.sampleRate), d = buf.getChannelData(0);
-      for(let i=0;i<len;i++){ d[i] = (Math.random()*2-1) * Math.pow(1-i/len, 2.2); }
-      const src = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain();
-      src.buffer = buf; f.type = 'lowpass'; f.frequency.value = 420; g.gain.value = .9;
-      src.connect(f); f.connect(g); g.connect(a.destination); src.start(); }catch(e){}
+    try{
+      const a = ac(), t = a.currentTime, o = out();
+      const crack = a.createBufferSource(), cf = a.createBiquadFilter(), cg = a.createGain();
+      crack.buffer = noiseBuf(.35); cf.type = 'highpass'; cf.frequency.value = 900;
+      cg.gain.setValueAtTime(.9, t); cg.gain.exponentialRampToValueAtTime(.0001, t + .3);
+      crack.connect(cf); cf.connect(cg); cg.connect(o); crack.start(t);
+      const boom = a.createBufferSource(), bf = a.createBiquadFilter(), bg = a.createGain();
+      boom.buffer = noiseBuf(2.6); bf.type = 'lowpass'; bf.frequency.value = 260;
+      bg.gain.setValueAtTime(.0001, t); bg.gain.exponentialRampToValueAtTime(2.2, t + .05); bg.gain.exponentialRampToValueAtTime(.0001, t + 2.5);
+      boom.connect(bf); bf.connect(bg); bg.connect(o); boom.start(t);
+      const sub = a.createOscillator(), sg = a.createGain();
+      sub.type = 'sine'; sub.frequency.setValueAtTime(70, t); sub.frequency.exponentialRampToValueAtTime(32, t + .8);
+      sg.gain.setValueAtTime(.9, t); sg.gain.exponentialRampToValueAtTime(.0001, t + .9);
+      sub.connect(sg); sg.connect(o); sub.start(t); sub.stop(t + 1);
+    }catch(e){}
   }
+  // big arena goal horn: low brassy chord, slight scoop up, long sustain, crowd roar underneath
   function horn(){
-    try{ const a = ac(), t = a.currentTime;
-      [138.6, 174.6, 207.7].forEach(fr => {
-        const o = a.createOscillator(), g = a.createGain(), lfo = a.createOscillator(), lg = a.createGain();
-        o.type = 'sawtooth'; o.frequency.value = fr; lfo.frequency.value = 5.5; lg.gain.value = 1.8;
-        lfo.connect(lg); lg.connect(o.frequency);
-        g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.06,t+.08);
-        g.gain.setValueAtTime(.06,t+1.6); g.gain.exponentialRampToValueAtTime(.0001,t+2.2);
-        o.connect(g); g.connect(a.destination); o.start(t); lfo.start(t); o.stop(t+2.3); lfo.stop(t+2.3);
-      }); }catch(e){}
+    try{
+      const a = ac(), t = a.currentTime, o = out(), dur = 3.6;
+      const shaper = a.createWaveShaper(), curve = new Float32Array(1024);
+      for(let i=0;i<1024;i++){ const x = i/512 - 1; curve[i] = Math.tanh(x*2.6); }
+      shaper.curve = curve;
+      const tone = a.createBiquadFilter(); tone.type = 'lowpass'; tone.frequency.value = 2200; tone.Q.value = 1.2;
+      const body = a.createBiquadFilter(); body.type = 'peaking'; body.frequency.value = 420; body.gain.value = 6; body.Q.value = 1;
+      const hg = a.createGain();
+      hg.gain.setValueAtTime(.0001, t); hg.gain.exponentialRampToValueAtTime(.55, t + .09);
+      hg.gain.setValueAtTime(.55, t + dur - .35); hg.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      shaper.connect(tone); tone.connect(body); body.connect(hg); hg.connect(o);
+      [116.5, 146.8, 174.6, 233.1].forEach(fr => {
+        [-5, 5].forEach(cents => {
+          ['sawtooth','square'].forEach(type => {
+            const osc = a.createOscillator(), g = a.createGain();
+            osc.type = type; osc.detune.value = cents;
+            osc.frequency.setValueAtTime(fr*0.94, t); osc.frequency.exponentialRampToValueAtTime(fr, t + .12);
+            g.gain.value = type === 'square' ? .05 : .08;
+            osc.connect(g); g.connect(shaper); osc.start(t); osc.stop(t + dur + .05);
+          });
+        });
+      });
+      const roar = a.createBufferSource(), rf = a.createBiquadFilter(), rg = a.createGain();
+      roar.buffer = noiseBuf(5); rf.type = 'bandpass'; rf.frequency.value = 900; rf.Q.value = .6;
+      rg.gain.setValueAtTime(.0001, t); rg.gain.exponentialRampToValueAtTime(.35, t + .6);
+      rg.gain.setValueAtTime(.35, t + 3.2); rg.gain.exponentialRampToValueAtTime(.0001, t + 5);
+      roar.connect(rf); rf.connect(rg); rg.connect(o); roar.start(t);
+    }catch(e){}
   }
 
   /* ---------- spin ---------- */
@@ -513,21 +594,39 @@ body.stagemode .edit{display:none}
     requestAnimationFrame(frame);
   }
 
+  function shock(x,y,cls,delay){
+    setTimeout(() => { const d = document.createElement('div'); d.className = 'shock ' + (cls||''); d.style.left = x+'px'; d.style.top = y+'px';
+      document.body.appendChild(d); setTimeout(() => d.remove(), 1000); }, delay||0);
+  }
   function announce(){
     const name = names[winnerIdx];
-    $('winName').textContent = name;
+    const wn = $('winName'); wn.textContent = name;
     drawn.push(name); renderDrawn();
-    if(!reduce){
-      const r = stage.getBoundingClientRect();
-      addBolt(r.left + r.width*.5 + (rand01()-.5)*80, -20, r.left + r.width/2, r.top + r.height*.06, 2.2);
-      addBolt(innerWidth*(.1+rand01()*.2), -20, innerWidth*(.2+rand01()*.15), innerHeight*.55, 1.3);
-      addBolt(innerWidth*(.7+rand01()*.2), -20, innerWidth*(.65+rand01()*.15), innerHeight*.5, 1.3);
-      const f = $('flash'); f.classList.remove('on'); void f.offsetWidth; f.classList.add('on');
-      thunder();
-      setTimeout(() => { horn(); confetti(); $('win').classList.add('show'); $('removeBtn').focus(); }, 260);
-    } else {
-      horn(); $('win').classList.add('show'); $('removeBtn').focus();
-    }
+    if(reduce){ horn(); $('win').classList.add('show'); $('removeBtn').focus(); return; }
+    const r = stage.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+    // wave 1: strike the wheel
+    addBolt(cx + (rand01()-.5)*80, -20, cx, r.top + r.height*.06, 2.6);
+    addBolt(innerWidth*(.05+rand01()*.15), -20, cx - r.width*.3, cy, 1.6);
+    addBolt(innerWidth*(.8+rand01()*.15), -20, cx + r.width*.3, cy, 1.6);
+    const f = $('flash'); f.className = ''; void f.offsetWidth; f.className = 'on2';
+    const pg = document.querySelector('.page'); pg.classList.remove('shake'); void pg.offsetWidth; pg.classList.add('shake');
+    shock(cx, cy, '', 0); shock(cx, cy, 'o', 140); shock(cx, cy, '', 300);
+    thunder();
+    // wave 2: goal
+    setTimeout(() => {
+      horn();
+      ['goal','goalEdge'].forEach(id => { const g = $(id); g.classList.remove('on'); void g.offsetWidth; g.classList.add('on'); });
+      const card = document.querySelector('.card'); card.classList.remove('hype'); void card.offsetWidth; card.classList.add('hype');
+      wn.classList.remove('pop'); void wn.offsetWidth; wn.classList.add('pop');
+      $('win').classList.add('show'); $('removeBtn').focus();
+      confetti();
+      shock(innerWidth/2, innerHeight/2, 'o', 0); shock(innerWidth/2, innerHeight/2, '', 160);
+    }, 320);
+    // wave 3: aftershocks
+    [900, 1500, 2300].forEach((ms,i) => setTimeout(() => {
+      const left = i % 2 === 0;
+      addBolt(left ? -20 : innerWidth + 20, innerHeight*(.1+rand01()*.3), innerWidth*(left ? .25+rand01()*.1 : .65+rand01()*.1), innerHeight*(.6+rand01()*.3), 1.4);
+    }, ms));
   }
   function closeWin(removeIt){
     $('win').classList.remove('show'); ta.disabled = false;
@@ -547,18 +646,31 @@ body.stagemode .edit{display:none}
   function confetti(){
     const cv = $('confetti'), cx = cv.getContext('2d'), dpr = devicePixelRatio || 1;
     cv.width = innerWidth*dpr; cv.height = innerHeight*dpr; cx.setTransform(dpr,0,0,dpr,0,0);
-    const cols = ['#FF6B35','#7DD3FC','#EAF6FF','#005DA6','#38BDF8'];
+    const cols = ['#FF6B35','#7DD3FC','#EAF6FF','#005DA6','#38BDF8','#ffffff'];
     const P = [];
-    [[.15,-1],[.85,1]].forEach(([x,dir]) => { for(let i=0;i<110;i++) P.push({
-      x:innerWidth*x, y:innerHeight*.95, vx:dir*-(3+Math.random()*9), vy:-(14+Math.random()*12),
-      r:Math.random()*6, vr:(Math.random()-.5)*.35, w:6+Math.random()*7, h:10+Math.random()*9, c:cols[Math.floor(Math.random()*cols.length)]
-    }); });
+    const mk = (x,y,vx,vy,delay) => P.push({x,y,vx,vy,delay,r:Math.random()*6,vr:(Math.random()-.5)*.35,
+      w:6+Math.random()*8,h:10+Math.random()*10,c:cols[Math.floor(Math.random()*cols.length)],spark:Math.random()<.18});
+    // corner cannons, two volleys
+    [0,650].forEach(delay => {
+      [[.02,1],[.98,-1]].forEach(([x,dir]) => { for(let i=0;i<150;i++) mk(innerWidth*x, innerHeight*.98, dir*(4+Math.random()*12), -(16+Math.random()*14), delay); });
+    });
+    // center burst behind the name
+    for(let i=0;i<220;i++){ const a = Math.random()*Math.PI*2, s = 6+Math.random()*18; mk(innerWidth/2, innerHeight*.45, Math.cos(a)*s, Math.sin(a)*s-6, 0); }
+    // rain from the top
+    for(let i=0;i<120;i++) mk(Math.random()*innerWidth, -20 - Math.random()*200, (Math.random()-.5)*2, 2+Math.random()*3, 400);
     const t0 = performance.now();
     (function loop(now){
+      const el = now - t0;
       cx.clearRect(0,0,innerWidth,innerHeight);
-      for(const p of P){ p.vy += .38; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.r += p.vr;
-        cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r); cx.fillStyle = p.c; cx.fillRect(-p.w/2,-p.h/2,p.w,p.h*Math.abs(Math.cos(p.r*2))); cx.restore(); }
-      if(now - t0 < 4200) requestAnimationFrame(loop); else cx.clearRect(0,0,innerWidth,innerHeight);
+      for(const p of P){
+        if(el < p.delay) continue;
+        p.vy += .34; p.vx *= .985; p.vy *= .995; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+        cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r);
+        if(p.spark){ cx.fillStyle = '#fff'; cx.shadowColor = '#7DD3FC'; cx.shadowBlur = 12; cx.beginPath(); cx.arc(0,0,2.6,0,Math.PI*2); cx.fill(); cx.shadowBlur = 0; }
+        else { cx.fillStyle = p.c; cx.fillRect(-p.w/2,-p.h/2,p.w,p.h*Math.abs(Math.cos(p.r*2))); }
+        cx.restore();
+      }
+      if(el < 6500) requestAnimationFrame(loop); else cx.clearRect(0,0,innerWidth,innerHeight);
     })(t0);
   }
 
