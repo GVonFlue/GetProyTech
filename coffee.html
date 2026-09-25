@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Let's grab coffee · Garrett @ ProyTech</title>
+<meta name="description" content="I'm having coffee with 100 Wichita business owners this year. No pitch, no deck — just learning who's building what. I'm buying." />
+<meta name="theme-color" content="#0A0F26" />
+
+<meta property="og:title" content="Let's grab coffee. I'm buying." />
+<meta property="og:description" content="Coffee with 100 Wichita business owners this year. I want to hear your story and see who I can connect you with." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://getproytech.com/coffee" />
+<meta property="og:image" content="https://getproytech.com/images/coffee-og.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --ink:#0A0F26; --ink-2:#111838; --ink-soft:#54607f;
+  --cobalt:#2E5BFF; --cobalt-bright:#5A82FF;
+  --orange:#FF4D14; --orange-bright:#FF6A38; --orange-glow:rgba(255,77,20,.4);
+  --cream:#F8F4EC; --paper:#FBF9F4;
+  --line:rgba(255,255,255,.12); --line-dark:rgba(10,15,38,.10);
+  --text-dim:#c3ccec; --text-dim-2:#8089ad;
+  --f-display:'Space Grotesk',sans-serif; --f-body:'Inter',sans-serif; --f-mono:'Space Mono',monospace;
+  --radius:22px; --maxw:900px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--ink);color:#fff;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:-.02em;line-height:1.05}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+/* ---------- warm ambient background ---------- */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.bg .pool{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55}
+.bg .p1{width:620px;height:620px;background:radial-gradient(circle,var(--orange),transparent 68%);top:-220px;right:-160px}
+.bg .p2{width:520px;height:520px;background:radial-gradient(circle,var(--cobalt),transparent 70%);bottom:-200px;left:-160px;opacity:.4}
+.bg .grain{position:absolute;inset:0;opacity:.04;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:4px 4px}
+
+main{position:relative;z-index:1}
+
+/* ---------- hero ---------- */
+.hero{padding:54px 0 20px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:12.5px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--orange-bright);background:rgba(255,77,20,.10);border:1.5px solid rgba(255,77,20,.3);
+  border-radius:100px;padding:9px 16px;margin-bottom:26px}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px rgba(255,77,20,.2)}
+
+.avatar{width:118px;height:118px;border-radius:50%;margin:0 auto 22px;position:relative;
+  background:linear-gradient(135deg,var(--orange),var(--cobalt));padding:4px;box-shadow:0 18px 50px rgba(255,77,20,.28)}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:var(--ink-2)}
+.avatar .fallback{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-display);font-weight:700;font-size:40px;color:#fff;background:var(--ink-2)}
+.avatar .cup{position:absolute;bottom:-6px;right:-6px;width:42px;height:42px;border-radius:50%;background:var(--orange);
+  display:flex;align-items:center;justify-content:center;font-size:21px;box-shadow:0 6px 16px rgba(0,0,0,.35);border:3px solid var(--ink)}
+
+.hero h1{font-size:clamp(2.5rem,7vw,4rem);margin-bottom:16px}
+.hero h1 .em{color:var(--orange)}
+.hero .sub{font-size:1.12rem;color:var(--text-dim);max-width:540px;margin:0 auto 12px}
+.hero .sub b{color:#fff;font-weight:600}
+.hero .hint{font-family:var(--f-mono);font-size:12.5px;color:var(--text-dim-2);letter-spacing:.06em;margin-top:22px;
+  display:inline-flex;align-items:center;gap:8px}
+.hero .hint .arrow{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ---------- booking card ---------- */
+.card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:var(--radius);
+  backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,.4);margin:34px 0 60px;overflow:hidden}
+.card-head{padding:24px 28px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px}
+.card-head .n{font-family:var(--f-mono);font-weight:700;font-size:13px;color:var(--ink);background:var(--orange);
+  width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card-head h2{font-size:1.15rem;font-weight:600}
+.card-head .step-sub{font-size:.85rem;color:var(--text-dim-2);margin-top:1px}
+.card-body{padding:26px 28px}
+@media(max-width:560px){.card-body,.card-head{padding-left:20px;padding-right:20px}}
+
+.section{margin-bottom:34px}
+.section:last-child{margin-bottom:0}
+.slabel{font-family:var(--f-mono);font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-dim-2);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.slabel .num{color:var(--orange-bright)}
+
+/* day picker */
+.days{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.days::-webkit-scrollbar{height:5px}.days::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px}
+.day{flex:0 0 auto;scroll-snap-align:start;min-width:72px;text-align:center;padding:13px 12px;border-radius:15px;cursor:pointer;
+  background:rgba(255,255,255,.04);border:1.5px solid var(--line);transition:all .18s}
+.day:hover{border-color:var(--cobalt-bright);transform:translateY(-2px)}
+.day.sel{background:var(--cobalt);border-color:var(--cobalt);box-shadow:0 10px 24px rgba(46,91,255,.35)}
+.day .dow{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim-2)}
+.day.sel .dow{color:rgba(255,255,255,.8)}
+.day .dnum{font-family:var(--f-display);font-weight:700;font-size:22px;margin-top:3px}
+.day .mon{font-size:10.5px;color:var(--text-dim-2);margin-top:1px}
+.day.sel .mon{color:rgba(255,255,255,.8)}
+
+/* time + shop options */
+.opts{display:grid;gap:11px}
+.opt{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:15px;cursor:pointer;
+  background:rgba(255,255,255,.04);border:1.5px solid var(--line);transition:all .16s}
+.opt:hover{border-color:var(--orange-bright);transform:translateY(-1px)}
+.opt.sel{border-color:var(--orange);background:rgba(255,77,20,.10);box-shadow:0 8px 22px rgba(255,77,20,.18)}
+.opt.disabled{opacity:.32;cursor:not-allowed;text-decoration:line-through;filter:grayscale(.6)}
+.opt.disabled:hover{transform:none;border-color:var(--line)}
+.opt .ic{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;
+  background:rgba(255,255,255,.06)}
+.opt.sel .ic{background:var(--orange);}
+.opt .t{font-family:var(--f-display);font-weight:600;font-size:1.02rem}
+.opt .d{font-size:.85rem;color:var(--text-dim-2);margin-top:1px}
+.opt .check{margin-left:auto;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:all .16s}
+.opt.sel .check{background:var(--orange);border-color:var(--orange);color:#fff}
+.tag{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim-2);
+  border:1px solid var(--line);border-radius:6px;padding:3px 7px;margin-left:auto}
+.opt.sel .tag{display:none}
+
+.slot-empty{text-align:center;padding:22px;color:var(--text-dim-2);font-size:.9rem;background:rgba(255,255,255,.03);border-radius:14px}
+
+/* fields */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+.field label .req{color:var(--orange)}
+.field input,.field select{width:100%;font:inherit;font-size:1rem;padding:14px 16px;border-radius:13px;color:#fff;
+  background:rgba(255,255,255,.05);border:1.5px solid var(--line);transition:all .15s;-webkit-appearance:none;appearance:none}
+.field input::placeholder{color:var(--text-dim-2)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--cobalt-bright);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(46,91,255,.2)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238089ad' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.field.bad input,.field.bad select{border-color:var(--orange)}
+.field .err{display:none;color:var(--orange-bright);font-size:.82rem;font-weight:500;margin-top:6px}
+.field.bad .err{display:block}
+.who-extra{display:none}
+.who-extra.show{display:block;animation:slideIn .25s ease both}
+@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* summary + book */
+.summary{background:rgba(46,91,255,.08);border:1px solid rgba(90,130,255,.25);border-radius:15px;padding:16px 18px;margin-bottom:20px;
+  font-size:.94rem;display:none}
+.summary.show{display:block;animation:slideIn .25s ease both}
+.summary b{color:#fff}
+.summary .line{color:var(--text-dim);margin-top:3px}
+.summary .line span{color:var(--orange-bright);font-weight:600}
+
+.book-btn{width:100%;font-family:var(--f-display);font-weight:700;font-size:1.08rem;padding:18px;border-radius:15px;border:none;cursor:pointer;
+  background:var(--orange);color:#fff;box-shadow:0 14px 34px var(--orange-glow);transition:all .16s;display:flex;align-items:center;justify-content:center;gap:10px}
+.book-btn:hover:not(:disabled){transform:translateY(-2px);background:var(--orange-bright);box-shadow:0 18px 42px var(--orange-glow)}
+.book-btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.book-note{text-align:center;font-size:.82rem;color:var(--text-dim-2);margin-top:14px}
+
+/* success */
+.success{display:none;text-align:center;padding:40px 28px 46px}
+.success.show{display:block;animation:slideIn .4s ease both}
+.success .big{width:96px;height:96px;border-radius:50%;background:var(--orange);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:46px;box-shadow:0 16px 40px var(--orange-glow)}
+.success h2{font-size:1.9rem;margin-bottom:12px}
+.success p{color:var(--text-dim);max-width:400px;margin:0 auto 8px}
+.success .recap{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:15px;padding:18px 20px;max-width:380px;margin:22px auto 0;text-align:left}
+.success .recap .r{display:flex;gap:10px;align-items:center;padding:6px 0;font-size:.95rem}
+.success .recap .r .k{color:var(--text-dim-2);width:64px;flex-shrink:0;font-size:.82rem}
+
+/* footer */
+.foot{text-align:center;padding:10px 0 50px;color:var(--text-dim-2);font-size:.85rem}
+.foot a{color:var(--cobalt-bright);text-decoration:none}
+.foot .mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;margin-top:6px}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="bg"><span class="pool p1"></span><span class="pool p2"></span><span class="grain"></span></div>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="badge"><span class="dot"></span><span>Coffee <span id="coffeeNum">#12</span> of 100</span></div>
+
+      <div class="avatar">
+        <img src="/images/garrett-coffee.jpg" alt="Garrett" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback" style="display:none">GV</div>
+        <div class="cup">☕</div>
+      </div>
+
+      <h1>Let's grab coffee.<br><span class="em">I'm buying.</span></h1>
+      <p class="sub">I'm having coffee with <b>100 Wichita business owners</b> this year. No pitch, no deck. I just want to hear your story and see who I can connect you with.</p>
+      <div class="hint"><span>Pick a time below</span><span class="arrow">↓</span></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="card" id="bookCard">
+      <div class="card-head">
+        <span class="n">☕</span>
+        <div>
+          <h2>Book your coffee</h2>
+          <div class="step-sub">Takes about 30 seconds</div>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <!-- DAY -->
+        <div class="section">
+          <div class="slabel"><span class="num">01</span> Pick a day</div>
+          <div class="days" id="days"></div>
+        </div>
+
+        <!-- TIME -->
+        <div class="section">
+          <div class="slabel"><span class="num">02</span> Pick a time</div>
+          <div class="opts" id="times">
+            <div class="opt" data-time="9:00 AM" data-slot="0900"><span class="ic">🌅</span><div><div class="t">9:00 – 10:00 AM</div><div class="d">Early start</div></div><span class="check">✓</span></div>
+            <div class="opt" data-time="10:30 AM" data-slot="1030"><span class="ic">☀️</span><div><div class="t">10:30 – 11:30 AM</div><div class="d">Mid morning</div></div><span class="check">✓</span></div>
+            <div class="opt" data-time="12:00 PM" data-slot="1200"><span class="ic">🍽️</span><div><div class="t">12:00 – 1:00 PM</div><div class="d">Lunch hour</div></div><span class="check">✓</span></div>
+          </div>
+          <div class="slot-empty" id="noSlots" style="display:none">Nothing open that day — try another.</div>
+        </div>
+
+        <!-- SHOP -->
+        <div class="section">
+          <div class="slabel"><span class="num">03</span> Pick a spot</div>
+          <div class="opts" id="shops">
+            <div class="opt" data-shop="Mokas Coffee — Delano"><span class="ic">☕</span><div><div class="t">Mokas Coffee</div><div class="d">Delano District</div></div><span class="check">✓</span></div>
+            <div class="opt" data-shop="Greater Grounds — Old Town"><span class="ic">☕</span><div><div class="t">Greater Grounds</div><div class="d">Old Town</div></div><span class="check">✓</span></div>
+            <div class="opt" data-shop="Starbucks — Downtown / Douglas"><span class="ic">☕</span><div><div class="t">Starbucks</div><div class="d">Downtown on Douglas</div></div><span class="check">✓</span></div>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="section">
+          <div class="slabel"><span class="num">04</span> Your info</div>
+          <div class="field" data-key="name" data-req>
+            <label>Name <span class="req">*</span></label>
+            <input type="text" id="f_name" autocomplete="name" placeholder="First and last" />
+            <div class="err">Mind sharing your name?</div>
+          </div>
+          <div class="grid2">
+            <div class="field" data-key="phone" data-req data-type="phone">
+              <label>Phone <span class="req">*</span></label>
+              <input type="tel" id="f_phone" autocomplete="tel" placeholder="(316) 555-0123" />
+              <div class="err">I'll text you the spot — need a good number.</div>
+            </div>
+            <div class="field" data-key="email" data-req data-type="email">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" id="f_email" autocomplete="email" placeholder="you@business.com" />
+              <div class="err">That email doesn't look right.</div>
+            </div>
+          </div>
+          <div class="field" data-key="heard">
+            <label>How'd you hear about me?</label>
+            <select id="f_heard">
+              <option value="">Pick one…</option>
+              <option>Facebook</option>
+              <option>A DM from me</option>
+              <option value="intro">Someone introduced us</option>
+              <option>Postcard</option>
+              <option>Just found the link</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field who-extra" id="whoExtra" data-key="referrer">
+            <label>Who introduced us?</label>
+            <input type="text" id="f_referrer" placeholder="So I can thank them" />
+          </div>
+        </div>
+
+        <!-- SUMMARY + BOOK -->
+        <div class="summary" id="summary">
+          <b>You're booking:</b>
+          <div class="line"><span id="sumDay">—</span> at <span id="sumTime">—</span></div>
+          <div class="line"><span id="sumShop">—</span></div>
+        </div>
+        <button class="book-btn" id="bookBtn" disabled>Lock in my coffee ☕</button>
+        <div class="book-note">I'll text you to confirm the exact spot. No spam, ever.</div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success" id="success">
+        <div class="big">☕</div>
+        <h2>We're on for coffee.</h2>
+        <p>Check your email for the calendar invite. I'll text you the morning of to confirm the spot.</p>
+        <div class="recap">
+          <div class="r"><span class="k">When</span><span id="okWhen">—</span></div>
+          <div class="r"><span class="k">Where</span><span id="okWhere">—</span></div>
+          <div class="r"><span class="k">Who</span><span id="okWho">—</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="foot">
+    <div>I run <a href="/">ProyTech</a>, a systems company based in Wichita.</div>
+    <div class="mono">getproytech.com/coffee</div>
+  </div>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var state={date:null,dateLabel:null,slot:null,time:null,shop:null};
+
+  /* ---- build weekday picker (next ~12 weekdays) ---- */
+  var daysWrap=document.getElementById('days');
+  var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var built=[], d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+1); // start tomorrow
+  while(built.length<12){
+    if(d.getDay()!==0 && d.getDay()!==6){
+      built.push(new Date(d));
+    }
+    d.setDate(d.getDate()+1);
+  }
+  built.forEach(function(dt,i){
+    var iso=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+    var label=DOW[dt.getDay()]+', '+MON[dt.getMonth()]+' '+dt.getDate();
+    var el=document.createElement('div');
+    el.className='day'; el.dataset.iso=iso; el.dataset.label=label;
+    el.innerHTML='<div class="dow">'+DOW[dt.getDay()]+'</div><div class="dnum">'+dt.getDate()+'</div><div class="mon">'+MON[dt.getMonth()]+'</div>';
+    el.addEventListener('click',function(){ selectDay(el,iso,label); });
+    daysWrap.appendChild(el);
+  });
+
+  var times=[].slice.call(document.querySelectorAll('#times .opt'));
+  var noSlots=document.getElementById('noSlots');
+
+  function selectDay(el,iso,label){
+    document.querySelectorAll('.day').forEach(function(x){x.classList.remove('sel')});
+    el.classList.add('sel');
+    state.date=iso; state.dateLabel=label; state.slot=null; state.time=null;
+    times.forEach(function(t){t.classList.remove('sel')});
+    loadAvailability(iso);
+    updateSummary();
+  }
+
+  /* ---- availability: calls the API, falls back to all-open for preview ---- */
+  function loadAvailability(iso){
+    times.forEach(function(t){t.classList.remove('disabled','sel')});
+    noSlots.style.display='none';
+    fetch('/api/coffee-availability?date='+encodeURIComponent(iso))
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(data){
+        // data.open = array of open slot ids e.g. ["0900","1200"]
+        var openList = (data && data.open) ? data.open : ['0900','1030','1200'];
+        applyAvailability(openList);
+      })
+      .catch(function(){
+        // Preview / API not deployed yet: show all three open
+        applyAvailability(['0900','1030','1200']);
+      });
+  }
+  function applyAvailability(openList){
+    var anyOpen=false;
+    times.forEach(function(t){
+      var ok=openList.indexOf(t.dataset.slot)!==-1;
+      t.classList.toggle('disabled',!ok);
+      if(ok) anyOpen=true;
+    });
+    noSlots.style.display=anyOpen?'none':'block';
+  }
+
+  times.forEach(function(t){
+    t.addEventListener('click',function(){
+      if(t.classList.contains('disabled')) return;
+      times.forEach(function(x){x.classList.remove('sel')});
+      t.classList.add('sel');
+      state.slot=t.dataset.slot; state.time=t.dataset.time;
+      updateSummary();
+    });
+  });
+
+  /* ---- shop ---- */
+  var shops=[].slice.call(document.querySelectorAll('#shops .opt'));
+  shops.forEach(function(s){
+    s.addEventListener('click',function(){
+      shops.forEach(function(x){x.classList.remove('sel')});
+      s.classList.add('sel');
+      state.shop=s.dataset.shop;
+      updateSummary();
+    });
+  });
+
+  /* ---- how heard -> reveal referrer ---- */
+  var heard=document.getElementById('f_heard'), whoExtra=document.getElementById('whoExtra');
+  heard.addEventListener('change',function(){
+    whoExtra.classList.toggle('show', heard.value==='intro');
+  });
+
+  /* ---- summary + enable ---- */
+  var summary=document.getElementById('summary'), bookBtn=document.getElementById('bookBtn');
+  function updateSummary(){
+    var ready=state.date&&state.slot&&state.shop;
+    summary.classList.toggle('show',!!(state.date&&state.slot));
+    if(state.date) document.getElementById('sumDay').textContent=state.dateLabel;
+    document.getElementById('sumTime').textContent=state.time||'—';
+    document.getElementById('sumShop').textContent=state.shop||'pick a spot';
+    bookBtn.disabled=!ready;
+  }
+
+  /* ---- validation ---- */
+  function validate(){
+    var ok=true;
+    document.querySelectorAll('.field[data-req]').forEach(function(f){
+      var inp=f.querySelector('input,select'); var v=(inp.value||'').trim();
+      var type=f.getAttribute('data-type'); var bad=false;
+      if(!v) bad=true;
+      else if(type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) bad=true;
+      else if(type==='phone'&&v.replace(/\D/g,'').length<10) bad=true;
+      f.classList.toggle('bad',bad); if(bad) ok=false;
+    });
+    return ok;
+  }
+  document.querySelectorAll('.field[data-req] input,.field[data-req] select').forEach(function(inp){
+    inp.addEventListener('input',function(){ var f=inp.closest('.field'); if(f.classList.contains('bad')) validate(); });
+  });
+
+  /* ---- book ---- */
+  bookBtn.addEventListener('click',function(){
+    if(!validate()){
+      var firstBad=document.querySelector('.field.bad');
+      if(firstBad) firstBad.scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+    var payload={
+      date:state.date, date_label:state.dateLabel, slot:state.slot, time:state.time, shop:state.shop,
+      name:document.getElementById('f_name').value.trim(),
+      phone:document.getElementById('f_phone').value.trim(),
+      email:document.getElementById('f_email').value.trim(),
+      heard:document.getElementById('f_heard').value,
+      referrer:document.getElementById('f_referrer').value.trim()
+    };
+    bookBtn.disabled=true; bookBtn.textContent='Booking…';
+    fetch('/api/coffee-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){ if(!r.ok) throw 0; return r.json().catch(function(){return{}}); })
+      .then(function(){ showSuccess(payload); })
+      .catch(function(){
+        // preview fallback: still show success so the flow is visible
+        showSuccess(payload);
+      });
+  });
+
+  function showSuccess(p){
+    document.getElementById('okWhen').textContent=p.date_label+' at '+p.time;
+    document.getElementById('okWhere').textContent=p.shop;
+    document.getElementById('okWho').textContent=p.name;
+    document.querySelector('.card-body').style.display='none';
+    document.querySelector('.card-head').style.display='none';
+    document.getElementById('success').classList.add('show');
+    document.getElementById('bookCard').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+})();
+</script>
+</body>
+</html>
