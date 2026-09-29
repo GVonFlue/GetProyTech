@@ -3,22 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AI & Add-ons | AI Front Desk, Content Studio, custom automations | ProyTech</title>
-<meta name="description" content="Add an AI Front Desk that never misses a call, a Content Studio that plans your week of posts, and custom automations, all plugged into your ProyTech Business Suite.">
+<title>Suite Night Events | Business networking in Wichita | ProyTech</title>
+<meta name="description" content="Private-suite business networking nights in Wichita, Kansas, hosted by ProyTech. Suite Night at the Thunder, Military Suite Night, and more.">
 <meta name="theme-color" content="#071A3D">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:title" content="AI & Add-ons | AI Front Desk, Content Studio, custom automations | ProyTech">
-<meta property="og:description" content="Add an AI Front Desk that never misses a call, a Content Studio that plans your week of posts, and custom automations, all plugged into your ProyTech Business Suite.">
+<meta property="og:title" content="Suite Night Events | Business networking in Wichita | ProyTech">
+<meta property="og:description" content="Private-suite business networking nights in Wichita, Kansas, hosted by ProyTech. Suite Night at the Thunder, Military Suite Night, and more.">
 <meta property="og:image" content="https://getproytech.com/images/proytech-dog.jpg">
-<meta property="og:url" content="https://getproytech.com/automation">
+<meta property="og:url" content="https://getproytech.com/events">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/pt-site.css?v=3">
+<style>
+.evgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:40px}
+.ev{position:relative;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(160deg,rgba(19,56,222,.25),rgba(6,20,49,.85));border:1px solid rgba(56,189,248,.55);box-shadow:0 0 0 1px rgba(56,189,248,.18),0 0 30px rgba(56,189,248,.22);text-decoration:none;color:#fff;transition:transform .3s ease,box-shadow .3s ease}
+.ev:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(56,189,248,.6),0 0 46px rgba(56,189,248,.45)}
+.ev.now{border-color:rgba(251,105,38,.65);box-shadow:0 0 0 1px rgba(251,105,38,.22),0 0 32px rgba(251,105,38,.25)}
+.ev.now:hover{box-shadow:0 0 0 1px rgba(251,105,38,.6),0 0 46px rgba(251,105,38,.5)}
+.ev .img{height:220px;position:relative;overflow:hidden}
+.ev .img img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease,filter .6s ease}
+.ev.past .img img{filter:grayscale(.85) brightness(.7)}
+.ev:hover .img img{transform:scale(1.06);filter:none}
+.ev .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(6,20,49,.9))}
+.ev .st{position:absolute;top:14px;left:14px;z-index:1;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:.4rem .7rem;border-radius:999px;background:rgba(6,20,49,.8);border:1px solid rgba(125,211,252,.5)}
+.ev.now .st{background:var(--o);border-color:var(--o)}
+.ev .body{padding:22px 24px 26px;display:flex;flex-direction:column;flex:1}
+.ev .kick{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-2)}
+.ev h3{font-family:var(--disp);font-size:1.6rem;letter-spacing:-.02em;margin-top:6px}
+.ev .when{color:#CFDDF2;font-weight:600;margin-top:6px}
+.ev p{color:var(--muted-d);line-height:1.6;margin-top:10px}
+.ev .go{margin-top:auto;padding-top:18px;font-weight:700;color:var(--ice-2)}
+.ev.now .go{color:var(--o-2)}
+@media (max-width:980px){.evgrid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <svg class="techbg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -50,8 +72,8 @@
   <div class="nav-links" id="navLinks">
     <a href="/websites">Websites</a>
     <a href="/suite">Business Suite</a>
-    <a href="/automation" class="cur">AI &amp; Add-ons</a>
-    <a href="/events">Events</a>
+    <a href="/automation">AI &amp; Add-ons</a>
+    <a href="/events" class="cur">Events</a>
     <a href="/work">Our work</a>
     <a href="/about">About</a>
     <a class="btn btn-o" href="/book">Book a consultation</a>
@@ -77,60 +99,27 @@
     <use href="#h2" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:2.6s"/>
   </svg>
   <div class="wrap">
-    <span class="eyebrow">AI &amp; Add-ons</span>
-    <h1>Let AI answer, follow up, and create <em>so you don't have to.</em></h1>
-    <p class="lede">Add-ons that plug into your Business Suite: an AI Front Desk that never misses a call, a Content Studio that plans your week of posts, and custom automations built around how you work.</p>
-    <div class="hero-cta"><a class="btn btn-o" href="/book">Book a free consultation</a><a class="btn btn-ghost" href="/ace">Try the AI Front Desk demo</a></div>
+    <span class="eyebrow">ProyTech presents</span>
+    <h1>Suite Night <em>events.</em></h1>
+    <p class="lede">Private-suite business networking nights in Wichita. Real rooms, real people, business networking done different.</p>
+    <div class="hero-cta"><a class="btn btn-o" href="/suitenight">Reserve the next one</a><a class="btn btn-ghost" href="#events">See all events</a></div>
   </div>
 </header>
+<section class="sec sec-dark" id="events">
+  <div class="wrap">
+    <span class="eyebrow rv">Now and upcoming</span>
+    <h2 class="h2 rv">What's happening. <em>And where it started.</em></h2>
+    <div class="evgrid"><a class="ev now rv" href="/suitenight"><div class="img"><img src="/images/suite-night-thunder.jpg" alt="" loading="lazy"><span class="st">Reserving now</span></div><div class="body"><span class="kick">Suite Night at the Thunder</span><h3>Opening Night on Ice</h3><div class="when">Sat, Oct 17, 2026 · INTRUST Bank Arena</div><p>A private suite for the Wichita Thunder's opening faceoff. A curated room of business owners, catered, with the game all night.</p><span class="go">Reserve your seat →</span></div></a><a class="ev now rv" href="/win?src=events"><div class="img"><img src="/images/bg-arena.jpg" alt="" loading="lazy"><span class="st">Enter free</span></div><div class="body"><span class="kick">ProyTech × Wichita Thunder</span><h3>Opening Night Giveaway</h3><div class="when">Entries close Sun, Oct 11 · Live drawing Oct 12</div><p>Win a $5,000 website and Business Suite package, or one of two four-packs of center ice seats to Opening Night.</p><span class="go">Enter the giveaway →</span></div></a><a class="ev past rv" href="https://gvonflue.vercel.app/militarysuitenight" target="_blank" rel="noopener"><div class="img"><img src="/images/suite-night-military.jpg" alt="" loading="lazy"><span class="st">Past event</span></div><div class="body"><span class="kick">For those who served</span><h3>Military Suite Night</h3><div class="when">Sept 11, 2026 · Equity Bank Park</div><p>Free suite seats for active duty and veterans, drawn live. On the field for the anthem, catered, and funded by local sponsors.</p><span class="go">See the night →</span></div></a><a class="ev past rv" href="/events"><div class="img"><img src="/images/suite-night-windsurge.jpg" alt="" loading="lazy"><span class="st">Past event</span></div><div class="body"><span class="kick">Where it started</span><h3>Suite Night at the Wind Surge</h3><div class="when">Aug 12, 2026 · Equity Bank Park</div><p>Twenty Wichita business owners, one suite, one night. The room that started it all.</p><span class="go">Sold out →</span></div></a></div>
+  </div>
+</section>
 <section class="sec sec-ice">
   <svg class="ice-traces" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path id="ice1a" d="M0 110 H260 L310 60 H620"/><path d="M1440 200 H1120 L1070 250 H820"/><path id="ice1b" d="M0 660 H320 L370 710 H760"/><path id="ice1c" d="M1440 600 H1190 L1140 550 H900"/><path d="M90 0 V150 L140 200 V360"/><path d="M1350 800 V650 L1300 600 V470"/><circle cx="310" cy="60" r="4"/><circle cx="1070" cy="250" r="4"/><circle cx="370" cy="710" r="4"/><circle cx="1140" cy="550" r="4"/><use href="#ice1a" class="pulse" stroke="#2E9BFF" style="color:#2E9BFF"/><use href="#ice1b" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:1.4s"/><use href="#ice1c" class="pulse" stroke="#2E9BFF" style="color:#2E9BFF;animation-delay:2.4s"/></svg>
   <div class="wrap">
-    <span class="eyebrow rv">Add-on</span>
-    <h2 class="h2 rv">AI Front Desk: <em>never miss another lead.</em></h2>
-    <p class="lede rv">The 9pm lead calls two other businesses before you wake up. The AI Front Desk makes sure you're the one who answered.</p>
-    <div class="grid3">
-      <article class="lcard rv"><span class="num">ANSWERS</span><h3>Picks up every call.</h3><p>Answers in your business's voice, day or night, and handles the common questions.</p></article>
-      <article class="lcard rv"><span class="num">TEXTS BACK</span><h3>Missed call? Instant text.</h3><p>Anyone you miss gets a text back right away, so the conversation keeps going.</p></article>
-      <article class="lcard rv" style="border-color:rgba(251,105,38,.4)"><span class="num">BOOKS</span><h3>Puts it on your calendar.</h3><p>Books the appointment and drops the whole conversation into your Suite.</p></article>
-    </div>
-    <p class="rv" style="margin-top:24px"><a class="btn btn-dark" href="/ace">Try the demo</a></p>
-  </div>
-</section>
-<section class="sec sec-dark">
-  <div class="wrap">
-    <span class="eyebrow rv">Add-on</span>
-    <h2 class="h2 rv">Content Studio: <em>a week of posts in an hour.</em></h2>
-    <p class="lede rv">Image ideas, video prompts, and captions for the whole week, planned in your voice and ready to schedule. Built right into your Suite.</p>
-  </div>
-</section>
-<section class="sec sec-ice">
-  <svg class="ice-traces" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path id="ice2a" d="M0 110 H260 L310 60 H620"/><path d="M1440 200 H1120 L1070 250 H820"/><path id="ice2b" d="M0 660 H320 L370 710 H760"/><path id="ice2c" d="M1440 600 H1190 L1140 550 H900"/><path d="M90 0 V150 L140 200 V360"/><path d="M1350 800 V650 L1300 600 V470"/><circle cx="310" cy="60" r="4"/><circle cx="1070" cy="250" r="4"/><circle cx="370" cy="710" r="4"/><circle cx="1140" cy="550" r="4"/><use href="#ice2a" class="pulse" stroke="#2E9BFF" style="color:#2E9BFF"/><use href="#ice2b" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:1.4s"/><use href="#ice2c" class="pulse" stroke="#2E9BFF" style="color:#2E9BFF;animation-delay:2.4s"/></svg>
-  <div class="wrap">
-    <span class="eyebrow rv">Custom automations</span>
-    <h2 class="h2 rv">The hand-offs your business needs, <em>built for you.</em></h2>
-    <p class="lede rv">We find the jobs you're doing by hand in the consultation, then automate the ones worth automating. A few we've built:</p>
-    <div class="inc">
-      <article class="lcard rv"><h3 style="font-size:1.2rem">Lead routing</h3><p>New leads go to the right person automatically, with an alert.</p></article>
-      <article class="lcard rv"><h3 style="font-size:1.2rem">Leads from email</h3><p>Lead notification emails turned into Suite leads, no retyping.</p></article>
-      <article class="lcard rv"><h3 style="font-size:1.2rem">Instant alerts</h3><p>Know the second someone books, pays, or needs you.</p></article>
-      <article class="lcard rv"><h3 style="font-size:1.2rem">Event guest lists</h3><p>Sign-ups flow from your form straight into your guest list.</p></article>
-      <article class="lcard rv"><h3 style="font-size:1.2rem">Deadline reminders</h3><p>Emails before important dates so nothing gets missed.</p></article>
-      <article class="lcard rv"><h3 style="font-size:1.2rem">Your idea here</h3><p>If you do it the same way every time, we can probably automate it.</p></article>
-    </div>
-  </div>
-</section>
-<section class="sec sec-dark">
-  <div class="wrap">
-    <span class="eyebrow rv">Already in every Suite</span>
-    <h2 class="h2 rv">AI that comes <em>built in.</em></h2>
-    <div class="feat">
-      <article class="card card-o rv"><h3>Jarvis <span class="ai-b">AI</span></h3><p>Ask your business anything and have it take actions after you confirm.</p></article>
-      <article class="card card-o rv"><h3>Conversation capture <span class="ai-b">AI</span></h3><p>Text threads turned into notes, updates, and next steps.</p></article>
-      <article class="card card-o rv"><h3>Meeting notes <span class="ai-b">AI</span></h3><p>Transcripts turned into summaries and tasks you approve.</p></article>
-      <article class="card card-o rv"><h3>Monday Huddle <span class="ai-b">AI</span></h3><p>A weekly brief written from your real numbers.</p></article>
-    </div>
-    <div class="center-cta rv"><a class="btn btn-o" href="/suite">See the whole Suite</a></div>
+    <span class="eyebrow rv">Business networking in Wichita</span>
+    <h2 class="h2 rv">Ten real relationships <em>beat fifty business cards.</em></h2>
+    <p class="lede rv">Suite Night is a private-suite networking night for Wichita business owners. Instead of a ballroom and a name tag, it's about twenty people in a suite at Equity Bank Park or INTRUST Bank Arena, catered, with the game on. Realtors, lenders, contractors, insurance, and home services: the room is curated so you're not pitching the same three people you met last month.</p>
+    <p class="lede rv">Every event is hosted by ProyTech and funded by local sponsors, which is how Military Suite Night stays free for active duty and veterans. If you run a business in Wichita, Derby, Andover, Maize, or Goddard, this is built for you.</p>
+    <p class="rv" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-o" href="/suitenight">Reserve a seat at the next one</a><a class="btn btn-dark" href="/suitenight#sponsor">Become a sponsor</a></p>
   </div>
 </section>
 <section class="final">
