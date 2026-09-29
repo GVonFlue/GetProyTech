@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="/css/pt-site.css?v=3">
 <style>
 .evgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:40px}
-.ev{position:relative;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(160deg,rgba(19,56,222,.25),rgba(6,20,49,.85));border:1px solid rgba(56,189,248,.55);box-shadow:0 0 0 1px rgba(56,189,248,.18),0 0 30px rgba(56,189,248,.22);text-decoration:none;color:#fff;transition:transform .3s ease,box-shadow .3s ease}
+.ev{position:relative;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(160deg,#0D2566,#07163A 70%);border:1px solid rgba(56,189,248,.55);box-shadow:0 0 0 1px rgba(56,189,248,.18),0 0 30px rgba(56,189,248,.22);text-decoration:none;color:#fff;transition:transform .3s ease,box-shadow .3s ease}
 .ev:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(56,189,248,.6),0 0 46px rgba(56,189,248,.45)}
 .ev.now{border-color:rgba(251,105,38,.65);box-shadow:0 0 0 1px rgba(251,105,38,.22),0 0 32px rgba(251,105,38,.25)}
 .ev.now:hover{box-shadow:0 0 0 1px rgba(251,105,38,.6),0 0 46px rgba(251,105,38,.5)}
@@ -80,7 +80,7 @@
   </div>
 </div></nav>
 <main>
-<header class="phero">
+<section class="phero" id="events" style="padding:118px 0 90px">
   <svg class="hero-traces" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <defs><linearGradient id="tb" x1="0" x2="1"><stop offset="0" stop-color="#2E9BFF" stop-opacity=".15"/><stop offset=".6" stop-color="#2E9BFF" stop-opacity=".6"/><stop offset="1" stop-color="#FB6926" stop-opacity=".65"/></linearGradient></defs>
     <g stroke="url(#tb)" stroke-width="1.8" fill="none">
@@ -100,15 +100,8 @@
   </svg>
   <div class="wrap">
     <span class="eyebrow">ProyTech presents</span>
-    <h1>Suite Night <em>events.</em></h1>
-    <p class="lede">Private-suite business networking nights in Wichita. Real rooms, real people, business networking done different.</p>
-    <div class="hero-cta"><a class="btn btn-o" href="/suitenight">Reserve the next one</a><a class="btn btn-ghost" href="#events">See all events</a></div>
-  </div>
-</header>
-<section class="sec sec-dark" id="events">
-  <div class="wrap">
-    <span class="eyebrow rv">Now and upcoming</span>
-    <h2 class="h2 rv">What's happening. <em>And where it started.</em></h2>
+    <h1 style="font-size:clamp(2rem,3.6vw,3rem);max-width:none">Suite Night <em>events.</em></h1>
+    <p class="lede" style="margin-top:10px">Private-suite business networking nights in Wichita. Real rooms, real people.</p>
     <div class="evgrid"><a class="ev now rv" href="/suitenight"><div class="img"><img src="/images/suite-night-thunder.jpg" alt="" loading="lazy"><span class="st">Reserving now</span></div><div class="body"><span class="kick">Suite Night at the Thunder</span><h3>Opening Night on Ice</h3><div class="when">Sat, Oct 17, 2026 · INTRUST Bank Arena</div><p>A private suite for the Wichita Thunder's opening faceoff. A curated room of business owners, catered, with the game all night.</p><span class="go">Reserve your seat →</span></div></a><a class="ev now rv" href="/win?src=events"><div class="img"><img src="/images/bg-arena.jpg" alt="" loading="lazy"><span class="st">Enter free</span></div><div class="body"><span class="kick">ProyTech × Wichita Thunder</span><h3>Opening Night Giveaway</h3><div class="when">Entries close Sun, Oct 11 · Live drawing Oct 12</div><p>Win a $5,000 website and Business Suite package, or one of two four-packs of center ice seats to Opening Night.</p><span class="go">Enter the giveaway →</span></div></a><a class="ev past rv" href="https://gvonflue.vercel.app/militarysuitenight" target="_blank" rel="noopener"><div class="img"><img src="/images/suite-night-military.jpg" alt="" loading="lazy"><span class="st">Past event</span></div><div class="body"><span class="kick">For those who served</span><h3>Military Suite Night</h3><div class="when">Sept 11, 2026 · Equity Bank Park</div><p>Free suite seats for active duty and veterans, drawn live. On the field for the anthem, catered, and funded by local sponsors.</p><span class="go">See the night →</span></div></a><a class="ev past rv" href="/events"><div class="img"><img src="/images/suite-night-windsurge.jpg" alt="" loading="lazy"><span class="st">Past event</span></div><div class="body"><span class="kick">Where it started</span><h3>Suite Night at the Wind Surge</h3><div class="when">Aug 12, 2026 · Equity Bank Park</div><p>Twenty Wichita business owners, one suite, one night. The room that started it all.</p><span class="go">Sold out →</span></div></a></div>
   </div>
 </section>
