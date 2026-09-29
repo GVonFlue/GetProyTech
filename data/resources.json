@@ -146,7 +146,17 @@
    "name": "Landscaping",
    "blurb": "Curb appeal and yards you're proud of.",
    "icon": "leaf",
-   "businesses": []
+   "businesses": [
+    {
+     "name": "Earthworks Plan Design Build",
+     "person": "Braden Clark",
+     "blurb": "Landscape design and build: patios, retaining walls, drainage, outdoor kitchens, and lighting, planned and built by one team. 5.0 stars on Google. Proud Suite Night sponsor.",
+     "url": "https://earthworkswichita.com/",
+     "phone": "(316) 516-0557",
+     "email": "Bclark@earthworks316.com",
+     "logo": "/images/partners/earthworks.webp"
+    }
+   ]
   },
   {
    "id": "paving",
