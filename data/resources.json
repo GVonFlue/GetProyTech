@@ -1,0 +1,189 @@
+{
+ "updated": "2026-09-29",
+ "featured": {
+  "category": "Content Creation",
+  "name": "Grand Frame Media",
+  "person": "Cameron McSwain",
+  "tagline": "Build your brand. Win more listings.",
+  "blurb": "Wichita's real estate photography and video studio. Listing photos, cinematic reels, drone footage, floor plans, and virtual twilights, built around your brand and ready to post in 24 to 48 hours. Cameron shoots our content too.",
+  "highlights": [
+   "Cinematic listing reels",
+   "MLS photography",
+   "Drone photo and video",
+   "Floor plans and virtual twilights",
+   "Content Club: 4 reels a month"
+  ],
+  "url": "https://grandframemedia.com/",
+  "book": "https://grandframemedia.com/book.html",
+  "instagram": "https://www.instagram.com/grandframemedia/",
+  "logo": "https://grandframemedia.com/assets/Logos/logo.png",
+  "photo": "https://grandframemedia.com/assets/Photos/cameron_drone.jpg"
+ },
+ "categories": [
+  {
+   "id": "content",
+   "name": "Content Creation",
+   "blurb": "Photo, video, and social content that builds your brand.",
+   "icon": "camera",
+   "businesses": [
+    {
+     "name": "Grand Frame Media",
+     "person": "Cameron McSwain",
+     "blurb": "Real estate photography, cinematic reels, drone, and floor plans. Ready in 24 to 48 hours.",
+     "url": "https://grandframemedia.com/",
+     "logo": "https://grandframemedia.com/assets/Logos/logo.png"
+    }
+   ]
+  },
+  {
+   "id": "lenders",
+   "name": "Lenders",
+   "blurb": "Mortgage pros who pick up the phone.",
+   "icon": "home-dollar",
+   "businesses": [
+    {
+     "name": "Mortgage Punk",
+     "person": "Chris Waipa",
+     "blurb": "Home loans with Chris Waipa, a lender who actually picks up the phone.",
+     "url": "https://mortgagepunklive.com/"
+    }
+   ]
+  },
+  {
+   "id": "financial",
+   "name": "Financial Services",
+   "blurb": "Planning, protection, and wealth.",
+   "icon": "chart",
+   "businesses": [
+    {
+     "name": "Sterling Edge Financial",
+     "person": "Ben Benjamin",
+     "blurb": "Financial services with a personal touch. Proud Suite Night sponsor.",
+     "url": "https://sterlingedgefinancial.com/ben-benjamin",
+     "logo": "/sponsors/sterling-edge-financial.webp"
+    }
+   ]
+  },
+  {
+   "id": "realtors",
+   "name": "Realtors",
+   "blurb": "Agents we trust with our own friends.",
+   "icon": "key",
+   "businesses": []
+  },
+  {
+   "id": "title",
+   "name": "Title Companies",
+   "blurb": "Smooth closings, no surprises.",
+   "icon": "doc",
+   "businesses": []
+  },
+  {
+   "id": "inspectors",
+   "name": "Home Inspectors",
+   "blurb": "Thorough, honest, on time.",
+   "icon": "search",
+   "businesses": []
+  },
+  {
+   "id": "attorneys",
+   "name": "Attorneys",
+   "blurb": "Business, real estate, and estate planning.",
+   "icon": "scale",
+   "businesses": []
+  },
+  {
+   "id": "property",
+   "name": "Property Management",
+   "blurb": "People who take care of your rentals.",
+   "icon": "building",
+   "businesses": []
+  },
+  {
+   "id": "insurance",
+   "name": "Insurance",
+   "blurb": "Coverage explained in plain English.",
+   "icon": "shield",
+   "businesses": [
+    {
+     "name": "A. Poppell Insurance",
+     "person": "Alyssa Poppell",
+     "blurb": "Home, auto, and business insurance with Alyssa Poppell.",
+     "url": "https://apoppell.com/"
+    }
+   ]
+  },
+  {
+   "id": "roofing",
+   "name": "Roofing",
+   "blurb": "Roofers who show up and stand behind it.",
+   "icon": "roof",
+   "businesses": []
+  },
+  {
+   "id": "glass",
+   "name": "Glass",
+   "blurb": "Windows, doors, mirrors, and auto glass.",
+   "icon": "window",
+   "businesses": []
+  },
+  {
+   "id": "electricians",
+   "name": "Electricians",
+   "blurb": "Licensed, safe, and easy to schedule.",
+   "icon": "bolt",
+   "businesses": []
+  },
+  {
+   "id": "painting",
+   "name": "Painting",
+   "blurb": "Interior, exterior, and commercial.",
+   "icon": "brush",
+   "businesses": []
+  },
+  {
+   "id": "landscaping",
+   "name": "Landscaping",
+   "blurb": "Curb appeal and yards you're proud of.",
+   "icon": "leaf",
+   "businesses": []
+  },
+  {
+   "id": "paving",
+   "name": "Paving & Striping",
+   "blurb": "Parking lots done right.",
+   "icon": "road",
+   "businesses": [
+    {
+     "name": "Kleen Stripe",
+     "person": "Devin Dyer",
+     "blurb": "Parking lot striping for Wichita businesses: crisp lines, done fast.",
+     "url": "https://kleenstripe.com/",
+     "logo": "/images/logo-kleenstripe.png"
+    }
+   ]
+  },
+  {
+   "id": "awards",
+   "name": "Awards & Engraving",
+   "blurb": "Trophies, plaques, and recognition.",
+   "icon": "trophy",
+   "businesses": []
+  },
+  {
+   "id": "travel",
+   "name": "Travel Advisors",
+   "blurb": "Trips planned by people who've been there.",
+   "icon": "plane",
+   "businesses": [
+    {
+     "name": "Squared Away Travel",
+     "blurb": "Travel planning done for you. Proud Suite Night sponsor.",
+     "url": "https://squaredawaytravel.com/",
+     "logo": "/sponsors/squared-away-mark.webp",
+     "logoBg": "#2d5638"
+    }
+   ]
+  }
+ ]
+}
