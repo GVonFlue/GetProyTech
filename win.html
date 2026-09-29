@@ -230,6 +230,52 @@ footer.tn-foot{position:relative;z-index:2;padding:80px 0 50px}
 .tn-foot-lock{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .tn-foot-lock img{height:34px;width:auto}
 .tn-foot-lock span{color:var(--ice);font-family:var(--disp);font-weight:700}
+/* stepper (kiosk style) */
+.st{display:none}
+.st.on{display:block;animation:st-in .34s cubic-bezier(.2,.7,.3,1) both}
+@keyframes st-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.st-top{margin-bottom:18px}
+.st-kicker{display:block;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-2);margin-bottom:10px}
+.st-rail{height:4px;border-radius:99px;background:rgba(124,199,255,.16);overflow:hidden}
+.st-rail i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#1B62C4,var(--ice-2));transition:width .34s cubic-bezier(.4,0,.2,1)}
+.st h3{font-family:var(--disp);font-weight:700;font-size:clamp(1.5rem,2.4vw,1.9rem);line-height:1.12;color:#fff;letter-spacing:-.02em}
+.st-sub{margin:10px 0 0;color:var(--muted);font-size:1rem;line-height:1.5}
+.st .tn-row2,.st label.f:first-of-type{margin-top:20px}
+.tiles{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.tile{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;text-align:left;background:rgba(2,10,18,.55);border:1.5px solid rgba(56,189,248,.4);border-radius:16px;padding:14px 18px;color:var(--frost);font-family:var(--body);font-size:1.05rem;font-weight:600;line-height:1.25;cursor:pointer;box-shadow:0 0 16px rgba(56,189,248,.12);transition:transform .1s ease,border-color .15s ease,background .15s ease,box-shadow .15s ease}
+.tile:hover{border-color:rgba(125,211,252,.85);box-shadow:0 0 24px rgba(56,189,248,.3)}
+.tile:active{transform:scale(.985)}
+.tile .txt{flex:1 1 auto;min-width:0}
+.tile b{display:block;font-weight:700}
+.tile em{display:block;font-style:normal;font-weight:400;font-size:.88rem;color:var(--muted);margin-top:4px}
+.tile .puck{flex:0 0 auto;width:24px;height:24px;border-radius:50%;border:2px solid rgba(124,199,255,.55)}
+.tile.sel{border-color:var(--ice);background:rgba(27,98,196,.5);box-shadow:0 0 0 3px rgba(56,189,248,.18),0 0 28px rgba(56,189,248,.35)}
+.tile.sel .puck{border-color:var(--ice);background:var(--ice);box-shadow:inset 0 0 0 4px #0a2440}
+.tile-o{border-color:rgba(255,107,53,.55);box-shadow:0 0 16px rgba(255,107,53,.16)}
+.tile-o:hover{border-color:rgba(255,107,53,.9);box-shadow:0 0 24px rgba(255,107,53,.35)}
+.tile-o.sel{border-color:var(--o);background:rgba(255,107,53,.18);box-shadow:0 0 0 3px rgba(255,107,53,.18),0 0 28px rgba(255,107,53,.35)}
+.tile-o.sel .puck{border-color:var(--o);background:var(--o)}
+.prices{display:flex;gap:10px;margin-top:18px}
+.prices div{flex:1;background:rgba(27,98,196,.34);border:1px solid rgba(124,199,255,.34);border-radius:14px;padding:12px 10px;text-align:center}
+.prices span{display:block;font-size:.8rem;font-weight:600;color:var(--ice-2)}
+.prices strong{display:block;font-family:var(--disp);font-weight:700;font-size:1.55rem;margin:4px 0 2px;color:#fff}
+.prices em{display:block;font-style:normal;font-size:.76rem;color:var(--muted)}
+.consent{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;background:rgba(2,10,18,.55);border:1.5px solid rgba(56,189,248,.35);border-radius:16px;padding:16px 18px;margin-top:14px;cursor:pointer;color:var(--frost);font-family:var(--body);font-size:1rem;line-height:1.45}
+.consent.req{border-color:rgba(255,107,53,.5)}
+.consent.on{border-color:var(--ice);background:rgba(27,98,196,.46)}
+.consent .box{flex:0 0 auto;width:26px;height:26px;border-radius:8px;border:2px solid rgba(124,199,255,.6);position:relative;margin-top:1px}
+.consent.on .box{background:var(--ice);border-color:var(--ice)}
+.consent.on .box::after{content:"";position:absolute;left:8px;top:3px;width:6px;height:12px;border:solid #03151f;border-width:0 3px 3px 0;transform:rotate(42deg)}
+.consent small{display:block;font-size:.8rem;color:var(--muted);margin-top:5px;line-height:1.4}
+.st-rules{display:inline-block;margin-top:12px;font-size:.9rem}
+.st-err{color:#ffb59a;font-size:.9rem;font-weight:600;margin-top:10px;min-height:0}
+.st-err:empty{display:none}
+.st-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px}
+.st-foot .tn-btn{flex:1;max-width:320px;margin-left:auto}
+.st-back{background:none;border:0;color:var(--muted);font:600 .95rem var(--body);padding:12px 6px;cursor:pointer}
+.st-back:hover{color:#fff}
+.tn-form-card{min-height:520px;scroll-margin-top:100px}
+@media(max-width:520px){.prices strong{font-size:1.25rem}.tile{min-height:56px;font-size:1rem}}
 [hidden]{display:none!important}
 
 @media(max-width:920px){
@@ -379,74 +425,167 @@ footer.tn-foot{position:relative;z-index:2;padding:80px 0 50px}
         <div class="tn-enter-copy tn-reveal">
           <span class="tn-kicker tn-kicker-o">03 · Enter</span>
           <h2 class="tn-h2">Grab your<br><em>entry.</em></h2>
-          <p>Straight up: <strong>it's free, and there's nothing to buy.</strong> Fill this out once and you're in. You'll get an email with your personal share link right away.</p>
+          <p>Straight up: <strong>it's free, and there's nothing to buy.</strong> Tap through a few quick questions and you're in. You'll get an email with your personal share link right away.</p>
           <p>Business owners, we ask a couple of questions about your business. Your answers don't change your odds. They just help us get to know the people building this city.</p>
           <div class="tn-badges"><span>Enter</span><i>→</i><span>Share your link</span><i>→</i><span>Live drawing Oct 12</span></div>
         </div>
 
-        <div class="tn-form-card tn-reveal">
-          <form id="form" novalidate>
-            <h3>Enter the giveaway</h3>
-            <p class="tn-form-note">Pick one. Everyone gets an entry.</p>
-            <div class="tn-pools" role="radiogroup" aria-label="Choose your drawing">
-              <label class="tn-pool"><input type="radio" name="pool" value="business"><b>I own or run a business</b><span>Two chances: the $5,000 grand prize and a four-pack. Includes self-employed and realtors.</span></label>
-              <label class="tn-pool"><input type="radio" name="pool" value="fan"><b>I'm here for the hockey</b><span>The fan four-pack: center ice seats for you and your family.</span></label>
-            </div>
-            <div id="rest" hidden>
-              <fieldset>
-                <span class="tn-legend">You</span>
-                <div class="tn-row2">
-                  <label class="f">First name<input type="text" name="first" autocomplete="given-name"></label>
-                  <label class="f">Last name<input type="text" name="last" autocomplete="family-name"></label>
-                </div>
-                <div class="tn-row2">
-                  <label class="f">Mobile phone<input type="tel" name="phone" autocomplete="tel" inputmode="tel"></label>
-                  <label class="f">Email<input type="email" name="email" autocomplete="email"></label>
-                </div>
-              </fieldset>
-              <fieldset id="biz">
-                <span class="tn-legend">Your business</span>
-                <label class="f">Business name<input type="text" name="business" autocomplete="organization"></label>
-                <label class="f">What best describes you?
-                  <select name="type">
-                    <option value="">Choose one</option>
-                    <option>Realtor or real estate team</option>
-                    <option>Lender or mortgage</option>
-                    <option>Home services or trades</option>
-                    <option>Health, beauty, or fitness</option>
-                    <option>Professional services</option>
-                    <option>Other business</option>
-                  </select></label>
-                <div class="tn-row2">
-                  <label class="f">Team size
-                    <select name="team"><option value="">Choose one</option><option>Just me</option><option>2 to 5</option><option>6 to 20</option><option>More than 20</option></select></label>
-                  <label class="f">Biggest headache
-                    <select name="headache">
-                      <option value="">Choose one</option>
-                      <option>Not enough leads</option>
-                      <option>Leads slip through the cracks</option>
-                      <option>My website doesn't bring in business</option>
-                      <option>Too many tools that don't talk</option>
-                      <option>I don't know my numbers</option>
-                      <option>I'm doing everything myself</option>
-                    </select></label>
-                </div>
-                <label class="f">Tell us about your business and what you'd do with more time back
-                  <textarea name="story" maxlength="600" placeholder="A few sentences is perfect"></textarea></label>
-                <label class="f">Want a free 20-minute teardown of your setup?
-                  <select name="teardown"><option value="">Choose one</option><option>Yes, reach out to me</option><option>Maybe after the game</option><option>No thanks</option></select></label>
-                <span class="tn-help">Your answers here don't change your odds of winning.</span>
-              </fieldset>
-              <label class="tn-chk"><input type="checkbox" name="owner"><span id="ownerTxt">I'm 18 or older.</span></label>
-              <label class="tn-chk"><input type="checkbox" name="rules"><span>I agree to the <a href="/win-rules" target="_blank" rel="noopener">official rules</a>.</span></label>
-              <label class="tn-chk"><input type="checkbox" name="textOk"><span>Text me giveaway updates and occasional offers from ProyTech. Optional. Message and data rates may apply. Reply STOP to opt out.</span></label>
-              <button class="tn-btn tn-btn-orange tn-btn-block" id="go" type="submit" style="margin-top:14px">Enter to win</button>
-              <div class="tn-err" id="err" role="alert"></div>
-              <p class="tn-fine">No purchase necessary. One entry per person. Bonus entries come from sharing your link.</p>
-            </div>
-          </form>
+        <div class="tn-form-card tn-reveal" id="entryCard">
+          <div class="st-top" id="stTop" hidden>
+            <span class="st-kicker" id="stKicker">Step 1 of 6</span>
+            <div class="st-rail"><i id="stRail"></i></div>
+          </div>
 
-          <div class="tn-done" id="done" hidden tabindex="-1">
+          <!-- PICK -->
+          <section class="st on" id="st-pick">
+            <h3>Which drawing are you entering?</h3>
+            <p class="st-sub">Pick one. Everyone gets an entry, and it takes about a minute.</p>
+            <div class="tiles" data-q="pool">
+              <button type="button" class="tile tile-o" data-v="business"><span class="puck"></span><span class="txt"><b>I own or run a business</b><em>Two chances: the $5,000 grand prize and a four-pack. Includes self-employed and realtors.</em></span></button>
+              <button type="button" class="tile" data-v="fan"><span class="puck"></span><span class="txt"><b>I'm here for the hockey</b><em>The fan four-pack: center ice seats for you and your family.</em></span></button>
+            </div>
+          </section>
+
+          <!-- WHO -->
+          <section class="st" id="st-who">
+            <h3>Who are we cheering for?</h3>
+            <p class="st-sub">We need a name and a number so we can reach you if you win.</p>
+            <div class="tn-row2">
+              <label class="f">First name<input type="text" id="first" autocomplete="given-name" autocapitalize="words" enterkeyhint="next"></label>
+              <label class="f">Last name<input type="text" id="last" autocomplete="family-name" autocapitalize="words" enterkeyhint="next"></label>
+            </div>
+            <label class="f">Mobile number<input type="tel" id="phone" autocomplete="tel" inputmode="tel" enterkeyhint="next"></label>
+            <div class="st-err" id="err-who"></div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button><button type="button" class="tn-btn tn-btn-orange st-next" data-check="who">Next</button></div>
+          </section>
+
+          <!-- EMAIL -->
+          <section class="st" id="st-email">
+            <h3>Where do we send the good news?</h3>
+            <p class="st-sub">One email confirming your entry, with your personal link for bonus entries.</p>
+            <label class="f">Email address<input type="email" id="email" autocomplete="email" inputmode="email" enterkeyhint="next"></label>
+            <div class="st-err" id="err-email"></div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button><button type="button" class="tn-btn tn-btn-orange st-next" data-check="email">Next</button></div>
+          </section>
+
+          <!-- BUSINESS PATH -->
+          <section class="st" id="st-bname">
+            <h3>What's the business called?</h3>
+            <p class="st-sub">So we know who we're talking to.</p>
+            <label class="f">Business name<input type="text" id="business" autocomplete="organization" enterkeyhint="next"></label>
+            <div class="st-err" id="err-bname"></div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button><button type="button" class="tn-btn tn-btn-orange st-next" data-check="bname">Next</button></div>
+          </section>
+
+          <section class="st" id="st-btype">
+            <h3>What best describes you?</h3>
+            <div class="tiles" data-q="type">
+              <button type="button" class="tile" data-v="Realtor or real estate team"><span class="puck"></span><span class="txt"><b>Realtor or real estate team</b></span></button>
+              <button type="button" class="tile" data-v="Lender or mortgage"><span class="puck"></span><span class="txt"><b>Lender or mortgage</b></span></button>
+              <button type="button" class="tile" data-v="Home services or trades"><span class="puck"></span><span class="txt"><b>Home services or trades</b></span></button>
+              <button type="button" class="tile" data-v="Health, beauty, or fitness"><span class="puck"></span><span class="txt"><b>Health, beauty, or fitness</b></span></button>
+              <button type="button" class="tile" data-v="Professional services"><span class="puck"></span><span class="txt"><b>Professional services</b></span></button>
+              <button type="button" class="tile" data-v="Other business"><span class="puck"></span><span class="txt"><b>Something else</b></span></button>
+            </div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button></div>
+          </section>
+
+          <section class="st" id="st-bteam">
+            <h3>How big is the team?</h3>
+            <div class="tiles" data-q="team">
+              <button type="button" class="tile" data-v="Just me"><span class="puck"></span><span class="txt"><b>Just me</b></span></button>
+              <button type="button" class="tile" data-v="2 to 5"><span class="puck"></span><span class="txt"><b>2 to 5</b></span></button>
+              <button type="button" class="tile" data-v="6 to 20"><span class="puck"></span><span class="txt"><b>6 to 20</b></span></button>
+              <button type="button" class="tile" data-v="More than 20"><span class="puck"></span><span class="txt"><b>More than 20</b></span></button>
+            </div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button></div>
+          </section>
+
+          <section class="st" id="st-bhead">
+            <h3>What eats the most time in your week?</h3>
+            <div class="tiles" data-q="headache">
+              <button type="button" class="tile" data-v="Not enough leads"><span class="puck"></span><span class="txt"><b>Not enough leads</b></span></button>
+              <button type="button" class="tile" data-v="Leads slip through the cracks"><span class="puck"></span><span class="txt"><b>Following up with leads</b><em>Calls we miss, leads that slip through</em></span></button>
+              <button type="button" class="tile" data-v="My website doesn't bring in business"><span class="puck"></span><span class="txt"><b>A website that doesn't bring in business</b></span></button>
+              <button type="button" class="tile" data-v="Too many tools that don't talk"><span class="puck"></span><span class="txt"><b>Too many tools that don't talk</b></span></button>
+              <button type="button" class="tile" data-v="I don't know my numbers"><span class="puck"></span><span class="txt"><b>Not knowing my numbers</b></span></button>
+              <button type="button" class="tile" data-v="I'm doing everything myself"><span class="puck"></span><span class="txt"><b>Doing everything myself</b><em>Admin, paperwork, posting</em></span></button>
+            </div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button></div>
+          </section>
+
+          <section class="st" id="st-bstory">
+            <h3>Tell us about your business.</h3>
+            <p class="st-sub">What do you do, and what would you do with more time back? A few sentences is perfect.</p>
+            <label class="f">Your story<textarea id="story" maxlength="600" placeholder="We're a 3-person team that..."></textarea></label>
+            <div class="st-err" id="err-bstory"></div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button><button type="button" class="tn-btn tn-btn-orange st-next" data-check="bstory">Next</button></div>
+          </section>
+
+          <section class="st" id="st-btear">
+            <h3>Want a free 20-minute teardown?</h3>
+            <p class="st-sub">We'll show you where leads are slipping through. Your answer doesn't change your odds of winning.</p>
+            <div class="tiles" data-q="teardown">
+              <button type="button" class="tile" data-v="Yes, reach out to me"><span class="puck"></span><span class="txt"><b>Yes, reach out to me</b></span></button>
+              <button type="button" class="tile" data-v="Maybe after the game"><span class="puck"></span><span class="txt"><b>Maybe after the game</b></span></button>
+              <button type="button" class="tile" data-v="No thanks"><span class="puck"></span><span class="txt"><b>No thanks</b></span></button>
+            </div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button></div>
+          </section>
+
+          <!-- FAN PATH -->
+          <section class="st" id="st-fgame">
+            <h3>Ever been to a Thunder game?</h3>
+            <div class="tiles" data-q="been">
+              <button type="button" class="tile" data-v="Never been"><span class="puck"></span><span class="txt"><b>Never been</b></span></button>
+              <button type="button" class="tile" data-v="Once or twice"><span class="puck"></span><span class="txt"><b>Once or twice</b></span></button>
+              <button type="button" class="tile" data-v="A few times a season"><span class="puck"></span><span class="txt"><b>A few times a season</b></span></button>
+              <button type="button" class="tile" data-v="Season ticket holder"><span class="puck"></span><span class="txt"><b>I'm a season ticket holder</b></span></button>
+            </div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button></div>
+          </section>
+
+          <section class="st" id="st-fseason">
+            <h3>Season tickets cost less than people think.</h3>
+            <p class="st-sub">36 home games. A full season seat starts at $550, which comes out to about $15 a game.</p>
+            <div class="prices">
+              <div><span>Goal zones</span><strong>$550</strong><em>about $15 a game</em></div>
+              <div><span>Sides</span><strong>$800</strong><em>about $22 a game</em></div>
+              <div><span>On the glass</span><strong>$1,200</strong><em>about $33 a game</em></div>
+            </div>
+            <div class="tiles" data-q="season">
+              <button type="button" class="tile" data-v="Wants pricing"><span class="puck"></span><span class="txt"><b>That's cheaper than I thought</b><em>Send me the details</em></span></button>
+              <button type="button" class="tile" data-v="Considering"><span class="puck"></span><span class="txt"><b>I've thought about it</b><em>Have a rep reach out</em></span></button>
+              <button type="button" class="tile" data-v="Group or partial"><span class="puck"></span><span class="txt"><b>More of a group or partial plan person</b></span></button>
+              <button type="button" class="tile" data-v="Not now"><span class="puck"></span><span class="txt"><b>Not right now</b></span></button>
+            </div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button></div>
+          </section>
+
+          <section class="st" id="st-fsuite">
+            <h3>Suites, party areas and group nights.</h3>
+            <p class="st-sub">The Thunder host private suites, the glass suite and group outings for companies, teams and birthdays.</p>
+            <div class="tiles" data-q="suite">
+              <button type="button" class="tile" data-v="Company suite"><span class="puck"></span><span class="txt"><b>A suite for my company</b><em>Clients, staff or a corporate night</em></span></button>
+              <button type="button" class="tile" data-v="Group outing"><span class="puck"></span><span class="txt"><b>A group night</b><em>Friends, family, team or birthday</em></span></button>
+              <button type="button" class="tile" data-v="Send options"><span class="puck"></span><span class="txt"><b>Just send me the options</b></span></button>
+              <button type="button" class="tile" data-v="Not for me"><span class="puck"></span><span class="txt"><b>Not for me</b></span></button>
+            </div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button></div>
+          </section>
+
+          <!-- CONSENT -->
+          <section class="st" id="st-consent">
+            <h3>One tap and you're in.</h3>
+            <button type="button" class="consent req" id="cRules"><span class="box"></span><span class="ctext"><span id="rulesTxt">I'm 18 or older and I agree to the official rules.</span><small>Required to enter the drawing.</small></span></button>
+            <button type="button" class="consent" id="cText"><span class="box"></span><span class="ctext">Text and email me giveaway updates, Thunder deals and ProyTech tips.<small>Optional. You agree ProyTech Business Solutions and the Wichita Thunder may contact you at the number and email above, including by automated text. Consent is not required to enter. Message and data rates may apply. Reply STOP to stop.</small></span></button>
+            <a class="st-rules" href="/win-rules" target="_blank" rel="noopener">Read the official rules</a>
+            <div class="st-err" id="err-consent"></div>
+            <div class="st-foot"><button type="button" class="st-back">Back</button><button type="button" class="tn-btn tn-btn-orange st-submit" id="go">Enter the drawing</button></div>
+          </section>
+
+          <!-- DONE -->
+          <section class="st tn-done" id="done" tabindex="-1">
             <div class="tn-done-mark">✓</div>
             <h3 id="doneTitle">You're in.</h3>
             <p id="doneLead">You have 1 entry. We sent a confirmation to your email.</p>
@@ -469,7 +608,7 @@ footer.tn-foot{position:relative;z-index:2;padding:80px 0 50px}
               <h4>Know a business owner?</h4>
               <p>Send them your link. When a business owner enters with it, you get 10 bonus entries, and they get a shot at a $5,000 website and Business Suite plus their own four-pack.</p>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div></div>
@@ -485,7 +624,7 @@ footer.tn-foot{position:relative;z-index:2;padding:80px 0 50px}
 
 <script>
 const CONFIG={
-  // Paste the Web app URL from your Apps Script deployment here (ends in /exec)
+  // Web app URL from the Apps Script deployment (ends in /exec)
   ENDPOINT:"https://script.google.com/macros/s/AKfycbxCAXCsDUKT23ccLGzea9gmcBtKHu2Q3yE29-l-ZlG2jqdHirDJQuKKRCeVAA5Rd8M/exec",
   CLOSES_AT:"2026-10-12T04:59:59Z",
   PAGE_URL:"https://getproytech.com/win"
@@ -494,68 +633,104 @@ const qs=new URLSearchParams(location.search);
 const REF=(qs.get("ref")||"").replace(/[^A-Za-z0-9]/g,"").slice(0,12).toUpperCase();
 const SRC=(qs.get("src")||(REF?"referral":"direct")).replace(/[^A-Za-z0-9_-]/g,"").slice(0,30);
 const $=id=>document.getElementById(id);
-let POOL="";
+const A={pool:"",type:"",team:"",headache:"",teardown:"",been:"",season:"",suite:""};
+const FLOWS={
+  business:["pick","who","email","bname","btype","bteam","bhead","bstory","btear","consent"],
+  fan:["pick","who","email","fgame","fseason","fsuite","consent"]
+};
+let cur="pick";
 
 (function(){const s=$("snow");for(let i=0;i<18;i++){const f=document.createElement("span");const z=5+Math.random()*6;f.style.cssText=`left:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${9+Math.random()*9}s;animation-delay:${Math.random()*6}s`;s.appendChild(f)}})();
-
 (function(){const els=document.querySelectorAll(".tn-reveal");
   if(!("IntersectionObserver" in window)){els.forEach(e=>e.classList.add("tn-in"));return}
   const io=new IntersectionObserver(en=>en.forEach(e=>{if(e.isIntersecting){e.target.classList.add("tn-in");io.unobserve(e.target)}}),{threshold:.12});
   els.forEach(e=>io.observe(e));})();
 
+function closed(){return new Date(CONFIG.CLOSES_AT)-new Date()<=0}
 function tick(){
   const ms=new Date(CONFIG.CLOSES_AT)-new Date();
-  if(ms<=0){$("clock").textContent="Entries are closed";$("clockSub").textContent="Live drawing Mon, Oct 12";$("form").hidden=true;return false}
+  if(ms<=0){$("clock").textContent="Entries are closed";$("clockSub").textContent="Live drawing Mon, Oct 12";
+    $("st-pick").innerHTML='<h3>Entries are closed.</h3><p class="st-sub">Watch for the live drawing on Monday, October 12.</p>';return false}
   const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);
   $("clock").textContent=`${d}d ${h}h ${m}m left`;$("clockSub").textContent="to enter";return true;
 }
 if(tick())setInterval(tick,30000);
 
-document.querySelectorAll('input[name="pool"]').forEach(r=>r.addEventListener("change",()=>{
-  POOL=r.value;$("rest").hidden=false;$("biz").hidden=POOL!=="business";
-  $("ownerTxt").textContent=POOL==="business"?"I'm 18 or older and I own, run, or am self-employed in a business.":"I'm 18 or older and I don't own or run a business. Business owners enter the business drawing.";
-  $("err").textContent="";
-}));
+function flow(){return A.pool?FLOWS[A.pool]:["pick"]}
+function show(id){
+  document.querySelectorAll(".st").forEach(s=>s.classList.remove("on"));
+  const el=$(id==="done"?"done":"st-"+id);el.classList.add("on");cur=id;
+  const f=flow(),i=f.indexOf(id);
+  if(id==="pick"||id==="done"){$("stTop").hidden=true}
+  else{$("stTop").hidden=false;$("stKicker").textContent=`Step ${i} of ${f.length-1}`;$("stRail").style.width=(i/(f.length-1)*100)+"%"}
+  const card=$("entryCard"),r=card.getBoundingClientRect();
+  if(id!=="pick"&&Math.abs(r.top-90)>40)window.scrollTo({top:window.scrollY+r.top-90,behavior:"smooth"});
+  const inp=el.querySelector("input,textarea");if(inp&&window.matchMedia("(hover:hover)").matches)setTimeout(()=>inp.focus(),250);
+}
+function next(){const f=flow(),i=f.indexOf(cur);if(i<f.length-1)show(f[i+1])}
+function back(){const f=flow(),i=f.indexOf(cur);if(i>0)show(f[i-1])}
+const val=id=>($(id).value||"").trim();
+const setErr=(k,m)=>{const e=$("err-"+k);if(e)e.textContent=m||""};
+const CHECKS={
+  who(){if(!val("first")||!val("last"))return"Add your first and last name.";if(val("phone").replace(/\D/g,"").length<10)return"Enter a 10-digit mobile number."},
+  email(){if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val("email")))return"That email doesn't look right. Check it and try again."},
+  bname(){if(!val("business"))return"Add your business name."},
+  bstory(){if(val("story").length<10)return"Give us a sentence or two about your business."}
+};
 
-$("form").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const f=e.target,err=$("err");err.textContent="";
-  const v=n=>(f.elements[n].value||"").trim();
-  if(!POOL){err.textContent="Pick your drawing first.";return}
-  const need=["first","last","phone","email"].concat(POOL==="business"?["business","type","team","headache","story","teardown"]:[]);
-  const missing=need.filter(n=>!v(n));
-  if(missing.length){err.textContent="Fill in every field so we can reach you if you win.";f.elements[missing[0]].focus();return}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("email"))){err.textContent="That email doesn't look right. Check it and try again.";f.elements.email.focus();return}
-  if(v("phone").replace(/\D/g,"").length<10){err.textContent="Enter a 10-digit mobile number.";f.elements.phone.focus();return}
-  if(!f.elements.owner.checked||!f.elements.rules.checked){err.textContent="Check the first two boxes to confirm you're eligible and agree to the rules.";return}
-  if(CONFIG.ENDPOINT.indexOf("http")!==0){err.textContent="Entries aren't connected yet. Please try again shortly.";return}
-  const biz=POOL==="business";
-  const body={pool:POOL,first:v("first"),last:v("last"),phone:v("phone"),email:v("email"),business:biz?v("business"):"",type:biz?v("type"):"",team:biz?v("team"):"",headache:biz?v("headache"):"",story:biz?v("story"):"",teardown:biz?v("teardown"):"",owner:true,rules:true,textOk:f.elements.textOk.checked,ref:REF,src:SRC,ua:navigator.userAgent.slice(0,120)};
-  const go=$("go");go.disabled=true;go.textContent="Entering you now";
+document.addEventListener("click",e=>{
+  const t=e.target.closest(".tile");
+  if(t){
+    const grp=t.closest(".tiles"),q=grp.dataset.q;
+    grp.querySelectorAll(".tile").forEach(x=>x.classList.remove("sel"));t.classList.add("sel");
+    A[q]=t.dataset.v;
+    if(q==="pool"){$("rulesTxt").textContent=A.pool==="business"?"I'm 18 or older, I own, run, or am self-employed in a business, and I agree to the official rules.":"I'm 18 or older, I don't own or run a business, and I agree to the official rules."}
+    setTimeout(next,220);return;
+  }
+  if(e.target.closest(".st-back")){back();return}
+  const n=e.target.closest(".st-next");
+  if(n){const k=n.dataset.check,m=CHECKS[k]&&CHECKS[k]();setErr(k,m);if(!m)next();return}
+  const c=e.target.closest(".consent");
+  if(c){c.classList.toggle("on");setErr("consent","");return}
+});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter"||e.target.tagName==="TEXTAREA")return;
+  const s=e.target.closest(".st");if(!s)return;
+  const inputs=[...s.querySelectorAll("input")],i=inputs.indexOf(e.target);
+  if(i>-1&&i<inputs.length-1){e.preventDefault();inputs[i+1].focus();return}
+  const n=s.querySelector(".st-next");if(n){e.preventDefault();n.click()}
+});
+
+$("go").addEventListener("click",async()=>{
+  if(closed()){setErr("consent","Entries are closed. Watch for the live drawing Monday, October 12.");return}
+  if(!$("cRules").classList.contains("on")){setErr("consent","Tap the first box to confirm you're eligible and agree to the rules.");return}
+  if(CONFIG.ENDPOINT.indexOf("http")!==0){setErr("consent","Entries aren't connected yet. Please try again shortly.");return}
+  const biz=A.pool==="business";
+  const body={pool:A.pool,first:val("first"),last:val("last"),phone:val("phone"),email:val("email"),
+    business:biz?val("business"):"",type:biz?A.type:"",team:biz?A.team:"",headache:biz?A.headache:"",story:biz?val("story"):"",teardown:biz?A.teardown:"",
+    been:biz?"":A.been,season:biz?"":A.season,suite:biz?"":A.suite,
+    owner:true,rules:true,textOk:$("cText").classList.contains("on"),ref:REF,src:SRC,ua:navigator.userAgent.slice(0,120)};
+  const go=$("go");go.disabled=true;go.textContent="Entering you now";setErr("consent","");
   try{
     const r=await fetch(CONFIG.ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)});
     const j=await r.json();
-    if(j.closed){err.textContent="Entries are closed. Watch for the live drawing Monday, October 12.";go.disabled=false;go.textContent="Enter to win";return}
+    if(j.closed){setErr("consent","Entries are closed. Watch for the live drawing Monday, October 12.");go.disabled=false;go.textContent="Enter the drawing";return}
     if(!j.ok)throw new Error(j.error||"fail");
     showDone(body.first,j);
-  }catch(x){
-    err.textContent="Your entry didn't go through. Check your connection and tap Enter again.";
-    go.disabled=false;go.textContent="Enter to win";
-  }
+  }catch(x){setErr("consent","Your entry didn't go through. Check your connection and tap Enter again.");go.disabled=false;go.textContent="Enter the drawing"}
 });
 function showDone(first,j){
   const url=CONFIG.PAGE_URL+"?ref="+encodeURIComponent(j.refCode||"");
-  $("form").hidden=true;$("done").hidden=false;
   $("doneTitle").textContent=j.duplicate?`You're already in, ${first}.`:`You're in, ${first}.`;
   const n=j.entries||1;
   $("doneLead").textContent=`You have ${n} ${n===1?"entry":"entries"}. We sent a confirmation to your email.`;
   $("shareUrl").value=url;
-  const isBiz=(j.pool||"").toLowerCase()==="business"||(!j.pool&&POOL==="business");
+  const isBiz=(j.pool||"").toLowerCase()==="business"||(!j.pool&&A.pool==="business");
   $("teardownCard").hidden=!isBiz;$("fanCard").hidden=isBiz;$("doneBiz").hidden=!isBiz;
   const msg=`I just entered to win center ice seats to Thunder Opening Night. Business owners can also win a free website and Business Suite, and it's free to enter: ${url}`;
   $("smsShare").href="sms:?&body="+encodeURIComponent(msg);
   $("fbShare").href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url);
-  $("done").focus();$("enter").scrollIntoView({behavior:"smooth",block:"start"});
+  show("done");$("done").focus({preventScroll:true});
 }
 $("copy").addEventListener("click",async()=>{
   const i=$("shareUrl");i.select();let ok=false;
