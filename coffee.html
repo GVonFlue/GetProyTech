@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Let's grab coffee · Garrett @ ProyTech</title>
 <meta name="description" content="I'm having coffee with 100 Wichita business owners this year. No pitch, no deck — just learning who's building what. I'm buying." />
-<meta name="theme-color" content="#0A0F26" />
+<meta name="theme-color" content="#061431" />
 
 <meta property="og:title" content="Let's grab coffee. I'm buying." />
 <meta property="og:description" content="Coffee with 100 Wichita business owners this year. I want to hear your story and see who I can connect you with." />
@@ -15,200 +15,199 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/pt-site.css?v=3" />
 
 <style>
-:root{
-  --ink:#0A0F26; --ink-2:#111838; --ink-soft:#54607f;
-  --cobalt:#2E5BFF; --cobalt-bright:#5A82FF;
-  --orange:#FF4D14; --orange-bright:#FF6A38; --orange-glow:rgba(255,77,20,.4);
-  --cream:#F8F4EC; --paper:#FBF9F4;
-  --line:rgba(255,255,255,.12); --line-dark:rgba(10,15,38,.10);
-  --text-dim:#c3ccec; --text-dim-2:#8089ad;
-  --f-display:'Space Grotesk',sans-serif; --f-body:'Inter',sans-serif; --f-mono:'Space Mono',monospace;
-  --radius:22px; --maxw:900px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--f-body);background:var(--ink);color:#fff;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:-.02em;line-height:1.05}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+/* ---- coffee page: booking widget, built on the site's tokens ---- */
+.coffee-hero{position:relative;overflow:hidden;padding:72px 0 40px;text-align:center;
+  background:radial-gradient(70% 60% at 50% 0%,rgba(251,105,38,.16),transparent 70%),linear-gradient(180deg,#07183A,#061431)}
+.coffee-hero .ice-traces{stroke:rgba(125,211,252,.22);stroke-width:1.5;fill:none}
+.coffee-hero .wrap{position:relative;z-index:2}
 
-/* ---------- warm ambient background ---------- */
-.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.bg .pool{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55}
-.bg .p1{width:620px;height:620px;background:radial-gradient(circle,var(--orange),transparent 68%);top:-220px;right:-160px}
-.bg .p2{width:520px;height:520px;background:radial-gradient(circle,var(--cobalt),transparent 70%);bottom:-200px;left:-160px;opacity:.4}
-.bg .grain{position:absolute;inset:0;opacity:.04;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:4px 4px}
+/* ---- host picker ---- */
+.hosts{display:flex;gap:20px;justify-content:center;margin:0 auto 34px;max-width:460px}
+.host{flex:1;max-width:200px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.18);
+  border-radius:20px;padding:20px 16px 18px;transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s,border-color .22s;position:relative}
+.host:hover{transform:translateY(-8px) scale(1.05);border-color:var(--ice);box-shadow:0 22px 50px rgba(46,155,255,.35);z-index:3}
+.host.sel{border-color:var(--o);background:rgba(251,105,38,.08);box-shadow:0 16px 40px rgba(251,105,38,.3)}
+.host .ring{width:92px;height:92px;border-radius:50%;margin:0 auto 12px;padding:3px;background:linear-gradient(135deg,var(--elec),var(--ice));transition:transform .22s}
+.host.sel .ring{background:linear-gradient(135deg,var(--o),var(--o-2))}
+.host:hover .ring{transform:scale(1.06)}
+.host .ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:var(--navy-2)}
+.host .hname{font-family:var(--disp);font-weight:700;font-size:1.15rem;color:#fff}
+.host .hrole{font-size:.82rem;color:var(--muted-d);margin-top:2px}
+.host .pick{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;border:2px solid rgba(125,211,252,.3);
+  display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all .18s}
+.host.sel .pick{background:var(--o);border-color:var(--o);color:#fff}
+.hosts-label{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d);margin-bottom:16px}
+@media(max-width:420px){.hosts{gap:12px}.host{padding:16px 10px 14px}.host .ring{width:76px;height:76px}}
+.c-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--disp);font-size:12.5px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--o-2);background:rgba(251,105,38,.10);border:1.5px solid rgba(251,105,38,.32);
+  border-radius:999px;padding:9px 16px;margin-bottom:26px}
+.c-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--o);box-shadow:0 0 0 4px rgba(251,105,38,.2)}
+.c-avatar{width:116px;height:116px;border-radius:50%;margin:0 auto 22px;position:relative;
+  background:linear-gradient(135deg,var(--o),var(--elec));padding:4px;box-shadow:0 18px 50px rgba(251,105,38,.28)}
+.c-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:var(--navy-2)}
+.c-avatar .fb{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--disp);font-weight:700;font-size:38px;color:#fff;background:var(--navy-2)}
+.c-avatar .cup{position:absolute;bottom:-5px;right:-5px;width:40px;height:40px;border-radius:50%;background:var(--o);
+  display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.4);border:3px solid #071A3D}
+.coffee-hero h1{font-family:var(--disp);font-weight:700;letter-spacing:-.02em;line-height:1.03;color:#fff;font-size:clamp(2.4rem,7vw,3.9rem);margin-bottom:16px}
+.coffee-hero h1 em{font-style:normal;color:var(--o)}
+.coffee-hero .sub{font-size:1.1rem;color:var(--muted-d);max-width:540px;margin:0 auto}
+.coffee-hero .sub b{color:#fff;font-weight:600}
+.coffee-hero .hint{font-family:var(--disp);font-size:12.5px;color:var(--muted-d);letter-spacing:.06em;margin-top:24px;display:inline-flex;gap:8px;align-items:center}
+.coffee-hero .hint .arw{animation:cbob 1.8s ease-in-out infinite}
+@keyframes cbob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
-main{position:relative;z-index:1}
+.book-sec{background:linear-gradient(180deg,#061431,#07183A);padding:10px 0 70px}
+.bcard{max-width:760px;margin:0 auto;background:rgba(255,255,255,.04);border:1px solid rgba(125,211,252,.18);border-radius:22px;
+  box-shadow:0 30px 80px rgba(0,0,0,.42);overflow:hidden}
+.bcard-head{padding:22px 28px;border-bottom:1px solid rgba(125,211,252,.14);display:flex;align-items:center;gap:14px}
+.bcard-head .n{width:30px;height:30px;border-radius:9px;background:var(--o);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.bcard-head h2{font-family:var(--disp);font-weight:600;font-size:1.15rem;color:#fff}
+.bcard-head .ss{font-size:.85rem;color:var(--muted-d);margin-top:1px}
+.bcard-body{padding:26px 28px}
+@media(max-width:560px){.bcard-body,.bcard-head{padding-left:20px;padding-right:20px}}
 
-/* ---------- hero ---------- */
-.hero{padding:54px 0 20px;text-align:center}
-.badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:12.5px;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--orange-bright);background:rgba(255,77,20,.10);border:1.5px solid rgba(255,77,20,.3);
-  border-radius:100px;padding:9px 16px;margin-bottom:26px}
-.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px rgba(255,77,20,.2)}
+.bsec{margin-bottom:32px}.bsec:last-child{margin-bottom:0}
+.blabel{font-family:var(--disp);font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d);margin-bottom:14px}
+.blabel .num{color:var(--o-2);margin-right:6px}
 
-.avatar{width:118px;height:118px;border-radius:50%;margin:0 auto 22px;position:relative;
-  background:linear-gradient(135deg,var(--orange),var(--cobalt));padding:4px;box-shadow:0 18px 50px rgba(255,77,20,.28)}
-.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:var(--ink-2)}
-.avatar .fallback{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-family:var(--f-display);font-weight:700;font-size:40px;color:#fff;background:var(--ink-2)}
-.avatar .cup{position:absolute;bottom:-6px;right:-6px;width:42px;height:42px;border-radius:50%;background:var(--orange);
-  display:flex;align-items:center;justify-content:center;font-size:21px;box-shadow:0 6px 16px rgba(0,0,0,.35);border:3px solid var(--ink)}
-
-.hero h1{font-size:clamp(2.5rem,7vw,4rem);margin-bottom:16px}
-.hero h1 .em{color:var(--orange)}
-.hero .sub{font-size:1.12rem;color:var(--text-dim);max-width:540px;margin:0 auto 12px}
-.hero .sub b{color:#fff;font-weight:600}
-.hero .hint{font-family:var(--f-mono);font-size:12.5px;color:var(--text-dim-2);letter-spacing:.06em;margin-top:22px;
-  display:inline-flex;align-items:center;gap:8px}
-.hero .hint .arrow{animation:bob 1.8s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-
-/* ---------- booking card ---------- */
-.card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:var(--radius);
-  backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,.4);margin:34px 0 60px;overflow:hidden}
-.card-head{padding:24px 28px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px}
-.card-head .n{font-family:var(--f-mono);font-weight:700;font-size:13px;color:var(--ink);background:var(--orange);
-  width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.card-head h2{font-size:1.15rem;font-weight:600}
-.card-head .step-sub{font-size:.85rem;color:var(--text-dim-2);margin-top:1px}
-.card-body{padding:26px 28px}
-@media(max-width:560px){.card-body,.card-head{padding-left:20px;padding-right:20px}}
-
-.section{margin-bottom:34px}
-.section:last-child{margin-bottom:0}
-.slabel{font-family:var(--f-mono);font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--text-dim-2);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.slabel .num{color:var(--orange-bright)}
-
-/* day picker */
-.days{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-.days::-webkit-scrollbar{height:5px}.days::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px}
+.days{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+.days::-webkit-scrollbar{height:5px}.days::-webkit-scrollbar-thumb{background:rgba(125,211,252,.2);border-radius:10px}
 .day{flex:0 0 auto;scroll-snap-align:start;min-width:72px;text-align:center;padding:13px 12px;border-radius:15px;cursor:pointer;
-  background:rgba(255,255,255,.04);border:1.5px solid var(--line);transition:all .18s}
-.day:hover{border-color:var(--cobalt-bright);transform:translateY(-2px)}
-.day.sel{background:var(--cobalt);border-color:var(--cobalt);box-shadow:0 10px 24px rgba(46,91,255,.35)}
-.day .dow{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim-2)}
-.day.sel .dow{color:rgba(255,255,255,.8)}
-.day .dnum{font-family:var(--f-display);font-weight:700;font-size:22px;margin-top:3px}
-.day .mon{font-size:10.5px;color:var(--text-dim-2);margin-top:1px}
-.day.sel .mon{color:rgba(255,255,255,.8)}
+  background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.16);transition:all .18s}
+.day:hover{border-color:var(--ice);transform:translateY(-2px)}
+.day.sel{background:var(--elec);border-color:var(--elec);box-shadow:0 10px 24px rgba(46,155,255,.4)}
+.day .dow{font-family:var(--disp);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d)}
+.day.sel .dow{color:rgba(255,255,255,.85)}
+.day .dnum{font-family:var(--disp);font-weight:700;font-size:22px;margin-top:3px;color:#fff}
+.day .mon{font-size:10.5px;color:var(--muted-d);margin-top:1px}.day.sel .mon{color:rgba(255,255,255,.85)}
 
-/* time + shop options */
 .opts{display:grid;gap:11px}
 .opt{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:15px;cursor:pointer;
-  background:rgba(255,255,255,.04);border:1.5px solid var(--line);transition:all .16s}
-.opt:hover{border-color:var(--orange-bright);transform:translateY(-1px)}
-.opt.sel{border-color:var(--orange);background:rgba(255,77,20,.10);box-shadow:0 8px 22px rgba(255,77,20,.18)}
+  background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.16);transition:all .16s}
+.opt:hover{border-color:var(--o-2);transform:translateY(-1px)}
+.opt.sel{border-color:var(--o);background:rgba(251,105,38,.10);box-shadow:0 8px 22px rgba(251,105,38,.18)}
 .opt.disabled{opacity:.32;cursor:not-allowed;text-decoration:line-through;filter:grayscale(.6)}
-.opt.disabled:hover{transform:none;border-color:var(--line)}
-.opt .ic{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;
-  background:rgba(255,255,255,.06)}
-.opt.sel .ic{background:var(--orange);}
-.opt .t{font-family:var(--f-display);font-weight:600;font-size:1.02rem}
-.opt .d{font-size:.85rem;color:var(--text-dim-2);margin-top:1px}
-.opt .check{margin-left:auto;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:all .16s}
-.opt.sel .check{background:var(--orange);border-color:var(--orange);color:#fff}
-.tag{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim-2);
-  border:1px solid var(--line);border-radius:6px;padding:3px 7px;margin-left:auto}
-.opt.sel .tag{display:none}
+.opt.disabled:hover{transform:none;border-color:rgba(125,211,252,.16)}
+.opt .ic{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(255,255,255,.06)}
+.opt.sel .ic{background:var(--o)}
+.opt .t{font-family:var(--disp);font-weight:600;font-size:1.02rem;color:#fff}
+.opt .d{font-size:.85rem;color:var(--muted-d);margin-top:1px}
+.opt .check{margin-left:auto;width:24px;height:24px;border-radius:50%;border:2px solid rgba(125,211,252,.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:all .16s}
+.opt.sel .check{background:var(--o);border-color:var(--o);color:#fff}
 
-.slot-empty{text-align:center;padding:22px;color:var(--text-dim-2);font-size:.9rem;background:rgba(255,255,255,.03);border-radius:14px}
+.slot-empty{text-align:center;padding:22px;color:var(--muted-d);font-size:.9rem;background:rgba(255,255,255,.03);border-radius:14px}
 
-/* fields */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
-@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}@media(max-width:560px){.grid2{grid-template-columns:1fr}}
 .field{margin-bottom:16px}
-.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
-.field label .req{color:var(--orange)}
+.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px;color:#fff}
+.field label .req{color:var(--o)}
 .field input,.field select{width:100%;font:inherit;font-size:1rem;padding:14px 16px;border-radius:13px;color:#fff;
-  background:rgba(255,255,255,.05);border:1.5px solid var(--line);transition:all .15s;-webkit-appearance:none;appearance:none}
-.field input::placeholder{color:var(--text-dim-2)}
-.field input:focus,.field select:focus{outline:none;border-color:var(--cobalt-bright);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(46,91,255,.2)}
-.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238089ad' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
-.field.bad input,.field.bad select{border-color:var(--orange)}
-.field .err{display:none;color:var(--orange-bright);font-size:.82rem;font-weight:500;margin-top:6px}
+  background:rgba(255,255,255,.05);border:1.5px solid rgba(125,211,252,.18);transition:all .15s;-webkit-appearance:none;appearance:none}
+.field input::placeholder{color:var(--muted-d)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--ice);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(46,155,255,.2)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A9BCD8' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.field.bad input,.field.bad select{border-color:var(--o)}
+.field .err{display:none;color:var(--o-2);font-size:.82rem;font-weight:500;margin-top:6px}
 .field.bad .err{display:block}
-.who-extra{display:none}
-.who-extra.show{display:block;animation:slideIn .25s ease both}
-@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.who-extra{display:none}.who-extra.show{display:block;animation:cslide .25s ease both}
+@keyframes cslide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 
-/* summary + book */
-.summary{background:rgba(46,91,255,.08);border:1px solid rgba(90,130,255,.25);border-radius:15px;padding:16px 18px;margin-bottom:20px;
-  font-size:.94rem;display:none}
-.summary.show{display:block;animation:slideIn .25s ease both}
-.summary b{color:#fff}
-.summary .line{color:var(--text-dim);margin-top:3px}
-.summary .line span{color:var(--orange-bright);font-weight:600}
+.summary{background:rgba(46,155,255,.09);border:1px solid rgba(56,189,248,.28);border-radius:15px;padding:16px 18px;margin-bottom:20px;font-size:.94rem;display:none;color:#fff}
+.summary.show{display:block;animation:cslide .25s ease both}
+.summary .line{color:var(--muted-d);margin-top:3px}
+.summary .line span{color:var(--o-2);font-weight:600}
 
-.book-btn{width:100%;font-family:var(--f-display);font-weight:700;font-size:1.08rem;padding:18px;border-radius:15px;border:none;cursor:pointer;
-  background:var(--orange);color:#fff;box-shadow:0 14px 34px var(--orange-glow);transition:all .16s;display:flex;align-items:center;justify-content:center;gap:10px}
-.book-btn:hover:not(:disabled){transform:translateY(-2px);background:var(--orange-bright);box-shadow:0 18px 42px var(--orange-glow)}
+.book-btn{width:100%;font-family:var(--disp);font-weight:700;font-size:1.08rem;padding:18px;border-radius:999px;border:none;cursor:pointer;
+  background:var(--o);color:#fff;box-shadow:0 14px 34px rgba(251,105,38,.45);transition:all .16s;display:flex;align-items:center;justify-content:center;gap:10px}
+.book-btn:hover:not(:disabled){transform:translateY(-2px);background:var(--o-2)}
 .book-btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
-.book-note{text-align:center;font-size:.82rem;color:var(--text-dim-2);margin-top:14px}
+.book-note{text-align:center;font-size:.82rem;color:var(--muted-d);margin-top:14px}
 
-/* success */
 .success{display:none;text-align:center;padding:40px 28px 46px}
-.success.show{display:block;animation:slideIn .4s ease both}
-.success .big{width:96px;height:96px;border-radius:50%;background:var(--orange);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:46px;box-shadow:0 16px 40px var(--orange-glow)}
-.success h2{font-size:1.9rem;margin-bottom:12px}
-.success p{color:var(--text-dim);max-width:400px;margin:0 auto 8px}
-.success .recap{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:15px;padding:18px 20px;max-width:380px;margin:22px auto 0;text-align:left}
-.success .recap .r{display:flex;gap:10px;align-items:center;padding:6px 0;font-size:.95rem}
-.success .recap .r .k{color:var(--text-dim-2);width:64px;flex-shrink:0;font-size:.82rem}
+.success.show{display:block;animation:cslide .4s ease both}
+.success .big{width:94px;height:94px;border-radius:50%;background:var(--o);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-size:44px;box-shadow:0 16px 40px rgba(251,105,38,.45)}
+.success h2{font-family:var(--disp);font-weight:700;font-size:1.9rem;color:#fff;margin-bottom:12px}
+.success p{color:var(--muted-d);max-width:400px;margin:0 auto}
+.success .recap{background:rgba(255,255,255,.05);border:1px solid rgba(125,211,252,.18);border-radius:15px;padding:18px 20px;max-width:380px;margin:22px auto 0;text-align:left}
+.success .recap .r{display:flex;gap:10px;align-items:center;padding:6px 0;font-size:.95rem;color:#fff}
+.success .recap .r .k{color:var(--muted-d);width:64px;flex-shrink:0;font-size:.82rem}
 
-/* footer */
-.foot{text-align:center;padding:10px 0 50px;color:var(--text-dim-2);font-size:.85rem}
-.foot a{color:var(--cobalt-bright);text-decoration:none}
-.foot .mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;margin-top:6px}
-
-@media (prefers-reduced-motion:reduce){*{animation:none!important}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
-<div class="bg"><span class="pool p1"></span><span class="pool p2"></span><span class="grain"></span></div>
 
-<main>
-  <section class="hero">
-    <div class="wrap">
-      <div class="badge"><span class="dot"></span><span>Coffee <span id="coffeeNum">#12</span> of 100</span></div>
+<nav class="nav" id="nav"><div class="wrap nav-in">
+  <a class="logo" href="/" aria-label="ProyTech home"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><g stroke-width="1.6" fill="none"><line x1="20" y1="20" x2="20" y2="6" stroke="#B18CFF" stroke-dasharray="2 2"/><line x1="20" y1="20" x2="8" y2="30" stroke="#38BDF8" stroke-dasharray="2 2"/><line x1="20" y1="20" x2="32" y2="30" stroke="#2DD4BF" stroke-dasharray="2 2"/><circle cx="20" cy="5" r="3" stroke="#B18CFF"/><circle cx="7" cy="31" r="3" stroke="#38BDF8"/><circle cx="33" cy="31" r="3" stroke="#2DD4BF"/></g><circle cx="20" cy="20" r="7" fill="#38BDF8"/></svg><span>Proy<span class="t">Tech</span></span></a>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
+    <a href="/websites">Websites</a>
+    <a href="/suite">Business Suite</a>
+    <a href="/automation">AI &amp; Add-ons</a>
+    <a href="/events">Events</a>
+    <a href="/resources">Resources</a>
+    <a href="/work">Our work</a>
+    <a href="/about">About</a>
+    <a class="btn btn-o" href="/book">Book a consultation</a>
+  </div>
+</div></nav>
 
-      <div class="avatar">
-        <img src="/images/garrett-coffee.jpg" alt="Garrett" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="fallback" style="display:none">GV</div>
-        <div class="cup">☕</div>
-      </div>
-
-      <h1>Let's grab coffee.<br><span class="em">I'm buying.</span></h1>
-      <p class="sub">I'm having coffee with <b>100 Wichita business owners</b> this year. No pitch, no deck. I just want to hear your story and see who I can connect you with.</p>
-      <div class="hint"><span>Pick a time below</span><span class="arrow">↓</span></div>
-    </div>
-  </section>
-
+<header class="coffee-hero">
+  <svg class="ice-traces" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path id="cf1" d="M0 110 H260 L310 60 H620"/><path d="M1440 200 H1120 L1070 250 H820"/>
+    <path id="cf2" d="M0 660 H320 L370 710 H760"/><path id="cf3" d="M1440 600 H1190 L1140 550 H900"/>
+    <path d="M90 0 V150 L140 200 V360"/><path d="M1350 800 V650 L1300 600 V470"/>
+    <circle cx="310" cy="60" r="4"/><circle cx="1070" cy="250" r="4"/><circle cx="370" cy="710" r="4"/><circle cx="1140" cy="550" r="4"/>
+    <use href="#cf1" class="pulse" stroke="#2E9BFF" style="color:#2E9BFF"/>
+    <use href="#cf2" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:1.4s"/>
+    <use href="#cf3" class="pulse" stroke="#2E9BFF" style="color:#2E9BFF;animation-delay:2.4s"/>
+  </svg>
   <div class="wrap">
-    <div class="card" id="bookCard">
-      <div class="card-head">
-        <span class="n">☕</span>
-        <div>
-          <h2>Book your coffee</h2>
-          <div class="step-sub">Takes about 30 seconds</div>
-        </div>
-      </div>
-      <div class="card-body">
+    <div class="c-badge"><span class="dot"></span><span>Coffee <span id="coffeeNum">#12</span> of 100</span></div>
+    <h1>Let's grab coffee.<br><em>I'm buying.</em></h1>
+    <p class="sub">I'm having coffee with <b>100 Wichita business owners</b> this year. No pitch, no deck. I just want to hear your story and see who I can connect you with.</p>
 
-        <!-- DAY -->
-        <div class="section">
-          <div class="slabel"><span class="num">01</span> Pick a day</div>
+    <div class="hosts-label" style="margin-top:34px">Who do you want to meet with?</div>
+    <div class="hosts" id="hosts">
+      <div class="host sel" data-host="Garrett">
+        <span class="pick">✓</span>
+        <div class="ring"><img src="/images/garrett-coffee.webp" alt="Garrett" onerror="this.onerror=null;this.src='/images/garrett-coffee.jpg'"></div>
+        <div class="hname">Garrett</div>
+        <div class="hrole">Co-founder</div>
+      </div>
+      <div class="host" data-host="Logan">
+        <span class="pick">✓</span>
+        <div class="ring"><img src="/images/logan-coffee.webp" alt="Logan" onerror="this.onerror=null;this.src='/images/logan-coffee.jpg'"></div>
+        <div class="hname">Logan</div>
+        <div class="hrole">Co-founder</div>
+      </div>
+    </div>
+
+    <div class="hint"><span>Pick a time below</span><span class="arw">↓</span></div>
+  </div>
+</header>
+
+<section class="book-sec">
+  <div class="wrap">
+    <div class="bcard" id="bookCard">
+      <div class="bcard-head">
+        <span class="n">☕</span>
+        <div><h2>Book your coffee</h2><div class="ss">Takes about 30 seconds</div></div>
+      </div>
+      <div class="bcard-body" id="bcardBody">
+
+        <div class="bsec">
+          <div class="blabel"><span class="num">01</span>Pick a day</div>
           <div class="days" id="days"></div>
         </div>
 
-        <!-- TIME -->
-        <div class="section">
-          <div class="slabel"><span class="num">02</span> Pick a time</div>
+        <div class="bsec">
+          <div class="blabel"><span class="num">02</span>Pick a time</div>
           <div class="opts" id="times">
             <div class="opt" data-time="9:00 AM" data-slot="0900"><span class="ic">🌅</span><div><div class="t">9:00 – 10:00 AM</div><div class="d">Early start</div></div><span class="check">✓</span></div>
             <div class="opt" data-time="10:30 AM" data-slot="1030"><span class="ic">☀️</span><div><div class="t">10:30 – 11:30 AM</div><div class="d">Mid morning</div></div><span class="check">✓</span></div>
@@ -217,9 +216,8 @@ main{position:relative;z-index:1}
           <div class="slot-empty" id="noSlots" style="display:none">Nothing open that day — try another.</div>
         </div>
 
-        <!-- SHOP -->
-        <div class="section">
-          <div class="slabel"><span class="num">03</span> Pick a spot</div>
+        <div class="bsec">
+          <div class="blabel"><span class="num">03</span>Pick a spot</div>
           <div class="opts" id="shops">
             <div class="opt" data-shop="Mokas Coffee — Delano"><span class="ic">☕</span><div><div class="t">Mokas Coffee</div><div class="d">Delano District</div></div><span class="check">✓</span></div>
             <div class="opt" data-shop="Greater Grounds — Old Town"><span class="ic">☕</span><div><div class="t">Greater Grounds</div><div class="d">Old Town</div></div><span class="check">✓</span></div>
@@ -227,9 +225,8 @@ main{position:relative;z-index:1}
           </div>
         </div>
 
-        <!-- INFO -->
-        <div class="section">
-          <div class="slabel"><span class="num">04</span> Your info</div>
+        <div class="bsec">
+          <div class="blabel"><span class="num">04</span>Your info</div>
           <div class="field" data-key="name" data-req>
             <label>Name <span class="req">*</span></label>
             <input type="text" id="f_name" autocomplete="name" placeholder="First and last" />
@@ -265,7 +262,6 @@ main{position:relative;z-index:1}
           </div>
         </div>
 
-        <!-- SUMMARY + BOOK -->
         <div class="summary" id="summary">
           <b>You're booking:</b>
           <div class="line"><span id="sumDay">—</span> at <span id="sumTime">—</span></div>
@@ -275,7 +271,6 @@ main{position:relative;z-index:1}
         <div class="book-note">I'll text you to confirm the exact spot. No spam, ever.</div>
       </div>
 
-      <!-- SUCCESS -->
       <div class="success" id="success">
         <div class="big">☕</div>
         <h2>We're on for coffee.</h2>
@@ -289,105 +284,81 @@ main{position:relative;z-index:1}
 
     </div>
   </div>
+</section>
 
-  <div class="foot">
-    <div>I run <a href="/">ProyTech</a>, a systems company based in Wichita.</div>
-    <div class="mono">getproytech.com/coffee</div>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/" aria-label="ProyTech home"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><g stroke-width="1.6" fill="none"><line x1="20" y1="20" x2="20" y2="6" stroke="#B18CFF" stroke-dasharray="2 2"/><line x1="20" y1="20" x2="8" y2="30" stroke="#38BDF8" stroke-dasharray="2 2"/><line x1="20" y1="20" x2="32" y2="30" stroke="#2DD4BF" stroke-dasharray="2 2"/><circle cx="20" cy="5" r="3" stroke="#B18CFF"/><circle cx="7" cy="31" r="3" stroke="#38BDF8"/><circle cx="33" cy="31" r="3" stroke="#2DD4BF"/></g><circle cx="20" cy="20" r="7" fill="#38BDF8"/></svg><span>Proy<span class="t">Tech</span></span></a>
+        <p>We build the systems that let you grow without hiring: custom websites and a Business Suite that runs your whole business from one dashboard.</p>
+      </div>
+      <div><h5>What we build</h5><a href="/websites">Websites</a><a href="/suite">Business Suite</a><a href="/automation">AI &amp; Add-ons</a></div>
+      <div><h5>Company</h5><a href="/work">Our work</a><a href="/about">About us</a><a href="/events">Events</a><a href="/resources">Resources</a><a href="/partner">Partner Program</a></div>
+      <div><h5>Talk to us</h5><a href="/book">Book a consultation</a><a href="tel:9013353905">901-335-3905</a><a href="mailto:admin@getproytech.com">admin@getproytech.com</a></div>
+    </div>
+    <div class="foot-base"><span>© <span id="yr"></span> ProyTech Business Solutions LLC · 150 N Main St, Wichita, KS 67202</span><span>Based in Wichita, building for businesses across the country.</span></div>
   </div>
-</main>
+</footer>
 
+<script src="/js/pt-site.js?v=3"></script>
 <script>
 (function(){
   "use strict";
-  var state={date:null,dateLabel:null,slot:null,time:null,shop:null};
+  var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
+  var state={host:'Garrett',date:null,dateLabel:null,slot:null,time:null,shop:null};
 
-  /* ---- build weekday picker (next ~12 weekdays) ---- */
+  /* host picker */
+  var hosts=[].slice.call(document.querySelectorAll('#hosts .host'));
+  hosts.forEach(function(h){ h.addEventListener('click',function(){
+    hosts.forEach(function(x){x.classList.remove('sel')}); h.classList.add('sel'); state.host=h.dataset.host;
+  }); });
+
   var daysWrap=document.getElementById('days');
-  var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var built=[], d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+1); // start tomorrow
-  while(built.length<12){
-    if(d.getDay()!==0 && d.getDay()!==6){
-      built.push(new Date(d));
-    }
-    d.setDate(d.getDate()+1);
-  }
-  built.forEach(function(dt,i){
+  var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var built=[], d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+1);
+  while(built.length<12){ if(d.getDay()!==0&&d.getDay()!==6) built.push(new Date(d)); d.setDate(d.getDate()+1); }
+  built.forEach(function(dt){
     var iso=dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
     var label=DOW[dt.getDay()]+', '+MON[dt.getMonth()]+' '+dt.getDate();
-    var el=document.createElement('div');
-    el.className='day'; el.dataset.iso=iso; el.dataset.label=label;
+    var el=document.createElement('div'); el.className='day'; el.dataset.iso=iso; el.dataset.label=label;
     el.innerHTML='<div class="dow">'+DOW[dt.getDay()]+'</div><div class="dnum">'+dt.getDate()+'</div><div class="mon">'+MON[dt.getMonth()]+'</div>';
     el.addEventListener('click',function(){ selectDay(el,iso,label); });
     daysWrap.appendChild(el);
   });
 
-  var times=[].slice.call(document.querySelectorAll('#times .opt'));
-  var noSlots=document.getElementById('noSlots');
-
+  var times=[].slice.call(document.querySelectorAll('#times .opt')), noSlots=document.getElementById('noSlots');
   function selectDay(el,iso,label){
     document.querySelectorAll('.day').forEach(function(x){x.classList.remove('sel')});
-    el.classList.add('sel');
-    state.date=iso; state.dateLabel=label; state.slot=null; state.time=null;
-    times.forEach(function(t){t.classList.remove('sel')});
-    loadAvailability(iso);
-    updateSummary();
+    el.classList.add('sel'); state.date=iso; state.dateLabel=label; state.slot=null; state.time=null;
+    times.forEach(function(t){t.classList.remove('sel')}); loadAvailability(iso); updateSummary();
   }
-
-  /* ---- availability: calls the API, falls back to all-open for preview ---- */
   function loadAvailability(iso){
-    times.forEach(function(t){t.classList.remove('disabled','sel')});
-    noSlots.style.display='none';
+    times.forEach(function(t){t.classList.remove('disabled','sel')}); noSlots.style.display='none';
     fetch('/api/coffee-availability?date='+encodeURIComponent(iso))
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(data){
-        // data.open = array of open slot ids e.g. ["0900","1200"]
-        var openList = (data && data.open) ? data.open : ['0900','1030','1200'];
-        applyAvailability(openList);
-      })
-      .catch(function(){
-        // Preview / API not deployed yet: show all three open
-        applyAvailability(['0900','1030','1200']);
-      });
+      .then(function(data){ applyAvailability((data&&data.open)?data.open:['0900','1030','1200']); })
+      .catch(function(){ applyAvailability(['0900','1030','1200']); });
   }
   function applyAvailability(openList){
-    var anyOpen=false;
-    times.forEach(function(t){
-      var ok=openList.indexOf(t.dataset.slot)!==-1;
-      t.classList.toggle('disabled',!ok);
-      if(ok) anyOpen=true;
-    });
-    noSlots.style.display=anyOpen?'none':'block';
+    var any=false;
+    times.forEach(function(t){ var ok=openList.indexOf(t.dataset.slot)!==-1; t.classList.toggle('disabled',!ok); if(ok) any=true; });
+    noSlots.style.display=any?'none':'block';
   }
+  times.forEach(function(t){ t.addEventListener('click',function(){
+    if(t.classList.contains('disabled')) return;
+    times.forEach(function(x){x.classList.remove('sel')}); t.classList.add('sel');
+    state.slot=t.dataset.slot; state.time=t.dataset.time; updateSummary();
+  }); });
 
-  times.forEach(function(t){
-    t.addEventListener('click',function(){
-      if(t.classList.contains('disabled')) return;
-      times.forEach(function(x){x.classList.remove('sel')});
-      t.classList.add('sel');
-      state.slot=t.dataset.slot; state.time=t.dataset.time;
-      updateSummary();
-    });
-  });
-
-  /* ---- shop ---- */
   var shops=[].slice.call(document.querySelectorAll('#shops .opt'));
-  shops.forEach(function(s){
-    s.addEventListener('click',function(){
-      shops.forEach(function(x){x.classList.remove('sel')});
-      s.classList.add('sel');
-      state.shop=s.dataset.shop;
-      updateSummary();
-    });
-  });
+  shops.forEach(function(s){ s.addEventListener('click',function(){
+    shops.forEach(function(x){x.classList.remove('sel')}); s.classList.add('sel'); state.shop=s.dataset.shop; updateSummary();
+  }); });
 
-  /* ---- how heard -> reveal referrer ---- */
   var heard=document.getElementById('f_heard'), whoExtra=document.getElementById('whoExtra');
-  heard.addEventListener('change',function(){
-    whoExtra.classList.toggle('show', heard.value==='intro');
-  });
+  heard.addEventListener('change',function(){ whoExtra.classList.toggle('show', heard.value==='intro'); });
 
-  /* ---- summary + enable ---- */
   var summary=document.getElementById('summary'), bookBtn=document.getElementById('bookBtn');
   function updateSummary(){
     var ready=state.date&&state.slot&&state.shop;
@@ -397,13 +368,10 @@ main{position:relative;z-index:1}
     document.getElementById('sumShop').textContent=state.shop||'pick a spot';
     bookBtn.disabled=!ready;
   }
-
-  /* ---- validation ---- */
   function validate(){
     var ok=true;
     document.querySelectorAll('.field[data-req]').forEach(function(f){
-      var inp=f.querySelector('input,select'); var v=(inp.value||'').trim();
-      var type=f.getAttribute('data-type'); var bad=false;
+      var inp=f.querySelector('input,select'), v=(inp.value||'').trim(), type=f.getAttribute('data-type'), bad=false;
       if(!v) bad=true;
       else if(type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) bad=true;
       else if(type==='phone'&&v.replace(/\D/g,'').length<10) bad=true;
@@ -415,37 +383,24 @@ main{position:relative;z-index:1}
     inp.addEventListener('input',function(){ var f=inp.closest('.field'); if(f.classList.contains('bad')) validate(); });
   });
 
-  /* ---- book ---- */
   bookBtn.addEventListener('click',function(){
-    if(!validate()){
-      var firstBad=document.querySelector('.field.bad');
-      if(firstBad) firstBad.scrollIntoView({behavior:'smooth',block:'center'});
-      return;
-    }
-    var payload={
-      date:state.date, date_label:state.dateLabel, slot:state.slot, time:state.time, shop:state.shop,
-      name:document.getElementById('f_name').value.trim(),
-      phone:document.getElementById('f_phone').value.trim(),
-      email:document.getElementById('f_email').value.trim(),
-      heard:document.getElementById('f_heard').value,
-      referrer:document.getElementById('f_referrer').value.trim()
-    };
+    if(!validate()){ var fb=document.querySelector('.field.bad'); if(fb) fb.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+    var payload={ host:state.host, date:state.date, date_label:state.dateLabel, slot:state.slot, time:state.time, shop:state.shop,
+      name:document.getElementById('f_name').value.trim(), phone:document.getElementById('f_phone').value.trim(),
+      email:document.getElementById('f_email').value.trim(), heard:document.getElementById('f_heard').value,
+      referrer:document.getElementById('f_referrer').value.trim() };
     bookBtn.disabled=true; bookBtn.textContent='Booking…';
     fetch('/api/coffee-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
       .then(function(r){ if(!r.ok) throw 0; return r.json().catch(function(){return{}}); })
       .then(function(){ showSuccess(payload); })
-      .catch(function(){
-        // preview fallback: still show success so the flow is visible
-        showSuccess(payload);
-      });
+      .catch(function(){ showSuccess(payload); });
   });
-
   function showSuccess(p){
     document.getElementById('okWhen').textContent=p.date_label+' at '+p.time;
     document.getElementById('okWhere').textContent=p.shop;
     document.getElementById('okWho').textContent=p.name;
-    document.querySelector('.card-body').style.display='none';
-    document.querySelector('.card-head').style.display='none';
+    document.getElementById('bcardBody').style.display='none';
+    document.querySelector('.bcard-head').style.display='none';
     document.getElementById('success').classList.add('show');
     document.getElementById('bookCard').scrollIntoView({behavior:'smooth',block:'start'});
   }
