@@ -420,7 +420,7 @@ nav.nav,footer,main{position:relative;z-index:2}
     // show a loading state
     times.forEach(function(t){t.classList.add('disabled')});
     noSlots.textContent='Checking open times…'; noSlots.style.display='block';
-    fetch(API+'/api/coffee-availability?date='+encodeURIComponent(iso))
+    fetch(API+'/api/coffee-availability',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:iso})})
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
       .then(function(data){
         if(!data||!data.ok||!Array.isArray(data.open)) throw 0;
