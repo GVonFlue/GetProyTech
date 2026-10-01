@@ -25,23 +25,45 @@
 .coffee-hero .ice-traces{stroke:rgba(125,211,252,.22);stroke-width:1.5;fill:none}
 .coffee-hero .wrap{position:relative;z-index:2}
 
-/* ---- host picker ---- */
-.hosts{display:flex;gap:20px;justify-content:center;margin:0 auto 34px;max-width:460px}
-.host{flex:1;max-width:200px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.18);
-  border-radius:20px;padding:20px 16px 18px;transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s,border-color .22s;position:relative}
-.host:hover{transform:translateY(-8px) scale(1.05);border-color:var(--ice);box-shadow:0 22px 50px rgba(46,155,255,.35);z-index:3}
-.host.sel{border-color:var(--o);background:rgba(251,105,38,.08);box-shadow:0 16px 40px rgba(251,105,38,.3)}
-.host .ring{width:92px;height:92px;border-radius:50%;margin:0 auto 12px;padding:3px;background:linear-gradient(135deg,var(--elec),var(--ice));transition:transform .22s}
+/* ---- host picker + race ---- */
+.hosts{display:flex;gap:22px;justify-content:center;align-items:stretch;margin:0 auto 30px;max-width:520px;position:relative}
+.host{flex:1;max-width:220px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.18);
+  border-radius:20px;padding:22px 16px 18px;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .2s;position:relative}
+.host:hover{transform:translateY(-14px) scale(1.07);border-color:var(--ice);box-shadow:0 30px 60px rgba(46,155,255,.4);z-index:4}
+.host.sel{border-color:var(--o);background:rgba(251,105,38,.08);box-shadow:0 16px 40px rgba(251,105,38,.28)}
+.host.sel:hover{box-shadow:0 30px 60px rgba(251,105,38,.45)}
+.host .ring{width:98px;height:98px;border-radius:50%;margin:0 auto 12px;padding:3px;background:linear-gradient(135deg,var(--elec),var(--ice));
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
 .host.sel .ring{background:linear-gradient(135deg,var(--o),var(--o-2))}
-.host:hover .ring{transform:scale(1.06)}
+.host:hover .ring{transform:scale(1.22) translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.5)}
 .host .ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:var(--navy-2)}
-.host .hname{font-family:var(--disp);font-weight:700;font-size:1.15rem;color:#fff}
-.host .hrole{font-size:.82rem;color:var(--muted-d);margin-top:2px}
-.host .pick{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;border:2px solid rgba(125,211,252,.3);
+.host .hname{font-family:var(--disp);font-weight:700;font-size:1.18rem;color:#fff}
+.host .hrole{font-size:.8rem;color:var(--muted-d);margin-top:2px;margin-bottom:14px}
+.host .pick{position:absolute;top:12px;left:12px;width:22px;height:22px;border-radius:50%;border:2px solid rgba(125,211,252,.3);
   display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all .18s}
 .host.sel .pick{background:var(--o);border-color:var(--o);color:#fff}
-.hosts-label{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d);margin-bottom:16px}
-@media(max-width:420px){.hosts{gap:12px}.host{padding:16px 10px 14px}.host .ring{width:76px;height:76px}}
+.host .crown{position:absolute;top:-14px;right:-10px;font-size:30px;opacity:0;transform:rotate(14deg) scale(.6);transition:all .3s cubic-bezier(.2,.8,.2,1);
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}
+.host.leader .crown{opacity:1;transform:rotate(14deg) scale(1)}
+
+/* race stat block */
+.race{margin-top:4px}
+.race-num{font-family:var(--disp);font-weight:700;line-height:1;display:flex;align-items:baseline;justify-content:center;gap:2px}
+.race-num .cnt{font-size:2.1rem;color:#fff}
+.host.leader .race-num .cnt{color:var(--o-2)}
+.race-num .tot{font-size:1rem;color:var(--muted-d)}
+.bar{height:7px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin:9px 0 8px}
+.bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--elec),var(--ice));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.host.leader .bar span{background:linear-gradient(90deg,var(--o),var(--o-2))}
+.race-tag{font-family:var(--disp);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d);height:16px}
+.host.leader .race-tag{color:var(--o-2)}
+
+.vs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;width:46px;height:46px;border-radius:50%;
+  background:var(--ink);border:2px solid rgba(125,211,252,.3);display:flex;align-items:center;justify-content:center;
+  font-family:var(--disp);font-weight:700;font-size:.85rem;color:var(--ice-2);box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.hosts-label{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d);margin-bottom:18px}
+.hosts-label b{color:var(--o-2)}
+@media(max-width:420px){.hosts{gap:14px}.host{padding:18px 10px 14px}.host .ring{width:82px;height:82px}.vs{width:40px;height:40px;font-size:.78rem}}
 .c-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--disp);font-size:12.5px;font-weight:700;letter-spacing:.12em;
   text-transform:uppercase;color:var(--o-2);background:rgba(251,105,38,.10);border:1.5px solid rgba(251,105,38,.32);
   border-radius:999px;padding:9px 16px;margin-bottom:26px}
@@ -168,24 +190,35 @@
     <use href="#cf3" class="pulse" stroke="#2E9BFF" style="color:#2E9BFF;animation-delay:2.4s"/>
   </svg>
   <div class="wrap">
-    <div class="c-badge"><span class="dot"></span><span>Coffee <span id="coffeeNum">#12</span> of 100</span></div>
+    <div class="c-badge"><span class="dot"></span><span>The Race to 100 ☕</span></div>
     <h1>Let's grab coffee.<br><em>I'm buying.</em></h1>
-    <p class="sub">I'm having coffee with <b>100 Wichita business owners</b> this year. No pitch, no deck. I just want to hear your story and see who I can connect you with.</p>
+    <p class="sub">Logan and I are racing to have coffee with <b>100 Wichita business owners</b> each. No pitch, no deck. We just want to hear your story and connect you with people you should know.</p>
 
-    <div class="hosts-label" style="margin-top:34px">Who do you want to meet with?</div>
+    <div class="hosts-label" style="margin-top:34px">Pick your host &mdash; <b>help them win</b></div>
     <div class="hosts" id="hosts">
-      <div class="host sel" data-host="Garrett">
-        <span class="pick">✓</span>
+      <div class="host sel leader" data-host="Garrett">
+        <span class="pick">✓</span><span class="crown">👑</span>
         <div class="ring"><img src="/images/garrett-coffee.webp" alt="Garrett" onerror="this.onerror=null;this.src='/images/garrett-coffee.jpg'"></div>
         <div class="hname">Garrett</div>
         <div class="hrole">Co-founder</div>
+        <div class="race">
+          <div class="race-num"><span class="cnt" id="gCount">0</span><span class="tot">/100</span></div>
+          <div class="bar"><span id="gBar"></span></div>
+          <div class="race-tag" id="gTag"></div>
+        </div>
       </div>
       <div class="host" data-host="Logan">
-        <span class="pick">✓</span>
+        <span class="pick">✓</span><span class="crown">👑</span>
         <div class="ring"><img src="/images/logan-coffee.webp" alt="Logan" onerror="this.onerror=null;this.src='/images/logan-coffee.jpg'"></div>
         <div class="hname">Logan</div>
         <div class="hrole">Co-founder</div>
+        <div class="race">
+          <div class="race-num"><span class="cnt" id="lCount">0</span><span class="tot">/100</span></div>
+          <div class="bar"><span id="lBar"></span></div>
+          <div class="race-tag" id="lTag"></div>
+        </div>
       </div>
+      <div class="vs">VS</div>
     </div>
 
     <div class="hint"><span>Pick a time below</span><span class="arw">↓</span></div>
@@ -306,6 +339,27 @@
 (function(){
   "use strict";
   var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
+
+  /* ===== RACE TO 100 — update these two numbers weekly ===== */
+  var RACE={ Garrett:0, Logan:0 };
+  /* ========================================================= */
+  (function renderRace(){
+    document.getElementById('gCount').textContent=RACE.Garrett;
+    document.getElementById('lCount').textContent=RACE.Logan;
+    setTimeout(function(){
+      document.getElementById('gBar').style.width=Math.min(100,RACE.Garrett)+'%';
+      document.getElementById('lBar').style.width=Math.min(100,RACE.Logan)+'%';
+    },200);
+    var gHost=document.querySelector('.host[data-host="Garrett"]'),
+        lHost=document.querySelector('.host[data-host="Logan"]'),
+        gTag=document.getElementById('gTag'), lTag=document.getElementById('lTag');
+    gHost.classList.remove('leader'); lHost.classList.remove('leader');
+    gTag.textContent=''; lTag.textContent='';
+    if(RACE.Garrett>RACE.Logan){ gHost.classList.add('leader'); gTag.textContent='Leading 🔥'; lTag.textContent=(RACE.Garrett-RACE.Logan)+' behind'; }
+    else if(RACE.Logan>RACE.Garrett){ lHost.classList.add('leader'); lTag.textContent='Leading 🔥'; gTag.textContent=(RACE.Logan-RACE.Garrett)+' behind'; }
+    else { gTag.textContent='Tied'; lTag.textContent='Tied'; }
+  })();
+
   var state={host:'Garrett',date:null,dateLabel:null,slot:null,time:null,shop:null};
 
   /* host picker */
