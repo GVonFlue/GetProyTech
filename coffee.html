@@ -387,6 +387,7 @@ nav.nav,footer,main{position:relative;z-index:2}
     else { gTag.textContent='Tied'; lTag.textContent='Tied'; }
   })();
 
+  var API='https://proytech-crm.vercel.app';  // CRM backend (holds the calendar + leads)
   var state={host:'Garrett',date:null,dateLabel:null,slot:null,time:null,shop:null};
 
   /* host picker */
@@ -416,7 +417,7 @@ nav.nav,footer,main{position:relative;z-index:2}
   }
   function loadAvailability(iso){
     times.forEach(function(t){t.classList.remove('disabled','sel')}); noSlots.style.display='none';
-    fetch('/api/coffee-availability?date='+encodeURIComponent(iso))
+    fetch(API+'/api/coffee-availability?date='+encodeURIComponent(iso))
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
       .then(function(data){ applyAvailability((data&&data.open)?data.open:['0900','1030','1200']); })
       .catch(function(){ applyAvailability(['0900','1030','1200']); });
@@ -471,7 +472,7 @@ nav.nav,footer,main{position:relative;z-index:2}
       email:document.getElementById('f_email').value.trim(), heard:document.getElementById('f_heard').value,
       referrer:document.getElementById('f_referrer').value.trim() };
     bookBtn.disabled=true; bookBtn.textContent='Booking…';
-    fetch('/api/coffee-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    fetch(API+'/api/coffee-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
       .then(function(r){ if(!r.ok) throw 0; return r.json().catch(function(){return{}}); })
       .then(function(){ showSuccess(payload); })
       .catch(function(){ showSuccess(payload); });
