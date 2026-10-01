@@ -417,14 +417,26 @@ nav.nav,footer,main{position:relative;z-index:2}
   }
   function loadAvailability(iso){
     times.forEach(function(t){t.classList.remove('disabled','sel')}); noSlots.style.display='none';
+    // show a loading state
+    times.forEach(function(t){t.classList.add('disabled')});
+    noSlots.textContent='Checking open times…'; noSlots.style.display='block';
     fetch(API+'/api/coffee-availability?date='+encodeURIComponent(iso))
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(data){ applyAvailability((data&&data.open)?data.open:['0900','1030','1200']); })
-      .catch(function(){ applyAvailability(['0900','1030','1200']); });
+      .then(function(data){
+        if(!data||!data.ok||!Array.isArray(data.open)) throw 0;
+        applyAvailability(data.open);
+      })
+      .catch(function(){
+        // FAIL CLOSED: never offer times we could not verify against the calendar.
+        times.forEach(function(t){t.classList.add('disabled')});
+        noSlots.textContent='Could not load open times right now. Text Garrett at 901-335-3905 and we\'ll lock one in.';
+        noSlots.style.display='block';
+      });
   }
   function applyAvailability(openList){
     var any=false;
     times.forEach(function(t){ var ok=openList.indexOf(t.dataset.slot)!==-1; t.classList.toggle('disabled',!ok); if(ok) any=true; });
+    noSlots.textContent='Nothing open that day — try another.';
     noSlots.style.display=any?'none':'block';
   }
   times.forEach(function(t){ t.addEventListener('click',function(){
