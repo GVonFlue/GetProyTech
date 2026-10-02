@@ -8,3 +8,4 @@
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});rv.forEach(function(e){io.observe(e)})}else{rv.forEach(function(e){e.classList.add('in')})}
   var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
 })();
+(function(){document.querySelectorAll('.dd-btn').forEach(function(b){b.addEventListener('click',function(e){var d=b.parentElement;var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');e.stopPropagation()})});document.addEventListener('click',function(){document.querySelectorAll('.dd.open').forEach(function(d){d.classList.remove('open')})})})();
