@@ -474,3 +474,37 @@ footer .logo-img{height:60px}
 .s2m-nuc{width:200px;height:auto;margin:6px auto 0;display:block}
 .s2m-dash{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.6);box-shadow:0 0 30px rgba(56,189,248,.3)}
 .s2m-dash img{width:100%;height:auto;display:block}
+
+/* ===== mobile hero cleanup ===== */
+@media (max-width:700px){
+  /* crop the banner to just the node art; hide the baked-in wordmark at its bottom */
+  .bhero .ban-m img{
+    aspect-ratio:auto;
+    height:300px;
+    object-fit:cover;
+    object-position:50% 20%;
+    -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
+  }
+  /* pull the card up over the art so there's no dead gap */
+  .offer{margin:-110px 14px 0;padding:24px 18px 26px}
+  .offer h1{font-size:1.72rem;line-height:1.08}
+  .offer .lede{font-size:1rem;line-height:1.5}
+  .offer .hero-cta{flex-direction:column;gap:10px}
+  .offer .hero-cta .btn{width:100%}
+  /* make room at the bottom so the fixed .mcta bar never covers content */
+  main{padding-bottom:84px}
+}
+@media (max-width:420px){
+  .bhero .ban-m img{height:250px}
+  .offer{margin:-96px 12px 0}
+  .offer h1{font-size:1.55rem}
+}
+
+/* harden hero media: never show broken-image/alt flash over the logo */
+.bhero .hmedia{background:#060E24}
+.bhero .ban{color:transparent;font-size:0}
+
+/* images never flash alt text as a broken-icon sprawl */
+img{color:transparent}
+img[loading=lazy]{background:rgba(125,211,252,.05)}
