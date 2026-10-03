@@ -296,6 +296,7 @@ nav.nav,footer,main{position:relative;z-index:2}
         <div class="bsec">
           <div class="blabel"><span class="num">02</span>Pick a time</div>
           <div class="opts" id="times">
+            <div class="opt" data-time="7:30 AM" data-slot="0730"><span class="ic">🌄</span><div><div class="t">7:30 – 8:30 AM</div><div class="d">Before the day starts</div></div><span class="check">✓</span></div>
             <div class="opt" data-time="9:00 AM" data-slot="0900"><span class="ic">🌅</span><div><div class="t">9:00 – 10:00 AM</div><div class="d">Early start</div></div><span class="check">✓</span></div>
             <div class="opt" data-time="10:30 AM" data-slot="1030"><span class="ic">☀️</span><div><div class="t">10:30 – 11:30 AM</div><div class="d">Mid morning</div></div><span class="check">✓</span></div>
             <div class="opt" data-time="12:00 PM" data-slot="1200"><span class="ic">🍽️</span><div><div class="t">12:00 – 1:00 PM</div><div class="d">Lunch hour</div></div><span class="check">✓</span></div>
@@ -465,7 +466,10 @@ nav.nav,footer,main{position:relative;z-index:2}
   /* host picker */
   var hosts=[].slice.call(document.querySelectorAll('#hosts .host'));
   hosts.forEach(function(h){ h.addEventListener('click',function(){
+    var changed=state.host!==h.dataset.host;
     hosts.forEach(function(x){x.classList.remove('sel')}); h.classList.add('sel'); state.host=h.dataset.host;
+    /* each host has their own calendar: re-check open times for the new host */
+    if(changed&&state.date){ state.slot=null; state.time=null; loadAvailability(state.date); updateSummary(); }
   }); });
 
   var daysWrap=document.getElementById('days');
@@ -492,7 +496,7 @@ nav.nav,footer,main{position:relative;z-index:2}
     // show a loading state
     times.forEach(function(t){t.classList.add('disabled')});
     noSlots.textContent='Checking open times…'; noSlots.style.display='block';
-    fetch(API+'/api/coffee-availability',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:iso})})
+    fetch(API+'/api/coffee-availability',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:iso,host:state.host})})
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
       .then(function(data){
         if(!data||!data.ok||!Array.isArray(data.open)) throw 0;
