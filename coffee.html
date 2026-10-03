@@ -4,11 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Let's grab coffee · Garrett @ ProyTech</title>
-<meta name="description" content="I'm having coffee with 100 Wichita business owners this year. No pitch, no deck — just learning who's building what. I'm buying." />
+<meta name="description" content="Logan and I are racing to coffee with 20 Wichita business owners each by Oct 10. No pitch, no deck — just learning who's building what. I'm buying." />
 <meta name="theme-color" content="#061431" />
 
 <meta property="og:title" content="Let's grab coffee. I'm buying." />
-<meta property="og:description" content="Coffee with 100 Wichita business owners this year. I want to hear your story and see who I can connect you with." />
+<meta property="og:description" content="Racing to coffee with 20 Wichita business owners each by Oct 10. I want to hear your story and see who I can connect you with." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://getproytech.com/coffee" />
 <meta property="og:image" content="https://getproytech.com/images/coffee-og.png" />
@@ -175,6 +175,32 @@ body{background:#061431}
 .book-sec{background:transparent}
 nav.nav,footer,main{position:relative;z-index:2}
 </style>
+<style>
+:root{--muted:#A9BCD8;--ice2:#7DD3FC}
+#studio{padding:60px 18px;border-top:1px solid rgba(125,211,252,.2);margin-top:40px}
+#studio button,#studio input,#studio select,#studio textarea{font-family:Inter,Arial,sans-serif}
+#studio .studio-h{max-width:1100px;margin:0 auto 18px;font:700 .8rem Inter,Arial;letter-spacing:.16em;text-transform:uppercase;color:#FB6926}
+#studio .wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start}
+#studio h1{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;letter-spacing:-.02em}
+#studio h1 span{color:var(--o)}
+#studio .p{color:var(--muted);font-size:.92rem;margin-top:6px;line-height:1.5}
+#studio .panel{background:linear-gradient(160deg,#0D2566,#07163A 75%);border:1px solid rgba(56,189,248,.5);border-radius:18px;padding:20px;position:sticky;top:20px}
+#studio label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ice2);margin:16px 0 6px}
+#studio .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+#studio .seg button,#studio .seg2 button{padding:10px 6px;border-radius:10px;border:1px solid rgba(125,211,252,.4);background:rgba(6,20,49,.7);color:#fff;font:600 .9rem Inter;cursor:pointer}
+#studio .seg button.on,#studio .seg2 button.on{background:var(--o);border-color:var(--o)}
+#studio .seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+#studio .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#studio input,#studio select,#studio textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid rgba(125,211,252,.4);background:#050E24;color:#fff;font:500 1rem Inter}
+#studio textarea{min-height:190px;font-size:.92rem;line-height:1.5;resize:vertical}
+#studio .btn{display:block;width:100%;margin-top:14px;padding:14px;border-radius:999px;border:0;background:var(--o);color:#fff;font:700 1rem Inter;cursor:pointer;box-shadow:0 8px 24px rgba(251,105,38,.4)}
+#studio .btn.ghost{background:rgba(56,189,248,.14);border:1px solid rgba(125,211,252,.5);box-shadow:none}
+#studio .live{font-size:.8rem;color:var(--muted);margin-top:6px}
+#studio .live b{color:#7CE3A7}
+#studio .stage canvas{width:100%;max-width:640px;height:auto;display:block;margin:0 auto;border-radius:14px;box-shadow:0 0 40px rgba(56,189,248,.25)}
+#studio .stage.story canvas{max-width:420px}
+@media (max-width:860px){#studio .wrap{grid-template-columns:1fr}#studio .panel{position:static}}
+</style>
 </head>
 <body>
 <svg class="techbg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -217,11 +243,12 @@ nav.nav,footer,main{position:relative;z-index:2}
 
 <header class="coffee-hero">
   <div class="wrap">
-    <div class="c-badge"><span class="dot"></span><span>The Race to 100 ☕</span></div>
+    <div class="c-badge"><span class="dot"></span><span>The Race to 20 ☕ · ends Sat, Oct 10</span></div>
     <h1>Let's grab coffee.<br><em>I'm buying.</em></h1>
-    <p class="sub">Logan and I are racing to have coffee with <b>100 Wichita business owners</b> each. No pitch, no deck. We just want to hear your story and connect you with people you should know.</p>
+    <p class="sub">Logan and I are racing to have coffee with <b>20 Wichita business owners</b> each by <b>Saturday, October 10</b>. No pitch, no deck. We just want to hear your story and connect you with people you should know. Every coffee you book helps your host win.</p>
 
-    <div class="hosts-label" style="margin-top:34px">Pick your host &mdash; <b>help them win</b></div>
+    <div class="race-clock" id="raceClock" style="margin-top:22px;font-weight:700;color:#7DD3FC;letter-spacing:.04em"></div>
+    <div class="hosts-label" style="margin-top:18px">Pick your host &mdash; <b>help them win</b></div>
     <div class="hosts" id="hosts">
       <div class="host sel leader" data-host="Garrett">
         <span class="pick">✓</span><span class="crown">👑</span>
@@ -229,7 +256,7 @@ nav.nav,footer,main{position:relative;z-index:2}
         <div class="hname">Garrett</div>
         <div class="hrole">Co-founder</div>
         <div class="race">
-          <div class="race-num"><span class="cnt" id="gCount">0</span><span class="tot">/100</span></div>
+          <div class="race-num"><span class="cnt" id="gCount">0</span><span class="tot">/20</span></div>
           <div class="bar"><span id="gBar"></span></div>
           <div class="race-tag" id="gTag"></div>
         </div>
@@ -240,7 +267,7 @@ nav.nav,footer,main{position:relative;z-index:2}
         <div class="hname">Logan</div>
         <div class="hrole">Co-founder</div>
         <div class="race">
-          <div class="race-num"><span class="cnt" id="lCount">0</span><span class="tot">/100</span></div>
+          <div class="race-num"><span class="cnt" id="lCount">0</span><span class="tot">/20</span></div>
           <div class="bar"><span id="lBar"></span></div>
           <div class="race-tag" id="lTag"></div>
         </div>
@@ -346,6 +373,38 @@ nav.nav,footer,main{position:relative;z-index:2}
   </div>
 </section>
 
+<section id="studio" hidden aria-label="Race graphic studio">
+<div class="studio-h">Team only · Post today's progress</div>
+<div class="wrap">
+  <div class="panel">
+    <h1>Race to 20 <span>☕</span></h1>
+    <p class="p">Pick who's posting, check the numbers, download, post. The scores load live from the CRM (coffees marked held).</p>
+
+    <label>Who's posting?</label>
+    <div class="seg" id="st-who"><button data-v="Garrett" class="on">Garrett</button><button data-v="Logan">Logan</button><button data-v="Both">Both</button></div>
+
+    <label>Size</label>
+    <div class="seg2" id="st-size"><button data-v="feed" class="on">Feed 4:5</button><button data-v="story">Story 9:16</button></div>
+
+    <div class="row">
+      <div><label for="st-g">Garrett</label><input id="st-g" type="number" min="0" max="99" value="0"></div>
+      <div><label for="st-l">Logan</label><input id="st-l" type="number" min="0" max="99" value="0"></div>
+    </div>
+    <div class="live" id="st-live">Loading live scores...</div>
+
+    <label for="st-day">Day</label>
+    <select id="st-day"></select>
+
+    <button class="btn" id="st-dl">Download image</button>
+
+    <label for="st-cap">Caption</label>
+    <textarea id="st-cap"></textarea>
+    <button class="btn ghost" id="st-copy">Copy caption</button>
+  </div>
+  <div class="stage" id="st-stage"><canvas id="st-cv" width="1080" height="1350"></canvas></div>
+</div>
+
+</section>
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -367,25 +426,38 @@ nav.nav,footer,main{position:relative;z-index:2}
   "use strict";
   var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
 
-  /* ===== RACE TO 100 — update these two numbers weekly ===== */
-  var RACE={ Garrett:0, Logan:0 };
-  /* ========================================================= */
-  (function renderRace(){
+  /* ===== RACE TO 20: live from the CRM (coffees marked HELD), with a manual fallback ===== */
+  var RACE_GOAL=20, RACE_END=new Date('2026-10-10T23:59:59-05:00');
+  var RACE={ Garrett:0, Logan:0 };   /* fallback only, used if the live count can't load */
+  function renderRace(){
     document.getElementById('gCount').textContent=RACE.Garrett;
     document.getElementById('lCount').textContent=RACE.Logan;
     setTimeout(function(){
-      document.getElementById('gBar').style.width=Math.min(100,RACE.Garrett)+'%';
-      document.getElementById('lBar').style.width=Math.min(100,RACE.Logan)+'%';
+      document.getElementById('gBar').style.width=Math.min(100,RACE.Garrett/RACE_GOAL*100)+'%';
+      document.getElementById('lBar').style.width=Math.min(100,RACE.Logan/RACE_GOAL*100)+'%';
     },200);
     var gHost=document.querySelector('.host[data-host="Garrett"]'),
         lHost=document.querySelector('.host[data-host="Logan"]'),
         gTag=document.getElementById('gTag'), lTag=document.getElementById('lTag');
     gHost.classList.remove('leader'); lHost.classList.remove('leader');
     gTag.textContent=''; lTag.textContent='';
-    if(RACE.Garrett>RACE.Logan){ gHost.classList.add('leader'); gTag.textContent='Leading 🔥'; lTag.textContent=(RACE.Garrett-RACE.Logan)+' behind'; }
-    else if(RACE.Logan>RACE.Garrett){ lHost.classList.add('leader'); lTag.textContent='Leading 🔥'; gTag.textContent=(RACE.Logan-RACE.Garrett)+' behind'; }
-    else { gTag.textContent='Tied'; lTag.textContent='Tied'; }
-  })();
+    if(RACE.Garrett>=RACE_GOAL) gTag.textContent='Hit 20 🏆';
+    if(RACE.Logan>=RACE_GOAL) lTag.textContent='Hit 20 🏆';
+    if(RACE.Garrett>RACE.Logan){ gHost.classList.add('leader'); if(!gTag.textContent) gTag.textContent='Leading 🔥'; if(!lTag.textContent) lTag.textContent=(RACE.Garrett-RACE.Logan)+' behind'; }
+    else if(RACE.Logan>RACE.Garrett){ lHost.classList.add('leader'); if(!lTag.textContent) lTag.textContent='Leading 🔥'; if(!gTag.textContent) gTag.textContent=(RACE.Logan-RACE.Garrett)+' behind'; }
+    else { if(!gTag.textContent) gTag.textContent='Tied'; if(!lTag.textContent) lTag.textContent='Tied'; }
+  }
+  function renderClock(){
+    var el=document.getElementById('raceClock'); if(!el) return;
+    var ms=RACE_END-new Date();
+    if(ms<=0){ el.textContent='The race is over. Thank you, Wichita. ☕'; return; }
+    var d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5);
+    el.textContent='⏱ '+(d?d+(d===1?' day ':' days '):'')+h+(h===1?' hour':' hours')+' left in the race';
+  }
+  renderRace(); renderClock(); setInterval(renderClock,60000);
+  fetch('https://proytech-crm.vercel.app/api/coffee-race',{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){
+    if(j&&j.ok&&j.counts){ RACE.Garrett=j.counts.Garrett||0; RACE.Logan=j.counts.Logan||0; if(j.goal) RACE_GOAL=j.goal; renderRace(); }
+  }).catch(function(){});
 
   var API='https://proytech-crm.vercel.app';  // CRM backend (holds the calendar + leads)
   var state={host:'Garrett',date:null,dateLabel:null,slot:null,time:null,shop:null};
@@ -498,6 +570,117 @@ nav.nav,footer,main{position:relative;z-index:2}
     document.getElementById('success').classList.add('show');
     document.getElementById('bookCard').scrollIntoView({behavior:'smooth',block:'start'});
   }
+})();
+</script>
+<script>
+(function(){ if(!/[?&]studio\b/.test(location.search)) return; var sec=document.getElementById("studio"); sec.hidden=false; setTimeout(function(){sec.scrollIntoView({behavior:"smooth"})},400);
+
+(function(){
+  var START=new Date('2026-10-03T00:00:00-05:00'), DAYS=8, GOAL=20, END=new Date('2026-10-10T23:59:59-05:00');
+  var st={who:'Garrett',size:'feed'};
+  var $=function(s){return document.querySelector(s)};
+  var imgs={};
+  function load(name,src){return new Promise(function(r){var i=new Image();i.onload=function(){imgs[name]=i;r()};i.onerror=function(){r()};i.src=src})}
+
+  // day picker, defaulting to today
+  var today=Math.min(DAYS,Math.max(1,Math.floor((new Date()-START)/864e5)+1));
+  for(var d=1;d<=DAYS;d++){var o=document.createElement('option');o.value=d;o.textContent='Day '+d+(d===DAYS?' (finish line)':'')+' · '+new Date(START.getTime()+(d-1)*864e5).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});if(d===today)o.selected=true;$('#st-day').appendChild(o)}
+
+  var CAPS={
+    1:"{rival} and I made a bet.\nFirst one to 20 coffees with Wichita business owners wins.\nWe've got until Saturday.\nNo pitch. No deck. Coffee's on me.\nI just want to hear what you're building and who I can connect you with.\nLink to grab a time is in my bio.\nWho's the first business owner I need to meet?",
+    2:"Coffee {mine} of 20 is in the books.\n{rival} is sitting at {theirs}.\n{left} days left and I'm not losing this one.\nIf you run a business in Wichita, the coffee's on me.\nWhat should I ask you first?",
+    3:"Day 3 of the race to 20.\nMe: {mine}\n{rival}: {theirs}\nThe best part so far isn't the score.\nIt's the people I'd never have met otherwise.\nWho in Wichita should I be grabbing coffee with?",
+    4:"{left} days left in the race to 20.\nI'm at {mine}. {rival} is at {theirs}.\nIf you've been meaning to book, this is your sign.\nI'm buying, and I'll bring a few people you should know.\nCoffee or lunch?",
+    5:"Here's what I'm learning from {mine} coffees with local owners.\nEveryone's busy.\nAlmost nobody knows their real numbers.\nThat's not a work ethic problem. It's a systems problem.\nWant to grab coffee and talk about yours?",
+    6:"{rival} thinks he's winning.\nScoreboard says {mine} to {theirs}.\n{left} days left.\nIf you run a business in Wichita and you've got 30 minutes, I want to meet you.\nWhere's your favorite coffee spot?",
+    7:"Last full day before the finish line.\nMe: {mine} of 20\n{rival}: {theirs} of 20\nEvery open time this week is up for grabs.\nLink in my bio. Coffee's on me.\nWho's taking the last spots?",
+    8:"The race to 20 ends today.\nMe: {mine}. {rival}: {theirs}.\nWin or lose, I met people this week I'm going to know for years.\nThank you, Wichita.\nWho should we grab coffee with next?"
+  };
+  var BOTH={
+    1:"We made a bet.\nFirst one of us to 20 coffees with Wichita business owners wins.\nWe've got until Saturday.\nNo pitch. No deck. Coffee's on us.\nPick your host and help them win. Link in bio.\nWho are you rooting for?",
+    def:"Race to 20, day {day}.\nGarrett: {g}\nLogan: {l}\n{left} days left.\nPick your host and help them win. Coffee's on us.\nWho are you rooting for?"
+  };
+  function caption(){
+    var day=+$('#st-day').value, g=+$('#st-g').value||0, l=+$('#st-l').value||0, left=Math.max(0,DAYS-day);
+    var t;
+    if(st.who==='Both'){t=(BOTH[day]||BOTH.def)}
+    else{t=CAPS[day]}
+    var mine=st.who==='Logan'?l:g, theirs=st.who==='Logan'?g:l, rival=st.who==='Logan'?'Garrett':'Logan';
+    return t.replace(/\{mine\}/g,mine).replace(/\{theirs\}/g,theirs).replace(/\{rival\}/g,rival).replace(/\{left\}/g,left).replace(/\{day\}/g,day).replace(/\{g\}/g,g).replace(/\{l\}/g,l);
+  }
+
+  function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+  function glowLine(c,pts,col,w,blur){c.save();c.strokeStyle=col;c.lineWidth=w;c.shadowColor=col;c.shadowBlur=blur;c.lineJoin='round';c.beginPath();c.moveTo(pts[0][0],pts[0][1]);for(var i=1;i<pts.length;i++)c.lineTo(pts[i][0],pts[i][1]);c.stroke();c.restore()}
+
+  function draw(){
+    var cv=$('#st-cv'), W=1080, H=st.size==='story'?1920:1350; cv.width=W; cv.height=H;
+    $('#st-stage').className='stage'+(st.size==='story'?' story':'');
+    var c=cv.getContext('2d');
+    var day=+$('#st-day').value, g=+$('#st-g').value||0, l=+$('#st-l').value||0, left=Math.max(0,DAYS-day);
+    var s=st.size==='story', top=s?150:60;
+    // background
+    var bg=c.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#0A2257');bg.addColorStop(.55,'#071A44');bg.addColorStop(1,'#050E24');c.fillStyle=bg;c.fillRect(0,0,W,H);
+    var rg=c.createRadialGradient(W/2,top+330,40,W/2,top+330,560);rg.addColorStop(0,'rgba(46,155,255,.45)');rg.addColorStop(1,'rgba(46,155,255,0)');c.fillStyle=rg;c.fillRect(0,0,W,H);
+    // circuit traces
+    c.globalAlpha=.55;
+    glowLine(c,[[0,top+140],[180,top+140],[230,top+90],[420,top+90]],'#2E9BFF',3,10);
+    glowLine(c,[[W,top+180],[880,top+180],[830,top+230],[660,top+230]],'#FB6926',3,10);
+    glowLine(c,[[0,H-300],[220,H-300],[270,H-250],[500,H-250]],'#2E9BFF',3,10);
+    glowLine(c,[[W,H-360],[860,H-360],[810,H-410],[600,H-410]],'#2E9BFF',3,10);
+    c.globalAlpha=1;
+    // header
+    if(imgs.logo){var lh=70,lw=imgs.logo.width*lh/imgs.logo.height;c.drawImage(imgs.logo,(W-lw)/2,top,lw,lh)}
+    c.textAlign='center';c.fillStyle='#7DD3FC';c.font='700 30px "Space Grotesk", Arial, sans-serif';
+    c.fillText('DAY '+day+' OF '+DAYS+(left?'  ·  '+left+(left===1?' DAY LEFT':' DAYS LEFT'):'  ·  FINISH LINE'),W/2,top+150);
+    c.fillStyle='#fff';c.font='700 '+(s?118:104)+'px "Space Grotesk", Arial, sans-serif';c.fillText('RACE TO 20',W/2,top+(s?285:265));
+    c.fillStyle='#FB6926';c.font='700 '+(s?44:40)+'px "Space Grotesk", Arial, sans-serif';c.fillText('coffees with Wichita business owners',W/2,top+(s?350:322));
+    // racers
+    var y0=top+(s?470:400), cardH=s?300:250, gap=s?40:28;
+    [['Garrett',g,imgs.g],['Logan',l,imgs.l]].forEach(function(r,i){
+      var y=y0+i*(cardH+gap), me=(st.who===r[0]), lead=(r[1]>(i?g:l));
+      c.save();rr(c,70,y,W-140,cardH,32);c.fillStyle='rgba(13,37,102,.85)';c.fill();
+      c.lineWidth=me||st.who==='Both'?4:2;c.strokeStyle=me?'#FB6926':'rgba(56,189,248,.8)';c.shadowColor=me?'#FB6926':'#38BDF8';c.shadowBlur=24;c.stroke();c.restore();
+      var av=cardH-90, ax=110, ay=y+45;
+      c.save();c.beginPath();c.arc(ax+av/2,ay+av/2,av/2,0,Math.PI*2);c.closePath();c.clip();
+      if(r[2])c.drawImage(r[2],ax,ay,av,av);else{c.fillStyle='#1338DE';c.fillRect(ax,ay,av,av)}
+      c.restore();
+      c.beginPath();c.arc(ax+av/2,ay+av/2,av/2+4,0,Math.PI*2);c.strokeStyle=me?'#FB6926':'#38BDF8';c.lineWidth=5;c.stroke();
+      var tx=ax+av+50;c.textAlign='left';
+      c.fillStyle='#fff';c.font='700 '+(s?58:50)+'px "Space Grotesk", Arial, sans-serif';c.fillText(r[0]+(lead?'  🔥':''),tx,y+(s?100:88));
+      c.fillStyle='#fff';c.font='700 '+(s?96:84)+'px "Space Grotesk", Arial, sans-serif';c.fillText(r[1],tx,y+(s?205:178));
+      var nw=c.measureText(String(r[1])).width;c.fillStyle='#A9BCD8';c.font='700 '+(s?48:42)+'px "Space Grotesk", Arial, sans-serif';c.fillText('/ 20',tx+nw+14,y+(s?205:178));
+      var bx=tx, bw=W-70-40-tx, by=y+cardH-(s?62:52), bh=18;
+      rr(c,bx,by,bw,bh,9);c.fillStyle='rgba(125,211,252,.18)';c.fill();
+      var pw=Math.max(bh,Math.min(1,r[1]/GOAL)*bw);rr(c,bx,by,pw,bh,9);
+      var gr=c.createLinearGradient(bx,0,bx+bw,0);gr.addColorStop(0,'#2E9BFF');gr.addColorStop(1,me?'#FB6926':'#38BDF8');
+      c.save();c.fillStyle=gr;c.shadowColor='#38BDF8';c.shadowBlur=16;c.fill();c.restore();
+    });
+    // footer CTA
+    var fy=y0+2*(cardH+gap)+(s?90:40);
+    c.textAlign='center';c.fillStyle='#fff';c.font='600 '+(s?44:38)+'px Inter, Arial, sans-serif';
+    c.fillText(st.who==='Both'?"Coffee's on us. Pick your host.":"Coffee's on me. Help me win.",W/2,fy);
+    var pillW=s?700:620,pillH=s?96:84,px=(W-pillW)/2,py=fy+(s?50:34);
+    c.save();rr(c,px,py,pillW,pillH,pillH/2);c.fillStyle='#FB6926';c.shadowColor='#FB6926';c.shadowBlur=30;c.fill();c.restore();
+    c.fillStyle='#fff';c.font='700 '+(s?44:38)+'px Inter, Arial, sans-serif';c.fillText('getproytech.com/coffee',W/2,py+pillH/2+(s?15:13));
+    $('#st-cap').value=caption();
+  }
+
+  function seg(id,key){document.querySelectorAll(id+' button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll(id+' button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');st[key]=b.dataset.v;draw()})})}
+  seg('#st-who','who');seg('#st-size','size');
+  ['#st-g','#st-l','#st-day'].forEach(function(s){$(s).addEventListener('input',draw)});
+  $('#st-dl').addEventListener('click',function(){var a=document.createElement('a');a.download='race-to-20-day'+$('#st-day').value+'-'+st.who.toLowerCase()+'-'+st.size+'.png';a.href=$('#st-cv').toDataURL('image/png');a.click()});
+  $('#st-copy').addEventListener('click',function(){navigator.clipboard.writeText($('#st-cap').value).then(function(){$('#st-copy').textContent='Copied ✓';setTimeout(function(){$('#st-copy').textContent='Copy caption'},1500)})});
+
+  Promise.all([
+    load('g','/images/garrett-coffee.jpg'),load('l','/images/logan-coffee.jpg'),load('logo','/images/proytech-logo-nav.png'),
+    document.fonts?Promise.all([document.fonts.load('700 40px "Space Grotesk", Arial, sans-serif'),document.fonts.load('600 40px Inter, Arial, sans-serif'),document.fonts.load('700 40px Inter, Arial, sans-serif')]):Promise.resolve()
+  ]).then(draw);
+  fetch('https://proytech-crm.vercel.app/api/coffee-race',{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){
+    if(j&&j.ok){$('#st-g').value=j.counts.Garrett||0;$('#st-l').value=j.counts.Logan||0;$('#st-live').innerHTML='<b>Live</b> from the CRM · '+new Date(j.updated).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});draw()}
+    else $('#st-live').textContent='Live scores unavailable. Type the numbers in.';
+  }).catch(function(){$('#st-live').textContent='Live scores unavailable. Type the numbers in.'});
+})();
+
 })();
 </script>
 </body>
