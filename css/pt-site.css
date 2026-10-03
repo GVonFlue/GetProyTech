@@ -457,3 +457,20 @@ footer{background:rgba(4,13,34,.92)}
 .logo-img{height:56px;width:auto;display:block;margin-left:-8px}
 footer .logo-img{height:60px}
 @media (max-width:560px){.logo-img{height:44px}}
+/* suite stack svg */
+.ss-wrap{margin-top:30px}
+.ss-wrap svg.ss{display:block;width:100%;height:auto;overflow:visible}
+.stack-m{display:none}
+@media (max-width:760px){.ss-wrap{display:none}.stack-m{display:block;margin-top:26px}.stack-m .stack{margin-top:0}.stack-m .core{background:none;box-shadow:none;max-width:240px;animation:none}.stack-m .core::before{display:none}.stack-m .core img{width:100%;height:auto}}
+/* chaos to system graphic v2 */
+.ss-wrap svg.s2{display:block;width:100%;height:auto;overflow:visible}
+.s2m{text-align:center}
+.s2m-l{font-family:var(--disp);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;color:#7E8BB0}
+.s2m-l.r{color:var(--ice-2);margin-top:6px}
+.s2m-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+.s2m-chip{display:inline-flex;flex-direction:column;align-items:flex-start;padding:8px 12px;border-radius:10px;background:#121A33;border:1px solid #4A5677;color:#C9D1E6;font:600 .85rem var(--disp);transform:rotate(-2deg)}
+.s2m-chip:nth-child(even){transform:rotate(2deg)}
+.s2m-chip i{font:500 .7rem var(--body);font-style:normal;color:#7E8BB0}
+.s2m-nuc{width:200px;height:auto;margin:6px auto 0;display:block}
+.s2m-dash{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid rgba(56,189,248,.6);box-shadow:0 0 30px rgba(56,189,248,.3)}
+.s2m-dash img{width:100%;height:auto;display:block}
