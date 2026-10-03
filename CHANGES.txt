@@ -1,17 +1,14 @@
-MOBILE FIXES — all in css/pt-site.css (one file, append-only at the bottom)
+MOBILE FIXES — 2 files
 
-1. HERO (the main complaint): on phones the banner image was shown full-height
-   with the "ProyTech" wordmark baked into its bottom third, which collided with
-   the offer card and duplicated the logo. Now the banner is cropped to ~300px
-   showing only the node/circuit art (wordmark cropped out), the offer card pulls
-   up tighter over it, headline/lede sized down, and CTAs stack full-width.
+1) css/pt-site.css  (homepage hero + global image hardening)
+   - mobile hero banner cropped to node art (kills the duplicate baked-in wordmark)
+   - offer card pulled up tight, headline/CTAs sized for phone
+   - images no longer flash broken-icon alt text while loading
 
-2. IMAGE ALT-FLASH: the hero banner and the two dashboard screenshots would show
-   sprawling broken-icon alt text while loading/if slow. Added global hardening so
-   images show a clean placeholder instead of alt-text sprawl (transparent text +
-   subtle bg). Pure safety; invisible once images load.
+2) book.html  (the /book page)
+   - the two-column layout (.grid2) had NO mobile breakpoint, so on phones both
+     cards sat squished side by side and the form ran off-screen.
+   - added: under 860px the two columns stack to one. Desktop untouched.
 
-3. Added bottom padding so the fixed mobile "Book" bar never covers content.
-
-NO HTML CHANGES. Just replace css/pt-site.css in the repo.
-Verified: no horizontal scroll, hero fits one screen, all sections stack clean.
+Both verified: no horizontal scroll on a 390px phone.
+Just replace these two files in the repo (keep the paths).
