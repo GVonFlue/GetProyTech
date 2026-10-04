@@ -119,6 +119,10 @@
 .opt:hover{border-color:var(--o-2);transform:translateY(-1px)}
 .opt.sel{border-color:var(--o);background:rgba(251,105,38,.10);box-shadow:0 8px 22px rgba(251,105,38,.18)}
 .opt.disabled{opacity:.32;cursor:not-allowed;text-decoration:line-through;filter:grayscale(.6)}
+.custom-row{gap:8px;margin-top:10px;flex-wrap:wrap}
+.custom-row select{flex:1;min-width:170px;padding:10px 12px;border-radius:10px;border:1px solid rgba(125,211,252,.35);background:#06102a;color:#fff;font:inherit}
+.custom-row button{padding:10px 14px;border-radius:10px;border:0;background:var(--o);color:#fff;font-weight:700;cursor:pointer;font:inherit;font-weight:700}
+.custom-msg{font-size:.85rem;margin-top:8px;color:#A9BCD8}.custom-msg.ok{color:#7CE3A7;font-weight:600}.custom-msg.no{color:#FFB38A}
 .opt.disabled:hover{transform:none;border-color:rgba(125,211,252,.16)}
 .opt .ic{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(255,255,255,.06)}
 .opt.sel .ic{background:var(--o)}
@@ -311,6 +315,12 @@ nav.nav,footer,main{position:relative;z-index:2}
             <div class="opt" data-time="9:00 AM" data-slot="0900"><span class="ic">🌅</span><div><div class="t">9:00 – 10:00 AM</div><div class="d">Early start</div></div><span class="check">✓</span></div>
             <div class="opt" data-time="10:30 AM" data-slot="1030"><span class="ic">☀️</span><div><div class="t">10:30 – 11:30 AM</div><div class="d">Mid morning</div></div><span class="check">✓</span></div>
             <div class="opt" data-time="12:00 PM" data-slot="1200"><span class="ic">🍽️</span><div><div class="t">12:00 – 1:00 PM</div><div class="d">Lunch hour</div></div><span class="check">✓</span></div>
+            <div class="opt" data-time="1:30 PM" data-slot="1330"><span class="ic">🌤️</span><div><div class="t">1:30 – 2:30 PM</div><div class="d">Afternoon</div></div><span class="check">✓</span></div>
+            <div class="opt" data-time="5:00 PM" data-slot="1700"><span class="ic">🌇</span><div><div class="t">5:00 – 6:00 PM</div><div class="d">After work</div></div><span class="check">✓</span></div>
+            <div class="opt" data-time="6:30 PM" data-slot="1830"><span class="ic">🌙</span><div><div class="t">6:30 – 7:30 PM</div><div class="d">Evening</div></div><span class="check">✓</span></div>
+            <div class="opt custom" id="customOpt"><span class="ic">🕐</span><div style="flex:1"><div class="t">Pick your own time</div><div class="d">Choose a start time and we'll check the calendar</div>
+              <div class="custom-row" id="customRow" style="display:none"><select id="customTime" aria-label="Start time"></select><button type="button" id="customCheck">Check this time</button></div>
+              <div class="custom-msg" id="customMsg"></div></div><span class="check">✓</span></div>
           </div>
           <div class="slot-empty" id="noSlots" style="display:none">Nothing open that day — try another.</div>
         </div>
@@ -480,7 +490,7 @@ nav.nav,footer,main{position:relative;z-index:2}
     var changed=state.host!==h.dataset.host;
     hosts.forEach(function(x){x.classList.remove('sel')}); h.classList.add('sel'); state.host=h.dataset.host;
     /* each host has their own calendar: re-check open times for the new host */
-    if(changed&&state.date){ state.slot=null; state.time=null; loadAvailability(state.date); updateSummary(); }
+    if(changed&&state.date){ state.slot=null; state.time=null; if(typeof clearCustom==='function') clearCustom(); loadAvailability(state.date); updateSummary(); }
   }); });
 
   var daysWrap=document.getElementById('days');
@@ -496,11 +506,11 @@ nav.nav,footer,main{position:relative;z-index:2}
     daysWrap.appendChild(el);
   });
 
-  var times=[].slice.call(document.querySelectorAll('#times .opt')), noSlots=document.getElementById('noSlots');
+  var times=[].slice.call(document.querySelectorAll('#times .opt:not(.custom)')), noSlots=document.getElementById('noSlots');
   function selectDay(el,iso,label){
     document.querySelectorAll('.day').forEach(function(x){x.classList.remove('sel')});
     el.classList.add('sel'); state.date=iso; state.dateLabel=label; state.slot=null; state.time=null;
-    times.forEach(function(t){t.classList.remove('sel')}); loadAvailability(iso); updateSummary();
+    times.forEach(function(t){t.classList.remove('sel')}); if(typeof clearCustom==='function') clearCustom(); loadAvailability(iso); updateSummary();
   }
   function loadAvailability(iso){
     times.forEach(function(t){t.classList.remove('disabled','sel')}); noSlots.style.display='none';
@@ -528,9 +538,45 @@ nav.nav,footer,main{position:relative;z-index:2}
   }
   times.forEach(function(t){ t.addEventListener('click',function(){
     if(t.classList.contains('disabled')) return;
-    times.forEach(function(x){x.classList.remove('sel')}); t.classList.add('sel');
+    times.forEach(function(x){x.classList.remove('sel')}); t.classList.add('sel'); if(typeof clearCustom==='function') clearCustom();
     state.slot=t.dataset.slot; state.time=t.dataset.time; updateSummary();
   }); });
+
+  /* ---- PICK YOUR OWN TIME: any 60-minute start from 7:00 AM to 7:00 PM, in
+     15-minute steps, checked live against the chosen host's calendar ---- */
+  var customOpt=document.getElementById('customOpt'), customRow=document.getElementById('customRow'),
+      customSel=document.getElementById('customTime'), customBtn=document.getElementById('customCheck'), customMsg=document.getElementById('customMsg');
+  function fmt12(h,m){ var ap=h>=12?'PM':'AM', hh=h%12||12; return hh+':'+(m<10?'0':'')+m+' '+ap; }
+  for(var mins=7*60; mins<=19*60; mins+=15){ var h=Math.floor(mins/60), m=mins%60, o=document.createElement('option');
+    o.value=(h<10?'0':'')+h+':'+(m<10?'0':'')+m; o.textContent=fmt12(h,m)+' – '+fmt12(Math.floor((mins+60)/60),(mins+60)%60); customSel.appendChild(o); }
+  function clearCustom(){ customOpt.classList.remove('sel'); customMsg.textContent=''; customMsg.className='custom-msg'; }
+  customOpt.addEventListener('click',function(e){
+    if(e.target===customSel||e.target===customBtn) return;
+    if(!state.date){ customMsg.textContent='Pick a day first.'; customMsg.className='custom-msg no'; return; }
+    customRow.style.display='flex';
+  });
+  customSel.addEventListener('change',clearCustom);
+  customBtn.addEventListener('click',function(){
+    if(!state.date){ customMsg.textContent='Pick a day first.'; customMsg.className='custom-msg no'; return; }
+    var hhmm=customSel.value, label=customSel.options[customSel.selectedIndex].textContent.split(' – ')[0];
+    customMsg.textContent='Checking '+label+'…'; customMsg.className='custom-msg';
+    fetch(API+'/api/coffee-availability',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:state.date,host:state.host,custom:hhmm})})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(d){
+        if(!d||!d.ok||typeof d.custom!=='boolean') throw 0;
+        if(d.custom){
+          times.forEach(function(x){x.classList.remove('sel')}); customOpt.classList.add('sel');
+          state.slot='c'+hhmm.replace(':',''); state.time=label;
+          customMsg.textContent='✓ '+label+' is open. It\'s yours if you want it.'; customMsg.className='custom-msg ok';
+        } else {
+          if(customOpt.classList.contains('sel')){ state.slot=null; state.time=null; }
+          customOpt.classList.remove('sel');
+          customMsg.textContent=label+' is taken. Try another time.'; customMsg.className='custom-msg no';
+        }
+        updateSummary();
+      })
+      .catch(function(){ customMsg.textContent='Could not check that time. Pick one of the times above.'; customMsg.className='custom-msg no'; });
+  });
 
   var shops=[].slice.call(document.querySelectorAll('#shops .opt'));
   shops.forEach(function(s){ s.addEventListener('click',function(){
