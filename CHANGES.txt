@@ -1,14 +1,25 @@
-MOBILE FIXES — 2 files
+SITE-WIDE MOBILE SWEEP + giveaway removal
 
-1) css/pt-site.css  (homepage hero + global image hardening)
-   - mobile hero banner cropped to node art (kills the duplicate baked-in wordmark)
-   - offer card pulled up tight, headline/CTAs sized for phone
-   - images no longer flash broken-icon alt text while loading
+ROOT CAUSE: pages were built desktop-first with multi-column layouts that had
+no mobile breakpoint, so columns stayed side-by-side on phones and content
+(dashboards, forms, feature grids) ran off the screen.
 
-2) book.html  (the /book page)
-   - the two-column layout (.grid2) had NO mobile breakpoint, so on phones both
-     cards sat squished side by side and the form ran off-screen.
-   - added: under 860px the two columns stack to one. Desktop untouched.
+FIXED:
+  css/pt-site.css  — GLOBAL rule: hero grids (.phero-grid), feature grids (.feat),
+                     grid3/grid4 all stack to one column on phones. Heroes clip
+                     overflow so nothing spills sideways. Blobs capped on mobile.
+                     (This one file fixes suite, about, and any page using these classes.)
+  suite.html       — hero dashboard now stacks below the text (was bleeding off-right)
+  about.html       — hero + feature grid stack
+  resources.html   — feature/column grids stack
+  events.html      — grids stack + GIVEAWAY CARD REMOVED (the /win "Opening Night
+                     Giveaway" card). 3 event cards remain. Promo bar at the very
+                     top is sitewide and left alone.
+  roofing/auto/home-services.html — industry inline grids stack on mobile
+  ace.html         — fixed 35px horizontal overflow (buttons wrap, children capped)
+  book.html        — two-column form stacks (from the earlier fix, included here)
 
-Both verified: no horizontal scroll on a 390px phone.
-Just replace these two files in the repo (keep the paths).
+VERIFIED: all 14 shared-CSS pages = no horizontal scroll at 390px. Rendered
+suite/events/roofing to confirm they look right, not just pass the overflow check.
+
+Replace these files in the repo (keep paths).

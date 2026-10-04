@@ -255,7 +255,13 @@ h1 .line{display:block;overflow:hidden}h1 .line span{display:block;transform:tra
   .footer .fbot{flex-direction:column;text-align:center}
   .marquee .track{font-size:18px;gap:30px}
 }
-</style></head><body><div id="prog"></div><div id="glow"></div><div class="aurora"><div class="blob b1"></div><div class="blob b2"></div></div><nav class="nav"><div class="nav-inner">
+</style><style>@media(max-width:860px){
+[style*="grid-template-columns:1.05fr .95fr"],
+[style*="grid-template-columns:.72fr 1.28fr"]{grid-template-columns:1fr !important;gap:20px !important}
+[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr !important}
+[style*="grid-template-columns:96px 1fr 54px"]{grid-template-columns:1fr !important;text-align:center}
+}</style>
+</head><body><div id="prog"></div><div id="glow"></div><div class="aurora"><div class="blob b1"></div><div class="blob b2"></div></div><nav class="nav"><div class="nav-inner">
   <a href="index.html" class="logo" aria-label="ProyTech home">Proy<span class="accent">Tech</span></a>
   <div class="nav-links"><a href="lenders.html">Lenders</a><a href="realtors.html">Realtors</a><a href="businesses.html">Local Business</a><a href="suite.html">Business Suite</a><a href="events.html">Events</a><a href="#pricing">Pricing</a></div>
   <div class="nav-cta"><button class="btn btn-ghost">Talk to Ace</button><button class="btn btn-primary">Free Teardown</button></div>
