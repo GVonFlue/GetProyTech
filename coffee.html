@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Let's grab coffee · Garrett @ ProyTech</title>
-<meta name="description" content="Logan and I are racing to coffee with 20 Wichita business owners each by Oct 10. No pitch, no deck — just learning who's building what. I'm buying." />
+<title>Connecting the city · one coffee at a time · ProyTech</title>
+<meta name="description" content="Logan and I are racing to coffee with 20 Wichita business owners each by Oct 10. Connecting the city, one coffee at a time." />
 <meta name="theme-color" content="#061431" />
 
-<meta property="og:title" content="Let's grab coffee. I'm buying." />
+<meta property="og:title" content="Connecting the city, one coffee at a time" />
 <meta property="og:description" content="Racing to coffee with 20 Wichita business owners each by Oct 10. I want to hear your story and see who I can connect you with." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://getproytech.com/coffee" />
@@ -75,9 +75,14 @@
   font-family:var(--disp);font-weight:700;font-size:38px;color:#fff;background:var(--navy-2)}
 .c-avatar .cup{position:absolute;bottom:-5px;right:-5px;width:40px;height:40px;border-radius:50%;background:var(--o);
   display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.4);border:3px solid #071A3D}
-.coffee-hero h1{font-family:var(--disp);font-weight:700;letter-spacing:-.02em;line-height:1.03;color:#fff;font-size:clamp(2.4rem,7vw,3.9rem);margin-bottom:16px}
-.coffee-hero h1 em{font-style:normal;color:var(--o)}
-.coffee-hero .sub{font-size:1.1rem;color:var(--muted-d);max-width:540px;margin:0 auto}
+.coffee-hero h1{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.98;color:#fff;font-size:clamp(2.6rem,8.5vw,4.6rem);margin-bottom:18px;text-shadow:0 2px 40px rgba(46,155,255,.25)}
+.coffee-hero h1 em{font-style:normal;background:linear-gradient(100deg,#FF8A4C,#FB6926 55%,#FF5A1F);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;position:relative}
+.coffee-hero .c-kicker{font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px;
+  background:linear-gradient(90deg,#7DD3FC,#2E9BFF 40%,#FB6926 85%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200% auto;animation:kickshine 6s linear infinite}
+@keyframes kickshine{to{background-position:200% center}}
+.coffee-hero .sub{font-size:1.1rem;color:var(--muted-d);max-width:580px;margin:0 auto}
+.coffee-hero .sub b{color:#fff}
 .coffee-hero .sub b{color:#fff;font-weight:600}
 .coffee-hero .hint{font-family:var(--disp);font-size:12.5px;color:var(--muted-d);letter-spacing:.06em;margin-top:24px;display:inline-flex;gap:8px;align-items:center}
 .coffee-hero .hint .arw{animation:cbob 1.8s ease-in-out infinite}
@@ -174,6 +179,11 @@ body{background:#061431}
 .coffee-hero{background:radial-gradient(70% 55% at 50% -5%,rgba(251,105,38,.12),transparent 65%)}
 .book-sec{background:transparent}
 nav.nav,footer,main{position:relative;z-index:2}
+
+.race-clock{display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-family:var(--disp);font-weight:700;font-size:15px;
+  color:#fff;background:rgba(251,105,38,.12);border:1.5px solid rgba(251,105,38,.4);border-radius:100px;padding:10px 20px;
+  letter-spacing:.03em;box-shadow:0 6px 24px rgba(251,105,38,.18)}
+.race-clock::before{content:"⏳";font-size:15px}
 </style>
 <style>
 :root{--muted:#A9BCD8;--ice2:#7DD3FC}
@@ -244,10 +254,11 @@ nav.nav,footer,main{position:relative;z-index:2}
 <header class="coffee-hero">
   <div class="wrap">
     <div class="c-badge"><span class="dot"></span><span>The Race to 20 ☕ · ends Sat, Oct 10</span></div>
-    <h1>Let's grab coffee.<br><em>I'm buying.</em></h1>
-    <p class="sub">Logan and I are racing to have coffee with <b>20 Wichita business owners</b> each by <b>Saturday, October 10</b>. No pitch, no deck. We just want to hear your story and connect you with people you should know. Every coffee you book helps your host win.</p>
+    <div class="c-kicker">Connecting the city, one coffee at a time</div>
+    <h1>The race to meet everyone<br><em>building Wichita.</em></h1>
+    <p class="sub">Logan and I are on a sprint: <b>20 coffees each by Saturday, October 10</b>. No pitch, no deck. We want to know what you're building, hear the real story, and connect you with the people you should already know. Our whole mission is simple: be the ones who, when you need someone, <b>know someone</b>. Every coffee you book helps your host win the race.</p>
 
-    <div class="race-clock" id="raceClock" style="margin-top:22px;font-weight:700;color:#7DD3FC;letter-spacing:.04em"></div>
+    <div class="race-clock" id="raceClock"></div>
     <div class="hosts-label" style="margin-top:18px">Pick your host &mdash; <b>help them win</b></div>
     <div class="hosts" id="hosts">
       <div class="host sel leader" data-host="Garrett">
@@ -594,7 +605,7 @@ nav.nav,footer,main{position:relative;z-index:2}
     1:"{rival} and I made a bet.\nFirst one to 20 coffees with Wichita business owners wins.\nWe've got until Saturday.\nNo pitch. No deck. Coffee's on me.\nI just want to hear what you're building and who I can connect you with.\nLink to grab a time is in my bio.\nWho's the first business owner I need to meet?",
     2:"Coffee {mine} of 20 is in the books.\n{rival} is sitting at {theirs}.\n{left} days left and I'm not losing this one.\nIf you run a business in Wichita, the coffee's on me.\nWhat should I ask you first?",
     3:"Day 3 of the race to 20.\nMe: {mine}\n{rival}: {theirs}\nThe best part so far isn't the score.\nIt's the people I'd never have met otherwise.\nWho in Wichita should I be grabbing coffee with?",
-    4:"{left} days left in the race to 20.\nI'm at {mine}. {rival} is at {theirs}.\nIf you've been meaning to book, this is your sign.\nI'm buying, and I'll bring a few people you should know.\nCoffee or lunch?",
+    4:"{left} days left in the race to 20.\nI'm at {mine}. {rival} is at {theirs}.\nIf you've been meaning to book, this is your sign.\nCoffee's on me, and I'll connect you with a few people worth knowing.\nCoffee or lunch?",
     5:"Here's what I'm learning from {mine} coffees with local owners.\nEveryone's busy.\nAlmost nobody knows their real numbers.\nThat's not a work ethic problem. It's a systems problem.\nWant to grab coffee and talk about yours?",
     6:"{rival} thinks he's winning.\nScoreboard says {mine} to {theirs}.\n{left} days left.\nIf you run a business in Wichita and you've got 30 minutes, I want to meet you.\nWhere's your favorite coffee spot?",
     7:"Last full day before the finish line.\nMe: {mine} of 20\n{rival}: {theirs} of 20\nEvery open time this week is up for grabs.\nLink in my bio. Coffee's on me.\nWho's taking the last spots?",
