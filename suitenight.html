@@ -454,6 +454,25 @@ body{background:#010710}
 @keyframes tn-pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .tn-seatcount strong{font-family:var(--disp);color:var(--frost);font-size:1rem;font-weight:600}
 .tn-seatcount span{color:var(--muted);font-size:.85rem;font-weight:600}
+/* event photos */
+.tn-shot{margin:46px 0 0;border-radius:22px;overflow:hidden;border:1px solid rgba(125,211,252,.2);box-shadow:0 30px 70px -30px rgba(0,0,0,.7);position:relative}
+.tn-shot img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.tn-shot figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 22px 16px;font-family:var(--body);font-size:.92rem;color:#eaf6ff;background:linear-gradient(0deg,rgba(2,10,18,.82),transparent)}
+.tn-gallery{padding:110px 0;background:linear-gradient(180deg,#04202f,#020a12)}
+.tn-gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px;margin-top:46px}
+.tn-gal-grid figure{margin:0;border-radius:18px;overflow:hidden;border:1px solid rgba(125,211,252,.18);position:relative;background:#061826}
+.tn-gal-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.tn-gal-grid figure:hover img{transform:scale(1.05)}
+.tn-gal-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 12px;font-size:.84rem;font-weight:500;color:#eaf6ff;background:linear-gradient(0deg,rgba(2,10,18,.8),transparent);opacity:0;transition:opacity .3s}
+.tn-gal-grid figure:hover .tn-gal-cap{opacity:1}
+.tn-gal-hero{grid-column:span 2;grid-row:span 2}
+.tn-gal-tall{grid-row:span 2}
+@media(max-width:860px){
+  .tn-gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+  .tn-gal-hero{grid-column:span 2;grid-row:span 2}
+  .tn-gal-tall{grid-row:span 1}
+  .tn-shot img{aspect-ratio:4/3}
+}
 </style>
 </head>
 <body>
@@ -538,6 +557,7 @@ body{background:#010710}
         <p class="tn-lede tn-reveal">The best rooms in this city do not happen at a conference table. They happen when the right people share a night worth remembering.</p>
         <p class="tn-body tn-reveal">So we took a private suite for Thunder hockey and filled it with Wichita business owners and leaders. One night, a great game, catered food, and a small room of people actually worth knowing. No pitch. No pressure. Just the kind of connection that turns into real business three months later.<br><br>One night. One room. The people who move this city.</p>
       </div>
+      <figure class="tn-shot tn-reveal"><img src="/images/sn-networking.jpg" alt="Wichita business owners networking in the ProyTech suite at a Thunder game" loading="lazy"><figcaption>Opening night in the suite. Real conversations, not a conference room.</figcaption></figure>
     </div></div>
   </section>
 
@@ -553,6 +573,22 @@ body{background:#010710}
         <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">03</span><h3>Real connection, zero pressure</h3><p>One night, good people, great hockey. No pitch, no name-tag shuffle. Just conversations that turn into something later.</p></article>
         <article class="tn-card tn-reveal tn-card-ice"><span class="tn-card-n">04</span><h3>Catered in the suite</h3><p>Food and drinks handled so you can focus on the room and the game.</p></article>
         <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">05</span><h3>Captured on camera</h3><p>Our videographer is in the suite all night. You leave with content, not just a memory.</p></article>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="tn-gallery">
+    <div class="tn-wrap"><div class="tn-slab">
+      <span class="tn-kicker tn-kicker-ice tn-reveal">Opening night</span>
+      <h2 class="tn-h2 tn-reveal">See what the night looks like.</h2>
+      <p class="tn-sponsors-lede tn-reveal">A real look inside the last Suite Night at INTRUST Bank Arena. This is the room you're walking into.</p>
+      <div class="tn-gal-grid">
+        <figure class="tn-gal-hero tn-reveal"><img src="/images/sn-group-ice.jpg" alt="The Suite Night group on center ice after a Wichita Thunder game" loading="lazy"><figcaption class="tn-gal-cap">The whole room, on the ice after the game.</figcaption></figure>
+        <figure class="tn-reveal"><img src="/images/sn-suiteview.jpg" alt="View of the ice from the private suite seats" loading="lazy"><figcaption class="tn-gal-cap">Your view from the suite.</figcaption></figure>
+        <figure class="tn-reveal"><img src="/images/sn-guests.jpg" alt="Guests watching the game from the ProyTech suite" loading="lazy"><figcaption class="tn-gal-cap">Settled in for the game.</figcaption></figure>
+        <figure class="tn-reveal"><img src="/images/sn-lounge.jpg" alt="The private suite lounge and bar before doors" loading="lazy"><figcaption class="tn-gal-cap">The suite before doors.</figcaption></figure>
+        <figure class="tn-reveal"><img src="/images/sn-rinkview.jpg" alt="Looking down at the INTRUST Bank Arena ice" loading="lazy"><figcaption class="tn-gal-cap">INTRUST Bank Arena.</figcaption></figure>
       </div>
     </div></div>
   </section>
