@@ -733,16 +733,17 @@ window.addEventListener('scroll',function(){
   document.getElementById('stickyBar').classList.toggle('tn-bar-in', window.scrollY>700);
 },{passive:true});
 
-/* seat counter: static for the Nov 13 event. To make it auto-tick, add a
-   ?thundernov13seats=1 endpoint to the Apps Script and restore the fetch below. */
-/* (function(){
+/* seat counter: reads taken seats from Apps Script ?thundernov13seats=1 -> {taken},
+   subtracts from SEATS_TOTAL, falls back to full on any error. */
+(function(){
+  if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL.indexOf('PASTE_')===0)return;
   fetch(APPS_SCRIPT_URL+'?thundernov13seats=1').then(function(r){return r.json();}).then(function(d){
     var taken=(d&&typeof d.taken==='number')?d.taken:0;
     var avail=Math.max(SEATS_TOTAL-taken,0);
     var el=document.getElementById('seatCount');
     if(el)el.textContent=avail+' of '+SEATS_TOTAL+' seats';
   }).catch(function(){});
-})(); */
+})();
 
 /* form submit */
 document.getElementById('reserveForm').addEventListener('submit',function(e){
