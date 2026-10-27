@@ -101,6 +101,7 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .filelist{margin-top:12px;display:flex;flex-direction:column;gap:8px}
 .fileitem{display:flex;align-items:center;gap:12px;background:rgba(2,10,18,.5);border:1px solid var(--line);border-radius:11px;padding:9px 12px;font-size:.88rem}
 .fileitem .thumb{width:34px;height:34px;border-radius:8px;object-fit:cover;background:#061826;flex:none}
+.fileitem .thumb-ext{display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;letter-spacing:.03em;color:#7DD3FC;border:1px solid var(--line)}
 .fileitem .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--frost)}
 .fileitem .rm{cursor:pointer;color:var(--o);font-weight:700;font-size:1.1rem;line-height:1;background:none;border:none;flex:none}
 
@@ -237,9 +238,9 @@ footer a{color:var(--ice-2);text-decoration:none}
         <div class="drop" id="dropLogo" data-input="logoInput">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="1.6"><path d="M12 16V4m0 0L8 8m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
           <div class="big">Drop your logo or tap to upload</div>
-          <div class="small">PNG, SVG, or JPG · transparent background preferred</div>
+          <div class="small">PNG, SVG, AI, EPS or PDF · transparent background preferred</div>
         </div>
-        <input type="file" id="logoInput" accept="image/*,.svg" hidden>
+        <input type="file" id="logoInput" accept="image/*,.svg,.ai,.eps,.pdf,.zip" hidden>
         <div class="filelist" id="logoList"></div>
       </div>
 
@@ -249,7 +250,7 @@ footer a{color:var(--ice-2);text-decoration:none}
           <div class="big">Add a headshot</div>
           <div class="small">For personal brands, agents, and one-person shops</div>
         </div>
-        <input type="file" id="headInput" accept="image/*" hidden>
+        <input type="file" id="headInput" accept="image/*,.heic" hidden>
         <div class="filelist" id="headList"></div>
       </div>
 
@@ -259,7 +260,7 @@ footer a{color:var(--ice-2);text-decoration:none}
           <div class="big">Add photos, product shots, flyers</div>
           <div class="small">You can add several</div>
         </div>
-        <input type="file" id="assetInput" accept="image/*,.pdf" multiple hidden>
+        <input type="file" id="assetInput" accept="image/*,.svg,.ai,.eps,.pdf,.zip" multiple hidden>
         <div class="filelist" id="assetsList"></div>
       </div>
 
@@ -345,7 +346,9 @@ function wireDrop(dropId,inputId,key,multi){
     list.innerHTML='';
     store[key].forEach(function(it,idx){
       var row=document.createElement('div');row.className='fileitem';
-      var thumbHtml=/^image\//.test(it.type)?'<img class="thumb" src="data:'+it.type+';base64,'+it.data+'">':'<div class="thumb"></div>';
+      var isImg=/^image\/(png|jpe?g|gif|webp|svg\+xml)$/.test(it.type);
+      var ext=((it.name.split('.').pop()||'file').toUpperCase()).slice(0,4);
+      var thumbHtml=isImg?'<img class="thumb" src="data:'+it.type+';base64,'+it.data+'">':'<div class="thumb thumb-ext">'+ext+'</div>';
       row.innerHTML=thumbHtml+'<span class="nm">'+it.name+'</span>';
       var rm=document.createElement('button');rm.type='button';rm.className='rm';rm.textContent='×';
       rm.onclick=function(){store[key].splice(idx,1);render();};
