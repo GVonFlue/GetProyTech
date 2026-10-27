@@ -248,7 +248,7 @@ footer a{color:var(--ice-2);text-decoration:none}
           <div class="small">You can add several</div>
         </div>
         <input type="file" id="assetInput" accept="image/*,.pdf" multiple hidden>
-        <div class="filelist" id="assetList"></div>
+        <div class="filelist" id="assetsList"></div>
       </div>
 
       <div class="field">
@@ -404,7 +404,7 @@ document.getElementById('againBtn').addEventListener('click',function(){
   form.reset();store.logo=[];store.head=[];store.assets=[];
   document.getElementById('logoList').innerHTML='';
   document.getElementById('headList').innerHTML='';
-  document.getElementById('assetList').innerHTML='';
+  document.getElementById('assetsList').innerHTML='';
   document.getElementById('successBox').style.display='none';
   form.style.display='block';
   submitBtn.disabled=false;submitBtn.textContent='Submit & lock in my spot';
