@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Suite Night · Thunder Opening Night · Oct 17 | ProyTech</title>
-<meta name="description" content="Business Networking Done Different. A private suite for the Wichita Thunder opening night. A curated room of Wichita business owners, catered, with the game all night."/>
+<title>Suite Night · Thunder Hockey · Nov 13 | ProyTech</title>
+<meta name="description" content="Business Networking Done Different. A private suite for Wichita Thunder hockey on November 13. A curated room of Wichita business owners, catered, with the game all night."/>
 <meta property="og:title" content="Suite Night · Business Networking Done Different"/>
-<meta property="og:description" content="A private suite for the Thunder's opening night. A curated room of Wichita business owners. Oct 17 at INTRUST Bank Arena."/>
+<meta property="og:description" content="A private suite for Wichita Thunder hockey. A curated room of Wichita business owners. Nov 13 at INTRUST Bank Arena."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://getproytech.com/suitenight"/>
 <meta property="og:image" content="https://getproytech.com/images/suitenight-og.png"/>
@@ -139,7 +139,7 @@ body{background:#020a12}
 .tn-side{display:flex;flex-direction:column;justify-content:flex-start;gap:20px}
 .tn-eyebrow{display:inline-flex;align-self:flex-start;align-items:center;gap:9px;font-weight:700;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.3);backdrop-filter:blur(8px);padding:.55rem 1rem;border-radius:999px}
 .tn-puck{width:12px;height:8px;border-radius:3px;background:linear-gradient(#0b0f14,#020507);box-shadow:0 0 0 1px rgba(255,255,255,.15),0 0 12px rgba(56,189,248,.6)}
-.tn-h1{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.94;font-size:clamp(2.8rem,6.4vw,5.8rem);margin:22px 0 0;
+.tn-h1{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.92;font-size:clamp(3rem,7vw,6.4rem);margin:22px 0 0;text-shadow:0 0 44px rgba(56,189,248,.45);
   color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.5)}
 .tn-h1 em{font-style:normal;background:linear-gradient(100deg,var(--ice-2),#fff 40%,var(--ice) 60%,var(--ice-2));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:tn-shimmer 6s linear infinite}
 @keyframes tn-shimmer{to{background-position:220% center}}
@@ -490,11 +490,10 @@ body{background:#010710}
     <div class="tn-hero-inner">
       <div class="tn-hero-grid">
         <div class="tn-hero-main">
-          <div class="tn-eyebrow"><i class="tn-puck"></i> Suite Night · Thunder Opening Night · October 17, 2026</div>
+          <div class="tn-eyebrow"><i class="tn-puck"></i> Suite Night · Thunder Hockey · November 13, 2026</div>
           <h1 class="tn-h1">Business Networking<br><em>Done Different.</em></h1>
-          <p class="tn-hero-sub">A private suite for the Thunder's opening faceoff. A curated room of Wichita business owners, catered, with the game all night. This is what networking should feel like.</p>
-          <p class="tn-hero-kid"><a href="#youngest-entrepreneur" style="color:inherit;text-decoration:underline;text-underline-offset:4px">Plus one seat for Wichita's youngest entrepreneur.</a></p>
-          <div class="tn-seatcount"><i class="dot"></i><strong id="seatCount">19 of 25 seats</strong><span>available</span></div>
+          <p class="tn-hero-sub">A private suite for Wichita Thunder hockey. A curated room of Wichita business owners, catered, with the game all night. This is what networking should feel like.</p>
+                    <div class="tn-seatcount"><i class="dot"></i><strong id="seatCount">25 of 25 seats</strong><span>available</span></div>
           <div class="tn-hero-cta">
             <button class="tn-btn tn-btn-orange" onclick="scrollToForm()">Reserve your seat</button>
             <div class="tn-seat-pill"><strong>$50</strong><span>a seat<br>in the suite</span></div>
@@ -508,9 +507,9 @@ body{background:#010710}
             </div>
             <p class="tn-glass-label tn-glass-label-sp">Sponsors</p>
             <div class="tn-side-sponsors">
-              <a class="tn-side-slot" href="https://squaredawaytravel.com/" target="_blank" rel="noopener" style="background:#2d5638" aria-label="Squared Away Travel"><img src="/sponsors/squared-away-mark.webp" alt="Squared Away Travel" style="max-height:80px"></a>
-              <a class="tn-side-slot" href="https://sterlingedgefinancial.com/ben-benjamin" target="_blank" rel="noopener" style="background:#fff" aria-label="Sterling Edge Financial"><img src="/sponsors/sterling-edge-financial.webp" alt="Sterling Edge Financial" style="max-height:80px"></a>
-              <a class="tn-side-slot" href="https://earthworkswichita.com/" target="_blank" rel="noopener" style="background:#fff" aria-label="Earthworks Plan Design Build"><img src="/images/partners/earthworks.webp" alt="Earthworks Plan Design Build" style="max-height:80px"></a>
+              <button class="tn-side-slot tn-side-slot-open" onclick="openSponsor()">Open</button>
+              <button class="tn-side-slot tn-side-slot-open" onclick="openSponsor()">Open</button>
+              <button class="tn-side-slot tn-side-slot-open" onclick="openSponsor()">Open</button>
               <button class="tn-side-slot tn-side-slot-open" onclick="openSponsor()">Open</button>
             </div>
           </div>
@@ -518,13 +517,13 @@ body{background:#010710}
       </div>
       <div class="tn-bubble">
         <div class="tn-bub-cell"><span>Where</span><strong>INTRUST Bank Arena</strong></div>
-        <div class="tn-bub-cell"><span>Puck drop</span><strong>6:05 PM</strong></div>
-        <div class="tn-bub-cell"><span>When</span><strong>Sat · Oct 17</strong></div>
+        <div class="tn-bub-cell"><span>Puck drop</span><strong>7:05 PM</strong></div>
+        <div class="tn-bub-cell"><span>When</span><strong>Fri · Nov 13</strong></div>
         <div class="tn-bub-cell"><span>A seat</span><strong>$50 · covers the night</strong></div>
       </div>
     </div>
     <div class="tn-marquee"><div class="tn-track">
-      <div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#991;</i></span><span>OPENING NIGHT<i>&#991;</i></span><span>35TH SEASON<i>&#991;</i></span><span>PRIVATE SUITE<i>&#991;</i></span><span>PUCK DROP 6:05<i>&#991;</i></span><span>YOUNGEST ENTREPRENEUR<i>&#991;</i></span><span>THE THUNDER<i>&#991;</i></span></div><div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#991;</i></span><span>OPENING NIGHT<i>&#991;</i></span><span>35TH SEASON<i>&#991;</i></span><span>PRIVATE SUITE<i>&#991;</i></span><span>PUCK DROP 6:05<i>&#991;</i></span><span>YOUNGEST ENTREPRENEUR<i>&#991;</i></span><span>THE THUNDER<i>&#991;</i></span></div>
+      <div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#991;</i></span><span>THE ROOM IS ELECTRIC<i>&#991;</i></span><span>THUNDER HOCKEY<i>&#991;</i></span><span>PRIVATE SUITE<i>&#991;</i></span><span>PUCK DROP 7:05<i>&#991;</i></span><span>NOV 13<i>&#991;</i></span><span>THE THUNDER<i>&#991;</i></span></div><div class="tn-track-half"><span>BUSINESS NETWORKING DONE DIFFERENT<i>&#991;</i></span><span>THE ROOM IS ELECTRIC<i>&#991;</i></span><span>THUNDER HOCKEY<i>&#991;</i></span><span>PRIVATE SUITE<i>&#991;</i></span><span>PUCK DROP 7:05<i>&#991;</i></span><span>NOV 13<i>&#991;</i></span><span>THE THUNDER<i>&#991;</i></span></div>
     </div></div>
   </section>
 
@@ -537,45 +536,19 @@ body{background:#010710}
       <div class="tn-chips tn-reveal"><span>Private suite</span><span>Curated room</span><span>Opening night</span><span>No pitch</span></div>
       <div class="tn-what-grid">
         <p class="tn-lede tn-reveal">The best rooms in this city do not happen at a conference table. They happen when the right people share a night worth remembering.</p>
-        <p class="tn-body tn-reveal">So we took a private suite for the Thunder's opening night and filled it with Wichita business owners and leaders. One night, a great game, catered food, and a small room of people actually worth knowing. No pitch. No pressure. Just the kind of connection that turns into real business three months later.<br><br>Opening night. 35th season. A room that gets it.</p>
+        <p class="tn-body tn-reveal">So we took a private suite for Thunder hockey and filled it with Wichita business owners and leaders. One night, a great game, catered food, and a small room of people actually worth knowing. No pitch. No pressure. Just the kind of connection that turns into real business three months later.<br><br>One night. One room. The people who move this city.</p>
       </div>
     </div></div>
   </section>
 
   <!-- YOUNGEST ENTREPRENEUR -->
-  <section class="tn-kid" id="youngest-entrepreneur">
-    <div class="tn-kid-glow" aria-hidden="true"></div>
-    <div class="tn-wrap"><div class="tn-slab tn-slab-o">
-      <div class="tn-kid-grid">
-        <figure class="tn-kid-poster tn-reveal">
-          <picture>
-            <source srcset="/images/suitenight-kid.webp" type="image/webp">
-            <img src="/images/suitenight-kid.jpg" width="1080" height="1350" loading="lazy" alt="ProyTech presents: Wichita's youngest entrepreneur earns a seat at the table. The Child Entrepreneur Pitch Challenge winner and their parent join Suite Night on October 17 at INTRUST Bank Arena.">
-          </picture>
-        </figure>
-        <div class="tn-kid-copy">
-          <span class="tn-kicker tn-kicker-o tn-reveal">The only pitch in the room</span>
-          <h2 class="tn-kid-h tn-reveal">Wichita's youngest entrepreneur<br><em>earns a seat at the table.</em></h2>
-          <p class="tn-body tn-reveal">The Society of Child Entrepreneurs runs the Child Entrepreneur Pitch Challenge for kids ages 6 to 17. Local business leaders pick the finalists, and the kids pitch live in front of judges at Goddard Fall Fest. One young founder comes out on top, and ProyTech is putting that winner and their parent in the suite with us on opening night.</p>
-          <p class="tn-kid-note tn-reveal">We said no pitch in this room. We made one exception.</p>
-          <ol class="tn-kid-steps tn-reveal">
-            <li><strong>Oct 7</strong><span>Finalists announced</span></li>
-            <li><strong>Oct 10</strong><span>Live pitch at Goddard Fall Fest</span></li>
-            <li class="tn-kid-last"><strong>Oct 17</strong><span>The winner takes a seat in the suite</span></li>
-          </ol>
-          <div class="tn-kid-cta tn-reveal"><button class="tn-btn tn-btn-orange" onclick="scrollToForm()">Sit in that room</button></div>
-        </div>
-      </div>
-    </div></div>
-  </section>
-
   <!-- VALUE STACK -->
   <section class="tn-stack">
     <div class="tn-wrap"><div class="tn-slab">
       <span class="tn-kicker tn-kicker-ice tn-reveal">02 &middot; What you get</span>
       <h2 class="tn-h2 tn-h2-light tn-reveal">Everything in the suite.</h2>
       <div class="tn-cards">
-        <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">01</span><h3>A private suite for opening night</h3><p>Watch the Thunder drop the puck on their 35th season from a private suite at INTRUST Bank Arena. Your seat, your view, all night.</p></article>
+        <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">01</span><h3>A private suite for the night</h3><p>Watch the Thunder drop the puck from a private suite at INTRUST Bank Arena. Your seat, your view, all night.</p></article>
         <article class="tn-card tn-reveal tn-card-ice"><span class="tn-card-n">02</span><h3>A room worth being in</h3><p>A curated group of Wichita business owners and leaders. Not a mixer. A small room of people actually worth knowing, with a hockey game as the backdrop.</p></article>
         <article class="tn-card tn-reveal tn-card-blue"><span class="tn-card-n">03</span><h3>Real connection, zero pressure</h3><p>One night, good people, great hockey. No pitch, no name-tag shuffle. Just conversations that turn into something later.</p></article>
         <article class="tn-card tn-reveal tn-card-ice"><span class="tn-card-n">04</span><h3>Catered in the suite</h3><p>Food and drinks handled so you can focus on the room and the game.</p></article>
@@ -589,9 +562,9 @@ body{background:#010710}
     <div class="tn-wrap"><div class="tn-slab">
       <span class="tn-kicker tn-kicker-ice tn-reveal">Put your brand on the ice</span>
       <h2 class="tn-h2 tn-reveal">Sponsor the night.</h2>
-      <p class="tn-sponsors-lede tn-reveal">Get your brand in front of a curated room of Wichita business owners, and on every piece of promotion leading up to opening night. One spot left.</p>
+      <p class="tn-sponsors-lede tn-reveal">Get your brand in front of a curated room of Wichita business owners, and on every piece of promotion leading up to the night. Four spots.</p>
       <div class="tn-sponsor-grid">
-        <div class="tn-sponsor-card tn-reveal"><a href="https://squaredawaytravel.com/" target="_blank" rel="noopener" class="tn-sponsor-openbtn" style="text-decoration:none"><span class="tn-sponsor-logo" style="background:#2d5638;padding:0;overflow:hidden"><img src="/sponsors/squared-away-travel.webp" alt="Squared Away Travel" style="max-height:100%;max-width:100%"/></span><span class="tn-sponsor-link" style="margin-top:16px">Squared Away Travel &rarr;</span></a></div><div class="tn-sponsor-card tn-reveal"><a href="https://sterlingedgefinancial.com/ben-benjamin" target="_blank" rel="noopener" class="tn-sponsor-openbtn" style="text-decoration:none"><span class="tn-sponsor-logo"><img src="/sponsors/sterling-edge-financial.webp" alt="Sterling Edge Financial"/></span><span class="tn-sponsor-link" style="margin-top:16px">Sterling Edge Financial &rarr;</span></a></div><div class="tn-sponsor-card tn-reveal"><a href="https://earthworkswichita.com/" target="_blank" rel="noopener" class="tn-sponsor-openbtn" style="text-decoration:none"><span class="tn-sponsor-logo"><img src="/images/partners/earthworks.webp" alt="Earthworks Plan Design Build"/></span><span class="tn-sponsor-link" style="margin-top:16px">Earthworks &rarr;</span></a></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div>
+        <div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div><div class="tn-sponsor-card tn-reveal"><button type="button" class="tn-sponsor-openbtn" onclick="openSponsor()"><span class="tn-sponsor-logo tn-sponsor-logo-open"><span>Open Spot</span></span><span class="tn-sponsor-link tn-sponsor-link-open">See what you get &rarr;</span></button></div>
       </div>
     </div></div>
   </section>
@@ -603,7 +576,7 @@ body{background:#010710}
         <div class="tn-reserve-copy tn-reveal">
           <span class="tn-kicker tn-kicker-ice">03 &middot; Reserve</span>
           <h2 class="tn-h2 tn-h2-light">Grab your seat.</h2>
-          <p>Straight up, before you type anything: <strong>$50 reserves your seat</strong> in the suite for opening night. That covers the suite, the catered food, and the game.</p>
+          <p>Straight up, before you type anything: <strong>$50 reserves your seat</strong> in the suite for the night. That covers the suite, the catered food, and the game.</p>
           <p class="tn-small">You are not paying on this page. Fill this out, I text you to confirm the seat and send a simple payment link. The seat locks once payment is in.</p>
           <div class="tn-badge-row"><span>Reserve</span><i>&rarr;</i><span>I text you</span><i>&rarr;</i><span>Pay &middot; seat locked</span></div>
         </div>
@@ -658,14 +631,14 @@ body{background:#010710}
           <span class="tn-kicker">04 &middot; Who's hosting</span>
           <h2 class="tn-h2">The guy who shows up.</h2>
           <p>I'm Garrett Von Flue, co-CEO of ProyTech, and the guy who'd rather build a room than rent one.</p>
-          <p>Suite Night started at the ballpark and it's become the thing I'm proudest of, real rooms of real people who leave actually knowing each other. This one trades the diamond for the ice, and opening night is the perfect stage for it.</p>
+          <p>Suite Night started at the ballpark and it's become the thing I'm proudest of, real rooms of real people who leave actually knowing each other. This one trades the diamond for the ice, and a packed arena is the perfect stage for it.</p>
           <p class="tn-host-line">No pitch. Even if we never work together.</p>
         </div>
         <div class="tn-host-panel tn-reveal">
           <div class="tn-panel-glow"></div>
           <div class="tn-stat"><strong>25</strong><span>seats in the suite</span></div>
-          <div class="tn-stat"><strong>1</strong><span>private suite, opening night</span></div>
-          <div class="tn-stat"><strong>35th</strong><span>Thunder season faceoff</span></div>
+          <div class="tn-stat"><strong>1</strong><span>private suite, one night</span></div>
+          <div class="tn-stat"><strong>Nov</strong><span>13 &middot; vs the Idaho Steelheads</span></div>
           <div class="tn-panel-tags"><span>ProyTech</span><span>Wichita Thunder</span><span>Suite Night</span></div>
         </div>
       </div>
@@ -678,11 +651,11 @@ body{background:#010710}
       <span class="tn-kicker tn-reveal">05 &middot; Before you ask</span>
       <h2 class="tn-h2 tn-reveal">The honest answers.</h2>
       <div class="tn-faq-list tn-reveal" id="faqList">
-        <div class="tn-faq-row tn-faq-open"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>What is this, exactly?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Suite Night is a private-suite networking night at a Wichita game. This one is the Thunder's opening night on October 17, 2026. A small, curated room of business owners and leaders, catered, with the game from the suite.</p></div></div>
+        <div class="tn-faq-row tn-faq-open"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>What is this, exactly?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Suite Night is a private-suite networking night at a Wichita game. This one is Thunder hockey on November 13, 2026, against the Idaho Steelheads. A small, curated room of business owners and leaders, catered, with the game from the suite.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>What does a seat cost?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>A seat in the suite is $50. That covers your spot for the whole night, the suite, the catered food, and the game. You will see the exact amount before you submit anything.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Do I pay on this page?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>No. You reserve here, I text you to confirm your seat and send a simple payment link. The seat locks once payment is in. That is the only reason payment exists, so everyone who says yes actually shows up.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Who is in the room?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Wichita business owners, executives, and a few of the people who quietly move this city. It is curated on purpose and kept small.</p></div></div>
-        <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>When is it?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>October 17, 2026 at INTRUST Bank Arena. Puck drops at 6:05 PM. Plan to arrive a little before for the room and the food.</p></div></div>
+        <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>When is it?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>November 13, 2026 at INTRUST Bank Arena. Puck drops at 7:05 PM. Plan to arrive a little before for the room and the food.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Who's the kid in the suite?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>The winner of the Society of Child Entrepreneurs Pitch Challenge, crowned live at Goddard Fall Fest on October 10. They join us with a parent. Wichita's next generation of business owners, sitting in the same room as this one.</p></div></div>
         <div class="tn-faq-row"><button class="tn-faq-q" onclick="toggleFaq(this)"><span>Can I bring my team?</span><i class="tn-faq-plus"></i></button><div class="tn-faq-a"><p>Absolutely. Grab multiple seats when you reserve. Bringing a few key people to a room like this is one of the better moves you can make.</p></div></div>
       </div>
@@ -694,13 +667,13 @@ body{background:#010710}
     <div class="tn-wrap tn-reveal">
       <svg class="tn-final-bolt" viewBox="0 0 44 64" aria-hidden="true"><path d="M27 0 L4 36 H20 L14 64 L40 24 H24 Z" fill="#eaf6ff"/></svg>
       <h2>Opening night.<br><em>Center ice.</em></h2>
-      <p>October 17, 2026 &middot; INTRUST Bank Arena</p>
+      <p>November 13, 2026 &middot; INTRUST Bank Arena</p>
       <button class="tn-btn tn-btn-orange tn-btn-lg" onclick="scrollToForm()">Reserve your seat</button>
     </div>
   </section>
 
   <!-- STICKY BAR -->
-  <div class="tn-bar" id="stickyBar"><span><strong>$50</strong> a seat &middot; Oct 17</span><button class="tn-btn tn-btn-orange tn-btn-sm" onclick="scrollToForm()">Reserve</button></div>
+  <div class="tn-bar" id="stickyBar"><span><strong>$50</strong> a seat &middot; Nov 13</span><button class="tn-btn tn-btn-orange tn-btn-sm" onclick="scrollToForm()">Reserve</button></div>
 
   <!-- SPONSOR MODAL -->
   <div class="tn-modal" id="sponsorModal" role="dialog" aria-modal="true" aria-label="Become a sponsor" style="display:none">
@@ -709,13 +682,13 @@ body{background:#010710}
       <button type="button" class="tn-modal-x" onclick="closeSponsor()" aria-label="Close">&#10005;</button>
       <span class="tn-kicker tn-kicker-ice">Become a sponsor</span>
       <h3 class="tn-modal-h">Put your brand on the ice.</h3>
-      <div class="tn-modal-price"><strong>$250</strong><span>one sponsor spot &middot; includes 1 ticket</span></div>
+      <div class="tn-modal-price"><strong>$350</strong><span>one sponsor spot &middot; includes 1 ticket</span></div>
       <div class="tn-modal-cols">
         <div class="tn-modal-col"><h4 class="tn-modal-colh tn-modal-colh-blue">What you get</h4><ul class="tn-modal-list">
           <li>Your logo on the website</li><li>Your logo on every social post for this event</li><li>Your own dedicated shoutout post</li><li>1 ticket to Suite Night in the suite</li><li>Your brand featured inside the suite</li><li>Face time with a curated room of business owners</li>
         </ul></div>
         <div class="tn-modal-col"><h4 class="tn-modal-colh tn-modal-colh-ice">Why it works</h4><ul class="tn-modal-list">
-          <li>A small, high-level room, not a crowd</li><li>Weeks of promotion with your name on it</li><li>Opening night visibility, 35th season</li><li>You're in the room, not just on a banner</li>
+          <li>A small, high-level room, not a crowd</li><li>Weeks of promotion with your name on it</li><li>Visibility in front of a curated room</li><li>You're in the room, not just on a banner</li>
         </ul></div>
       </div>
       <div class="tn-modal-contact">
@@ -760,16 +733,16 @@ window.addEventListener('scroll',function(){
   document.getElementById('stickyBar').classList.toggle('tn-bar-in', window.scrollY>700);
 },{passive:true});
 
-/* seat counter: reads taken from Apps Script ?thunderseats=1 -> {taken} ; falls back to full */
-(function(){
-  if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL.indexOf('PASTE_')===0)return;
-  fetch(APPS_SCRIPT_URL+'?thunderseats=1').then(function(r){return r.json();}).then(function(d){
+/* seat counter: static for the Nov 13 event. To make it auto-tick, add a
+   ?thundernov13seats=1 endpoint to the Apps Script and restore the fetch below. */
+/* (function(){
+  fetch(APPS_SCRIPT_URL+'?thundernov13seats=1').then(function(r){return r.json();}).then(function(d){
     var taken=(d&&typeof d.taken==='number')?d.taken:0;
     var avail=Math.max(SEATS_TOTAL-taken,0);
     var el=document.getElementById('seatCount');
     if(el)el.textContent=avail+' of '+SEATS_TOTAL+' seats';
   }).catch(function(){});
-})();
+})(); */
 
 /* form submit */
 document.getElementById('reserveForm').addEventListener('submit',function(e){
@@ -779,11 +752,11 @@ document.getElementById('reserveForm').addEventListener('submit',function(e){
   var name=f.name.value.trim(),email=f.email.value.trim(),phone=f.phone.value.trim(),role=f.role.value;
   if(!name||!email||!phone||!role){err.textContent='Name, email, phone and role are required.';err.style.display='block';return;}
   var btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='Holding your seat...';
-  var payload={name:name,email:email,phone:phone,business:f.business.value.trim(),role:role,seats:f.seats.value,note:f.note.value.trim(),source:'thunder',submittedAt:new Date().toISOString()};
+  var payload={name:name,email:email,phone:phone,business:f.business.value.trim(),role:role,seats:f.seats.value,note:f.note.value.trim(),source:'thundernov13',submittedAt:new Date().toISOString()};
   if(APPS_SCRIPT_URL&&APPS_SCRIPT_URL.indexOf('PASTE_')!==0){
     fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).catch(function(){});
   }
-  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.assign({access_key:WEB3FORMS_KEY,subject:'\ud83c\udfd2 New Thunder Suite Night Reservation',from_name:'Suite Night · Thunder Opening Night'},payload))})
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.assign({access_key:WEB3FORMS_KEY,subject:'\ud83c\udfd2 New Suite Night Reservation (Nov 13)',from_name:'Suite Night · Thunder Hockey Nov 13'},payload))})
   .then(function(r){return r.json();}).then(function(data){
     if(!data.success)throw new Error('fail');
     document.getElementById('formWrap').style.display='none';
