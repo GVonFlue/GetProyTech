@@ -369,16 +369,35 @@ form.addEventListener('submit',function(e){
 
   submitBtn.disabled=true;submitBtn.textContent='Uploading your assets…';
 
-  fetch(SPONSOR_SCRIPT_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)})
-    .then(function(){
-      form.style.display='none';
-      document.getElementById('successBox').style.display='block';
-      document.getElementById('successBox').scrollIntoView({behavior:'smooth',block:'center'});
-    })
-    .catch(function(){
-      submitBtn.disabled=false;submitBtn.textContent='Submit & lock in my spot';
-      showErr('Something went wrong sending that. Please try again, or text Garrett at 901-335-3905.');
-    });
+  // Reliable Apps Script submission via hidden-iframe form POST (no CORS/redirect issues)
+  var sink=document.createElement('iframe');
+  sink.name='snsink_'+Date.now();
+  sink.style.display='none';
+  document.body.appendChild(sink);
+
+  var hform=document.createElement('form');
+  hform.method='POST';
+  hform.action=SPONSOR_SCRIPT_URL;
+  hform.target=sink.name;
+  hform.style.display='none';
+  var ta=document.createElement('textarea');
+  ta.name='payload';
+  ta.value=JSON.stringify(payload);
+  hform.appendChild(ta);
+  document.body.appendChild(hform);
+
+  var finished=false;
+  function succeed(){
+    if(finished)return;finished=true;
+    form.style.display='none';
+    var sb=document.getElementById('successBox');
+    sb.style.display='block';
+    sb.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(function(){try{hform.remove();sink.remove();}catch(e){}},1500);
+  }
+  sink.addEventListener('load',succeed);
+  setTimeout(succeed,20000);
+  hform.submit();
 });
 
 document.getElementById('againBtn').addEventListener('click',function(){
