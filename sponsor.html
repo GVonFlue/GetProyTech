@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Become a Suite Night Sponsor | ProyTech</title>
+<meta name="description" content="Sponsor a ProyTech Suite Night at Wichita Thunder hockey. Get in front of a curated room of Wichita business owners, on the jumbotron, and across our social. Tell us about your business and we'll handle the rest."/>
+<meta property="og:title" content="Become a Suite Night Sponsor · ProyTech x Wichita Thunder"/>
+<meta property="og:description" content="Put your brand in the suite, on the jumbotron, and across our social. A curated room of Wichita business owners at INTRUST Bank Arena."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://getproytech.com/sponsor"/>
+<meta property="og:image" content="https://getproytech.com/images/suitenight-og-nov13.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<link rel="icon" href="/proytechlogo.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#005DA6;--blue-lite:#2E86C8;--ice:#38BDF8;--ice-2:#7DD3FC;--frost:#EAF6FF;
+  --mid:#083253;--deep:#04263f;--ink:#03151f;--near:#020a12;
+  --o:#FF6B35;--o-deep:#E4551F;--muted:#9fb8cc;--txt:#dceaf5;
+  --disp:'Space Grotesk',system-ui,-apple-system,sans-serif;--body:'Inter',system-ui,-apple-system,sans-serif;
+  --line:rgba(125,211,252,.16);--card:rgba(255,255,255,.035);--card-2:rgba(255,255,255,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--near);color:var(--txt);overflow-x:clip;line-height:1.5}
+a{color:inherit}
+img{max-width:100%;display:block}
+
+/* nav */
+.pt-nav{position:sticky;top:14px;z-index:80;margin:14px auto 0;max-width:1180px;padding:0 20px;font-family:var(--body)}
+.pt-nav-inner{position:relative;display:flex;align-items:center;gap:22px;background:rgba(255,255,255,.94);backdrop-filter:blur(16px) saturate(1.4);border:1px solid #ECE9E3;border-radius:40px;padding:11px 12px 11px 22px;box-shadow:0 16px 40px -20px rgba(20,22,55,.5)}
+.pt-logo-img{height:30px;width:auto}
+.pt-nav-links{display:flex;gap:4px;margin-left:8px}
+.pt-nav-links a{padding:9px 14px;border-radius:30px;color:#12142B;font-size:14px;font-weight:500;text-decoration:none}
+.pt-nav-links a:hover{background:#FBFAF8}
+.pt-nav-cta{margin-left:auto;display:flex;gap:8px}
+.pt-btn{border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:14px;border-radius:30px;padding:11px 20px;transition:transform .25s,box-shadow .25s;text-decoration:none;display:inline-flex;align-items:center}
+.pt-btn-primary{background:#FF4D14;color:#fff;box-shadow:0 12px 26px -10px rgba(255,77,20,.6)}
+.pt-btn-primary:hover{transform:translateY(-2px)}
+.pt-btn-ghost{background:transparent;color:#12142B;border:1px solid #ECE9E3}
+.pt-burger{display:none;margin-left:auto;width:42px;height:42px;border:1px solid #ECE9E3;border-radius:13px;background:#fff;cursor:pointer;place-items:center;flex:none}
+.pt-burger span,.pt-burger span::before,.pt-burger span::after{display:block;width:18px;height:2px;background:#12142B;border-radius:2px;position:relative}
+.pt-burger span::before{content:"";position:absolute;top:-6px}.pt-burger span::after{content:"";position:absolute;top:6px}
+.pt-nav-inner.open .pt-burger span{background:transparent}
+.pt-drop{display:none;position:absolute;top:calc(100% + 10px);left:0;right:0;background:#fff;border:1px solid #ECE9E3;border-radius:22px;box-shadow:0 26px 54px -20px rgba(20,22,55,.44);padding:12px;flex-direction:column;gap:2px;z-index:90}
+.pt-drop a{padding:13px 14px;border-radius:13px;color:#12142B;font-size:16px;font-weight:500;text-decoration:none}.pt-drop a:hover{background:#FBFAF8}
+.pt-nav-inner.open .pt-drop{display:flex}
+
+/* hero */
+.hero{position:relative;padding:120px 20px 70px;overflow:hidden;background:linear-gradient(180deg,#041c30 0%,#03151f 62%,#020a12 100%);isolation:isolate}
+.hero-glow{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(60% 50% at 20% 10%, rgba(56,189,248,.22), transparent 70%),
+  radial-gradient(50% 50% at 90% 0%, rgba(255,107,53,.16), transparent 70%);pointer-events:none}
+.flake{position:absolute;top:-6%;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle,#fff,rgba(255,255,255,.2));opacity:.6;animation:fall linear infinite;z-index:1}
+@keyframes fall{to{transform:translateY(112vh) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.flake{display:none}}
+.hero-in{position:relative;z-index:2;max-width:860px;margin:0 auto;text-align:center}
+.kicker{display:inline-block;font-weight:700;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ice);border:1px solid var(--line);border-radius:999px;padding:8px 16px;background:rgba(56,189,248,.06)}
+h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.02;font-size:clamp(2.4rem,6vw,4.2rem);color:var(--frost);margin:22px 0 0}
+h1 .o{color:var(--o)}
+.sub{font-size:clamp(1.02rem,2vw,1.2rem);color:var(--muted);max-width:620px;margin:20px auto 0}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
+.trust span{font-size:.82rem;color:var(--ice-2);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+
+/* value strip */
+.value{max-width:1080px;margin:-34px auto 0;padding:0 20px;position:relative;z-index:5}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.vcard h3{font-family:var(--disp);font-size:1.05rem;color:var(--frost);margin-bottom:8px}
+.vcard p{font-size:.92rem;color:var(--muted)}
+.vcard .n{font-size:.78rem;font-weight:700;letter-spacing:.14em;color:var(--o);text-transform:uppercase}
+
+/* form */
+.wrap{max-width:780px;margin:54px auto 0;padding:0 20px 90px}
+.card{background:var(--card-2);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,4vw,40px);box-shadow:0 30px 80px -40px rgba(0,0,0,.8)}
+.step{font-family:var(--disp);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);margin:34px 0 4px}
+.step:first-of-type{margin-top:0}
+.step-note{font-size:.86rem;color:var(--muted);margin-bottom:18px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{margin-bottom:16px}
+label{display:block;font-size:.9rem;font-weight:600;color:var(--frost);margin-bottom:7px}
+label .req{color:var(--o)}
+label .opt{color:var(--muted);font-weight:500;font-size:.82rem}
+.hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+input,select,textarea{width:100%;font-family:var(--body);font-size:1rem;color:var(--frost);background:rgba(2,10,18,.55);border:1px solid var(--line);border-radius:13px;padding:13px 15px;transition:border .2s,box-shadow .2s}
+input::placeholder,textarea::placeholder{color:#5f7589}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ice);box-shadow:0 0 0 3px rgba(56,189,248,.16)}
+textarea{min-height:96px;resize:vertical}
+select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237DD3FC' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 15px center}
+
+/* file drop */
+.drop{border:1.5px dashed rgba(125,211,252,.35);border-radius:15px;padding:22px;text-align:center;cursor:pointer;transition:.2s;background:rgba(56,189,248,.03)}
+.drop:hover,.drop.over{border-color:var(--ice);background:rgba(56,189,248,.08)}
+.drop svg{margin:0 auto 10px;display:block}
+.drop .big{font-weight:600;color:var(--frost)}
+.drop .small{font-size:.82rem;color:var(--muted);margin-top:4px}
+.filelist{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.fileitem{display:flex;align-items:center;gap:12px;background:rgba(2,10,18,.5);border:1px solid var(--line);border-radius:11px;padding:9px 12px;font-size:.88rem}
+.fileitem .thumb{width:34px;height:34px;border-radius:8px;object-fit:cover;background:#061826;flex:none}
+.fileitem .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--frost)}
+.fileitem .rm{cursor:pointer;color:var(--o);font-weight:700;font-size:1.1rem;line-height:1;background:none;border:none;flex:none}
+
+.submit{margin-top:30px}
+.tn-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--body);font-weight:700;font-size:1.04rem;line-height:1;border:none;border-radius:999px;cursor:pointer;padding:1.15rem 2rem;transition:.24s ease;white-space:nowrap;width:100%}
+.tn-btn-orange{background:var(--o);color:#fff;box-shadow:0 10px 30px rgba(255,107,53,.4)}
+.tn-btn-orange:hover{background:var(--o-deep);transform:translateY(-2px)}
+.tn-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.formnote{text-align:center;font-size:.82rem;color:var(--muted);margin-top:14px}
+
+/* states */
+.err{display:none;background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.4);color:#ffd7c6;border-radius:12px;padding:12px 15px;font-size:.9rem;margin-top:18px}
+.success{display:none;text-align:center;padding:30px 10px}
+.success .ring{width:76px;height:76px;border-radius:50%;background:rgba(56,189,248,.12);border:1px solid var(--ice);display:grid;place-items:center;margin:0 auto 20px}
+.success h2{font-family:var(--disp);color:var(--frost);font-size:1.7rem;margin-bottom:10px}
+.success p{color:var(--muted);max-width:460px;margin:0 auto}
+.success .again{margin-top:22px;display:inline-block;color:var(--ice);font-weight:600;cursor:pointer;text-decoration:none;border-bottom:1px solid var(--line)}
+
+footer{border-top:1px solid var(--line);padding:30px 20px;text-align:center;color:var(--muted);font-size:.85rem}
+footer a{color:var(--ice-2);text-decoration:none}
+
+@media(max-width:720px){
+  .pt-nav-links,.pt-nav-cta{display:none}
+  .pt-burger{display:grid}
+  .value-grid{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="pt-nav"><div class="pt-nav-inner">
+  <a href="index.html" class="pt-logo" aria-label="ProyTech home"><img src="/proytechlogo.png" alt="ProyTech" class="pt-logo-img"></a>
+  <div class="pt-nav-links">
+    <a href="lenders.html">Lenders</a>
+    <a href="realtors.html">Realtors</a>
+    <a href="businesses.html">Local Business</a>
+    <a href="suite.html">Business Suite</a>
+    <a href="events.html">Events</a>
+  </div>
+  <div class="pt-nav-cta"><a class="pt-btn pt-btn-ghost" href="suitenight.html">Suite Night</a><a class="pt-btn pt-btn-primary" href="events.html">Events</a></div>
+  <button class="pt-burger" aria-label="Menu" onclick="this.closest('.pt-nav-inner').classList.toggle('open')"><span></span></button>
+  <div class="pt-drop">
+    <a href="lenders.html">Lenders</a><a href="realtors.html">Realtors</a><a href="businesses.html">Local Business</a><a href="suite.html">Business Suite</a><a href="events.html">Events</a><a href="suitenight.html">Suite Night</a>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div id="flakes"></div>
+  <div class="hero-in">
+    <span class="kicker">ProyTech × Wichita Thunder</span>
+    <h1>Become a <span class="o">Suite Night</span> Sponsor</h1>
+    <p class="sub">Put your brand in the suite, on the jumbotron, and across our social. Fill this out once and we handle the rest, your logo, your post, your spotlight.</p>
+    <div class="trust">
+      <span>Curated room of Wichita owners</span>
+      <span>Jumbotron logo lineup</span>
+      <span>Dedicated sponsor post</span>
+      <span>Website feature</span>
+    </div>
+  </div>
+</header>
+
+<section class="value">
+  <div class="value-grid">
+    <div class="vcard"><div class="n">01 · Reach</div><h3>In the room</h3><p>A night in a private suite with a hand-picked room of Wichita business owners and decision makers, not a crowd of strangers.</p></div>
+    <div class="vcard"><div class="n">02 · Spotlight</div><h3>Your own post</h3><p>We build you a dedicated sponsor graphic and caption, posted to our pages and yours, plus your logo on the arena jumbotron.</p></div>
+    <div class="vcard"><div class="n">03 · Done for you</div><h3>Zero lift</h3><p>Drop your info and logo here one time. We create everything, tag you, and keep your assets on file for the next night.</p></div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="card">
+    <form id="sponsorForm" novalidate>
+
+      <div class="step">Your business</div>
+      <p class="step-note">The basics so we know who you are and how to reach you.</p>
+      <div class="row">
+        <div class="field"><label>Business name <span class="req">*</span></label><input name="business" required placeholder="Acme Co."></div>
+        <div class="field"><label>Your name <span class="req">*</span></label><input name="name" required placeholder="First and last"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Email <span class="req">*</span></label><input type="email" name="email" required placeholder="you@business.com"></div>
+        <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" name="phone" required placeholder="(316) 000-0000"></div>
+      </div>
+      <div class="field"><label>Website <span class="opt">(optional)</span></label><input name="website" placeholder="https://"></div>
+      <div class="row">
+        <div class="field"><label>Instagram <span class="opt">(optional)</span></label><input name="instagram" placeholder="@handle"></div>
+        <div class="field"><label>Facebook <span class="opt">(optional)</span></label><input name="facebook" placeholder="facebook.com/yourpage"></div>
+      </div>
+
+      <div class="step">How we promote you</div>
+      <p class="step-note">This is what we turn into your sponsor post, your website feature, and how we introduce you in the room.</p>
+      <div class="field">
+        <label>One line on what you do <span class="req">*</span></label>
+        <input name="blurb" required maxlength="140" placeholder="e.g. We help Wichita families buy their first home.">
+        <div class="hint">Keep it tight, this is the hook we lead your post with.</div>
+      </div>
+      <div class="field">
+        <label>The offer or action you want us to drive <span class="opt">(optional)</span></label>
+        <textarea name="offer" placeholder="What should people do after they see you? Book a call, visit, mention Suite Night for a deal, etc."></textarea>
+      </div>
+      <div class="field">
+        <label>Anything you want the room to know <span class="opt">(optional)</span></label>
+        <textarea name="note" placeholder="A story, a milestone, what makes you different. We'll weave it in."></textarea>
+      </div>
+      <div class="field">
+        <label>Which Suite Night are you sponsoring?</label>
+        <select name="event">
+          <option value="Nov 13 vs Idaho Steelheads">Fri, Nov 13 · vs Idaho Steelheads</option>
+          <option value="Nov 21 vs Tulsa">Sat, Nov 21 · vs Tulsa (buy-in night)</option>
+          <option value="A future Suite Night">A future Suite Night</option>
+          <option value="Not sure yet / whichever fits">Not sure yet, whichever fits</option>
+        </select>
+      </div>
+
+      <div class="step">Your brand assets</div>
+      <p class="step-note">Your logo is what goes on the jumbotron and in the post. High-res with a transparent background (PNG or SVG) looks best.</p>
+
+      <div class="field">
+        <label>Logo <span class="req">*</span></label>
+        <div class="drop" id="dropLogo" data-input="logoInput">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#7DD3FC" stroke-width="1.6"><path d="M12 16V4m0 0L8 8m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          <div class="big">Drop your logo or tap to upload</div>
+          <div class="small">PNG, SVG, or JPG · transparent background preferred</div>
+        </div>
+        <input type="file" id="logoInput" accept="image/*,.svg" hidden>
+        <div class="filelist" id="logoList"></div>
+      </div>
+
+      <div class="field">
+        <label>Headshot <span class="opt">(optional)</span></label>
+        <div class="drop" id="dropHead" data-input="headInput">
+          <div class="big">Add a headshot</div>
+          <div class="small">For personal brands, agents, and one-person shops</div>
+        </div>
+        <input type="file" id="headInput" accept="image/*" hidden>
+        <div class="filelist" id="headList"></div>
+      </div>
+
+      <div class="field">
+        <label>Other photos or brand assets <span class="opt">(optional)</span></label>
+        <div class="drop" id="dropAssets" data-input="assetInput">
+          <div class="big">Add photos, product shots, flyers</div>
+          <div class="small">You can add several</div>
+        </div>
+        <input type="file" id="assetInput" accept="image/*,.pdf" multiple hidden>
+        <div class="filelist" id="assetList"></div>
+      </div>
+
+      <div class="field">
+        <label>Brand colors <span class="opt">(optional)</span></label>
+        <input name="colors" placeholder="e.g. navy + gold, or hex codes if you have them">
+      </div>
+
+      <div class="err" id="errBox"></div>
+
+      <div class="submit">
+        <button type="submit" class="tn-btn tn-btn-orange" id="submitBtn">Submit &amp; lock in my spot</button>
+        <p class="formnote">We'll review and reach out to confirm your Suite Night and get you on the lineup.</p>
+      </div>
+    </form>
+
+    <div class="success" id="successBox">
+      <div class="ring"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>You're in. 🏒</h2>
+      <p>Thanks for jumping in. Your info and assets are saved and we'll reach out shortly to confirm your Suite Night and show you the sponsor post before it goes live.</p>
+      <a class="again" id="againBtn">Submit another business</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  ProyTech × Wichita Thunder · Suite Night &nbsp;·&nbsp; Questions? <a href="mailto:admin@getproytech.com">admin@getproytech.com</a>
+</footer>
+
+<script>
+/* ===== CONFIG ===== */
+/* Paste the Apps Script Web App URL here after deploying (see delivery notes). */
+var SPONSOR_SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+/* ===== snow ===== */
+(function(){
+  var box=document.getElementById('flakes');if(!box)return;
+  for(var i=0;i<14;i++){var f=document.createElement('div');f.className='flake';
+    f.style.left=(Math.random()*100)+'%';
+    var d=6+Math.random()*7;f.style.animationDuration=d+'s';
+    f.style.animationDelay=(-Math.random()*d)+'s';
+    var s=4+Math.random()*6;f.style.width=s+'px';f.style.height=s+'px';
+    box.appendChild(f);}
+})();
+
+/* ===== file handling ===== */
+var store={logo:[],head:[],assets:[]};
+function wireDrop(dropId,inputId,key,multi){
+  var drop=document.getElementById(dropId),input=document.getElementById(inputId),list=document.getElementById(key+'List');
+  drop.addEventListener('click',function(){input.click();});
+  drop.addEventListener('dragover',function(e){e.preventDefault();drop.classList.add('over');});
+  drop.addEventListener('dragleave',function(){drop.classList.remove('over');});
+  drop.addEventListener('drop',function(e){e.preventDefault();drop.classList.remove('over');handle(e.dataTransfer.files);});
+  input.addEventListener('change',function(){handle(input.files);input.value='';});
+  function handle(files){
+    for(var i=0;i<files.length;i++){(function(file){
+      if(file.size>15*1024*1024){alert('"'+file.name+'" is over 15MB, please upload a smaller file.');return;}
+      var reader=new FileReader();
+      reader.onload=function(){
+        var b64=(''+reader.result).split(',')[1]||'';
+        var item={name:file.name,type:file.type||'application/octet-stream',data:b64};
+        if(!multi)store[key]=[item];else store[key].push(item);
+        render();
+      };
+      reader.readAsDataURL(file);
+    })(files[i]);}
+  }
+  function render(){
+    list.innerHTML='';
+    store[key].forEach(function(it,idx){
+      var row=document.createElement('div');row.className='fileitem';
+      var thumbHtml=/^image\//.test(it.type)?'<img class="thumb" src="data:'+it.type+';base64,'+it.data+'">':'<div class="thumb"></div>';
+      row.innerHTML=thumbHtml+'<span class="nm">'+it.name+'</span>';
+      var rm=document.createElement('button');rm.type='button';rm.className='rm';rm.textContent='×';
+      rm.onclick=function(){store[key].splice(idx,1);render();};
+      row.appendChild(rm);list.appendChild(row);
+    });
+  }
+  list._render=render;
+}
+wireDrop('dropLogo','logoInput','logo',false);
+wireDrop('dropHead','headInput','head',false);
+wireDrop('dropAssets','assetInput','assets',true);
+
+/* ===== submit ===== */
+var form=document.getElementById('sponsorForm');
+var submitBtn=document.getElementById('submitBtn');
+var errBox=document.getElementById('errBox');
+
+function showErr(msg){errBox.textContent=msg;errBox.style.display='block';errBox.scrollIntoView({behavior:'smooth',block:'center'});}
+
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  errBox.style.display='none';
+
+  var fd=new FormData(form);
+  var required=['business','name','email','phone','blurb'];
+  for(var r=0;r<required.length;r++){
+    if(!(''+fd.get(required[r])).trim()){showErr('Please fill in all required (*) fields.');return;}
+  }
+  if(!store.logo.length){showErr('Please upload your logo, it is what goes on the jumbotron and in your post.');return;}
+
+  if(SPONSOR_SCRIPT_URL.indexOf('PASTE_')===0){
+    showErr('This form is not connected yet. Please text Garrett at 901-335-3905 so he can finish setup.');
+    return;
+  }
+
+  var files=[];
+  store.logo.forEach(function(f){files.push({kind:'logo',name:f.name,type:f.type,data:f.data});});
+  store.head.forEach(function(f){files.push({kind:'headshot',name:f.name,type:f.type,data:f.data});});
+  store.assets.forEach(function(f){files.push({kind:'asset',name:f.name,type:f.type,data:f.data});});
+
+  var payload={
+    business:fd.get('business'),name:fd.get('name'),email:fd.get('email'),phone:fd.get('phone'),
+    website:fd.get('website'),instagram:fd.get('instagram'),facebook:fd.get('facebook'),
+    blurb:fd.get('blurb'),offer:fd.get('offer'),note:fd.get('note'),event:fd.get('event'),colors:fd.get('colors'),
+    submittedAt:new Date().toISOString(),source:'sponsor-intake',files:files
+  };
+
+  submitBtn.disabled=true;submitBtn.textContent='Uploading your assets…';
+
+  fetch(SPONSOR_SCRIPT_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)})
+    .then(function(){
+      form.style.display='none';
+      document.getElementById('successBox').style.display='block';
+      document.getElementById('successBox').scrollIntoView({behavior:'smooth',block:'center'});
+    })
+    .catch(function(){
+      submitBtn.disabled=false;submitBtn.textContent='Submit & lock in my spot';
+      showErr('Something went wrong sending that. Please try again, or text Garrett at 901-335-3905.');
+    });
+});
+
+document.getElementById('againBtn').addEventListener('click',function(){
+  form.reset();store.logo=[];store.head=[];store.assets=[];
+  document.getElementById('logoList').innerHTML='';
+  document.getElementById('headList').innerHTML='';
+  document.getElementById('assetList').innerHTML='';
+  document.getElementById('successBox').style.display='none';
+  form.style.display='block';
+  submitBtn.disabled=false;submitBtn.textContent='Submit & lock in my spot';
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
