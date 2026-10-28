@@ -151,6 +151,20 @@ section{position:relative}
 .svc h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.32rem;color:#fff;margin-bottom:7px;letter-spacing:.01em}
 .svc p{color:var(--grey);font-size:.95rem}
 
+/* gallery */
+.gallery{background:linear-gradient(180deg,#0B0E09,#090c07);border-top:1px solid var(--line)}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.gtile{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:linear-gradient(160deg,#1b2116,#10140c);display:block}
+.gtile img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.gtile:hover img{transform:scale(1.06)}
+.gtile .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 12px;font-size:.84rem;color:#eaf5e6;background:linear-gradient(0deg,rgba(9,13,7,.85),transparent);opacity:0;transition:.3s}
+.gtile:hover .cap{opacity:1}
+.gal-ig{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;aspect-ratio:4/3;border-radius:16px;border:1px dashed rgba(123,210,30,.4);background:rgba(91,210,30,.06);text-decoration:none;color:#fff;transition:.25s;padding:16px}
+.gal-ig:hover{background:rgba(91,210,30,.12);border-color:var(--green);transform:translateY(-3px)}
+.gal-ig .ig-ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(91,210,30,.14);border:1px solid var(--line)}
+.gal-ig b{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.1rem;letter-spacing:.02em}
+.gal-ig span{color:var(--grey);font-size:.84rem}
+
 /* process */
 .proc{background:linear-gradient(180deg,#090c07,#0B0E09);border-top:1px solid var(--line)}
 .proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
@@ -363,6 +377,18 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
   </div>
 </section>
 
+<!-- GALLERY -->
+<section class="gallery sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kick reveal">Our work</div>
+      <h2 class="reveal d1">See it in the field</h2>
+      <p class="lead reveal d2">A look at Liberty on the job around Wichita.</p>
+    </div>
+    <div class="gal-grid reveal d2" id="galGrid"></div>
+  </div>
+</section>
+
 <!-- PROCESS -->
 <section class="proc sec">
   <div class="wrap">
@@ -460,6 +486,19 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
   }
   var s=document.querySelector('.stats');
   if('IntersectionObserver' in window&&s){var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)run();});},{threshold:.2});io.observe(s);setTimeout(run,3000);}else run();
+})();
+/* gallery — add repo-hosted project photos here as Austin sends them */
+(function(){
+  var GALLERY=[
+    {src:'https://landing-page-app-hero-images.s3.amazonaws.com/media/a1e71e46-4ca7-4337-bd2f-8166b738974f.png',alt:'Liberty Lawn & Landscape crew at work in Wichita'}
+  ];
+  var grid=document.getElementById('galGrid');if(!grid)return;
+  var html='';
+  GALLERY.forEach(function(g){
+    html+='<div class="gtile"><img src="'+g.src+'" alt="'+g.alt+'" loading="lazy" onerror="this.closest(\'.gtile\').style.display=\'none\'"><span class="cap">'+g.alt+'</span></div>';
+  });
+  html+='<a class="gal-ig" href="https://instagram.com/libertylawnandlandscape316" target="_blank" rel="noopener"><span class="ig-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#78E53B" stroke="none"/></svg></span><b>See more on Instagram</b><span>@libertylawnandlandscape316</span></a>';
+  grid.innerHTML=html;
 })();
 </script>
 </body>
