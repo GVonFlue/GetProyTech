@@ -20,164 +20,203 @@
 <link rel="icon" href="/images/sponsors/liberty-lawn-landscape.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <style>
 :root{
   --green:#5BD21E;--green-2:#78E53B;--green-d:#3C9611;--green-deep:#1f5a0a;
-  --ink:#0C0F0B;--ink-2:#14180F;--panel:#171C13;--line:rgba(123,210,30,.18);
-  --grey:#9BA596;--light:#EFF3EA;--white:#fff;--gold:#FFC53D;--aqua:#4FD6C2;
-  --disp:'Barlow Condensed',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;
+  --ink:#0B0E09;--ink-2:#10140C;--panel:#161B12;--panel-2:#1b2116;--line:rgba(123,210,30,.16);
+  --grey:#9BA596;--grey-2:#c3ccb9;--light:#EFF3EA;--white:#fff;--gold:#FFC53D;--aqua:#4FD6C2;
+  --disp:'Barlow Condensed',system-ui,sans-serif;--serif:'Fraunces',Georgia,serif;--body:'Inter',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--body);background:var(--ink);color:var(--light);line-height:1.55;overflow-x:hidden}
+body{font-family:var(--body);background:var(--ink);color:var(--light);line-height:1.6;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
 
-/* reveal animation */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 .reveal.in{opacity:1;transform:none}
 .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.4s}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{animation:none!important}}
 
-.ribbon{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(90deg,#0a0d08,#13180e,#0a0d08);border-bottom:1px solid var(--line);padding:11px 16px;font-size:.8rem;color:var(--grey);text-align:center}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.kick{font-family:var(--disp);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-size:.94rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--body);font-weight:700;font-size:1.02rem;border:none;border-radius:999px;padding:1.08rem 2rem;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s;text-align:center}
+.btn-green{background:linear-gradient(180deg,var(--green-2),var(--green-d));color:#07230a;box-shadow:0 14px 34px -10px rgba(91,210,30,.6)}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 20px 44px -10px rgba(91,210,30,.8)}
+.btn-ghost{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.btn-ghost:hover{border-color:var(--green);color:var(--green-2)}
+.btn-white{background:#fff;color:#14400a;box-shadow:0 16px 40px -12px rgba(0,0,0,.5)}
+.btn-white:hover{transform:translateY(-2px)}
+
+/* ribbon */
+.ribbon{display:flex;align-items:center;justify-content:center;gap:10px;background:#090c07;border-bottom:1px solid var(--line);padding:11px 16px;font-size:.8rem;color:var(--grey);text-align:center}
 .ribbon a{color:var(--green-2);text-decoration:none;font-weight:600}
 .ribbon .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.5;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
 
 /* hero */
-.hero{position:relative;padding:56px 20px 64px;text-align:center;overflow:hidden;isolation:isolate;
-  background:linear-gradient(180deg,#0E130A 0%,#0C0F0B 100%)}
-.hero-glow{position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(70% 60% at 50% -10%, rgba(91,210,30,.26), transparent 70%),radial-gradient(50% 50% at 85% 20%, rgba(60,150,17,.18), transparent 70%);
-  animation:glow 7s ease-in-out infinite}
-@keyframes glow{0%,100%{opacity:.75}50%{opacity:1}}
-.blades{position:absolute;left:0;right:0;bottom:0;height:130px;z-index:0;opacity:.5;
-  background:repeating-linear-gradient(80deg, transparent 0 7px, rgba(91,210,30,.10) 7px 9px),
-             repeating-linear-gradient(100deg, transparent 0 9px, rgba(60,150,17,.10) 9px 11px);
-  -webkit-mask:linear-gradient(0deg,#000,transparent);mask:linear-gradient(0deg,#000,transparent)}
-.drops{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.drop{position:absolute;top:-8%;width:9px;height:9px;border-radius:50% 50% 50% 0;transform:rotate(45deg);
-  background:linear-gradient(180deg,rgba(125,211,252,.0),rgba(79,214,194,.5));box-shadow:0 0 10px rgba(79,214,194,.4);opacity:.55;animation:fall linear infinite}
-@keyframes fall{to{transform:rotate(45deg) translateY(118vh)}}
-.hero-in{position:relative;z-index:2;max-width:880px;margin:0 auto}
-.logo-card{display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:22px;padding:22px 30px;box-shadow:0 30px 70px -24px rgba(0,0,0,.8),0 0 0 1px rgba(123,210,30,.25);margin-bottom:24px;animation:floaty 6s ease-in-out infinite}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;isolation:isolate;padding:70px 0 60px}
+.hero-photo{position:absolute;inset:0;z-index:0;background:#0A0D07 center 30%/cover no-repeat;background-image:url('https://landing-page-app-hero-images.s3.amazonaws.com/media/a1e71e46-4ca7-4337-bd2f-8166b738974f.png');transform:scale(1.04);animation:kenburns 22s ease-in-out infinite alternate}
+@keyframes kenburns{to{transform:scale(1.12)}}
+.hero-ov{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(8,12,7,.70),rgba(9,13,7,.80) 55%,rgba(9,13,7,.94)),radial-gradient(70% 70% at 15% 20%,rgba(91,210,30,.22),transparent 60%),radial-gradient(60% 60% at 95% 90%,rgba(79,214,194,.12),transparent 60%)}
+.hero-ov2{position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(100deg,transparent 0 11px,rgba(60,150,17,.05) 11px 13px);-webkit-mask:linear-gradient(0deg,#000,transparent 60%)}
+.drops{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.drop{position:absolute;top:-8%;width:9px;height:9px;border-radius:50% 50% 50% 0;transform:rotate(45deg);background:linear-gradient(180deg,rgba(125,211,252,0),rgba(79,214,194,.55));box-shadow:0 0 10px rgba(79,214,194,.4);opacity:.5;animation:fall linear infinite}
+@keyframes fall{to{transform:rotate(45deg) translateY(104vh)}}
+.hero-in{position:relative;z-index:2;width:100%}
+.hero-grid{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center}
+.logo-card{display:inline-flex;align-items:center;justify-content:center;background:#fff;border-radius:22px;padding:22px 28px;box-shadow:0 30px 70px -24px rgba(0,0,0,.9),0 0 0 1px rgba(123,210,30,.3);animation:floaty 6s ease-in-out infinite;align-self:start}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.logo-card img{max-height:104px;width:auto}
+.logo-card img{max-height:96px;width:auto}
 .vet{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#07230a;background:var(--green-2);border-radius:999px;padding:7px 15px;margin-bottom:18px}
-h1{font-family:var(--disp);font-weight:800;letter-spacing:.01em;line-height:.95;font-size:clamp(2.5rem,7vw,5rem);color:#fff;text-transform:uppercase}
+h1{font-family:var(--disp);font-weight:800;letter-spacing:.01em;line-height:.92;font-size:clamp(2.7rem,7.4vw,5.6rem);color:#fff;text-transform:uppercase;text-shadow:0 10px 40px rgba(0,0,0,.6)}
 h1 .g{color:var(--green)}
-.hero-sub{font-size:clamp(1.02rem,2.2vw,1.28rem);color:#cdd6c3;max-width:650px;margin:20px auto 0}
-.cta-row{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-top:30px}
-.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--body);font-weight:700;font-size:1.02rem;border:none;border-radius:999px;padding:1.05rem 1.9rem;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s;text-align:center}
-.btn-green{background:linear-gradient(180deg,var(--green-2),var(--green-d));color:#07230a;box-shadow:0 14px 34px -10px rgba(91,210,30,.6)}
-.btn-green:hover{transform:translateY(-2px);box-shadow:0 20px 44px -10px rgba(91,210,30,.75)}
-.btn-ghost{background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(255,255,255,.18)}
-.btn-ghost:hover{border-color:var(--green);color:var(--green-2)}
+.hero-sub{font-size:clamp(1.05rem,2.1vw,1.32rem);color:#dbe4d3;max-width:620px;margin:20px 0 0;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+.cta-row{display:flex;flex-wrap:wrap;gap:13px;margin-top:32px}
+.hero-cues{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:30px;color:#cdd6c3;font-size:.92rem;font-weight:500}
+.hero-cues span{display:inline-flex;align-items:center;gap:8px}
+.hero-cues .c{color:var(--green-2)}
 
 /* stats */
-.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0A0D07}
-.stats-in{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:24px 14px;text-align:center;border-left:1px solid var(--line)}
+.stats{border-bottom:1px solid var(--line);background:#090c07}
+.stats-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:26px 14px;text-align:center;border-left:1px solid var(--line)}
 .stat:first-child{border-left:none}
-.stat b{font-family:var(--disp);font-weight:800;font-size:2.1rem;color:var(--green);display:block;line-height:1}
-.stat span{font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--grey);font-weight:600}
+.stat b{font-family:var(--disp);font-weight:800;font-size:2.3rem;color:var(--green);display:block;line-height:1}
+.stat span{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);font-weight:600}
 .stat .stars{color:var(--gold)}
 
 section{position:relative}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-.sec{padding:66px 0}
-.sec-head{text-align:center;max-width:680px;margin:0 auto 40px}
-.sec-kick{font-family:var(--disp);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-size:.92rem}
-.sec h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(1.9rem,4.5vw,3rem);color:#fff;line-height:1;margin:8px 0 14px}
-.sec p.lead{color:var(--grey);font-size:1.05rem}
+.sec{padding:84px 0}
+.sec-head{max-width:720px;margin:0 auto 50px;text-align:center}
+.sec-head.l{text-align:left;margin-left:0}
+.sec h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,4.6vw,3.2rem);color:#fff;line-height:1;margin:10px 0 14px}
+.sec .lead{color:var(--grey-2);font-size:1.08rem}
 
-/* FEATURED livestock (hero focus) */
-.feat{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:radial-gradient(70% 90% at 12% 10%, rgba(79,214,194,.12), transparent 60%),radial-gradient(70% 90% at 95% 90%, rgba(91,210,30,.16), transparent 60%),linear-gradient(165deg,#0c1810,#0A0D07)}
-.feat .ripple{position:absolute;border-radius:50%;border:1px solid rgba(79,214,194,.25);animation:ripple 6s ease-out infinite;pointer-events:none}
-.feat .r1{width:300px;height:300px;left:-80px;top:-60px}
-.feat .r2{width:460px;height:460px;left:-160px;top:-140px;animation-delay:2s}
-.feat .r3{width:620px;height:620px;left:-240px;top:-220px;animation-delay:4s}
-@keyframes ripple{0%{transform:scale(.6);opacity:.6}100%{transform:scale(1.15);opacity:0}}
-.feat-in{position:relative;z-index:2;max-width:1040px;margin:0 auto;padding:72px 20px;display:grid;grid-template-columns:1.12fr .88fr;gap:44px;align-items:center}
+/* FEATURED livestock */
+.feat{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:radial-gradient(70% 90% at 10% 10%,rgba(79,214,194,.14),transparent 55%),radial-gradient(70% 90% at 95% 95%,rgba(91,210,30,.16),transparent 55%),linear-gradient(165deg,#0c1810,#090c07)}
+.feat .ripple{position:absolute;border-radius:50%;border:1px solid rgba(79,214,194,.22);animation:ripple 6s ease-out infinite;pointer-events:none}
+.feat .r1{width:300px;height:300px;left:-80px;top:-60px}.feat .r2{width:460px;height:460px;left:-160px;top:-140px;animation-delay:2s}.feat .r3{width:620px;height:620px;left:-240px;top:-220px;animation-delay:4s}
+@keyframes ripple{0%{transform:scale(.6);opacity:.55}100%{transform:scale(1.15);opacity:0}}
+.feat-in{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:84px 24px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
 .feat-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#07230a;background:linear-gradient(90deg,var(--aqua),var(--green-2));border-radius:999px;padding:8px 16px;font-size:.84rem;margin-bottom:18px}
-.feat h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2.3rem,6vw,4rem);color:#fff;line-height:.96}
+.feat h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2.3rem,6vw,4.1rem);color:#fff;line-height:.95}
 .feat h2 .g{color:var(--green)}
-.feat .lede{color:#ddeadb;font-size:1.12rem;margin-top:18px;max-width:560px}
-.feat .mini{margin-top:24px;display:flex;flex-direction:column;gap:13px}
-.feat .mini div{display:flex;gap:13px;align-items:flex-start;color:var(--light);font-size:1.03rem}
-.feat .mini .chk{flex:none;width:24px;height:24px;border-radius:50%;background:rgba(79,214,194,.15);border:1px solid rgba(79,214,194,.4);display:grid;place-items:center;color:var(--aqua);font-size:.8rem;font-weight:800;margin-top:1px}
-.feat .fbtns{margin-top:30px;display:flex;flex-wrap:wrap;gap:13px}
-.feat-card{background:linear-gradient(165deg,#16271c,#0c140d);border:1px solid rgba(79,214,194,.22);border-radius:24px;padding:36px 30px;text-align:center;box-shadow:0 30px 70px -30px rgba(0,0,0,.8)}
-.feat-card .ic{width:84px;height:84px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%, rgba(79,214,194,.25), rgba(91,210,30,.08));border:1px solid rgba(79,214,194,.4);animation:bob 4s ease-in-out infinite}
+.feat .lede{color:#ddeadb;font-size:1.14rem;margin-top:18px;max-width:560px}
+.mini{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.mini div{display:flex;gap:13px;align-items:flex-start;color:var(--light);font-size:1.04rem}
+.mini .chk{flex:none;width:24px;height:24px;border-radius:50%;background:rgba(79,214,194,.15);border:1px solid rgba(79,214,194,.4);display:grid;place-items:center;color:var(--aqua);font-size:.8rem;font-weight:800;margin-top:2px}
+.fbtns{margin-top:32px;display:flex;flex-wrap:wrap;gap:13px}
+.feat-card{background:linear-gradient(165deg,#16271c,#0c140d);border:1px solid rgba(79,214,194,.22);border-radius:26px;padding:40px 32px;text-align:center;box-shadow:0 36px 80px -34px rgba(0,0,0,.9)}
+.feat-card .ic{width:92px;height:92px;margin:0 auto 20px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,rgba(79,214,194,.28),rgba(91,210,30,.08));border:1px solid rgba(79,214,194,.4);animation:bob 4s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.feat-card .q{color:#eaf5e6;font-size:1.12rem;font-style:italic;line-height:1.5}
-.feat-card .by{color:var(--grey);font-size:.9rem;margin-top:14px}
-.feat-card .semper{margin-top:18px;font-family:var(--disp);font-weight:800;color:var(--aqua);font-size:1.3rem;letter-spacing:.04em}
+.feat-card .q{color:#eaf5e6;font-family:var(--serif);font-size:1.22rem;font-style:italic;line-height:1.5}
+.feat-card .by{color:var(--grey);font-size:.92rem;margin-top:14px}
+.feat-card .semper{margin-top:18px;font-family:var(--disp);font-weight:800;color:var(--aqua);font-size:1.35rem;letter-spacing:.04em}
+
+/* owner */
+.owner{background:linear-gradient(180deg,#090c07,#0B0E09)}
+.owner-in{display:grid;grid-template-columns:.82fr 1.18fr;gap:50px;align-items:center}
+.owner-photo-wrap{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 36px 80px -34px rgba(0,0,0,.9);aspect-ratio:4/5;background:linear-gradient(160deg,#1b2116,#10140c)}
+.owner-photo-wrap img{width:100%;height:100%;object-fit:cover}
+.owner-photo-wrap .frameglow{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 -80px 120px -40px rgba(9,13,7,.85);border-radius:24px}
+.owner-photo-wrap .ini{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:7rem;color:rgba(91,210,30,.4)}
+.owner-photo-wrap.noimg .ini{display:flex}
+.owner-badge{position:absolute;left:18px;bottom:18px;z-index:2;background:rgba(9,13,7,.78);border:1px solid var(--line);backdrop-filter:blur(6px);border-radius:14px;padding:12px 16px}
+.owner-badge b{color:#fff;font-weight:700;display:block;font-size:1rem}
+.owner-badge span{color:var(--green-2);font-size:.82rem;font-weight:600}
+.owner h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,4.4vw,3rem);color:#fff;line-height:1.02}
+.owner p{color:var(--grey-2);font-size:1.08rem;margin-top:16px}
+.owner .pull{font-family:var(--serif);font-size:1.3rem;font-style:italic;color:#eaf5e6;border-left:3px solid var(--green);padding-left:18px;margin:24px 0}
+.owner .sig{margin-top:22px;font-family:var(--disp);font-weight:700;color:var(--aqua);letter-spacing:.03em;font-size:1.15rem}
+
+/* why / difference */
+.why{background:linear-gradient(180deg,#0B0E09,#090c07);border-top:1px solid var(--line)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.why-card{background:linear-gradient(180deg,var(--panel),#0f130b);border:1px solid var(--line);border-radius:18px;padding:28px 24px;transition:transform .25s,border-color .25s}
+.why-card:hover{transform:translateY(-5px);border-color:rgba(123,210,30,.4)}
+.why-card .ic{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(91,210,30,.12);border:1px solid var(--line);margin-bottom:16px}
+.why-card h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.18rem;color:#fff;margin-bottom:7px}
+.why-card p{color:var(--grey);font-size:.92rem}
 
 /* services */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.svc{background:linear-gradient(180deg,var(--panel),#10140C);border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.svc{background:linear-gradient(180deg,var(--panel),#0f130b);border:1px solid var(--line);border-radius:18px;padding:28px 26px;transition:transform .25s,border-color .25s,box-shadow .25s}
 .svc:hover{transform:translateY(-6px);border-color:rgba(123,210,30,.45);box-shadow:0 26px 50px -24px rgba(0,0,0,.8)}
-.svc .ic{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;background:rgba(91,210,30,.12);border:1px solid var(--line);margin-bottom:16px;transition:.25s}
+.svc .ic{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;background:rgba(91,210,30,.12);border:1px solid var(--line);margin-bottom:16px;transition:.25s}
 .svc:hover .ic{background:rgba(91,210,30,.22);transform:scale(1.06)}
-.svc h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.3rem;color:#fff;margin-bottom:7px;letter-spacing:.01em}
-.svc p{color:var(--grey);font-size:.94rem}
+.svc h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.32rem;color:#fff;margin-bottom:7px;letter-spacing:.01em}
+.svc p{color:var(--grey);font-size:.95rem}
+
+/* process */
+.proc{background:linear-gradient(180deg,#090c07,#0B0E09);border-top:1px solid var(--line)}
+.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
+.step{position:relative;background:linear-gradient(180deg,var(--panel),#0f130b);border:1px solid var(--line);border-radius:20px;padding:34px 28px}
+.step .n{font-family:var(--disp);font-weight:800;font-size:3.2rem;color:var(--green);line-height:1;opacity:.85}
+.step h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.4rem;color:#fff;margin:6px 0 8px}
+.step p{color:var(--grey);font-size:.98rem}
 
 /* testimonials */
 .revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.rev{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;transition:transform .25s,border-color .25s}
+.rev{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px;transition:transform .25s,border-color .25s}
 .rev:hover{transform:translateY(-4px);border-color:rgba(123,210,30,.4)}
-.rev .st{color:var(--gold);font-size:1rem;letter-spacing:2px;margin-bottom:12px}
-.rev p{color:#dce6d2;font-size:1rem}
+.rev .st{color:var(--gold);font-size:1.05rem;letter-spacing:2px;margin-bottom:12px}
+.rev p{color:#dce6d2;font-family:var(--serif);font-size:1.05rem;font-style:italic}
 .rev .who{margin-top:14px;color:#fff;font-weight:600;font-size:.92rem}
-.area{text-align:center;color:var(--grey);font-size:.95rem;max-width:760px;margin:0 auto;padding:0 20px}
-.area b{color:var(--light)}
 
-/* big CTA band */
-.band{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--green-d),var(--green-deep));text-align:center;padding:62px 20px;border-top:1px solid rgba(255,255,255,.14)}
-.band .ripple{border-color:rgba(255,255,255,.18)}
-.band h2{position:relative;z-index:2;font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,5vw,3.4rem);color:#fff;line-height:1}
-.band p{position:relative;z-index:2;color:#e7ffd8;margin:14px auto 28px;max-width:540px;font-size:1.06rem}
+/* area */
+.area{background:linear-gradient(180deg,#0B0E09,#090c07);border-top:1px solid var(--line);text-align:center}
+.towns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:820px;margin:26px auto 0}
+.towns span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:.92rem;color:var(--grey-2);font-weight:500}
+.towns span.hub{background:rgba(91,210,30,.14);border-color:rgba(91,210,30,.4);color:var(--green-2);font-weight:700}
+.licensed{margin-top:22px;color:var(--grey);font-size:.92rem}
+
+/* band */
+.band{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--green-d),var(--green-deep));text-align:center;padding:72px 24px;border-top:1px solid rgba(255,255,255,.14)}
+.band .ripple{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.16);animation:ripple 6s ease-out infinite;pointer-events:none;left:50%;top:50%;margin-left:-150px;margin-top:-150px;width:300px;height:300px}
+.band .r2{width:520px;height:520px;margin-left:-260px;margin-top:-260px;animation-delay:2.5s}
+.band h2{position:relative;z-index:2;font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2.1rem,5vw,3.6rem);color:#fff;line-height:1}
+.band p{position:relative;z-index:2;color:#eaffdd;margin:14px auto 30px;max-width:560px;font-size:1.1rem}
 .band .btn{position:relative;z-index:2}
-.btn-white{background:#fff;color:#14400a;box-shadow:0 16px 40px -12px rgba(0,0,0,.5)}
-.btn-white:hover{transform:translateY(-2px)}
-.btn-xl{font-size:1.18rem;padding:1.22rem 2.5rem}
+.btn-xl{font-size:1.2rem;padding:1.25rem 2.6rem}
 
 /* contact */
-.contact{padding:60px 20px}
-.contact-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:1000px;margin:0 auto}
-.cc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 14px;text-align:center;text-decoration:none;transition:transform .2s,border-color .2s;display:block}
+.contact{padding:66px 24px}
+.contact-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:1020px;margin:0 auto}
+.cc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 16px;text-align:center;text-decoration:none;transition:transform .2s,border-color .2s;display:block}
 .cc:hover{border-color:var(--green);transform:translateY(-3px)}
 .cc .k{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);font-weight:700;margin-bottom:6px}
-.cc .v{color:#fff;font-weight:600;font-size:.9rem;word-break:break-word}
+.cc .v{color:#fff;font-weight:600;font-size:.92rem;word-break:break-word}
+.hours{text-align:center;color:var(--grey);font-size:.92rem;margin-top:24px}
 
-footer{border-top:1px solid var(--line);padding:30px 20px;text-align:center;color:var(--grey);font-size:.86rem;background:#0A0D07}
+footer{border-top:1px solid var(--line);padding:32px 24px;text-align:center;color:var(--grey);font-size:.86rem;background:#090c07}
 footer a{color:var(--green-2);text-decoration:none;font-weight:600}
 
-@media(max-width:860px){
-  .feat-in{grid-template-columns:1fr;gap:30px;padding:56px 20px}
+@media(max-width:900px){
+  .feat-in{grid-template-columns:1fr;gap:32px;padding:66px 24px}
+  .owner-in{grid-template-columns:1fr;gap:30px}
+  .owner-photo-wrap{max-width:420px;margin:0 auto;aspect-ratio:4/4}
+  .why-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:820px){
+  .hero-grid{grid-template-columns:1fr;gap:22px}
   .stats-in{grid-template-columns:1fr 1fr}
-  .stat:nth-child(3){border-left:none}
-  .stat:nth-child(n+3){border-top:1px solid var(--line)}
-  .svc-grid{grid-template-columns:1fr}
-  .revs{grid-template-columns:1fr}
+  .stat:nth-child(3){border-left:none}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .svc-grid,.proc-grid,.revs{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:560px){
-  .hero{padding:40px 18px 48px}
-  .logo-card{padding:18px 22px}.logo-card img{max-height:82px}
-  .sec{padding:48px 0}
-  .sec-head{margin-bottom:30px}
-  .feat-in{padding:46px 18px}
-  .feat-card{padding:28px 22px}
-  .band{padding:48px 18px}
-  .contact{padding:46px 18px}
-  .cta-row .btn,.feat .fbtns .btn{width:100%;justify-content:center}
-  .btn-xl{width:100%;justify-content:center}
+  .hero{min-height:0;padding:48px 0 44px}
+  .logo-card{padding:16px 20px}.logo-card img{max-height:72px}
+  .sec{padding:56px 0}.sec-head{margin-bottom:34px}
+  .feat-in{padding:50px 20px}.feat-card{padding:30px 22px}
+  .why-grid{grid-template-columns:1fr}
+  .band{padding:54px 20px}.contact{padding:50px 20px}
+  .cta-row .btn,.fbtns .btn,.btn-xl{width:100%;justify-content:center}
+  .wrap{padding:0 18px}
 }
 </style>
 </head>
@@ -186,17 +225,29 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
 <div class="ribbon"><span class="dot"></span> Proud sponsor of <a href="/suitenight">ProyTech Suite Night</a> &nbsp;·&nbsp; Wichita Thunder Hockey</div>
 
 <header class="hero">
-  <div class="hero-glow"></div>
-  <div class="blades"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-ov2"></div>
   <div class="drops" id="drops"></div>
   <div class="hero-in">
-    <div class="logo-card reveal"><img src="/images/sponsors/liberty-lawn-landscape.png" alt="Liberty Lawn & Landscape, LLC"></div>
-    <div class="reveal d1"><span class="vet">&#9733; Veteran Owned &amp; Operated</span></div>
-    <h1 class="reveal d1">Horse &amp; livestock<br><span class="g">water, done right.</span></h1>
-    <p class="hero-sub reveal d2">Liberty Lawn &amp; Landscape, LLC keeps your animals watered with reliable horse &amp; livestock water solutions, and handles the full landscape, hardscape, and lawn care around Wichita too.</p>
-    <div class="cta-row reveal d3">
-      <a class="btn btn-green" href="https://libertylawns316.com/" target="_blank" rel="noopener">Visit our website &rarr;</a>
-      <a class="btn btn-ghost" href="tel:3164523738">Call 316-452-3738</a>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="logo-card reveal"><img src="/images/sponsors/liberty-lawn-landscape.png" alt="Liberty Lawn & Landscape, LLC"></div>
+        <div>
+          <div class="reveal d1"><span class="vet">&#9733; Veteran Owned &amp; Operated &middot; Est. 2023</span></div>
+          <h1 class="reveal d1">Horse &amp; livestock<br><span class="g">water, done right.</span></h1>
+          <p class="hero-sub reveal d2">Liberty Lawn &amp; Landscape, LLC keeps your animals watered with reliable horse &amp; livestock water solutions, and brings Marine Corps attention to detail to the full landscape, hardscape, and lawn care around Wichita.</p>
+          <div class="cta-row reveal d3">
+            <a class="btn btn-green" href="https://libertylawns316.com/" target="_blank" rel="noopener">Visit our website &rarr;</a>
+            <a class="btn btn-ghost" href="tel:3164523738">Call 316-452-3738</a>
+          </div>
+          <div class="hero-cues reveal d4">
+            <span><span class="c">&#10003;</span> Veteran-owned</span>
+            <span><span class="c">&#10003;</span> Licensed &amp; insured</span>
+            <span><span class="c">&#10003;</span> 4.9&#9733; on Google</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -210,26 +261,27 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
   </div>
 </section>
 
-<!-- FEATURED: livestock water (the focal point) -->
+<!-- FEATURED: livestock water -->
 <section class="feat">
   <span class="ripple r1"></span><span class="ripple r2"></span><span class="ripple r3"></span>
   <div class="feat-in">
     <div>
       <div class="feat-tag reveal">&#128167; The specialty</div>
       <h2 class="reveal d1">Reliable water for <span class="g">horses &amp; livestock.</span></h2>
-      <p class="lede reveal d2">This is where Liberty is putting its focus, dependable water solutions built to last, so your animals always have clean water on the property. Arena and paddock prep is coming next.</p>
+      <p class="lede reveal d2">This is where Liberty is putting its focus, dependable water solutions built to last, so your animals always have clean, reliable water on the property. Arena and paddock prep is coming next.</p>
       <div class="mini">
         <div class="reveal d2"><span class="chk">&#10003;</span> Horse &amp; livestock water solutions built to last</div>
+        <div class="reveal d3"><span class="chk">&#10003;</span> Clean, reliable water your animals can count on</div>
         <div class="reveal d3"><span class="chk">&#10003;</span> Arena &amp; paddock prep (coming soon)</div>
-        <div class="reveal d3"><span class="chk">&#10003;</span> Backed by full landscape &amp; hardscape services</div>
+        <div class="reveal d4"><span class="chk">&#10003;</span> Backed by full landscape &amp; hardscape services</div>
       </div>
       <div class="fbtns reveal d4">
-        <a class="btn btn-green" href="https://libertylawns316.com/" target="_blank" rel="noopener">Ask about livestock water &rarr;</a>
+        <a class="btn btn-green" href="https://libertylawns316.com/services/livestock-and-horse-watering-solutions/" target="_blank" rel="noopener">Ask about livestock water &rarr;</a>
         <a class="btn btn-ghost" href="tel:3164523738">Call Austin</a>
       </div>
     </div>
     <div class="feat-card reveal d2">
-      <div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4FD6C2" stroke-width="1.6"><path d="M12 2s6 7 6 11a6 6 0 01-12 0c0-4 6-11 6-11z"/></svg></div>
+      <div class="ic"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#4FD6C2" stroke-width="1.5"><path d="M12 2s6 7 6 11a6 6 0 01-12 0c0-4 6-11 6-11z"/></svg></div>
       <p class="q">"If you have livestock, or know someone who does, let's connect."</p>
       <div class="by">— Austin Lipke, Owner</div>
       <div class="semper">Semper Fi &#9733; Veteran-Owned</div>
@@ -237,52 +289,100 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
   </div>
 </section>
 
-<section class="sec">
+<!-- OWNER -->
+<section class="owner sec">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-kick reveal">Full service, too</div>
-      <h2 class="reveal d1">Everything else we do</h2>
-      <p class="lead reveal d2">From the yard to the pasture, Liberty keeps your whole property sharp.</p>
-    </div>
-    <div class="svc-grid">
-      <div class="svc reveal">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M3 20c6 0 9-4 9-10 0 6 3 10 9 10"/><path d="M12 20V7"/></svg></div>
-        <h3>Lawn Care &amp; Maintenance</h3>
-        <p>Mowing, aeration, seeding, mulching, and the regular upkeep that keeps your lawn thick, green, and healthy year round.</p>
+    <div class="owner-in">
+      <div class="owner-photo-wrap reveal" id="ownerFrame">
+        <img src="https://landing-page-app-hero-images.s3.amazonaws.com/media/cd544573-ed09-438a-a157-227d65b0c1e8.png" alt="Austin Lipke, owner of Liberty Lawn & Landscape" loading="lazy" onerror="document.getElementById('ownerFrame').classList.add('noimg');this.remove();">
+        <div class="ini">AL</div>
+        <div class="frameglow"></div>
+        <div class="owner-badge"><b>Austin Lipke</b><span>Owner &middot; U.S. Marine Corps veteran</span></div>
       </div>
-      <div class="svc reveal d1">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M12 3s5 6 5 10a5 5 0 01-10 0c0-4 5-10 5-10z"/></svg></div>
-        <h3>Landscape &amp; Design</h3>
-        <p>Landscape installation, planting, grading, and drainage, designed to look great and built to hold up.</p>
-      </div>
-      <div class="svc reveal d2">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M4 19h16M6 19v-6h4v6M14 19v-9h4v9"/></svg></div>
-        <h3>Hardscape</h3>
-        <p>Paver patios, walkways, and retaining walls, the built features that turn a yard into a space you actually use.</p>
-      </div>
-      <div class="svc reveal">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div>
-        <h3>Drainage &amp; Grading</h3>
-        <p>Solve standing water and erosion with proper grading and drainage that protects your property long term.</p>
-      </div>
-      <div class="svc reveal d1">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"/></svg></div>
-        <h3>Seasonal</h3>
-        <p>Spring &amp; fall cleanups and Christmas light installation to keep your property dialed in through every season.</p>
-      </div>
-      <div class="svc reveal d2" style="border-color:rgba(79,214,194,.3)">
-        <div class="ic" style="background:rgba(79,214,194,.14);border-color:rgba(79,214,194,.35)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4FD6C2" stroke-width="1.7"><path d="M12 2s6 7 6 11a6 6 0 01-12 0c0-4 6-11 6-11z"/></svg></div>
-        <h3>Livestock Water</h3>
-        <p>Our specialty, reliable horse &amp; livestock water solutions. <a href="#top" onclick="window.scrollTo({top:document.querySelector('.feat').offsetTop-20,behavior:'smooth'});return false;" style="color:#4FD6C2;font-weight:600;text-decoration:none">See above &uarr;</a></p>
+      <div>
+        <div class="kick reveal">Meet the owner</div>
+        <h2 class="reveal d1">Veteran-owned, and <br>built to a higher standard.</h2>
+        <p class="reveal d2">Liberty Lawn &amp; Landscape, LLC was founded in 2023 with a simple mission: serve Wichita-area property owners with honest work, strong communication, and results that last.</p>
+        <p class="pull reveal d2">"We are not the cheapest, and that is by design."</p>
+        <p class="reveal d3">As a veteran-owned company, Austin brings Marine Corps attention to detail to everything, from livestock water solutions to lawn maintenance, drainage, and hardscaping. The focus is premium service, clean workmanship, and doing the job right so your property looks and works better.</p>
+        <div class="sig reveal d3">&#9733; Semper Fi &mdash; Austin Lipke</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- WHY -->
+<section class="why sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kick reveal">The Liberty difference</div>
+      <h2 class="reveal d1">Why people choose Liberty</h2>
+      <p class="lead reveal d2">Not the cheapest. The one that does it right the first time.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Veteran-Owned</h3>
+        <p>Marine Corps discipline and attention to detail brought to every job, big or small.</p>
+      </div>
+      <div class="why-card reveal d1">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+        <h3>Premium By Design</h3>
+        <p>We focus on clean workmanship and lasting results, not the lowest bid.</p>
+      </div>
+      <div class="why-card reveal d2">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M4 5h16v11H7l-3 3z"/><path d="M8 9h8M8 12h5"/></svg></div>
+        <h3>Honest Communication</h3>
+        <p>Clear updates and straight answers from first call to final walkthrough.</p>
+      </div>
+      <div class="why-card reveal d3">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M12 2l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z"/></svg></div>
+        <h3>Licensed &amp; Insured</h3>
+        <p>Fully licensed and insured, so your property and your peace of mind are covered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kick reveal">Full service, too</div>
+      <h2 class="reveal d1">Everything else we do</h2>
+      <p class="lead reveal d2">From the yard to the pasture, Liberty keeps your whole property sharp.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M3 20c6 0 9-4 9-10 0 6 3 10 9 10"/><path d="M12 20V7"/></svg></div><h3>Lawn Care &amp; Maintenance</h3><p>Mowing, aeration, seeding, mulching, and the regular upkeep that keeps your lawn thick, green, and healthy year round.</p></div>
+      <div class="svc reveal d1"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M12 3s5 6 5 10a5 5 0 01-10 0c0-4 5-10 5-10z"/></svg></div><h3>Landscape &amp; Design</h3><p>Landscape installation, planting, grading, and drainage, designed to look great and built to hold up.</p></div>
+      <div class="svc reveal d2"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M4 19h16M6 19v-6h4v6M14 19v-9h4v9"/></svg></div><h3>Hardscape</h3><p>Paver patios, walkways, and retaining walls, the built features that turn a yard into a space you actually use.</p></div>
+      <div class="svc reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div><h3>Drainage &amp; Grading</h3><p>Solve standing water and erosion with proper grading and drainage that protects your property long term.</p></div>
+      <div class="svc reveal d1"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78E53B" stroke-width="1.7"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"/></svg></div><h3>Seasonal</h3><p>Spring &amp; fall cleanups and Christmas light installation to keep your property dialed in through every season.</p></div>
+      <div class="svc reveal d2" style="border-color:rgba(79,214,194,.3)"><div class="ic" style="background:rgba(79,214,194,.14);border-color:rgba(79,214,194,.35)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4FD6C2" stroke-width="1.7"><path d="M12 2s6 7 6 11a6 6 0 01-12 0c0-4 6-11 6-11z"/></svg></div><h3>Livestock Water</h3><p>Our specialty, reliable horse &amp; livestock water solutions. <a href="#" onclick="window.scrollTo({top:document.querySelector('.feat').offsetTop-20,behavior:'smooth'});return false;" style="color:#4FD6C2;font-weight:600;text-decoration:none">See above &uarr;</a></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="proc sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kick reveal">How it works</div>
+      <h2 class="reveal d1">Simple, start to finish</h2>
+    </div>
+    <div class="proc-grid">
+      <div class="step reveal"><div class="n">1</div><h3>Reach out</h3><p>Call, text, or message for a free, no-pressure quote on your project or property.</p></div>
+      <div class="step reveal d1"><div class="n">2</div><h3>We walk it &amp; plan</h3><p>Austin looks at the property, listens to what you need, and lays out an honest plan and price.</p></div>
+      <div class="step reveal d2"><div class="n">3</div><h3>Done right</h3><p>Clean, detailed work on schedule, finished the way a Marine would sign off on it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
 <section class="sec" style="padding-top:20px">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-kick reveal">What people say</div>
+      <div class="kick reveal">What people say</div>
       <h2 class="reveal d1">Trusted across Wichita</h2>
     </div>
     <div class="revs">
@@ -290,20 +390,35 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
       <div class="rev reveal d1"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"His work is amazing. Highly recommend."</p><div class="who">— Ron K.</div></div>
       <div class="rev reveal d2"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Efficient and attentive to detail. Did an amazing job on our lawn."</p><div class="who">— Sarah P.</div></div>
     </div>
-    <p class="area reveal" style="margin-top:30px">Serving <b>Wichita</b> and the surrounding areas, including Andover, Haysville, Derby, Mulvane, Clearwater, Park City, Valley Center, Goddard, Augusta, Kechi, and Colwich. &nbsp;Licensed &amp; insured.</p>
   </div>
 </section>
 
+<!-- AREA -->
+<section class="area sec">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:0">
+      <div class="kick reveal">Where we work</div>
+      <h2 class="reveal d1">Serving Wichita &amp; beyond</h2>
+    </div>
+    <div class="towns reveal d2">
+      <span class="hub">Wichita</span><span>Andover</span><span>Haysville</span><span>Derby</span><span>Mulvane</span><span>Clearwater</span><span>Park City</span><span>Valley Center</span><span>Goddard</span><span>Augusta</span><span>Kechi</span><span>Colwich</span>
+    </div>
+    <p class="licensed reveal d2">Licensed &amp; insured &middot; Open Monday&ndash;Saturday, 8:00am&ndash;4:30pm</p>
+  </div>
+</section>
+
+<!-- CTA -->
 <section class="band">
-  <span class="ripple r1"></span><span class="ripple r2"></span><span class="ripple r3"></span>
+  <span class="ripple"></span><span class="ripple r2"></span>
   <h2 class="reveal">Let's get your project started</h2>
   <p class="reveal d1">Reach out for a quote on horse &amp; livestock water, lawn care, landscape, or hardscape.</p>
   <a class="btn btn-white btn-xl reveal d2" href="https://libertylawns316.com/" target="_blank" rel="noopener">Go to libertylawns316.com &rarr;</a>
 </section>
 
+<!-- CONTACT -->
 <section class="contact">
   <div class="sec-head">
-    <div class="sec-kick reveal">Get in touch</div>
+    <div class="kick reveal">Get in touch</div>
     <h2 class="reveal d1" style="font-family:var(--disp);font-weight:800;text-transform:uppercase;color:#fff;font-size:clamp(1.8rem,4vw,2.6rem)">Contact Liberty</h2>
   </div>
   <div class="contact-grid">
@@ -313,7 +428,7 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
     <a class="cc reveal d3" href="https://instagram.com/libertylawnandlandscape316" target="_blank" rel="noopener"><div class="k">Instagram</div><div class="v">@libertylawnandlandscape316</div></a>
     <a class="cc reveal d4" href="https://facebook.com/libertylawnandlandscape" target="_blank" rel="noopener"><div class="k">Facebook</div><div class="v">Liberty Lawn &amp; Landscape</div></a>
   </div>
-  <p class="area" style="margin-top:24px">Hours: Monday&ndash;Saturday, 8:00am&ndash;4:30pm &middot; Closed Sunday</p>
+  <p class="hours">Hours: Monday&ndash;Saturday, 8:00am&ndash;4:30pm &middot; Closed Sunday</p>
 </section>
 
 <footer>
@@ -321,43 +436,30 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
 </footer>
 
 <script>
-/* scroll reveal */
 (function(){
   var els=[].slice.call(document.querySelectorAll('.reveal'));
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
-  var io=new IntersectionObserver(function(ent){
-    ent.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});
-  },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+  var io=new IntersectionObserver(function(ent){ent.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
   els.forEach(function(e){io.observe(e);});
 })();
-/* water drops in hero */
 (function(){
   var box=document.getElementById('drops');if(!box)return;
   for(var i=0;i<12;i++){var d=document.createElement('div');d.className='drop';
-    d.style.left=(Math.random()*100)+'%';
-    var dur=3.5+Math.random()*4;d.style.animationDuration=dur+'s';
-    d.style.animationDelay=(-Math.random()*dur)+'s';
-    var s=6+Math.random()*7;d.style.width=s+'px';d.style.height=s+'px';
+    d.style.left=(Math.random()*100)+'%';var dur=3.5+Math.random()*4;d.style.animationDuration=dur+'s';
+    d.style.animationDelay=(-Math.random()*dur)+'s';var s=6+Math.random()*7;d.style.width=s+'px';d.style.height=s+'px';
     box.appendChild(d);}
 })();
-/* count-up stats */
 (function(){
   var done=false;
-  function run(){
-    if(done)return;done=true;
+  function run(){if(done)return;done=true;
     document.querySelectorAll('.num').forEach(function(el){
       var to=parseFloat(el.getAttribute('data-to')),dec=parseInt(el.getAttribute('data-dec')||'0',10),t0=null,dur=1300;
-      function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=1-Math.pow(1-p,3);
+      function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);
         el.textContent=(to*e).toFixed(dec);if(p<1)requestAnimationFrame(step);else el.textContent=to.toFixed(dec);}
-      requestAnimationFrame(step);
-    });
+      requestAnimationFrame(step);});
   }
   var s=document.querySelector('.stats');
-  if('IntersectionObserver' in window&&s){
-    var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)run();});},{threshold:.2});
-    io.observe(s);
-    setTimeout(run,3000);
-  }else run();
+  if('IntersectionObserver' in window&&s){var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)run();});},{threshold:.2});io.observe(s);setTimeout(run,3000);}else run();
 })();
 </script>
 </body>
