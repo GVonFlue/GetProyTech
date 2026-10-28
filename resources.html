@@ -71,6 +71,9 @@
 .bz .lg img{max-width:84%;max-height:84%;object-fit:contain}
 .bz .banner{height:120px;border-radius:14px;background:#fff;display:grid;place-items:center;margin-bottom:16px;overflow:hidden}
 .bz .banner img{max-width:82%;max-height:78%;object-fit:contain}
+.bz .bzhead{display:block;text-decoration:none;color:inherit;cursor:pointer}
+.bz .bzhead:hover .banner{box-shadow:0 0 0 2px rgba(56,189,248,.55)}
+.bz .bzhead:hover b{color:#7DD3FC}
 .bz .lg.ini{background:linear-gradient(135deg,var(--blue),var(--elec));font-family:var(--disp);font-weight:700;font-size:1.5rem;color:#fff}
 .bz b{font-family:var(--disp);font-size:1.2rem;display:block}
 .bz .p{color:var(--ice-2);font-size:.9rem;font-weight:600}
@@ -200,11 +203,14 @@ body.lock{overflow:hidden}
   function card(b){
     var ban=b.logo?'<div class="banner"'+(b.logoBg?' style="background:'+esc(b.logoBg)+'"':'')+'><img src="'+esc(b.logo)+'" alt="'+esc(b.name)+' logo" loading="lazy"></div>':'';
     var lg=b.logo?'':'<div class="lg ini">'+esc((b.name||'?').charAt(0))+'</div>';
+    var top='<div class="top">'+lg+'<div><b>'+esc(b.name)+'</b>'+(b.person?'<span class="p">'+esc(b.person)+'</span>':'')+'</div></div>';
+    var head=b.landing?('<a class="bzhead" href="'+esc(b.landing)+'">'+ban+top+'</a>'):(ban+top);
     var a='';
-    if(b.url)a+='<a class="o" href="'+esc(b.url)+'" target="_blank" rel="noopener">Website</a>';
+    if(b.landing)a+='<a class="o" href="'+esc(b.landing)+'">View page &rarr;</a>';
+    else if(b.url)a+='<a class="o" href="'+esc(b.url)+'" target="_blank" rel="noopener">Website</a>';
     if(b.phone)a+='<a href="tel:'+esc(b.phone.replace(/[^0-9+]/g,''))+'">Call</a>';
     if(b.email)a+='<a href="mailto:'+esc(b.email)+'">Email</a>';
-    return '<article class="bz">'+ban+'<div class="top">'+lg+'<div><b>'+esc(b.name)+'</b>'+(b.person?'<span class="p">'+esc(b.person)+'</span>':'')+'</div></div><p class="d">'+esc(b.blurb)+'</p><div class="acts">'+a+'</div></article>';
+    return '<article class="bz">'+head+'<p class="d">'+esc(b.blurb)+'</p><div class="acts">'+a+'</div></article>';
   }
   function openCat(id){
     if(!data)return; var c=data.categories.find(function(x){return x.id===id}); if(!c)return;
