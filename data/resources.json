@@ -125,7 +125,19 @@
       "name": "Glass",
       "blurb": "Windows, doors, mirrors, and auto glass.",
       "icon": "window",
-      "businesses": []
+      "businesses": [
+        {
+          "name": "After Dark Window Tinting",
+          "person": "Dawson & Amanda Riffel",
+          "blurb": "Residential, commercial, and automotive window tint. Family owned, GEO SHIELD film, lifetime warranty, 1,000+ jobs completed. Proud Suite Night sponsor.",
+          "url": "https://afterdarktint.com/",
+          "phone": "(316) 210-1319",
+          "email": "amanda@afterdarktint.com",
+          "logo": "/images/sponsors/after-dark-window-tinting/logo-wide.png",
+          "logoBg": "#0A0B0A",
+          "landing": "/sponsors/after-dark-window-tinting"
+        }
+      ]
     },
     {
       "id": "electricians",
