@@ -1,0 +1,18 @@
+# Secrets — never commit. Env vars live in the Vercel project settings.
+.env
+.env.*
+*.pem
+*.key
+*-key.json
+*credentials*
+*secret*
+
+# Dependencies and build output
+node_modules/
+dist/
+.vercel/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log

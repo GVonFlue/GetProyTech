@@ -1,3 +1,4 @@
+import { guard, sweep } from './_guard.js';
 // api/crm-onboard.js — Vercel serverless function
 // Receives the CRM onboarding form JSON and forwards it to the Google Sheets
 // webhook. Identical pattern to api/onboard.js — the only difference is the
@@ -8,10 +9,9 @@
 // (Vercel → Project → Settings → Environment Variables).
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ ok: false, error: 'Method not allowed' });
-  }
+  const gate = await guard(req, res, { name: 'crm-onboard', perIp: 10, windowMin: 10, perDay: 1000, maxChars: 40000 });
+  if (!gate.ok) return;
+  sweep();
 
   const webhookUrl = process.env.SHEETS_WEBHOOK_URL;
   if (!webhookUrl) {

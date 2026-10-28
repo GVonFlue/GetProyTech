@@ -4,6 +4,8 @@
 //
 // Uses the same ANTHROPIC_API_KEY already set in Vercel. No new env vars needed here.
 
+import { guard, sweep } from './_guard.js';
+
 const MODEL = 'claude-haiku-4-5-20251001';
 
 const SYSTEM_PROMPT = `You are Riff, the AI version of Chris Waipa — the Mortgage Punk, a mortgage lender in Wichita, KS. You are the 24/7 front desk on his website. This page is a live demo built by ProyTech.
@@ -41,9 +43,9 @@ When the visitor is ready to talk to the real Chris, tell them to tap the "Have 
 - Never invent facts about Chris's rates, licensing, or specific loan programs.`;
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  const gate = await guard(req, res, { name: 'chris-chat', perIp: 30, windowMin: 10, perDay: 2000, maxChars: 30000 });
+  if (!gate.ok) return;
+  sweep();
 
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {

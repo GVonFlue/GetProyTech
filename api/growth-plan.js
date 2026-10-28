@@ -1,10 +1,13 @@
+import { guard, sweep } from './_guard.js';
 // api/growth-plan.js — receives "Book your free Growth Plan" requests from /book.
 // ENV (Vercel → Settings → Environment Variables):
 //   GROWTH_PLAN_WEBHOOK_URL = Google Apps Script web-app URL (or any JSON webhook) that stores the request
 // Falls back to SHEETS_WEBHOOK_URL if set. If nothing is configured, returns stored:false
 // and the page falls back to opening an email, so no request is ever lost silently.
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ ok: false });
+  const gate = await guard(req, res, { name: 'growth-plan', perIp: 10, windowMin: 10, perDay: 1000, maxChars: 8000 });
+  if (!gate.ok) return;
+  sweep();
   const b = req.body || {};
   if (b.company) return res.status(200).json({ ok: true, stored: true }); // honeypot
   const s = (v, n) => String(v || '').trim().slice(0, n);

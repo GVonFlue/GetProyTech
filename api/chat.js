@@ -16,6 +16,8 @@
 // Then redeploy. If SHEETS_WEBHOOK_URL is missing, chat still works; the lead
 // just isn't fired (and it's logged server-side).
 
+import { guard, sweep } from './_guard.js';
+
 const MODEL = 'claude-haiku-4-5-20251001';
 
 const SYSTEM_PROMPT = `You are Ace, the AI front desk for ProyTech — a Wichita, KS company that builds and runs a business's entire operating system: a website, automations, and an AI-powered Business Suite, all installed for them. You help realtors, lenders, and local businesses. You are NOT just a CRM or a website guy — ProyTech is the system a whole business runs on, and a growth partner.
@@ -104,9 +106,9 @@ async function fireLead(lead, messages) {
 }
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  const gate = await guard(req, res, { name: 'chat', perIp: 30, windowMin: 10, perDay: 3000, maxChars: 30000 });
+  if (!gate.ok) return;
+  sweep();
 
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {

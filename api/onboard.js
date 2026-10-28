@@ -1,3 +1,4 @@
+import { guard, sweep } from './_guard.js';
 // api/onboard.js — Vercel serverless function
 // Receives the onboarding form JSON and forwards it to the Google Sheets
 // webhook. Same pattern as api/lead.js: the webhook URL lives in the
@@ -5,10 +6,9 @@
 // Environment Variables).
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ ok: false, error: 'Method not allowed' });
-  }
+  const gate = await guard(req, res, { name: 'onboard', perIp: 10, windowMin: 10, perDay: 1000, maxChars: 40000 });
+  if (!gate.ok) return;
+  sweep();
 
   const webhookUrl = process.env.SHEETS_WEBHOOK_URL;
   if (!webhookUrl) {

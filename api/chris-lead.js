@@ -1,3 +1,4 @@
+import { guard, sweep } from './_guard.js';
 // api/chris-lead.js — receives leads from the Riff demo (/askchris)
 // and forwards them to a Google Apps Script webhook that:
 //   1. Logs the lead to a Google Sheet
@@ -9,7 +10,9 @@
 // Same pattern as api/lead.js.
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  const gate = await guard(req, res, { name: 'chris-lead', perIp: 10, windowMin: 10, perDay: 1000, maxChars: 6000 });
+  if (!gate.ok) return;
+  sweep();
 
   try {
     const b = req.body || {};
