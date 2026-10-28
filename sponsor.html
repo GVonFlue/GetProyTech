@@ -141,9 +141,81 @@ footer a{color:var(--ice-2);text-decoration:none}
   .value-grid{grid-template-columns:1fr}
   .row{grid-template-columns:1fr}
 }
+/* ===== Suite Night ice background (shared look with /suitenight) ===== */
+.sn-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(180deg,#05263f,#03151f 60%,#020a12);pointer-events:none}
+.tn-ice{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(120% 80% at 50% -10%, rgba(56,189,248,.28), transparent 60%),
+  radial-gradient(90% 60% at 15% 20%, rgba(0,93,166,.5), transparent 65%),
+  radial-gradient(90% 70% at 85% 15%, rgba(45,134,200,.42), transparent 62%),
+  linear-gradient(180deg, #05263f, #03151f);
+  transform:scale(1.05);animation:tn-drift 24s ease-in-out infinite alternate}
+@keyframes tn-drift{to{transform:scale(1.12) translate3d(0,-12px,0)}}
+.tn-aurora{position:absolute;inset:-20% -10% auto -10%;height:70%;z-index:0;pointer-events:none;filter:blur(48px);opacity:.55;
+  background:conic-gradient(from 120deg at 50% 40%, rgba(56,189,248,.0), rgba(56,189,248,.55), rgba(0,93,166,.0), rgba(125,211,252,.5), rgba(56,189,248,.0));
+  animation:tn-aurora 18s ease-in-out infinite}
+@keyframes tn-aurora{0%,100%{transform:translateX(-6%) translateY(0) rotate(0deg)}50%{transform:translateX(6%) translateY(3%) rotate(4deg)}}
+.tn-beams{position:absolute;inset:0 0 auto 0;height:90%;z-index:0;pointer-events:none;opacity:.5;mix-blend-mode:screen;
+  background:
+    conic-gradient(from 90deg at 20% -10%, transparent 0 8deg, rgba(125,211,252,.16) 9deg 11deg, transparent 12deg 20deg),
+    conic-gradient(from 90deg at 50% -10%, transparent 0 6deg, rgba(56,189,248,.18) 7deg 9deg, transparent 10deg 18deg),
+    conic-gradient(from 90deg at 80% -10%, transparent 0 8deg, rgba(125,211,252,.14) 9deg 11deg, transparent 12deg 20deg);
+  animation:tn-beams 12s ease-in-out infinite alternate;transform-origin:50% 0}
+@keyframes tn-beams{0%{transform:translateX(-2%) scaleY(1)}100%{transform:translateX(2%) scaleY(1.05)}}
+.tn-cracks{position:absolute;inset:auto 0 0 0;height:55%;z-index:0;pointer-events:none;opacity:.12;
+  background-image:
+    linear-gradient(115deg, transparent 49.6%, rgba(234,246,255,.6) 49.8%, transparent 50%),
+    linear-gradient(65deg, transparent 49.7%, rgba(234,246,255,.5) 49.85%, transparent 50%),
+    linear-gradient(160deg, transparent 49.7%, rgba(234,246,255,.4) 49.9%, transparent 50%);
+  background-size:220px 220px, 300px 300px, 180px 180px;background-position:10% 90%, 70% 100%, 40% 80%;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000);mask-image:linear-gradient(180deg,transparent,#000)}
+.tn-streak{position:absolute;left:-10%;top:30%;z-index:1;width:120px;height:6px;pointer-events:none;border-radius:999px;
+  background:linear-gradient(90deg, transparent, rgba(125,211,252,.9), #fff);
+  box-shadow:0 0 18px rgba(125,211,252,.9),0 0 40px rgba(56,189,248,.6);
+  filter:blur(.3px);opacity:0;animation:tn-streak 7s ease-in-out infinite}
+@keyframes tn-streak{0%{left:-12%;opacity:0}8%{opacity:1}42%{left:112%;opacity:0}100%{left:112%;opacity:0}}
+.tn-sheen{position:absolute;top:0;left:-60%;width:60%;height:100%;z-index:1;pointer-events:none;
+  background:linear-gradient(105deg, transparent, rgba(234,246,255,.10) 45%, rgba(234,246,255,.18) 50%, rgba(234,246,255,.10) 55%, transparent);
+  animation:tn-sheen 9s ease-in-out infinite}
+@keyframes tn-sheen{0%{left:-60%}55%,100%{left:120%}}
+.tn-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 20%, transparent 50%, rgba(2,10,18,.82) 100%)}
+.tn-snow{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.tn-flake{position:absolute;top:-6%;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#fff,rgba(255,255,255,.2));opacity:.7;animation:tn-fall linear infinite}
+@keyframes tn-fall{0%{transform:translate3d(0,-10vh,0);opacity:0}10%{opacity:.85}100%{transform:translate3d(14px,110vh,0);opacity:0}}
+.tn-flake-0{left:6%;width:6px;height:6px;animation-duration:11s;animation-delay:0s}
+.tn-flake-1{left:16%;width:10px;height:10px;animation-duration:15s;animation-delay:2s}
+.tn-flake-2{left:27%;width:5px;height:5px;animation-duration:9s;animation-delay:1s}
+.tn-flake-3{left:38%;width:9px;height:9px;animation-duration:13s;animation-delay:4s}
+.tn-flake-4{left:49%;width:6px;height:6px;animation-duration:12s;animation-delay:.5s}
+.tn-flake-5{left:58%;width:11px;height:11px;animation-duration:17s;animation-delay:3s}
+.tn-flake-6{left:66%;width:5px;height:5px;animation-duration:10s;animation-delay:2.5s}
+.tn-flake-7{left:73%;width:8px;height:8px;animation-duration:14s;animation-delay:1.5s}
+.tn-flake-8{left:81%;width:7px;height:7px;animation-duration:12s;animation-delay:5s}
+.tn-flake-9{left:88%;width:10px;height:10px;animation-duration:16s;animation-delay:.8s}
+.tn-flake-10{left:93%;width:6px;height:6px;animation-duration:11s;animation-delay:3.5s}
+.tn-flake-11{left:12%;width:7px;height:7px;animation-duration:13s;animation-delay:6s}
+.tn-flake-12{left:34%;width:5px;height:5px;animation-duration:10s;animation-delay:2.2s}
+.tn-flake-13{left:44%;width:9px;height:9px;animation-duration:15s;animation-delay:4.5s}
+.tn-flake-14{left:62%;width:6px;height:6px;animation-duration:12s;animation-delay:1.2s}
+.tn-flake-15{left:77%;width:8px;height:8px;animation-duration:14s;animation-delay:3.2s}
+.tn-flake-16{left:22%;width:6px;height:6px;animation-duration:11s;animation-delay:5.5s}
+.tn-flake-17{left:85%;width:7px;height:7px;animation-duration:13s;animation-delay:.3s}
+/* lift content above the fixed background + readability over the ice */
+body{background:#020a12}
+.pt-nav,.hero,main,footer{position:relative;z-index:2}
+.hero{background:radial-gradient(100% 82% at 50% 16%, rgba(2,10,18,.5), transparent 72%)!important}
+.card{background:rgba(5,22,37,.82)!important;backdrop-filter:blur(12px) saturate(1.2)}
+.vcard{background:rgba(6,24,40,.62)!important;backdrop-filter:blur(6px)}
+@media(prefers-reduced-motion:reduce){.tn-ice,.tn-aurora,.tn-beams,.tn-streak,.tn-sheen,.tn-flake{animation:none}.tn-snow{display:none}}
 </style>
 </head>
 <body>
+
+<div class="sn-bg" aria-hidden="true">
+  <div class="tn-ice"></div><div class="tn-beams"></div><div class="tn-cracks"></div>
+  <div class="tn-aurora"></div><div class="tn-sheen"></div><div class="tn-streak"></div>
+  <div class="tn-snow"><span class="tn-flake tn-flake-0"></span><span class="tn-flake tn-flake-1"></span><span class="tn-flake tn-flake-2"></span><span class="tn-flake tn-flake-3"></span><span class="tn-flake tn-flake-4"></span><span class="tn-flake tn-flake-5"></span><span class="tn-flake tn-flake-6"></span><span class="tn-flake tn-flake-7"></span><span class="tn-flake tn-flake-8"></span><span class="tn-flake tn-flake-9"></span><span class="tn-flake tn-flake-10"></span><span class="tn-flake tn-flake-11"></span><span class="tn-flake tn-flake-12"></span><span class="tn-flake tn-flake-13"></span><span class="tn-flake tn-flake-14"></span><span class="tn-flake tn-flake-15"></span><span class="tn-flake tn-flake-16"></span><span class="tn-flake tn-flake-17"></span></div>
+  <div class="tn-vignette"></div>
+</div>
 
 <nav class="pt-nav"><div class="pt-nav-inner">
   <a href="index.html" class="pt-logo" aria-label="ProyTech home"><img src="/proytechlogo.png" alt="ProyTech" class="pt-logo-img"></a>
@@ -162,8 +234,6 @@ footer a{color:var(--ice-2);text-decoration:none}
 </div></nav>
 
 <header class="hero">
-  <div class="hero-glow"></div>
-  <div id="flakes"></div>
   <div class="hero-in">
     <span class="kicker">ProyTech × Wichita Thunder</span>
     <h1>Become a <span class="o">Suite Night</span> Sponsor</h1>
