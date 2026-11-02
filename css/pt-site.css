@@ -534,3 +534,13 @@ img[loading=lazy]{background:rgba(125,211,252,.05)}
 @media (max-width:700px){
   .blob{max-width:80vw;filter:blur(60px)}
 }
+
+/* SMS consent checkbox (A2P 10DLC) — inherits the form's text color so it reads
+   on both light and dark form backgrounds. */
+.sms-consent-wrap{margin:14px 0;text-align:left}
+.sms-consent-wrap label{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.5;opacity:.82;cursor:pointer}
+.sms-consent-wrap input{margin-top:3px;flex:0 0 auto;width:16px;height:16px;accent-color:#FB6926;cursor:pointer}
+.sms-consent-wrap a{color:inherit;text-decoration:underline}
+.sms-consent-wrap.sms-consent-err label{color:#e0533b;opacity:1}
+.sms-consent-wrap.sms-consent-err input{outline:2px solid #e0533b;outline-offset:2px}
+.sms-consent-msg{color:#e0533b;font-size:12px;margin:6px 0 0 25px}

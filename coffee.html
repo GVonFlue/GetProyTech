@@ -376,7 +376,8 @@ nav.nav,footer,main{position:relative;z-index:2}
           <div class="line"><span id="sumDay">—</span> at <span id="sumTime">—</span></div>
           <div class="line"><span id="sumShop">—</span></div>
         </div>
-        <button class="book-btn" id="bookBtn" disabled>Lock in my coffee ☕</button>
+        <div class="sms-consent-wrap"><label><input type="checkbox" class="js-sms-consent" required> <span>I agree to receive text messages from ProyTech at the number provided, including replies to my inquiry, appointment reminders, follow ups, and occasional offers. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/terms" target="_blank" rel="noopener">Terms</a>.</span></label><p class="sms-consent-msg" hidden>Please check the box to agree to texts before continuing.</p></div>
+        <button class="book-btn" id="bookBtn" data-consent-gate disabled>Lock in my coffee ☕</button>
         <div class="book-note">I'll text you to confirm the exact spot. No spam, ever.</div>
       </div>
 
@@ -744,5 +745,6 @@ nav.nav,footer,main{position:relative;z-index:2}
 
 })();
 </script>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae7f2cb03d93fc5217b9946" data-source="WEB_USER"></script>
 </body>
 </html>

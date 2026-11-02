@@ -343,7 +343,8 @@ body{background:#020a12}
       <div class="err" id="errBox"></div>
 
       <div class="submit">
-        <button type="submit" class="tn-btn tn-btn-orange" id="submitBtn">Submit &amp; lock in my spot</button>
+        <div class="sms-consent-wrap"><label><input type="checkbox" class="js-sms-consent" required> <span>I agree to receive text messages from ProyTech at the number provided, including replies to my inquiry, appointment reminders, follow ups, and occasional offers. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/terms" target="_blank" rel="noopener">Terms</a>.</span></label><p class="sms-consent-msg" hidden>Please check the box to agree to texts before continuing.</p></div>
+        <button type="submit" class="tn-btn tn-btn-orange" id="submitBtn" data-consent-gate>Submit &amp; lock in my spot</button>
         <p class="formnote">We'll review and reach out to confirm your Suite Night and get you on the lineup.</p>
       </div>
     </form>
@@ -510,6 +511,25 @@ document.getElementById('againBtn').addEventListener('click',function(){
   submitBtn.disabled=false;submitBtn.textContent='Submit & lock in my spot';
   window.scrollTo({top:0,behavior:'smooth'});
 });
+</script>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae7f2cb03d93fc5217b9946" data-source="WEB_USER"></script>
+<style>
+.sms-consent-wrap{margin:14px 0;text-align:left}
+.sms-consent-wrap label{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.5;opacity:.82;cursor:pointer}
+.sms-consent-wrap input{margin-top:3px;flex:0 0 auto;width:16px;height:16px;accent-color:#FB6926;cursor:pointer}
+.sms-consent-wrap a{color:inherit;text-decoration:underline}
+.sms-consent-wrap.sms-consent-err label{color:#e0533b;opacity:1}
+.sms-consent-wrap.sms-consent-err input{outline:2px solid #e0533b;outline-offset:2px}
+.sms-consent-msg{color:#e0533b;font-size:12px;margin:6px 0 0 25px}
+</style>
+<script>
+(function(){
+  var box=document.querySelector('.js-sms-consent'); if(!box) return;
+  function warn(){var w=box.closest('.sms-consent-wrap');if(!w)return;w.classList.add('sms-consent-err');var m=w.querySelector('.sms-consent-msg');if(m)m.hidden=false;try{box.focus()}catch(e){}}
+  box.addEventListener('change',function(){var w=box.closest('.sms-consent-wrap');if(!w)return;w.classList.toggle('sms-consent-err',!box.checked);var m=w.querySelector('.sms-consent-msg');if(m)m.hidden=box.checked;});
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-consent-gate]');if(!b)return;if(box.checked)return;e.preventDefault();e.stopImmediatePropagation();warn();},true);
+  document.addEventListener('submit',function(e){if(box.checked)return;e.preventDefault();e.stopImmediatePropagation();warn();},true);
+})();
 </script>
 </body>
 </html>

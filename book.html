@@ -62,6 +62,7 @@
 .leak-back{background:none;border:0;color:var(--gray);font:inherit;font-size:14px;
   cursor:pointer;padding:10px 0;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:560px){ .row2{grid-template-columns:1fr} .leak{padding:26px 20px} }
+@media (max-width:820px){ .grid2{grid-template-columns:1fr !important} }
 </style>
 <style>.bk{--line:rgba(125,211,252,.3);--blue:#38BDF8;--blue-deep:#1338DE;--white:#fff;--gray:#A9BCD8;--orange:#FB6926;--display:var(--disp)}
 .bk .btn-primary{background:var(--o);color:#fff;box-shadow:0 10px 30px rgba(251,105,38,.4)}
@@ -175,7 +176,8 @@
         </div>
         <div class="field"><label for="bw">What's the biggest thing holding you back?</label><textarea id="bw" placeholder="We get leads, but I don't know my numbers and follow up falls through the cracks."></textarea></div>
         <input type="text" id="bhp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-        <button class="btn btn-o" id="bookSend" style="width:100%">Request my free Growth Plan</button>
+        <div class="sms-consent-wrap"><label><input type="checkbox" class="js-sms-consent" required> <span>I agree to receive text messages from ProyTech at the number provided, including replies to my inquiry, appointment reminders, follow ups, and occasional offers. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/terms" target="_blank" rel="noopener">Terms</a>.</span></label><p class="sms-consent-msg" hidden>Please check the box to agree to texts before continuing.</p></div>
+        <button class="btn btn-o" id="bookSend" data-consent-gate style="width:100%">Request my free Growth Plan</button>
         <div id="bookMsg" role="status"></div>
       </div>
     </div>
@@ -210,7 +212,7 @@
       <div><h5>Company</h5><a href="/about">About us</a><a href="/work">Our work</a><a href="/events">Events</a><a href="/resources">Resources</a><a href="/partner">Partner Program</a></div>
       <div><h5>Talk to us</h5><a href="/book">Free Growth Plan</a><a href="tel:9013353905">901-335-3905</a><a href="mailto:admin@getproytech.com">admin@getproytech.com</a></div>
     </div>
-    <div class="foot-base"><span>© <span id="yr"></span> ProyTech Business Solutions LLC · 150 N Main St, Wichita, KS 67202</span><span><a href="/terms">Terms of Service</a> · <a href="/privacy">Privacy Policy</a></span><span>Based in Wichita, building for businesses across the country.</span></div>
+    <div class="foot-base"><span>© <span id="yr"></span> ProyTech Business Solutions LLC · 150 N Main St, Wichita, KS 67202</span><span><a href="/terms">Terms of Service</a> · <a href="/privacy">Privacy Policy</a> &middot; Text STOP to opt out</span><span>Based in Wichita, building for businesses across the country.</span></div>
   </div>
 </footer>
 <div class="mcta"><a class="btn btn-o" href="/book">Book your free Growth Plan</a></div>
@@ -337,5 +339,6 @@
 })();
 </script>
 
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae7f2cb03d93fc5217b9946" data-source="WEB_USER"></script>
 </body>
 </html>
