@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Previews | ProyTech</title>
+<meta name="description" content="Custom website previews built by ProyTech. Each preview is live for 14 days.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1338DE;--orange:#FB6926;--navy:#000110;--ink:#111528;--muted:#5B6478;--tint:#F1F4FE}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6}
+.frame{margin:12px;border:6px solid var(--blue);border-radius:22px;min-height:calc(100vh - 24px);overflow:hidden;display:flex;flex-direction:column}
+.top{background:var(--navy);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.top img{height:34px;width:auto}
+.top a.cta{color:#fff;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:10px 18px}
+main{max-width:1100px;width:100%;margin:0 auto;padding:64px 24px;flex:1}
+.label{font-family:'Space Mono',monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--blue)}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(36px,5vw,56px);line-height:1.05;margin:10px 0 14px;letter-spacing:-1px}
+.lede{color:var(--muted);max-width:620px;margin:0 0 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{display:flex;flex-direction:column;border:1px solid #DCE2F5;border-radius:18px;overflow:hidden;text-decoration:none;color:var(--ink);background:#fff;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(19,56,222,.12)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 25%;background:var(--tint)}
+.card .b{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px}
+.card .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px}
+.card .k{color:var(--muted);font-size:15px}
+.card .x{font-family:'Space Mono',monospace;font-size:12px;color:var(--orange)}
+.empty{padding:40px;border:1px dashed #C9D2F2;border-radius:18px;color:var(--muted);text-align:center}
+.cta-box{margin-top:56px;background:var(--orange);color:#fff;border-radius:18px;padding:32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.cta-box h2{font-family:'Space Grotesk',sans-serif;margin:0;font-size:28px}
+.cta-box a{background:var(--navy);color:#fff;text-decoration:none;font-weight:600;border-radius:999px;padding:14px 22px}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="top">
+    <a href="/"><img src="/images/proytech-logo-nav.png" alt="ProyTech"></a>
+    <a class="cta" href="/book">Book a 20-minute teardown</a>
+  </div>
+  <main>
+    <div class="label">Website previews</div>
+    <h1>Built before you ever paid a dime.</h1>
+    <p class="lede">We build real previews for real Wichita businesses so they can see exactly what they'd get. Each one stays live for 14 days.</p>
+    <div class="grid" id="grid"></div>
+    <div class="cta-box">
+      <h2>Want to see yours?</h2>
+      <a href="/book">Book a 20-minute teardown</a>
+    </div>
+  </main>
+</div>
+<script>
+// ADD NEW PREVIEWS HERE. Each one auto-hides 14 days after "added".
+// slug = the file name in /previews (without .html)
+var PREVIEWS = [
+  { slug: 'erikachoriego', name: 'Erika Choriego', kind: 'Realtor · Wichita, KS', added: '2026-11-03',
+    img: 'https://pvobppbsoqelfdqwovgd.supabase.co/storage/v1/object/public/forms/cfa097c5-4687-4939-9fdd-cce38eab50d1/form_thumb_81518899-391f-4bd2-bbfa-756c8df2b63a/1762889995110.jpg' }
+];
+(function(){
+  var grid = document.getElementById('grid'), now = new Date(), shown = 0;
+  PREVIEWS.forEach(function(p){
+    var exp = new Date(p.added + 'T00:00:00-06:00'); exp.setDate(exp.getDate() + 14);
+    if (now > exp) return;
+    var days = Math.ceil((exp - now) / 86400000);
+    var a = document.createElement('a'); a.className = 'card'; a.href = '/previews/' + p.slug;
+    a.innerHTML = '<img alt="" loading="lazy"><div class="b"><span class="n"></span><span class="k"></span><span class="x"></span></div>';
+    a.querySelector('img').src = p.img; a.querySelector('img').alt = p.name + ' website preview';
+    a.querySelector('.n').textContent = p.name; a.querySelector('.k').textContent = p.kind;
+    a.querySelector('.x').textContent = days + (days === 1 ? ' day' : ' days') + ' left';
+    grid.appendChild(a); shown++;
+  });
+  if (!shown) grid.innerHTML = '<div class="empty">No live previews right now. Check back soon.</div>';
+})();
+</script>
+</body>
+</html>
