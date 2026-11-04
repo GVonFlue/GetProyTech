@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Report for Tellez Landscaping | ProyTech</title>
+<meta name="description" content="A plain-English look at how Tellez Landscaping shows up online: what is working, what is costing you jobs, and how we would fix it.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Your website report, Tellez Landscaping">
+<meta property="og:description" content="What is working, what is costing you jobs, and how we would fix it.">
+<meta property="og:image" content="https://getproytech.com/images/og/tellezlandscaping.jpg">
+<meta name="preview-expires" content="2026-11-18">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1338DE;--orange:#FB6926;--navy:#000110;--ink:#111528;--muted:#5B6478;--tint:#F1F4FE;--line:#DCE2F5;--good:#167A3E;--goodbg:#E6F4EC;--warn:#9A5B00;--warnbg:#FFF2DC;--bad:#B3261E;--badbg:#FDE7E5}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+h1,h2,h3,p{margin:0}
+.frame{margin:12px;border:6px solid var(--blue);border-radius:22px;overflow:hidden}
+.band{background:var(--navy);padding:16px 28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.band img{height:34px;width:auto}
+.band a{color:#fff;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:9px 16px}
+main{max-width:980px;margin:0 auto;padding:56px 28px 72px}
+.label{font-family:'Space Mono',monospace;font-size:13px;color:var(--blue);letter-spacing:1px}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-1px;margin:10px 0 16px}
+h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-.5px;margin-bottom:18px}
+h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;line-height:1.2}
+.lede{font-size:19px;color:var(--muted);max-width:720px}
+section{margin-top:64px}
+
+.verdict{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;margin-top:36px;padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--tint)}
+.grade{width:120px;height:120px;border-radius:18px;background:var(--orange);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif}
+.grade b{font-size:58px;line-height:1}
+.grade span{font-size:13px;font-weight:600}
+.verdict p{font-size:19px}
+
+.scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:22px}
+.sc{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-weight:600;font-size:15px}
+.pill{font-family:'Space Mono',monospace;font-size:12px;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.g{background:var(--goodbg);color:var(--good)}.w{background:var(--warnbg);color:var(--warn)}.x{background:var(--badbg);color:var(--bad)}
+
+.top3{display:flex;flex-direction:column;gap:22px}
+.prob{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.prob .h{display:flex;gap:16px;align-items:flex-start;padding:22px 24px}
+.prob .n{flex:none;width:40px;height:40px;border-radius:10px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px}
+.prob .h p{color:var(--muted);margin-top:6px}
+.prob figure{margin:0;border-top:1px solid var(--line);background:#F7F8FC;padding:16px}
+.prob figure img{border-radius:8px;border:1px solid var(--line)}
+.prob figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.fixline{padding:14px 24px;border-top:1px solid var(--line);font-weight:600;font-size:15px}
+.fixline b{color:var(--blue)}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:18px 0 6px}
+.m{border:1px solid var(--line);border-radius:12px;padding:14px}
+.m b{display:block;font-family:'Space Grotesk',sans-serif;font-size:30px;line-height:1}
+.m span{font-size:13px;color:var(--muted)}
+
+.area{border-top:1px solid var(--line);padding:22px 0}
+.area .t{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.area ul{margin:0;padding-left:20px;color:var(--ink)}
+.area li{margin:6px 0}
+.area li em{font-style:normal;color:var(--muted)}
+.why{color:var(--muted);font-size:15px;margin-top:8px}
+
+.working{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.working div{background:var(--goodbg);border-radius:10px;padding:12px 14px;font-size:15px;font-weight:500}
+
+.fixed{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fixed li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:14px 18px;border-top:1px solid var(--line);font-size:15px}
+.fixed li:first-child{border-top:0;background:var(--tint);font-weight:700;font-family:'Space Grotesk',sans-serif}
+.fixed li span:last-child{color:var(--good);font-weight:600}
+.fixed li:first-child span:last-child{color:var(--ink)}
+
+.cta{margin-top:56px;background:var(--orange);color:#fff;border-radius:18px;padding:34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+.cta h2{margin:0;color:#fff}
+.cta p{color:#FFE7DA;margin-top:6px}
+.cta .btns{display:flex;flex-wrap:wrap;gap:10px}
+.cta a{background:var(--navy);color:#fff;text-decoration:none;font-weight:600;border-radius:999px;padding:14px 22px}
+.cta a.alt{background:#fff;color:var(--navy)}
+.foot{margin-top:28px;font-size:13px;color:var(--muted)}
+.expired{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#000110;color:#F1F4FE;text-align:center}
+.expired a{color:#FB6926}
+@media (max-width:640px){.verdict{grid-template-columns:minmax(0,1fr)}.fixed li{grid-template-columns:minmax(0,1fr);gap:4px}.frame{margin:6px;border-width:4px}main{padding:40px 18px 56px}}
+@media print{.frame{border:0;margin:0}.cta a{border:1px solid #fff}section,.prob{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="band"><a href="https://getproytech.com" style="border:0;padding:0"><img src="/images/proytech-logo-nav.png" alt="ProyTech"></a><a href="/previews/tellezlandscaping">See your new homepage</a></div>
+  <main>
+    <div class="label">Website report · tellezlandscaping.net · November 4, 2026</div>
+    <h1>Your website report, Tellez Landscaping</h1>
+    <p class="lede">We looked you up the way a Colorado Springs homeowner would: on Google, on Instagram, and by typing in your web address. Here's what they find today, what it costs you, and how we'd fix it.</p>
+
+    <div class="verdict">
+      <div class="grade"><b>F</b><span>Website</span></div>
+      <p><strong>Your reputation is an A. Your website is offline.</strong> You have 4.9 stars from 56 Google reviews, real project photos and a certified, family crew. But tellezlandscaping.net shows a "Website Expired" page, and your Google listing has no website at all. Every homeowner who wants to see more before they call hits a dead end.</p>
+    </div>
+
+    <div class="scores" aria-label="Scores by area">
+      <div class="sc">Website is up <span class="pill x">Expired</span></div>
+      <div class="sc">Google listing link <span class="pill x">Missing</span></div>
+      <div class="sc">Instagram link <span class="pill x">Broken</span></div>
+      <div class="sc">Reviews and rating <span class="pill g">Great</span></div>
+      <div class="sc">Replies to reviews <span class="pill w">None yet</span></div>
+      <div class="sc">Project photos <span class="pill g">Good</span></div>
+      <div class="sc">Online estimate request <span class="pill x">Missing</span></div>
+      <div class="sc">After hours lead capture <span class="pill x">Missing</span></div>
+      <div class="sc">Google search <span class="pill w">Needs work</span></div>
+      <div class="sc">AI search <span class="pill x">Not showing</span></div>
+      <div class="sc">Name confusion online <span class="pill w">Risk</span></div>
+      <div class="sc">Tracking <span class="pill x">Missing</span></div>
+    </div>
+
+    <section>
+      <h2>The 3 problems costing you jobs right now</h2>
+      <div class="top3">
+        <div class="prob">
+          <div class="h"><div class="n">1</div><div><h3>Your website shows "Website Expired"</h3><p>The address in your Instagram bio, tellezlandscaping.net, loads a Squarespace page that says the account has expired. Homeowners who tap it from Instagram see that instead of your work, and most won't try again.</p></div></div>
+          <figure><img src="/images/previews/tellezlandscaping-expired.jpg" alt="Screenshot of tellezlandscaping.net showing a Squarespace Website Expired message"><figcaption>tellezlandscaping.net, checked November 4, 2026.</figcaption></figure>
+          <div class="fixline"><b>Fix:</b> a fast, mobile first site on a domain you own, live in days, with your photos and reviews on it.</div>
+        </div>
+        <div class="prob">
+          <div class="h"><div class="n">2</div><div><h3>Your Google listing has no website</h3><p>Your Google Business Profile is strong: 4.9 stars, 56 reviews, real photos. But the website field is empty, so people comparing landscapers can't click through to see services, a project gallery or a way to request an estimate. Google also uses your website to decide when to show you, so an empty field holds your ranking back.</p></div></div>
+          <div class="fixline"><b>Fix:</b> link the new site from your Google listing, with your name, phone and service area matching exactly.</div>
+        </div>
+        <div class="prob">
+          <div class="h"><div class="n">3</div><div><h3>Leads that come in after hours have nowhere to go</h3><p>Landscaping customers shop at night and on weekends, often from their phone while looking at their bare yard. Right now the only option is calling during the day. If you're on a job and miss the call, that homeowner calls the next company on Google.</p></div></div>
+          <div class="fixline"><b>Fix:</b> a yard plan form and a 24/7 assistant that collects the project details and texts them straight to you.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Everything else we found</h2>
+      <div class="area"><div class="t"><h3>Searching for a landscaper</h3><span class="pill x">Not showing</span></div>
+        <ul><li>A search for the best xeriscape landscapers in Colorado Springs returned HomeAdvisor, Angi, LawnStarter and other companies. Tellez Landscaping wasn't in the results.</li><li>AI tools like ChatGPT, Google AI and Perplexity build their answers from websites. With no live site, they have nothing about you to work with.</li></ul>
+        <p class="why">Why it matters: more homeowners now ask AI "who's the best landscaper near me." Almost no local landscaper is set up for it yet, which makes it an easy lead to win.</p></div>
+      <div class="area"><div class="t"><h3>Your name online</h3><span class="pill w">Risk</span></div>
+        <ul><li>A Facebook page called "Tellez Landscapes" belongs to a different company with a California phone number. Searching your name also brings up other Tellez landscapers in Illinois and California.</li><li>We couldn't find a Facebook page for your Colorado Springs business.</li></ul>
+        <p class="why">Why it matters: a homeowner could message the wrong company. A website plus consistent profiles makes it clear which Tellez is the Colorado Springs one.</p></div>
+      <div class="area"><div class="t"><h3>Reviews</h3><span class="pill g">Strong</span></div>
+        <ul><li>4.9 stars from 56 Google reviews. Customers name Dyllan, his father, his brother and Lucino, and praise the work, communication and fair pricing.</li><li>We didn't see owner replies on the recent reviews. A short thank you on each one helps your Google ranking and shows new customers you're responsive.</li><li>One review is scored 1 star but the text is glowing. It's likely a mis-tap and is worth politely asking that customer to fix.</li></ul></div>
+      <div class="area"><div class="t"><h3>Turning visitors into estimates</h3><span class="pill x">Missing</span></div>
+        <ul><li>No estimate request form, no click to call page, no way to send photos of the yard.</li><li>No follow up system, so leads live in your phone and texts.</li></ul></div>
+      <div class="area"><div class="t"><h3>Tracking</h3><span class="pill x">Missing</span></div>
+        <ul><li>With no live site, there's no way to see how many people looked for you, where they came from, or which projects they care about.</li></ul></div>
+    </section>
+
+    <section>
+      <h2>What's already working</h2>
+      <div class="working">
+        <div>4.9 stars from 56 Google reviews</div>
+        <div>Real photos of finished yards</div>
+        <div>Landscape Industry Certified and NALP member</div>
+        <div>A family crew customers mention by name</div>
+        <div>You handle HOA design submittals, which reviewers love</div>
+        <div>A clean, recognizable logo and truck sign</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Fixed in your preview</h2>
+      <ul class="fixed">
+        <li><span>Problem</span><span>How the new homepage solves it</span></li>
+        <li><span>Website expired</span><span>A live, fast homepage built from your own photos and reviews</span></li>
+        <li><span>No website on Google</span><span>Ready to link from your Google listing</span></li>
+        <li><span>No estimate request</span><span>"Plan your yard" form: pick projects, front or back, new build or redo</span></li>
+        <li><span>Missed calls after hours</span><span>24/7 assistant that qualifies the job and captures the number</span></li>
+        <li><span>Reviews hidden on Google</span><span>Your rating and real reviews front and center</span></li>
+        <li><span>HOA advantage not mentioned</span><span>A step in "How it works" that sells it</span></li>
+        <li><span>Hard to tap on a phone</span><span>Big call buttons and a layout built for phones first</span></li>
+        <li><span>Name confusion</span><span>Clear Colorado Springs branding, your logo and your numbers</span></li>
+      </ul>
+      <p style="margin-top:22px"><a href="/previews/tellezlandscaping" style="font-weight:700">See your new homepage →</a></p>
+    </section>
+
+    <div class="cta">
+      <div><h2>Want this live before spring?</h2><p>Book a 20-minute teardown and we'll walk through it together.</p></div>
+      <div class="btns"><a href="https://getproytech.com/book">Book a 20-minute teardown</a><a class="alt" href="/previews/tellezlandscaping">See the preview</a></div>
+    </div>
+    <p class="foot">Report prepared by ProyTech for Tellez Landscaping. Findings checked November 4, 2026. This page expires November 18, 2026.</p>
+  </main>
+</div>
+<script>
+(function(){var exp=document.querySelector('meta[name="preview-expires"]').content;if(new Date()>new Date(exp+'T23:59:59-07:00')){document.body.innerHTML='<div class="expired"><div><h1 style="font-size:32px;margin:0 0 12px">This preview has expired.</h1><p>Want one built for your business? <a href="https://getproytech.com/book">Book a 20-minute teardown</a>.</p></div></div>';}})();
+</script>
+</body>
+</html>
