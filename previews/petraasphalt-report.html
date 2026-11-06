@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Report for Petra Asphalt | ProyTech</title>
+<meta name="description" content="A plain-English review of petraasphalt.com: what is working, what is costing you jobs, and how we would fix it.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Your website report, Petra Asphalt">
+<meta property="og:description" content="What is working, what is costing you jobs, and how we would fix it.">
+<meta property="og:image" content="https://getproytech.com/images/og/petraasphalt.jpg">
+<meta name="preview-expires" content="2026-11-19">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1338DE;--orange:#FB6926;--navy:#000110;--ink:#111528;--muted:#5B6478;--tint:#F1F4FE;--line:#DCE2F5;--good:#167A3E;--goodbg:#E6F4EC;--warn:#9A5B00;--warnbg:#FFF2DC;--bad:#B3261E;--badbg:#FDE7E5}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+h1,h2,h3,p{margin:0}
+.frame{margin:12px;border:6px solid var(--blue);border-radius:22px;overflow:hidden}
+.band{background:var(--navy);padding:16px 28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.band img{height:34px;width:auto}
+.band a{color:#fff;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:9px 16px}
+main{max-width:980px;margin:0 auto;padding:56px 28px 72px}
+.label{font-family:'Space Mono',monospace;font-size:13px;color:var(--blue);letter-spacing:1px}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-1px;margin:10px 0 16px}
+h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-.5px;margin-bottom:18px}
+h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;line-height:1.2}
+.lede{font-size:19px;color:var(--muted);max-width:720px}
+section{margin-top:64px}
+
+.verdict{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;margin-top:36px;padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--tint)}
+.grade{width:120px;height:120px;border-radius:18px;background:var(--orange);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif}
+.grade b{font-size:58px;line-height:1}
+.grade span{font-size:13px;font-weight:600}
+.verdict p{font-size:19px}
+
+.scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:22px}
+.sc{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-weight:600;font-size:15px}
+.pill{font-family:'Space Mono',monospace;font-size:12px;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.g{background:var(--goodbg);color:var(--good)}.w{background:var(--warnbg);color:var(--warn)}.x{background:var(--badbg);color:var(--bad)}
+
+.top3{display:flex;flex-direction:column;gap:22px}
+.prob{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.prob .h{display:flex;gap:16px;align-items:flex-start;padding:22px 24px}
+.prob .n{flex:none;width:40px;height:40px;border-radius:10px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px}
+.prob .h p{color:var(--muted);margin-top:6px}
+.prob figure{margin:0;border-top:1px solid var(--line);background:#F7F8FC;padding:16px}
+.prob figure img{border-radius:8px;border:1px solid var(--line)}
+.prob figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.fixline{padding:14px 24px;border-top:1px solid var(--line);font-weight:600;font-size:15px}
+.fixline b{color:var(--blue)}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:18px 0 6px}
+.m{border:1px solid var(--line);border-radius:12px;padding:14px}
+.m b{display:block;font-family:'Space Grotesk',sans-serif;font-size:30px;line-height:1}
+.m span{font-size:13px;color:var(--muted)}
+
+.area{border-top:1px solid var(--line);padding:22px 0}
+.area .t{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.area ul{margin:0;padding-left:20px;color:var(--ink)}
+.area li{margin:6px 0}
+.area li em{font-style:normal;color:var(--muted)}
+.why{color:var(--muted);font-size:15px;margin-top:8px}
+
+.working{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.working div{background:var(--goodbg);border-radius:10px;padding:12px 14px;font-size:15px;font-weight:500}
+
+.fixed{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fixed li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:14px 18px;border-top:1px solid var(--line);font-size:15px}
+.fixed li:first-child{border-top:0;background:var(--tint);font-weight:700;font-family:'Space Grotesk',sans-serif}
+.fixed li span:last-child{color:var(--good);font-weight:600}
+.fixed li:first-child span:last-child{color:var(--ink)}
+
+.cta{margin-top:56px;background:var(--orange);color:#fff;border-radius:18px;padding:34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+.cta h2{margin:0;color:#fff}
+.cta p{color:#FFE7DA;margin-top:6px}
+.cta .btns{display:flex;flex-wrap:wrap;gap:10px}
+.cta a{background:var(--navy);color:#fff;text-decoration:none;font-weight:600;border-radius:999px;padding:14px 22px}
+.cta a.alt{background:#fff;color:var(--navy)}
+.foot{margin-top:28px;font-size:13px;color:var(--muted)}
+.expired{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#000110;color:#F1F4FE;text-align:center}
+.expired a{color:#FB6926}
+@media (max-width:640px){.verdict{grid-template-columns:minmax(0,1fr)}.fixed li{grid-template-columns:minmax(0,1fr);gap:4px}.frame{margin:6px;border-width:4px}main{padding:40px 18px 56px}}
+@media print{.frame{border:0;margin:0}.cta a{border:1px solid #fff}section,.prob{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="band"><a href="https://getproytech.com" style="border:0;padding:0"><img src="/images/proytech-logo-nav.png" alt="ProyTech"></a><a href="/previews/petraasphalt">See your new homepage</a></div>
+  <main>
+    <div class="label">Website report · petraasphalt.com · November 5, 2026</div>
+    <h1>Petra Asphalt website report</h1>
+    <p class="lede">We went through your site the way a property manager with a cracked lot would, and the way Google and AI tools do. Here's what's working, what's costing you jobs, and how we'd fix it.</p>
+
+    <div class="verdict">
+      <div class="grade"><b>B‑</b><span>Overall</span></div>
+      <p>A sharp, fast site that's hiding its best selling points. Your 5‑star Google reviews aren't on it, phone visitors can't get to the menu, and the site blocks most AI crawlers, including the ones behind Claude, Gemini and Apple's AI.</p>
+    </div>
+
+    <div class="scores" aria-label="Scores by area">
+      <div class="sc">Up and secure <span class="pill g">Good</span></div>
+      <div class="sc">Speed <span class="pill g">Good</span></div>
+      <div class="sc">Mobile experience <span class="pill x">Broken</span></div>
+      <div class="sc">First impression <span class="pill g">Good</span></div>
+      <div class="sc">Turning visits into calls <span class="pill w">Needs work</span></div>
+      <div class="sc">Trust and reviews <span class="pill x">Missing</span></div>
+      <div class="sc">Google search <span class="pill w">Needs work</span></div>
+      <div class="sc">AI search <span class="pill x">Blocked</span></div>
+      <div class="sc">Link previews <span class="pill x">Missing</span></div>
+      <div class="sc">Accessibility <span class="pill g">Good</span></div>
+      <div class="sc">Broken or outdated <span class="pill g">None found</span></div>
+      <div class="sc">Tracking <span class="pill w">Needs work</span></div>
+    </div>
+
+    <section>
+      <h2>The 3 things costing you jobs right now</h2>
+      <div class="top3">
+        <div class="prob">
+          <div class="h"><span class="n">1</span><div><h3>Your site tells most AI crawlers to stay out.</h3><p>More property managers and homeowners now ask ChatGPT, Gemini or their phone's assistant "who does parking lot sealcoating in Wichita." Your site's robots.txt (the file that tells crawlers what they can read) blocks 32 of them by name, including ClaudeBot, GPTBot, Google‑Extended (Gemini), Applebot‑Extended (Apple) and Meta's crawler. It looks like Cloudflare's built‑in AI blocking setting rather than a choice made for Petra, and it's a quick fix.</p></div></div>
+          <figure><img src="/images/previews/petraasphalt-proof-robots.jpg" alt="petraasphalt.com robots.txt showing Disallow for ClaudeBot, GPTBot, Google-Extended and Applebot-Extended" width="432" height="577" style="max-width:432px"><figcaption>petraasphalt.com/robots.txt on November 5, 2026. Highlighted lines block AI crawlers. ChatGPT's search crawler and Perplexity are not on the list, so they can still read the site.</figcaption></figure>
+          <div class="fixline"><b>In your preview:</b> built to be read by AI search, with a plain‑language FAQ, your service area and your reviews in a form these tools can quote. On launch, robots.txt welcomes them.</div>
+        </div>
+        <div class="prob">
+          <div class="h"><span class="n">2</span><div><h3>On a phone, there's no menu.</h3><p>On a phone screen the header hides Home, Services, Our Work, About and your phone number, and there's no menu button to bring them back. A visitor sees your logo and "Free Estimate," and nothing else at the top. To see your before and afters or call you, they have to scroll and hunt.</p></div></div>
+          <figure><img src="/images/previews/petraasphalt-proof-mobile.jpg" alt="petraasphalt.com on a 390 pixel wide phone screen, header showing only the logo and Free Estimate" width="392" height="577" style="max-width:300px"><figcaption>Your homepage at phone width (390px). No menu, no phone number in the header.</figcaption></figure>
+          <div class="fixline"><b>In your preview:</b> a real phone menu, plus a bar pinned to the bottom of the screen with Call, Text and Free Estimate.</div>
+        </div>
+        <div class="prob">
+          <div class="h"><span class="n">3</span><div><h3>Your 5.0 Google rating is nowhere on the site.</h3><p>Google shows Petra Asphalt at 5.0 stars from 8 reviews, with lines like "The before and after was astonishing" and "They also use Superior products." Your site doesn't show a single review or the rating. For someone choosing between three contractors, that's the deciding factor, and right now they have to leave your site to find it.</p></div></div>
+          <div class="fixline"><b>In your preview:</b> "5.0 on Google" in the first screen, and 7 real reviews with first names, in their own words.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Speed</h2>
+      <p class="lede" style="font-size:17px">Measured in Chrome on November 5. Google's PageSpeed tool was unavailable that evening, so these are our own measurements, not Google's scores.</p>
+      <div class="metrics">
+        <div class="m"><b>0.1–0.25s</b><span>Server response, 4 tries</span></div>
+        <div class="m"><b>2.1s</b><span>Page fully loaded (desktop connection)</span></div>
+        <div class="m"><b>WebP</b><span>Modern, compressed photos</span></div>
+        <div class="m"><b>HTTP/3</b><span>Served through Cloudflare</span></div>
+      </div>
+      <p class="why">This is the strongest part of the site. Nothing here needs fixing.</p>
+    </section>
+
+    <section>
+      <h2>Everything we checked</h2>
+
+      <div class="area"><div class="t"><h3>Up and secure</h3><span class="pill g">Good</span></div>
+        <ul><li>HTTPS, served through Cloudflare, no warnings.</li><li>Every page in the menu loads, and a mistyped address returns a proper "not found" page.</li></ul></div>
+
+      <div class="area"><div class="t"><h3>Speed</h3><span class="pill g">Good</span></div>
+        <ul><li>Fast server response and compressed WebP photos. See above.</li></ul></div>
+
+      <div class="area"><div class="t"><h3>Mobile experience</h3><span class="pill x">Broken</span></div>
+        <ul><li>No menu on phones: the navigation links and the phone number are hidden in the header, and there's no menu button. <em>(see #2)</em></li>
+          <li>No call or text button that stays on screen as people scroll.</li></ul>
+        <p class="why">Why it matters: most people looking up a contractor are on their phone, often while standing in the lot they want fixed.</p></div>
+
+      <div class="area"><div class="t"><h3>First impression</h3><span class="pill g">Good</span></div>
+        <ul><li>Strong headline, your own drone photo, and two clear buttons. It's obvious what you do within seconds.</li>
+          <li><em>Small gap:</em> the first screen doesn't say where you work. "South‑central Kansas" only shows up in the footer.</li></ul></div>
+
+      <div class="area"><div class="t"><h3>Turning visits into calls</h3><span class="pill w">Needs work</span></div>
+        <ul><li>Good: a clear estimate form, click‑to‑call, and a simple 3‑step "what to expect."</li>
+          <li>The estimate page says "Prefer to call or text?" but there's only a call link, no tap‑to‑text.</li>
+          <li>No way to send photos of the lot with the request, which is often what you need to quote.</li>
+          <li>Nothing answers after hours. A property manager filling out work orders at 9pm gets a form and a wait.</li>
+          <li><em>We didn't submit the form, so we couldn't confirm where requests go. Worth a test submission.</em></li></ul></div>
+
+      <div class="area"><div class="t"><h3>Trust and reviews</h3><span class="pill x">Missing</span></div>
+        <ul><li>No reviews or rating anywhere on the site, despite 5.0 from 8 on Google. <em>(see #3)</em></li>
+          <li>The About page tells your story but has no photo of you or the crew. People hire the person.</li>
+          <li>Nothing about insurance, years in business or the products you use (a reviewer mentioned your Superior products).</li></ul></div>
+
+      <div class="area"><div class="t"><h3>Google search</h3><span class="pill w">Needs work</span></div>
+        <ul><li>Good foundations: a unique title and description on every page, LocalBusiness schema with your name, phone and 5 service cities, and a sitemap.</li>
+          <li>No pages for the cities you serve. Your schema lists Wichita, Derby, Haysville, Hutchinson and McPherson, but there's no page for any of them (petraasphalt.com/wichita is a 404).</li>
+          <li>No canonical tags, which help Google pick the right version of each page.</li>
+          <li>In web searches we ran on November 5 for "best sealcoating company Wichita KS," "parking lot striping and crack filling Wichita Kansas," and even "Petra Asphalt" Wichita, petraasphalt.com didn't come up. The site is new (September 2026), so this is normal, but it won't fix itself without city pages and reviews.</li>
+          <li>Name confusion: on Google Maps, "PETRA" (an investment company with 34 reviews) and "PETRA Services" show up right beside you.</li></ul></div>
+
+      <div class="area"><div class="t"><h3>AI search (ChatGPT, Gemini, Claude, Apple)</h3><span class="pill x">Blocked</span></div>
+        <ul><li>robots.txt blocks ClaudeBot, GPTBot, Google‑Extended, Applebot‑Extended, Amazonbot, Meta's crawler and 26 others. <em>(see #1)</em></li>
+          <li>No llms.txt (the short summary AI tools look for).</li>
+          <li>No FAQ. AI tools quote plain answers to plain questions, like "how often should a parking lot be sealcoated."</li></ul></div>
+
+      <div class="area"><div class="t"><h3>Link previews</h3><span class="pill x">Missing</span></div>
+        <ul><li>No Open Graph tags, so when you text or post petraasphalt.com there's no photo card, just a bare link. That's every link you send a property manager.</li></ul></div>
+
+      <div class="area"><div class="t"><h3>Accessibility</h3><span class="pill g">Good</span></div>
+        <ul><li>Every image we checked has a description, form fields are labeled, and text contrast is strong. Spot‑checked, not a full audit.</li></ul></div>
+
+      <div class="area"><div class="t"><h3>Broken or outdated</h3><span class="pill g">None found</span></div>
+        <ul><li>No dead links in the menu, no placeholder text, and a current copyright year.</li></ul></div>
+
+      <div class="area"><div class="t"><h3>Tracking</h3><span class="pill w">Needs work</span></div>
+        <ul><li>Cloudflare's basic visitor counts are on. No Google Analytics, no Meta Pixel, and no Search Console tag found (it may be verified another way). You can't see which searches bring people in or which pages lead to calls.</li></ul></div>
+    </section>
+
+    <section>
+      <h2>What's already working</h2>
+      <div class="working">
+        <div>Bold design that matches your logo and trucks</div>
+        <div>Fast, with compressed photos</div>
+        <div>Real before and after photos from real jobs</div>
+        <div>Business schema with your service cities</div>
+        <div>Unique titles and descriptions on every page</div>
+        <div>A clear estimate form and 3‑step process</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Fixed in your preview</h2>
+      <ul class="fixed">
+        <li><span>Problem</span><span>How the new homepage solves it</span></li>
+        <li><span>AI crawlers blocked</span><span>Built for AI search: FAQ, service area and reviews in plain language. robots.txt opened on launch.</span></li>
+        <li><span>No menu on phones</span><span>A real phone menu and a pinned Call, Text and Estimate bar</span></li>
+        <li><span>5.0 Google rating hidden</span><span>5.0 on Google in the first screen, plus 7 real reviews</span></li>
+        <li><span>"Call or text?" with no text link</span><span>Tap‑to‑text everywhere the phone number appears</span></li>
+        <li><span>No way to send lot photos</span><span>"Check your lot" picker plus photo upload on the estimate form</span></li>
+        <li><span>Nothing answers after hours</span><span>An assistant that asks what the lot needs, how big it is and the timing, then takes a number</span></li>
+        <li><span>No city pages</span><span>Your 5 service cities called out, each ready to become its own page</span></li>
+        <li><span>No photo card when you text the link</span><span>Open Graph tags with a branded card</span></li>
+        <li><span>No tracking</span><span>Ready for Google Analytics, Search Console and Meta Pixel on launch</span></li>
+      </ul>
+    </section>
+
+    <div class="cta">
+      <div><h2>See the new homepage</h2><p>Built around your logo, colors and real job photos. It stays up for 14 days.</p></div>
+      <div class="btns"><a class="alt" href="/previews/petraasphalt">Open the preview</a><a href="https://getproytech.com/book">Book a 20‑minute teardown</a></div>
+    </div>
+    <p class="foot">Prepared by ProyTech for Petra Asphalt LLC. Based on our own review of petraasphalt.com on November 5, 2026. Review count and rating from your Google Business Profile on the same date.</p>
+  </main>
+</div>
+<script>
+(function(){var exp=document.querySelector('meta[name="preview-expires"]').content;
+if(new Date()>new Date(exp+'T23:59:59-06:00')){document.body.innerHTML='<div class="expired"><div><h1 style="font-size:32px;margin:0 0 12px">This report has expired.</h1><p>Want one for your business? <a href="https://getproytech.com/book">Book a 20-minute teardown</a>.</p></div></div>';}})();
+</script>
+</body>
+</html>
