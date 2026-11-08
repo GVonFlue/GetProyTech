@@ -23,169 +23,171 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#E8E5DF;--paper-2:#DFDAD1;--white:#FBFAF7;
-  --ink:#211C15;--ink-2:#58544A;--line:rgba(33,28,21,.15);--line-2:rgba(33,28,21,.28);
-  --ochre:#986527;--ochre-2:#C0924C;--ochre-d:#7a4f1c;
+  --paper:#E8E5DF;--white:#FBFAF7;
+  --ink:#201B13;--ink-2:#55503f;--line:rgba(32,27,19,.16);
+  --ochre:#9A6727;--ochre-2:#CB9A4F;--ochre-d:#7d521c;
+  --cream:#F3EFE6;
   --disp:'Archivo',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--quote:'Fraunces',Georgia,serif;
-  --mx:clamp(20px,5vw,84px);
+  --mx:clamp(20px,5vw,84px);--panel:rgba(233,230,223,.86);--panel-2:rgba(223,218,208,.9);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+body{font-family:var(--body);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;background:#2a2219}
+/* faded photo behind everything */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:#2a2219 url('https://bearcreek-ks.com/assets/framing-trusses-DQpVMlSk.jpg') center/cover no-repeat;filter:saturate(.62) brightness(.92) contrast(1.02)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(44,36,25,.46),rgba(38,31,22,.58))}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
-h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.02;color:var(--ink)}
+h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.02}
 .u{max-width:1280px;margin:0 auto;padding:0 var(--mx)}
-.kicker{font-size:.9rem;font-weight:600;color:var(--ochre);letter-spacing:0;margin-bottom:18px}
-.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--body);font-weight:600;font-size:1rem;padding:15px 28px;border-radius:2px;border:1.5px solid var(--ink);transition:background .2s,color .2s}
-.btn-solid{background:var(--ink);color:var(--paper)}
+.kicker{font-size:.9rem;font-weight:600;color:var(--ochre);margin-bottom:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--body);font-weight:600;font-size:1rem;padding:15px 28px;border-radius:2px;border:1.5px solid currentColor;transition:background .2s,color .2s,border-color .2s}
+.btn-solid{background:var(--ink);color:var(--cream);border-color:var(--ink)}
 .btn-solid:hover{background:#000}
-.btn-line{background:transparent;color:var(--ink)}
-.btn-line:hover{background:var(--ink);color:var(--paper)}
+.btn-line{background:transparent}
+.btn-line:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
 
-/* top bar */
-.bar{border-bottom:1px solid var(--line)}
-.bar-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px var(--mx);max-width:1280px;margin:0 auto}
+/* top bar over hero photo */
+.bar{position:absolute;top:0;left:0;right:0;z-index:5}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px var(--mx);max-width:1280px;margin:0 auto;color:var(--cream)}
 .brand{display:flex;align-items:center;gap:13px}
-.brand .chip{width:52px;height:52px;border-radius:3px;background:var(--ink);display:grid;place-items:center;flex:none}
+.brand .chip{width:52px;height:52px;border-radius:3px;background:rgba(10,8,5,.5);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(4px);display:grid;place-items:center;flex:none}
 .brand .chip img{width:40px;height:40px;object-fit:contain}
-.brand b{font-family:var(--disp);font-weight:800;font-size:1.04rem;letter-spacing:-.01em;line-height:1.05}
-.brand span{display:block;font-family:var(--body);font-weight:500;font-size:.74rem;color:var(--ink-2);letter-spacing:.02em}
-.bar-r{display:flex;align-items:center;gap:26px;font-size:.92rem}
-.bar-r .spon{color:var(--ink-2)}
-.bar-r .spon a{color:var(--ochre);font-weight:600}
-.bar-r .ph{font-family:var(--disp);font-weight:700;color:var(--ink)}
+.brand b{font-family:var(--disp);font-weight:800;font-size:1.04rem;line-height:1.05;color:#fff}
+.brand span{display:block;font-family:var(--body);font-weight:500;font-size:.74rem;color:rgba(243,239,230,.8)}
+.bar-r{display:flex;align-items:center;gap:26px;font-size:.92rem;color:rgba(243,239,230,.85)}
+.bar-r .spon a{color:var(--ochre-2);font-weight:600}
+.bar-r .ph{font-family:var(--disp);font-weight:700;color:#fff}
 @media(max-width:780px){.bar-r .spon{display:none}}
 
-/* hero */
-.hero{display:grid;grid-template-columns:1.02fr 1fr;align-items:stretch;border-bottom:1px solid var(--line)}
-.hero-l{padding:clamp(48px,7vw,104px) clamp(20px,5vw,84px) clamp(48px,6vw,88px);display:flex;flex-direction:column;justify-content:center;max-width:720px;margin-left:auto}
-.hero-l .flag{display:inline-flex;align-items:center;gap:9px;font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:22px}
-.hero-l .flag b{color:var(--ochre)}
-h1{font-size:clamp(2.9rem,6vw,4.9rem);font-weight:900;letter-spacing:-.035em}
-.hero-l p.lede{font-size:1.16rem;color:var(--ink-2);margin:26px 0 0;max-width:30em}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
-.hero-marks{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:34px;padding-top:26px;border-top:1px solid var(--line);font-size:.92rem;color:var(--ink-2);font-weight:500}
-.hero-marks b{color:var(--ink);font-weight:600}
-.hero-r{position:relative;min-height:420px;background:#cfcabf center/cover no-repeat;background-image:url('https://bearcreek-ks.com/assets/framing-vaulted-CKaTwSYA.jpg')}
-.hero-r::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(232,229,223,.25),transparent 30%);pointer-events:none}
-.hero-r .tag{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);font-size:.82rem;font-weight:600;letter-spacing:.01em;padding:11px 18px}
-.hero-r .tag b{color:var(--ochre-2);font-weight:700}
-@media(max-width:860px){.hero{grid-template-columns:1fr}.hero-l{max-width:none;margin:0}.hero-r{min-height:58vw}}
+/* hero — bold photo */
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:0;background:#2a2219 url('https://bearcreek-ks.com/assets/framing-vaulted-CKaTwSYA.jpg') center/cover no-repeat;animation:slowzoom 30s ease-in-out infinite alternate}
+@keyframes slowzoom{to{transform:scale(1.07)}}
+.hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(18,14,9,.42) 0%,rgba(18,14,9,.12) 34%,rgba(18,14,9,.66) 82%,rgba(24,19,12,.9) 100%)}
+.hero-in{position:relative;z-index:2;width:100%;padding:0 0 clamp(52px,7vw,96px)}
+.hero-in .flag{display:inline-flex;align-items:center;gap:9px;font-size:.84rem;font-weight:600;color:#fff;margin-bottom:20px}
+.hero-in .flag b{color:var(--ochre-2)}
+.hero h1{font-size:clamp(3rem,7.4vw,6.2rem);font-weight:900;letter-spacing:-.035em;color:#fff;max-width:16ch;text-shadow:0 2px 30px rgba(0,0,0,.4)}
+.hero .lede{font-size:1.18rem;color:#ede8de;margin:26px 0 0;max-width:40ch;text-shadow:0 1px 16px rgba(0,0,0,.5)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.hero .btn-line{color:#fff}
+.hero-marks{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:34px;font-size:.92rem;color:#e7e1d6;font-weight:500}
+.hero-marks b{color:#fff;font-weight:600}
+.scrolltag{position:absolute;right:var(--mx);bottom:clamp(52px,7vw,96px);z-index:2;color:rgba(255,255,255,.85);font-size:.8rem;font-weight:600;writing-mode:vertical-rl;letter-spacing:.04em}
+@media(max-width:620px){.scrolltag{display:none}}
 
-/* section scaffolding */
-.sec{padding:clamp(64px,8vw,120px) 0}
-.sec-top{padding-top:clamp(56px,7vw,96px)}
-.lead-row{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:end;margin-bottom:clamp(40px,5vw,64px)}
-.lead-row h2{font-size:clamp(2.1rem,4.4vw,3.3rem);font-weight:800}
+/* panel sections float over faded backdrop */
+.panel{background:var(--panel);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.panel-2{background:var(--panel-2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.sec{padding:clamp(60px,8vw,112px) 0}
+.lead-row{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:end;margin-bottom:clamp(40px,5vw,60px)}
+.lead-row h2{font-size:clamp(2.1rem,4.4vw,3.3rem);font-weight:800;color:var(--ink)}
 .lead-row p{color:var(--ink-2);font-size:1.08rem}
 @media(max-width:820px){.lead-row{grid-template-columns:1fr;gap:16px;align-items:start}}
 
 /* WORK gallery */
-.work{background:var(--paper-2)}
-.gal{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:168px;gap:12px}
-.ph{overflow:hidden;background:#cfcabf;position:relative}
+.gal{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:170px;gap:12px}
+.ph{overflow:hidden;background:#cfc7b8;position:relative;box-shadow:0 18px 40px -22px rgba(0,0,0,.6)}
 .ph img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
 .ph:hover img{transform:scale(1.045)}
-.ph .cap{position:absolute;left:0;bottom:0;right:0;padding:26px 16px 12px;color:#fff;font-size:.82rem;font-weight:500;background:linear-gradient(0deg,rgba(20,16,10,.72),transparent);opacity:0;transition:opacity .3s}
+.ph .cap{position:absolute;left:0;bottom:0;right:0;padding:26px 16px 12px;color:#fff;font-size:.82rem;font-weight:500;background:linear-gradient(0deg,rgba(20,16,10,.74),transparent);opacity:0;transition:opacity .3s}
 .ph:hover .cap{opacity:1}
 .g-a{grid-column:span 4;grid-row:span 2}
-.g-b{grid-column:span 2;grid-row:span 1}
-.g-c{grid-column:span 2;grid-row:span 1}
-.g-d{grid-column:span 2;grid-row:span 1}
-.g-e{grid-column:span 2;grid-row:span 1}
-.g-f{grid-column:span 2;grid-row:span 1}
+.g-b,.g-c,.g-d,.g-e,.g-f{grid-column:span 2;grid-row:span 1}
 .gal-note{margin-top:20px;font-size:.92rem;color:var(--ink-2)}
-.gal-note a{color:var(--ochre);font-weight:600;border-bottom:1px solid var(--ochre)}
+.gal-note a{color:var(--ochre-d);font-weight:600;border-bottom:1px solid var(--ochre-d)}
 @media(max-width:820px){.gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:40vw}.g-a{grid-column:span 2;grid-row:span 2}.g-b,.g-c,.g-d,.g-e,.g-f{grid-column:span 1}}
 
-/* services list */
+/* services */
 .svc{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(40px,6vw,96px)}
 .svc-item{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:28px 0;border-top:1px solid var(--line);align-items:baseline}
 .svc-item .no{font-family:var(--disp);font-weight:700;font-size:.9rem;color:var(--ochre);padding-top:5px}
-.svc-item h3{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.svc-item h3{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
 .svc-item p{color:var(--ink-2);font-size:1rem;margin-top:7px;max-width:34em}
 @media(max-width:820px){.svc{grid-template-columns:1fr}}
 
-/* owner dark panel */
-.owner{background:var(--ink);color:var(--paper)}
-.owner-in{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(36px,6vw,80px);align-items:center;padding:clamp(60px,8vw,108px) 0}
-.crestwrap{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;background:#17130d;border:1px solid rgba(232,229,223,.14);max-width:360px}
+/* owner dark */
+.owner{background:rgba(22,18,11,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--cream);border-top:1px solid rgba(203,154,79,.22);border-bottom:1px solid rgba(203,154,79,.22)}
+.owner-in{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(36px,6vw,80px);align-items:center;padding:clamp(60px,8vw,104px) 0}
+.crestwrap{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;background:rgba(10,8,5,.5);border:1px solid rgba(203,154,79,.26);max-width:340px}
 .crestwrap img{width:72%;height:72%;object-fit:contain}
-.owner h2{color:var(--white);font-size:clamp(2rem,4vw,3rem)}
 .owner .kicker{color:var(--ochre-2)}
-.owner p{color:#cfcabf;font-size:1.1rem;margin-top:20px;max-width:34em}
-.owner .by{margin-top:26px;font-family:var(--disp);font-weight:700;color:var(--white);font-size:1.05rem}
+.owner h2{color:#fff;font-size:clamp(2rem,4vw,3rem)}
+.owner p{color:#ded6c7;font-size:1.1rem;margin-top:20px;max-width:34em}
+.owner .by{margin-top:26px;font-family:var(--disp);font-weight:700;color:#fff;font-size:1.05rem}
 .owner .by span{display:block;font-family:var(--body);font-weight:500;font-size:.9rem;color:var(--ochre-2);margin-top:3px}
-@media(max-width:820px){.owner-in{grid-template-columns:1fr;gap:34px}.crestwrap{max-width:220px}}
+@media(max-width:820px){.owner-in{grid-template-columns:1fr;gap:34px}.crestwrap{max-width:200px}}
 
 /* reviews */
-.rev-feat{font-family:var(--quote);font-style:italic;font-weight:500;font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.28;letter-spacing:-.01em;color:var(--ink);max-width:19ch}
+.rev-feat{font-family:var(--quote);font-style:italic;font-weight:500;font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.28;color:var(--ink);max-width:19ch}
 .rev-feat .who{display:block;font-family:var(--body);font-style:normal;font-weight:600;font-size:1rem;color:var(--ink);margin-top:28px}
 .rev-feat .who span{font-weight:500;color:var(--ink-2)}
-.rev-two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);margin-top:clamp(44px,6vw,72px);padding-top:clamp(40px,5vw,56px);border-top:1px solid var(--line)}
-.rev-two blockquote p{font-size:1.14rem;color:var(--ink);line-height:1.5}
-.rev-two .who{margin-top:16px;font-weight:600;font-size:.96rem}
+.rev-two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);margin-top:clamp(42px,6vw,64px);padding-top:clamp(36px,5vw,52px);border-top:1px solid var(--line)}
+.rev-two p{font-size:1.14rem;color:var(--ink);line-height:1.5}
+.rev-two .who{margin-top:16px;font-weight:600;font-size:.96rem;color:var(--ink)}
 .rev-two .who span{display:block;font-weight:500;color:var(--ink-2);font-size:.82rem;margin-top:2px}
 @media(max-width:700px){.rev-two{grid-template-columns:1fr;gap:34px}}
 
 /* process */
-.proc{background:var(--paper-2)}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px)}
 .step{border-top:2px solid var(--ink)}
 .step .n{font-family:var(--disp);font-weight:800;font-size:1.1rem;margin-top:16px;color:var(--ochre)}
-.step h3{font-size:1.45rem;font-weight:700;margin-top:6px}
+.step h3{font-size:1.45rem;font-weight:700;margin-top:6px;color:var(--ink)}
 .step p{color:var(--ink-2);margin-top:10px;font-size:1rem}
 @media(max-width:720px){.steps{grid-template-columns:1fr;gap:28px}}
 
-/* offer band */
-.offer{background:var(--ochre);color:#fff}
-.offer-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:30px 0}
+/* offer */
+.offer{background:rgba(154,103,39,.94);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff}
+.offer-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:32px 0}
 .offer b{font-family:var(--disp);font-weight:800;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.02em;color:#fff}
-.offer .sm{font-size:1.02rem;color:#fff6ea;max-width:30em}
+.offer .sm{font-size:1.02rem;color:#fff4e6;max-width:30em}
 
 /* area */
 .area-in{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,72px)}
-.area h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
-.towns{columns:2;column-gap:40px}
-.towns li{list-style:none;padding:12px 0;border-bottom:1px solid var(--line);font-size:1.08rem;break-inside:avoid}
-.towns li.hub{font-family:var(--disp);font-weight:700;color:var(--ink)}
+.area h2{font-size:clamp(1.9rem,3.6vw,2.7rem);color:var(--ink)}
+.towns{columns:2;column-gap:40px;margin:0;padding:0}
+.towns li{list-style:none;padding:12px 0;border-bottom:1px solid var(--line);font-size:1.08rem;break-inside:avoid;color:var(--ink)}
+.towns li.hub{font-family:var(--disp);font-weight:700}
 .area small{display:block;margin-top:24px;color:var(--ink-2);font-size:.92rem}
 @media(max-width:820px){.area-in{grid-template-columns:1fr;gap:22px}}
 
-/* CTA photo band */
-.cta{position:relative;min-height:62vh;display:flex;align-items:center;background:#1a160f center/cover no-repeat;background-image:url('https://bearcreek-ks.com/assets/framing-trusses-DQpVMlSk.jpg')}
-.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,16,10,.88),rgba(20,16,10,.52))}
-.cta-in{position:relative;color:#fff;max-width:640px}
+/* CTA */
+.cta{position:relative;min-height:60vh;display:flex;align-items:center;overflow:hidden}
+.cta-bg{position:absolute;inset:0;background:#1a160f url('https://bearcreek-ks.com/assets/deck-multilevel-CtzEJGy-.jpg') center/cover no-repeat}
+.cta-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,14,9,.9),rgba(18,14,9,.5))}
+.cta-in{position:relative;z-index:2;color:#fff;max-width:640px}
 .cta h2{color:#fff;font-size:clamp(2.2rem,5vw,3.7rem)}
 .cta p{color:#e7e1d6;font-size:1.14rem;margin:18px 0 32px;max-width:32em}
-.cta .btn-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.cta .btn-solid{background:var(--cream);color:var(--ink);border-color:var(--cream)}
 .cta .btn-solid:hover{background:#fff}
 
-/* contact / footer */
-.contact{padding:clamp(56px,7vw,96px) 0}
+/* contact */
+.contact{padding:clamp(56px,7vw,92px) 0}
+.contact h2{color:var(--ink)}
 .c-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:28px}
-.c-grid a{background:var(--paper);padding:26px 22px;transition:background .2s}
+.c-grid a{background:var(--panel);padding:26px 22px;transition:background .2s}
 .c-grid a:hover{background:var(--white)}
 .c-grid .k{font-size:.8rem;color:var(--ink-2);font-weight:500}
-.c-grid .v{font-family:var(--disp);font-weight:700;font-size:1.08rem;margin-top:8px;letter-spacing:-.01em;word-break:break-word}
+.c-grid .v{font-family:var(--disp);font-weight:700;font-size:1.08rem;margin-top:8px;letter-spacing:-.01em;word-break:break-word;color:var(--ink)}
 @media(max-width:820px){.c-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:460px){.c-grid{grid-template-columns:1fr}}
-footer{border-top:1px solid var(--line);padding:30px 0;font-size:.9rem;color:var(--ink-2)}
-footer a{color:var(--ochre);font-weight:600}
+footer{background:rgba(22,18,11,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:30px 0;font-size:.9rem;color:#cfc7b7;border-top:1px solid rgba(203,154,79,.2)}
+footer a{color:var(--ochre-2);font-weight:600}
 footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
-/* subtle, single load reveal on hero only */
 @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.hero-l>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
-.hero-l .flag{animation-delay:.02s}h1{animation-delay:.08s}.hero-l p.lede{animation-delay:.16s}.hero-cta{animation-delay:.24s}.hero-marks{animation-delay:.32s}
-@media(prefers-reduced-motion:reduce){*{animation:none!important}.ph img{transition:none}}
+.hero-in>*{animation:rise .75s cubic-bezier(.2,.7,.2,1) both}
+.hero-in .flag{animation-delay:.05s}.hero h1{animation-delay:.12s}.hero .lede{animation-delay:.22s}.hero-cta{animation-delay:.32s}.hero-marks{animation-delay:.42s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.ph img{transition:none}.hero-bg{transform:none}}
 </style>
 </head>
 <body>
 
-<div class="bar">
-  <div class="bar-in">
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-scrim"></div>
+  <div class="bar"><div class="bar-in">
     <a class="brand" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener">
       <span class="chip"><img src="/images/sponsors/bear-creek-construction.png" alt=""></span>
       <span><b>Bear Creek Construction</b><span>Rose Hill, Kansas</span></span>
@@ -194,11 +196,8 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <span class="spon">Proud sponsor of <a href="/suitenight">ProyTech Suite Night</a></span>
       <a class="ph" href="tel:3168331820">316&middot;833&middot;1820</a>
     </div>
-  </div>
-</div>
-
-<header class="hero">
-  <div class="hero-l">
+  </div></div>
+  <div class="hero-in"><div class="u">
     <div class="flag"><b>&#9733;</b> Veteran owned &amp; operated general contractor</div>
     <h1>Premium construction, built to last.</h1>
     <p class="lede">From the framing up, Bear Creek builds and remodels homes and commercial spaces across the Wichita area, with one accountable contractor on the job from the first conversation to the final walkthrough.</p>
@@ -211,14 +210,12 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <span><b>Residential</b> &amp; commercial</span>
       <span>Based in <b>Rose Hill, KS</b></span>
     </div>
-  </div>
-  <div class="hero-r">
-    <div class="tag"><b>Framing &amp; structure</b> &nbsp;New build, Wichita area</div>
-  </div>
+  </div></div>
+  <div class="scrolltag">Framing &amp; structure, Wichita area</div>
 </header>
 
 <!-- WORK -->
-<section class="work sec" id="work">
+<section class="work panel-2 sec" id="work">
   <div class="u">
     <div class="lead-row">
       <h2>The work</h2>
@@ -237,7 +234,7 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </section>
 
 <!-- SERVICES -->
-<section class="sec" id="services">
+<section class="panel sec" id="services">
   <div class="u">
     <div class="lead-row">
       <h2>What we build</h2>
@@ -268,7 +265,7 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </section>
 
 <!-- REVIEWS -->
-<section class="sec" id="reviews">
+<section class="panel sec" id="reviews">
   <div class="u">
     <div class="kicker">From clients</div>
     <p class="rev-feat">&ldquo;Andy is one of those contractors who actually shows up, communicates clearly, and does what he says he's going to do.&rdquo;<span class="who">Siobhan Cecelia Collier <span>&middot; Verified client</span></span></p>
@@ -280,7 +277,7 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </section>
 
 <!-- PROCESS -->
-<section class="proc sec">
+<section class="panel-2 sec">
   <div class="u">
     <div class="lead-row">
       <h2>How a project runs</h2>
@@ -303,7 +300,7 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </section>
 
 <!-- AREA -->
-<section class="sec">
+<section class="panel sec">
   <div class="u area-in">
     <div class="area">
       <div class="kicker">Service area</div>
@@ -311,22 +308,14 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <small>Licensed &amp; insured general contractor based in Rose Hill, KS.</small>
     </div>
     <ul class="towns">
-      <li class="hub">Rose Hill</li>
-      <li>Wichita</li>
-      <li>Andover</li>
-      <li>Derby</li>
-      <li>Goddard</li>
-      <li>Park City</li>
-      <li>Valley Center</li>
-      <li>Augusta</li>
-      <li>Kechi</li>
-      <li>Bel Aire</li>
+      <li class="hub">Rose Hill</li><li>Wichita</li><li>Andover</li><li>Derby</li><li>Goddard</li><li>Park City</li><li>Valley Center</li><li>Augusta</li><li>Kechi</li><li>Bel Aire</li>
     </ul>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta">
+  <div class="cta-bg"></div>
   <div class="u"><div class="cta-in">
     <h2>Let's build something that lasts.</h2>
     <p>Start your next build, remodel, or addition with a contractor who treats the bones like they matter. Mention Suite Night for 10% off.</p>
@@ -335,7 +324,7 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </section>
 
 <!-- CONTACT -->
-<section class="contact">
+<section class="panel contact">
   <div class="u">
     <div class="kicker">Get in touch</div>
     <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem)">Contact Bear Creek Construction</h2>
