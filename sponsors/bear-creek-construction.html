@@ -20,474 +20,340 @@
 <link rel="icon" href="/images/sponsors/bear-creek-construction.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --amber:#E7A33C;--amber-2:#F4B85A;--amber-d:#B47A20;--amber-deep:#5f3f12;
-  --ink:#09090a;--ink-2:#0f0f11;--panel:#161619;--panel-2:#1c1c20;--line:rgba(176,186,198,.14);
-  --grey:#8b929b;--grey-2:#c3c9d1;--light:#ECEEF1;--white:#fff;--gold:#F4B85A;--steel:#8DA2B5;
-  --disp:'Barlow Condensed',system-ui,sans-serif;--serif:'Fraunces',Georgia,serif;--body:'Inter',system-ui,sans-serif;
+  --paper:#E8E5DF;--paper-2:#DFDAD1;--white:#FBFAF7;
+  --ink:#211C15;--ink-2:#58544A;--line:rgba(33,28,21,.15);--line-2:rgba(33,28,21,.28);
+  --ochre:#986527;--ochre-2:#C0924C;--ochre-d:#7a4f1c;
+  --disp:'Archivo',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--quote:'Fraunces',Georgia,serif;
+  --mx:clamp(20px,5vw,84px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--body);background:var(--ink);color:var(--light);line-height:1.6;overflow-x:hidden}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-a{color:inherit}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.02;color:var(--ink)}
+.u{max-width:1280px;margin:0 auto;padding:0 var(--mx)}
+.kicker{font-size:.9rem;font-weight:600;color:var(--ochre);letter-spacing:0;margin-bottom:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--body);font-weight:600;font-size:1rem;padding:15px 28px;border-radius:2px;border:1.5px solid var(--ink);transition:background .2s,color .2s}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-solid:hover{background:#000}
+.btn-line{background:transparent;color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--paper)}
 
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
-.reveal.in{opacity:1;transform:none}
-.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.4s}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{animation:none!important}}
-
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-.kick{font-family:var(--disp);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-size:.94rem}
-.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--body);font-weight:700;font-size:1.02rem;border:none;border-radius:999px;padding:1.08rem 2rem;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s;text-align:center}
-.btn-amber{background:linear-gradient(180deg,var(--amber-2),var(--amber-d));color:#241602;box-shadow:0 14px 34px -10px rgba(231,163,60,.55)}
-.btn-amber:hover{transform:translateY(-2px);box-shadow:0 20px 44px -10px rgba(231,163,60,.75)}
-.btn-ghost{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(255,255,255,.2)}
-.btn-ghost:hover{border-color:var(--amber);color:var(--amber-2)}
-.btn-white{background:#fff;color:#241602;box-shadow:0 16px 40px -12px rgba(0,0,0,.5)}
-.btn-white:hover{transform:translateY(-2px)}
-
-/* ribbon */
-.ribbon{display:flex;align-items:center;justify-content:center;gap:10px;background:#060607;border-bottom:1px solid var(--line);padding:11px 16px;font-size:.8rem;color:var(--grey);text-align:center}
-.ribbon a{color:var(--amber-2);text-decoration:none;font-weight:600}
-.ribbon .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.5;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+/* top bar */
+.bar{border-bottom:1px solid var(--line)}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px var(--mx);max-width:1280px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:13px}
+.brand .chip{width:52px;height:52px;border-radius:3px;background:var(--ink);display:grid;place-items:center;flex:none}
+.brand .chip img{width:40px;height:40px;object-fit:contain}
+.brand b{font-family:var(--disp);font-weight:800;font-size:1.04rem;letter-spacing:-.01em;line-height:1.05}
+.brand span{display:block;font-family:var(--body);font-weight:500;font-size:.74rem;color:var(--ink-2);letter-spacing:.02em}
+.bar-r{display:flex;align-items:center;gap:26px;font-size:.92rem}
+.bar-r .spon{color:var(--ink-2)}
+.bar-r .spon a{color:var(--ochre);font-weight:600}
+.bar-r .ph{font-family:var(--disp);font-weight:700;color:var(--ink)}
+@media(max-width:780px){.bar-r .spon{display:none}}
 
 /* hero */
-.hero{position:relative;min-height:86vh;display:flex;align-items:center;overflow:hidden;isolation:isolate;padding:70px 0 60px}
-.hero-photo{position:absolute;inset:0;z-index:0;background-color:#0a0a0c;
-  background-image:
-    url('https://bearcreek-ks.com/assets/framing-vaulted-CKaTwSYA.jpg'),
-    radial-gradient(90% 70% at 72% 8%,rgba(231,163,60,.14),transparent 58%),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 72px),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 72px);
-  background-size:cover,auto,auto,auto;background-position:center 28%,center,center,center;background-repeat:no-repeat,no-repeat,repeat,repeat;
-  transform:scale(1.04);animation:kenburns 24s ease-in-out infinite alternate}
-@keyframes kenburns{to{transform:scale(1.12)}}
-.hero-ov{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(9,9,10,.74),rgba(9,9,10,.82) 55%,rgba(9,9,10,.96)),radial-gradient(70% 70% at 85% 15%,rgba(231,163,60,.16),transparent 60%)}
-.hero-ov2{position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(118deg,transparent 0 13px,rgba(231,163,60,.04) 13px 15px);-webkit-mask:linear-gradient(0deg,#000,transparent 60%)}
-.hero-in{position:relative;z-index:2;width:100%}
-.hero-grid{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center}
-.logo-card{display:inline-flex;align-items:center;justify-content:center;background:#000;border:1px solid rgba(176,186,198,.18);border-radius:22px;padding:22px 26px;box-shadow:0 30px 70px -24px rgba(0,0,0,.9),0 0 0 1px rgba(231,163,60,.22);animation:floaty 6s ease-in-out infinite;align-self:start}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.logo-card img{max-height:118px;width:auto}
-.vet{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#241602;background:var(--amber-2);border-radius:999px;padding:7px 15px;margin-bottom:18px}
-h1{font-family:var(--disp);font-weight:800;letter-spacing:.01em;line-height:.92;font-size:clamp(2.7rem,7.4vw,5.6rem);color:#fff;text-transform:uppercase;text-shadow:0 10px 40px rgba(0,0,0,.6)}
-h1 .g{color:var(--amber)}
-.hero-sub{font-size:clamp(1.05rem,2.1vw,1.32rem);color:#d6dae0;max-width:640px;margin:20px 0 0;text-shadow:0 2px 20px rgba(0,0,0,.5)}
-.hero-sub b{color:#fff}
-.cta-row{display:flex;flex-wrap:wrap;gap:13px;margin-top:32px}
-.hero-cues{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:30px;color:#cdd2d9;font-size:.92rem;font-weight:500}
-.hero-cues span{display:inline-flex;align-items:center;gap:8px}
-.hero-cues .c{color:var(--amber-2)}
+.hero{display:grid;grid-template-columns:1.02fr 1fr;align-items:stretch;border-bottom:1px solid var(--line)}
+.hero-l{padding:clamp(48px,7vw,104px) clamp(20px,5vw,84px) clamp(48px,6vw,88px);display:flex;flex-direction:column;justify-content:center;max-width:720px;margin-left:auto}
+.hero-l .flag{display:inline-flex;align-items:center;gap:9px;font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:22px}
+.hero-l .flag b{color:var(--ochre)}
+h1{font-size:clamp(2.9rem,6vw,4.9rem);font-weight:900;letter-spacing:-.035em}
+.hero-l p.lede{font-size:1.16rem;color:var(--ink-2);margin:26px 0 0;max-width:30em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.hero-marks{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:34px;padding-top:26px;border-top:1px solid var(--line);font-size:.92rem;color:var(--ink-2);font-weight:500}
+.hero-marks b{color:var(--ink);font-weight:600}
+.hero-r{position:relative;min-height:420px;background:#cfcabf center/cover no-repeat;background-image:url('https://bearcreek-ks.com/assets/framing-vaulted-CKaTwSYA.jpg')}
+.hero-r::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(232,229,223,.25),transparent 30%);pointer-events:none}
+.hero-r .tag{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);font-size:.82rem;font-weight:600;letter-spacing:.01em;padding:11px 18px}
+.hero-r .tag b{color:var(--ochre-2);font-weight:700}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.hero-l{max-width:none;margin:0}.hero-r{min-height:58vw}}
 
-/* trust strip */
-.stats{border-bottom:1px solid var(--line);background:#060607}
-.stats-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:24px 14px;text-align:center;border-left:1px solid var(--line)}
-.stat:first-child{border-left:none}
-.stat b{font-family:var(--disp);font-weight:800;font-size:1.72rem;color:var(--amber);display:block;line-height:1.05}
-.stat span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);font-weight:600}
+/* section scaffolding */
+.sec{padding:clamp(64px,8vw,120px) 0}
+.sec-top{padding-top:clamp(56px,7vw,96px)}
+.lead-row{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:end;margin-bottom:clamp(40px,5vw,64px)}
+.lead-row h2{font-size:clamp(2.1rem,4.4vw,3.3rem);font-weight:800}
+.lead-row p{color:var(--ink-2);font-size:1.08rem}
+@media(max-width:820px){.lead-row{grid-template-columns:1fr;gap:16px;align-items:start}}
 
-section{position:relative}
-.sec{padding:84px 0}
-.sec-head{max-width:720px;margin:0 auto 50px;text-align:center}
-.sec h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,4.6vw,3.2rem);color:#fff;line-height:1;margin:10px 0 14px}
-.sec .lead{color:var(--grey-2);font-size:1.08rem}
+/* WORK gallery */
+.work{background:var(--paper-2)}
+.gal{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:168px;gap:12px}
+.ph{overflow:hidden;background:#cfcabf;position:relative}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.ph:hover img{transform:scale(1.045)}
+.ph .cap{position:absolute;left:0;bottom:0;right:0;padding:26px 16px 12px;color:#fff;font-size:.82rem;font-weight:500;background:linear-gradient(0deg,rgba(20,16,10,.72),transparent);opacity:0;transition:opacity .3s}
+.ph:hover .cap{opacity:1}
+.g-a{grid-column:span 4;grid-row:span 2}
+.g-b{grid-column:span 2;grid-row:span 1}
+.g-c{grid-column:span 2;grid-row:span 1}
+.g-d{grid-column:span 2;grid-row:span 1}
+.g-e{grid-column:span 2;grid-row:span 1}
+.g-f{grid-column:span 2;grid-row:span 1}
+.gal-note{margin-top:20px;font-size:.92rem;color:var(--ink-2)}
+.gal-note a{color:var(--ochre);font-weight:600;border-bottom:1px solid var(--ochre)}
+@media(max-width:820px){.gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:40vw}.g-a{grid-column:span 2;grid-row:span 2}.g-b,.g-c,.g-d,.g-e,.g-f{grid-column:span 1}}
 
-/* FEATURED main sell */
-.feat{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:radial-gradient(70% 90% at 10% 10%,rgba(141,162,181,.10),transparent 55%),radial-gradient(70% 90% at 95% 95%,rgba(231,163,60,.14),transparent 55%),linear-gradient(165deg,#141210,#09090a)}
-.feat .ripple{position:absolute;border-radius:50%;border:1px solid rgba(231,163,60,.18);animation:ripple 6s ease-out infinite;pointer-events:none}
-.feat .r1{width:300px;height:300px;left:-80px;top:-60px}.feat .r2{width:460px;height:460px;left:-160px;top:-140px;animation-delay:2s}.feat .r3{width:620px;height:620px;left:-240px;top:-220px;animation-delay:4s}
-@keyframes ripple{0%{transform:scale(.6);opacity:.5}100%{transform:scale(1.15);opacity:0}}
-.feat-in{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:84px 24px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-.feat-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#241602;background:linear-gradient(90deg,var(--steel),var(--amber-2));border-radius:999px;padding:8px 16px;font-size:.84rem;margin-bottom:18px}
-.feat h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2.3rem,6vw,4.1rem);color:#fff;line-height:.95}
-.feat h2 .g{color:var(--amber)}
-.feat .lede{color:#dde2e8;font-size:1.14rem;margin-top:18px;max-width:560px}
-.mini{margin-top:26px;display:flex;flex-direction:column;gap:14px}
-.mini div{display:flex;gap:13px;align-items:flex-start;color:var(--light);font-size:1.04rem}
-.mini .chk{flex:none;width:24px;height:24px;border-radius:50%;background:rgba(231,163,60,.15);border:1px solid rgba(231,163,60,.4);display:grid;place-items:center;color:var(--amber-2);font-size:.8rem;font-weight:800;margin-top:2px}
-.fbtns{margin-top:32px;display:flex;flex-wrap:wrap;gap:13px}
-.feat-card{background:linear-gradient(165deg,#1d1a14,#0d0c0b);border:1px solid rgba(231,163,60,.26);border-radius:26px;padding:40px 32px;text-align:center;box-shadow:0 36px 80px -34px rgba(0,0,0,.9)}
-.feat-card .big{font-family:var(--disp);font-weight:800;font-size:4.6rem;line-height:1;color:var(--amber);text-shadow:0 0 34px rgba(231,163,60,.35)}
-.feat-card .off{font-family:var(--disp);font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#fff;font-size:1.5rem;margin-top:6px}
-.feat-card .q{color:#e9edf1;font-size:1.02rem;line-height:1.5;margin-top:14px}
-.feat-card .semper{margin-top:20px;font-family:var(--disp);font-weight:800;color:var(--amber-2);font-size:1.2rem;letter-spacing:.04em}
+/* services list */
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(40px,6vw,96px)}
+.svc-item{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:28px 0;border-top:1px solid var(--line);align-items:baseline}
+.svc-item .no{font-family:var(--disp);font-weight:700;font-size:.9rem;color:var(--ochre);padding-top:5px}
+.svc-item h3{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.svc-item p{color:var(--ink-2);font-size:1rem;margin-top:7px;max-width:34em}
+@media(max-width:820px){.svc{grid-template-columns:1fr}}
 
-/* owner */
-.owner{background:linear-gradient(180deg,#060607,#09090a)}
-.owner-in{display:grid;grid-template-columns:.82fr 1.18fr;gap:50px;align-items:center}
-.owner-photo-wrap{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 36px 80px -34px rgba(0,0,0,.9);aspect-ratio:4/5;background:linear-gradient(160deg,#1c1c20,#0f0f11)}
-.owner-photo-wrap img{width:100%;height:100%;object-fit:cover}
-.owner-photo-wrap .frameglow{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 -80px 120px -40px rgba(6,6,7,.85);border-radius:24px}
-.owner-photo-wrap .ini{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:6rem;color:rgba(231,163,60,.4);text-align:center;line-height:.9}
-.owner-photo-wrap.noimg .ini{display:flex}
-.owner-badge{position:absolute;left:18px;bottom:18px;z-index:2;background:rgba(6,6,7,.78);border:1px solid var(--line);backdrop-filter:blur(6px);border-radius:14px;padding:12px 16px}
-.owner-badge b{color:#fff;font-weight:700;display:block;font-size:1rem}
-.owner-badge span{color:var(--amber-2);font-size:.82rem;font-weight:600}
-.owner h2{font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,4.4vw,3rem);color:#fff;line-height:1.02}
-.owner p{color:var(--grey-2);font-size:1.08rem;margin-top:16px}
-.owner .pull{font-family:var(--serif);font-size:1.3rem;font-style:italic;color:#eef1f4;border-left:3px solid var(--amber);padding-left:18px;margin:24px 0}
-.owner .sig{margin-top:22px;font-family:var(--disp);font-weight:700;color:var(--amber-2);letter-spacing:.03em;font-size:1.15rem}
+/* owner dark panel */
+.owner{background:var(--ink);color:var(--paper)}
+.owner-in{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(36px,6vw,80px);align-items:center;padding:clamp(60px,8vw,108px) 0}
+.crestwrap{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;background:#17130d;border:1px solid rgba(232,229,223,.14);max-width:360px}
+.crestwrap img{width:72%;height:72%;object-fit:contain}
+.owner h2{color:var(--white);font-size:clamp(2rem,4vw,3rem)}
+.owner .kicker{color:var(--ochre-2)}
+.owner p{color:#cfcabf;font-size:1.1rem;margin-top:20px;max-width:34em}
+.owner .by{margin-top:26px;font-family:var(--disp);font-weight:700;color:var(--white);font-size:1.05rem}
+.owner .by span{display:block;font-family:var(--body);font-weight:500;font-size:.9rem;color:var(--ochre-2);margin-top:3px}
+@media(max-width:820px){.owner-in{grid-template-columns:1fr;gap:34px}.crestwrap{max-width:220px}}
 
-/* why */
-.why{background:linear-gradient(180deg,#09090a,#060607);border-top:1px solid var(--line)}
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.why-card{background:linear-gradient(180deg,var(--panel),#0f0f11);border:1px solid var(--line);border-radius:18px;padding:28px 24px;transition:transform .25s,border-color .25s}
-.why-card:hover{transform:translateY(-5px);border-color:rgba(231,163,60,.4)}
-.why-card .ic{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(231,163,60,.12);border:1px solid var(--line);margin-bottom:16px}
-.why-card h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.18rem;color:#fff;margin-bottom:7px}
-.why-card p{color:var(--grey);font-size:.92rem}
-
-/* services */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.svc{background:linear-gradient(180deg,var(--panel),#0f0f11);border:1px solid var(--line);border-radius:18px;padding:28px 26px;transition:transform .25s,border-color .25s,box-shadow .25s}
-.svc:hover{transform:translateY(-6px);border-color:rgba(231,163,60,.45);box-shadow:0 26px 50px -24px rgba(0,0,0,.8)}
-.svc .ic{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;background:rgba(231,163,60,.12);border:1px solid var(--line);margin-bottom:16px;transition:.25s}
-.svc:hover .ic{background:rgba(231,163,60,.22);transform:scale(1.06)}
-.svc h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.32rem;color:#fff;margin-bottom:7px;letter-spacing:.01em}
-.svc p{color:var(--grey);font-size:.95rem}
-
-/* gallery */
-.gallery{background:linear-gradient(180deg,#09090a,#060607);border-top:1px solid var(--line)}
-.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-.gtile{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:linear-gradient(160deg,#1c1c20,#0f0f11);display:block}
-.gtile img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.gtile:hover img{transform:scale(1.06)}
-.gtile .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 12px;font-size:.84rem;color:#eef1f4;background:linear-gradient(0deg,rgba(6,6,7,.85),transparent);opacity:0;transition:.3s}
-.gtile:hover .cap{opacity:1}
-.gal-ig{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;aspect-ratio:4/3;border-radius:16px;border:1px dashed rgba(231,163,60,.4);background:rgba(231,163,60,.06);text-decoration:none;color:#fff;transition:.25s;padding:16px}
-.gal-ig:hover{background:rgba(231,163,60,.12);border-color:var(--amber);transform:translateY(-3px)}
-.gal-ig .ig-ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(231,163,60,.14);border:1px solid var(--line)}
-.gal-ig b{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.1rem;letter-spacing:.02em}
-.gal-ig span{color:var(--grey);font-size:.84rem}
+/* reviews */
+.rev-feat{font-family:var(--quote);font-style:italic;font-weight:500;font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.28;letter-spacing:-.01em;color:var(--ink);max-width:19ch}
+.rev-feat .who{display:block;font-family:var(--body);font-style:normal;font-weight:600;font-size:1rem;color:var(--ink);margin-top:28px}
+.rev-feat .who span{font-weight:500;color:var(--ink-2)}
+.rev-two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);margin-top:clamp(44px,6vw,72px);padding-top:clamp(40px,5vw,56px);border-top:1px solid var(--line)}
+.rev-two blockquote p{font-size:1.14rem;color:var(--ink);line-height:1.5}
+.rev-two .who{margin-top:16px;font-weight:600;font-size:.96rem}
+.rev-two .who span{display:block;font-weight:500;color:var(--ink-2);font-size:.82rem;margin-top:2px}
+@media(max-width:700px){.rev-two{grid-template-columns:1fr;gap:34px}}
 
 /* process */
-.proc{background:linear-gradient(180deg,#060607,#09090a);border-top:1px solid var(--line)}
-.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.step{position:relative;background:linear-gradient(180deg,var(--panel),#0f0f11);border:1px solid var(--line);border-radius:20px;padding:34px 28px}
-.step .n{font-family:var(--disp);font-weight:800;font-size:3.2rem;color:var(--amber);line-height:1;opacity:.9}
-.step h3{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.4rem;color:#fff;margin:6px 0 8px}
-.step p{color:var(--grey);font-size:.98rem}
+.proc{background:var(--paper-2)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px)}
+.step{border-top:2px solid var(--ink)}
+.step .n{font-family:var(--disp);font-weight:800;font-size:1.1rem;margin-top:16px;color:var(--ochre)}
+.step h3{font-size:1.45rem;font-weight:700;margin-top:6px}
+.step p{color:var(--ink-2);margin-top:10px;font-size:1rem}
+@media(max-width:720px){.steps{grid-template-columns:1fr;gap:28px}}
 
-/* testimonials */
-.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.rev{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px;transition:transform .25s,border-color .25s}
-.rev:hover{transform:translateY(-4px);border-color:rgba(231,163,60,.4)}
-.rev .st{color:var(--gold);font-size:1.05rem;letter-spacing:2px;margin-bottom:12px}
-.rev p{color:#dce2ea;font-family:var(--serif);font-size:1.05rem;font-style:italic}
-.rev .who{margin-top:14px;color:#fff;font-weight:600;font-size:.92rem}
-.rev .who span{display:block;color:var(--grey);font-weight:500;font-size:.8rem;margin-top:2px}
+/* offer band */
+.offer{background:var(--ochre);color:#fff}
+.offer-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:30px 0}
+.offer b{font-family:var(--disp);font-weight:800;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.02em;color:#fff}
+.offer .sm{font-size:1.02rem;color:#fff6ea;max-width:30em}
 
 /* area */
-.area{background:linear-gradient(180deg,#09090a,#060607);border-top:1px solid var(--line);text-align:center}
-.towns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:820px;margin:26px auto 0}
-.towns span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:.92rem;color:var(--grey-2);font-weight:500}
-.towns span.hub{background:rgba(231,163,60,.14);border-color:rgba(231,163,60,.4);color:var(--amber-2);font-weight:700}
-.licensed{margin-top:22px;color:var(--grey);font-size:.92rem}
+.area-in{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,72px)}
+.area h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+.towns{columns:2;column-gap:40px}
+.towns li{list-style:none;padding:12px 0;border-bottom:1px solid var(--line);font-size:1.08rem;break-inside:avoid}
+.towns li.hub{font-family:var(--disp);font-weight:700;color:var(--ink)}
+.area small{display:block;margin-top:24px;color:var(--ink-2);font-size:.92rem}
+@media(max-width:820px){.area-in{grid-template-columns:1fr;gap:22px}}
 
-/* band */
-.band{position:relative;overflow:hidden;background:linear-gradient(120deg,#20170a,#120d06);text-align:center;padding:72px 24px;border-top:1px solid rgba(231,163,60,.22)}
-.band .ripple{position:absolute;border-radius:50%;border:1px solid rgba(231,163,60,.18);animation:ripple 6s ease-out infinite;pointer-events:none;left:50%;top:50%;margin-left:-150px;margin-top:-150px;width:300px;height:300px}
-.band .r2{width:520px;height:520px;margin-left:-260px;margin-top:-260px;animation-delay:2.5s}
-.band h2{position:relative;z-index:2;font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2.1rem,5vw,3.6rem);color:#fff;line-height:1}
-.band p{position:relative;z-index:2;color:#f1e3cc;margin:14px auto 30px;max-width:560px;font-size:1.1rem}
-.band .btn{position:relative;z-index:2}
-.btn-xl{font-size:1.2rem;padding:1.25rem 2.6rem}
+/* CTA photo band */
+.cta{position:relative;min-height:62vh;display:flex;align-items:center;background:#1a160f center/cover no-repeat;background-image:url('https://bearcreek-ks.com/assets/framing-trusses-DQpVMlSk.jpg')}
+.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,16,10,.88),rgba(20,16,10,.52))}
+.cta-in{position:relative;color:#fff;max-width:640px}
+.cta h2{color:#fff;font-size:clamp(2.2rem,5vw,3.7rem)}
+.cta p{color:#e7e1d6;font-size:1.14rem;margin:18px 0 32px;max-width:32em}
+.cta .btn-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.cta .btn-solid:hover{background:#fff}
 
-/* contact */
-.contact{padding:66px 24px}
-.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:880px;margin:0 auto}
-.cc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 16px;text-align:center;text-decoration:none;transition:transform .2s,border-color .2s;display:block}
-.cc:hover{border-color:var(--amber);transform:translateY(-3px)}
-.cc .k{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);font-weight:700;margin-bottom:6px}
-.cc .v{color:#fff;font-weight:600;font-size:.92rem;word-break:break-word}
-.hours{text-align:center;color:var(--grey);font-size:.92rem;margin-top:24px}
+/* contact / footer */
+.contact{padding:clamp(56px,7vw,96px) 0}
+.c-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:28px}
+.c-grid a{background:var(--paper);padding:26px 22px;transition:background .2s}
+.c-grid a:hover{background:var(--white)}
+.c-grid .k{font-size:.8rem;color:var(--ink-2);font-weight:500}
+.c-grid .v{font-family:var(--disp);font-weight:700;font-size:1.08rem;margin-top:8px;letter-spacing:-.01em;word-break:break-word}
+@media(max-width:820px){.c-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.c-grid{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding:30px 0;font-size:.9rem;color:var(--ink-2)}
+footer a{color:var(--ochre);font-weight:600}
+footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
-footer{border-top:1px solid var(--line);padding:32px 24px;text-align:center;color:var(--grey);font-size:.86rem;background:#060607}
-footer a{color:var(--amber-2);text-decoration:none;font-weight:600}
-
-@media(max-width:900px){
-  .feat-in{grid-template-columns:1fr;gap:32px;padding:66px 24px}
-  .owner-in{grid-template-columns:1fr;gap:30px}
-  .owner-photo-wrap{max-width:420px;margin:0 auto;aspect-ratio:4/4}
-  .why-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:820px){
-  .hero-grid{grid-template-columns:1fr;gap:22px}
-  .stats-in{grid-template-columns:1fr 1fr}
-  .stat:nth-child(3){border-left:none}.stat:nth-child(n+3){border-top:1px solid var(--line)}
-  .svc-grid,.proc-grid,.revs{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:560px){
-  .hero{min-height:0;padding:48px 0 44px}
-  .logo-card{padding:16px 18px}.logo-card img{max-height:84px}
-  .sec{padding:56px 0}.sec-head{margin-bottom:34px}
-  .feat-in{padding:50px 20px}.feat-card{padding:30px 22px}
-  .feat-card .big{font-size:3.6rem}
-  .why-grid{grid-template-columns:1fr}
-  .band{padding:54px 20px}.contact{padding:50px 20px}
-  .cta-row .btn,.fbtns .btn,.btn-xl{width:100%;justify-content:center}
-  .wrap{padding:0 18px}
-}
+/* subtle, single load reveal on hero only */
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-l>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.hero-l .flag{animation-delay:.02s}h1{animation-delay:.08s}.hero-l p.lede{animation-delay:.16s}.hero-cta{animation-delay:.24s}.hero-marks{animation-delay:.32s}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.ph img{transition:none}}
 </style>
 </head>
 <body>
 
-<div class="ribbon"><span class="dot"></span> Proud sponsor of <a href="/suitenight">ProyTech Suite Night</a> &nbsp;·&nbsp; Wichita Thunder Hockey</div>
+<div class="bar">
+  <div class="bar-in">
+    <a class="brand" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener">
+      <span class="chip"><img src="/images/sponsors/bear-creek-construction.png" alt=""></span>
+      <span><b>Bear Creek Construction</b><span>Rose Hill, Kansas</span></span>
+    </a>
+    <div class="bar-r">
+      <span class="spon">Proud sponsor of <a href="/suitenight">ProyTech Suite Night</a></span>
+      <a class="ph" href="tel:3168331820">316&middot;833&middot;1820</a>
+    </div>
+  </div>
+</div>
 
 <header class="hero">
-  <div class="hero-photo"></div>
-  <div class="hero-ov"></div>
-  <div class="hero-ov2"></div>
-  <div class="hero-in">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="logo-card reveal"><img src="/images/sponsors/bear-creek-construction-full.png" alt="Bear Creek Construction, LLC"></div>
-        <div>
-          <div class="reveal d1"><span class="vet">&#9733; Veteran Owned &amp; Operated</span></div>
-          <h1 class="reveal d1">Premium construction,<br><span class="g">built to last.</span></h1>
-          <p class="hero-sub reveal d2"><b>Bear Creek Construction, LLC</b> is a veteran owned and operated general contractor in Rose Hill, KS, handling residential and commercial construction and remodeling from concept to completion.</p>
-          <div class="cta-row reveal d3">
-            <a class="btn btn-amber" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener">Visit our website &rarr;</a>
-            <a class="btn btn-ghost" href="tel:3168331820">Call 316-833-1820</a>
-          </div>
-          <div class="hero-cues reveal d4">
-            <span><span class="c">&#10003;</span> Veteran-owned</span>
-            <span><span class="c">&#10003;</span> Licensed &amp; insured</span>
-            <span><span class="c">&#10003;</span> Residential &amp; commercial</span>
-          </div>
-        </div>
-      </div>
+  <div class="hero-l">
+    <div class="flag"><b>&#9733;</b> Veteran owned &amp; operated general contractor</div>
+    <h1>Premium construction, built to last.</h1>
+    <p class="lede">From the framing up, Bear Creek builds and remodels homes and commercial spaces across the Wichita area, with one accountable contractor on the job from the first conversation to the final walkthrough.</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener">Visit our website</a>
+      <a class="btn btn-line" href="tel:3168331820">Call 316-833-1820</a>
     </div>
+    <div class="hero-marks">
+      <span><b>Licensed &amp; insured</b> general contractor</span>
+      <span><b>Residential</b> &amp; commercial</span>
+      <span>Based in <b>Rose Hill, KS</b></span>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="tag"><b>Framing &amp; structure</b> &nbsp;New build, Wichita area</div>
   </div>
 </header>
 
-<section class="stats">
-  <div class="stats-in">
-    <div class="stat reveal"><b>&#9733; Veteran</b><span>Owned &amp; Operated</span></div>
-    <div class="stat reveal d1"><b>100%</b><span>Licensed &amp; Insured</span></div>
-    <div class="stat reveal d2"><b>Res + Com</b><span>Construction &amp; Remodel</span></div>
-    <div class="stat reveal d3"><b>10% Off</b><span>Mention Suite Night</span></div>
+<!-- WORK -->
+<section class="work sec" id="work">
+  <div class="u">
+    <div class="lead-row">
+      <h2>The work</h2>
+      <p>A premium build is only as good as its bones. These are recent Bear Creek projects around the Wichita area, from framing and decks to remodels and roofing.</p>
+    </div>
+    <div class="gal">
+      <a class="ph g-a" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener"><img src="https://bearcreek-ks.com/assets/framing-vaulted-CKaTwSYA.jpg" alt="Residential framing with vaulted ceilings" loading="lazy" onerror="this.closest('.ph').style.display='none'"><span class="cap">Residential framing, vaulted ceilings</span></a>
+      <a class="ph g-b" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener"><img src="https://bearcreek-ks.com/assets/deck-railing-B_Ox4SP0.jpg" alt="Composite deck with black aluminum railing" loading="lazy" onerror="this.closest('.ph').style.display='none'"><span class="cap">Composite deck &amp; railing, Rose Hill</span></a>
+      <a class="ph g-c" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener"><img src="https://bearcreek-ks.com/assets/shower-tile-7moiU0TP.jpg" alt="Walk-in shower remodel with subway tile" loading="lazy" onerror="this.closest('.ph').style.display='none'"><span class="cap">Walk-in shower remodel</span></a>
+      <a class="ph g-d" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener"><img src="https://bearcreek-ks.com/assets/framing-trusses-DQpVMlSk.jpg" alt="Framing and roof truss work" loading="lazy" onerror="this.closest('.ph').style.display='none'"><span class="cap">Framing &amp; roof trusses</span></a>
+      <a class="ph g-e" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener"><img src="https://bearcreek-ks.com/assets/roofing-shingles-DaeXEnfh.jpg" alt="Architectural shingle roof installation" loading="lazy" onerror="this.closest('.ph').style.display='none'"><span class="cap">Architectural shingle roof</span></a>
+      <a class="ph g-f" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener"><img src="https://bearcreek-ks.com/assets/deck-multilevel-CtzEJGy-.jpg" alt="Multi-level wood deck build" loading="lazy" onerror="this.closest('.ph').style.display='none'"><span class="cap">Multi-level wood deck</span></a>
+    </div>
+    <p class="gal-note">More projects on <a href="https://www.facebook.com/profile.php?id=61583699164237" target="_blank" rel="noopener">Bear Creek's Facebook</a>.</p>
   </div>
 </section>
 
-<!-- FEATURED: main sell -->
-<section class="feat">
-  <span class="ripple r1"></span><span class="ripple r2"></span><span class="ripple r3"></span>
-  <div class="feat-in">
-    <div>
-      <div class="feat-tag reveal">&#128296; One contractor, concept to completion</div>
-      <h2 class="reveal d1">Construction &amp; <span class="g">remodeling, done right.</span></h2>
-      <p class="lede reveal d2">From framing and additions to full remodels, Bear Creek handles residential and commercial projects start to finish, with one accountable general contractor managing the work.</p>
-      <div class="mini">
-        <div class="reveal d2"><span class="chk">&#10003;</span> Framing, additions &amp; new construction</div>
-        <div class="reveal d3"><span class="chk">&#10003;</span> Kitchen, bath &amp; full-home remodels</div>
-        <div class="reveal d3"><span class="chk">&#10003;</span> Concrete, decks, fencing &amp; roofing</div>
-        <div class="reveal d4"><span class="chk">&#10003;</span> Licensed &amp; insured, one point of contact</div>
-      </div>
-      <div class="fbtns reveal d4">
-        <a class="btn btn-amber" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener">Start your project &rarr;</a>
-        <a class="btn btn-ghost" href="tel:3168331820">Call Andy</a>
-      </div>
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="u">
+    <div class="lead-row">
+      <h2>What we build</h2>
+      <p>One licensed contractor for the whole job, residential or commercial, managed start to finish so the work stays accountable to a single standard.</p>
     </div>
-    <div class="feat-card reveal d2">
-      <div class="big">10%</div>
-      <div class="off">Off your project</div>
-      <p class="q">Mention <b>Suite Night</b> when you reach out and Bear Creek will take 10% off your project.</p>
-      <div class="semper">&#9733; Veteran-Owned General Contractor</div>
+    <div class="svc">
+      <div class="svc-item"><div class="no">01</div><div><h3>Framing</h3><p>Precision framing for residential and commercial builds, squared, level, and built to carry what comes next.</p></div></div>
+      <div class="svc-item"><div class="no">02</div><div><h3>Remodeling</h3><p>Kitchens, baths, additions, and full-home renovations, plus custom carpentry, trim, and built-ins.</p></div></div>
+      <div class="svc-item"><div class="no">03</div><div><h3>Concrete</h3><p>Foundations, driveways, patios, and slab work, poured and finished the right way.</p></div></div>
+      <div class="svc-item"><div class="no">04</div><div><h3>Deck Building</h3><p>Custom composite and wood decks, from simple platforms to multi-level outdoor living.</p></div></div>
+      <div class="svc-item"><div class="no">05</div><div><h3>Fencing</h3><p>Wood, metal, and privacy fencing built straight, solid, and made to hold up.</p></div></div>
+      <div class="svc-item"><div class="no">06</div><div><h3>Roofing</h3><p>Asphalt and metal roofing plus storm-damage replacements, installed to protect what's under them.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- OWNER -->
-<section class="owner sec">
-  <div class="wrap">
-    <div class="owner-in">
-      <div class="owner-photo-wrap noimg reveal" id="ownerFrame">
-        <div class="ini">AP</div>
-        <div class="frameglow"></div>
-        <div class="owner-badge"><b>Andy &ldquo;Bear&rdquo; Perrill</b><span>Owner &middot; Veteran Owned &amp; Operated</span></div>
-      </div>
-      <div>
-        <div class="kick reveal">Meet the owner</div>
-        <h2 class="reveal d1">Veteran-owned, and <br>built to a higher standard.</h2>
-        <p class="reveal d2">Bear Creek Construction, LLC is veteran owned and operated, run by Andy &ldquo;Bear&rdquo; Perrill out of Rose Hill, KS. Every project is handled the way you'd expect from someone who served: show up, communicate, and finish the work right.</p>
-        <p class="pull reveal d2">Premium construction, built to last.</p>
-        <p class="reveal d3">As a licensed and insured general contractor, Bear Creek takes on residential and commercial construction and remodeling across the Wichita area, bringing one accountable team to every build from the first conversation to the final walkthrough.</p>
-        <div class="sig reveal d3">&#9733; Andy Perrill &middot; Bear Creek Construction</div>
-      </div>
+<section class="owner">
+  <div class="u owner-in">
+    <div class="crestwrap"><img src="/images/sponsors/bear-creek-construction.png" alt="Bear Creek Construction crest"></div>
+    <div>
+      <div class="kicker">The contractor</div>
+      <h2>Built by a veteran, to a higher standard.</h2>
+      <p>Bear Creek Construction is veteran owned and operated, run by Andy &ldquo;Bear&rdquo; Perrill out of Rose Hill, Kansas. Every project runs the way you'd expect from someone who served: show up, communicate straight, and finish the work right. One accountable contractor, start to finish, backed by full licensing and insurance.</p>
+      <div class="by">Andy &ldquo;Bear&rdquo; Perrill<span>Owner &middot; Bear Creek Construction, LLC</span></div>
     </div>
   </div>
 </section>
 
-<!-- WHY -->
-<section class="why sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kick reveal">The Bear Creek difference</div>
-      <h2 class="reveal d1">Why people choose Bear Creek</h2>
-      <p class="lead reveal d2">A veteran-owned contractor who shows up, communicates, and finishes the job right.</p>
+<!-- REVIEWS -->
+<section class="sec" id="reviews">
+  <div class="u">
+    <div class="kicker">From clients</div>
+    <p class="rev-feat">&ldquo;Andy is one of those contractors who actually shows up, communicates clearly, and does what he says he's going to do.&rdquo;<span class="who">Siobhan Cecelia Collier <span>&middot; Verified client</span></span></p>
+    <div class="rev-two">
+      <blockquote><p>&ldquo;They did amazing work on the flooring install. I highly recommend them for anything construction related.&rdquo;</p><div class="who">Brandon Ivy<span>Verified client</span></div></blockquote>
+      <blockquote><p>&ldquo;Bear Creek Construction handled a large structural foundation repair project by the book, on schedule.&rdquo;</p><div class="who">Rapid Asset Solutions, LLC<span>Commercial client</span></div></blockquote>
     </div>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>Veteran-Owned</h3>
-        <p>Military discipline and standards brought to every job, residential or commercial.</p>
-      </div>
-      <div class="why-card reveal d1">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M12 2l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V5z"/></svg></div>
-        <h3>Licensed &amp; Insured</h3>
-        <p>A fully licensed and insured Kansas general contractor, so your project is covered.</p>
-      </div>
-      <div class="why-card reveal d2">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M4 19h16M6 19v-6h4v6M14 19v-9h4v9"/></svg></div>
-        <h3>Res + Commercial</h3>
-        <p>One contractor for homes and businesses, from remodels to ground-up builds.</p>
-      </div>
-      <div class="why-card reveal d3">
-        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M4 5h16v11H7l-3 3z"/><path d="M8 9h8M8 12h5"/></svg></div>
-        <h3>Straight Communication</h3>
-        <p>Clear updates and honest answers from first call to final walkthrough.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kick reveal">What we build</div>
-      <h2 class="reveal d1">Construction &amp; remodeling services</h2>
-      <p class="lead reveal d2">Residential and commercial work, managed start to finish by one team.</p>
-    </div>
-    <div class="svc-grid">
-      <div class="svc reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M3 21V9l9-6 9 6v12"/><path d="M3 13h18M9 21V13M15 21V13M12 3v6"/></svg></div><h3>Framing</h3><p>Precision framing for residential and commercial builds, squared, level, and built to last.</p></div>
-      <div class="svc reveal d1"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M14 3l7 7-11 11H3v-7z"/><path d="M12 5l7 7"/></svg></div><h3>Remodeling</h3><p>Kitchens, baths, additions, and full-home renovations, plus custom carpentry, trim, and built-ins.</p></div>
-      <div class="svc reveal d2"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M3 7h18v10H3z"/><path d="M3 11h18M8 7v10M14 7v10"/></svg></div><h3>Concrete</h3><p>Foundations, driveways, patios, and slab work poured and finished the right way.</p></div>
-      <div class="svc reveal"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M3 10h18M3 14h18M6 10v8M18 10v8M4 10l8-5 8 5"/></svg></div><h3>Deck Building</h3><p>Custom composite and wood decks, from simple platforms to multi-level outdoor living.</p></div>
-      <div class="svc reveal d1"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M3 21V8M8 21V8M13 21V8M18 21V8M2 11h20M2 15h20M3 8l5-3 5 3 5-3v3"/></svg></div><h3>Fencing</h3><p>Wood, metal, and privacy fencing built straight, solid, and made to hold up.</p></div>
-      <div class="svc reveal d2"><div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M2 12l10-8 10 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/></svg></div><h3>Roofing</h3><p>Asphalt and metal roofing plus storm-damage replacements, installed to protect what's under them.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gallery sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kick reveal">Our work</div>
-      <h2 class="reveal d1">See it in the field</h2>
-      <p class="lead reveal d2">Recent builds and remodels from Bear Creek around the Wichita area.</p>
-    </div>
-    <div class="gal-grid reveal d2" id="galGrid"></div>
   </div>
 </section>
 
 <!-- PROCESS -->
 <section class="proc sec">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kick reveal">How it works</div>
-      <h2 class="reveal d1">Simple, start to finish</h2>
+  <div class="u">
+    <div class="lead-row">
+      <h2>How a project runs</h2>
+      <p>No guesswork, no runaround. Three steps from the first call to a finished build you can stand behind.</p>
     </div>
-    <div class="proc-grid">
-      <div class="step reveal"><div class="n">1</div><h3>Reach out</h3><p>Call, text, or message Bear Creek about your project, residential or commercial.</p></div>
-      <div class="step reveal d1"><div class="n">2</div><h3>Plan &amp; price</h3><p>Andy walks the project, listens to what you need, and lays out an honest scope and price.</p></div>
-      <div class="step reveal d2"><div class="n">3</div><h3>Built right</h3><p>Clean, managed work on schedule, finished to a standard you can stand behind.</p></div>
+    <div class="steps">
+      <div class="step"><div class="n">Step one</div><h3>Reach out</h3><p>Call, text, or message Bear Creek about your project, residential or commercial.</p></div>
+      <div class="step"><div class="n">Step two</div><h3>Plan &amp; price</h3><p>Andy walks the project, listens to what you need, and lays out an honest scope and price.</p></div>
+      <div class="step"><div class="n">Step three</div><h3>Built right</h3><p>Clean, managed work on schedule, finished to a standard you can stand behind.</p></div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="sec" style="padding-top:20px">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kick reveal">What clients say</div>
-      <h2 class="reveal d1">Trusted across the Wichita area</h2>
-    </div>
-    <div class="revs">
-      <div class="rev reveal"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"They did amazing work on the flooring install. I highly recommend them for anything construction related."</p><div class="who">Brandon Ivy<span>Verified Client</span></div></div>
-      <div class="rev reveal d1"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Andy is one of those contractors who actually shows up, communicates clearly, and does what he says he's going to do."</p><div class="who">Siobhan Cecelia Collier<span>Verified Client</span></div></div>
-      <div class="rev reveal d2"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>"Bear Creek Construction handled a large structural foundation repair project by the book, on schedule."</p><div class="who">Rapid Asset Solutions, LLC<span>Commercial Client</span></div></div>
-    </div>
+<!-- OFFER -->
+<section class="offer">
+  <div class="u offer-in">
+    <b>10% off your project</b>
+    <div class="sm">Mention Suite Night when you reach out and Bear Creek takes 10% off, their thank-you to the ProyTech Suite Night room.</div>
   </div>
 </section>
 
 <!-- AREA -->
-<section class="area sec">
-  <div class="wrap">
-    <div class="sec-head" style="margin-bottom:0">
-      <div class="kick reveal">Where we work</div>
-      <h2 class="reveal d1">Serving Wichita &amp; the surrounding area</h2>
+<section class="sec">
+  <div class="u area-in">
+    <div class="area">
+      <div class="kicker">Service area</div>
+      <h2>Rose Hill, Wichita &amp; the surrounding Kansas towns.</h2>
+      <small>Licensed &amp; insured general contractor based in Rose Hill, KS.</small>
     </div>
-    <div class="towns reveal d2">
-      <span class="hub">Rose Hill</span><span>Wichita</span><span>Andover</span><span>Derby</span><span>Goddard</span><span>Park City</span><span>Valley Center</span><span>Augusta</span><span>Kechi</span><span>Bel Aire</span>
-    </div>
-    <p class="licensed reveal d2">Licensed &amp; insured general contractor &middot; Based in Rose Hill, KS</p>
+    <ul class="towns">
+      <li class="hub">Rose Hill</li>
+      <li>Wichita</li>
+      <li>Andover</li>
+      <li>Derby</li>
+      <li>Goddard</li>
+      <li>Park City</li>
+      <li>Valley Center</li>
+      <li>Augusta</li>
+      <li>Kechi</li>
+      <li>Bel Aire</li>
+    </ul>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="band">
-  <span class="ripple"></span><span class="ripple r2"></span>
-  <h2 class="reveal">Let's build it right</h2>
-  <p class="reveal d1">Reach out for a quote on your next build, remodel, or addition. Mention Suite Night for 10% off.</p>
-  <a class="btn btn-white btn-xl reveal d2" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener">Go to bearcreek-ks.com &rarr;</a>
+<section class="cta">
+  <div class="u"><div class="cta-in">
+    <h2>Let's build something that lasts.</h2>
+    <p>Start your next build, remodel, or addition with a contractor who treats the bones like they matter. Mention Suite Night for 10% off.</p>
+    <a class="btn btn-solid" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener">Start your project</a>
+  </div></div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact">
-  <div class="sec-head">
-    <div class="kick reveal">Get in touch</div>
-    <h2 class="reveal d1" style="font-family:var(--disp);font-weight:800;text-transform:uppercase;color:#fff;font-size:clamp(1.8rem,4vw,2.6rem)">Contact Bear Creek</h2>
+  <div class="u">
+    <div class="kicker">Get in touch</div>
+    <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem)">Contact Bear Creek Construction</h2>
+    <div class="c-grid">
+      <a href="https://www.bearcreek-ks.com" target="_blank" rel="noopener"><div class="k">Website</div><div class="v">bearcreek-ks.com</div></a>
+      <a href="tel:3168331820"><div class="k">Phone</div><div class="v">316-833-1820</div></a>
+      <a href="mailto:andy@bckansas.com"><div class="k">Email</div><div class="v">andy@bckansas.com</div></a>
+      <a href="https://www.facebook.com/profile.php?id=61583699164237" target="_blank" rel="noopener"><div class="k">Facebook</div><div class="v">Bear Creek Construction</div></a>
+    </div>
   </div>
-  <div class="contact-grid">
-    <a class="cc reveal" href="https://www.bearcreek-ks.com" target="_blank" rel="noopener"><div class="k">Website</div><div class="v">bearcreek-ks.com</div></a>
-    <a class="cc reveal d1" href="tel:3168331820"><div class="k">Phone</div><div class="v">316-833-1820</div></a>
-    <a class="cc reveal d2" href="mailto:andy@bckansas.com"><div class="k">Email</div><div class="v">andy@bckansas.com</div></a>
-    <a class="cc reveal d3" href="https://www.facebook.com/profile.php?id=61583699164237" target="_blank" rel="noopener"><div class="k">Facebook</div><div class="v">Bear Creek Construction</div></a>
-  </div>
-  <p class="hours">Veteran owned &amp; operated &middot; Mention Suite Night for 10% off your project</p>
 </section>
 
 <footer>
-  Bear Creek Construction, LLC is a proud sponsor of <a href="/suitenight">ProyTech Suite Night</a>. &nbsp;This page is presented by <a href="https://getproytech.com">ProyTech</a>.
+  <div class="u fin">
+    <span>Bear Creek Construction, LLC &middot; Veteran owned &amp; operated &middot; Rose Hill, KS</span>
+    <span>Proud sponsor of <a href="/suitenight">ProyTech Suite Night</a> &middot; Page by <a href="https://getproytech.com">ProyTech</a></span>
+  </div>
 </footer>
 
-<script>
-(function(){
-  var els=[].slice.call(document.querySelectorAll('.reveal'));
-  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
-  var io=new IntersectionObserver(function(ent){ent.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
-  els.forEach(function(e){io.observe(e);});
-})();
-/* gallery — real project photos from bearcreek-ks.com (hotlinked; broken tiles auto-hide). Swap to repo-hosted copies as Bear Creek sends originals. */
-(function(){
-  var B='https://bearcreek-ks.com/assets/';
-  var GALLERY=[
-    {src:B+'framing-vaulted-CKaTwSYA.jpg',alt:'Residential framing with vaulted ceilings'},
-    {src:B+'deck-railing-B_Ox4SP0.jpg',alt:'Composite deck with black aluminum railing, Rose Hill'},
-    {src:B+'framing-trusses-DQpVMlSk.jpg',alt:'Large-scale framing and roof truss work'},
-    {src:B+'shower-tile-7moiU0TP.jpg',alt:'Walk-in shower remodel with subway tile'},
-    {src:B+'roofing-shingles-DaeXEnfh.jpg',alt:'Architectural shingle roof installation'},
-    {src:B+'deck-multilevel-CtzEJGy-.jpg',alt:'Multi-level wood deck build'}
-  ];
-  var grid=document.getElementById('galGrid');if(!grid)return;
-  var html='';
-  GALLERY.forEach(function(g){
-    html+='<div class="gtile"><img src="'+g.src+'" alt="'+g.alt+'" loading="lazy" onerror="this.closest(\'.gtile\').style.display=\'none\'"><span class="cap">'+g.alt+'</span></div>';
-  });
-  html+='<a class="gal-ig" href="https://www.facebook.com/profile.php?id=61583699164237" target="_blank" rel="noopener"><span class="ig-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F4B85A" stroke-width="1.7"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg></span><b>See more on Facebook</b><span>Bear Creek Construction</span></a>';
-  grid.innerHTML=html;
-})();
-</script>
 </body>
 </html>
