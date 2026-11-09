@@ -245,6 +245,18 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   .scrolltag{display:none}
 }
 
+/* thank-you note from ProyTech */
+.thanks{border-top:1px solid rgba(207,168,99,.25);border-bottom:1px solid rgba(207,168,99,.25)}
+.thanks-in{max-width:900px;margin:0 auto;text-align:center;padding-block:clamp(60px,8vw,104px)}
+.thanks .ptchip{display:inline-flex;align-items:center;justify-content:center;background:#14161b;border:1px solid rgba(207,168,99,.3);border-radius:13px;padding:13px 22px;margin-bottom:24px;box-shadow:0 14px 34px -16px rgba(0,0,0,.5)}
+.thanks .ptmark{height:34px;width:auto;display:block}
+.thanks .kicker{margin-bottom:14px}
+.thanks h2{font-size:clamp(2rem,4vw,3rem);color:var(--ink)}
+.thanks p{color:var(--ink-2);font-size:1.12rem;max-width:62ch;margin:18px auto 0}
+.thanks .pq{font-family:var(--quote);font-style:italic;font-weight:500;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.3;color:var(--brass-d);max-width:26ch;margin:32px auto 0}
+.thanks .sign{margin-top:28px;font-family:var(--disp);font-weight:700;color:var(--ink);font-size:1.02rem}
+.thanks .sign span{display:block;font-family:var(--body);font-weight:500;color:var(--ink-2);font-size:.9rem;margin-top:3px}
+
 @media(prefers-reduced-motion:reduce){*{animation:none!important}.ph img{transition:none}.hero-bg{transform:none}.reveal{opacity:1!important;transform:none!important;transition:none}.crestwrap img{clip-path:none!important}}
 </style>
 </head>
@@ -392,6 +404,19 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <ul class="towns">
       <li class="hub">Wichita</li><li>Andover</li><li>Derby</li><li>Rose Hill</li><li>Northeast Wichita</li><li>Southeast Wichita</li><li>West Wichita</li><li>Overland Park</li>
     </ul>
+  </div>
+</section>
+
+<!-- THANK YOU -->
+<section class="thanks panel">
+  <div class="u thanks-in">
+    <span class="ptchip"><img class="ptmark" src="/images/proytech-logo-transparent.png" alt="ProyTech"></span>
+    <div class="kicker">With gratitude</div>
+    <h2>Thank you for backing the room.</h2>
+    <p>Suite Night only happens because businesses like Dwell believe in it. ProyTech is building something simple and rare in this city: a room where Wichita comes to build real relationships, not to run a pitch. When Jeff and the Dwell team stepped up to sponsor, they bet on relationships over transactions, and on the idea that a city grows when its people actually know each other.</p>
+    <p>And Dwell lives that out every day. A veteran who helps families find home, who shows up for the people around him, who builds this community one move at a time. From one veteran-owned business to another, thank you for standing with us and shining a light on what Wichita can be.</p>
+    <p class="pq">&ldquo;The city gets stronger when we build it together.&rdquo;</p>
+    <div class="sign">With gratitude,<span>Garrett &amp; the ProyTech team</span></div>
   </div>
 </section>
 
