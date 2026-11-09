@@ -69,7 +69,19 @@
       "name": "Realtors",
       "blurb": "Agents we trust with our own friends.",
       "icon": "key",
-      "businesses": []
+      "businesses": [
+        {
+          "name": "Dwell Real Estate Group",
+          "person": "Jeff Schnell",
+          "blurb": "Full-service Wichita real estate with Jeff Schnell, an Army veteran who specializes in military relocation, VA loans, buyers, and sellers. 5.0 stars across 40 reviews. Proud Suite Night sponsor.",
+          "url": "https://dwellWICHITA.com",
+          "phone": "(316) 206-3158",
+          "email": "Jeff@dwellWICHITA.com",
+          "logo": "/images/sponsors/dwell-real-estate-group.png",
+          "logoBg": "#ffffff",
+          "landing": "/sponsors/dwell-real-estate-group"
+        }
+      ]
     },
     {
       "id": "title",
