@@ -10,13 +10,13 @@
 <meta property="og:site_name" content="ProyTech Suite Night"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://getproytech.com/sponsors/bear-creek-construction"/>
-<meta property="og:image" content="https://getproytech.com/images/og/bear-creek-construction.png"/>
+<meta property="og:image" content="https://getproytech.com/images/og/bear-creek-construction.png?v=2"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Suite Night Sponsor: Bear Creek Construction"/>
 <meta name="twitter:description" content="Meet our ProyTech Suite Night sponsor — Bear Creek Construction, LLC. Veteran-owned general contractor in Rose Hill, KS. Premium construction built to last."/>
-<meta name="twitter:image" content="https://getproytech.com/images/og/bear-creek-construction.png"/>
+<meta name="twitter:image" content="https://getproytech.com/images/og/bear-creek-construction.png?v=2"/>
 <link rel="icon" href="/images/sponsors/bear-creek-construction.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -240,6 +240,26 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 }
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important}.ph img{transition:none}.hero-bg{transform:none}.reveal{opacity:1!important;transform:none!important;transition:none}}
+
+/* thank-you note from ProyTech — glowing framed card */
+.thanks{padding:clamp(48px,7vw,104px) 0}
+.thanks-card{position:relative;max-width:1000px;margin:0 auto;text-align:center;padding:clamp(48px,6vw,86px) clamp(26px,5vw,74px);border-radius:24px;overflow:hidden;
+  background:radial-gradient(130% 100% at 50% -10%,rgba(46,37,18,.95),rgba(10,12,16,.97) 62%);
+  border:1.5px solid rgba(203,154,79,.6);
+  box-shadow:0 0 0 1px rgba(203,154,79,.28),0 0 54px rgba(203,154,79,.4),0 0 130px rgba(203,154,79,.2),0 34px 90px -34px rgba(0,0,0,.85);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:thanksGlow 3.8s ease-in-out infinite}
+.thanks-card::before{content:"";position:absolute;top:-55%;left:50%;transform:translateX(-50%);width:78%;height:90%;background:radial-gradient(circle,rgba(203,154,79,.34),transparent 70%);pointer-events:none}
+.thanks-card::after{content:"";position:absolute;inset:0;border-radius:24px;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 60px rgba(203,154,79,.1)}
+.thanks-card>*{position:relative;z-index:1}
+@keyframes thanksGlow{0%,100%{box-shadow:0 0 0 1px rgba(203,154,79,.28),0 0 46px rgba(203,154,79,.32),0 0 110px rgba(203,154,79,.16),0 34px 90px -34px rgba(0,0,0,.85)}50%{box-shadow:0 0 0 1px rgba(203,154,79,.4),0 0 70px rgba(203,154,79,.55),0 0 160px rgba(203,154,79,.28),0 34px 90px -34px rgba(0,0,0,.85)}}
+.thanks .ptchip{display:inline-flex;align-items:center;justify-content:center;background:#0f1116;border:1px solid rgba(203,154,79,.5);border-radius:13px;padding:13px 22px;margin-bottom:24px;box-shadow:0 0 28px rgba(203,154,79,.45)}
+.thanks .ptmark{height:34px;width:auto;display:block}
+.thanks .t-kick{margin-bottom:14px;color:#CB9A4F;letter-spacing:.22em;text-transform:uppercase;font-size:.82rem;font-weight:600;text-shadow:0 0 18px rgba(203,154,79,.6);font-family:'Inter',sans-serif}
+.thanks h2{font-size:clamp(2.1rem,4.4vw,3.3rem);color:#fff;text-shadow:0 0 30px rgba(203,154,79,.45);font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:-.01em;line-height:1.04}
+.thanks p{color:#e7e4dc;font-size:1.12rem;max-width:60ch;margin:18px auto 0;line-height:1.62;font-family:'Inter',sans-serif}
+.thanks .pq{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.28;color:#CB9A4F;max-width:24ch;margin:34px auto 0;text-shadow:0 0 34px rgba(203,154,79,.5)}
+.thanks .t-sign{margin-top:30px;font-weight:700;color:#fff;font-size:1.05rem;font-family:'Archivo',sans-serif}
+.thanks .t-sign span{display:block;font-weight:500;color:#CB9A4F;font-size:.9rem;margin-top:3px;font-family:'Inter',sans-serif}
 </style>
 </head>
 <body>
@@ -388,6 +408,21 @@ footer .fin{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <ul class="towns">
       <li class="hub">Rose Hill</li><li>Wichita</li><li>Andover</li><li>Derby</li><li>Goddard</li><li>Park City</li><li>Valley Center</li><li>Augusta</li><li>Kechi</li><li>Bel Aire</li>
     </ul>
+  </div>
+</section>
+
+<!-- THANK YOU -->
+<section class="thanks">
+  <div class="u">
+    <div class="thanks-card">
+      <span class="ptchip"><img class="ptmark" src="/images/proytech-logo-transparent.png" alt="ProyTech"></span>
+      <div class="t-kick">With gratitude</div>
+      <h2>Thank you for backing the room.</h2>
+      <p>Suite Night only happens because businesses like Bear Creek believe in it. ProyTech is building something simple and rare in this city: a room where Wichita comes to build real relationships, not to run a pitch. When Andy and the Bear Creek crew stepped up to sponsor, they bet on relationships over transactions, and on the idea that a city grows when its people actually know each other.</p>
+      <p>And Bear Creek lives that out on every job. A veteran-owned builder who shows up, does it right, and builds things made to last. From one veteran-owned business to another, thank you for standing with us and for building this community, in every sense of the word.</p>
+      <p class="pq">&ldquo;The city gets stronger when we build it together.&rdquo;</p>
+      <div class="t-sign">With gratitude,<span>Garrett &amp; the ProyTech team</span></div>
+    </div>
   </div>
 </section>
 

@@ -10,13 +10,13 @@
 <meta property="og:site_name" content="ProyTech Suite Night"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://getproytech.com/sponsors/liberty-lawn-landscape"/>
-<meta property="og:image" content="https://getproytech.com/images/og/liberty-lawn-landscape.png"/>
+<meta property="og:image" content="https://getproytech.com/images/og/liberty-lawn-landscape.png?v=2"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Suite Night Sponsor: Liberty Lawn & Landscape"/>
 <meta name="twitter:description" content="Meet our ProyTech Suite Night sponsor — Liberty Lawn & Landscape. Veteran-owned horse & livestock water, plus landscape, hardscape & lawn care around Wichita."/>
-<meta name="twitter:image" content="https://getproytech.com/images/og/liberty-lawn-landscape.png"/>
+<meta name="twitter:image" content="https://getproytech.com/images/og/liberty-lawn-landscape.png?v=2"/>
 <link rel="icon" href="/images/sponsors/liberty-lawn-landscape.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -232,6 +232,26 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
   .cta-row .btn,.fbtns .btn,.btn-xl{width:100%;justify-content:center}
   .wrap{padding:0 18px}
 }
+
+/* thank-you note from ProyTech — glowing framed card */
+.thanks{padding:clamp(48px,7vw,104px) 0}
+.thanks-card{position:relative;max-width:1000px;margin:0 auto;text-align:center;padding:clamp(48px,6vw,86px) clamp(26px,5vw,74px);border-radius:24px;overflow:hidden;
+  background:radial-gradient(130% 100% at 50% -10%,rgba(20,40,12,.96),rgba(10,12,16,.97) 62%);
+  border:1.5px solid rgba(120,229,59,.6);
+  box-shadow:0 0 0 1px rgba(120,229,59,.28),0 0 54px rgba(120,229,59,.4),0 0 130px rgba(120,229,59,.2),0 34px 90px -34px rgba(0,0,0,.85);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:thanksGlow 3.8s ease-in-out infinite}
+.thanks-card::before{content:"";position:absolute;top:-55%;left:50%;transform:translateX(-50%);width:78%;height:90%;background:radial-gradient(circle,rgba(120,229,59,.34),transparent 70%);pointer-events:none}
+.thanks-card::after{content:"";position:absolute;inset:0;border-radius:24px;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 60px rgba(120,229,59,.1)}
+.thanks-card>*{position:relative;z-index:1}
+@keyframes thanksGlow{0%,100%{box-shadow:0 0 0 1px rgba(120,229,59,.28),0 0 46px rgba(120,229,59,.32),0 0 110px rgba(120,229,59,.16),0 34px 90px -34px rgba(0,0,0,.85)}50%{box-shadow:0 0 0 1px rgba(120,229,59,.4),0 0 70px rgba(120,229,59,.55),0 0 160px rgba(120,229,59,.28),0 34px 90px -34px rgba(0,0,0,.85)}}
+.thanks .ptchip{display:inline-flex;align-items:center;justify-content:center;background:#0f1116;border:1px solid rgba(120,229,59,.5);border-radius:13px;padding:13px 22px;margin-bottom:24px;box-shadow:0 0 28px rgba(120,229,59,.45)}
+.thanks .ptmark{height:34px;width:auto;display:block}
+.thanks .t-kick{margin-bottom:14px;color:#78E53B;letter-spacing:.22em;text-transform:uppercase;font-size:.82rem;font-weight:600;text-shadow:0 0 18px rgba(120,229,59,.6);font-family:'Inter',sans-serif}
+.thanks h2{font-size:clamp(2.1rem,4.4vw,3.3rem);color:#fff;text-shadow:0 0 30px rgba(120,229,59,.45);font-family:'Barlow Condensed',sans-serif;font-weight:800;letter-spacing:-.01em;line-height:1.04}
+.thanks p{color:#e7e4dc;font-size:1.12rem;max-width:60ch;margin:18px auto 0;line-height:1.62;font-family:'Inter',sans-serif}
+.thanks .pq{font-family:'Fraunces',Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.28;color:#78E53B;max-width:24ch;margin:34px auto 0;text-shadow:0 0 34px rgba(120,229,59,.5)}
+.thanks .t-sign{margin-top:30px;font-weight:700;color:#fff;font-size:1.05rem;font-family:'Barlow Condensed',sans-serif}
+.thanks .t-sign span{display:block;font-weight:500;color:#78E53B;font-size:.9rem;margin-top:3px;font-family:'Inter',sans-serif}
 </style>
 </head>
 <body>
@@ -430,6 +450,21 @@ footer a{color:var(--green-2);text-decoration:none;font-weight:600}
       <span class="hub">Wichita</span><span>Andover</span><span>Haysville</span><span>Derby</span><span>Mulvane</span><span>Clearwater</span><span>Park City</span><span>Valley Center</span><span>Goddard</span><span>Augusta</span><span>Kechi</span><span>Colwich</span>
     </div>
     <p class="licensed reveal d2">Licensed &amp; insured &middot; Open Monday&ndash;Saturday, 8:00am&ndash;4:30pm</p>
+  </div>
+</section>
+
+<!-- THANK YOU -->
+<section class="thanks">
+  <div class="u">
+    <div class="thanks-card">
+      <span class="ptchip"><img class="ptmark" src="/images/proytech-logo-transparent.png" alt="ProyTech"></span>
+      <div class="t-kick">With gratitude</div>
+      <h2>Thank you for backing the room.</h2>
+      <p>Suite Night only happens because businesses like Liberty believe in it. ProyTech is building something simple and rare in this city: a room where Wichita comes to build real relationships, not to run a pitch. When Austin and the Liberty team stepped up to sponsor, they bet on relationships over transactions, and on the idea that a city grows when its people actually know each other.</p>
+      <p>And Liberty lives that out on every property. A veteran-owned team that takes pride in the work and shows up for the people they serve. From one veteran-owned business to another, thank you for standing with us and shining a light on what Wichita can be.</p>
+      <p class="pq">&ldquo;The city gets stronger when we build it together.&rdquo;</p>
+      <div class="t-sign">With gratitude,<span>Garrett &amp; the ProyTech team</span></div>
+    </div>
   </div>
 </section>
 
