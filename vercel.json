@@ -32,6 +32,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/client-docs/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ]
 }
