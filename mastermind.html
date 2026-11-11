@@ -34,8 +34,8 @@
   "location":{"@type":"Place","name":"Norwegian Gem, round trip from Port Tampa Bay","address":{"@type":"PostalAddress","addressLocality":"Tampa","addressRegion":"FL","addressCountry":"US"}},
   "image":["https://getproytech.com/images/mastermind/mastermind-og.jpg"],
   "organizer":{"@type":"Organization","name":"ProyTech Business Solutions LLC","url":"https://getproytech.com"},
-  "offers":{"@type":"Offer","price":"2425","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://getproytech.com/mastermind","validThrough":"2026-12-31T23:59:00-06:00"},
-  "performer":[{"@type":"Person","name":"Garrett Von Flue"},{"@type":"Person","name":"Jim Reynolds"},{"@type":"Person","name":"Matthew Agnew"}]
+  "offers":{"@type":"Offer","price":"2425","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://getproytech.com/mastermind","validThrough":"2026-12-15T23:59:00-06:00"},
+  "performer":[{"@type":"Person","name":"Garrett Von Flue"}]
 }
 </script>
 <style>
@@ -102,7 +102,8 @@ h1 em{font-style:normal;color:var(--gold);display:block}
 .chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:9px 15px;font-size:.92rem;color:#fff}
 .chip b{color:var(--gold)}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.seats{margin-top:16px;font-size:.88rem;color:var(--mut)}
+.bonus{margin-top:18px;display:inline-block;background:rgba(251,105,38,.14);border:1.5px solid rgba(251,105,38,.6);border-radius:14px;padding:12px 16px;color:#fff;font-size:.98rem}.bonus b{color:#FB6926}
+.seats{display:block;margin-top:14px;font-size:.88rem;color:var(--mut)}
 
 /* facts */
 .facts{background:var(--cream);color:#111528;padding:0}
@@ -251,12 +252,14 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
         <span class="chip">Aboard Norwegian Gem</span>
         <span class="chip">Tampa round trip</span>
         <span class="chip">Flights from Wichita included</span>
+        <span class="chip">Taxes, fees &amp; gratuities included</span>
       </div>
       <div class="cta-row">
-        <a class="btn btn-gold" href="https://app.tern.travel/trips/rCt8o5HrxzcvAlcStFon3A/landing_page" target="_blank" rel="noopener">Reserve your seat →</a>
+        <a class="btn btn-gold" href="https://app.tern.travel/trips/wuwl0pCODHBKYGF7K4VK9w/landing_page" target="_blank" rel="noopener">Reserve your seat →</a>
         <a class="btn btn-line" href="#itinerary">See the itinerary</a>
       </div>
-      <div class="seats">Limited to 10 business owners. Deposits due by December 31.</div>
+      <div class="bonus"><b>Book by Thanksgiving</b> and get <b>$100 onboard credit</b> for the spa, duty free or anything on board.</div>
+      <div class="seats">Limited to 10 business owners. Final booking date December 15.</div>
     </div>
     </div>
   </div>
@@ -310,13 +313,13 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
         <span class="kick">Tuesday · Day one</span>
         <h3>Running the business</h3>
         <div class="talk"><b>AI in one real workflow</b><span>Garrett Von Flue · ProyTech</span></div>
-        <div class="talk"><b>Payment fraud drill: the fake CEO and the fake vendor</b><span>Jim Reynolds · Reynolds Financial Services</span></div>
+        <div class="talk"><b>Payment fraud drill: the fake CEO and the fake vendor</b><span>Guest expert · finance and fraud prevention</span></div>
       </div>
       <div class="block rv">
         <span class="kick">Thursday · Day two</span>
         <h3>Money and value</h3>
-        <div class="talk"><b>Pricing, a 13 week cash forecast, and capital</b><span>Jim Reynolds · Reynolds Financial Services</span></div>
-        <div class="talk"><b>Legal foundations for selling a business</b><span>Matthew Agnew · Agnew Law</span></div>
+        <div class="talk"><b>Pricing, a 13 week cash forecast, and capital</b><span>Guest expert · finance</span></div>
+        <div class="talk"><b>Legal foundations for selling a business</b><span>Guest expert · business law</span></div>
       </div>
     </div>
     <div class="mm-tables rv">
@@ -331,10 +334,11 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
   <div class="wrap">
     <span class="kick rv">Your hosts and speakers</span>
     <h2 class="h2 rv">Wichita people who do this every day.</h2>
+    <p class="lede rv" style="color:#5B6478">Guest experts are being confirmed now and will be announced here.</p>
     <div class="spk-grid">
       <div class="person rv"><div class="av">GV</div><h3>Garrett Von Flue</h3><div class="co">ProyTech Business Solutions</div><p>Army veteran and co-founder of ProyTech, which builds the websites, CRMs and AI systems that let Wichita businesses grow without hiring. Hosts Suite Night, the city's business networking night at the Thunder.</p></div>
-      <div class="person rv"><div class="av">JR</div><h3>Jim Reynolds</h3><div class="co">Reynolds Financial Services</div><p>Leads the money side of the trip: spotting payment fraud before it hits, pricing for profit, forecasting cash 13 weeks out, and how to think about capital.</p></div>
-      <div class="person rv"><div class="av">MA</div><h3>Matthew Agnew</h3><div class="co">Agnew Law</div><p>Walks through the legal groundwork that makes a business sellable, so the value you build is value someone can actually buy.</p></div>
+      <div class="person rv"><div class="av">$</div><h3>Finance &amp; fraud expert</h3><div class="co">Being finalized</div><p>Leads the money side of the trip: spotting payment fraud before it hits, pricing for profit, forecasting cash 13 weeks out, and how to think about capital.</p></div>
+      <div class="person rv"><div class="av">§</div><h3>Business attorney</h3><div class="co">Being finalized</div><p>Walks through the legal groundwork that makes a business sellable, so the value you build is value someone can actually buy.</p></div>
     </div>
   </div>
 </section>
@@ -352,19 +356,23 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
           <li>Balcony stateroom on Norwegian Gem</li>
           <li>Food, premium beverages and energy drinks</li>
           <li>Unlimited streaming internet on board</li>
+          <li>Taxes, port fees and all onboard gratuities</li>
           <li>Every education session and mastermind table</li>
           <li>Group dinner at Cagney's Steakhouse</li>
-          <li class="x">Not included: optional island activities, dinner on your own in Tampa, and travel insurance</li>
+          <li class="x">Not included: optional island activities, dinner on your own in Tampa, and travel insurance (recommended)</li>
         </ul>
-        <div class="cta-row"><a class="btn btn-gold" style="width:100%" href="https://app.tern.travel/trips/rCt8o5HrxzcvAlcStFon3A/landing_page" target="_blank" rel="noopener">Reserve your seat →</a></div>
+        <div class="cta-row"><a class="btn btn-gold" style="width:100%" href="https://app.tern.travel/trips/wuwl0pCODHBKYGF7K4VK9w/landing_page" target="_blank" rel="noopener">Reserve your seat →</a></div>
       </div>
       <div class="sched rv">
         <h3>How booking works</h3>
-        <div class="step"><b>At booking</b><span>$1,200 deposit holds your seat. Booking closes December 31, 2026.</span></div>
+        <div class="step"><b>At booking</b><span>$1,200 deposit holds your seat ($1,800 for two in one room).</span></div>
+        <div class="step"><b>By Thanksgiving</b><span>Book by November 26 and get $100 onboard credit added to your room.</span></div>
+        <div class="step"><b>Nov 30</b><span>Go date. Once 5 owners are booked, the trip is confirmed. If we don't reach 5, every payment is refunded.</span></div>
+        <div class="step"><b>Dec 15</b><span>Final booking date.</span></div>
         <div class="step"><b>By Jan 31</b><span>Remaining balance due.</span></div>
-        <div class="step"><b>Bring someone</b><span>Spouse or co-owner sharing your stateroom? Double occupancy pricing is available. Ask Scott for the current number.</span></div>
-        <div class="step"><b>Insurance</b><span>Recommended. Offered with your confirmed itinerary, usually around $100 to $150 a person depending on age.</span></div>
-        <p class="note">Travel is booked and managed by Scott Temaat of Squared Away Travel, so every question about flights, cabins and payments goes straight to the person handling them.</p>
+        <div class="step"><b>Bring someone</b><span>Spouse or business partner sharing your stateroom: $1,400 more, everything included.</span></div>
+        <div class="step"><b>Insurance</b><span>Recommended. Offered with your confirmed itinerary, about $100 to $150 per person depending on age and coverage selected.</span></div>
+        <p class="note">Travel is booked and managed by Scott Temaat of Squared Away Travel, so every question about flights, cabins and payments goes straight to the person handling them. Payments are held in a group funds account until the trip is confirmed; a 3.5% convenience fee applies to that account.</p>
       </div>
     </div>
   </div>
@@ -378,8 +386,9 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
       <details class="rv"><summary>Who is this for?</summary><p>Wichita business owners who want to step away and work on the business instead of in it. Tables mix newer and established owners on purpose, so there's something to learn in both directions.</p></details>
       <details class="rv"><summary>Why only 10 seats?</summary><p>Mastermind tables only work when everyone gets real airtime. Ten owners keeps it small enough that every person's business gets worked on.</p></details>
       <details class="rv"><summary>Is it all work?</summary><p>No. Sessions run in the mornings and early afternoons on the two sea days. Evenings, the island day and the Tampa day are yours.</p></details>
-      <details class="rv"><summary>Can I bring my spouse or business partner?</summary><p>Yes. They can share your balcony stateroom at double occupancy pricing. Reach out to Scott for the current price.</p></details>
-      <details class="rv"><summary>Do I need a passport?</summary><p>For a round trip cruise from Tampa to the Bahamas, US citizens can often travel with a birth certificate and photo ID, but a passport is strongly recommended. Scott will confirm requirements when you book.</p></details>
+      <details class="rv"><summary>Can I bring my spouse or business partner?</summary><p>Yes. They can share your balcony stateroom for $1,400 more, with everything included.</p></details>
+      <details class="rv"><summary>Do I need a passport?</summary><p>Yes, we strongly recommend one. A birth certificate and ID can get you on the ship, but if anything ever forced you to fly home from the Bahamas, you could not get back into the US without a passport. Scott can help with timing when you book.</p></details>
+      <details class="rv"><summary>What if the trip doesn't fill?</summary><p>The trip is confirmed once 5 owners are booked. If we don't reach 5 by Monday, November 30, every payment is refunded in full. Payments sit in a group funds account until then, and rooms are booked as each seat is confirmed.</p></details>
       <details class="rv"><summary>Who do I talk to about booking?</summary><p>Scott Temaat at Squared Away Travel handles all travel and payments. Call <a href="tel:+13163752100" style="color:#FB6926">(316) 375-2100</a> or email <a href="mailto:scott@squaredawaytravel.com" style="color:#FB6926">scott@squaredawaytravel.com</a>.</p></details>
     </div>
   </div>
@@ -389,8 +398,8 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
   <div class="wrap">
     <span class="kick rv">March 7–12, 2027</span>
     <h2 class="h2 rv">Ten seats. One week that changes how you run next year.</h2>
-    <p class="lede rv">Lock in your seat with a $1,200 deposit before December 31.</p>
-    <div class="cta-row rv" style="margin-top:28px"><a class="btn btn-gold" href="https://app.tern.travel/trips/rCt8o5HrxzcvAlcStFon3A/landing_page" target="_blank" rel="noopener">Reserve your seat →</a><a class="btn btn-line" href="tel:+13163752100">Call Scott</a></div>
+    <p class="lede rv">A $1,200 deposit holds your seat. Book by Thanksgiving for $100 onboard credit.</p>
+    <div class="cta-row rv" style="margin-top:28px"><a class="btn btn-gold" href="https://app.tern.travel/trips/wuwl0pCODHBKYGF7K4VK9w/landing_page" target="_blank" rel="noopener">Reserve your seat →</a><a class="btn btn-line" href="tel:+13163752100">Call Scott</a></div>
     <div class="contact rv">Travel questions: Scott Temaat, Squared Away Travel · <a href="tel:+13163752100">(316) 375-2100</a> · <a href="mailto:scott@squaredawaytravel.com">scott@squaredawaytravel.com</a></div>
   </div>
 </section>
@@ -401,12 +410,12 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
   <div class="wrap host-in">
     <small>Hosted by</small>
     <a href="/" aria-label="ProyTech"><img src="/images/proytech-logo-transparent.png" alt="ProyTech Business Solutions"></a>
-    <p>ProyTech Mastermind at Sea is hosted by ProyTech Business Solutions LLC. Travel arranged by Squared Away Travel.</p>
+    <p>ProyTech Mastermind at Sea is hosted by ProyTech Business Solutions LLC. Travel arranged by <a href="https://squaredawaytravel.com" target="_blank" rel="noopener" style="color:#C9D6FF">Squared Away Travel</a>.</p>
   </div>
 </div>
-<div class="foot">© 2026 ProyTech Business Solutions LLC · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a><br>Pricing and itinerary set by Squared Away Travel and subject to cruise line and airline terms.</div>
+<div class="foot">© 2026 ProyTech Business Solutions LLC · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · Travel by <a href="https://squaredawaytravel.com" target="_blank" rel="noopener">Squared Away Travel</a><br>Pricing and itinerary set by Squared Away Travel and subject to cruise line and airline terms.</div>
 
-<div class="sticky"><a class="btn btn-gold" href="https://app.tern.travel/trips/rCt8o5HrxzcvAlcStFon3A/landing_page" target="_blank" rel="noopener">Reserve your seat · $2,425</a></div>
+<div class="sticky"><a class="btn btn-gold" href="https://app.tern.travel/trips/wuwl0pCODHBKYGF7K4VK9w/landing_page" target="_blank" rel="noopener">Reserve your seat · $2,425</a></div>
 
 <script>
 (function(){var els=document.querySelectorAll('.rv');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
