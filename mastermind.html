@@ -83,22 +83,19 @@ section{position:relative}
 .rv.in{opacity:1;transform:none}
 
 /* hero */
-.hero{padding:120px 0 90px;margin-top:-70px;background:
+.hero{padding:120px 0 110px;margin-top:-70px;background:linear-gradient(90deg,rgba(0,1,16,.94) 0%,rgba(0,1,16,.75) 40%,rgba(0,1,16,.1) 75%),url(/images/mastermind/mm-hero-ship.jpg) 70% 60%/cover no-repeat,
   radial-gradient(90% 70% at 85% 10%,rgba(56,189,248,.18),transparent 60%),radial-gradient(60% 50% at 70% 90%,rgba(251,105,38,.12),transparent 60%),
   radial-gradient(80% 60% at 10% 30%,rgba(19,56,222,.5),transparent 65%),
   linear-gradient(180deg,#0B1236,#050A22 70%,#000110);overflow:hidden}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;opacity:.18;pointer-events:none;
   background:repeating-radial-gradient(ellipse 60px 14px at 50% 100%,transparent 0 10px,rgba(251,105,38,.9) 11px 12px,transparent 13px 26px);background-size:120px 40px;animation:wave 14s linear infinite}
 @keyframes wave{to{background-position:1200px 0}}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
-.badge{background:radial-gradient(80% 70% at 50% 30%,rgba(19,56,222,.35),transparent 70%),#000110;border:6px solid #1338DE;border-radius:22px;padding:56px 40px;text-align:center;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 60px -10px rgba(19,56,222,.6)}
-.badge img{width:100%;max-width:420px;margin:0 auto}
-.badge .bt{font-family:var(--disp);font-weight:700;font-size:clamp(2rem,3.4vw,3rem);line-height:1;letter-spacing:-.02em;color:#fff;margin-top:26px;text-transform:uppercase}
-.badge .bd{font-family:"Space Mono",monospace;color:#FB6926;font-weight:700;letter-spacing:.14em;margin-top:16px;font-size:.9rem;text-transform:uppercase}
+.hero-grid{display:block}.hero-copy{max-width:640px}
+.hero-logo{width:440px;max-width:100%;margin:0 0 22px -12px}
 .hosted{display:inline-flex;align-items:center;gap:10px;font-size:.82rem;color:var(--mut);margin-bottom:22px;letter-spacing:.02em}
 .hosted b{color:#fff;font-weight:600}
 .hosted i{width:28px;height:1px;background:var(--gold);display:block}
-h1{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.98;font-size:clamp(2.5rem,5.4vw,4.3rem);color:#fff}
+h1{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:.98;font-size:clamp(2.3rem,4.6vw,3.8rem);color:#fff}
 h1 em{font-style:normal;color:var(--gold);display:block}
 .sub{font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.85rem;color:var(--gold);margin-top:22px}
 .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
@@ -209,7 +206,8 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
 @media(max-width:900px){
   .hero{padding-top:110px}
   .hero-grid{grid-template-columns:1fr;gap:36px}
-  .badge{max-width:340px;margin:0 auto;padding:34px 24px}
+  .hero{background:linear-gradient(180deg,rgba(0,1,16,.55) 0%,rgba(0,1,16,.8) 45%,rgba(0,1,16,.97) 70%),url(/images/mastermind/mm-hero-ship.jpg) 72% 0/auto 520px no-repeat,#000110}
+  .hero-logo{width:320px}
   .hero-copy{order:2}
   .fact-grid{grid-template-columns:1fr 1fr}
   .fact:nth-child(2){border-right:0}.fact:nth-child(-n+2){border-bottom:1px solid #E1E6F5}
@@ -244,6 +242,7 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
+      <img class="hero-logo" src="/images/mastermind/mm-logo-horizontal-web.png" alt="ProyTech Mastermind at Sea" width="1100" height="413">
       <div class="hosted"><i></i><span>A <b>ProyTech</b> event for Wichita business owners</span></div>
       <h1>Get out of the business.<em>Work on the business.</em></h1>
       <div class="sub">Four night mastermind at sea</div>
@@ -259,7 +258,7 @@ details p{color:var(--mut);line-height:1.65;margin-top:12px}
       </div>
       <div class="seats">Limited to 10 business owners. Deposits due by December 31.</div>
     </div>
-    <div class="badge rv" id="mm-logo"><img src="/images/proytech-logo-transparent.png" alt="ProyTech" width="1835" height="491"><div class="bt">Mastermind<br>at Sea</div><div class="bd">March 7–12, 2027</div></div>
+    </div>
   </div>
 </section>
 
