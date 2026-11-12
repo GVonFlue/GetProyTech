@@ -514,10 +514,10 @@ body{background:#010710}
           <div class="tn-eyebrow"><i class="tn-puck"></i> Suite Night · Thunder Hockey · November 13, 2026</div>
           <h1 class="tn-h1">Business Networking<br><em>Done Different.</em></h1>
           <p class="tn-hero-sub">A private suite for Wichita Thunder hockey. A curated room of Wichita business owners, catered, with the game all night. This is what networking should feel like.</p>
-                    <div class="tn-seatcount"><i class="dot"></i><strong id="seatCount">25 of 25 seats</strong><span>available</span></div>
+                    <div class="tn-seatcount tn-seatcount-out"><i class="dot"></i><strong id="seatCount">SOLD OUT</strong><span>every seat is claimed</span></div>
           <div class="tn-hero-cta">
-            <button class="tn-btn tn-btn-orange" onclick="scrollToForm()">Reserve your seat</button>
-            <div class="tn-seat-pill"><strong>$50</strong><span>a seat<br>in the suite</span></div>
+            <span class="tn-btn tn-btn-soldout" aria-disabled="true">Sold out</span>
+            <div class="tn-seat-pill"><strong>Nov 13</strong><span>see you<br>at the suite</span></div>
           </div>
         </div>
         <aside class="tn-side">
@@ -613,14 +613,14 @@ body{background:#010710}
     <div class="tn-wrap"><div class="tn-slab">
       <div class="tn-reserve-grid">
         <div class="tn-reserve-copy tn-reveal">
-          <span class="tn-kicker tn-kicker-ice">03 &middot; Reserve</span>
-          <h2 class="tn-h2 tn-h2-light">Grab your seat.</h2>
-          <p>Straight up, before you type anything: <strong>$50 reserves your seat</strong> in the suite for the night. That covers the suite, the catered food, and the game.</p>
-          <p class="tn-small">You are not paying on this page. Fill this out, I text you to confirm the seat and send a simple payment link. The seat locks once payment is in.</p>
-          <div class="tn-badge-row"><span>Reserve</span><i>&rarr;</i><span>I text you</span><i>&rarr;</i><span>Pay &middot; seat locked</span></div>
+          <span class="tn-kicker tn-kicker-ice">Sold out</span>
+          <h2 class="tn-h2 tn-h2-light">Every seat is claimed.</h2>
+          <p>Suite Night on November 13 is officially <strong>sold out</strong>. Thank you to everyone who grabbed a seat, and to our sponsors for making the night happen.</p>
+          <p class="tn-small">Want first shot at the next one? Text me at 901.335.3905 and I'll put you at the front of the line.</p>
+          <div class="tn-badge-row"><span>Every seat</span><i>&rarr;</i><span>Claimed</span><i>&rarr;</i><span>See you Nov 13</span></div>
         </div>
         <div class="tn-form-card tn-reveal">
-          <div id="formWrap">
+          <div id="formWrap" style="display:none">
             <form id="reserveForm" novalidate>
               <h3>Reserve your seat</h3>
               <p class="tn-form-note">$50 a seat &middot; payment comes by text</p>
@@ -647,16 +647,11 @@ body{background:#010710}
               <p class="tn-fine">Reserving doesn't charge you. I text to confirm first.</p>
             </form>
           </div>
-          <div id="successWrap" class="tn-success" style="display:none">
-            <div class="tn-success-mark">&#10003;</div>
-            <h3>Seat held. Watch your phone.</h3>
-            <p id="successName">You're on the list. Here's what's next.</p>
-            <ol>
-              <li><strong>I text you.</strong> From my real number, usually within a few hours.</li>
-              <li><strong>I send a payment link.</strong> $50 reserves your seat.</li>
-              <li><strong>Payment lands, seat locks.</strong> Full details a few days out.</li>
-            </ol>
-            <p class="tn-small">Don't hear from me by tomorrow? Text 901.335.3905.</p>
+          <div class="tn-success tn-soldcard">
+            <div class="tn-success-mark tn-success-mark-out">&#10005;</div>
+            <h3>Sold out</h3>
+            <p>Every seat in the suite for November 13 is claimed. Thank you for the incredible support, Wichita.</p>
+            <p class="tn-small">Want in on the next Suite Night? Text 901.335.3905 and I'll give you first dibs.</p>
           </div>
         </div>
       </div>
@@ -708,12 +703,12 @@ body{background:#010710}
       <svg class="tn-final-bolt" viewBox="0 0 44 64" aria-hidden="true"><path d="M27 0 L4 36 H20 L14 64 L40 24 H24 Z" fill="#eaf6ff"/></svg>
       <h2>Opening night.<br><em>Center ice.</em></h2>
       <p>November 13, 2026 &middot; INTRUST Bank Arena</p>
-      <button class="tn-btn tn-btn-orange tn-btn-lg" onclick="scrollToForm()">Reserve your seat</button>
+      <span class="tn-btn tn-btn-soldout tn-btn-lg" aria-disabled="true">Sold out</span>
     </div>
   </section>
 
   <!-- STICKY BAR -->
-  <div class="tn-bar" id="stickyBar"><span><strong>$50</strong> a seat &middot; Nov 13</span><button class="tn-btn tn-btn-orange tn-btn-sm" onclick="scrollToForm()">Reserve</button></div>
+  <div class="tn-bar" id="stickyBar"><span><strong>Sold out</strong> &middot; Nov 13</span><span class="tn-btn tn-btn-soldout tn-btn-sm" aria-disabled="true">Sold out</span></div>
 
   <!-- SPONSOR MODAL -->
   <div class="tn-modal" id="sponsorModal" role="dialog" aria-modal="true" aria-label="Become a sponsor" style="display:none">
@@ -777,18 +772,14 @@ window.addEventListener('scroll',function(){
 /* seat counter: reads taken seats from Apps Script ?thundernov13seats=1 -> {taken},
    subtracts from SEATS_TOTAL, falls back to full on any error. */
 (function(){
-  if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL.indexOf('PASTE_')===0)return;
-  fetch(APPS_SCRIPT_URL+'?thundernov13seats=1').then(function(r){return r.json();}).then(function(d){
-    var taken=(d&&typeof d.taken==='number')?d.taken:0;
-    var avail=Math.max(SEATS_TOTAL-taken,0);
-    var el=document.getElementById('seatCount');
-    if(el)el.textContent=avail+' of '+SEATS_TOTAL+' seats';
-  }).catch(function(){});
+  var el=document.getElementById('seatCount');
+  if(el)el.textContent='SOLD OUT';
 })();
 
 /* form submit */
 document.getElementById('reserveForm').addEventListener('submit',function(e){
   e.preventDefault();
+  return; /* Suite Night is sold out — reservations are closed */
   var f=e.target, err=document.getElementById('formErr');
   err.style.display='none';
   var name=f.name.value.trim(),email=f.email.value.trim(),phone=f.phone.value.trim(),role=f.role.value;
@@ -813,6 +804,12 @@ document.getElementById('reserveForm').addEventListener('submit',function(e){
 </script>
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae7f2cb03d93fc5217b9946" data-source="WEB_USER"></script>
 <style>
+/* sold-out state */
+.tn-btn-soldout{display:inline-flex;align-items:center;justify-content:center;background:rgba(120,140,160,.22);color:#aeb9c6;border:1px solid rgba(125,211,252,.22);box-shadow:none;cursor:default;pointer-events:none;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+.tn-seatcount-out .dot{background:#ff6b35!important;box-shadow:0 0 12px rgba(255,107,53,.9)!important}
+.tn-seatcount-out strong{color:#ff8a5c;letter-spacing:.08em}
+.tn-soldcard{display:block!important;text-align:center}
+.tn-success-mark-out{background:linear-gradient(135deg,#ff6b35,#ff9a3c)!important;color:#1a0f08!important;box-shadow:0 0 30px rgba(255,107,53,.5)!important}
 .sms-consent-wrap{margin:14px 0;text-align:left}
 .sms-consent-wrap label{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.5;opacity:.82;cursor:pointer}
 .sms-consent-wrap input{margin-top:3px;flex:0 0 auto;width:16px;height:16px;accent-color:#FB6926;cursor:pointer}
