@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="Share your ProyTech story — the real one.">
+<title>Your ProyTech Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#061431; --navy2:#0a2350; --panel:#0e2146; --line:#1d396f;
+    --fg:#eaf2ff; --muted:#9fb6da;
+    --elec:#2E9BFF; --ice:#7DD3FC; --o:#FB6926; --o2:#FF8A4C;
+    --disp:'Space Grotesk',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:#040d20;color:var(--fg);font-family:var(--body);overflow-x:hidden;position:relative;min-height:100%}
+  h1,h2,h3{font-family:var(--disp);line-height:1.08;margin:0;text-wrap:balance}
+  .jv-circuit{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+  body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(130% 100% at 50% 44%,transparent 46%,rgba(2,7,20,.5) 100%)}
+
+  .stage{position:relative;z-index:2;min-height:100%;display:flex;flex-direction:column}
+  .wrap{max-width:660px;margin:0 auto;width:100%;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+  .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+  .top .wrap{display:flex;align-items:center;gap:14px;padding-block:16px}
+  .brand{font-family:var(--disp);font-weight:700;font-size:1.15rem;text-shadow:0 2px 18px rgba(4,13,32,.9)}
+  .brand .b2{color:var(--o)}
+  .prog{flex:1;height:5px;border-radius:999px;background:rgba(125,211,252,.16);overflow:hidden;box-shadow:0 0 0 1px rgba(4,13,32,.5)}
+  .prog i{display:block;height:100%;width:20%;border-radius:999px;background:linear-gradient(90deg,var(--elec),var(--ice));box-shadow:0 0 12px rgba(46,155,255,.7);transition:width .5s cubic-bezier(.4,0,.2,1)}
+  .stepno{font-family:var(--disp);font-size:.72rem;color:var(--ice);letter-spacing:.1em;white-space:nowrap;text-shadow:0 2px 14px rgba(4,13,32,.9)}
+
+  .panel{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:34px}
+  .shell{position:relative;background:linear-gradient(180deg,rgba(8,22,52,.82),rgba(5,15,38,.88));border:1px solid rgba(125,211,252,.22);border-radius:22px;padding:34px 32px;box-shadow:0 30px 80px rgba(2,7,20,.6),0 0 0 1px rgba(2,7,20,.4),inset 0 1px 0 rgba(125,211,252,.1);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+  .shell::before{content:"";position:absolute;inset:-1px;border-radius:22px;padding:1px;background:linear-gradient(135deg,rgba(46,155,255,.5),transparent 40%,transparent 70%,rgba(251,105,38,.35));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.8}
+
+  .step{display:none;animation:rise .55s cubic-bezier(.2,.7,.2,1)}
+  .step.on{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+  .eyebrow{font-family:var(--disp);font-weight:600;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ice);display:inline-flex;align-items:center;gap:8px}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--o);border-radius:2px}
+  h1.big{font-size:clamp(2rem,6vw,3.1rem);margin:16px 0 0}
+  h1.big em{font-style:normal;background:linear-gradient(90deg,var(--o),var(--o2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  h2.q{font-size:clamp(1.5rem,5vw,2.15rem);margin:14px 0 0}
+  .sub{color:var(--muted);font-size:1.02rem;margin:15px 0 0;max-width:46ch;line-height:1.55}
+  .kick{color:var(--ice);font-family:var(--disp);font-weight:600;font-size:.85rem;letter-spacing:.04em;margin-top:22px}
+
+  .stars{display:flex;gap:10px;margin:24px 0 0}
+  .star{width:44px;height:44px;cursor:pointer;color:rgba(125,211,252,.22);transition:transform .15s,color .15s}
+  .star svg{width:100%;height:100%;display:block}
+  .star:hover{transform:translateY(-3px) scale(1.08)}
+  .star.lit{color:var(--o);filter:drop-shadow(0 0 10px rgba(251,105,38,.6))}
+  .ratelabel{margin-top:15px;font-family:var(--disp);font-weight:600;color:var(--fg);min-height:1.4em;font-size:1.02rem}
+
+  .field{margin-top:24px}
+  .field label{display:block;font-family:var(--disp);font-weight:600;font-size:1.02rem;margin-bottom:10px}
+  .field .hint{color:var(--muted);font-size:.86rem;font-weight:400;font-family:var(--body);margin-top:3px}
+  textarea,input[type=text]{width:100%;background:rgba(2,8,20,.7);border:1px solid var(--line);border-radius:14px;color:var(--fg);font-family:var(--body);font-size:1rem;padding:14px 16px;resize:vertical;transition:border-color .2s,box-shadow .2s}
+  textarea{min-height:88px}
+  textarea:focus,input[type=text]:focus{outline:none;border-color:var(--elec);box-shadow:0 0 0 3px rgba(46,155,255,.2)}
+  textarea::placeholder,input::placeholder{color:#5f7599}
+
+  .media{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+  .drop{border:1.5px dashed var(--line);border-radius:16px;padding:22px 16px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:rgba(2,8,20,.5)}
+  .drop:hover{border-color:var(--ice);background:rgba(46,155,255,.08)}
+  .drop .ic{font-size:1.6rem}
+  .drop b{display:block;font-family:var(--disp);margin-top:8px;font-size:.95rem}
+  .drop span{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+  .drop.set{border-color:var(--o);border-style:solid;background:rgba(251,105,38,.08)}
+
+  .perms{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .perm{display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid var(--line);border-radius:14px;cursor:pointer;background:rgba(2,8,20,.5);transition:border-color .2s,background .2s}
+  .perm:hover{border-color:rgba(125,211,252,.5)}
+  .perm.on{border-color:var(--elec);background:rgba(46,155,255,.1)}
+  .sw{flex:0 0 auto;width:46px;height:27px;border-radius:999px;background:rgba(125,211,252,.18);position:relative;transition:background .2s}
+  .perm.on .sw{background:var(--elec);box-shadow:0 0 12px rgba(46,155,255,.6)}
+  .sw i{position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;transition:left .2s}
+  .perm.on .sw i{left:22px}
+  .perm .pt{font-family:var(--disp);font-weight:600;font-size:.96rem}
+  .perm .ps{color:var(--muted);font-size:.79rem;margin-top:2px}
+
+  .nav{display:flex;gap:12px;align-items:center;margin-top:30px;flex-wrap:wrap}
+  .btn{appearance:none;border:0;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:1rem;padding:14px 28px;border-radius:999px;transition:transform .15s,box-shadow .2s,opacity .2s}
+  .btn-o{background:linear-gradient(90deg,var(--o),var(--o2));color:#1a0a02;box-shadow:0 8px 26px rgba(251,105,38,.4)}
+  .btn-o:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(251,105,38,.55)}
+  .btn-ghost{background:transparent;color:var(--muted);padding:14px 8px}
+  .btn-ghost:hover{color:var(--fg)}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+  .skip{color:var(--muted);font-size:.82rem;text-decoration:underline;cursor:pointer;background:none;border:0;font-family:var(--body)}
+
+  .reviewcard{margin-top:22px;border:1px solid var(--line);border-radius:18px;background:rgba(3,10,26,.7);overflow:hidden}
+  .reviewcard .rc-top{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line);font-family:var(--disp);font-weight:600;font-size:.86rem;color:var(--ice)}
+  .reviewcard textarea{border:0;border-radius:0;background:transparent;min-height:144px}
+  .gstars{color:var(--o);letter-spacing:3px;font-size:1.1rem}
+  .copybtn{margin-top:14px}
+  .copybtn.done{background:linear-gradient(90deg,#16c98d,#16936b);color:#02140d;box-shadow:none}
+  .confetti-note{color:var(--muted);font-size:.85rem;margin-top:18px}
+
+  .demo-tag{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:9;background:rgba(10,24,54,.9);border:1px solid var(--line);color:var(--muted);font-family:var(--disp);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+  @media(max-width:520px){ .media{grid-template-columns:1fr} .star{width:40px;height:40px} .shell{padding:26px 20px} }
+  .sending{opacity:.6;pointer-events:none}
+  .errline{color:#ff8a4c;font-family:var(--disp);font-weight:600;font-size:.9rem;margin-top:14px;min-height:1em}
+</style>
+</head>
+<body>
+
+<canvas class="jv-circuit" id="circuit" aria-hidden="true"></canvas>
+
+<div class="stage">
+  <div class="top"><div class="wrap">
+    <span class="brand">Proy<span class="b2">Tech</span></span>
+    <div class="prog"><i id="bar"></i></div>
+    <span class="stepno" id="stepno">01 / 05</span>
+  </div></div>
+
+  <div class="panel"><div class="wrap"><div class="shell">
+
+    <section class="step on" data-step="1">
+      <span class="eyebrow">Your story</span>
+      <h1 class="big">You get to tell us about your <em>journey with us.</em></h1>
+      <p class="sub">No boxes to tick, no corporate script. Just the real story of what it's been like building with ProyTech. Takes about two minutes, and your words might be the reason the next business bets on themselves.</p>
+      <p class="kick">First things first, how'd the ride feel?</p>
+      <div class="stars" id="stars"></div>
+      <div class="ratelabel" id="ratelabel"></div>
+      <div class="nav"><button class="btn btn-o" id="go1" disabled>Let's go &rarr;</button></div>
+    </section>
+
+    <section class="step" data-step="2">
+      <span class="eyebrow">The before and after</span>
+      <h2 class="q">Walk us through it.</h2>
+      <p class="sub">Talk like you'd talk to a friend. The messier and more honest, the better it reads.</p>
+      <div class="field"><label>Where were you before ProyTech?<span class="hint">The chaos, the duct tape, the thing that kept you up.</span></label><textarea id="q_before" placeholder="Before this, I was..."></textarea></div>
+      <div class="field"><label>What changed once the system was live?<span class="hint">What does a normal day look like now?</span></label><textarea id="q_after" placeholder="Now..."></textarea></div>
+      <div class="field"><label>Who do you know that deserves this too?<span class="hint">Not names, just the kind of business you'd send our way.</span></label><textarea id="q_refer" placeholder="Honestly, any..."></textarea></div>
+      <div class="nav"><button class="btn btn-ghost" data-back>&larr; Back</button><button class="btn btn-o" id="go2">Keep going &rarr;</button></div>
+    </section>
+
+    <section class="step" data-step="3">
+      <span class="eyebrow">Make it yours</span>
+      <h2 class="q">Put a face and a voice to it.</h2>
+      <p class="sub">Totally optional, but a real face and real voice hit ten times harder than words alone. Record it right here, or skip it.</p>
+      <div class="media">
+        <label class="drop" id="dropPhoto"><div class="ic">📸</div><b>Add a photo</b><span>A headshot or a shot of you at work</span><input type="file" accept="image/*" hidden id="filePhoto"></label>
+        <label class="drop" id="dropVideo"><div class="ic">🎥</div><b>Add a video</b><span>Up to 90 seconds, in your own words</span><input type="file" accept="video/*" hidden id="fileVideo"></label>
+      </div>
+      <div class="nav"><button class="btn btn-ghost" data-back>&larr; Back</button><button class="btn btn-o" id="go3">Almost there &rarr;</button></div>
+    </section>
+
+    <section class="step" data-step="4">
+      <span class="eyebrow">Your call</span>
+      <h2 class="q">Where can we show off your words?</h2>
+      <p class="sub">You own your story. Flip on only what you're good with. Everything's off until you say so.</p>
+      <div class="perms" id="perms">
+        <div class="perm" data-perm="name"><div class="sw"><i></i></div><div><div class="pt">Use my name</div><div class="ps">So it reads as a real person, not "anonymous client"</div></div></div>
+        <div class="perm" data-perm="company"><div class="sw"><i></i></div><div><div class="pt">Use my company</div><div class="ps">Tag my business alongside the quote</div></div></div>
+        <div class="perm" data-perm="photo"><div class="sw"><i></i></div><div><div class="pt">Show my photo / video</div><div class="ps">Only if you added one above</div></div></div>
+        <div class="perm" data-perm="website"><div class="sw"><i></i></div><div><div class="pt">Feature it on the ProyTech website</div><div class="ps">On our work and proof pages</div></div></div>
+        <div class="perm" data-perm="social"><div class="sw"><i></i></div><div><div class="pt">Share it on social</div><div class="ps">Posts and stories</div></div></div>
+      </div>
+      <div class="field"><label>Sign it<span class="hint">Type your name to lock it in.</span></label><input type="text" id="sign" placeholder="Your name"></div>
+      <div class="nav"><button class="btn btn-ghost" data-back>&larr; Back</button><button class="btn btn-o" id="go4" disabled>Send it &rarr;</button></div>
+      <div class="errline" id="err4"></div>
+    </section>
+
+    <section class="step" data-step="5">
+      <span class="eyebrow">One power move left</span>
+      <h2 class="q">Want to make it count <em style="font-style:normal;color:var(--o)">twice?</em></h2>
+      <p class="sub">We took what you just wrote and sharpened it into a Google review. These are your words, just a little louder. Make it yours, then drop it on Google in two taps. This is the stuff that puts us in front of the next business looking for help.</p>
+      <div class="reviewcard">
+        <div class="rc-top"><span class="gstars" id="gstars">★★★★★</span><span>Your review, polished</span></div>
+        <textarea id="greview"></textarea>
+      </div>
+      <button class="btn btn-o copybtn" id="copyBtn">Copy my review</button>
+      <div class="nav" style="margin-top:14px"><button class="btn btn-o" id="gotoGoogle" style="background:linear-gradient(90deg,#2E9BFF,#7DD3FC);color:#041021">Open Google &rarr;</button><button class="skip" id="useOwn">These are my words, I'll post as is</button></div>
+      <p class="confetti-note" id="demoNote">However you rated us, this link is yours. No strings, no gates. Thank you for building with us.</p>
+    </section>
+
+  </div></div></div>
+</div>
+
+<script>
+/* ===== ProyTech board — clean PCB traces: straight runs, right angles, a 45
+   chamfer at corners. No curves, no fans, no triangles. Neon-tube look (glow +
+   dark core), vias at corners, ring pads at ends, in the margins so the panel
+   stays calm. Traveling white light along them. ===== */
+(function(){
+  var cv=document.getElementById('circuit'); var ctx;
+  try{ ctx=cv.getContext('2d'); }catch(e){ ctx=null; }
+  if(!ctx) return;
+  var ACC=[251,105,38], CYAN=[56,189,248], BLUE=[46,155,255], ICE=[189,238,255], WHITE=[255,255,255], CORE=[7,21,56];
+  var rgba=function(c,a){return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')';};
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function rng(seed){var s=seed>>>0;return function(){s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+  function measured(pts){var segs=[],len=0;for(var k=1;k<pts.length;k++){var d=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]);segs.push(d);len+=d;}return {pts:pts,segs:segs,len:len};}
+  function pointAt(p,d){var acc=0;for(var k=0;k<p.segs.length;k++){if(acc+p.segs[k]>=d){var f=p.segs[k]?(d-acc)/p.segs[k]:0;var a=p.pts[k],b=p.pts[k+1];return [a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f];}acc+=p.segs[k];}return p.pts[p.pts.length-1];}
+  function slice(p,d0,d1){var out=[pointAt(p,Math.max(0,d0))],acc=0;for(var k=0;k<p.segs.length;k++){acc+=p.segs[k];if(acc>d0&&acc<d1)out.push(p.pts[k+1]);}out.push(pointAt(p,Math.min(p.len,d1)));return out;}
+  function line(c,pts){c.beginPath();for(var i=0;i<pts.length;i++){i?c.lineTo(pts[i][0],pts[i][1]):c.moveTo(pts[i][0],pts[i][1]);}}
+  function hexPath(c,x,y,r){c.beginPath();for(var i=0;i<6;i++){var a=Math.PI/6+i*Math.PI/3;var px=x+Math.cos(a)*r,py=y+Math.sin(a)*r;i?c.lineTo(px,py):c.moveTo(px,py);}c.closePath();}
+
+  var W=0,H=0,dpr=1,base=null,traces=[],sparks=[];
+  /* dir=+1 enters from the left, -1 from the right. steps: [runToX, stepY];
+     stepY makes a true 45 chamfer (equal dx,dy) then the run continues. */
+  function trace(x0,y,dir,steps,col){
+    var pts=[[x0,y]], yy=y;
+    steps.forEach(function(st){
+      var rx=st[0], sy=st[1]||0;
+      pts.push([rx,yy]);
+      if(sy){ var ad=Math.abs(sy); pts.push([rx+dir*ad, yy+sy]); yy=yy+sy; }
+    });
+    traces.push(Object.assign(measured(pts),{col:col,accent:col===ACC}));
+  }
+  function layout(){
+    var rect=cv.getBoundingClientRect();
+    W=Math.max(1,rect.width);H=Math.max(1,rect.height);
+    dpr=Math.min(1.5,window.devicePixelRatio||1);
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+    var u=Math.max(0.6,Math.min(1.5,Math.min(W,H)/900));
+    var phone=W<640; var rand=rng(7);
+    traces=[];
+    var step=function(f){ return (f<0.5?1:-1)*(16+rand()*18)*u; };
+    // LEFT margin: in from the left edge, end around x 0.20-0.30
+    var ly=phone?[0.1,0.22,0.8,0.9]:[0.09,0.16,0.24,0.74,0.82,0.9];
+    ly.forEach(function(f,i){ var y=H*f; var jx=W*(0.07+rand()*0.05); var ex=jx+(0.11+rand()*0.06)*W;
+      trace(-14,y,1,[[jx,step(f)],[ex,0]], (i===2)?ACC:CYAN); });
+    // RIGHT margin: in from the right edge, end around x 0.70-0.80
+    var ry=phone?[0.14,0.26,0.86]:[0.12,0.2,0.28,0.72,0.8,0.88];
+    ry.forEach(function(f,i){ var y=H*f; var jx=W*(0.93-rand()*0.05); var ex=jx-(0.11+rand()*0.06)*W;
+      trace(W+14,y,-1,[[jx,step(f)],[ex,0]], (i===1||i===4)?ACC:CYAN); });
+    // faint full-width rails top and bottom for depth
+    if(!phone){ trace(-14,H*0.045,1,[[W*0.42,0],[W*0.48,16*u],[W*1.1,0]], BLUE);
+                trace(W+14,H*0.96,-1,[[W*0.58,0],[W*0.52,-16*u],[W*-0.1,0]], BLUE); }
+
+    base=document.createElement('canvas');base.width=cv.width;base.height=cv.height;
+    var b=base.getContext('2d');b.setTransform(dpr,0,0,dpr,0,0);b.lineJoin='miter';b.lineCap='round';
+    // soft depth glows (radial, no edges)
+    [[W*0.15,H*0.3,[30,107,255],0.16],[W*0.86,H*0.72,[251,105,38],0.075]].forEach(function(g){
+      var rg=b.createRadialGradient(g[0],g[1],0,g[0],g[1],Math.max(W,H)*0.5);
+      rg.addColorStop(0,rgba(g[2],g[3]));rg.addColorStop(1,rgba(g[2],0));b.fillStyle=rg;b.fillRect(0,0,W,H);});
+    // hexagons, sparse, in the margins only
+    var hr=rng(23);
+    for(var h=0;h<(phone?3:6);h++){var rgt=h%2===0;var hx=rgt?W*(0.74+hr()*0.22):W*(0.04+hr()*0.18);var hy=H*(0.12+hr()*0.76),hrad=(28+hr()*42)*u;hexPath(b,hx,hy,hrad);b.strokeStyle=rgba(BLUE,0.15);b.lineWidth=1.4;b.stroke();}
+    // traces: neon tube (glow, line, dark core), vias at corners, ring pad at end
+    traces.forEach(function(t){var col=t.col, faint=col===BLUE;
+      b.save();b.shadowColor=rgba(col,0.85);b.shadowBlur=(faint?6:13)*u;line(b,t.pts);b.strokeStyle=rgba(col,faint?0.3:0.8);b.lineWidth=(faint?2:6.5)*u;b.stroke();b.restore();
+      if(!faint){line(b,t.pts);b.strokeStyle=rgba(CORE,0.95);b.lineWidth=2.2*u;b.stroke();}
+      for(var k=1;k<t.pts.length-1;k++){b.save();b.shadowColor=rgba(col,1);b.shadowBlur=9*u;b.beginPath();b.arc(t.pts[k][0],t.pts[k][1],(faint?2.4:3.4)*u,0,Math.PI*2);b.fillStyle=rgba(faint?col:ICE,1);b.fill();b.restore();}
+      var e=t.pts[t.pts.length-1];b.save();b.shadowColor=rgba(col,1);b.shadowBlur=15*u;b.beginPath();b.arc(e[0],e[1],6.5*u,0,Math.PI*2);b.fillStyle=rgba(CORE,1);b.fill();b.strokeStyle=rgba(t.accent?ACC:ICE,1);b.lineWidth=2.2*u;b.stroke();b.restore();});
+    sparks.length=0;
+  }
+
+  var last=performance.now(), timers=new Map();
+  function draw(now){
+    var dt=Math.min(0.05,(now-last)/1000)*(reduced?0.3:1);last=now;
+    traces.forEach(function(p){var t=timers.has(p)?timers.get(p):Math.random()*3;t-=dt;if(t<=0){sparks.push({p:p,d:0,v:(p.col===BLUE?240:470)*(0.85+Math.random()*0.3),len:p.col===BLUE?24:32});t=2+Math.random()*2.6;}timers.set(p,t);});
+    ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,cv.width,cv.height);if(base)ctx.drawImage(base,0,0);
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.lineCap='round';ctx.lineJoin='round';ctx.globalCompositeOperation='lighter';
+    for(var i=sparks.length-1;i>=0;i--){var s=sparks[i];s.d+=s.v*dt;if(s.d>s.p.len+s.len){sparks.splice(i,1);continue;}var seg=slice(s.p,Math.max(0,s.d-s.len),Math.min(s.p.len,s.d));var col=s.p.col;var fat=s.p.col!==BLUE;ctx.save();ctx.shadowColor=rgba(col,1);ctx.shadowBlur=12;line(ctx,seg);ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=fat?4.5:3;ctx.stroke();line(ctx,seg);ctx.strokeStyle=rgba(WHITE,0.95);ctx.lineWidth=fat?2:1.4;ctx.stroke();ctx.restore();}
+    ctx.globalCompositeOperation='source-over';requestAnimationFrame(draw);
+  }
+  layout();requestAnimationFrame(draw);
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,150);});
+})();
+
+/* ===== the form flow ===== */
+(function(){
+  var step=1,total=5,rating=0;
+  var bar=document.getElementById('bar'),stepno=document.getElementById('stepno');
+  function show(n){document.querySelectorAll('.step').forEach(function(s){s.classList.toggle('on',+s.dataset.step===n);});step=n;bar.style.width=(n/total*100)+'%';stepno.textContent=('0'+n).slice(-2)+' / 0'+total;try{document.querySelector('.panel').scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}}
+  var starWrap=document.getElementById('stars'),rl=document.getElementById('ratelabel');
+  var labels=['','Tell us straight, we can take it.','Noted, we want the full story.','Solid. What would have made it a 5?','Love that. What stood out?','Let\'s gooo. Say it loud.'];
+  var SVG='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77 5.82 21l1.18-6.88-5-4.87 7.1-1.01z"/></svg>';
+  for(var i=1;i<=5;i++){(function(v){var s=document.createElement('div');s.className='star';s.innerHTML=SVG;s.addEventListener('mouseenter',function(){paint(v);});s.addEventListener('click',function(){rating=v;paint(v);rl.textContent=labels[v];document.getElementById('go1').disabled=false;document.getElementById('gstars').textContent='★★★★★'.slice(0,v)+'☆☆☆☆☆'.slice(0,5-v);});starWrap.appendChild(s);})(i);}
+  starWrap.addEventListener('mouseleave',function(){paint(rating);});
+  function paint(v){starWrap.querySelectorAll('.star').forEach(function(s,ix){s.classList.toggle('lit',ix<v);});}
+  function wire(dropId,inputId){var d=document.getElementById(dropId),f=document.getElementById(inputId);d.addEventListener('change',function(){if(f.files&&f.files[0]){d.classList.add('set');d.querySelector('b').textContent='Added ✓';d.querySelector('span').textContent=f.files[0].name.slice(0,26);}});}
+  wire('dropPhoto','filePhoto');wire('dropVideo','fileVideo');
+  document.querySelectorAll('.perm').forEach(function(p){p.addEventListener('click',function(){p.classList.toggle('on');});});
+  var sign=document.getElementById('sign');sign.addEventListener('input',function(){document.getElementById('go4').disabled=sign.value.trim().length<2;});
+  document.getElementById('go1').addEventListener('click',function(){show(2);});
+  document.getElementById('go2').addEventListener('click',function(){show(3);});
+  document.getElementById('go3').addEventListener('click',function(){show(4);});
+  // --- config: the CRM backend, and the Google review link (paste it to light up the Google step) ---
+  var CFG = { api: 'https://proytech-crm.vercel.app/api/testimonial', google: '' };
+  var QS = new URLSearchParams(location.search);
+  function collect(){
+    var perms={};document.querySelectorAll('.perm').forEach(function(p){perms[p.dataset.perm]=p.classList.contains('on');});
+    var media={},pf=document.getElementById('filePhoto'),vf=document.getElementById('fileVideo');
+    if(pf.files&&pf.files[0])media.photo=pf.files[0].type;
+    if(vf.files&&vf.files[0])media.video=vf.files[0].type;
+    return {
+      lead: QS.get('lead')||QS.get('c')||'',
+      name: sign.value.trim()||QS.get('name')||'',
+      company: QS.get('company')||'',
+      rating: rating||null,
+      answers:{before:document.getElementById('q_before').value.trim(),after:document.getElementById('q_after').value.trim(),refer:document.getElementById('q_refer').value.trim()},
+      google_text:document.getElementById('greview').value.trim(),
+      permissions:perms,
+      typed_name:sign.value.trim(),
+      media:media
+    };
+  }
+  function putFile(url,file){return fetch(url,{method:'PUT',headers:{'content-type':file.type},body:file});}
+  var go4=document.getElementById('go4'), err4=document.getElementById('err4');
+  go4.addEventListener('click',function(){
+    buildReview();
+    err4.textContent='';go4.classList.add('sending');go4.textContent='Sending…';
+    fetch(CFG.api,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(collect())})
+      .then(function(r){return r.json().catch(function(){return {ok:false,error:'Bad response'};});})
+      .then(function(j){
+        if(!j||!j.ok){throw new Error((j&&j.error)||'Could not save');}
+        var ups=j.uploads||{},jobs=[],pf=document.getElementById('filePhoto'),vf=document.getElementById('fileVideo');
+        if(ups.photo&&pf.files&&pf.files[0])jobs.push(putFile(ups.photo.url,pf.files[0]).catch(function(){}));
+        if(ups.video&&vf.files&&vf.files[0])jobs.push(putFile(ups.video.url,vf.files[0]).catch(function(){}));
+        return Promise.all(jobs);
+      })
+      .then(function(){go4.classList.remove('sending');go4.innerHTML='Send it &rarr;';show(5);})
+      .catch(function(e){go4.classList.remove('sending');go4.innerHTML='Send it &rarr;';err4.textContent=(String(e.message||e)||'Something went wrong')+'. Give it another tap.';});
+  });
+  document.querySelectorAll('[data-back]').forEach(function(b){b.addEventListener('click',function(){show(step-1);});});
+  function buildReview(){var before=document.getElementById('q_before').value.trim();var after=document.getElementById('q_after').value.trim();var refer=document.getElementById('q_refer').value.trim();var name=(sign.value.trim()||'A ProyTech client');var parts=[];if(before)parts.push(before.replace(/\s+/g,' '));if(after)parts.push(after.replace(/\s+/g,' '));if(!parts.length)parts.push('Working with ProyTech changed how my business runs. The team built a real system around how I actually work.');if(refer)parts.push('If you run a business and you\'re still doing this the hard way, talk to them.');document.getElementById('greview').value=parts.join(' ')+'\n\n— '+name;}
+  var copyBtn=document.getElementById('copyBtn');
+  copyBtn.addEventListener('click',function(){var t=document.getElementById('greview').value;function ok(){copyBtn.textContent='Copied ✓';copyBtn.classList.add('done');setTimeout(function(){copyBtn.textContent='Copy my review';copyBtn.classList.remove('done');},1800);}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok).catch(function(){document.getElementById('greview').select();ok();});}else{document.getElementById('greview').select();ok();}});
+  document.getElementById('useOwn').addEventListener('click',function(){copyBtn.click();});
+  document.getElementById('gotoGoogle').addEventListener('click',function(){var n=document.getElementById('demoNote');if(CFG.google){window.open(CFG.google,'_blank','noopener');n.textContent='Opened Google in a new tab — paste your review there and hit post. That\'s the whole thing. Thank you.';}else{copyBtn.click();n.textContent='Your review is copied. Search “ProyTech” on Google, open our profile, and paste it into a review. Thank you for this.';}n.style.color='var(--ice)';});
+  show(1);
+})();
+</script>
+</body>
+</html>
