@@ -122,8 +122,8 @@
   <div class="panel"><div class="wrap"><div class="shell">
 
     <section class="step on" data-step="1">
-      <span class="eyebrow">Your story</span>
-      <h1 class="big">You get to tell us about your <em>journey with us.</em></h1>
+      <span class="eyebrow" id="eyebrow1">Your story</span>
+      <h1 class="big" id="h1big">You get to tell us about your <em>journey with us.</em></h1>
       <p class="sub">No boxes to tick, no corporate script. Just the real story of what it's been like building with ProyTech. Takes about two minutes, and your words might be the reason the next business bets on themselves.</p>
       <p class="kick">First things first, how'd the ride feel?</p>
       <div class="stars" id="stars"></div>
@@ -288,6 +288,19 @@
   // --- config: the CRM backend, and the Google review link (paste it to light up the Google step) ---
   var CFG = { api: 'https://proytech-crm.vercel.app/api/testimonial', google: '' };
   var QS = new URLSearchParams(location.search);
+  // Greet them by name when the CRM link carries one. textContent escapes, so a
+  // name can never inject markup; the orange "journey with us." stays styled.
+  (function(){
+    var first = (QS.get('name')||'').trim().replace(/\s+/g,' ').split(' ')[0].slice(0,40);
+    if(!first) return;
+    var eb = document.getElementById('eyebrow1'); if(eb) eb.textContent = 'For ' + first;
+    var h = document.getElementById('h1big');
+    if(h){ h.textContent = first + ', you get to tell us about your ';
+      var em = document.createElement('em'); em.textContent = 'journey with us.'; h.appendChild(em); }
+    var sg = document.getElementById('sign');
+    if(sg){ sg.value = (QS.get('name')||'').trim().slice(0,80);
+      var g4 = document.getElementById('go4'); if(g4 && sg.value.trim().length >= 2) g4.disabled = false; }
+  })();
   function collect(){
     var perms={};document.querySelectorAll('.perm').forEach(function(p){perms[p.dataset.perm]=p.classList.contains('on');});
     var media={},pf=document.getElementById('filePhoto'),vf=document.getElementById('fileVideo');
