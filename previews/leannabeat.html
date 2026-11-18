@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LeAnna Beat | Wichita Real Estate</title>
+<meta name="description" content="A custom website preview built by ProyTech for LeAnna Beat, Wichita REALTOR®.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LeAnna Beat | Wichita Real Estate">
+<meta property="og:url" content="https://getproytech.com/previews/leannabeat">
+<meta property="og:title" content="LeAnna Beat | Wichita Real Estate">
+<meta property="og:description" content="Buying, selling and investing in Wichita, with an agent who owns rentals here herself. Your website preview, built for you.">
+<meta property="og:image" content="https://getproytech.com/images/og/leannabeat.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LeAnna Beat, Wichita real estate">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LeAnna Beat | Wichita Real Estate">
+<meta name="twitter:image" content="https://getproytech.com/images/og/leannabeat.jpg">
+<meta name="preview-expires" content="2026-12-17">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Direction: "the card in the mail". LeAnna is the agent who still hand-writes
+   cards, so the page is built around one hand-addressed card and a real card
+   list sign-up. Sky and plum-navy ground, her coral heartbeat as the single
+   accent, a sunflower postmark for Kansas. */
+:root{--sky:#EAF1F8;--sky2:#DCE7F3;--navy:#1B1E4B;--navy2:#2A2E6B;--coral:#F25C3B;--coral-d:#C8401F;--sun:#F2B632;--paper:#FFFFFF;--ink:#1B1E4B;--body:#3B3F66;--muted:#646A8E;--line:#CFDAE8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sky);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.04;letter-spacing:-.02em;margin:0;color:var(--navy)}
+h2{font-size:clamp(30px,4.4vw,48px);font-weight:800}
+h3{font-size:23px;font-weight:700;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 24px;border-radius:999px;border:0;background:var(--coral);color:#fff;font:600 16.5px 'Instrument Sans',sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--coral-d)}
+.btn.ghost{background:transparent;color:var(--navy);box-shadow:inset 0 0 0 2px var(--navy)}
+.btn.ghost:hover{background:var(--navy);color:#fff}
+
+/* ProyTech preview bar */
+.pbar{background:#000110;color:#F1F4FE;font-family:Inter,system-ui,sans-serif;font-size:14px}
+.pbar .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;padding-top:10px;padding-bottom:10px}
+.pbar b{color:#FB6926;font-weight:600}
+.pbar a{color:#F1F4FE;font-weight:600}
+.pbar .offer{background:#FB6926;color:#000110;font-weight:700;border-radius:999px;padding:3px 12px;white-space:nowrap}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:30;background:rgba(234,241,248,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 21px 'Bricolage Grotesque',sans-serif;color:var(--navy);letter-spacing:-.02em}
+.brand svg{flex:none}
+.brand small{display:block;font:500 12.5px 'Instrument Sans',sans-serif;color:var(--muted);letter-spacing:0}
+.links{display:flex;gap:26px;align-items:center}
+.links a{text-decoration:none;font-weight:500;font-size:15.5px}
+.links a:hover{color:var(--coral-d)}
+.call{white-space:nowrap}
+@media (max-width:860px){.links a:not(.call){display:none}}
+@media (max-width:480px){.brand small{display:none}.brand{font-size:18px}.call{padding:10px 16px;min-height:44px;font-size:15px}.call .num{display:none}.nav .wrap{gap:8px}}
+
+/* hero */
+.hero{padding:54px 0 70px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(40px,6.4vw,78px);font-weight:800}
+.hero .lede{font-size:19.5px;color:var(--body);max-width:33em;margin:20px 0 26px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero .under{margin-top:20px;font-size:15px;color:var(--muted)}
+/* the card */
+.mail{position:relative;justify-self:center;width:min(100%,470px)}
+.card{position:relative;background:var(--paper);border-radius:10px;padding:26px 26px 24px;box-shadow:0 30px 60px -28px rgba(27,30,75,.55),0 2px 0 var(--sky2);transform:rotate(-2.2deg);background-image:linear-gradient(#fff,#fff),repeating-linear-gradient(135deg,var(--coral) 0 14px,#fff 14px 28px,var(--navy2) 28px 42px,#fff 42px 56px);background-origin:padding-box,border-box;background-clip:padding-box,border-box;border:9px solid transparent}
+.card .stamp{position:absolute;right:18px;top:16px;width:74px;height:88px;border:2px dashed var(--line);border-radius:4px;display:grid;place-items:center;background:var(--sky)}
+.card .postmark{position:absolute;right:62px;top:34px;width:98px;height:98px;border-radius:50%;border:2.5px solid var(--sun);color:#9a6f08;display:grid;place-items:center;text-align:center;font:700 10.5px/1.25 'Instrument Sans',sans-serif;transform:rotate(-14deg);opacity:.92}
+.card .hand{font-family:'Caveat',cursive;color:var(--navy2);font-size:29px;line-height:1.22;margin:98px 0 0}
+.card .hand b{font-weight:700;color:var(--coral-d)}
+.card .to{margin-top:22px;border-top:1px solid var(--line);padding-top:14px;font-family:'Caveat',cursive;font-size:25px;line-height:1.2;color:var(--ink)}
+.card .to span{display:block;font:500 12.5px 'Instrument Sans',sans-serif;color:var(--muted);margin-bottom:2px}
+.card.in{animation:drop .9s cubic-bezier(.2,.9,.25,1) both}
+@keyframes drop{from{transform:translateY(-36px) rotate(-9deg);opacity:0}to{transform:rotate(-2.2deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){.card.in{animation:none}html{scroll-behavior:auto}}
+@media (max-width:860px){.hero{padding:34px 0 52px}.hero .wrap{grid-template-columns:1fr;gap:38px}.card .hand{font-size:26px}}
+
+/* trust strip */
+.trust{background:var(--navy);color:#DDE3F6}
+.trust .wrap{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between;padding-top:18px;padding-bottom:18px;font-size:15.5px}
+.trust b{color:#fff;font-weight:600}
+
+section.block{padding:76px 0}
+.intro{max-width:40em;margin-bottom:34px}
+.intro p{color:var(--body);font-size:18.5px;margin-top:14px}
+
+/* three ways */
+.ways{display:grid;grid-template-columns:1.25fr 1fr;gap:22px}
+.way{background:var(--paper);border-radius:22px;padding:30px}
+.way p{color:var(--body);margin-top:10px}
+.way.sell{grid-row:span 2;background:var(--navy);color:#DDE3F6}
+.way.sell h3{color:#fff;font-size:30px}.way.sell p{color:#C9D0EE}
+.way a.more{font-weight:600;color:var(--coral-d)}
+.value{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:20px}
+.value input{min-width:0;width:100%;min-height:50px;border-radius:999px;border:0;padding:0 20px;font:500 16.5px 'Instrument Sans',sans-serif}
+.note{font-size:14px;color:#AEB7DE;margin-top:12px}
+.ok{display:none;margin-top:14px;background:rgba(255,255,255,.1);border-radius:14px;padding:14px 16px;font-size:15.5px}
+.ok.show{display:block}
+@media (max-width:860px){.ways{grid-template-columns:1fr}.value{grid-template-columns:1fr}}
+
+/* areas */
+.areas{background:var(--sky2)}
+.areas ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.areas li{background:var(--paper);border-radius:999px;padding:10px 20px;font-weight:500}
+.move{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.move div{border-left:4px solid var(--coral);padding:4px 0 4px 20px}
+.move p{color:var(--body);margin-top:8px}
+@media (max-width:760px){.move{grid-template-columns:1fr}}
+
+/* card list (signature) */
+.list .wrap{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+.list .seasons{font-family:'Caveat',cursive;font-size:31px;line-height:1.3;color:var(--navy2);margin-top:18px}
+.form{background:var(--paper);border-radius:22px;padding:28px}
+.form label{display:block;font-weight:600;font-size:15px;margin:14px 0 6px}
+.form label:first-of-type{margin-top:0}
+.form input,.form select,.form textarea{width:100%;min-width:0;min-height:50px;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;font:500 16.5px 'Instrument Sans',sans-serif;color:var(--ink);background:#fff}
+.form textarea{min-height:96px;resize:vertical}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form .row > div{min-width:0}
+.form .btn{margin-top:18px;width:100%}
+.form .ok{background:var(--sky);color:var(--ink)}
+@media (max-width:860px){.list .wrap{grid-template-columns:1fr}.form .row{grid-template-columns:1fr}}
+
+/* about */
+.about{background:var(--paper)}
+.about .wrap{display:grid;grid-template-columns:330px 1fr;gap:48px;align-items:start}
+.photo{aspect-ratio:4/5;border-radius:22px;background:repeating-linear-gradient(135deg,var(--sky) 0 16px,var(--sky2) 16px 32px);display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted);font-size:15px;border:2px dashed var(--line)}
+.photo b{display:block;font:800 60px 'Bricolage Grotesque',sans-serif;color:var(--navy);letter-spacing:-.03em}
+.about p{color:var(--body);font-size:18px;max-width:36em}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;padding:0;list-style:none}
+.creds li{border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14.5px;font-weight:500}
+@media (max-width:860px){.about .wrap{grid-template-columns:1fr}.photo{max-width:300px}}
+
+/* contact */
+.contact .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:46px}
+.contact .big{font:800 clamp(32px,4.6vw,48px) 'Bricolage Grotesque',sans-serif;color:var(--navy);text-decoration:none;display:inline-block;margin:14px 0 6px;letter-spacing:-.02em}
+.contact .big:hover{color:var(--coral-d)}
+@media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+
+footer{background:var(--navy);color:#C9D0EE;font-size:14.5px;padding:26px 0 96px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+footer a{color:#fff}
+
+/* assistant */
+.chat-fab{position:fixed;right:18px;bottom:18px;z-index:40;display:flex;align-items:center;gap:10px;min-height:54px;padding:8px 20px 8px 8px;border-radius:999px;border:0;background:var(--navy);color:#fff;font:600 15.5px 'Instrument Sans',sans-serif;cursor:pointer;box-shadow:0 14px 30px -10px rgba(27,30,75,.6)}
+.chat-fab i,.chat-h i{flex:none;width:38px;height:38px;border-radius:50%;background:var(--coral);display:grid;place-items:center;font:800 15px 'Bricolage Grotesque',sans-serif;font-style:normal;color:#fff}
+.chat{position:fixed;right:18px;bottom:18px;z-index:41;width:min(380px,calc(100vw - 24px));display:none;flex-direction:column;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 30px 70px -20px rgba(27,30,75,.6)}
+.chat.open{display:flex}
+.chat-h{display:flex;align-items:center;gap:10px;background:var(--navy);color:#fff;padding:12px 14px}
+.chat-h .who{flex:1;min-width:0}.chat-h b{display:block;font-size:15.5px}.chat-h span{font-size:12.5px;color:#C9D0EE}
+.chat-h button{background:none;border:0;color:#fff;font-size:26px;width:44px;height:44px;cursor:pointer}
+.chat-b{height:300px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:var(--sky)}
+.msg{max-width:86%;padding:10px 14px;border-radius:16px;font-size:15.5px;line-height:1.45}
+.msg.bot{background:#fff;align-self:flex-start;border-bottom-left-radius:5px}
+.msg.me{background:var(--navy);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.quick{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px 0;background:#fff}
+.quick button{min-height:40px;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:999px;padding:6px 14px;font:600 14.5px 'Instrument Sans',sans-serif;cursor:pointer}
+.quick button:hover{background:var(--navy);color:#fff}
+.chat-f{display:flex;gap:8px;padding:12px 14px}
+.chat-f input{flex:1;min-width:0;min-height:46px;border:1.5px solid var(--line);border-radius:999px;padding:0 16px;font:500 16px 'Instrument Sans',sans-serif}
+.chat-f .btn{min-height:46px;padding:8px 18px}
+.demo-tag{font-size:12px;color:var(--muted);text-align:center;padding:0 12px 10px}
+.expired{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px;font-family:Inter,system-ui,sans-serif}
+</style>
+</head>
+<body>
+
+<div class="pbar">
+  <div class="wrap">
+    <span><b>Website preview</b> built for LeAnna Beat by ProyTech · Preview link expires Dec 17, 2026</span>
+    <span><span class="offer">Yours for $999 through Dec 17</span> &nbsp; <a href="https://getproytech.com/book" target="_blank" rel="noopener">Talk to Garrett</a></span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="LeAnna Beat, home">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#1B1E4B"/><path d="M6 22h8l2.6-6 3 11 3-15 2.6 12 1.8-2H34" fill="none" stroke="#F25C3B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>LeAnna Beat<small>REALTOR® · Real Broker, LLC</small></span>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#ways">Buy, sell, invest</a>
+      <a href="#areas">Where I work</a>
+      <a href="#cards">The card list</a>
+      <a href="#about">About</a>
+      <a class="btn call" href="tel:+13162141121" aria-label="Call LeAnna at 316 214 1121">Call<span class="num">&nbsp;(316) 214-1121</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Wichita real estate, from someone who still mails you a card.</h1>
+      <p class="lede">I help people buy, sell and invest in Wichita, and I stay in touch long after closing. I own rental houses here myself, so when you ask whether a place is a good buy, I answer like an owner.</p>
+      <div class="ctas">
+        <a class="btn" href="#value">What is my home worth?</a>
+        <a class="btn ghost" href="#contact">Start a conversation</a>
+      </div>
+      <p class="under">For buyers, sellers, investors and anyone moving to Wichita.</p>
+    </div>
+    <div class="mail" aria-hidden="true">
+      <div class="card in">
+        <div class="stamp"><svg width="44" height="44" viewBox="0 0 40 40"><path d="M4 22h9l2.6-6 3 11 3-15 2.6 12 1.8-2H36" fill="none" stroke="#F25C3B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="postmark">WICHITA<br>KANSAS<br>★</div>
+        <p class="hand">Happy first year in the new house! Thinking of you both. Call me if you ever need <b>anything.</b><br>LeAnna</p>
+        <div class="to"><span>To</span>You, and every client I have ever handed keys to</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <span><b>Real Broker, LLC</b></span>
+    <span><b>GRI</b> Graduate, REALTOR® Institute</span>
+    <span><b>ABR</b> Accredited Buyer's Representative</span>
+    <span><b>Wichita State</b> alum</span>
+    <span><b>Member</b> National Association of REALTORS®</span>
+  </div>
+</div>
+
+<section class="block" id="ways">
+  <div class="wrap">
+    <div class="intro">
+      <h2>Three reasons people call me</h2>
+      <p>Most of my clients are selling a home they have loved, buying one they will, or putting money to work in a rental. Often it is two of the three.</p>
+    </div>
+    <div class="ways">
+      <div class="way sell" id="value">
+        <h3>Selling? Start with a real number.</h3>
+        <p>Online estimates do not know about your new roof or the house two doors down that sold last month. Tell me the address and I will send you a value based on what is actually selling around you.</p>
+        <form class="value" id="vf">
+          <label class="sr" for="va">Your home address</label>
+          <input id="va" type="text" placeholder="Your home address" autocomplete="street-address" required>
+          <button class="btn" type="submit">Get my home value</button>
+        </form>
+        <div class="ok" id="vok" role="status">Got it. In the live site this goes straight to LeAnna and into her Beat Suite, and she calls you with a real number.</div>
+        <p class="note">No obligation, and I will never pass your information along.</p>
+      </div>
+      <div class="way">
+        <h3>Buying</h3>
+        <p>First home or fifth, I will tell you what I would want to know: what it is really worth, what will need fixing, and when to walk away.</p>
+        <a class="more" href="#contact">Tell me what you are looking for</a>
+      </div>
+      <div class="way">
+        <h3>Investing</h3>
+        <p>I am a landlord too. I can talk rent, repairs and tenants from experience, and help you find a house that pencils out before you buy it.</p>
+        <a class="more" href="#contact">Talk through a rental with me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block areas" id="areas">
+  <div class="wrap">
+    <div class="intro">
+      <h2>Where I work</h2>
+      <p>All over the Wichita area, with a lot of time on the west side.</p>
+    </div>
+    <ul>
+      <li>West Wichita</li><li>Westlink</li><li>Goddard</li><li>South Central</li><li>Schweiter</li><li>The Hyde</li><li>Greater Wichita</li>
+    </ul>
+    <div class="move">
+      <div>
+        <h3>Moving to Wichita?</h3>
+        <p>I can walk you through neighborhoods by video before you ever get on a plane, and line up a full day of showings for when you land.</p>
+      </div>
+      <div>
+        <h3>Buying from out of state?</h3>
+        <p>Plenty of investors I work with have never lived here. I will be your eyes on the house, the street and the numbers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block list" id="cards">
+  <div class="wrap">
+    <div>
+      <h2>Get on my card list</h2>
+      <div class="intro" style="margin-bottom:0"><p>I hand-write cards a few times a year. No sales pitch inside, just a hello and my number in case you need it. If you would like one, tell me where to send it.</p></div>
+      <p class="seasons">Halloween. Thanksgiving. Christmas.<br>And the day you got your keys.</p>
+    </div>
+    <form class="form" id="lf">
+      <label for="ln">Your name</label>
+      <input id="ln" type="text" autocomplete="name" required>
+      <label for="la">Mailing address</label>
+      <input id="la" type="text" autocomplete="street-address" required>
+      <div class="row">
+        <div><label for="lc">City</label><input id="lc" type="text" autocomplete="address-level2"></div>
+        <div><label for="lz">ZIP</label><input id="lz" type="text" inputmode="numeric" autocomplete="postal-code"></div>
+      </div>
+      <button class="btn" type="submit">Add me to the card list</button>
+      <div class="ok" id="lok" role="status">You are on the list. In the live site this drops you into LeAnna's Beat Suite card list, ready for the next season.</div>
+    </form>
+  </div>
+</section>
+
+<section class="block about" id="about">
+  <div class="wrap">
+    <div class="photo"><div><b>LB</b>LeAnna's photo goes here.<br>We will use her own headshot in the live site.</div></div>
+    <div>
+      <h2>About LeAnna</h2>
+      <p style="margin-top:18px">I have been helping people buy and sell homes in Wichita for more than two decades. I went to Wichita State and I have built my business here, one family and one house at a time.</p>
+      <p>I also own rental houses, so I know what a surprise plumbing bill feels like. That is useful when you are buying your first investment property and want someone to be honest about what you are getting into.</p>
+      <p>What you can count on from me: I answer my phone, I tell you the truth about a house, and I will still be in touch years after closing.</p>
+      <ul class="creds">
+        <li>REALTOR®</li><li>GRI</li><li>ABR</li><li>ALHS</li><li>First-time buyers</li><li>Investors</li><li>Military families</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block contact" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Call, text or write</h2>
+      <a class="big" href="tel:+13162141121">(316) 214-1121</a>
+      <p><a href="mailto:leanna@leannabeat.com">leanna@leannabeat.com</a></p>
+      <p style="color:var(--body);max-width:24em;margin-top:16px">Tell me a little about what you are thinking. There is no wrong time to ask a question, even if a move is a year away.</p>
+    </div>
+    <form class="form" id="cf2">
+      <div class="row">
+        <div><label for="cn">Name</label><input id="cn" type="text" autocomplete="name" required></div>
+        <div><label for="cp">Phone or email</label><input id="cp" type="text" autocomplete="tel" required></div>
+      </div>
+      <label for="cw">I would like help with</label>
+      <select id="cw"><option>Buying a home</option><option>Selling my home</option><option>Buying a rental</option><option>Moving to Wichita</option><option>Something else</option></select>
+      <label for="cm">Anything I should know?</label>
+      <textarea id="cm"></textarea>
+      <button class="btn" type="submit">Send it to LeAnna</button>
+      <div class="ok" id="cok" role="status">Sent. In the live site LeAnna gets this on her phone right away, and it is saved in her Beat Suite with a reminder to follow up.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>LeAnna Beat, REALTOR® · Real Broker, LLC · Kansas License #00216288</span>
+    <span>Equal Housing Opportunity · Site preview by <a href="https://getproytech.com" target="_blank" rel="noopener">ProyTech</a></span>
+  </div>
+</footer>
+
+<!-- AI assistant demo (scripted for the preview; the live version is trained on LeAnna's market and voice) -->
+<button class="chat-fab" id="fab" aria-controls="chat" aria-expanded="false"><i>LB</i>Ask LeAnna's assistant</button>
+<div class="chat" id="chat" role="dialog" aria-label="LeAnna's assistant">
+  <div class="chat-h">
+    <i>LB</i>
+    <div class="who"><b>LeAnna's Assistant</b><span>Answers day and night. LeAnna follows up herself.</span></div>
+    <button id="close" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-b" id="log" aria-live="polite"></div>
+  <div class="quick" id="quick"></div>
+  <form class="chat-f" id="cf">
+    <label for="ci" class="sr">Type a message</label>
+    <input id="ci" type="text" placeholder="Ask about buying, selling, rentals" autocomplete="off">
+    <button class="btn" type="submit">Send</button>
+  </form>
+  <div class="demo-tag">Preview demo. The live version is trained on LeAnna's market and voice.</div>
+</div>
+
+<script>
+(function(){
+  // Auto-expire: after the date in <meta name="preview-expires">, the page retires itself.
+  var exp = document.querySelector('meta[name="preview-expires"]').content;
+  if (new Date() > new Date(exp + 'T23:59:59-06:00')) {
+    document.body.innerHTML = '<div class="expired"><div><h1 style="font-size:32px;margin:0 0 12px">This preview has expired.</h1><p>Want one built for your business? <a href="https://getproytech.com/book">Book a 20-minute teardown</a>.</p></div></div>';
+    return;
+  }
+
+  // demo forms: show what happens in the live version
+  [['vf','vok'],['lf','lok'],['cf2','cok']].forEach(function(p){
+    var f = document.getElementById(p[0]), ok = document.getElementById(p[1]);
+    f.addEventListener('submit', function(e){ e.preventDefault(); ok.classList.add('show'); f.reset(); });
+  });
+
+  var fab = document.getElementById('fab'), chat = document.getElementById('chat'), log = document.getElementById('log'),
+      quick = document.getElementById('quick'), form = document.getElementById('cf'), input = document.getElementById('ci'),
+      started = false, capturing = false, touched = false;
+
+  var flows = {
+    start: { say: ["Hi, I'm LeAnna's assistant. I can get you a home value, help you start a search, or answer questions about buying a rental in Wichita.", "What brings you here today?"],
+      opts: [["I want to sell","sell"],["I'm thinking about buying","buy"],["I'm looking at rentals","invest"],["Moving to Wichita","move"]] },
+    sell: { say: ["Good place to start. LeAnna prices from what is actually selling near you, not an online guess.", "How soon are you thinking of selling?"], opts: [["Next 3 months","hot"],["Sometime this year","warm"],["Just curious what it's worth","warm"]] },
+    buy: { say: ["Happy to help. Is this your first home, or have you bought before?"], opts: [["First home","first"],["I've bought before","warm"]] },
+    first: { say: ["Congratulations. LeAnna works with a lot of first-time buyers and will walk you through every step.", "Have you talked with a lender yet?"], opts: [["Yes, I'm pre-approved","hot"],["Not yet","lender"]] },
+    lender: { say: ["No problem. LeAnna can point you to a lender she trusts so you know your budget before you look."], opts: [["Sounds good","warm"]] },
+    invest: { say: ["LeAnna owns rental houses in Wichita herself, so she can talk rent, repairs and tenants from experience.", "Is this your first rental?"], opts: [["Yes, my first","warm"],["I own a few already","hot"],["I live out of state","hot"]] },
+    move: { say: ["Welcome, almost. LeAnna can tour neighborhoods with you by video before you travel.", "When are you planning to move?"], opts: [["Within 3 months","hot"],["Later this year","warm"],["Just exploring","warm"]] },
+    hot: { say: ["That is exactly the kind of thing LeAnna likes to talk through herself.", "What's your name and the best number to reach you? She usually calls back the same day."], opts: [], capture: true },
+    warm: { say: ["Got it, that helps.", "What's your name and the best number or email? LeAnna will follow up personally."], opts: [], capture: true },
+    done: { say: ["Thank you. In the live site LeAnna gets a text with everything you just told me, and you are saved in her Beat Suite so nothing gets lost. 🙂"], opts: [] }
+  };
+
+  function add(text, who){
+    var d = document.createElement('div'); d.className = 'msg ' + who; d.textContent = text; log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
+  function run(key){
+    var f = flows[key]; if (!f) return;
+    quick.innerHTML = ''; capturing = !!f.capture;
+    f.say.forEach(function(s, i){ setTimeout(function(){ add(s, 'bot'); if (i === f.say.length - 1) opts(f.opts); }, 450 * (i + 1)); });
+  }
+  function opts(list){
+    quick.innerHTML = '';
+    list.forEach(function(o){
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = o[0];
+      b.addEventListener('click', function(){ add(o[0], 'me'); run(o[1]); });
+      quick.appendChild(b);
+    });
+  }
+  function fit(){
+    // on a phone, stay inside the space the keyboard leaves
+    var vv = window.visualViewport; if (!vv) return;
+    var room = vv.height - 24;
+    chat.style.maxHeight = room + 'px';
+    log.style.height = Math.max(120, Math.min(300, room - 230)) + 'px';
+    chat.style.bottom = (window.innerHeight - vv.height - vv.offsetTop + 12) + 'px';
+    log.scrollTop = log.scrollHeight;
+  }
+  function open(){
+    chat.classList.add('open'); fab.style.display = 'none'; fab.setAttribute('aria-expanded', 'true'); fit();
+    if (!started) { started = true; run('start'); }
+  }
+  function shut(){ chat.classList.remove('open'); fab.style.display = ''; fab.setAttribute('aria-expanded', 'false'); touched = true; }
+  fab.addEventListener('click', function(){ touched = true; open(); });
+  document.getElementById('close').addEventListener('click', shut);
+  if (window.visualViewport) { visualViewport.addEventListener('resize', fit); visualViewport.addEventListener('scroll', fit); }
+  form.addEventListener('submit', function(e){
+    e.preventDefault(); var v = input.value.trim(); if (!v) return;
+    add(v, 'me'); input.value = '';
+    if (capturing) { run('done'); return; }
+    var t = v.toLowerCase();
+    run(/sell|worth|value|list/.test(t) ? 'sell' : /rent|invest|landlord|tenant/.test(t) ? 'invest' : /mov|relocat/.test(t) ? 'move' : /buy|house|home|look/.test(t) ? 'buy' : 'warm');
+  });
+  // opens on its own after about 9 seconds on desktop, once, if they have not touched it
+  if (window.matchMedia('(min-width: 900px)').matches) setTimeout(function(){ if (!touched && !chat.classList.contains('open')) open(); }, 9000);
+})();
+</script>
+</body>
+</html>
