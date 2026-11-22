@@ -117,7 +117,7 @@
 .day.sel .dow,.day.sel .mon{color:rgba(255,255,255,.85)}
 .day .dnum{display:block;font-family:var(--disp);font-weight:700;font-size:22px;margin-top:3px}
 .day .mon{display:block;font-size:10.5px;color:var(--muted-d);margin-top:1px}
-.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:18px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:9px;margin-top:18px}
 .slot{padding:15px 10px;border-radius:14px;cursor:pointer;font-family:var(--disp);font-weight:600;font-size:1rem;color:#fff;background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.18);transition:border-color .16s,background .16s}
 .slot:hover{border-color:var(--o-2)}
 .slot.sel{border-color:var(--o);background:rgba(251,105,38,.14);box-shadow:0 8px 22px rgba(251,105,38,.18)}
@@ -238,13 +238,13 @@
 
           <div class="astep" data-step="1">
             <h3>You</h3>
-            <div class="field" data-req="text"><label for="a_first">First name</label><input type="text" id="a_first" name="firstName" autocomplete="given-name" maxlength="80"><div class="err">What is your first name?</div></div>
-            <div class="field" data-req="text"><label for="a_last">Last name</label><input type="text" id="a_last" name="lastName" autocomplete="family-name" maxlength="80"><div class="err">What is your last name?</div></div>
+            <div class="field" data-req="text"><label for="a_first">First name</label><input type="text" id="a_first" name="firstName" autocomplete="given-name" maxlength="59"><div class="err">What is your first name?</div></div>
+            <div class="field" data-req="text"><label for="a_last">Last name</label><input type="text" id="a_last" name="lastName" autocomplete="family-name" maxlength="60"><div class="err">What is your last name?</div></div>
             <div class="field" data-req="text"><label for="a_biz">Business name</label><input type="text" id="a_biz" name="business" autocomplete="organization" maxlength="160"><div class="err">What is the business called?</div></div>
             <div class="field"><label for="a_site">Website</label><p class="help" id="h_site">No site yet? Leave it blank.</p><input type="text" id="a_site" name="website" inputmode="url" autocomplete="url" maxlength="200" aria-describedby="h_site" placeholder="yourbusiness.com"></div>
             <div class="field" data-req="phone"><label for="a_phone">Mobile</label><input type="tel" id="a_phone" name="phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(316) 555-0142"><div class="err">We need a 10-digit mobile number.</div></div>
             <div class="field" data-req="email"><label for="a_email">Email</label><input type="email" id="a_email" name="email" inputmode="email" autocomplete="email" maxlength="160" placeholder="you@business.com"><div class="err">That email doesn't look right.</div></div>
-            <div class="hp" aria-hidden="true"><label for="a_company">Company</label><input type="text" id="a_company" name="company" tabindex="-1" autocomplete="off"></div>
+            <div class="hp" aria-hidden="true"><label for="a_fax">Fax</label><input type="text" id="a_fax" name="fax" tabindex="-1" autocomplete="off"></div>
             <div class="sms-consent-wrap"><label><input type="checkbox" class="js-sms-consent" required> <span>I agree to receive text messages from ProyTech at the number provided, including replies to my inquiry, appointment reminders, follow ups, and occasional offers. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/terms" target="_blank" rel="noopener">Terms</a>.</span></label><p class="sms-consent-msg" hidden>Please check the box to agree to texts before continuing.</p></div>
             <div class="anav"><button type="button" class="book-btn" data-next data-consent-gate>Continue</button></div>
           </div>
@@ -262,8 +262,8 @@
             <h3>What you need</h3>
             <fieldset class="field" data-req="choice"><legend>What are you looking for?</legend><div class="choices" data-choices="lookingFor"></div><div class="err">Pick one.</div></fieldset>
             <fieldset class="field" data-req="choice"><legend>What is the biggest thing in the way right now?</legend><div class="choices" data-choices="blocker"></div><div class="err">Pick one.</div></fieldset>
-            <div class="field"><label for="a_cost">What is that costing you? <span class="opt-tag">(optional)</span></label><p class="help" id="h_cost">Lost jobs, hours a week, stress. Your best guess.</p><textarea id="a_cost" name="cost" maxlength="1000" aria-describedby="h_cost"></textarea></div>
-            <div class="field" data-req="text"><label for="a_tools">What do you run the business on today?</label><p class="help" id="h_tools">Spreadsheets, a CRM, QuickBooks, your phone. List what you use.</p><textarea id="a_tools" name="tools" maxlength="1000" aria-describedby="h_tools"></textarea><div class="err">List what you use today, even if it's just your phone.</div></div>
+            <div class="field"><label for="a_cost">What is that costing you? <span class="opt-tag">(optional)</span></label><p class="help" id="h_cost">Lost jobs, hours a week, stress. Your best guess.</p><textarea id="a_cost" name="cost" maxlength="300" aria-describedby="h_cost"></textarea></div>
+            <div class="field" data-req="text"><label for="a_tools">What do you run the business on today?</label><p class="help" id="h_tools">Spreadsheets, a CRM, QuickBooks, your phone. List what you use.</p><textarea id="a_tools" name="tools" maxlength="500" aria-describedby="h_tools"></textarea><div class="err">List what you use today, even if it's just your phone.</div></div>
             <fieldset class="field" data-req="choice"><legend>How soon would you want to start?</legend><div class="choices" data-choices="timing"></div><div class="err">Pick one.</div></fieldset>
             <div class="anav"><button type="button" class="back" data-prev>Back</button><button type="button" class="book-btn" data-next>See my times</button></div>
           </div>
@@ -341,40 +341,39 @@
 
   /* =====================================================================
      CRM ADAPTER. Every request and response field name lives here.
-     The CRM routes are not final: change names here, nothing below.
+     Contract: proytech-crm api/nucleus-availability.js, api/nucleus-book.js,
+     src/lib/nucleus.js. Both routes take FLAT bodies and refuse unknown keys.
      ===================================================================== */
   var ADAPTER = {
     base: 'https://proytech-crm.vercel.app',
     paths: { availability: '/api/nucleus-availability', book: '/api/nucleus-book' },
-    req: {                       // request body keys
-      date: 'date',              // "YYYY-MM-DD", a Central-time calendar day
-      track: 'track',            // the server's own track value, echoed back
-      answers: 'answers',        // object, keys below
-      start: 'start',            // the chosen start, exactly as the server sent it
-      src: 'src',
-      honeypot: 'company'
+    availability: {              // first call {date, revenue, want}; later {date, track}
+      date: 'date', track: 'track', revenue: 'revenue', want: 'want'
     },
-    answers: {                   // page answer -> server key inside "answers"
-      firstName: 'first_name', lastName: 'last_name', business: 'business_name', website: 'website',
-      phone: 'phone', email: 'email', smsConsent: 'sms_consent', smsConsentText: 'sms_consent_text',
-      does: 'business_description', revenue: 'revenue_12mo', team: 'team_size', goal: 'revenue_goal_12mo',
-      lookingFor: 'looking_for', blocker: 'biggest_blocker', cost: 'blocker_cost', tools: 'current_tools',
-      timing: 'start_timing', leakFinder: 'leak_finder'
+    book: {                      // flat: application keys + date, time, src, track, honeypot
+      date: 'date', time: 'time', src: 'src', track: 'track', honeypot: 'fax',
+      name: 'name',              // first + last, joined
+      textConsent: 'textConsent',   // boolean true, sent only when ticked
+      consentText: 'consentText',   // the exact checkbox wording, sent only when ticked
+      leakFinder: 'leakFinder',     // array of short strings, sent only when the quiz was done
+      answers: {                 // page field -> server key
+        business: 'business', website: 'website', phone: 'phone', email: 'email',
+        does: 'whatTheyDo', revenue: 'revenue', team: 'teamSize', goal: 'revenueGoal',
+        lookingFor: 'want', blocker: 'blocker', cost: 'cost', tools: 'tools', timing: 'startWhen'
+      }
     },
-    sendChoiceAs: 'code',        // 'code' (e.g. "1m_3m") or 'label' (e.g. "$1M to $3M")
-    res: {                       // response body keys
-      ok: 'ok', error: 'error',
-      track: 'track',            // availability: which call this person gets
-      open: 'open',              // availability: array of start times (ISO strings, or objects below)
-      slotStart: 'start', slotLabel: 'label',
-      timeLabel: 'time_label',   // booking: e.g. "Tuesday, December 2 at 10:30 AM Central"
-      meetLink: 'meet_link'      // booking: https://meet.google.com/...
+    sendAs: { revenue: 'id', lookingFor: 'id', blocker: 'id', team: 'label', timing: 'label' },
+    res: {
+      ok: 'ok', error: 'error', fields: 'fields', reason: 'reason',
+      track: 'track', trackName: 'name', trackMinutes: 'minutes',
+      open: 'open', slotTime: 'time', slotLabel: 'label',
+      when: 'when', meetLink: 'meetLink'
     },
-    tracks: { website: 'website', growth: 'growth_os', empire: 'empire_os' },  // page key -> server value
-    errors: { taken: 'slot_taken' }
+    errors: { taken: 'slot_taken', badSlot: 'bad date/time', mismatch: 'track_mismatch', invalid: 'invalid' }
   };
 
-  /* Choice answers: stable code + the label the visitor sees. */
+  /* Choice answers: id + the label the visitor sees. revenue, lookingFor and
+     blocker ids are the CRM's (src/lib/nucleus.js; blockers from settings). */
   var CHOICES = {
     revenue: [['under_50k','Under $50k'],['50k_250k','$50k to $250k'],['250k_1m','$250k to $1M'],['1m_3m','$1M to $3M'],['3m_10m','$3M to $10M'],['over_10m','Over $10M']],
     team: [['just_me','Just me'],['2_5','2 to 5'],['6_15','6 to 15'],['16_50','16 to 50'],['over_50','Over 50']],
@@ -384,14 +383,12 @@
   };
   var FIELDS = ['firstName','lastName','business','website','phone','email','does','revenue','team','goal','lookingFor','blocker','cost','tools','timing'];
 
-  /* What the routed screen says for each track. The track itself always comes from the server. */
+  /* The routed screen's words, picked by the track NAME the server returns.
+     The length always comes from the server's minutes. */
   var TRACK_COPY = {
-    website: { title: 'You’re set for a 15-minute Nucleus Session.',
-      body: 'From what you told us, the place to start is a website that brings in leads. That is $1,499 to build and $149 a month. On the call we confirm the fit and show you the plan.' },
-    growth: { title: 'You’re set for a 30-minute Nucleus Session.',
-      body: 'From what you told us, you need more than a website. Growth OS is your site plus the Business Suite that runs your leads, follow-up and customers. That is $2,999 to build and $299 a month. On the call we map it to your business.' },
-    empire: { title: 'You’re set for a 30-minute Nucleus Session.',
-      body: 'A company your size needs a real plan before anyone quotes a number. This call is where we learn the business and decide together whether a deeper Blueprint Session makes sense.' }
+    website: 'From what you told us, the place to start is a website that brings in leads. That is $1,499 to build and $149 a month. On the call we confirm the fit and show you the plan.',
+    growth_os: 'From what you told us, you need more than a website. Growth OS is your site plus the Business Suite that runs your leads, follow-up and customers. That is $2,999 to build and $299 a month. On the call we map it to your business.',
+    empire_os: 'A company your size needs a real plan before anyone quotes a number. This call is where we learn the business and decide together whether a deeper Blueprint Session makes sense.'
   };
 
   var TZ = 'America/Chicago';
@@ -403,7 +400,7 @@
   var $ = function(s, r){ return (r || document).querySelector(s); };
   var $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
   var form = $('#appForm');
-  var state = { view: 1, track: null, date: null, start: null, startLabel: null, leak: null, src: null, booked: false };
+  var state = { view: 1, track: null, date: null, time: null, timeLabel: null, leak: null, src: null, booked: false };
 
   /* ---------- storage (never required; answers also live in the DOM) ---------- */
   function load(){ try { return JSON.parse(sessionStorage.getItem(STORE)) || {}; } catch(e){ return {}; } }
@@ -418,7 +415,7 @@
 
   /* src tag: from the link, kept for the whole visit, sent with the booking */
   state.src = (params.get('src') || saved.src || 'book-page').slice(0, 80);
-  state.leak = saved.leak || null;
+  state.leak = Array.isArray(saved.leak) ? saved.leak : null;
 
   /* ---------- build the choice rows ---------- */
   $$('[data-choices]').forEach(function(box){
@@ -447,6 +444,7 @@
     var el = form.elements[k]; if (!el) return '';
     return String(el.value || '').trim();
   }
+  function label(k, v){ var out = v; (CHOICES[k] || []).forEach(function(c){ if (c[0] === v) out = c[1]; }); return out; }
   function setVal(k, v){
     var el = form.elements[k]; if (!el || v == null || v === '') return;
     if (el.length !== undefined && el[0] && el[0].type === 'radio'){
@@ -471,21 +469,28 @@
       else if (type === 'email') bad = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
       else if (type === 'phone') bad = phone10(v).length !== 10;
     }
-    f.classList.toggle('bad', bad);
-    var inp = $('input,textarea', f); if (inp && type !== 'choice') inp.setAttribute('aria-invalid', bad ? 'true' : 'false');
+    mark(f, bad);
     return !bad;
+  }
+  function mark(f, bad){
+    f.classList.toggle('bad', bad);
+    var inp = $('input,textarea', f); if (inp && f.getAttribute('data-req') !== 'choice') inp.setAttribute('aria-invalid', bad ? 'true' : 'false');
+  }
+  function focusField(f){
+    f.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    var i = $('input,textarea', f); if (i) setTimeout(function(){ try { i.focus({ preventScroll: true }); } catch(e){} }, 250);
   }
   function checkStep(n, quiet){
     var fields = $$('.astep[data-step="' + n + '"] .field[data-req]'), ok = true;
     fields.forEach(function(f){ if (!check(f)) ok = false; });
-    if (!ok && !quiet){
-      var first = $('.astep[data-step="' + n + '"] .field.bad');
-      first.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      var i = $('input,textarea', first); if (i) setTimeout(function(){ try { i.focus({ preventScroll: true }); } catch(e){} }, 250);
-    }
+    if (!ok && !quiet) focusField($('.astep[data-step="' + n + '"] .field.bad'));
     return ok;
   }
   var consent = $('.js-sms-consent');
+  function consentError(){
+    var wrap = consent.closest('.sms-consent-wrap'); wrap.classList.add('sms-consent-err');
+    var m = $('.sms-consent-msg', wrap); if (m) m.hidden = false;
+  }
   /* pt-site.js blocks the step 1 button while the text box is unticked (capture on document).
      This runs first (capture on window) so missing fields are marked at the same time. */
   window.addEventListener('click', function(e){
@@ -533,7 +538,7 @@
     if (state.view === 1) setTimeout(function(){ try { form.elements.firstName.focus({ preventScroll: true }); } catch(_){} }, 450);
   }
   $$('[data-start]').forEach(function(a){ a.addEventListener('click', start); });
-  window.NucleusApp = { fromLeakFinder: function(hits){ state.leak = hits && hits.length ? hits.join(' ') : null; save(); start(); } };
+  window.NucleusApp = { fromLeakFinder: function(hits){ state.leak = hits && hits.length ? hits.slice(0, 12) : null; save(); start(); } };
 
   /* hide the sticky phone button while the application is on screen */
   var mcta = $('#mcta');
@@ -541,7 +546,7 @@
     new IntersectionObserver(function(en){ mcta.classList.toggle('away', en[0].isIntersecting); }, { threshold: 0 }).observe($('#apply'));
   }
 
-  /* ---------- Central-time helpers ---------- */
+  /* ---------- Central-time day strip ---------- */
   var DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function partsCT(d){
     var p = {};
@@ -555,30 +560,27 @@
     for (; out.length < n && i < 40; i++){
       var t = new Date(base + i * 864e5), wd = t.getUTCDay();
       if (wd === 0 || wd === 6) continue;
-      out.push({ iso: t.toISOString().slice(0, 10), dow: DOW[wd], dnum: t.getUTCDate(), mon: MON[t.getUTCMonth()] });
+      out.push({ iso: t.toISOString().slice(0, 10), dow: DOW[wd], dnum: t.getUTCDate(), mon: MON[t.getUTCMonth()], long: DOW[wd] + ', ' + MON[t.getUTCMonth()] + ' ' + t.getUTCDate() });
     }
     return out;
   }
-  function timeCT(iso){ var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit' }); }
-  function whenCT(iso){ var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleString('en-US', { timeZone: TZ, weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' Central'; }
 
   /* ---------- talking to the CRM ---------- */
-  function trackKey(serverValue){
-    for (var k in ADAPTER.tracks) if (ADAPTER.tracks[k] === serverValue) return k;
-    return null;
-  }
-  function answersOut(){
-    var A = ADAPTER.answers, out = {};
-    FIELDS.forEach(function(k){
-      var v = val(k);
-      if (CHOICES[k] && ADAPTER.sendChoiceAs === 'label'){ CHOICES[k].forEach(function(c){ if (c[0] === v) v = c[1]; }); }
-      out[A[k]] = v;
-    });
-    out[A.phone] = phone10(val('phone'));
-    out[A.smsConsent] = !!(consent && consent.checked);
-    out[A.smsConsentText] = consent ? consent.closest('label').textContent.replace(/\s+/g, ' ').trim() : '';
-    if (state.leak) out[A.leakFinder] = state.leak;
-    return out;
+  function sendValue(k){ var v = val(k); return ADAPTER.sendAs[k] === 'label' ? label(k, v) : v; }
+  function bookBody(){
+    var B = ADAPTER.book, body = {};
+    body[B.name] = (val('firstName') + ' ' + val('lastName')).trim();
+    Object.keys(B.answers).forEach(function(k){ var v = sendValue(k); if (v) body[B.answers[k]] = v; });
+    body[B.answers.phone] = phone10(val('phone'));
+    if (consent && consent.checked){
+      body[B.textConsent] = true;
+      body[B.consentText] = consent.closest('label').textContent.replace(/\s+/g, ' ').trim();
+    }
+    if (state.leak && state.leak.length) body[B.leakFinder] = state.leak.slice(0, 12);
+    body[B.date] = state.date; body[B.time] = state.time;
+    body[B.track] = state.track; body[B.src] = state.src;
+    body[B.honeypot] = val('fax');
+    return body;
   }
   function post(path, body){
     if (MOCK) return mock(path, body);
@@ -593,13 +595,16 @@
         });
       });
   }
+  function readTrack(j){
+    var R = ADAPTER.res, t = j && j[R.track];
+    if (!t || typeof t !== 'object' || typeof t[R.trackName] !== 'string' || !(+t[R.trackMinutes] > 0)) return null;
+    return { name: t[R.trackName], minutes: Math.round(+t[R.trackMinutes]) };
+  }
   function readSlots(j){
     var R = ADAPTER.res, list = j[R.open];
     if (!Array.isArray(list)) return null;
     return list.map(function(s){
-      var st = (typeof s === 'string') ? s : (s && s[R.slotStart]);
-      var lb = (s && typeof s === 'object' && typeof s[R.slotLabel] === 'string') ? s[R.slotLabel] : timeCT(st);
-      return (typeof st === 'string' && lb) ? { start: st, label: lb } : null;
+      return (s && typeof s[R.slotTime] === 'string' && typeof s[R.slotLabel] === 'string') ? { time: s[R.slotTime], label: s[R.slotLabel] } : null;
     }).filter(Boolean);
   }
 
@@ -610,41 +615,45 @@
     var b = document.createElement('button'); b.type = 'button'; b.className = 'day'; b.dataset.iso = d.iso;
     b.setAttribute('aria-pressed', 'false');
     [['dow', d.dow], ['dnum', d.dnum], ['mon', d.mon]].forEach(function(x){ var s = document.createElement('span'); s.className = x[0]; s.textContent = x[1]; b.appendChild(s); });
-    b.setAttribute('aria-label', d.dow + ' ' + d.mon + ' ' + d.dnum);
+    b.setAttribute('aria-label', d.long);
     b.addEventListener('click', function(){ pickDay(d.iso); });
     daysEl.appendChild(b);
   });
+  function dayLong(iso){ for (var i = 0; i < DAYS.length; i++) if (DAYS[i].iso === iso) return DAYS[i].long; return iso; }
   function say(el, text){ el.textContent = text; el.hidden = !text; }
-  function setTrack(k){
-    state.track = k;
-    $('#routedTitle').textContent = TRACK_COPY[k].title;
-    $('#routedCopy').textContent = TRACK_COPY[k].body;
+  function setTrack(t){
+    state.track = t.name;
+    $('#routedTitle').textContent = 'You’re set for a ' + t.minutes + '-minute Nucleus Session.';
+    $('#routedCopy').textContent = TRACK_COPY[t.name] || '';
   }
   function openTimes(){
     bookMsg.textContent = '';
     if (!state.track){ $('#routedTitle').textContent = 'Checking your times…'; $('#routedCopy').textContent = ''; }
     pickDay(state.date || DAYS[0].iso);
   }
-  function pickDay(iso){
-    state.date = iso; state.start = null; state.startLabel = null; bookBtn.disabled = true; bookMsg.textContent = '';
+  function pickDay(iso, keepMsg){
+    state.date = iso; state.time = null; state.timeLabel = null; bookBtn.disabled = true;
+    if (!keepMsg) bookMsg.textContent = '';
     $$('.day', daysEl).forEach(function(b){ var on = b.dataset.iso === iso; b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
     slotsEl.textContent = ''; say(slotMsg, 'Checking open times…');
-    var Q = ADAPTER.req, body = {}, my = ++reqId;
-    body[Q.date] = iso;
-    if (state.track) body[Q.track] = ADAPTER.tracks[state.track];
-    else { body[Q.answers] = answersOut(); body[Q.src] = state.src; }   // first call: the server decides the track
+    var A = ADAPTER.availability, body = {}, my = ++reqId;
+    body[A.date] = iso;
+    if (state.track) body[A.track] = state.track;
+    else { body[A.revenue] = val('revenue'); body[A.want] = val('lookingFor'); }   // the server decides the track
     post(ADAPTER.paths.availability, body).then(function(j){
       if (my !== reqId) return;
       var R = ADAPTER.res;
       if (!j[R.ok]) throw new Error('not ok');
-      var k = trackKey(j[R.track]) || state.track;
-      if (!k || !TRACK_COPY[k]) throw new Error('no track');
-      setTrack(k);
+      var t = readTrack(j);
+      if (t) setTrack(t);
+      if (!state.track) throw new Error('no track');
+      if (j[R.reason]) throw new Error(String(j[R.reason]));          // settings or calendar unreadable: open:[] is not "nothing free"
       var slots = readSlots(j); if (!slots) throw new Error('no open list');
       renderSlots(slots);
     }).catch(function(){
       if (my !== reqId) return;
-      if (!state.track){ $('#routedTitle').textContent = 'We could not load times right now.'; }
+      if (!state.track){ $('#routedTitle').textContent = 'We could not load times right now.'; $('#routedCopy').textContent = ''; }
+      slotsEl.textContent = '';
       say(slotMsg, 'We could not load open times right now. ' + FALLBACK);
     });
   }
@@ -658,56 +667,78 @@
       b.addEventListener('click', function(){
         $$('.slot', slotsEl).forEach(function(x){ x.classList.remove('sel'); x.setAttribute('aria-pressed', 'false'); });
         b.classList.add('sel'); b.setAttribute('aria-pressed', 'true');
-        state.start = s.start; state.startLabel = s.label; bookBtn.disabled = false; bookMsg.textContent = '';
+        state.time = s.time; state.timeLabel = s.label; bookBtn.disabled = false; bookMsg.textContent = '';
       });
       slotsEl.appendChild(b);
     });
   }
 
   /* ---------- booking ---------- */
+  var SERVER_FIELD = {};   // server key -> page field, for "invalid"
+  Object.keys(ADAPTER.book.answers).forEach(function(k){ SERVER_FIELD[ADAPTER.book.answers[k]] = k; });
+  SERVER_FIELD[ADAPTER.book.name] = 'firstName';
+
+  function resetBtn(){ bookBtn.disabled = !state.time; bookBtn.textContent = 'Book my Nucleus Session'; }
+  function failMsg(lead){
+    bookMsg.textContent = '';
+    bookMsg.appendChild(document.createTextNode(lead + ' ' + FALLBACK + ' '));
+    var a = document.createElement('a'); a.textContent = 'Email us your answers instead.';
+    a.href = 'mailto:admin@getproytech.com?subject=' + encodeURIComponent('Nucleus Session request: ' + val('firstName') + ' ' + val('lastName')) +
+      '&body=' + encodeURIComponent(mailBody());
+    bookMsg.appendChild(a);
+  }
+  function showInvalid(fields){
+    var list = Array.isArray(fields) ? fields : [], step = 4, target = null;
+    list.forEach(function(sk){
+      if (sk === ADAPTER.book.textConsent || sk === ADAPTER.book.consentText){ if (step > 1){ step = 1; target = 'consent'; } return; }
+      var pk = SERVER_FIELD[sk]; if (!pk) return;
+      var el = form.elements[pk]; var f = el && (el.length !== undefined && el[0] ? el[0] : el).closest('.field'); if (!f) return;
+      mark(f, true);
+      var n = +f.closest('.astep').getAttribute('data-step');
+      if (n < step){ step = n; target = f; }
+    });
+    if (step > 3) return false;            // nothing the visitor can fix (leakFinder, or an unknown key)
+    show(step, true);
+    if (target === 'consent'){ consentError(); consent.focus(); } else if (target) focusField(target);
+    return true;
+  }
   bookBtn.addEventListener('click', function(){
-    if (!state.start || !state.track) return;
-    if (consent && !consent.checked){ show(1, true); consent.focus(); return; }
-    var Q = ADAPTER.req, body = {};
-    body[Q.answers] = answersOut();
-    body[Q.start] = state.start;
-    body[Q.track] = ADAPTER.tracks[state.track];
-    body[Q.src] = state.src;
-    body[Q.honeypot] = val('company');
+    if (!state.time || !state.track) return;
+    if (consent && !consent.checked){ show(1, true); consentError(); consent.focus(); return; }
     bookBtn.disabled = true; bookBtn.textContent = 'Booking…'; bookMsg.textContent = '';
-    post(ADAPTER.paths.book, body).then(function(j){
-      var R = ADAPTER.res;
+    post(ADAPTER.paths.book, bookBody()).then(function(j){
+      var R = ADAPTER.res, E = ADAPTER.errors, err = j[R.error];
       if (j[R.ok]) return done(j);
-      if (j[R.error] === ADAPTER.errors.taken){
-        bookBtn.textContent = 'Book my Nucleus Session';
-        pickDay(state.date);
+      resetBtn();
+      if (err === E.taken || err === E.badSlot){
+        pickDay(state.date, true);
         bookMsg.textContent = 'Someone just took that time. Pick another one.';
         return;
       }
-      throw new Error('not ok');
+      if (err === E.mismatch){
+        state.track = null; pickDay(state.date, true);
+        bookMsg.textContent = 'Your answers put you on a different call. Here are its times. Pick one again.';
+        return;
+      }
+      if (err === E.invalid && showInvalid(j[R.fields])) return;
+      if (err === 'calendar_not_connected' || err === 'calendar_read_failed' || err === 'calendar_create_failed')
+        return failMsg('Our calendar did not answer, and nothing was booked.');
+      failMsg('That did not go through, and nothing was booked.');   // settings_unreadable, error, Unknown field: …, invalid we cannot point at
     }).catch(function(){
-      bookBtn.disabled = false; bookBtn.textContent = 'Book my Nucleus Session';
-      bookMsg.textContent = '';
-      bookMsg.appendChild(document.createTextNode('That did not go through, and nothing was booked. Try again, or ' + FALLBACK.charAt(0).toLowerCase() + FALLBACK.slice(1) + ' '));
-      var a = document.createElement('a'); a.textContent = 'Email us your answers instead.';
-      a.href = 'mailto:admin@getproytech.com?subject=' + encodeURIComponent('Nucleus Session request: ' + val('firstName') + ' ' + val('lastName')) +
-        '&body=' + encodeURIComponent(mailBody());
-      bookMsg.appendChild(a);
+      resetBtn();
+      failMsg('That did not go through, and nothing was booked. Try again, or');
     });
   });
   function mailBody(){
-    var lines = ['Nucleus Session request', '', 'Wanted time: ' + (whenCT(state.start) || state.startLabel || '-'), 'src: ' + state.src, ''];
-    FIELDS.forEach(function(k){
-      var v = val(k); if (CHOICES[k]) CHOICES[k].forEach(function(c){ if (c[0] === v) v = c[1]; });
-      lines.push(k + ': ' + (v || '-'));
-    });
+    var lines = ['Nucleus Session request', '', 'Wanted time: ' + (state.date ? dayLong(state.date) + ' at ' + (state.timeLabel || '-') + ' Central' : '-'), 'src: ' + state.src, ''];
+    FIELDS.forEach(function(k){ lines.push(k + ': ' + (label(k, val(k)) || '-')); });
     return lines.join('\n');
   }
   function done(j){
     var R = ADAPTER.res;
     state.booked = true; forget();
-    var label = (typeof j[R.timeLabel] === 'string' && j[R.timeLabel]) || whenCT(state.start);
-    $('#doneWhen').textContent = label + ' on Google Meet';
+    var when = (typeof j[R.when] === 'string' && j[R.when]) || (dayLong(state.date) + ' at ' + state.timeLabel + ' Central');
+    $('#doneWhen').textContent = when + ' on Google Meet';
     var link = j[R.meetLink], a = $('#doneMeet');
     if (typeof link === 'string' && /^https:\/\/meet\.google\.com\/[\w-]+(\?.*)?$/.test(link)){ a.href = link; a.textContent = link.replace(/^https:\/\//, ''); a.hidden = false; }
     show('done', false);
@@ -715,31 +746,55 @@
     setTimeout(function(){ try { $('#doneTitle').focus({ preventScroll: true }); } catch(e){} }, 300);
   }
 
-  /* ---------- ?mock=1: fakes both routes so the flow can be reviewed ----------
-     ?mock=1&track=website|growth|empire  picks the track the fake server returns (default growth)
-     ?mock=1&fail=times|book|taken         forces an error path                                   */
+  /* ---------- ?mock=1: fakes both routes with the CRM's real shapes ----------
+     ?mock=1&track=website|growth_os|empire_os  the track the fake server routes to (default growth_os)
+     ?mock=1&fail=times|calendar|book|taken|mismatch|invalid  forces an error path
+     Like the real routes, the mock refuses unknown keys and missing required ones. */
+  var MOCK_TRACKS = { website: 15, growth_os: 30, empire_os: 30 };
+  var MOCK_AVAIL_KEYS = ['date', 'track', 'revenue', 'want', 'fax'];
+  var MOCK_BOOK_KEYS = ['name','business','website','phone','email','whatTheyDo','revenue','teamSize','revenueGoal','want','blocker','cost','tools','startWhen','textConsent','consentText','leakFinder','date','time','src','track','fax'];
   function mock(path, body){
-    var R = ADAPTER.res, Q = ADAPTER.req, fail = params.get('fail'), out = {};
+    var fail = params.get('fail'), tk = MOCK_TRACKS[params.get('track')] ? params.get('track') : 'growth_os';
+    function trackObj(n){ return { name: n, label: n + ' track', minutes: MOCK_TRACKS[n] }; }
+    function unknown(keys){ var x = Object.keys(body).filter(function(k){ return keys.indexOf(k) < 0; }); return x.length ? { ok: false, error: 'Unknown field' + (x.length > 1 ? 's' : '') + ': ' + x.join(', ') + '.' } : null; }
     return new Promise(function(res, rej){ setTimeout(function(){
+      if (window.console) console.info('[mock] ' + path, JSON.parse(JSON.stringify(body)));
+      var bad;
       if (path === ADAPTER.paths.availability){
+        if ((bad = unknown(MOCK_AVAIL_KEYS))) return res(bad);
         if (fail === 'times') return rej(new Error('mock'));
-        var tk = ADAPTER.tracks[params.get('track')] || ADAPTER.tracks.growth;
-        var iso = body[Q.date], dnum = +iso.slice(8, 10), now = Date.now();
-        out[R.ok] = true; out[R.track] = body[Q.track] || tk;
-        out[R.open] = (dnum % 4 === 0) ? [] : [[9,0],[9,30],[10,30],[13,0],[14,30],[15,30]]
-          .map(function(t){ return isoCT(iso, t[0], t[1]); })
-          .filter(function(s){ return new Date(s).getTime() > now + 36e5; });
-        return res(out);
+        var name = body.track != null ? body.track : (body.revenue && body.want ? tk : null);
+        if (!MOCK_TRACKS[name]) return res({ ok: false, error: 'bad track' });
+        if (fail === 'calendar') return res({ ok: true, track: trackObj(name), open: [], reason: 'calendar_not_connected' });
+        var iso = body.date, dnum = +iso.slice(8, 10), min = MOCK_TRACKS[name], open = [], from = Date.now() + 2 * 36e5;
+        if (dnum % 4 !== 0){
+          for (var m = 9 * 60; m + min <= 17 * 60; m += min){
+            if ((m / min) % 3 === 1) continue;                     // some taken
+            var h = Math.floor(m / 60), mi = m % 60;
+            if (new Date(isoCT(iso, h, mi)).getTime() < from) continue;
+            open.push({ time: (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi, label: (h % 12 || 12) + ':' + (mi < 10 ? '0' : '') + mi + ' ' + (h < 12 ? 'AM' : 'PM') });
+          }
+        }
+        return res({ ok: true, track: trackObj(name), open: open, tz: TZ });
       }
       if (path === ADAPTER.paths.book){
-        if (fail === 'book') return rej(new Error('mock'));
-        if (fail === 'taken' && !mock.tookOne){ mock.tookOne = true; out[R.ok] = false; out[R.error] = ADAPTER.errors.taken; return res(out); }
-        out[R.ok] = true; out[R.timeLabel] = whenCT(body[Q.start]); out[R.meetLink] = 'https://meet.google.com/abc-defg-hij';
-        if (window.console) console.info('[mock] booking body', body);
-        return res(out);
+        if ((bad = unknown(MOCK_BOOK_KEYS))) return res(bad);
+        if (body.fax) return res({ ok: true, when: '', meetLink: '' });
+        var missing = ['name','phone','email','revenue','want'].filter(function(k){ return !body[k]; });
+        if (body.textConsent != null && body.textConsent !== true) missing.push('textConsent');
+        if (body.consentText && body.textConsent !== true) missing.push('consentText');
+        if (fail === 'invalid' && !mock.once){ mock.once = true; missing.push('revenueGoal'); }
+        if (missing.length) return res({ ok: false, error: 'invalid', fields: missing });
+        if (body.track !== tk) return res({ ok: false, error: 'track_mismatch', track: tk });
+        if (fail === 'mismatch' && !mock.once){ mock.once = true; return res({ ok: false, error: 'track_mismatch', track: tk }); }
+        if (fail === 'book') return res({ ok: false, error: 'calendar_create_failed' });
+        if (fail === 'taken' && !mock.once){ mock.once = true; return res({ ok: false, error: 'slot_taken' }); }
+        var p = body.date.split('-'), hh = +body.time.slice(0, 2), mm = body.time.slice(3);
+        var wd = DOW[new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])).getUTCDay()];
+        return res({ ok: true, when: wd + ', ' + MON[+p[1] - 1] + ' ' + (+p[2]) + ' · ' + (hh % 12 || 12) + ':' + mm + ' ' + (hh < 12 ? 'AM' : 'PM') + ' CST', meetLink: 'https://meet.google.com/abc-defg-hij' });
       }
       rej(new Error('mock: unknown path'));
-    }, 500); });
+    }, 400); });
   }
   function isoCT(dateIso, h, m){
     var y = +dateIso.slice(0, 4), mo = +dateIso.slice(5, 7), d = +dateIso.slice(8, 10);
