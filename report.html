@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your website report | ProyTech</title>
+<meta name="description" content="Your website teardown from ProyTech: the grade, what is working, and what to fix first.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+/* The previews/*-report.html family's design, so a self-serve report and a
+   hand-built one look like the same thing. */
+:root{--blue:#1338DE;--orange:#FB6926;--navy:#000110;--ink:#111528;--muted:#5B6478;--tint:#F1F4FE;--line:#DCE2F5;--good:#167A3E;--goodbg:#E6F4EC;--warn:#9A5B00;--warnbg:#FFF2DC;--bad:#B3261E;--badbg:#FDE7E5}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+h1,h2,h3,p{margin:0}
+.frame{margin:12px;border:6px solid var(--blue);border-radius:22px;overflow:hidden}
+.band{background:var(--navy);padding:16px 28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.band img{height:34px;width:auto}
+main{max-width:980px;margin:0 auto;padding:56px 28px 72px}
+.label{font-family:'Space Mono',monospace;font-size:13px;color:var(--blue);letter-spacing:1px;text-transform:uppercase}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-1px;margin:10px 0 16px}
+h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-.5px;margin-bottom:18px}
+h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;line-height:1.2}
+.lede{font-size:19px;color:var(--muted);max-width:720px}
+section{margin-top:64px}
+.verdict{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;margin-top:36px;padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--tint)}
+.grade{width:120px;height:120px;border-radius:18px;background:var(--orange);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif}
+.grade b{font-size:58px;line-height:1}
+.grade span{font-size:13px;font-weight:600}
+.verdict p{font-size:19px}
+.verdict .small{font-size:13px;color:var(--muted);margin-top:10px}
+.scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:22px}
+.sc{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-weight:600;font-size:15px}
+.pill{font-family:'Space Mono',monospace;font-size:12px;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.g{background:var(--goodbg);color:var(--good)}.w{background:var(--warnbg);color:var(--warn)}.x{background:var(--badbg);color:var(--bad)}.n{background:#EEF0F5;color:var(--muted)}
+.top3{display:flex;flex-direction:column;gap:22px}
+.prob{border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.prob .h{display:flex;gap:16px;align-items:flex-start;padding:22px 24px}
+.prob .num{flex:none;width:40px;height:40px;border-radius:10px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px}
+.prob .h p{color:var(--muted);margin-top:6px}
+.fixline{padding:14px 24px;border-top:1px solid var(--line);font-weight:600;font-size:15px}
+.fixline b{color:var(--blue)}
+.shot{margin:22px 0 0;border:1px solid var(--line);border-radius:16px;background:#F7F8FC;padding:16px;max-width:360px}
+.shot img{border-radius:8px;border:1px solid var(--line)}
+.shot figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:18px 0 6px}
+.m{border:1px solid var(--line);border-radius:12px;padding:14px}
+.m b{display:block;font-family:'Space Grotesk',sans-serif;font-size:30px;line-height:1}
+.m span{font-size:13px;color:var(--muted)}
+.area{border-top:1px solid var(--line);padding:22px 0}
+.area .t{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.area ul{margin:0;padding-left:20px}
+.area li{margin:6px 0}
+.area li .st{font-family:'Space Mono',monospace;font-size:12px;margin-right:8px}
+.area li .q{color:var(--muted)}
+.area li .fx{display:block;font-size:15px;color:var(--ink);font-weight:600}
+.area li .fx b{color:var(--blue)}
+.why{color:var(--muted);font-size:15px;margin-top:8px}
+.working{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.working div{background:var(--goodbg);border-radius:10px;padding:12px 14px;font-size:15px;font-weight:500}
+.working q{display:block;color:var(--muted);font-weight:400;font-size:14px;margin-top:4px}
+.offer{margin-top:56px;background:var(--orange);color:#fff;border-radius:18px;padding:34px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:center}
+.offer h2{margin:0;color:#fff}
+.offer p{color:#FFE7DA;margin-top:6px}
+.offer .btn{display:inline-block;margin-top:18px;background:var(--navy);color:#fff;text-decoration:none;font-weight:600;border-radius:999px;padding:14px 22px}
+.code{background:#fff;color:var(--ink);border-radius:14px;padding:20px}
+.code .c{font-family:'Space Mono',monospace;font-size:22px;letter-spacing:1px;color:var(--navy);word-break:break-all}
+.code p{color:var(--ink);font-size:15px;margin-top:8px}
+.foot{margin-top:28px;font-size:13px;color:var(--muted)}
+.state{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
+.state a{color:var(--orange);font-weight:600}
+.mock-flag{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:90;background:#FFD166;color:#0B1633;font:700 12px/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px}
+@media (max-width:640px){.verdict,.offer{grid-template-columns:minmax(0,1fr)}.frame{margin:6px;border-width:4px}main{padding:40px 18px 56px}.band{padding:14px 18px}}
+@media print{.frame{border:0;margin:0}section,.prob{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="band"><a href="https://getproytech.com" style="border:0;padding:0"><img src="/images/proytech-logo-nav.png" alt="ProyTech"></a></div>
+  <main id="root" aria-live="polite"><div class="state"><p>Loading your report…</p></div></main>
+</div>
+<!-- Everything below is drawn by /js/report.js with textContent only: the report
+     comes from the CRM and quotes the audited site, so none of it is ever
+     parsed as HTML. -->
+<script src="/js/report.js?v=1"></script>
+<script src="/js/td-ping.js?v=1" defer></script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+{
+ "ok": true,
+ "business": "Acme Roofing",
+ "domain": "acmeroofing.com",
+ "builtOn": "2026-11-23",
+ "grade": "F",
+ "score": 43,
+ "report": {
+  "v": 1,
+  "host": "acmeroofing.com",
+  "builtOn": "2026-11-23",
+  "score": 43,
+  "grade": "F",
+  "categories": [
+   {
+    "id": "first",
+    "name": "First impression",
+    "weight": 12,
+    "points": 2,
+    "pct": 17,
+    "pill": "Broken"
+   },
+   {
+    "id": "contact",
+    "name": "Contact and lead capture",
+    "weight": 16,
+    "points": 6,
+    "pct": 38,
+    "pill": "Broken"
+   },
+   {
+    "id": "trust",
+    "name": "Trust and proof",
+    "weight": 12,
+    "points": 6,
+    "pct": 50,
+    "pill": "Needs work"
+   },
+   {
+    "id": "copy",
+    "name": "Copy",
+    "weight": 10,
+    "points": 0,
+    "pct": 0,
+    "pill": "Broken"
+   },
+   {
+    "id": "flow",
+    "name": "Flow and choices",
+    "weight": 10,
+    "points": 7.5,
+    "pct": 75,
+    "pill": "Needs work"
+   },
+   {
+    "id": "mobile",
+    "name": "Mobile",
+    "weight": 10,
+    "points": 7.5,
+    "pct": 75,
+    "pill": "Needs work"
+   },
+   {
+    "id": "speed",
+    "name": "Speed",
+    "weight": 8,
+    "points": 2.7,
+    "pct": 33,
+    "pill": "Broken"
+   },
+   {
+    "id": "google",
+    "name": "Google basics",
+    "weight": 10,
+    "points": 5,
+    "pct": 50,
+    "pill": "Needs work"
+   },
+   {
+    "id": "broken",
+    "name": "Broken and secure",
+    "weight": 8,
+    "points": 6,
+    "pct": 75,
+    "pill": "Needs work"
+   },
+   {
+    "id": "tracking",
+    "name": "Tracking",
+    "weight": 4,
+    "points": 0,
+    "pct": 0,
+    "pill": "Broken"
+   }
+  ],
+  "items": [
+   {
+    "id": "fi_what",
+    "cat": "first",
+    "name": "Says what you do, for whom and where",
+    "status": "partial",
+    "evidence": "Your headline is your name; what you do and where comes further down.",
+    "quote": "Acme Roofing",
+    "fix": "Put what you do and the area you serve in the first line people see on a phone."
+   },
+   {
+    "id": "fi_action",
+    "cat": "first",
+    "name": "One clear main action at the top",
+    "status": "miss",
+    "evidence": "The only way to act sits at the bottom of the page.",
+    "quote": "Call us at (316) 555-0142",
+    "fix": "Pick one action (call, book or get a quote) and make it the main button at the top."
+   },
+   {
+    "id": "fi_headline",
+    "cat": "first",
+    "name": "Headline is more than the business name",
+    "status": "miss",
+    "evidence": "Your headline is only the business name.",
+    "quote": "Acme Roofing",
+    "fix": "Make the headline the result your customer gets, not just your name."
+   },
+   {
+    "id": "fi_photo",
+    "cat": "first",
+    "name": "Real photo of your work or team",
+    "status": "na",
+    "evidence": "Our review did not reach this item.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "c_tel",
+    "cat": "contact",
+    "name": "Tap-to-call phone number near the top",
+    "status": "miss",
+    "evidence": "We did not find a tap-to-call phone link on your homepage.",
+    "quote": "",
+    "fix": "Make your phone number a tap-to-call link and put it at the top of the page."
+   },
+   {
+    "id": "c_form",
+    "cat": "contact",
+    "name": "A form or booking link on the homepage",
+    "status": "pass",
+    "evidence": "Your homepage has a booking or request link.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "c_ways",
+    "cat": "contact",
+    "name": "At least two ways to reach you",
+    "status": "partial",
+    "evidence": "We found only one way to reach you on the homepage.",
+    "quote": "",
+    "fix": "Offer at least two: a tap-to-call number plus a form, booking link or email."
+   },
+   {
+    "id": "c_scroll",
+    "cat": "contact",
+    "name": "A way to reach you on every screen while scrolling",
+    "status": "na",
+    "evidence": "Needs a real browser on a phone.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "c_phone_same",
+    "cat": "contact",
+    "name": "One consistent phone number",
+    "status": "miss",
+    "evidence": "We found 2 different phone numbers on your homepage.",
+    "quote": "",
+    "fix": "Use one main number everywhere, so nobody calls the wrong line."
+   },
+   {
+    "id": "t_reviews",
+    "cat": "trust",
+    "name": "Reviews or testimonials on the site",
+    "status": "miss",
+    "evidence": "We did not find reviews or testimonials on your homepage.",
+    "quote": "",
+    "fix": "Show three or four real reviews on the homepage, with names."
+   },
+   {
+    "id": "t_facts",
+    "cat": "trust",
+    "name": "Concrete facts near the top",
+    "status": "partial",
+    "evidence": "Good facts, but below the first screen.",
+    "quote": "Family owned since 1998",
+    "fix": "Put real numbers near the top: years in business, jobs done, warranty."
+   },
+   {
+    "id": "t_cred",
+    "cat": "trust",
+    "name": "Credentials or guarantees easy to find",
+    "status": "pass",
+    "evidence": "Your licence and insurance are stated plainly.",
+    "quote": "licensed and insured",
+    "fix": ""
+   },
+   {
+    "id": "t_real",
+    "cat": "trust",
+    "name": "Real people or real jobs shown",
+    "status": "na",
+    "evidence": "Our review did not reach this item.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "cp_you",
+    "cat": "copy",
+    "name": "Talks about the customer more than itself",
+    "status": "na",
+    "evidence": "Not enough text on the homepage to count.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "cp_facts",
+    "cat": "copy",
+    "name": "Concrete facts outnumber vague phrases",
+    "status": "miss",
+    "evidence": "We counted 4 stock phrases like \"quality service\" or \"trusted\" and only 3 lines with real numbers.",
+    "quote": "",
+    "fix": "Swap phrases like \"quality service\" for specifics: numbers, places, results."
+   },
+   {
+    "id": "cp_objections",
+    "cat": "copy",
+    "name": "Common worries answered before the main button",
+    "status": "miss",
+    "evidence": "Price, timing and what happens next are not answered.",
+    "quote": "committed to quality service",
+    "fix": "Answer price, timing and trust questions before the main button."
+   },
+   {
+    "id": "f_nav",
+    "cat": "flow",
+    "name": "Main menu has 7 items or fewer",
+    "status": "partial",
+    "evidence": "Your main menu has 9 items.",
+    "quote": "",
+    "fix": "Cut the main menu to 7 items or fewer."
+   },
+   {
+    "id": "f_dominant",
+    "cat": "flow",
+    "name": "One thing stands out at the top",
+    "status": "na",
+    "evidence": "Our review did not reach this item.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "f_end",
+    "cat": "flow",
+    "name": "The main action sits where each section ends",
+    "status": "na",
+    "evidence": "Needs a real browser on a phone.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "f_next",
+    "cat": "flow",
+    "name": "A next step on the page",
+    "status": "pass",
+    "evidence": "Your homepage has a button or link asking people to call, book or get a quote.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "m_viewport",
+    "cat": "mobile",
+    "name": "Set up for phone screens",
+    "status": "pass",
+    "evidence": "Your homepage tells phones to fit the page to the screen.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "m_sideways",
+    "cat": "mobile",
+    "name": "No sideways scrolling on a phone",
+    "status": "na",
+    "evidence": "Needs a real browser on a phone.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "m_readable",
+    "cat": "mobile",
+    "name": "Text readable and buttons tappable on a phone",
+    "status": "partial",
+    "evidence": "Google PageSpeed flagged text size or tap targets on a phone.",
+    "quote": "",
+    "fix": "Use larger text and bigger, well spaced buttons on phones."
+   },
+   {
+    "id": "m_reach",
+    "cat": "mobile",
+    "name": "Call or book reachable within one thumb scroll",
+    "status": "na",
+    "evidence": "Needs a real browser on a phone.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "s_lcp",
+    "cat": "speed",
+    "name": "Main content appears quickly on a phone",
+    "status": "miss",
+    "evidence": "Main content took 4.7 seconds to appear in our phone test. We look for 2.5 or less.",
+    "quote": "",
+    "fix": "Shrink large images and drop scripts the page does not need."
+   },
+   {
+    "id": "s_cls",
+    "cat": "speed",
+    "name": "Page holds still while it loads",
+    "status": "pass",
+    "evidence": "The page held still while it loaded in our phone test.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "s_weight",
+    "cat": "speed",
+    "name": "Page weight under 3 MB",
+    "status": "miss",
+    "evidence": "The homepage weighed 3.6 MB. We look for under 3 MB.",
+    "quote": "",
+    "fix": "Compress images and remove files the page does not use."
+   },
+   {
+    "id": "g_title",
+    "cat": "google",
+    "name": "A page title that names you and what you do",
+    "status": "pass",
+    "evidence": "Your homepage has a page title, 34 characters long.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "g_desc",
+    "cat": "google",
+    "name": "A page description",
+    "status": "miss",
+    "evidence": "Your homepage has no description for search results.",
+    "quote": "",
+    "fix": "Add a description of about 50 to 165 characters."
+   },
+   {
+    "id": "g_h1",
+    "cat": "google",
+    "name": "One main heading that says something",
+    "status": "partial",
+    "evidence": "Your homepage has one main heading, but it is only one or two words.",
+    "quote": "",
+    "fix": "Use one main heading that says what you do."
+   },
+   {
+    "id": "g_schema",
+    "cat": "google",
+    "name": "Local business details for Google",
+    "status": "miss",
+    "evidence": "We did not find local business structured data on your homepage.",
+    "quote": "",
+    "fix": "Add LocalBusiness structured data with your name, address and phone."
+   },
+   {
+    "id": "g_nap",
+    "cat": "google",
+    "name": "Name, service and city together in the text",
+    "status": "pass",
+    "evidence": "Your service and city appear together.",
+    "quote": "Over 2,400 roofs replaced across Wichita",
+    "fix": ""
+   },
+   {
+    "id": "g_alt",
+    "cat": "google",
+    "name": "Images described with alt text",
+    "status": "partial",
+    "evidence": "1 of 2 images have alt text.",
+    "quote": "",
+    "fix": "Give every image a short description (alt text)."
+   },
+   {
+    "id": "b_https",
+    "cat": "broken",
+    "name": "Secure connection, and http forwards to https",
+    "status": "pass",
+    "evidence": "Your homepage loads over https, and the plain http address forwards to it.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "b_errors",
+    "cat": "broken",
+    "name": "No visible errors or placeholder text",
+    "status": "pass",
+    "evidence": "We found no error or placeholder wording on the homepage.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "b_year",
+    "cat": "broken",
+    "name": "Footer year is current",
+    "status": "miss",
+    "evidence": "Your footer still says 2021.",
+    "quote": "",
+    "fix": "Update the footer year (or let the site set it itself)."
+   },
+   {
+    "id": "b_mixed",
+    "cat": "broken",
+    "name": "Nothing loads over plain http",
+    "status": "pass",
+    "evidence": "Nothing on the homepage loads over plain http.",
+    "quote": "",
+    "fix": ""
+   },
+   {
+    "id": "tr_analytics",
+    "cat": "tracking",
+    "name": "An analytics tag",
+    "status": "miss",
+    "evidence": "We did not find an analytics tag on your homepage.",
+    "quote": "",
+    "fix": "Add an analytics tag, like Google Analytics."
+   },
+   {
+    "id": "tr_leads",
+    "cat": "tracking",
+    "name": "A way to measure leads",
+    "status": "miss",
+    "evidence": "We did not find a way to measure leads, like call tracking or a thank-you page.",
+    "quote": "",
+    "fix": "Track form sends and calls (a thank-you page, call tracking or an events tag)."
+   }
+  ],
+  "top": [
+   {
+    "id": "c_tel",
+    "heading": "Phone visitors can't tap to call you",
+    "body": "We did not find a tap-to-call phone link on your homepage.",
+    "fix": "Make your phone number a tap-to-call link and put it at the top of the page."
+   },
+   {
+    "id": "c_phone_same",
+    "heading": "Your homepage shows more than one phone number",
+    "body": "We found 2 different phone numbers on your homepage.",
+    "fix": "Use one main number everywhere, so nobody calls the wrong line."
+   },
+   {
+    "id": "fi_action",
+    "heading": "There is no clear first step at the top of the page",
+    "body": "On your homepage: \"Call us at (316) 555-0142\". The only way to act sits at the bottom of the page.",
+    "fix": "Pick one action (call, book or get a quote) and make it the main button at the top."
+   }
+  ],
+  "working": [
+   {
+    "text": "You've been in business since 1998, which builds trust.",
+    "quote": "Family owned since 1998"
+   },
+   {
+    "text": "You back every roof with a 10-year workmanship warranty.",
+    "quote": "10-year workmanship warranty"
+   },
+   {
+    "text": "You show real volume: over 2,400 roofs replaced.",
+    "quote": "Over 2,400 roofs replaced"
+   },
+   {
+    "text": "Visitors can send you a request from the homepage.",
+    "quote": ""
+   },
+   {
+    "text": "The page asks visitors to take a next step.",
+    "quote": ""
+   }
+  ],
+  "verdict": [
+   "You've been in business since 1998, which builds trust.",
+   "The biggest gap: phone visitors can't tap to call you."
+  ],
+  "speed": {
+   "lcpS": 4.7,
+   "cls": 0.02,
+   "weightMb": 3.6
+  },
+  "notChecked": [
+   "Real photo of your work or team",
+   "A way to reach you on every screen while scrolling",
+   "Real people or real jobs shown",
+   "Talks about the customer more than itself",
+   "One thing stands out at the top",
+   "The main action sits where each section ends",
+   "No sideways scrolling on a phone",
+   "Call or book reachable within one thumb scroll"
+  ],
+  "judgment": true,
+  "rule": "How we graded this: 10 areas, 100 points, scored only from what anyone can see on your homepage. Each item is a pass, a partial or a miss. A is 90 or more, B 80 to 89, C 70 to 79, D 60 to 69, F under 60. Items we could not check are left out of the score and named.",
+  "scoreLabel": "The grade is ProyTech's score for these checks on this date. It does not come from Google or any rating body."
+ },
+ "code": "TEARDOWN-ACMEROOFING",
+ "codeExpires": "2026-12-07",
+ "bookUrl": "https://www.getproytech.com/book?src=td-acmeroofing"
+}
