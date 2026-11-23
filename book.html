@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Book your free Growth Plan | ProyTech</title>
-<meta name="description" content="Two hours with ProyTech, free. We map your goals, your numbers, and the levers that move them, and you leave with a written plan.">
+<title>The Nucleus Session | ProyTech</title>
+<meta name="description" content="The Nucleus Session: free, 15 to 30 minutes on Google Meet. Tell us about your business, pick a time, and leave knowing your next three moves.">
 <meta name="theme-color" content="#071A3D">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:title" content="Book your free Growth Plan | ProyTech">
-<meta property="og:description" content="Two hours with ProyTech, free. We map your goals, your numbers, and the levers that move them, and you leave with a written plan.">
+<link rel="canonical" href="https://getproytech.com/book">
+<meta property="og:title" content="The Nucleus Session | ProyTech">
+<meta property="og:description" content="Free, 15 to 30 minutes on Google Meet. Leave knowing your next three moves.">
 <meta property="og:image" content="https://getproytech.com/images/proytech-dog.jpg">
 <meta property="og:url" content="https://getproytech.com/book">
 <meta property="og:type" content="website">
@@ -20,21 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/pt-site.css?v=3">
 <style>
-.field{margin-bottom:16px}
-.field label{display:block;font-size:12.5px;font-weight:700;color:var(--blue);
-  letter-spacing:.09em;text-transform:uppercase;margin-bottom:8px}
-.field input,.field textarea{
-  width:100%;background:rgba(5,11,24,.8);border:1.5px solid var(--line);
-  border-radius:12px;padding:15px 17px;color:var(--white);
-  font-family:inherit;font-size:16.5px;transition:border-color .15s,background .15s}
-.field textarea{min-height:92px;resize:vertical}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);background:rgba(10,22,44,.95)}
-.field input.bad,.field textarea.bad{border-color:#FF6B6B}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-#bookMsg{margin-top:14px;font-size:15px;font-weight:600;display:none}
-#bookMsg.ok{display:block;color:var(--blue)}
-#bookMsg.err{display:block;color:#FF8E8E}
-
+/* ---- leak finder (unchanged from the previous /book) ---- */
 .leak{max-width:780px;margin:0 auto;padding:36px 34px;border-radius:22px;
   border:1px solid var(--line);
   background:linear-gradient(180deg, rgba(12,26,51,.9), rgba(6,14,28,.92))}
@@ -61,22 +48,98 @@
   border-radius:3px;background:var(--orange);opacity:.85}
 .leak-back{background:none;border:0;color:var(--gray);font:inherit;font-size:14px;
   cursor:pointer;padding:10px 0;text-decoration:underline;text-underline-offset:3px}
-@media (max-width:560px){ .row2{grid-template-columns:1fr} .leak{padding:26px 20px} }
-@media (max-width:820px){ .grid2{grid-template-columns:1fr !important} }
-</style>
-<style>.bk{--line:rgba(125,211,252,.3);--blue:#38BDF8;--blue-deep:#1338DE;--white:#fff;--gray:#A9BCD8;--orange:#FB6926;--display:var(--disp)}
+@media (max-width:560px){ .leak{padding:26px 20px} }
+.bk{--line:rgba(125,211,252,.3);--blue:#38BDF8;--blue-deep:#1338DE;--white:#fff;--gray:#A9BCD8;--orange:#FB6926;--display:var(--disp)}
 .bk .btn-primary{background:var(--o);color:#fff;box-shadow:0 10px 30px rgba(251,105,38,.4)}
 .bk .section-head{text-align:center}.bk .section-head h2{font-family:var(--disp);font-size:clamp(2rem,4vw,3rem);letter-spacing:-.03em;margin-top:10px}.bk .kicker{font-family:var(--disp);font-weight:600;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ice-2)}
 .bk .leak{max-width:720px;margin:34px auto 0;border-radius:24px;padding:34px;background:linear-gradient(160deg,#0D2566,#07163A 75%);border:1px solid rgba(56,189,248,.5);box-shadow:0 0 30px rgba(56,189,248,.2)}
-.bk select{width:100%;background:rgba(5,11,24,.8);border:1.5px solid var(--line);border-radius:12px;padding:15px 17px;color:#fff;font-family:inherit;font-size:16px}
-.bk select:focus{outline:none;border-color:var(--blue)}
-.bk select option{background:#07163A}
-.bk .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.bk #bookMsg{margin-top:12px;font-weight:600}.bk #bookMsg.ok{color:#7CE3A7}.bk #bookMsg.err{color:#FFB59A}
-.bk input.bad,.bk select.bad{border-color:#FF6B35}
-.bk .gp-list{list-style:none;padding:0;margin-top:14px;display:grid;gap:12px}
-.bk .gp-list li{position:relative;padding-left:30px;color:#D6E4F7;line-height:1.5}
-.bk .gp-list li::before{content:"✓";position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:rgba(56,189,248,.2);border:1px solid var(--ice);color:var(--ice-2);font-size:.75rem;display:grid;place-items:center;font-weight:700}
+
+/* ---- hero ---- */
+.nh .lede{max-width:56ch}
+.nh .hero-cta{margin-top:30px}
+/* VIDEO SLOT: hidden while empty, so the page looks finished without it */
+.hero-video{margin-top:34px;max-width:760px;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid rgba(56,189,248,.45);box-shadow:0 0 30px rgba(56,189,248,.2);background:#050E24}
+.hero-video:empty{display:none}
+.hero-video>video,.hero-video>iframe{display:block;width:100%;height:100%;border:0}
+
+/* ---- what we build ---- */
+.tiers .card{display:flex;flex-direction:column}
+.callsteps .step p{font-family:var(--disp);font-weight:600;font-size:1.2rem;line-height:1.45;color:var(--ink);margin-top:20px}
+.tiers .price{margin-top:auto;padding-top:22px;font-family:var(--disp);font-weight:700;font-size:1.15rem;color:#fff;line-height:1.5}
+.tiers .price small{display:block;font-family:var(--body);font-weight:500;font-size:.88rem;color:var(--muted-d)}
+.tiers-note{margin-top:26px;text-align:center;color:#CFDDF2}
+
+/* ---- application ---- */
+.app{max-width:680px;margin:40px auto 0;background:rgba(10,22,51,.72);border:1px solid rgba(125,211,252,.22);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.42);overflow:hidden}
+.app-head{padding:20px 26px;border-bottom:1px solid rgba(125,211,252,.14)}
+.app-head .lbl{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-2)}
+.app-rail{height:4px;border-radius:99px;background:rgba(46,155,255,.16);overflow:hidden;margin-top:10px}
+.app-rail i{display:block;height:100%;width:33.34%;border-radius:99px;background:linear-gradient(90deg,var(--elec),var(--o));transition:width .35s cubic-bezier(.4,0,.2,1)}
+.app-body{padding:26px}
+@media (max-width:560px){.app-head,.app-body{padding-left:18px;padding-right:18px}}
+.astep h3,.app-view h3{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:-.01em;color:#fff;margin-bottom:20px}
+.app .field{margin:0 0 20px;padding:0;border:0;min-width:0}
+.app .field>label,.app .field>legend{display:block;padding:0;font-weight:600;font-size:.98rem;line-height:1.4;margin-bottom:8px;color:#fff}
+.app .field .opt-tag{font-weight:500;color:var(--muted-d);font-size:.85rem}
+.app .help{font-size:.86rem;color:var(--muted-d);margin:-2px 0 9px;line-height:1.45}
+.app .field input[type=text],.app .field input[type=tel],.app .field input[type=email],.app .field textarea{width:100%;font:inherit;font-size:16px;padding:14px 16px;border-radius:13px;color:#fff;background:rgba(255,255,255,.05);border:1.5px solid rgba(125,211,252,.22);transition:border-color .15s,background .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+.app .field textarea{min-height:96px;resize:vertical;line-height:1.5}
+.app .field input::placeholder,.app .field textarea::placeholder{color:#7F93B3}
+.app .field input:focus,.app .field textarea:focus{outline:none;border-color:var(--ice);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(46,155,255,.2)}
+.app .field.bad input[type=text],.app .field.bad input[type=tel],.app .field.bad input[type=email],.app .field.bad textarea{border-color:var(--o)}
+.app .field .err{display:none;color:var(--o-2);font-size:.85rem;font-weight:500;margin-top:7px}
+.app .field.bad .err{display:block}
+.choices{display:grid;gap:9px}
+.choice{display:flex;align-items:center;gap:12px;min-height:54px;padding:12px 16px;border-radius:14px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.18);color:#fff;font-weight:500;line-height:1.35;transition:border-color .15s,background .15s}
+.choice:hover{border-color:var(--ice)}
+.choice input{flex:0 0 auto;width:20px;height:20px;margin:0;accent-color:#FB6926;cursor:pointer}
+.choice.sel{border-color:var(--o);background:rgba(251,105,38,.10)}
+.app .field.bad .choice{border-color:rgba(251,105,38,.55)}
+.anav{display:flex;gap:12px;align-items:center;margin-top:8px}
+.anav .back{flex:0 0 auto}
+.book-btn{flex:1;width:100%;font-family:var(--disp);font-weight:700;font-size:1.05rem;padding:17px 20px;border-radius:999px;border:0;cursor:pointer;background:var(--o);color:#fff;box-shadow:0 14px 34px rgba(251,105,38,.4);transition:transform .16s,background .16s;display:flex;align-items:center;justify-content:center}
+.book-btn:hover:not(:disabled){transform:translateY(-2px);background:var(--o-2)}
+.book-btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.back{background:none;border:0;color:var(--muted-d);font:inherit;font-size:.95rem;font-weight:600;cursor:pointer;padding:12px 6px;text-decoration:underline;text-underline-offset:3px}
+.back:hover{color:#fff}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* routed screen + time picker (from /coffee) */
+.routed-copy{color:#CFDDF2;line-height:1.6;margin:-8px 0 24px}
+.blabel{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d);margin-bottom:14px}
+.days{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.days::-webkit-scrollbar{height:5px}.days::-webkit-scrollbar-thumb{background:rgba(125,211,252,.2);border-radius:10px}
+.day{flex:0 0 auto;scroll-snap-align:start;min-width:72px;text-align:center;padding:13px 12px;border-radius:15px;cursor:pointer;color:#fff;font:inherit;
+  background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.16);transition:border-color .18s,background .18s,transform .18s}
+.day:hover{border-color:var(--ice);transform:translateY(-2px)}
+.day.sel{background:var(--elec);border-color:var(--elec);box-shadow:0 10px 24px rgba(46,155,255,.4)}
+.day .dow{display:block;font-family:var(--disp);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d)}
+.day.sel .dow,.day.sel .mon{color:rgba(255,255,255,.85)}
+.day .dnum{display:block;font-family:var(--disp);font-weight:700;font-size:22px;margin-top:3px}
+.day .mon{display:block;font-size:10.5px;color:var(--muted-d);margin-top:1px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:9px;margin-top:18px}
+.slot{padding:15px 10px;border-radius:14px;cursor:pointer;font-family:var(--disp);font-weight:600;font-size:1rem;color:#fff;background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.18);transition:border-color .16s,background .16s}
+.slot:hover{border-color:var(--o-2)}
+.slot.sel{border-color:var(--o);background:rgba(251,105,38,.14);box-shadow:0 8px 22px rgba(251,105,38,.18)}
+.slot-empty{text-align:center;padding:22px;margin-top:18px;color:var(--muted-d);font-size:.95rem;background:rgba(255,255,255,.03);border-radius:14px}
+.app-msg{margin-top:14px;font-size:.95rem;line-height:1.5;color:#FFB59A}
+.app-msg:empty{display:none}
+.app-msg a{color:#fff}
+
+/* confirmation */
+.done{text-align:center;padding:12px 0 6px}
+.done .big{width:84px;height:84px;border-radius:50%;background:var(--o);margin:0 auto 22px;display:grid;place-items:center;box-shadow:0 16px 40px rgba(251,105,38,.45)}
+.done h3{font-size:1.9rem;margin-bottom:10px}
+.done .when{font-family:var(--disp);font-weight:600;font-size:1.15rem;color:#fff;line-height:1.45}
+.done .sub{color:#CFDDF2;margin-top:8px}
+.done .meet{display:inline-block;margin-top:10px;color:var(--ice-2);word-break:break-all}
+.ready{text-align:left;max-width:460px;margin:26px auto 0;background:rgba(255,255,255,.05);border:1px solid rgba(125,211,252,.18);border-radius:15px;padding:18px 20px;color:#fff}
+.ready ol{margin:10px 0 0 20px;color:#D6E4F7;line-height:1.6}
+.ready ol li{margin-bottom:6px}
+.done .last{margin-top:22px;color:var(--muted-d);font-size:.95rem}
+
+.mock-flag{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:90;background:#FFD166;color:#0B1633;font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.mcta.away{display:none!important}
 </style>
 </head>
 <body>
@@ -119,70 +182,125 @@
     <a href="/events">Events</a>
     <a href="/resources">Resources</a>
     <a href="/about">About</a>
-    <a class="btn btn-o" href="/book">Free Growth Plan</a>
+    <a class="btn btn-o" href="/book">Free Nucleus Session</a>
   </div>
 </div></nav>
 <main>
-<section class="phero bk" style="padding:118px 0 70px">
-  <svg class="hero-traces" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs><linearGradient id="tb" x1="0" x2="1"><stop offset="0" stop-color="#2E9BFF" stop-opacity=".15"/><stop offset=".6" stop-color="#2E9BFF" stop-opacity=".6"/><stop offset="1" stop-color="#FB6926" stop-opacity=".65"/></linearGradient></defs>
-    <g stroke="url(#tb)" stroke-width="1.8" fill="none">
-      <path id="h1" d="M0 120 H300 L350 70 H560 L600 120 H820 L870 170 H1440"/>
-      <path id="h2" d="M0 300 H200 L250 250 H600 L650 210 H900 L950 260 H1440"/>
-      <path id="h3" d="M0 470 H260 L310 520 H640 L690 450 H980 L1030 500 H1440"/>
-      <path id="h4" d="M0 640 H380 L430 600 H760 L810 640 H1440"/>
-      <path d="M1180 0 V120 L1230 170 V330"/><path d="M420 0 V60 L470 110 V200"/>
-    </g>
-    <g fill="#38BDF8"><circle cx="350" cy="70" r="4"/><circle cx="600" cy="120" r="4"/><circle cx="250" cy="250" r="4"/><circle cx="650" cy="210" r="4"/><circle cx="310" cy="520" r="4"/><circle cx="690" cy="450" r="4"/><circle cx="430" cy="600" r="4"/></g>
-    <g fill="#FB6926"><circle cx="870" cy="170" r="4"/><circle cx="950" cy="260" r="4"/><circle cx="1030" cy="500" r="4"/></g>
-    <use href="#h1" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC"/>
-    <use href="#h2" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:1.1s"/>
-    <use href="#h3" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:.6s"/>
-    <use href="#h4" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:2s"/>
-    <use href="#h2" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:2.6s"/>
-  </svg>
+
+<!-- 1. HERO -->
+<section class="phero nh" style="padding:118px 0 70px">
   <div class="wrap">
-    <span class="eyebrow">Free · 2 hours · no pitch</span>
-    <h1 style="font-size:clamp(2.2rem,4.4vw,3.6rem);max-width:20ch">Book your free <em>Growth Plan.</em></h1>
-    <p class="lede">Two hours with us. We map your goals, your numbers, and the levers that move them, and you leave with a written plan whether you work with us or not.</p>
-    <div class="grid2" style="display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;margin-top:40px;align-items:start">
-      <div class="card rv">
-        <h3>What you walk away with</h3>
-        <ul class="gp-list">
-          <li>Your 12-month revenue goal, broken into weekly targets</li>
-          <li>Where leads and hours are slipping today</li>
-          <li>The one or two levers to pull first</li>
-          <li>A written plan you keep, either way</li>
-        </ul>
-        <div style="height:1px;background:rgba(125,211,252,.2);margin:24px 0"></div>
-        <h3 style="font-size:1.1rem">Rather just talk?</h3>
-        <p>Call or text either of us. We answer.</p>
-        <p style="font-family:var(--disp);font-weight:600;font-size:1.1rem;line-height:1.9;margin-top:8px">Garrett · <a href="tel:9013353905" style="color:var(--ice-2);text-decoration:none">901-335-3905</a><br>Logan · <a href="tel:9132374403" style="color:var(--ice-2);text-decoration:none">913-237-4403</a></p>
+    <span class="eyebrow">The Nucleus Session · Free · 15 to 30 minutes on Google Meet</span>
+    <h1 style="font-size:clamp(2.2rem,4.4vw,3.6rem);max-width:20ch">Leave knowing your <em>next three moves.</em></h1>
+    <!-- VIDEO SLOT: put a <video> or <iframe> directly inside #heroVideo (no spaces or line breaks around it).
+         While it is empty it stays hidden, so the page looks finished without it. -->
+    <div class="hero-video" id="heroVideo"></div>
+    <p class="lede">Tell us about your business and pick a time. Garrett or Logan gets on a call with you, looks at your goals, your numbers and what is in the way, and tells you what we would fix first.</p>
+    <div class="hero-cta"><a class="btn btn-o" href="#apply" data-start>Start my application</a></div>
+  </div>
+</section>
+
+<!-- 2. WHAT HAPPENS ON THE CALL -->
+<section class="sec sec-ice">
+  <div class="wrap">
+    <h2 class="h2 rv" style="margin-top:0">What happens on the call</h2>
+    <div class="steps callsteps">
+      <div class="step rv"><div class="dot">1</div><p>We find where leads, sales and hours are slipping away.</p></div>
+      <div class="step rv"><div class="dot">2</div><p>You get your next three moves, in order.</p></div>
+      <div class="step rv"><div class="dot">3</div><p>If we can help, you see the plan and the price on the call. If we can't, we tell you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. WHAT WE BUILD -->
+<section class="sec sec-dark">
+  <div class="wrap">
+    <h2 class="h2 rv" style="margin-top:0">What we build</h2>
+    <div class="grid3 tiers">
+      <article class="card rv"><h3>Website</h3><p>A site built to bring in leads.</p><p class="price">$1,499 to build<small>$149 a month</small></p></article>
+      <article class="card card-o rv"><h3>Growth OS</h3><p>Your website plus the Business Suite that runs your leads, follow-up and customers.</p><p class="price">$2,999 to build<small>$299 a month</small></p></article>
+      <article class="card rv"><h3>Empire OS</h3><p>The full operating system and AI team for companies around $1M and up.</p><p class="price">By application</p></article>
+    </div>
+    <p class="tiers-note rv">Not sure which one fits? The application sorts that out.</p>
+  </div>
+</section>
+
+<!-- 4-6. APPLICATION, ROUTED SCREEN + TIME PICKER, CONFIRMATION -->
+<section class="sec sec-dark" id="apply" style="padding-top:40px">
+  <div class="wrap">
+    <div class="app" id="app">
+      <div class="app-head">
+        <div class="lbl" id="appStep" aria-live="polite">Step 1 of 3</div>
+        <div class="app-rail"><i id="appBar"></i></div>
       </div>
-      <div class="card card-o rv">
-        <h3>A few quick questions</h3>
-        <p style="margin-bottom:18px">So we can come prepared and make sure it's a good fit. We'll reach out within one business day to set a time.</p>
-        <div class="row2">
-          <div class="field"><label for="bn">Your name</label><input id="bn" type="text" autocomplete="name" placeholder="Jordan Reed"></div>
-          <div class="field"><label for="bp">Phone</label><input id="bp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(316) 555-0142"></div>
+      <div class="app-body">
+        <form id="appForm" novalidate autocomplete="on">
+
+          <div class="astep" data-step="1">
+            <h3>You</h3>
+            <div class="field" data-req="text"><label for="a_first">First name</label><input type="text" id="a_first" name="firstName" autocomplete="given-name" maxlength="59"><div class="err">What is your first name?</div></div>
+            <div class="field" data-req="text"><label for="a_last">Last name</label><input type="text" id="a_last" name="lastName" autocomplete="family-name" maxlength="60"><div class="err">What is your last name?</div></div>
+            <div class="field" data-req="text"><label for="a_biz">Business name</label><input type="text" id="a_biz" name="business" autocomplete="organization" maxlength="160"><div class="err">What is the business called?</div></div>
+            <div class="field"><label for="a_site">Website</label><p class="help" id="h_site">No site yet? Leave it blank.</p><input type="text" id="a_site" name="website" inputmode="url" autocomplete="url" maxlength="200" aria-describedby="h_site" placeholder="yourbusiness.com"></div>
+            <div class="field" data-req="phone"><label for="a_phone">Mobile</label><input type="tel" id="a_phone" name="phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(316) 555-0142"><div class="err">We need a 10-digit mobile number.</div></div>
+            <div class="field" data-req="email"><label for="a_email">Email</label><input type="email" id="a_email" name="email" inputmode="email" autocomplete="email" maxlength="160" placeholder="you@business.com"><div class="err">That email doesn't look right.</div></div>
+            <div class="hp" aria-hidden="true"><label for="a_fax">Fax</label><input type="text" id="a_fax" name="fax" tabindex="-1" autocomplete="off"></div>
+            <div class="sms-consent-wrap"><label><input type="checkbox" class="js-sms-consent" required> <span>I agree to receive text messages from ProyTech at the number provided, including replies to my inquiry, appointment reminders, follow ups, and occasional offers. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/terms" target="_blank" rel="noopener">Terms</a>.</span></label><p class="sms-consent-msg" hidden>Please check the box to agree to texts before continuing.</p></div>
+            <div class="anav"><button type="button" class="book-btn" data-next data-consent-gate>Continue</button></div>
+          </div>
+
+          <div class="astep" data-step="2" hidden>
+            <h3>Your business</h3>
+            <div class="field" data-req="text"><label for="a_does">What does your business do?</label><input type="text" id="a_does" name="does" maxlength="300" placeholder="Residential roofing in Wichita"><div class="err">Tell us what the business does.</div></div>
+            <fieldset class="field" data-req="choice"><legend>Revenue over the last 12 months</legend><p class="help">A range is fine. It decides which call we put you on.</p><div class="choices" data-choices="revenue"></div><div class="err">Pick a range.</div></fieldset>
+            <fieldset class="field" data-req="choice"><legend>How many people work in the business, counting you?</legend><div class="choices" data-choices="team"></div><div class="err">Pick one.</div></fieldset>
+            <div class="field" data-req="text"><label for="a_goal">Where do you want revenue to be 12 months from now?</label><input type="text" id="a_goal" name="goal" maxlength="120" placeholder="$750k"><div class="err">Give us a number, even a rough one.</div></div>
+            <div class="anav"><button type="button" class="back" data-prev>Back</button><button type="button" class="book-btn" data-next>Continue</button></div>
+          </div>
+
+          <div class="astep" data-step="3" hidden>
+            <h3>What you need</h3>
+            <fieldset class="field" data-req="choice"><legend>What are you looking for?</legend><div class="choices" data-choices="lookingFor"></div><div class="err">Pick one.</div></fieldset>
+            <fieldset class="field" data-req="choice"><legend>What is the biggest thing in the way right now?</legend><div class="choices" data-choices="blocker"></div><div class="err">Pick one.</div></fieldset>
+            <div class="field"><label for="a_cost">What is that costing you? <span class="opt-tag">(optional)</span></label><p class="help" id="h_cost">Lost jobs, hours a week, stress. Your best guess.</p><textarea id="a_cost" name="cost" maxlength="300" aria-describedby="h_cost"></textarea></div>
+            <div class="field" data-req="text"><label for="a_tools">What do you run the business on today?</label><p class="help" id="h_tools">Spreadsheets, a CRM, QuickBooks, your phone. List what you use.</p><textarea id="a_tools" name="tools" maxlength="500" aria-describedby="h_tools"></textarea><div class="err">List what you use today, even if it's just your phone.</div></div>
+            <fieldset class="field" data-req="choice"><legend>How soon would you want to start?</legend><div class="choices" data-choices="timing"></div><div class="err">Pick one.</div></fieldset>
+            <div class="anav"><button type="button" class="back" data-prev>Back</button><button type="button" class="book-btn" data-next>See my times</button></div>
+          </div>
+        </form>
+
+        <div class="app-view" id="viewTimes" hidden>
+          <h3 id="routedTitle">Checking your times…</h3>
+          <p class="routed-copy" id="routedCopy"></p>
+          <div class="blabel">Pick a time. Weekdays, Central time.</div>
+          <div class="days" id="days" role="group" aria-label="Day"></div>
+          <div class="slots" id="slots" role="group" aria-label="Start time"></div>
+          <div class="slot-empty" id="slotMsg" hidden></div>
+          <div class="anav" style="margin-top:22px"><button type="button" class="back" id="editAnswers">Edit my answers</button><button type="button" class="book-btn" id="bookBtn" disabled>Book my Nucleus Session</button></div>
+          <div class="app-msg" id="bookMsg" role="alert"></div>
         </div>
-        <div class="row2">
-          <div class="field"><label for="be">Email</label><input id="be" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com"></div>
-          <div class="field"><label for="bb">Business</label><input id="bb" type="text" placeholder="Reed Realty, Wichita"></div>
+
+        <div class="app-view done" id="viewDone" hidden>
+          <div class="big" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3 tabindex="-1" id="doneTitle">You're booked.</h3>
+          <p class="when" id="doneWhen"></p>
+          <p class="sub">The invite with your link is in your inbox.</p>
+          <a class="meet" id="doneMeet" href="#" target="_blank" rel="noopener" hidden></a>
+          <div class="ready">
+            <b>Before the call, two things to have ready:</b>
+            <ol>
+              <li>Roughly what the business brought in over the last 12 months.</li>
+              <li>Where your last five customers came from.</li>
+            </ol>
+          </div>
+          <p class="last">Need to move it? Reply to the invite and we will find another time.</p>
         </div>
-        <div class="row2">
-          <div class="field"><label for="bi">What kind of business?</label><select id="bi"><option value="">Choose one</option><option>Realtor or real estate team</option><option>Lender or mortgage</option><option>Home services or trades</option><option>Insurance</option><option>Professional services</option><option>Something else</option></select></div>
-          <div class="field"><label for="br">Yearly revenue</label><select id="br"><option value="">Choose one</option><option>Under $100K</option><option>$100K to $250K</option><option>$250K to $1M</option><option>Over $1M</option><option>Prefer not to say</option></select></div>
-        </div>
-        <div class="field"><label for="bw">What's the biggest thing holding you back?</label><textarea id="bw" placeholder="We get leads, but I don't know my numbers and follow up falls through the cracks."></textarea></div>
-        <input type="text" id="bhp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-        <div class="sms-consent-wrap"><label><input type="checkbox" class="js-sms-consent" required> <span>I agree to receive text messages from ProyTech at the number provided, including replies to my inquiry, appointment reminders, follow ups, and occasional offers. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/terms" target="_blank" rel="noopener">Terms</a>.</span></label><p class="sms-consent-msg" hidden>Please check the box to agree to texts before continuing.</p></div>
-        <button class="btn btn-o" id="bookSend" data-consent-gate style="width:100%">Request my free Growth Plan</button>
-        <div id="bookMsg" role="status"></div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- LEAK FINDER (kept as it was) -->
 <div class="bk"><section>
   <div class="wrap">
     <div class="section-head center rv">
@@ -210,39 +328,488 @@
       </div>
       <div><h5>What we build</h5><a href="/#growth-os">Growth OS</a><a href="/websites">Websites</a><a href="/suite">Business Suite</a><a href="/automation">Automations</a></div>
       <div><h5>Company</h5><a href="/about">About us</a><a href="/work">Our work</a><a href="/events">Events</a><a href="/resources">Resources</a><a href="/partner">Partner Program</a></div>
-      <div><h5>Talk to us</h5><a href="/book">Free Growth Plan</a><a href="tel:9013353905">901-335-3905</a><a href="mailto:admin@getproytech.com">admin@getproytech.com</a></div>
+      <div><h5>Talk to us</h5><a href="/book">Free Nucleus Session</a><a href="tel:9013353905">901-335-3905</a><a href="mailto:admin@getproytech.com">admin@getproytech.com</a></div>
     </div>
     <div class="foot-base"><span>© <span id="yr"></span> ProyTech Business Solutions LLC · 201 N Water St, Wichita, KS 67202 · 901-335-3905 · admin@getproytech.com</span><span><a href="/terms">Terms of Service</a> · <a href="/privacy">Privacy Policy</a> &middot; Text STOP to opt out</span><span>Based in Wichita, building for businesses across the country.</span></div>
   </div>
 </footer>
-<div class="mcta"><a class="btn btn-o" href="/book">Book your free Growth Plan</a></div>
+<div class="mcta" id="mcta"><a class="btn btn-o" href="#apply" data-start>Start my application</a></div>
 <script src="/js/pt-site.js?v=3"></script>
 <script>
 (function(){
-  var $=function(s){return document.querySelector(s)};
-  var digits=function(s){return (s||'').replace(/\D/g,'')};
-  function fmt(v){var d=digits(v).slice(0,10);if(d.length<4)return d;if(d.length<7)return '('+d.slice(0,3)+') '+d.slice(3);return '('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6)}
-  $('#bp').addEventListener('input',function(e){e.target.value=fmt(e.target.value)});
-  var MAILTO='admin@getproytech.com';
-  function say(t,ok){var m=$('#bookMsg');m.textContent=t;m.className=ok?'ok':'err'}
-  $('#bookSend').addEventListener('click',async function(){
-    var f={name:$('#bn').value.trim(),phone:$('#bp').value.trim(),email:$('#be').value.trim(),business:$('#bb').value.trim(),
-      industry:$('#bi').value,revenue:$('#br').value,problem:$('#bw').value.trim(),company:$('#bhp').value,source:new URLSearchParams(location.search).get('src')||'book-page'};
-    document.querySelectorAll('.bad').forEach(function(i){i.classList.remove('bad')});
-    if(!f.name){$('#bn').classList.add('bad');return say('We need a name.',false)}
-    if(digits(f.phone).length!==10&&!f.email){$('#bp').classList.add('bad');return say('Leave a phone number or an email so we can reach you.',false)}
-    if(!f.business){$('#bb').classList.add('bad');return say('Tell us the name of your business.',false)}
-    if(!f.industry){$('#bi').classList.add('bad');return say('Pick the kind of business you run.',false)}
-    var btn=$('#bookSend');btn.disabled=true;btn.textContent='Sending...';
-    var stored=false;
-    try{var r=await fetch('/api/growth-plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(f)});var j=await r.json();stored=!!(j&&j.stored)}catch(e){}
-    if(!stored){
-      var body='Growth Plan request\n\nName: '+f.name+'\nBusiness: '+f.business+'\nType: '+f.industry+'\nRevenue: '+(f.revenue||'-')+'\nPhone: '+(f.phone||'-')+'\nEmail: '+(f.email||'-')+'\n\nBiggest thing holding them back:\n'+(f.problem||'-')+'\n';
-      window.location.href='mailto:'+MAILTO+'?subject='+encodeURIComponent('Growth Plan request: '+f.name)+'&body='+encodeURIComponent(body);
-    }
-    btn.textContent='Request sent';
-    say('Got it, '+f.name.split(' ')[0]+'. We\u2019ll reach out within one business day to set your time.',true);
+  "use strict";
+
+  /* =====================================================================
+     CRM ADAPTER. Every request and response field name lives here.
+     Contract: proytech-crm api/nucleus-availability.js, api/nucleus-book.js,
+     src/lib/nucleus.js. Both routes take FLAT bodies and refuse unknown keys.
+     ===================================================================== */
+  var ADAPTER = {
+    base: 'https://proytech-crm.vercel.app',
+    paths: { availability: '/api/nucleus-availability', book: '/api/nucleus-book' },
+    availability: {              // first call {date, revenue, want}; later {date, track}
+      date: 'date', track: 'track', revenue: 'revenue', want: 'want'
+    },
+    book: {                      // flat: application keys + date, time, src, track, honeypot
+      date: 'date', time: 'time', src: 'src', track: 'track', honeypot: 'fax',
+      name: 'name',              // first + last, joined
+      textConsent: 'textConsent',   // boolean true, sent only when ticked
+      consentText: 'consentText',   // the exact checkbox wording, sent only when ticked
+      leakFinder: 'leakFinder',     // array of short strings, sent only when the quiz was done
+      answers: {                 // page field -> server key
+        business: 'business', website: 'website', phone: 'phone', email: 'email',
+        does: 'whatTheyDo', revenue: 'revenue', team: 'teamSize', goal: 'revenueGoal',
+        lookingFor: 'want', blocker: 'blocker', cost: 'cost', tools: 'tools', timing: 'startWhen'
+      }
+    },
+    sendAs: { revenue: 'id', lookingFor: 'id', blocker: 'id', team: 'label', timing: 'label' },
+    res: {
+      ok: 'ok', error: 'error', fields: 'fields', reason: 'reason',
+      track: 'track', trackName: 'name', trackMinutes: 'minutes',
+      open: 'open', slotTime: 'time', slotLabel: 'label',
+      when: 'when', meetLink: 'meetLink'
+    },
+    errors: { taken: 'slot_taken', badSlot: 'bad date/time', mismatch: 'track_mismatch', invalid: 'invalid' }
+  };
+
+  /* Choice answers: id + the label the visitor sees. revenue, lookingFor and
+     blocker ids are the CRM's (src/lib/nucleus.js; blockers from settings). */
+  var CHOICES = {
+    revenue: [['under_50k','Under $50k'],['50k_250k','$50k to $250k'],['250k_1m','$250k to $1M'],['1m_3m','$1M to $3M'],['3m_10m','$3M to $10M'],['over_10m','Over $10M']],
+    team: [['just_me','Just me'],['2_5','2 to 5'],['6_15','6 to 15'],['16_50','16 to 50'],['over_50','Over 50']],
+    lookingFor: [['website','A website'],['website_system','A website plus a system to run my leads and follow-up'],['scale','Help scaling the whole company']],
+    blocker: [['not_enough_leads','Not enough leads'],['follow_up','Leads go cold and follow-up falls through'],['runs_through_me','Too much runs through me'],['no_numbers','I can’t see my numbers'],['tools_disconnected','My tools don’t talk to each other'],['website_not_working','My website isn’t bringing in business'],['other','Something else']],
+    timing: [['right_away','Right away'],['30_days','Within 30 days'],['1_3_months','1 to 3 months'],['just_looking','Just looking']]
+  };
+  var FIELDS = ['firstName','lastName','business','website','phone','email','does','revenue','team','goal','lookingFor','blocker','cost','tools','timing'];
+
+  /* The routed screen's words, picked by the track NAME the server returns.
+     The length always comes from the server's minutes. */
+  var TRACK_COPY = {
+    website: 'From what you told us, the place to start is a website that brings in leads. That is $1,499 to build and $149 a month. On the call we confirm the fit and show you the plan.',
+    growth_os: 'From what you told us, you need more than a website. Growth OS is your site plus the Business Suite that runs your leads, follow-up and customers. That is $2,999 to build and $299 a month. On the call we map it to your business.',
+    empire_os: 'A company your size needs a real plan before anyone quotes a number. This call is where we learn the business and decide together whether a deeper Blueprint Session makes sense.'
+  };
+
+  var TZ = 'America/Chicago';
+  var FALLBACK = 'Call or text Garrett at 901-335-3905 and we will set up a time.';
+  var params = new URLSearchParams(location.search);
+  var MOCK = params.get('mock') === '1';
+  var STORE = 'nucleus-app-v1';
+
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
+  var form = $('#appForm');
+  var state = { view: 1, track: null, date: null, time: null, timeLabel: null, leak: null, src: null, booked: false };
+
+  /* ---------- storage (never required; answers also live in the DOM) ---------- */
+  function load(){ try { return JSON.parse(sessionStorage.getItem(STORE)) || {}; } catch(e){ return {}; } }
+  function save(){
+    try {
+      var a = {}; FIELDS.forEach(function(k){ a[k] = val(k); });
+      sessionStorage.setItem(STORE, JSON.stringify({ a: a, src: state.src, leak: state.leak }));
+    } catch(e){}
+  }
+  function forget(){ try { sessionStorage.removeItem(STORE); } catch(e){} }
+  var saved = load();
+
+  /* src tag: from the link, kept for the whole visit, sent with the booking */
+  state.src = (params.get('src') || saved.src || 'book-page').slice(0, 80);
+  state.leak = Array.isArray(saved.leak) ? saved.leak : null;
+
+  /* ---------- build the choice rows ---------- */
+  $$('[data-choices]').forEach(function(box){
+    var name = box.getAttribute('data-choices');
+    box.setAttribute('role', 'radiogroup');
+    CHOICES[name].forEach(function(c){
+      var lab = document.createElement('label'); lab.className = 'choice';
+      var inp = document.createElement('input'); inp.type = 'radio'; inp.name = name; inp.value = c[0];
+      var span = document.createElement('span'); span.textContent = c[1];
+      lab.appendChild(inp); lab.appendChild(span); box.appendChild(lab);
+    });
   });
+  form.addEventListener('change', function(e){
+    if (e.target.type === 'radio'){
+      $$('input[name="' + e.target.name + '"]', form).forEach(function(r){ r.parentNode.classList.toggle('sel', r.checked); });
+    }
+    var f = e.target.closest('.field'); if (f && f.classList.contains('bad')) check(f);
+    save();
+  });
+  form.addEventListener('input', function(e){
+    var f = e.target.closest('.field'); if (f && f.classList.contains('bad')) check(f);
+    save();
+  });
+
+  function val(k){
+    var el = form.elements[k]; if (!el) return '';
+    return String(el.value || '').trim();
+  }
+  function label(k, v){ var out = v; (CHOICES[k] || []).forEach(function(c){ if (c[0] === v) out = c[1]; }); return out; }
+  function setVal(k, v){
+    var el = form.elements[k]; if (!el || v == null || v === '') return;
+    if (el.length !== undefined && el[0] && el[0].type === 'radio'){
+      [].slice.call(el).forEach(function(r){ r.checked = (r.value === v); r.parentNode.classList.toggle('sel', r.checked); });
+    } else { el.value = v; }
+  }
+  if (saved.a) FIELDS.forEach(function(k){ setVal(k, saved.a[k]); });
+
+  /* phone mask, same as the old /book */
+  var digits = function(s){ return String(s || '').replace(/\D/g, ''); };
+  function phone10(v){ var d = digits(v); if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1); return d; }
+  function fmtPhone(v){ var d = phone10(v).slice(0, 10); if (d.length < 4) return d; if (d.length < 7) return '(' + d.slice(0,3) + ') ' + d.slice(3); return '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6); }
+  form.elements.phone.addEventListener('input', function(e){ e.target.value = fmtPhone(e.target.value); });
+
+  /* ---------- validation ---------- */
+  function check(f){
+    var type = f.getAttribute('data-req'), bad = false;
+    if (type === 'choice'){ bad = !$('input:checked', f); }
+    else {
+      var v = String(($('input,textarea', f) || {}).value || '').trim();
+      if (!v) bad = true;
+      else if (type === 'email') bad = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+      else if (type === 'phone') bad = phone10(v).length !== 10;
+    }
+    mark(f, bad);
+    return !bad;
+  }
+  function mark(f, bad){
+    f.classList.toggle('bad', bad);
+    var inp = $('input,textarea', f); if (inp && f.getAttribute('data-req') !== 'choice') inp.setAttribute('aria-invalid', bad ? 'true' : 'false');
+  }
+  function focusField(f){
+    f.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    var i = $('input,textarea', f); if (i) setTimeout(function(){ try { i.focus({ preventScroll: true }); } catch(e){} }, 250);
+  }
+  function checkStep(n, quiet){
+    var fields = $$('.astep[data-step="' + n + '"] .field[data-req]'), ok = true;
+    fields.forEach(function(f){ if (!check(f)) ok = false; });
+    if (!ok && !quiet) focusField($('.astep[data-step="' + n + '"] .field.bad'));
+    return ok;
+  }
+  var consent = $('.js-sms-consent');
+  function consentError(){
+    var wrap = consent.closest('.sms-consent-wrap'); wrap.classList.add('sms-consent-err');
+    var m = $('.sms-consent-msg', wrap); if (m) m.hidden = false;
+  }
+  /* pt-site.js blocks the step 1 button while the text box is unticked (capture on document).
+     This runs first (capture on window) so missing fields are marked at the same time. */
+  window.addEventListener('click', function(e){
+    if (e.target.closest && e.target.closest('.astep[data-step="1"] [data-next]')) checkStep(1, true);
+  }, true);
+
+  /* ---------- views + browser back ---------- */
+  var stepEl = $('#appStep'), bar = $('#appBar');
+  function show(view, push){
+    if (state.booked && view !== 'done') return;
+    state.view = view;
+    if (typeof view === 'number') state.track = null;    // answers may change: let the server route again
+    $$('.astep').forEach(function(s){ s.hidden = String(view) !== s.getAttribute('data-step'); });
+    form.hidden = typeof view !== 'number';
+    $('#viewTimes').hidden = view !== 'times';
+    $('#viewDone').hidden = view !== 'done';
+    if (typeof view === 'number'){ stepEl.textContent = 'Step ' + view + ' of 3'; bar.style.width = (view / 3 * 100) + '%'; }
+    else if (view === 'times'){ stepEl.textContent = 'Last step: pick a time'; bar.style.width = '100%'; }
+    else { stepEl.textContent = 'Booked'; bar.style.width = '100%'; }
+    if (push){ try { history.pushState({ nucleus: view }, ''); } catch(e){} }
+    var app = $('#app'), top = app.getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * .6) app.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  try { history.replaceState({ nucleus: 1 }, ''); } catch(e){}
+  window.addEventListener('popstate', function(e){
+    var v = e.state && e.state.nucleus; if (v == null || state.booked) return;
+    show(v, false); if (v === 'times' && !state.track) openTimes();
+  });
+
+  $$('[data-next]').forEach(function(b){ b.addEventListener('click', function(){
+    var n = state.view;
+    if (!checkStep(n)) return;
+    if (n === 1 && consent && !consent.checked) return;   // pt-site.js shows the consent message
+    if (n < 3){ show(n + 1, true); return; }
+    show('times', true); openTimes();
+  }); });
+  $$('[data-prev]').forEach(function(b){ b.addEventListener('click', function(){ history.back(); }); });
+  $('#editAnswers').addEventListener('click', function(){ show(3, true); });
+
+  /* start buttons, and the leak finder's button */
+  function start(e){
+    if (e) e.preventDefault();
+    if (state.booked){ show('done', false); return; }
+    $('#app').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (state.view === 1) setTimeout(function(){ try { form.elements.firstName.focus({ preventScroll: true }); } catch(_){} }, 450);
+  }
+  $$('[data-start]').forEach(function(a){ a.addEventListener('click', start); });
+  window.NucleusApp = { fromLeakFinder: function(hits){ state.leak = hits && hits.length ? hits.slice(0, 12) : null; save(); start(); } };
+
+  /* hide the sticky phone button while the application is on screen */
+  var mcta = $('#mcta');
+  if (mcta && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(en){ mcta.classList.toggle('away', en[0].isIntersecting); }, { threshold: 0 }).observe($('#apply'));
+  }
+
+  /* ---------- Central-time day strip ---------- */
+  var DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function partsCT(d){
+    var p = {};
+    new Intl.DateTimeFormat('en-US', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+      .formatToParts(d).forEach(function(x){ p[x.type] = x.value; });
+    return p;
+  }
+  function weekdaysCT(n){
+    var p = partsCT(new Date()), base = Date.UTC(+p.year, +p.month - 1, +p.day), out = [];
+    var i = (+p.hour >= 15) ? 1 : 0;                       // late in the day: start tomorrow
+    for (; out.length < n && i < 40; i++){
+      var t = new Date(base + i * 864e5), wd = t.getUTCDay();
+      if (wd === 0 || wd === 6) continue;
+      out.push({ iso: t.toISOString().slice(0, 10), dow: DOW[wd], dnum: t.getUTCDate(), mon: MON[t.getUTCMonth()], long: DOW[wd] + ', ' + MON[t.getUTCMonth()] + ' ' + t.getUTCDate() });
+    }
+    return out;
+  }
+
+  /* ---------- talking to the CRM ---------- */
+  function sendValue(k){ var v = val(k); return ADAPTER.sendAs[k] === 'label' ? label(k, v) : v; }
+  function bookBody(){
+    var B = ADAPTER.book, body = {};
+    body[B.name] = (val('firstName') + ' ' + val('lastName')).trim();
+    Object.keys(B.answers).forEach(function(k){ var v = sendValue(k); if (v) body[B.answers[k]] = v; });
+    body[B.answers.phone] = phone10(val('phone'));
+    if (consent && consent.checked){
+      body[B.textConsent] = true;
+      body[B.consentText] = consent.closest('label').textContent.replace(/\s+/g, ' ').trim();
+    }
+    if (state.leak && state.leak.length) body[B.leakFinder] = state.leak.slice(0, 12);
+    body[B.date] = state.date; body[B.time] = state.time;
+    body[B.track] = state.track; body[B.src] = state.src;
+    body[B.honeypot] = val('fax');
+    return body;
+  }
+  function post(path, body){
+    if (MOCK) return mock(path, body);
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function(){ ctl.abort(); }, 15000) : null;
+    return fetch(ADAPTER.base + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: ctl ? ctl.signal : undefined })
+      .then(function(r){
+        return r.json().catch(function(){ return null; }).then(function(j){
+          if (timer) clearTimeout(timer);
+          if (!j || (!r.ok && !j[ADAPTER.res.error])) throw new Error('http ' + r.status);
+          return j;
+        });
+      });
+  }
+  function readTrack(j){
+    var R = ADAPTER.res, t = j && j[R.track];
+    if (!t || typeof t !== 'object' || typeof t[R.trackName] !== 'string' || !(+t[R.trackMinutes] > 0)) return null;
+    return { name: t[R.trackName], minutes: Math.round(+t[R.trackMinutes]) };
+  }
+  function readSlots(j){
+    var R = ADAPTER.res, list = j[R.open];
+    if (!Array.isArray(list)) return null;
+    return list.map(function(s){
+      return (s && typeof s[R.slotTime] === 'string' && typeof s[R.slotLabel] === 'string') ? { time: s[R.slotTime], label: s[R.slotLabel] } : null;
+    }).filter(Boolean);
+  }
+
+  /* ---------- routed screen + time picker ---------- */
+  var daysEl = $('#days'), slotsEl = $('#slots'), slotMsg = $('#slotMsg'), bookBtn = $('#bookBtn'), bookMsg = $('#bookMsg');
+  var DAYS = weekdaysCT(10), reqId = 0;
+  DAYS.forEach(function(d){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'day'; b.dataset.iso = d.iso;
+    b.setAttribute('aria-pressed', 'false');
+    [['dow', d.dow], ['dnum', d.dnum], ['mon', d.mon]].forEach(function(x){ var s = document.createElement('span'); s.className = x[0]; s.textContent = x[1]; b.appendChild(s); });
+    b.setAttribute('aria-label', d.long);
+    b.addEventListener('click', function(){ pickDay(d.iso); });
+    daysEl.appendChild(b);
+  });
+  function dayLong(iso){ for (var i = 0; i < DAYS.length; i++) if (DAYS[i].iso === iso) return DAYS[i].long; return iso; }
+  function say(el, text){ el.textContent = text; el.hidden = !text; }
+  function setTrack(t){
+    state.track = t.name;
+    $('#routedTitle').textContent = 'You’re set for a ' + t.minutes + '-minute Nucleus Session.';
+    $('#routedCopy').textContent = TRACK_COPY[t.name] || '';
+  }
+  function openTimes(){
+    bookMsg.textContent = '';
+    if (!state.track){ $('#routedTitle').textContent = 'Checking your times…'; $('#routedCopy').textContent = ''; }
+    pickDay(state.date || DAYS[0].iso);
+  }
+  function pickDay(iso, keepMsg){
+    state.date = iso; state.time = null; state.timeLabel = null; bookBtn.disabled = true;
+    if (!keepMsg) bookMsg.textContent = '';
+    $$('.day', daysEl).forEach(function(b){ var on = b.dataset.iso === iso; b.classList.toggle('sel', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    slotsEl.textContent = ''; say(slotMsg, 'Checking open times…');
+    var A = ADAPTER.availability, body = {}, my = ++reqId;
+    body[A.date] = iso;
+    if (state.track) body[A.track] = state.track;
+    else { body[A.revenue] = val('revenue'); body[A.want] = val('lookingFor'); }   // the server decides the track
+    post(ADAPTER.paths.availability, body).then(function(j){
+      if (my !== reqId) return;
+      var R = ADAPTER.res;
+      if (!j[R.ok]) throw new Error('not ok');
+      var t = readTrack(j);
+      if (t) setTrack(t);
+      if (!state.track) throw new Error('no track');
+      if (j[R.reason]) throw new Error(String(j[R.reason]));          // settings or calendar unreadable: open:[] is not "nothing free"
+      var slots = readSlots(j); if (!slots) throw new Error('no open list');
+      renderSlots(slots);
+    }).catch(function(){
+      if (my !== reqId) return;
+      if (!state.track){ $('#routedTitle').textContent = 'We could not load times right now.'; $('#routedCopy').textContent = ''; }
+      slotsEl.textContent = '';
+      say(slotMsg, 'We could not load open times right now. ' + FALLBACK);
+    });
+  }
+  function renderSlots(slots){
+    slotsEl.textContent = '';
+    if (!slots.length){ say(slotMsg, 'Nothing open that day. Try another one.'); return; }
+    say(slotMsg, '');
+    slots.forEach(function(s){
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'slot'; b.textContent = s.label;
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function(){
+        $$('.slot', slotsEl).forEach(function(x){ x.classList.remove('sel'); x.setAttribute('aria-pressed', 'false'); });
+        b.classList.add('sel'); b.setAttribute('aria-pressed', 'true');
+        state.time = s.time; state.timeLabel = s.label; bookBtn.disabled = false; bookMsg.textContent = '';
+      });
+      slotsEl.appendChild(b);
+    });
+  }
+
+  /* ---------- booking ---------- */
+  var SERVER_FIELD = {};   // server key -> page field, for "invalid"
+  Object.keys(ADAPTER.book.answers).forEach(function(k){ SERVER_FIELD[ADAPTER.book.answers[k]] = k; });
+  SERVER_FIELD[ADAPTER.book.name] = 'firstName';
+
+  function resetBtn(){ bookBtn.disabled = !state.time; bookBtn.textContent = 'Book my Nucleus Session'; }
+  function failMsg(lead){
+    bookMsg.textContent = '';
+    bookMsg.appendChild(document.createTextNode(lead + ' ' + FALLBACK + ' '));
+    var a = document.createElement('a'); a.textContent = 'Email us your answers instead.';
+    a.href = 'mailto:admin@getproytech.com?subject=' + encodeURIComponent('Nucleus Session request: ' + val('firstName') + ' ' + val('lastName')) +
+      '&body=' + encodeURIComponent(mailBody());
+    bookMsg.appendChild(a);
+  }
+  function showInvalid(fields){
+    var list = Array.isArray(fields) ? fields : [], step = 4, target = null;
+    list.forEach(function(sk){
+      if (sk === ADAPTER.book.textConsent || sk === ADAPTER.book.consentText){ if (step > 1){ step = 1; target = 'consent'; } return; }
+      var pk = SERVER_FIELD[sk]; if (!pk) return;
+      var el = form.elements[pk]; var f = el && (el.length !== undefined && el[0] ? el[0] : el).closest('.field'); if (!f) return;
+      mark(f, true);
+      var n = +f.closest('.astep').getAttribute('data-step');
+      if (n < step){ step = n; target = f; }
+    });
+    if (step > 3) return false;            // nothing the visitor can fix (leakFinder, or an unknown key)
+    show(step, true);
+    if (target === 'consent'){ consentError(); consent.focus(); } else if (target) focusField(target);
+    return true;
+  }
+  bookBtn.addEventListener('click', function(){
+    if (!state.time || !state.track) return;
+    if (consent && !consent.checked){ show(1, true); consentError(); consent.focus(); return; }
+    bookBtn.disabled = true; bookBtn.textContent = 'Booking…'; bookMsg.textContent = '';
+    post(ADAPTER.paths.book, bookBody()).then(function(j){
+      var R = ADAPTER.res, E = ADAPTER.errors, err = j[R.error];
+      if (j[R.ok]) return done(j);
+      resetBtn();
+      if (err === E.taken || err === E.badSlot){
+        pickDay(state.date, true);
+        bookMsg.textContent = 'Someone just took that time. Pick another one.';
+        return;
+      }
+      if (err === E.mismatch){
+        state.track = null; pickDay(state.date, true);
+        bookMsg.textContent = 'Your answers put you on a different call. Here are its times. Pick one again.';
+        return;
+      }
+      if (err === E.invalid && showInvalid(j[R.fields])) return;
+      if (err === 'calendar_not_connected' || err === 'calendar_read_failed' || err === 'calendar_create_failed')
+        return failMsg('Our calendar did not answer, and nothing was booked.');
+      failMsg('That did not go through, and nothing was booked.');   // settings_unreadable, error, Unknown field: …, invalid we cannot point at
+    }).catch(function(){
+      resetBtn();
+      failMsg('That did not go through, and nothing was booked. Try again, or');
+    });
+  });
+  function mailBody(){
+    var lines = ['Nucleus Session request', '', 'Wanted time: ' + (state.date ? dayLong(state.date) + ' at ' + (state.timeLabel || '-') + ' Central' : '-'), 'src: ' + state.src, ''];
+    FIELDS.forEach(function(k){ lines.push(k + ': ' + (label(k, val(k)) || '-')); });
+    return lines.join('\n');
+  }
+  function done(j){
+    var R = ADAPTER.res;
+    state.booked = true; forget();
+    var when = (typeof j[R.when] === 'string' && j[R.when]) || (dayLong(state.date) + ' at ' + state.timeLabel + ' Central');
+    $('#doneWhen').textContent = when + ' on Google Meet';
+    var link = j[R.meetLink], a = $('#doneMeet');
+    if (typeof link === 'string' && /^https:\/\/meet\.google\.com\/[\w-]+(\?.*)?$/.test(link)){ a.href = link; a.textContent = link.replace(/^https:\/\//, ''); a.hidden = false; }
+    show('done', false);
+    try { history.replaceState({ nucleus: 'done' }, ''); } catch(e){}
+    setTimeout(function(){ try { $('#doneTitle').focus({ preventScroll: true }); } catch(e){} }, 300);
+  }
+
+  /* ---------- ?mock=1: fakes both routes with the CRM's real shapes ----------
+     ?mock=1&track=website|growth_os|empire_os  the track the fake server routes to (default growth_os)
+     ?mock=1&fail=times|calendar|book|taken|mismatch|invalid  forces an error path
+     Like the real routes, the mock refuses unknown keys and missing required ones. */
+  var MOCK_TRACKS = { website: 15, growth_os: 30, empire_os: 30 };
+  var MOCK_AVAIL_KEYS = ['date', 'track', 'revenue', 'want', 'fax'];
+  var MOCK_BOOK_KEYS = ['name','business','website','phone','email','whatTheyDo','revenue','teamSize','revenueGoal','want','blocker','cost','tools','startWhen','textConsent','consentText','leakFinder','date','time','src','track','fax'];
+  function mock(path, body){
+    var fail = params.get('fail'), tk = MOCK_TRACKS[params.get('track')] ? params.get('track') : 'growth_os';
+    function trackObj(n){ return { name: n, label: n + ' track', minutes: MOCK_TRACKS[n] }; }
+    function unknown(keys){ var x = Object.keys(body).filter(function(k){ return keys.indexOf(k) < 0; }); return x.length ? { ok: false, error: 'Unknown field' + (x.length > 1 ? 's' : '') + ': ' + x.join(', ') + '.' } : null; }
+    return new Promise(function(res, rej){ setTimeout(function(){
+      if (window.console) console.info('[mock] ' + path, JSON.parse(JSON.stringify(body)));
+      var bad;
+      if (path === ADAPTER.paths.availability){
+        if ((bad = unknown(MOCK_AVAIL_KEYS))) return res(bad);
+        if (fail === 'times') return rej(new Error('mock'));
+        var name = body.track != null ? body.track : (body.revenue && body.want ? tk : null);
+        if (!MOCK_TRACKS[name]) return res({ ok: false, error: 'bad track' });
+        if (fail === 'calendar') return res({ ok: true, track: trackObj(name), open: [], reason: 'calendar_not_connected' });
+        var iso = body.date, dnum = +iso.slice(8, 10), min = MOCK_TRACKS[name], open = [], from = Date.now() + 2 * 36e5;
+        if (dnum % 4 !== 0){
+          for (var m = 9 * 60; m + min <= 17 * 60; m += min){
+            if ((m / min) % 3 === 1) continue;                     // some taken
+            var h = Math.floor(m / 60), mi = m % 60;
+            if (new Date(isoCT(iso, h, mi)).getTime() < from) continue;
+            open.push({ time: (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi, label: (h % 12 || 12) + ':' + (mi < 10 ? '0' : '') + mi + ' ' + (h < 12 ? 'AM' : 'PM') });
+          }
+        }
+        return res({ ok: true, track: trackObj(name), open: open, tz: TZ });
+      }
+      if (path === ADAPTER.paths.book){
+        if ((bad = unknown(MOCK_BOOK_KEYS))) return res(bad);
+        if (body.fax) return res({ ok: true, when: '', meetLink: '' });
+        var missing = ['name','phone','email','revenue','want'].filter(function(k){ return !body[k]; });
+        if (body.textConsent != null && body.textConsent !== true) missing.push('textConsent');
+        if (body.consentText && body.textConsent !== true) missing.push('consentText');
+        if (fail === 'invalid' && !mock.once){ mock.once = true; missing.push('revenueGoal'); }
+        if (missing.length) return res({ ok: false, error: 'invalid', fields: missing });
+        if (body.track !== tk) return res({ ok: false, error: 'track_mismatch', track: tk });
+        if (fail === 'mismatch' && !mock.once){ mock.once = true; return res({ ok: false, error: 'track_mismatch', track: tk }); }
+        if (fail === 'book') return res({ ok: false, error: 'calendar_create_failed' });
+        if (fail === 'taken' && !mock.once){ mock.once = true; return res({ ok: false, error: 'slot_taken' }); }
+        var p = body.date.split('-'), hh = +body.time.slice(0, 2), mm = body.time.slice(3);
+        var wd = DOW[new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])).getUTCDay()];
+        return res({ ok: true, when: wd + ', ' + MON[+p[1] - 1] + ' ' + (+p[2]) + ' · ' + (hh % 12 || 12) + ':' + mm + ' ' + (hh < 12 ? 'AM' : 'PM') + ' CST', meetLink: 'https://meet.google.com/abc-defg-hij' });
+      }
+      rej(new Error('mock: unknown path'));
+    }, 400); });
+  }
+  function isoCT(dateIso, h, m){
+    var y = +dateIso.slice(0, 4), mo = +dateIso.slice(5, 7), d = +dateIso.slice(8, 10);
+    for (var off = 5; off <= 6; off++){
+      var t = new Date(Date.UTC(y, mo - 1, d, h + off, m)), p = partsCT(t);
+      if (+p.hour === h && +p.minute === m) return t.toISOString();
+    }
+    return new Date(Date.UTC(y, mo - 1, d, h + 6, m)).toISOString();
+  }
+  if (MOCK){ var flag = document.createElement('div'); flag.className = 'mock-flag'; flag.textContent = 'Mock mode: nothing is booked'; document.body.appendChild(flag); }
+})();
+</script>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
 /* ---------- leak finder ---------- */
   var Q = [
     { q:'When a lead comes in after hours, what happens?',
@@ -321,17 +888,14 @@
       html += '<div style="height:26px"></div>';
     }
 
-    html += '<a class="btn btn-primary" href="#top" id="leakCta" style="margin-bottom:10px">Book my free Growth Plan</a>' +
+    html += '<a class="btn btn-primary" href="#apply" id="leakCta" style="margin-bottom:10px">Start my application</a>' +
             '<div><button class="leak-back" id="leakAgain">Start over</button></div></div>';
 
     body.innerHTML = html;
     $('#leakAgain').addEventListener('click', replay);
     $('#leakCta').addEventListener('click', function(e){
       e.preventDefault();
-      var bwEl = $('#bw');
-      if (bwEl && hits.length && !bwEl.value) bwEl.value = hits.join(' ');
-      document.querySelector('#bn').scrollIntoView({ behavior:'smooth', block:'center' });
-      setTimeout(function(){ document.querySelector('#bn').focus(); }, 500);
+      if (window.NucleusApp) window.NucleusApp.fromLeakFinder(hits.slice());
     });
   }
 
