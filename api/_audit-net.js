@@ -22,6 +22,7 @@ import dns from 'node:dns';
 import zlib from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { ipOf } from './_guard.js';
+import { keyedBucket, saltOk, saltOf } from './_bucket.js';
 import { validateUrl, isPublicAddress, inspectHtml, headerChecks, speedChecks, USER_AGENT, LIMITS, SPEED_IDS } from './_audit.js';
 
 /* ------------------------------------------------------------ guarded fetch */
@@ -169,27 +170,36 @@ export async function runPageSpeed(target, key, { timeoutMs = LIMITS.speedMs, fe
    not read here under any name. site_hit counts a "site:" bucket and answers
    true (over, nothing recorded) or false (under, recorded), in one database
    call under a per-bucket lock, and deletes old rows itself. The anon key can
-   do nothing else in that database. Read per call, not at import. */
-const supa = () => ({ url: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '', key: process.env.SUPABASE_ANON_KEY || '' });
-export const limiterMissing = () => { const s = supa(), m = []; if (!s.url) m.push('SUPABASE_URL'); if (!s.key) m.push('SUPABASE_ANON_KEY'); return m; };
-export const hashed = s => createHash('sha256').update(String(s)).digest('hex').slice(0, 32);
-/** site_hit() accepts only ^site:[A-Za-z0-9:._-]{1,195}$; a header with
- *  anything else in it would be refused and read as an outage. */
-export const bucketPart = s => String(s == null ? '' : s).replace(/[^A-Za-z0-9:._-]/g, '_').slice(0, 90) || '_';
+   do nothing else in that database. Read per call, not at import.
 
-/** One call to site_hit(). 'ok' | 'limit' | 'down'. `record: false` asks
+   EVERY BUCKET IS KEYED (_bucket.js, shared with _guard.js): the database
+   sees "site:" + 40 hex of HMAC-SHA256 with SITE_LIMIT_SALT, never a
+   readable name. Without the salt nobody can name the per-site or
+   per-address counter, so an email address cannot be probed ("was it sent a
+   report today?") and a daily cap cannot be filled from outside. The
+   readable names (which already hash the host and the address, so no
+   address is ever in a log) appear only in our logs. */
+const supa = () => ({ url: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '', key: process.env.SUPABASE_ANON_KEY || '' });
+export const limiterMissing = () => { const s = supa(), m = []; if (!s.url) m.push('SUPABASE_URL'); if (!s.key) m.push('SUPABASE_ANON_KEY'); if (!saltOk(saltOf())) m.push('SITE_LIMIT_SALT'); return m; };
+export const hashed = s => createHash('sha256').update(String(s)).digest('hex').slice(0, 32);
+
+/** One call to site_hit() for the counter called `name` (readable; keyed
+ *  before it leaves). 'ok' | 'limit' | 'down' (also: not configured, or
+ *  site_hit's NULL, its table is full). `record: false` asks
  *  "is it at the limit?" and records nothing. The key goes on `apikey` only:
  *  a publishable key on Authorization is parsed as a JWT and refused. */
-export async function hit(bucket, limit, windowMin, { record = true } = {}) {
+export async function hit(name, limit, windowMin, { record = true } = {}) {
   const s = supa();
-  if (!s.url || !s.key) return 'down';
+  if (limiterMissing().length) return 'down';
+  const bucket = keyedBucket(name);
   const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 3000);
   try {
     const r = await fetch(`${s.url.replace(/\/+$/, '')}/rest/v1/rpc/site_hit`, { method: 'POST', signal: ctl.signal,
       headers: { apikey: s.key, 'content-type': 'application/json' },
       body: JSON.stringify({ p_bucket: bucket, p_window_sec: Math.round(windowMin * 60), p_limit: limit, p_record: !!record }) });
-    if (!r.ok) { console.error('[audit] the limiter answered', r.status); return 'down'; }
+    if (!r.ok) { console.error(`[audit] the limiter answered ${r.status} for ${name}`); return 'down'; }
     const over = await r.json();
+    if (over === null) console.error(`[audit] the limiter's table is full; refusing ${name}`);
     return over === true ? 'limit' : over === false ? 'ok' : 'down';
   } catch { return 'down'; } finally { clearTimeout(timer); }
 }
@@ -217,7 +227,7 @@ export async function auditGate(req, res, { name, perIp, windowMin, perDay, maxC
   const day = await take(`site:${name}:global`, perDay, 60 * 24);
   if (day === 'down') return send(503, { ok: false, error: 'limiter_unavailable' });
   if (day === 'limit') { console.error(`[${name}] DAILY CAP HIT`); return send(429, { ok: false, error: 'busy' }); }
-  const ip = ipOf(req), one = await take(`site:${name}:ip:${bucketPart(ip)}`, perIp, windowMin);
+  const ip = ipOf(req), one = await take(`site:${name}:ip:${ip}`, perIp, windowMin);
   if (one === 'down') return send(503, { ok: false, error: 'limiter_unavailable' });
   if (one === 'limit') { res.setHeader('retry-after', String(windowMin * 60)); return send(429, { ok: false, error: 'too_many' }); }
   let body = req.body;

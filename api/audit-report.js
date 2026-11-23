@@ -21,7 +21,7 @@
 // consent box is separate and optional: only the boolean true counts, and the
 // lead's message says in words whether it was ticked.
 //
-// FAILS CLOSED: refuses, naming the variable, when any of the limiter's two,
+// FAILS CLOSED: refuses, naming the variable, when any of the limiter's three (SUPABASE_URL, SUPABASE_ANON_KEY, SITE_LIMIT_SALT),
 // AUDIT_SIGNING_KEY, RESEND_API_KEY, AUDIT_FROM or SITE_LEAD_KEY is unset.
 // It never falls back to another sender and never drops the lead quietly.
 import { open, cleanContact, renderReport, leadPayload, gradeOf, CHECKS } from './_audit.js';

@@ -9,6 +9,7 @@ import zlib from 'node:zlib';
 import fs from 'node:fs';
 import * as A from '../api/_audit.js';
 import * as N from '../api/_audit-net.js';
+import { keyedBucket } from '../api/_bucket.js';
 import { makeHandler as makeScan } from '../api/audit-scan.js';
 import { makeHandler as makeSpeed } from '../api/audit-speed.js';
 import { makeHandler as makeReport } from '../api/audit-report.js';
@@ -172,8 +173,14 @@ test('runPageSpeed: reads the three lab numbers; a timeout or an error is "could
 
 /* ---- the routes ---- */
 const SECRET = 'test-secret-test-secret-test-secret-1234';
-const ENV_KEYS = ['SUPABASE_URL', 'VITE_SUPABASE_URL', 'SUPABASE_ANON_KEY', 'SUPABASE_SERVICE_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'AUDIT_SIGNING_KEY', 'PAGESPEED_API_KEY', 'RESEND_API_KEY', 'AUDIT_FROM', 'SITE_LEAD_KEY'];
-const FULL = { SUPABASE_URL: 'https://db.example.org', SUPABASE_ANON_KEY: 'anon-public', AUDIT_SIGNING_KEY: SECRET, PAGESPEED_API_KEY: 'psi', RESEND_API_KEY: 're_x', AUDIT_FROM: 'ProyTech <audit@getproytech.com>', SITE_LEAD_KEY: 'pts_x' };
+/* a test value, not a secret */
+const SALT = 'test-salt-test-salt-test-salt-0001';
+const K = name => keyedBucket(name, SALT);
+const KEYED = /^site:[0-9a-f]{40}$/;
+const HOST_BUCKET = () => K('site:audit-host:' + N.hashed('example.com'));
+const EMAIL_BUCKET = () => K('site:audit-email:' + N.hashed('jo@reed.com'));
+const ENV_KEYS = ['SUPABASE_URL', 'VITE_SUPABASE_URL', 'SUPABASE_ANON_KEY', 'SITE_LIMIT_SALT', 'SUPABASE_SERVICE_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'AUDIT_SIGNING_KEY', 'PAGESPEED_API_KEY', 'RESEND_API_KEY', 'AUDIT_FROM', 'SITE_LEAD_KEY'];
+const FULL = { SUPABASE_URL: 'https://db.example.org', SUPABASE_ANON_KEY: 'anon-public', SITE_LIMIT_SALT: SALT, AUDIT_SIGNING_KEY: SECRET, PAGESPEED_API_KEY: 'psi', RESEND_API_KEY: 're_x', AUDIT_FROM: 'ProyTech <audit@getproytech.com>', SITE_LEAD_KEY: 'pts_x' };
 const realFetch = globalThis.fetch;
 /** Run `fn` with exactly `env` set and fetch replaced. Returns what was fetched. */
 async function world(env, fn, { hits = () => 0, limiter = 'up' } = {}) {
@@ -212,12 +219,12 @@ const neverScan = async () => { throw new Error('the scan must not run'); };
 
 test('FAIL CLOSED: with the rate limiter not configured, all three routes refuse, name the variables, and touch nothing', async () => {
   for (const [name, handler, body] of [['scan', makeScan({ scan: neverScan }), { url: 'example.com' }], ['speed', makeSpeed({ speed: neverScan }), { token: token() }], ['report', makeReport({ email: neverScan, lead: neverScan }), person()]]) {
-    const env = { ...FULL }; delete env.SUPABASE_URL; delete env.SUPABASE_ANON_KEY;
+    const env = { ...FULL }; delete env.SUPABASE_URL; delete env.SUPABASE_ANON_KEY; delete env.SITE_LIMIT_SALT;
     const calls = await world(env, async (c, errors) => {
       const r = await call(handler, body);
       assert.equal(r.status, 503, name); assert.equal(r.body.ok, false); assert.equal(r.body.error, 'not_configured');
-      assert.deepEqual(r.body.missing, ['SUPABASE_URL', 'SUPABASE_ANON_KEY'], name);
-      assert.match(errors.join('\n'), /SUPABASE_URL, SUPABASE_ANON_KEY/);
+      assert.deepEqual(r.body.missing, ['SUPABASE_URL', 'SUPABASE_ANON_KEY', 'SITE_LIMIT_SALT'], name);
+      assert.match(errors.join('\n'), /SUPABASE_URL, SUPABASE_ANON_KEY, SITE_LIMIT_SALT/);
     });
     assert.equal(calls.length, 0, name + ' made no network call at all');
   }
@@ -251,12 +258,12 @@ test('rate limits: the daily caps and per-IP limits are the agreed numbers', asy
     [makeReport({ email: neverScan, lead: neverScan }), person(), 'site:audit-report:global', 200, 'busy'], [makeReport({ email: neverScan, lead: neverScan }), person(), 'site:audit-report:ip:203.0.113.9', 3, 'too_many'],
   ];
   for (const [handler, body, bucket, limit, error] of cases) {
-    await world(FULL, async () => { const r = await call(handler, body); assert.equal(r.status, 429, bucket); assert.equal(r.body.error, error); }, { hits: b => (b === bucket ? limit : 0) });
+    await world(FULL, async () => { const r = await call(handler, body); assert.equal(r.status, 429, bucket); assert.equal(r.body.error, error); }, { hits: b => (b === K(bucket) ? limit : 0) });
     // one under the limit gets past this bucket (and then fails later for its own reasons, never with 429 from it)
-    await world(FULL, async () => { const r = await call(handler, body); assert.notEqual(r.body && r.body.error, error, bucket + ' at limit-1'); }, { hits: b => (b === bucket ? limit - 1 : 0) }).catch(() => {});
+    await world(FULL, async () => { const r = await call(handler, body); assert.notEqual(r.body && r.body.error, error, bucket + ' at limit-1'); }, { hits: b => (b === K(bucket) ? limit - 1 : 0) }).catch(() => {});
   }
-  await world(FULL, async () => { const r = await call(makeScan({ scan: neverScan }), { url: 'example.com' }); assert.equal(r.status, 429); assert.equal(r.body.error, 'host_limit'); }, { hits: b => (b.startsWith('site:audit-host:') ? 5 : 0) });
-  await world(FULL, async () => { const r = await call(makeReport({ email: neverScan, lead: neverScan }), person()); assert.equal(r.status, 429); assert.equal(r.body.error, 'already_sent'); }, { hits: b => (b.startsWith('site:audit-email:') ? 1 : 0) });
+  await world(FULL, async () => { const r = await call(makeScan({ scan: neverScan }), { url: 'example.com' }); assert.equal(r.status, 429); assert.equal(r.body.error, 'host_limit'); }, { hits: b => (b === HOST_BUCKET() ? 5 : 0) });
+  await world(FULL, async () => { const r = await call(makeReport({ email: neverScan, lead: neverScan }), person()); assert.equal(r.status, 429); assert.equal(r.body.error, 'already_sent'); }, { hits: b => (b === EMAIL_BUCKET() ? 1 : 0) });
 });
 test('gate: POST only, and oversized bodies are refused before anything runs', async () => {
   await world(FULL, async calls => {
@@ -324,7 +331,7 @@ test('audit-report: emails the report through Resend and posts the lead to the C
   assert.deepEqual(Object.keys(lead.body), ['kind', 'source', 'form', 'name', 'email', 'phone', 'page', 'message']);
   assert.equal(lead.body.source, 'Website audit'); assert.equal(lead.body.name, 'Jo Reed'); assert.equal(lead.body.phone, '3165550142');
   assert.match(lead.body.page, /audit\?src=ig \(audited example\.com\)/); assert.match(lead.body.message, /Text consent box: TICKED\./);
-  const email = calls.filter(c => c.body && String(c.body.p_bucket).startsWith('site:audit-email:'));
+  const email = calls.filter(c => c.body && c.body.p_bucket === EMAIL_BUCKET());
   assert.deepEqual(email.map(c => [c.body.p_limit, c.body.p_window_sec, c.body.p_record]), [[1, 86400, false], [1, 86400, true]], 'asked before the send, recorded after it');
   assert.ok(calls.indexOf(email[0]) < calls.indexOf(mail) && calls.indexOf(mail) < calls.indexOf(email[1]));
 });
@@ -367,7 +374,8 @@ test('audit-report: honeypot, failed email, failed CRM', async () => {
     assert.equal(r.status, 502); assert.deepEqual(r.body, { ok: false, error: 'email_failed' });
   });
   assert.equal(leads, 0, 'no lead without a report, so a retry cannot duplicate one');
-  assert.ok(!calls.some(c => c.method === 'POST' && c.body && String(c.body.bucket).startsWith('site:audit-email:')), 'a failed send does not use up the address\'s one report');
+  const emailCalls = calls.filter(c => c.body && c.body.p_bucket === EMAIL_BUCKET());
+  assert.deepEqual(emailCalls.map(c => c.body.p_record), [false], 'asked, and a failed send does not use up the address\'s one report');
 
   await world(FULL, async (c, errors) => {
     const r = await call(makeReport({ email: async () => ({ ok: true }), lead: async () => ({ ok: false, status: 502 }) }), person());
@@ -394,10 +402,10 @@ test('the limiter is the CRM\'s site_hit() on the ANON key: the service key is n
   for (const c of lim) {
     assert.equal(c.url, 'https://db.example.org/rest/v1/rpc/site_hit'); assert.equal(c.method, 'POST');
     assert.deepEqual(Object.keys(c.headers).sort(), ['apikey', 'content-type']); assert.equal(c.headers.apikey, 'anon-public');
-    assert.match(c.body.p_bucket, /^site:[A-Za-z0-9:._-]{1,195}$/); assert.equal(c.body.p_record, true);
+    assert.match(c.body.p_bucket, KEYED); assert.equal(c.body.p_record, true);
   }
-  assert.deepEqual(lim.map(c => [c.body.p_bucket.replace(/[0-9a-f]{32}$/, 'H'), c.body.p_window_sec, c.body.p_limit]),
-    [['site:audit-scan:global', 86400, 300], ['site:audit-scan:ip:fe80::1_eth0', 600, 5], ['site:audit-host:H', 86400, 5]]);
+  assert.deepEqual(lim.map(c => [c.body.p_bucket, c.body.p_window_sec, c.body.p_limit]),
+    [[K('site:audit-scan:global'), 86400, 300], [K('site:audit-scan:ip:fe80::1%eth0'), 600, 5], [HOST_BUCKET(), 86400, 5]]);
   assert.ok(!JSON.stringify(calls).includes('svc-secret'));
   for (const f of ['_audit-net.js', 'audit-scan.js', 'audit-speed.js', 'audit-report.js']) {
     assert.ok(!/SUPABASE_SERVICE/.test(fs.readFileSync(new URL('../api/' + f, import.meta.url), 'utf8').replace(/\/\/[^\n]*|\/\*[\s\S]*?\*\//g, '')), f);
@@ -413,4 +421,46 @@ test('a limiter answer that is not a plain true/false is a refusal, not a pass',
     });
   }
   globalThis.fetch = old;
+});
+
+test('KEYED: every audit bucket is site: + 40 hex; the same name under two salts is two buckets', async () => {
+  assert.notEqual(keyedBucket('site:audit-scan:global', SALT), keyedBucket('site:audit-scan:global', SALT.replace('0001', '0002')));
+  assert.equal(keyedBucket('site:audit-scan:global', SALT), K('site:audit-scan:global'));
+  /* through the real routes, under two salts: no bucket in common */
+  const sent = async salt => (await world({ ...FULL, SITE_LIMIT_SALT: salt }, async () => { await call(makeReport({ email: async () => ({ ok: true }), lead: async () => ({ ok: true }) }), person()); }))
+    .filter(c => c.url.includes('/rest/v1/')).map(c => c.body.p_bucket);
+  const a = await sent(SALT), b = await sent(SALT.replace('0001', '0002'));
+  assert.equal(a.length, 4, 'global, per IP, then the address asked and recorded');
+  for (const x of [...a, ...b]) assert.match(x, KEYED);
+  assert.ok(!a.some(x => b.includes(x)), 'a different salt shares no bucket');
+});
+test('KEYED: an email address cannot be probed — neither it nor its plain hash reaches the database', async () => {
+  const calls = await world(FULL, async () => { await call(makeReport({ email: async () => ({ ok: true }), lead: async () => ({ ok: true }) }), person()); });
+  const toDb = JSON.stringify(calls.filter(c => c.url.includes('/rest/v1/')));
+  for (const x of ['jo@reed.com', N.hashed('jo@reed.com'), 'audit-email', 'example.com', N.hashed('example.com'), '203.0.113.9', SALT]) assert.ok(!toDb.includes(x), x + ' reached the database');
+  assert.ok(toDb.includes(EMAIL_BUCKET()));
+});
+test('MISSING SALT: all three routes refuse with not_configured naming SITE_LIMIT_SALT, and touch nothing', async () => {
+  for (const salt of [undefined, '', 'too-short']) {
+    for (const [handler, body] of [[makeScan({ scan: neverScan }), { url: 'example.com' }], [makeSpeed({ speed: neverScan }), { token: token() }], [makeReport({ email: neverScan, lead: neverScan }), person()]]) {
+      const env = { ...FULL }; if (salt === undefined) delete env.SITE_LIMIT_SALT; else env.SITE_LIMIT_SALT = salt;
+      const calls = await world(env, async (c, errors) => {
+        const r = await call(handler, body);
+        assert.equal(r.status, 503); assert.equal(r.body.error, 'not_configured'); assert.deepEqual(r.body.missing, ['SITE_LIMIT_SALT']);
+        assert.match(errors.join('\n'), /SITE_LIMIT_SALT/);
+      });
+      assert.equal(calls.length, 0);
+    }
+  }
+  assert.deepEqual(await (async () => { const old = process.env.SITE_LIMIT_SALT; delete process.env.SITE_LIMIT_SALT; try { return await N.hit('site:x', 1, 1); } finally { if (old !== undefined) process.env.SITE_LIMIT_SALT = old; } })(), 'down', 'hit() itself never sends an unkeyed name');
+});
+test('FULL TABLE: site_hit\'s NULL is limiter_unavailable on every route, and is logged by readable name', async () => {
+  for (const [handler, body] of [[makeScan({ scan: neverScan }), { url: 'example.com' }], [makeSpeed({ speed: neverScan }), { token: token() }], [makeReport({ email: neverScan, lead: neverScan }), person()]]) {
+    await world(FULL, async (c, errors) => {
+      globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => null });
+      const r = await call(handler, body);
+      assert.equal(r.status, 503); assert.equal(r.body.error, 'limiter_unavailable');
+      assert.match(errors.join('\n'), /table is full; refusing site:audit-(scan|speed|report):global/);
+    });
+  }
 });
