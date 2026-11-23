@@ -7,7 +7,7 @@ import { guard, sweep } from './_guard.js';
 // ENV VAR (Vercel → Settings → Environment Variables):
 //   CHRIS_WEBHOOK_URL = the Apps Script web-app URL (see chris-apps-script.gs)
 //
-// Same pattern as api/lead.js.
+// Same webhook pattern as api/onboard.js.
 
 export default async function handler(req, res) {
   const gate = await guard(req, res, { name: 'chris-lead', perIp: 10, windowMin: 10, perDay: 1000, maxChars: 6000 });

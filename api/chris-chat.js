@@ -43,7 +43,7 @@ When the visitor is ready to talk to the real Chris, tell them to tap the "Have 
 - Never invent facts about Chris's rates, licensing, or specific loan programs.`;
 
 export default async function handler(req, res) {
-  const gate = await guard(req, res, { name: 'chris-chat', perIp: 30, windowMin: 10, perDay: 2000, maxChars: 30000 });
+  const gate = await guard(req, res, { name: 'chris-chat', perIp: 30, windowMin: 10, perDay: 2000, maxChars: 30000, failClosed: true });
   if (!gate.ok) return;
   sweep();
 
