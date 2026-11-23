@@ -106,7 +106,7 @@ async function fireLead(lead, messages) {
 }
 
 export default async function handler(req, res) {
-  const gate = await guard(req, res, { name: 'chat', perIp: 30, windowMin: 10, perDay: 3000, maxChars: 30000 });
+  const gate = await guard(req, res, { name: 'chat', perIp: 30, windowMin: 10, perDay: 3000, maxChars: 30000, failClosed: true });
   if (!gate.ok) return;
   sweep();
 

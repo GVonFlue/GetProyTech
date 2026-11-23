@@ -1,24 +1,44 @@
-// api/_env.js — one place that knows how to find Supabase from the server.
+// api/_env.js — one place that knows how to find the rate limiter's database.
 //
-// The marketing site's guard (_guard.js) uses the SAME api_hits table the CRM
-// already runs its rate limiter on, so an abusive loop is capped across cold
-// starts and across every serverless instance, not just one.
+// The marketing site's guard (_guard.js) counts requests in the CRM's Supabase
+// (its api_hits table), so an abusive loop is capped across cold starts and
+// across every serverless instance, not just one.
 //
-// THESE ARE SERVER-ONLY. The service-role key bypasses RLS and must NEVER be
-// given a VITE_ prefix (a VITE_ variable is compiled into the browser bundle).
-// Accepting VITE_SUPABASE_URL for the URL only is safe: the URL is public.
+// THE SITE HOLDS ONLY THE PUBLIC ANON KEY, NEVER THE SERVICE KEY. It can call
+// exactly one thing with it: public.site_hit(), which the CRM's
+// SITE-HIT-MIGRATION.sql creates. That function counts "site:" buckets and
+// nothing else; anon cannot read, change or delete a row of api_hits, or
+// reach any other table. The anon key is public by design (the CRM's own
+// browser bundle carries it), so it being on this project exposes nothing new.
 //
-// If these are not set, the guard FAILS OPEN (the site keeps working, rate
-// limiting is simply inactive) — so shipping this changes nothing until the
-// two variables below are added to the getproytech Vercel project.
+// The service key is deliberately NOT read, under any name. If one is set on
+// this project it is ignored, and it should be removed.
 //
-//   SUPABASE_URL                 (or VITE_SUPABASE_URL — same value, public)
-//   SUPABASE_SERVICE_KEY         (or SUPABASE_SERVICE_ROLE_KEY)
+// Read on every call, not at import, so a missing value is named in the log
+// and the tests can set them.
+//
+//   SUPABASE_URL        (or VITE_SUPABASE_URL — same value, public)
+//   SUPABASE_ANON_KEY   the CRM project's anon or publishable key (public)
+//   SITE_LIMIT_SALT     SERVER-ONLY, at least 32 characters. Keys every counter
+//                       name (_bucket.js) so nobody else can name one. Never
+//                       give it a VITE_ prefix; never put it in the CRM.
 
-export const SUPA_URL = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
+import { saltOk } from './_bucket.js';
 
-export const SUPA_KEY = process.env.SUPABASE_SERVICE_KEY
-  || process.env.SUPABASE_SERVICE_ROLE_KEY
-  || '';
+export function limiterEnv() {
+  return {
+    url: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '',
+    key: process.env.SUPABASE_ANON_KEY || '',
+  };
+}
 
-export const guardConfigured = () => !!(SUPA_URL && SUPA_KEY);
+/** The limiter variables that are not set, in a fixed order. */
+export function limiterMissing() {
+  const { url, key } = limiterEnv(), m = [];
+  if (!url) m.push('SUPABASE_URL');
+  if (!key) m.push('SUPABASE_ANON_KEY');
+  if (!saltOk(process.env.SITE_LIMIT_SALT || '')) m.push('SITE_LIMIT_SALT');
+  return m;
+}
+
+export const guardConfigured = () => limiterMissing().length === 0;
