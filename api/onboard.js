@@ -1,7 +1,7 @@
 import { guard, sweep } from './_guard.js';
 // api/onboard.js — Vercel serverless function
 // Receives the onboarding form JSON and forwards it to the Google Sheets
-// webhook. Same pattern as api/lead.js: the webhook URL lives in the
+// webhook. The webhook URL lives in the
 // SHEETS_WEBHOOK_URL environment variable (Vercel → Project → Settings →
 // Environment Variables).
 
