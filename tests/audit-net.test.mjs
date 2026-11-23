@@ -6,6 +6,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import zlib from 'node:zlib';
+import fs from 'node:fs';
 import * as A from '../api/_audit.js';
 import * as N from '../api/_audit-net.js';
 import { makeHandler as makeScan } from '../api/audit-scan.js';
@@ -171,8 +172,8 @@ test('runPageSpeed: reads the three lab numbers; a timeout or an error is "could
 
 /* ---- the routes ---- */
 const SECRET = 'test-secret-test-secret-test-secret-1234';
-const ENV_KEYS = ['SUPABASE_URL', 'VITE_SUPABASE_URL', 'SUPABASE_SERVICE_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'AUDIT_SIGNING_KEY', 'PAGESPEED_API_KEY', 'RESEND_API_KEY', 'AUDIT_FROM', 'SITE_LEAD_KEY'];
-const FULL = { SUPABASE_URL: 'https://db.example.org', SUPABASE_SERVICE_KEY: 'svc', AUDIT_SIGNING_KEY: SECRET, PAGESPEED_API_KEY: 'psi', RESEND_API_KEY: 're_x', AUDIT_FROM: 'ProyTech <audit@getproytech.com>', SITE_LEAD_KEY: 'pts_x' };
+const ENV_KEYS = ['SUPABASE_URL', 'VITE_SUPABASE_URL', 'SUPABASE_ANON_KEY', 'SUPABASE_SERVICE_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'AUDIT_SIGNING_KEY', 'PAGESPEED_API_KEY', 'RESEND_API_KEY', 'AUDIT_FROM', 'SITE_LEAD_KEY'];
+const FULL = { SUPABASE_URL: 'https://db.example.org', SUPABASE_ANON_KEY: 'anon-public', AUDIT_SIGNING_KEY: SECRET, PAGESPEED_API_KEY: 'psi', RESEND_API_KEY: 're_x', AUDIT_FROM: 'ProyTech <audit@getproytech.com>', SITE_LEAD_KEY: 'pts_x' };
 const realFetch = globalThis.fetch;
 /** Run `fn` with exactly `env` set and fetch replaced. Returns what was fetched. */
 async function world(env, fn, { hits = () => 0, limiter = 'up' } = {}) {
@@ -183,11 +184,12 @@ async function world(env, fn, { hits = () => 0, limiter = 'up' } = {}) {
   globalThis.fetch = async (url, init = {}) => {
     const u = String(url), call = { url: u, method: init.method || 'GET', headers: init.headers || {}, body: init.body ? JSON.parse(init.body) : null };
     calls.push(call);
-    if (u.includes('/rest/v1/api_hits')) {
+    if (u.includes('/rest/v1/')) {
+      /* plays the CRM's public.site_hit(): true = over (nothing recorded) */
       if (limiter === 'down') return { ok: false, status: 500, json: async () => ({}) };
-      if (call.method === 'POST') return { ok: true, status: 201, json: async () => ({}) };
-      const bucket = decodeURIComponent(/bucket=eq\.([^&]*)/.exec(u)[1]);
-      return { ok: true, status: 200, json: async () => Array.from({ length: hits(bucket) }, (_, i) => ({ id: i })) };
+      if (!u.endsWith('/rest/v1/rpc/site_hit') || call.method !== 'POST') return { ok: false, status: 404, json: async () => ({}) };
+      if (!/^site:[A-Za-z0-9:._-]{1,195}$/.test(call.body.p_bucket)) return { ok: false, status: 400, json: async () => ({}) };
+      return { ok: true, status: 200, json: async () => hits(call.body.p_bucket) >= call.body.p_limit };
     }
     return { ok: true, status: 200, json: async () => ({ ok: true, id: 'x' }) };
   };
@@ -201,7 +203,7 @@ function call(handler, body, { method = 'POST', ip = '203.0.113.9' } = {}) {
     Promise.resolve(handler({ method, body, headers: { 'x-forwarded-for': ip } }, res)).catch(e => resolve({ status: 599, body: { thrown: String(e) } }));
   });
 }
-const outside = calls => calls.filter(c => !c.url.includes('/rest/v1/api_hits'));
+const outside = calls => calls.filter(c => !c.url.includes('/rest/v1/'));
 const goodChecks = () => Object.fromEntries(A.CHECK_IDS.map(id => [id, A.SPEED_IDS.includes(id) ? { s: 'na', c: 'not_run' } : { s: 'pass', c: 'ok' }]));
 const scanned = (over = {}) => ({ ok: true, data: { v: 1, host: 'example.com', at: Date.now(), https: true, fwd: false, checks: { ...goodChecks(), ...over } } });
 const token = (over = {}) => A.seal(scanned(over).data, SECRET);
@@ -210,12 +212,12 @@ const neverScan = async () => { throw new Error('the scan must not run'); };
 
 test('FAIL CLOSED: with the rate limiter not configured, all three routes refuse, name the variables, and touch nothing', async () => {
   for (const [name, handler, body] of [['scan', makeScan({ scan: neverScan }), { url: 'example.com' }], ['speed', makeSpeed({ speed: neverScan }), { token: token() }], ['report', makeReport({ email: neverScan, lead: neverScan }), person()]]) {
-    const env = { ...FULL }; delete env.SUPABASE_URL; delete env.SUPABASE_SERVICE_KEY;
+    const env = { ...FULL }; delete env.SUPABASE_URL; delete env.SUPABASE_ANON_KEY;
     const calls = await world(env, async (c, errors) => {
       const r = await call(handler, body);
       assert.equal(r.status, 503, name); assert.equal(r.body.ok, false); assert.equal(r.body.error, 'not_configured');
-      assert.deepEqual(r.body.missing, ['SUPABASE_URL', 'SUPABASE_SERVICE_KEY'], name);
-      assert.match(errors.join('\n'), /SUPABASE_URL, SUPABASE_SERVICE_KEY/);
+      assert.deepEqual(r.body.missing, ['SUPABASE_URL', 'SUPABASE_ANON_KEY'], name);
+      assert.match(errors.join('\n'), /SUPABASE_URL, SUPABASE_ANON_KEY/);
     });
     assert.equal(calls.length, 0, name + ' made no network call at all');
   }
@@ -322,7 +324,9 @@ test('audit-report: emails the report through Resend and posts the lead to the C
   assert.deepEqual(Object.keys(lead.body), ['kind', 'source', 'form', 'name', 'email', 'phone', 'page', 'message']);
   assert.equal(lead.body.source, 'Website audit'); assert.equal(lead.body.name, 'Jo Reed'); assert.equal(lead.body.phone, '3165550142');
   assert.match(lead.body.page, /audit\?src=ig \(audited example\.com\)/); assert.match(lead.body.message, /Text consent box: TICKED\./);
-  assert.ok(calls.some(c => c.method === 'POST' && c.body && String(c.body.bucket).startsWith('site:audit-email:')), 'the per-address limit is recorded after the send');
+  const email = calls.filter(c => c.body && String(c.body.p_bucket).startsWith('site:audit-email:'));
+  assert.deepEqual(email.map(c => [c.body.p_limit, c.body.p_window_sec, c.body.p_record]), [[1, 86400, false], [1, 86400, true]], 'asked before the send, recorded after it');
+  assert.ok(calls.indexOf(email[0]) < calls.indexOf(mail) && calls.indexOf(mail) < calls.indexOf(email[1]));
 });
 test('audit-report: the number is required and goes to the CRM either way; an unticked box is said in words and is not consent', async () => {
   await world(FULL, async () => {
@@ -376,4 +380,37 @@ test('the speed function has its 60 seconds, and the test inside it stops first'
   const cfg = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
   assert.equal(cfg.functions['api/audit-speed.js'].maxDuration, 60);
   assert.ok(A.LIMITS.speedMs < 60000);
+});
+
+test('the limiter is the CRM\'s site_hit() on the ANON key: the service key is never read or sent', async () => {
+  /* the service key alone does not configure the limiter */
+  const env = { ...FULL, SUPABASE_SERVICE_KEY: 'svc-secret', SUPABASE_SERVICE_ROLE_KEY: 'svc-secret' }; delete env.SUPABASE_ANON_KEY;
+  let calls = await world(env, async () => { const r = await call(makeScan({ scan: neverScan }), { url: 'example.com' }); assert.equal(r.status, 503); assert.deepEqual(r.body.missing, ['SUPABASE_ANON_KEY']); });
+  assert.equal(calls.length, 0);
+  /* configured: every limiter call is POST rpc/site_hit, the key on apikey only, buckets site_hit accepts */
+  calls = await world({ ...FULL, SUPABASE_SERVICE_KEY: 'svc-secret' }, async () => { await call(makeScan({ scan: async () => scanned() }), { url: 'example.com' }, { ip: 'fe80::1%eth0' }); });
+  const lim = calls.filter(c => c.url.includes('/rest/v1/'));
+  assert.equal(lim.length, 3, 'global, per IP, per host');
+  for (const c of lim) {
+    assert.equal(c.url, 'https://db.example.org/rest/v1/rpc/site_hit'); assert.equal(c.method, 'POST');
+    assert.deepEqual(Object.keys(c.headers).sort(), ['apikey', 'content-type']); assert.equal(c.headers.apikey, 'anon-public');
+    assert.match(c.body.p_bucket, /^site:[A-Za-z0-9:._-]{1,195}$/); assert.equal(c.body.p_record, true);
+  }
+  assert.deepEqual(lim.map(c => [c.body.p_bucket.replace(/[0-9a-f]{32}$/, 'H'), c.body.p_window_sec, c.body.p_limit]),
+    [['site:audit-scan:global', 86400, 300], ['site:audit-scan:ip:fe80::1_eth0', 600, 5], ['site:audit-host:H', 86400, 5]]);
+  assert.ok(!JSON.stringify(calls).includes('svc-secret'));
+  for (const f of ['_audit-net.js', 'audit-scan.js', 'audit-speed.js', 'audit-report.js']) {
+    assert.ok(!/SUPABASE_SERVICE/.test(fs.readFileSync(new URL('../api/' + f, import.meta.url), 'utf8').replace(/\/\/[^\n]*|\/\*[\s\S]*?\*\//g, '')), f);
+  }
+});
+test('a limiter answer that is not a plain true/false is a refusal, not a pass', async () => {
+  const old = globalThis.fetch;
+  for (const answer of [null, 'false', 0, {}]) {
+    const r = await world(FULL, async () => {
+      globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => answer });
+      const out = await call(makeScan({ scan: neverScan }), { url: 'example.com' });
+      assert.equal(out.status, 503, JSON.stringify(answer)); assert.equal(out.body.error, 'limiter_unavailable');
+    });
+  }
+  globalThis.fetch = old;
 });

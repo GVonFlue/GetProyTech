@@ -159,40 +159,44 @@ export async function runPageSpeed(target, key, { timeoutMs = LIMITS.speedMs, fe
 
 /* ---------------------------------------------------- rate limits, CLOSED */
 
-/* The site's shared guard (_guard.js) FAILS OPEN: with Supabase unset it lets
-   every request through. That is its documented choice for the older routes
-   and this file does not change it. The audit routes spend money (PageSpeed,
-   email) and fetch other people's servers, so they FAIL CLOSED: no limiter,
-   no run. Same api_hits table, same "site:" bucket prefix (so _guard's sweep
-   cleans these rows too). The environment is read per call, not at import. */
-const supa = () => ({ url: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '', key: process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '' });
-export const limiterMissing = () => { const s = supa(), m = []; if (!s.url) m.push('SUPABASE_URL'); if (!s.key) m.push('SUPABASE_SERVICE_KEY'); return m; };
-const sbHeaders = k => ({ apikey: k, authorization: `Bearer ${k}`, 'content-type': 'application/json' });
-export const hashed = s => createHash('sha256').update(String(s)).digest('hex').slice(0, 32);
+/* The audit routes spend money (PageSpeed, email) and fetch other people's
+   servers, so they FAIL CLOSED: no limiter, no run. The site's shared guard
+   (_guard.js) lets its form routes through instead; that is its choice for
+   them, not this file's.
 
-/** How many hits a bucket has in the window: a number, or null when the
- *  limiter cannot be read (which the callers treat as "refuse"). */
-export async function countHits(bucket, windowMin) {
-  const s = supa(), since = new Date(Date.now() - windowMin * 60000).toISOString();
-  try {
-    const r = await fetch(`${s.url}/rest/v1/api_hits?bucket=eq.${encodeURIComponent(bucket)}&at=gte.${since}&select=id`, { headers: sbHeaders(s.key) });
-    if (!r.ok) return null;
-    const rows = await r.json();
-    return Array.isArray(rows) ? rows.length : null;
-  } catch { return null; }
-}
-export async function recordHit(bucket) {
+   The limiter is the CRM's public.site_hit() (SITE-HIT-MIGRATION.sql), called
+   with the CRM's PUBLIC anon key, NEVER the service key: the service key is
+   not read here under any name. site_hit counts a "site:" bucket and answers
+   true (over, nothing recorded) or false (under, recorded), in one database
+   call under a per-bucket lock, and deletes old rows itself. The anon key can
+   do nothing else in that database. Read per call, not at import. */
+const supa = () => ({ url: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '', key: process.env.SUPABASE_ANON_KEY || '' });
+export const limiterMissing = () => { const s = supa(), m = []; if (!s.url) m.push('SUPABASE_URL'); if (!s.key) m.push('SUPABASE_ANON_KEY'); return m; };
+export const hashed = s => createHash('sha256').update(String(s)).digest('hex').slice(0, 32);
+/** site_hit() accepts only ^site:[A-Za-z0-9:._-]{1,195}$; a header with
+ *  anything else in it would be refused and read as an outage. */
+export const bucketPart = s => String(s == null ? '' : s).replace(/[^A-Za-z0-9:._-]/g, '_').slice(0, 90) || '_';
+
+/** One call to site_hit(). 'ok' | 'limit' | 'down'. `record: false` asks
+ *  "is it at the limit?" and records nothing. The key goes on `apikey` only:
+ *  a publishable key on Authorization is parsed as a JWT and refused. */
+export async function hit(bucket, limit, windowMin, { record = true } = {}) {
   const s = supa();
-  try { const r = await fetch(`${s.url}/rest/v1/api_hits`, { method: 'POST', headers: sbHeaders(s.key), body: JSON.stringify({ bucket, at: new Date().toISOString() }) }); return r.ok; }
-  catch { return false; }
+  if (!s.url || !s.key) return 'down';
+  const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 3000);
+  try {
+    const r = await fetch(`${s.url.replace(/\/+$/, '')}/rest/v1/rpc/site_hit`, { method: 'POST', signal: ctl.signal,
+      headers: { apikey: s.key, 'content-type': 'application/json' },
+      body: JSON.stringify({ p_bucket: bucket, p_window_sec: Math.round(windowMin * 60), p_limit: limit, p_record: !!record }) });
+    if (!r.ok) { console.error('[audit] the limiter answered', r.status); return 'down'; }
+    const over = await r.json();
+    return over === true ? 'limit' : over === false ? 'ok' : 'down';
+  } catch { return 'down'; } finally { clearTimeout(timer); }
 }
-/** 'ok' | 'limit' | 'down'. Counts, and records this hit when under the limit. */
-export async function take(bucket, limit, windowMin) {
-  const n = await countHits(bucket, windowMin);
-  if (n == null) return 'down';
-  if (n >= limit) return 'limit';
-  return (await recordHit(bucket)) ? 'ok' : 'down';
-}
+/** Counts, and records this hit when under the limit. */
+export const take = (bucket, limit, windowMin) => hit(bucket, limit, windowMin);
+/** Only asks whether the bucket is at the limit; records nothing. */
+export const peek = (bucket, limit, windowMin) => hit(bucket, limit, windowMin, { record: false });
 
 /** The gate every audit route calls first. It answers the request itself and
  *  returns { ok:false } unless: it is a POST, every variable in `need` and the
@@ -213,7 +217,7 @@ export async function auditGate(req, res, { name, perIp, windowMin, perDay, maxC
   const day = await take(`site:${name}:global`, perDay, 60 * 24);
   if (day === 'down') return send(503, { ok: false, error: 'limiter_unavailable' });
   if (day === 'limit') { console.error(`[${name}] DAILY CAP HIT`); return send(429, { ok: false, error: 'busy' }); }
-  const ip = ipOf(req), one = await take(`site:${name}:ip:${ip}`, perIp, windowMin);
+  const ip = ipOf(req), one = await take(`site:${name}:ip:${bucketPart(ip)}`, perIp, windowMin);
   if (one === 'down') return send(503, { ok: false, error: 'limiter_unavailable' });
   if (one === 'limit') { res.setHeader('retry-after', String(windowMin * 60)); return send(429, { ok: false, error: 'too_many' }); }
   let body = req.body;

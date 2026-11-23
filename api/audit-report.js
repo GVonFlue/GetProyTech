@@ -25,7 +25,7 @@
 // AUDIT_SIGNING_KEY, RESEND_API_KEY, AUDIT_FROM or SITE_LEAD_KEY is unset.
 // It never falls back to another sender and never drops the lead quietly.
 import { open, cleanContact, renderReport, leadPayload, gradeOf, CHECKS } from './_audit.js';
-import { auditGate, countHits, recordHit, hashed, sendEmail, postLead, fromOk } from './_audit-net.js';
+import { auditGate, peek, take, hashed, sendEmail, postLead, fromOk } from './_audit-net.js';
 
 const KEYS = ['token', 'name', 'email', 'phone', 'consent', 'src', 'fax'];
 
@@ -54,17 +54,18 @@ export function makeHandler({ email = sendEmail, lead = postLead } = {}) {
     const result = open(b.token, process.env.AUDIT_SIGNING_KEY, Date.now());
     if (!result) { res.status(400).json({ ok: false, error: 'bad_token' }); return; }
 
-    /* one report per email address per day. Counted now, recorded only after
-       the email really went, so a failed send does not lock the address out. */
+    /* one report per email address per day. Asked now (peek records nothing),
+       recorded only after the email really went, so a failed send does not
+       lock the address out. */
     const bucket = `site:audit-email:${hashed(contact.email)}`;
-    const sent = await countHits(bucket, 60 * 24);
-    if (sent == null) { res.status(503).json({ ok: false, error: 'limiter_unavailable' }); return; }
-    if (sent >= 1) { res.status(429).json({ ok: false, error: 'already_sent' }); return; }
+    const sent = await peek(bucket, 1, 60 * 24);
+    if (sent === 'down') { res.status(503).json({ ok: false, error: 'limiter_unavailable' }); return; }
+    if (sent === 'limit') { res.status(429).json({ ok: false, error: 'already_sent' }); return; }
 
     const report = renderReport({ result, firstName: contact.name, src: b.src });
     const mail = await email({ to: contact.email, subject: report.subject, html: report.html, text: report.text });
     if (!mail.ok) { res.status(502).json({ ok: false, error: 'email_failed' }); return; }
-    await recordHit(bucket);
+    await take(bucket, 1, 60 * 24);
 
     const saved = await lead(leadPayload({ contact, result, src: b.src }));
     if (!saved.ok) console.error(`[audit-report] LEAD NOT SAVED for an audit of ${result.host}: the report was emailed but the CRM has no lead`);

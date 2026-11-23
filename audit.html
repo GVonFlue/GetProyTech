@@ -372,7 +372,7 @@
     function list(speed){ return NAMES.map(function(n){ return { id: n[0], name: n[1], ran: SPEED_IDS.indexOf(n[0]) < 0 || speed }; }); }
     return new Promise(function(res, rej){ setTimeout(function(){
       if (window.console) console.info('[mock] ' + path, JSON.parse(JSON.stringify(body)));
-      if (fail === 'config') return res({ ok: false, error: 'not_configured', missing: ['SUPABASE_URL', 'SUPABASE_SERVICE_KEY'] });
+      if (fail === 'config') return res({ ok: false, error: 'not_configured', missing: ['SUPABASE_URL', 'SUPABASE_ANON_KEY'] });
       if (path === API.scan){
         if (fail === 'unreachable' || fail === 'private') return res({ ok: false, error: fail });
         var host = String(body.url).replace(/^[a-z]+:\/\//i, '').split('/')[0].toLowerCase();
