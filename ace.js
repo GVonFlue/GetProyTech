@@ -13,8 +13,11 @@
   "use strict";
 
   var GREETING =
-    "Hey — I'm Ace. Tell me what you do and where deals slip through the cracks, and I'll show you how we'd fix it. What's your business?";
-  var GREET_CHIPS = ["I'm a realtor", "I'm a lender", "How does it all work?"];
+    "Hey, I'm Ace, the kind of AI front desk ProyTech builds. Tell me what your business does and what's eating your time, and I'll show you how we'd fix it.";
+  var GREET_CHIPS = ["I wear too many hats", "Leads slip through", "What's it cost?"];
+  // A booking chip goes to the booking page instead of being sent as a message.
+  var BOOK_URL = "/book?src=ace";
+  function isBookingChip(t) { return /\b(book|schedule)\b|nucleus session/i.test(t || ""); }
 
   /* ---------- one-time styles ---------- */
   function injectStyles() {
@@ -105,14 +108,17 @@
       (chips || []).forEach(function (c) {
         var b = document.createElement("button");
         b.className = "ace-chip"; b.type = "button"; b.textContent = c;
-        b.addEventListener("click", function () { send(c); });
+        b.addEventListener("click", function () {
+          if (isBookingChip(c)) { window.location.href = BOOK_URL; return; }
+          send(c);
+        });
         chipsWrap.appendChild(b);
       });
     }
     function showCaptured() {
       var d = document.createElement("div");
       d.className = "ace-captured";
-      d.innerHTML = '<span aria-hidden="true">&#9989;</span><div><b>You&rsquo;re on the list.</b> Garrett or Logan will reach out shortly to set up your free Pipeline Teardown.</div>';
+      d.innerHTML = '<span aria-hidden="true">&#9989;</span><div><b>Got it.</b> Garrett or Logan will reach out shortly. Want it sooner? <a href="/book?src=ace" style="color:#3A4AE0;font-weight:600">Book your Nucleus Session</a>.</div>';
       feed.appendChild(d); scrollDown();
     }
     function setBusy(b) { busy = b; sendBtn.disabled = b; input.disabled = b; }
@@ -133,7 +139,7 @@
         .then(function (r) { return r.json().catch(function () { return {}; }); })
         .then(function (data) {
           hideTyping(); setBusy(false);
-          if (data.error) { addMsg("I'm having a hiccup — try again in a sec, or tap Book a Teardown.", "bot"); return; }
+          if (data.error) { addMsg("I'm having a hiccup. Try again in a sec, or book your free Nucleus Session at getproytech.com/book.", "bot"); return; }
           var reply = data.reply || "Sorry, I didn't catch that — mind rephrasing?";
           addMsg(reply, "bot");
           history.push({ role: "assistant", content: reply });
@@ -255,6 +261,10 @@
 
   /* ---------- boot ---------- */
   function boot() {
+    // A page with an inline spot (data-ace-inline) gets Ace there and no
+    // floating bubble, so it never stacks with the site's other chat button.
+    var spot = document.querySelector("[data-ace-inline]");
+    if (spot) { mountInline(spot); return; }
     if (document.getElementById("aceLauncher")) {
       // host page already has its own floating widget; just ensure inline is available
       injectStyles();

@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ace — AI Receptionist Demo for Realtors &amp; Lenders | ProyTech</title>
-<meta name="description" content="Try Ace live — the AI front desk that answers real estate and mortgage leads in seconds, qualifies them, and books appointments 24/7. This is the exact assistant ProyTech builds for realtors and lenders." />
+<meta name="description" content="Try Ace live, the AI front desk that answers leads in seconds, qualifies them and points them to a booked call, 24/7. The kind of assistant ProyTech builds into a business." />
 <meta name="keywords" content="AI receptionist demo, AI receptionist for realtors, real estate chatbot, AI front desk, missed call text back demo, mortgage AI assistant" />
 <link rel="canonical" href="https://getproytech.com/ace" />
 <meta name="robots" content="index, follow" />
@@ -25,10 +25,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":"Ace — AI Receptionist Demo","url":"https://getproytech.com/ace","description":"Live demo of Ace, ProyTech's AI front desk for realtors and lenders.","isPartOf":{"@type":"WebSite","name":"ProyTech","url":"https://getproytech.com/"}}
+{"@context":"https://schema.org","@type":"WebPage","name":"Ace — AI Receptionist Demo","url":"https://getproytech.com/ace","description":"Live demo of Ace, ProyTech's AI front desk.","isPartOf":{"@type":"WebSite","name":"ProyTech","url":"https://getproytech.com/"}}
 </script>
 <style>
 :root{
@@ -157,7 +155,7 @@ body{overflow-x:hidden}
     <a href="/" class="logo" aria-label="ProyTech home"><img src="/proytechlogo.png" alt="ProyTech" class="logo-img" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','Proy<b>Tech</b>')"></a>
     <div class="nav-r">
       <a href="/" class="nav-back">← Back to site</a>
-      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Get my free leak audit</a>
+      <a href="/book?src=ace" class="btn btn-primary">Book your free Nucleus Session</a>
     
       <button class="nav-burger" id="navBurger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
@@ -184,7 +182,7 @@ body{overflow-x:hidden}
       <a class="msub" href="/ace">Ace — AI Front Desk</a>
     </div>
     <div class="mnav-cta">
-      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" class="btn btn-primary">Get my free leak audit →</a>
+      <a href="/book?src=ace" class="btn btn-primary">Book your free Nucleus Session →</a>
     </div>
   </div>
 </div>
@@ -197,23 +195,23 @@ body{overflow-x:hidden}
       <div>
         <span class="eyebrow">Live Demo</span>
         <h1>Meet Ace. <span>Go ahead — try to stump it.</span></h1>
-        <p>This is the exact AI front desk we build for realtors and lenders — answering in seconds, qualifying, and booking 24/7. It's live on this page right now. Ask it anything: pricing, how it works, whether it fits your business.</p>
+        <p>This is the kind of AI front desk we build into your system — answering in seconds, qualifying, and booking 24/7. It's live on this page right now. Ask it anything: pricing, how it works, whether it fits your business.</p>
         <div class="hero-cta">
-          <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Get my free leak audit →</a>
+          <a href="/book?src=ace" class="btn btn-primary">Book your free Nucleus Session →</a>
           <a href="/" class="btn btn-ghost">See everything we build</a>
         </div>
-        <div class="hero-note">Yours gets trained on YOUR voice, listings, and process — this one just knows ours.</div>
+        <div class="hero-note">Yours gets trained on YOUR voice and process — this one just knows ours.</div>
       </div>
 
       <div class="chatcard">
         <div class="chat-h"><span class="av">A</span><div><div class="n">Ace</div><div class="s"><span class="dot-live"></span> Live · answers in seconds</div></div></div>
         <div class="chat-body" id="aceBody">
-          <div class="cmsg ace">Hey — I'm Ace 👋 I'm the AI front desk ProyTech builds for realtors and lenders. Ask me anything, or tap a question below. Go on, time me.</div>
+          <div class="cmsg ace">Hey — I'm Ace 👋 I'm the kind of AI front desk ProyTech builds. Ask me anything, or tap a question below. Go on, time me.</div>
         </div>
         <div class="cchips" id="aceChips">
           <button class="cchip" onclick="quickAsk('What exactly do you do for a realtor?')">What do you do?</button>
           <button class="cchip" onclick="quickAsk('What does the front desk cost?')">What's it cost?</button>
-          <button class="cchip" onclick="openCalendly()">Book a free audit</button>
+          <button class="cchip" onclick="location.href='/book?src=ace'">Book my Nucleus Session</button>
         </div>
         <div class="chat-foot"><input id="aceInput" type="text" placeholder="Ask Ace anything…" onkeydown="if(event.key==='Enter')sendAce()" /><button onclick="sendAce()" aria-label="Send">↑</button></div>
       </div>
@@ -232,7 +230,7 @@ body{overflow-x:hidden}
       <div class="gcard"><div class="ic">📅</div><h3>Books straight to your calendar</h3><p>No phone tag. Ace offers real open times and drops the appointment on your calendar with reminders that kill no-shows.</p></div>
     </div>
     <div class="cta-row">
-      <a href="https://calendly.com/getproytech/30min" target="_blank" rel="noopener" onclick="return openCalendly()" class="btn btn-primary">Get my free leak audit →</a>
+      <a href="/book?src=ace" class="btn btn-primary">Book your free Nucleus Session →</a>
       <a href="/#pricing" class="btn btn-dark">See pricing</a>
     </div>
   </section>
@@ -242,15 +240,14 @@ body{overflow-x:hidden}
 <div class="foot">Ace is one of the systems ProyTech builds. <a href="/">See the full picture →</a></div>
 
 <script>
-const CALENDLY_URL="https://calendly.com/getproytech/30min";
-function openCalendly(){if(window.Calendly&&window.Calendly.initPopupWidget){Calendly.initPopupWidget({url:CALENDLY_URL});}else{window.open(CALENDLY_URL,'_blank','noopener');}return false;}
-function isBookingChip(t){return /\b(book|schedule)\b/i.test(t)||/grab a time|set up a call|pick a time/i.test(t);}
+function openCalendly(){location.href='/book?src=ace';return false;}
+function isBookingChip(t){return /\b(book|schedule)\b|nucleus session/i.test(t)||/grab a time|set up a call|pick a time/i.test(t);}
 
 const aceBody=document.getElementById('aceBody');
 const aceInput=document.getElementById('aceInput');
 const aceChips=document.getElementById('aceChips');
 let aceHistory=[];
-const DEFAULT_CHIPS=["How does it work?","What's it cost?","Book a free audit"];
+const DEFAULT_CHIPS=["How does it work?","What's it cost?","Book my Nucleus Session"];
 
 function quickAsk(q){aceInput.value=q;sendAce();}
 function renderChips(chips){
@@ -272,7 +269,7 @@ async function sendAce(){
     const data=await res.json();
     const reply=data.reply||"Sorry — I hit a snag. Email admin@getproytech.com and we'll jump right on it.";
     bubble(reply,'ace');aceHistory.push({role:'assistant',content:reply});renderChips(data.chips);
-  }catch(e){dots.remove();bubble("I can't reach the server right now — but email admin@getproytech.com or book a free audit and we'll answer everything.",'ace');renderChips(DEFAULT_CHIPS);}
+  }catch(e){dots.remove();bubble("I can't reach the server right now — but email admin@getproytech.com or book your free Nucleus Session and we'll answer everything.",'ace');renderChips(DEFAULT_CHIPS);}
 }
 </script>
 
