@@ -17,7 +17,10 @@
 // functions are stateless and cold starts — exactly when you're hit hardest —
 // would reset an in-memory counter. The site holds ONLY the public anon key
 // (see _env.js) and makes ONE kind of call with it: public.site_hit(), which
-// counts a "site:" bucket and answers true (over) or false (under, recorded).
+// counts a "site:" bucket and answers true (over), false (under, recorded) or
+// null (its table is full, read here as "down"). Bucket names are KEYED
+// (_bucket.js): the database sees "site:" + 40 hex, never a readable name, so
+// a stranger holding the anon key cannot name one of our counters to fill it.
 // The count and the record happen in one database call under a per-bucket
 // lock, so a burst cannot slip past the way read-then-write over REST did.
 // The function also deletes old rows, so there is nothing to sweep from here.
@@ -30,6 +33,7 @@
 // A missing variable is named in the log; it is never silently "fine".
 
 import { limiterEnv, limiterMissing } from './_env.js';
+import { keyedBucket } from './_bucket.js';
 
 /** Caller's IP. Vercel sets x-forwarded-for; take the FIRST entry — later ones
  *  are proxies and are trivially spoofable by the client. */
@@ -39,20 +43,16 @@ export function ipOf(req) {
   return req.headers['x-real-ip'] || req.socket?.remoteAddress || 'unknown';
 }
 
-/** site_hit() accepts only ^site:[A-Za-z0-9:._-]{1,195}$. A header value with
- *  anything else in it (an IPv6 zone "%eth0", junk from a client) would make
- *  the database refuse the call and look like an outage, so it is folded into
- *  the allowed characters here instead. */
-export const bucketPart = s => String(s == null ? '' : s).replace(/[^A-Za-z0-9:._-]/g, '_').slice(0, 90) || '_';
-
 const LIMITER_MS = 3000;
 
-/** One call to public.site_hit(). Answers 'ok' (under, recorded), 'limit'
- *  (over, nothing recorded), 'down' (unreachable or an unexpected answer) or
- *  'off' (not configured). `record: false` asks for the count only. */
-export async function siteHit(bucket, limit, windowSec, { record = true } = {}) {
+/** One call to public.site_hit() for the counter called `name` (readable;
+ *  it is keyed before it leaves). Answers 'ok' (under, recorded), 'limit'
+ *  (over, nothing recorded), 'down' (unreachable, full, or an unexpected
+ *  answer) or 'off' (not configured). `record: false` asks for the count only. */
+export async function siteHit(name, limit, windowSec, { record = true } = {}) {
   const { url, key } = limiterEnv();
-  if (!url || !key) return 'off';
+  if (!url || !key || limiterMissing().length) return 'off';
+  const bucket = keyedBucket(name);
   const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), LIMITER_MS);
   try {
     const r = await fetch(`${url.replace(/\/+$/, '')}/rest/v1/rpc/site_hit`, {
@@ -64,8 +64,9 @@ export async function siteHit(bucket, limit, windowSec, { record = true } = {}) 
       body: JSON.stringify({ p_bucket: bucket, p_window_sec: Math.round(windowSec), p_limit: Math.round(limit), p_record: !!record }),
       signal: ctl.signal,
     });
-    if (!r.ok) { console.error(`[guard] the limiter answered ${r.status} for ${bucket.split(':').slice(0, 2).join(':')}`); return 'down'; }
+    if (!r.ok) { console.error(`[guard] the limiter answered ${r.status} for ${name}`); return 'down'; }
     const over = await r.json();
+    if (over === null) console.error(`[guard] the limiter's table is full; treating ${name} as down`);
     return over === true ? 'limit' : over === false ? 'ok' : 'down';
   } catch {
     return 'down';
@@ -127,7 +128,7 @@ export async function guard(req, res, opts = {}) {
   }
 
   // 2. global daily cap FIRST — the only layer that bounds a botnet's bill
-  const day = await siteHit(`site:${bucketPart(name)}:global`, perDay, 24 * 3600);
+  const day = await siteHit(`site:${name}:global`, perDay, 24 * 3600);
   if (day === 'limit') {
     console.error(`[guard] DAILY CAP HIT on ${name}`);
     res.status(429).json({ error: 'This service is busy right now. Please try again later.' });
@@ -140,7 +141,7 @@ export async function guard(req, res, opts = {}) {
   }
 
   // 3. per-IP
-  const one = await siteHit(`site:${bucketPart(name)}:ip:${bucketPart(ip)}`, perIp, windowMin * 60);
+  const one = await siteHit(`site:${name}:ip:${ip}`, perIp, windowMin * 60);
   if (one === 'limit') {
     res.setHeader('retry-after', String(windowMin * 60));
     res.status(429).json({ error: `Too many requests. Try again in ${windowMin} minutes.` });

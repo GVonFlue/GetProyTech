@@ -19,6 +19,11 @@
 //
 //   SUPABASE_URL        (or VITE_SUPABASE_URL — same value, public)
 //   SUPABASE_ANON_KEY   the CRM project's anon or publishable key (public)
+//   SITE_LIMIT_SALT     SERVER-ONLY, at least 32 characters. Keys every counter
+//                       name (_bucket.js) so nobody else can name one. Never
+//                       give it a VITE_ prefix; never put it in the CRM.
+
+import { saltOk } from './_bucket.js';
 
 export function limiterEnv() {
   return {
@@ -32,6 +37,7 @@ export function limiterMissing() {
   const { url, key } = limiterEnv(), m = [];
   if (!url) m.push('SUPABASE_URL');
   if (!key) m.push('SUPABASE_ANON_KEY');
+  if (!saltOk(process.env.SITE_LIMIT_SALT || '')) m.push('SITE_LIMIT_SALT');
   return m;
 }
 
