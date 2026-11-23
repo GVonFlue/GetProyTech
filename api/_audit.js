@@ -10,16 +10,24 @@
 // The rubric, the scoring and the report live in ./_rubric.js.
 //
 // WHAT THE CARRIED RESULT MAY HOLD: the host, the time, the scan's facts (small
-// whole numbers and yes/no), PageSpeed's numbers and the screenshot's hash.
+// whole numbers and yes/no, for the homepage and for the site), the tools found
+// (indexes into our own table), PageSpeed's numbers and the screenshot's hash.
 // Never text from the audited site and never text a visitor typed.
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto';
 import { isIP } from 'node:net';
 import { ruleResults, teaserMisses, cleanFacts } from './_rubric.js';
+import { cleanSite, cleanTools } from './_crawl.js';
 
 export const SITE_ORIGIN = 'https://getproytech.com';
 export const USER_AGENT = 'ProyTechWebsiteAudit/1.0 (+https://getproytech.com/audit)';
 export const LIMITS = {
   fetchMs: 8000,            // the homepage, redirects included
+  pageMs: 6000,             // each of the other pages read
+  textMs: 5000,             // robots.txt, llms.txt, the sitemap
+  linkMs: 4000,             // "is this link there?"
+  dnsMs: 2500,              // the domain's email records
+  pageBytes: 1536 * 1024,
+  textBytes: 512 * 1024,
   fallbackMs: 5000,         // the plain-http retry when https does not answer
   redirectCheckMs: 4000,    // "does http forward to https"
   maxBytes: 2 * 1024 * 1024,
@@ -107,17 +115,18 @@ export function isPublicAddress(ip) {
 /** What the visitor sees before the details form: how many items need work
  *  among those checked so far, and a few headline misses by name. No grade. */
 export function teaser(result) {
-  const r = ruleResults(result.facts, result, result.speed);
+  const r = ruleResults(result.facts, result, result.speed, result.site, result.tools);
   const checked = Object.values(r).filter(x => x.s !== 'na');
   return { needWork: checked.filter(x => x.s !== 'pass').length, checked: checked.length, misses: teaserMisses(r) };
 }
 /* ------------------------------------------------------- the carried result */
 
 /** Rebuild a result from the fixed vocabulary only: a validated host, a time,
- *  the scan's facts (small numbers, ./_rubric.js cleanFacts), PageSpeed's
- *  numbers and the screenshot's hash. Anything else is dropped. */
+ *  the scan's facts (small numbers, ./_rubric.js cleanFacts and ./_crawl.js
+ *  cleanSite), the tool indexes, PageSpeed's numbers and the screenshot's hash.
+ *  Anything else is dropped. v3 is the whole-site scan; older tokens do not open. */
 export function sanitizeResult(r) {
-  if (!r || typeof r !== 'object' || r.v !== 2) return null;
+  if (!r || typeof r !== 'object' || r.v !== 3) return null;
   const v = validateUrl(typeof r.host === 'string' ? r.host : '');
   if (!v.ok || v.host !== r.host || !Number.isFinite(r.at)) return null;
   const facts = cleanFacts(r.facts);
@@ -129,7 +138,7 @@ export function sanitizeResult(r) {
     speed = { lcpMs: num(r.speed.lcpMs), cls: num(r.speed.cls), weightBytes: num(r.speed.weightBytes), fontOk: yn(r.speed.fontOk), tapOk: yn(r.speed.tapOk) };
   }
   const shot = typeof r.shot === 'string' && /^[0-9a-f]{64}$/.test(r.shot) ? r.shot : '';
-  return { v: 2, host: v.host, at: r.at, https: r.https === true, redirect: ['pass', 'fail', 'na'].includes(r.redirect) ? r.redirect : 'na', fwd: r.fwd === true, facts, speed, shot };
+  return { v: 3, host: v.host, at: r.at, https: r.https === true, redirect: ['pass', 'fail', 'na'].includes(r.redirect) ? r.redirect : 'na', fwd: r.fwd === true, facts, site: cleanSite(r.site), tools: cleanTools(r.tools), speed, shot };
 }
 
 const keyOf = secret => createHash('sha256').update('proytech-audit-v2:' + String(secret)).digest();

@@ -6,7 +6,7 @@
  "grade": "F",
  "score": 43,
  "report": {
-  "v": 1,
+  "v": 2,
   "host": "acmeroofing.com",
   "builtOn": "2026-11-23",
   "score": 43,
@@ -15,82 +15,98 @@
    {
     "id": "first",
     "name": "First impression",
-    "weight": 12,
-    "points": 2,
+    "weight": 9,
+    "points": 1.5,
     "pct": 17,
     "pill": "Broken"
    },
    {
     "id": "contact",
     "name": "Contact and lead capture",
-    "weight": 16,
-    "points": 6,
+    "weight": 12,
+    "points": 4.5,
     "pct": 38,
     "pill": "Broken"
    },
    {
     "id": "trust",
     "name": "Trust and proof",
+    "weight": 10,
+    "points": 3.8,
+    "pct": 38,
+    "pill": "Broken"
+   },
+   {
+    "id": "psych",
+    "name": "Buyer psychology",
     "weight": 12,
-    "points": 6,
+    "points": 3.4,
+    "pct": 29,
+    "pill": "Broken"
+   },
+   {
+    "id": "journey",
+    "name": "Customer journey",
+    "weight": 9,
+    "points": 4.5,
     "pct": 50,
     "pill": "Needs work"
    },
    {
-    "id": "copy",
-    "name": "Copy",
-    "weight": 10,
-    "points": 0,
-    "pct": 0,
-    "pill": "Broken"
-   },
-   {
-    "id": "flow",
-    "name": "Flow and choices",
-    "weight": 10,
-    "points": 7.5,
-    "pct": 75,
+    "id": "pages",
+    "name": "Pages and structure",
+    "weight": 9,
+    "points": 4.5,
+    "pct": 50,
     "pill": "Needs work"
    },
    {
     "id": "mobile",
     "name": "Mobile",
-    "weight": 10,
-    "points": 7.5,
+    "weight": 7,
+    "points": 5.3,
     "pct": 75,
     "pill": "Needs work"
    },
    {
     "id": "speed",
     "name": "Speed",
+    "weight": 6,
+    "points": 2,
+    "pct": 33,
+    "pill": "Broken"
+   },
+   {
+    "id": "google",
+    "name": "Google search",
+    "weight": 9,
+    "points": 5.3,
+    "pct": 59,
+    "pill": "Needs work"
+   },
+   {
+    "id": "aivis",
+    "name": "Found by AI assistants",
+    "weight": 5,
+    "points": 2.5,
+    "pct": 50,
+    "pill": "Needs work"
+   },
+   {
+    "id": "behind",
+    "name": "Behind the scenes",
     "weight": 8,
     "points": 2.7,
     "pct": 33,
     "pill": "Broken"
    },
    {
-    "id": "google",
-    "name": "Google basics",
-    "weight": 10,
-    "points": 5,
-    "pct": 50,
-    "pill": "Needs work"
-   },
-   {
     "id": "broken",
     "name": "Broken and secure",
-    "weight": 8,
-    "points": 6,
+    "weight": 4,
+    "points": 3,
     "pct": 75,
     "pill": "Needs work"
-   },
-   {
-    "id": "tracking",
-    "name": "Tracking",
-    "weight": 4,
-    "points": 0,
-    "pct": 0,
-    "pill": "Broken"
    }
   ],
   "items": [
@@ -101,7 +117,7 @@
     "status": "partial",
     "evidence": "Your headline is your name; what you do and where comes further down.",
     "quote": "Acme Roofing",
-    "fix": "Put what you do and the area you serve in the first line people see on a phone."
+    "page": "/"
    },
    {
     "id": "fi_action",
@@ -110,7 +126,7 @@
     "status": "miss",
     "evidence": "The only way to act sits at the bottom of the page.",
     "quote": "Call us at (316) 555-0142",
-    "fix": "Pick one action (call, book or get a quote) and make it the main button at the top."
+    "page": "/"
    },
    {
     "id": "fi_headline",
@@ -119,16 +135,16 @@
     "status": "miss",
     "evidence": "Your headline is only the business name.",
     "quote": "Acme Roofing",
-    "fix": "Make the headline the result your customer gets, not just your name."
+    "page": "/"
    },
    {
     "id": "fi_photo",
     "cat": "first",
     "name": "Real photo of your work or team",
     "status": "na",
-    "evidence": "Our review did not reach this item.",
+    "evidence": "We could not get a phone screenshot of your homepage.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "c_tel",
@@ -137,7 +153,7 @@
     "status": "miss",
     "evidence": "We did not find a tap-to-call phone link on your homepage.",
     "quote": "",
-    "fix": "Make your phone number a tap-to-call link and put it at the top of the page."
+    "page": ""
    },
    {
     "id": "c_form",
@@ -146,7 +162,7 @@
     "status": "pass",
     "evidence": "Your homepage has a booking or request link.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "c_ways",
@@ -155,7 +171,7 @@
     "status": "partial",
     "evidence": "We found only one way to reach you on the homepage.",
     "quote": "",
-    "fix": "Offer at least two: a tap-to-call number plus a form, booking link or email."
+    "page": ""
    },
    {
     "id": "c_scroll",
@@ -164,25 +180,25 @@
     "status": "na",
     "evidence": "Needs a real browser on a phone.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "c_phone_same",
     "cat": "contact",
     "name": "One consistent phone number",
     "status": "miss",
-    "evidence": "We found 2 different phone numbers on your homepage.",
+    "evidence": "We found 2 different phone numbers across the 3 pages we checked.",
     "quote": "",
-    "fix": "Use one main number everywhere, so nobody calls the wrong line."
+    "page": ""
    },
    {
     "id": "t_reviews",
     "cat": "trust",
-    "name": "Reviews or testimonials on the site",
+    "name": "Reviews or testimonials where visitors land",
     "status": "miss",
-    "evidence": "We did not find reviews or testimonials on your homepage.",
+    "evidence": "We did not find reviews or testimonials on the pages we checked.",
     "quote": "",
-    "fix": "Show three or four real reviews on the homepage, with names."
+    "page": ""
    },
    {
     "id": "t_facts",
@@ -191,7 +207,7 @@
     "status": "partial",
     "evidence": "Good facts, but below the first screen.",
     "quote": "Family owned since 1998",
-    "fix": "Put real numbers near the top: years in business, jobs done, warranty."
+    "page": "/"
    },
    {
     "id": "t_cred",
@@ -200,79 +216,214 @@
     "status": "pass",
     "evidence": "Your licence and insurance are stated plainly.",
     "quote": "licensed and insured",
-    "fix": ""
+    "page": "/"
+   },
+   {
+    "id": "t_specific",
+    "cat": "trust",
+    "name": "Reviews are specific: names, places, details",
+    "status": "miss",
+    "evidence": "There are no customer reviews to read anywhere on the pages we checked.",
+    "quote": "committed to quality service",
+    "page": "/"
    },
    {
     "id": "t_real",
     "cat": "trust",
     "name": "Real people or real jobs shown",
     "status": "na",
-    "evidence": "Our review did not reach this item.",
+    "evidence": "We could not get a phone screenshot of your homepage.",
     "quote": "",
-    "fix": ""
+    "page": ""
+   },
+   {
+    "id": "ps_problem",
+    "cat": "psych",
+    "name": "Names the customer's problem in their words",
+    "status": "partial",
+    "evidence": "Your services page names storm damage, but the homepage never names a problem.",
+    "quote": "Storm damage?",
+    "page": "/services"
+   },
+   {
+    "id": "ps_outcome",
+    "cat": "psych",
+    "name": "Sells the result, not just the service",
+    "status": "miss",
+    "evidence": "You list services rather than the result a homeowner wants.",
+    "quote": "Roof repair, roof replacement, gutters and siding",
+    "page": "/services"
+   },
+   {
+    "id": "ps_why_you",
+    "cat": "psych",
+    "name": "Says why you over the next company",
+    "status": "partial",
+    "evidence": "The warranty sets you apart, but it is buried mid-page.",
+    "quote": "10-year workmanship warranty",
+    "page": "/"
+   },
+   {
+    "id": "ps_risk",
+    "cat": "psych",
+    "name": "Takes the risk off the customer",
+    "status": "pass",
+    "evidence": "Your services page offers a free estimate.",
+    "quote": "free estimate",
+    "page": "/services"
+   },
+   {
+    "id": "ps_urgency",
+    "cat": "psych",
+    "name": "Gives an honest reason to act now",
+    "status": "miss",
+    "evidence": "Nothing gives a homeowner a reason to call this week.",
+    "quote": "We usually reply within one business day.",
+    "page": "/contact"
    },
    {
     "id": "cp_you",
-    "cat": "copy",
+    "cat": "psych",
     "name": "Talks about the customer more than itself",
     "status": "na",
     "evidence": "Not enough text on the homepage to count.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "cp_facts",
-    "cat": "copy",
+    "cat": "psych",
     "name": "Concrete facts outnumber vague phrases",
     "status": "miss",
     "evidence": "We counted 4 stock phrases like \"quality service\" or \"trusted\" and only 3 lines with real numbers.",
     "quote": "",
-    "fix": "Swap phrases like \"quality service\" for specifics: numbers, places, results."
+    "page": ""
    },
    {
     "id": "cp_objections",
-    "cat": "copy",
+    "cat": "psych",
     "name": "Common worries answered before the main button",
     "status": "miss",
     "evidence": "Price, timing and what happens next are not answered.",
     "quote": "committed to quality service",
-    "fix": "Answer price, timing and trust questions before the main button."
+    "page": "/"
    },
    {
     "id": "f_nav",
-    "cat": "flow",
+    "cat": "journey",
     "name": "Main menu has 7 items or fewer",
     "status": "partial",
     "evidence": "Your main menu has 9 items.",
     "quote": "",
-    "fix": "Cut the main menu to 7 items or fewer."
+    "page": ""
    },
    {
     "id": "f_dominant",
-    "cat": "flow",
+    "cat": "journey",
     "name": "One thing stands out at the top",
     "status": "na",
-    "evidence": "Our review did not reach this item.",
+    "evidence": "We could not get a phone screenshot of your homepage.",
     "quote": "",
-    "fix": ""
+    "page": ""
+   },
+   {
+    "id": "f_next",
+    "cat": "journey",
+    "name": "A next step on the homepage",
+    "status": "pass",
+    "evidence": "Your homepage has a button or link asking people to call, book or get a quote.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "j_reach",
+    "cat": "journey",
+    "name": "A way to reach you from every page",
+    "status": "partial",
+    "evidence": "2 of the 3 pages we checked give visitors a way to reach you (a phone link, a form or a contact link).",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "j_every_cta",
+    "cat": "journey",
+    "name": "Every page asks for a next step",
+    "status": "miss",
+    "evidence": "Only 1 of the 3 pages we checked asks visitors to call, book or get a quote.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "j_form",
+    "cat": "journey",
+    "name": "A short contact form (5 fields or fewer)",
+    "status": "partial",
+    "evidence": "Your contact form asks for 8 things. We look for 5 or fewer.",
+    "quote": "",
+    "page": ""
    },
    {
     "id": "f_end",
-    "cat": "flow",
+    "cat": "journey",
     "name": "The main action sits where each section ends",
     "status": "na",
     "evidence": "Needs a real browser on a phone.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
-    "id": "f_next",
-    "cat": "flow",
-    "name": "A next step on the page",
+    "id": "p_services",
+    "cat": "pages",
+    "name": "A page for each main service",
     "status": "pass",
-    "evidence": "Your homepage has a button or link asking people to call, book or get a quote.",
+    "evidence": "Your site has 4 pages about specific services.",
     "quote": "",
-    "fix": ""
+    "page": ""
+   },
+   {
+    "id": "p_areas",
+    "cat": "pages",
+    "name": "Shows the areas you serve",
+    "status": "partial",
+    "evidence": "You name two towns once, with no list of the areas you serve.",
+    "quote": "across Wichita and Derby",
+    "page": "/"
+   },
+   {
+    "id": "p_about",
+    "cat": "pages",
+    "name": "An about page",
+    "status": "pass",
+    "evidence": "Your site has an about page.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "p_depth",
+    "cat": "pages",
+    "name": "Pages have real substance (300+ words)",
+    "status": "miss",
+    "evidence": "None of the 2 pages we checked has 300 words or more.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "p_faq",
+    "cat": "pages",
+    "name": "Answers common questions (an FAQ)",
+    "status": "miss",
+    "evidence": "We did not find an FAQ or a common questions section.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "p_links",
+    "cat": "pages",
+    "name": "No broken links",
+    "status": "partial",
+    "evidence": "1 of the 6 links we tested is broken.",
+    "quote": "",
+    "page": ""
    },
    {
     "id": "m_viewport",
@@ -281,7 +432,7 @@
     "status": "pass",
     "evidence": "Your homepage tells phones to fit the page to the screen.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "m_sideways",
@@ -290,7 +441,7 @@
     "status": "na",
     "evidence": "Needs a real browser on a phone.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "m_readable",
@@ -299,7 +450,7 @@
     "status": "partial",
     "evidence": "Google PageSpeed flagged text size or tap targets on a phone.",
     "quote": "",
-    "fix": "Use larger text and bigger, well spaced buttons on phones."
+    "page": ""
    },
    {
     "id": "m_reach",
@@ -308,7 +459,7 @@
     "status": "na",
     "evidence": "Needs a real browser on a phone.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "s_lcp",
@@ -317,7 +468,7 @@
     "status": "miss",
     "evidence": "Main content took 4.7 seconds to appear in our phone test. We look for 2.5 or less.",
     "quote": "",
-    "fix": "Shrink large images and drop scripts the page does not need."
+    "page": ""
    },
    {
     "id": "s_cls",
@@ -326,7 +477,7 @@
     "status": "pass",
     "evidence": "The page held still while it loaded in our phone test.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "s_weight",
@@ -335,25 +486,25 @@
     "status": "miss",
     "evidence": "The homepage weighed 3.6 MB. We look for under 3 MB.",
     "quote": "",
-    "fix": "Compress images and remove files the page does not use."
+    "page": ""
    },
    {
     "id": "g_title",
     "cat": "google",
-    "name": "A page title that names you and what you do",
+    "name": "A homepage title that names you and what you do",
     "status": "pass",
     "evidence": "Your homepage has a page title, 34 characters long.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "g_desc",
     "cat": "google",
-    "name": "A page description",
+    "name": "A homepage description",
     "status": "miss",
     "evidence": "Your homepage has no description for search results.",
     "quote": "",
-    "fix": "Add a description of about 50 to 165 characters."
+    "page": ""
    },
    {
     "id": "g_h1",
@@ -362,7 +513,7 @@
     "status": "partial",
     "evidence": "Your homepage has one main heading, but it is only one or two words.",
     "quote": "",
-    "fix": "Use one main heading that says what you do."
+    "page": ""
    },
    {
     "id": "g_schema",
@@ -371,7 +522,7 @@
     "status": "miss",
     "evidence": "We did not find local business structured data on your homepage.",
     "quote": "",
-    "fix": "Add LocalBusiness structured data with your name, address and phone."
+    "page": ""
    },
    {
     "id": "g_nap",
@@ -380,7 +531,7 @@
     "status": "pass",
     "evidence": "Your service and city appear together.",
     "quote": "Over 2,400 roofs replaced across Wichita",
-    "fix": ""
+    "page": "/"
    },
    {
     "id": "g_alt",
@@ -389,7 +540,142 @@
     "status": "partial",
     "evidence": "1 of 2 images have alt text.",
     "quote": "",
-    "fix": "Give every image a short description (alt text)."
+    "page": ""
+   },
+   {
+    "id": "g_titles_unique",
+    "cat": "google",
+    "name": "Every page has its own title",
+    "status": "partial",
+    "evidence": "2 of the 3 pages we checked share a title with another page.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "g_desc_all",
+    "cat": "google",
+    "name": "Every page has a description",
+    "status": "miss",
+    "evidence": "2 of the 3 pages we checked have no description for search results.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "g_h1_all",
+    "cat": "google",
+    "name": "Every page has one main heading",
+    "status": "pass",
+    "evidence": "Every page we checked has one main heading.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "g_sitemap",
+    "cat": "google",
+    "name": "A sitemap Google can find",
+    "status": "pass",
+    "evidence": "Your sitemap lists 14 pages for Google.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "g_indexable",
+    "cat": "google",
+    "name": "Pages are open to Google",
+    "status": "pass",
+    "evidence": "The pages we checked are open to Google.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "ai_crawlers",
+    "cat": "aivis",
+    "name": "AI assistants are allowed to read your site",
+    "status": "partial",
+    "evidence": "Your robots.txt blocks GPTBot (OpenAI).",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "ai_nojs",
+    "cat": "aivis",
+    "name": "Words readable without running scripts",
+    "status": "pass",
+    "evidence": "The pages we checked send their words with the page, so any reader can see them.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "ai_entity",
+    "cat": "aivis",
+    "name": "Business facts in structured data",
+    "status": "miss",
+    "evidence": "We did not find structured data with your business name, phone and address.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "ai_llms",
+    "cat": "aivis",
+    "name": "An llms.txt guide for AI assistants",
+    "status": "partial",
+    "evidence": "Your site has no llms.txt file. It is optional and new, and quick to add.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "bh_capture",
+    "cat": "behind",
+    "name": "Leads go into a system, not just an inbox",
+    "status": "partial",
+    "evidence": "We found a form (Contact Form 7), but could not see it feeding a CRM, so leads may land only in an inbox.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "bh_instant",
+    "cat": "behind",
+    "name": "A way to get an answer after hours",
+    "status": "miss",
+    "evidence": "After hours, a visitor can only call or send a form and wait.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "tr_analytics",
+    "cat": "behind",
+    "name": "An analytics tag",
+    "status": "pass",
+    "evidence": "We found Google Analytics on your site.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "tr_leads",
+    "cat": "behind",
+    "name": "A way to measure leads",
+    "status": "miss",
+    "evidence": "We did not find a way to measure leads, like call tracking or a thank-you page.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "bh_pixel",
+    "cat": "behind",
+    "name": "An ad pixel for retargeting",
+    "status": "miss",
+    "evidence": "We did not find an ad pixel (Meta or Google Ads), so you can't show ads to people who already visited.",
+    "quote": "",
+    "page": ""
+   },
+   {
+    "id": "bh_email",
+    "cat": "behind",
+    "name": "Your email domain is protected (SPF and DMARC)",
+    "status": "partial",
+    "evidence": "Your email domain has SPF but no DMARC record.",
+    "quote": "",
+    "page": ""
    },
    {
     "id": "b_https",
@@ -398,7 +684,7 @@
     "status": "pass",
     "evidence": "Your homepage loads over https, and the plain http address forwards to it.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "b_errors",
@@ -407,7 +693,7 @@
     "status": "pass",
     "evidence": "We found no error or placeholder wording on the homepage.",
     "quote": "",
-    "fix": ""
+    "page": ""
    },
    {
     "id": "b_year",
@@ -416,7 +702,7 @@
     "status": "miss",
     "evidence": "Your footer still says 2021.",
     "quote": "",
-    "fix": "Update the footer year (or let the site set it itself)."
+    "page": ""
    },
    {
     "id": "b_mixed",
@@ -425,25 +711,7 @@
     "status": "pass",
     "evidence": "Nothing on the homepage loads over plain http.",
     "quote": "",
-    "fix": ""
-   },
-   {
-    "id": "tr_analytics",
-    "cat": "tracking",
-    "name": "An analytics tag",
-    "status": "miss",
-    "evidence": "We did not find an analytics tag on your homepage.",
-    "quote": "",
-    "fix": "Add an analytics tag, like Google Analytics."
-   },
-   {
-    "id": "tr_leads",
-    "cat": "tracking",
-    "name": "A way to measure leads",
-    "status": "miss",
-    "evidence": "We did not find a way to measure leads, like call tracking or a thank-you page.",
-    "quote": "",
-    "fix": "Track form sends and calls (a thank-you page, call tracking or an events tag)."
+    "page": ""
    }
   ],
   "top": [
@@ -455,8 +723,8 @@
    },
    {
     "id": "c_phone_same",
-    "heading": "Your homepage shows more than one phone number",
-    "body": "We found 2 different phone numbers on your homepage.",
+    "heading": "Your site shows more than one phone number",
+    "body": "We found 2 different phone numbers across the 3 pages we checked.",
     "fix": "Use one main number everywhere, so nobody calls the wrong line."
    },
    {
@@ -469,29 +737,98 @@
   "working": [
    {
     "text": "You've been in business since 1998, which builds trust.",
-    "quote": "Family owned since 1998"
+    "quote": "Family owned since 1998",
+    "page": "/"
    },
    {
     "text": "You back every roof with a 10-year workmanship warranty.",
-    "quote": "10-year workmanship warranty"
+    "quote": "10-year workmanship warranty",
+    "page": "/"
    },
    {
     "text": "You show real volume: over 2,400 roofs replaced.",
-    "quote": "Over 2,400 roofs replaced"
+    "quote": "Over 2,400 roofs replaced",
+    "page": "/"
    },
    {
     "text": "Visitors can send you a request from the homepage.",
-    "quote": ""
+    "quote": "",
+    "page": ""
    },
    {
-    "text": "The page asks visitors to take a next step.",
-    "quote": ""
+    "text": "The homepage asks visitors to take a next step.",
+    "quote": "",
+    "page": ""
+   }
+  ],
+  "journey": [
+   {
+    "text": "A visitor lands on your name as the headline and has to scroll to learn you do roofs.",
+    "quote": "Acme Roofing",
+    "page": "/"
+   },
+   {
+    "text": "They meet a stock line before any proof, so the first impression is generic.",
+    "quote": "We are a trusted, dedicated team committed to quality service.",
+    "page": "/"
+   },
+   {
+    "text": "The strongest proof, 2,400 roofs and a 10-year warranty, sits mid-page.",
+    "quote": "Over 2,400 roofs replaced across Wichita and Derby.",
+    "page": "/"
+   },
+   {
+    "text": "Ready to act, they find two phone numbers and wonder which one to call.",
+    "quote": "Call us at (316) 555-0142 or (316) 555-0199.",
+    "page": "/"
+   },
+   {
+    "text": "On the contact page, an eight-field form slows down anyone ready to book.",
+    "quote": "We usually reply within one business day.",
+    "page": "/contact"
    }
   ],
   "verdict": [
    "You've been in business since 1998, which builds trust.",
    "The biggest gap: phone visitors can't tap to call you."
   ],
+  "needWork": 41,
+  "pages": [
+   {
+    "path": "/",
+    "kind": "home",
+    "words": 61
+   },
+   {
+    "path": "/services",
+    "kind": "services",
+    "words": 36
+   },
+   {
+    "path": "/contact",
+    "kind": "contact",
+    "words": 11
+   }
+  ],
+  "stack": {
+   "platform": "Not identified",
+   "tools": [
+    {
+     "name": "Contact Form 7",
+     "kind": "forms"
+    },
+    {
+     "name": "Google Analytics",
+     "kind": "analytics"
+    }
+   ],
+   "email": "Google Workspace"
+  },
+  "checked": {
+   "pages": 3,
+   "found": 8,
+   "links": 6
+  },
   "speed": {
    "lcpS": 4.7,
    "cls": 0.02,
@@ -508,7 +845,7 @@
    "Call or book reachable within one thumb scroll"
   ],
   "judgment": true,
-  "rule": "How we graded this: 10 areas, 100 points, scored only from what anyone can see on your homepage. Each item is a pass, a partial or a miss. A is 90 or more, B 80 to 89, C 70 to 79, D 60 to 69, F under 60. Items we could not check are left out of the score and named.",
+  "rule": "How we graded this: 12 areas, 100 points, scored only from what anyone can see from the outside: up to 8 pages of your site, its robots.txt, sitemap and llms.txt files, and the public email records for your domain. Each item is a pass, a partial or a miss. A is 90 or more, B 80 to 89, C 70 to 79, D 60 to 69, F under 60. Items we could not check are left out of the score and named.",
   "scoreLabel": "The grade is ProyTech's score for these checks on this date. It does not come from Google or any rating body."
  },
  "code": "TEARDOWN-ACMEROOFING",

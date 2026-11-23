@@ -11,10 +11,14 @@
 //   2. One teardown per email address a day, three per website a day: asked
 //      first (peek records nothing), recorded only after the CRM has it, so a
 //      failure does not lock anyone out.
-//   3. The homepage is fetched again for its words (the token carries numbers
-//      only) and ONE Claude call judges the items plain code can't. This is
-//      the only step that spends on the model, and it runs only for someone
-//      who gave their name, business, email and mobile.
+//   3. The site is read again for its words (the token carries numbers only):
+//      the same up-to-8 pages the scan read. ONE Claude call (Sonnet) reads
+//      them all and judges what plain code can't: the first impression, trust,
+//      buyer psychology, the journey a visitor takes. This is the only step
+//      that spends on the model, and it runs only for someone who gave their
+//      name, business, email and mobile. The fresh crawl's numbers are used
+//      for the rule items too, so the words and the numbers describe the same
+//      visit; if the site can't be read again, the token's numbers are used.
 //   4. Claude's answer goes through the evidence guard and the never-claim
 //      filter (./_rubric.js checkAi). An unusable answer is not an error: the
 //      report goes out on the rule items alone and says so.
@@ -32,9 +36,10 @@
 // (SUPABASE_URL, SUPABASE_ANON_KEY, SITE_LIMIT_SALT), AUDIT_SIGNING_KEY,
 // SITE_LEAD_KEY or ANTHROPIC_API_KEY is unset.
 import { open, cleanContact } from './_audit.js';
-import { auditGate, peek, take, hashed, homeText, askClaude, saveTeardown, shotHash, SHOT_MAX } from './_audit-net.js';
-import { ruleResults, checkAi, buildReport, topPainsOf, slugOf, CONSENT_TEXT } from './_rubric.js';
-import { mockText, mockClaude, mockSave, MOCK_KEY } from './_audit-mock.js';
+import { auditGate, peek, take, hashed, readSite, askClaude, saveTeardown, shotHash, SHOT_MAX } from './_audit-net.js';
+import { ruleResults, checkAi, buildReport, topPainsOf, slugOf, aiSummary, cleanFacts, CONSENT_TEXT } from './_rubric.js';
+import { cleanSite, cleanTools } from './_crawl.js';
+import { mockSite, mockClaude, mockSave, MOCK_KEY } from './_audit-mock.js';
 
 const KEYS = ['token', 'name', 'company', 'email', 'phone', 'consent', 'src', 'fax', 'shot'];
 export const CAPS = { perDay: 25, perIp: 3, ipWindowMin: 60, perSite: 3, perEmail: 1 };
@@ -47,7 +52,7 @@ export const centralDate = now => new Intl.DateTimeFormat('en-CA', { timeZone: '
    ======================================================================== */
 async function verifyHuman(_req, _body) { return true; }
 
-export function makeHandler({ text = homeText, claude = askClaude, save = saveTeardown, now = () => Date.now() } = {}) {
+export function makeHandler({ crawl = readSite, claude = askClaude, save = saveTeardown, now = () => Date.now() } = {}) {
   return async function handler(req, res) {
     const gate = await auditGate(req, res, { name: 'audit-report', perIp: CAPS.perIp, windowMin: CAPS.ipWindowMin, perDay: CAPS.perDay, maxChars: SHOT_MAX + 6000, need: ['AUDIT_SIGNING_KEY', 'SITE_LEAD_KEY', 'ANTHROPIC_API_KEY'] });
     if (!gate.ok) return;
@@ -75,14 +80,19 @@ export function makeHandler({ text = homeText, claude = askClaude, save = saveTe
     }
 
     const shot = typeof b.shot === 'string' && b.shot.length <= SHOT_MAX && result.shot && shotHash(b.shot) === result.shot ? b.shot : '';
-    const pageText = await (mock ? mockText : text)(result.host).catch(() => '');
-    const raw = pageText ? await (mock ? mockClaude : claude)({ text: pageText, shot }).catch(() => null) : null;
-    const ai = raw ? checkAi(raw, pageText, { hadImage: !!shot }) : null;
+    const read = await (mock ? mockSite : crawl)(result.host).catch(() => null);
+    const pages = read && Array.isArray(read.pages) ? read.pages.filter(p => p && typeof p.text === 'string' && p.text) : [];
+    /* the fresh numbers when the site was read again, else the sealed ones */
+    const facts = (read && cleanFacts(read.facts)) || result.facts;
+    const site = read ? (read.site ? cleanSite(read.site) : null) : result.site;
+    const tools = read ? cleanTools(read.tools) : result.tools;
+    const raw = pages.length ? await (mock ? mockClaude : claude)({ pages, summary: aiSummary({ site, tools, pages }), shot }).catch(() => null) : null;
+    const ai = raw ? checkAi(raw, pages, { hadImage: !!shot }) : null;
     if (raw && !ai) console.error('[audit-report] the review answer was unusable; reporting on the rule items alone');
 
-    const results = { ...ruleResults(result.facts, result, result.speed), ...(ai ? ai.results : {}) };
+    const results = { ...ruleResults(facts, result, result.speed, site, tools), ...(ai ? ai.results : {}) };
     const builtOn = centralDate(now());
-    const report = buildReport({ host: result.host, builtOn, results, ai, speed: result.speed, judgment: !!ai });
+    const report = buildReport({ host: result.host, builtOn, results, ai, speed: result.speed, judgment: !!ai, pages, site, tools });
     const slug = slugOf(result.host);
 
     const saved = await (mock ? mockSave : save)({
@@ -93,8 +103,7 @@ export function makeHandler({ text = homeText, claude = askClaude, save = saveTe
     if (!saved.ok) { res.status(502).json({ ok: false, error: 'save_failed' }); return; }
     if (!mock) { await take(emailBucket, CAPS.perEmail, 60 * 24); await take(siteBucket, CAPS.perSite, 60 * 24); }
 
-    const needWork = report.items.filter(i => i.status === 'miss' || i.status === 'partial').length;
-    res.status(200).json({ ok: true, grade: report.grade, score: report.score, needWork, reportUrl: saved.reportUrl });
+    res.status(200).json({ ok: true, grade: report.grade, score: report.score, needWork: report.needWork, reportUrl: saved.reportUrl });
   };
 }
 export default makeHandler();
