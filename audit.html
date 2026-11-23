@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free website audit | ProyTech</title>
+<meta name="description" content="Enter your website address and get a free report on your homepage: secure connection, search basics, phone setup, contact details and speed. Emailed to you in about a minute.">
+<meta name="theme-color" content="#071A3D">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://getproytech.com/audit">
+<meta property="og:title" content="Free website audit | ProyTech">
+<meta property="og:description" content="A free automated check of your homepage, emailed to you in about a minute.">
+<meta property="og:image" content="https://getproytech.com/images/proytech-dog.jpg">
+<meta property="og:url" content="https://getproytech.com/audit">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/pt-site.css?v=3">
+<style>
+.ah .lede{max-width:56ch}
+.app{max-width:680px;margin:36px 0 0;background:rgba(10,22,51,.78);border:1px solid rgba(125,211,252,.25);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.42);overflow:hidden}
+.app-body{padding:26px}
+@media (max-width:560px){.app-body{padding:20px 18px}}
+.app h2{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:-.01em;color:#fff;margin-bottom:8px}
+.app .sub{color:#CFDDF2;line-height:1.55;margin-bottom:20px}
+.field{margin:0 0 18px}
+.field>label{display:block;font-weight:600;font-size:.98rem;margin-bottom:8px;color:#fff}
+.field input{width:100%;font:inherit;font-size:16px;padding:14px 16px;border-radius:13px;color:#fff;background:rgba(255,255,255,.05);border:1.5px solid rgba(125,211,252,.22);transition:border-color .15s,background .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+.field input::placeholder{color:#7F93B3}
+.field input:focus{outline:none;border-color:var(--ice);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(46,155,255,.2)}
+.field.bad input{border-color:var(--o)}
+.field .err{display:none;color:var(--o-2);font-size:.85rem;font-weight:500;margin-top:7px}
+.field.bad .err{display:block}
+.abtn{width:100%;font-family:var(--disp);font-weight:700;font-size:1.05rem;padding:17px 20px;border-radius:999px;border:0;cursor:pointer;background:var(--o);color:#fff;box-shadow:0 14px 34px rgba(251,105,38,.4);transition:transform .16s,background .16s;display:flex;align-items:center;justify-content:center;text-decoration:none}
+.abtn:hover:not(:disabled){transform:translateY(-2px);background:var(--o-2)}
+.abtn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+.linkbtn{background:none;border:0;color:var(--muted-d);font:inherit;font-size:.95rem;font-weight:600;cursor:pointer;padding:12px 6px;text-decoration:underline;text-underline-offset:3px}
+.linkbtn:hover{color:#fff}
+.msg{margin-top:14px;font-size:.95rem;line-height:1.5;color:#FFB59A}
+.msg:empty{display:none}
+.note{color:var(--muted-d);font-size:.9rem;line-height:1.5;margin-top:14px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.alist{list-style:none;padding:0;margin:0 0 6px;display:grid;gap:8px}
+.alist li{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(125,211,252,.16);color:#fff;font-weight:500;font-size:.97rem}
+.alist .dot{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:2px solid rgba(125,211,252,.4);display:grid;place-items:center;font-size:12px;color:transparent}
+.alist li.done .dot{background:var(--elec);border-color:var(--elec);color:#fff}
+.alist li.wait{color:var(--muted-d)}
+.alist li.wait .dot{border-style:dashed;animation:spin 1.6s linear infinite}
+.alist li.skip{color:var(--muted-d)}
+.alist .tag{margin-left:auto;font-size:.78rem;color:var(--muted-d);white-space:nowrap}
+@keyframes spin{to{transform:rotate(360deg)}}
+.count{font-family:var(--disp);font-weight:700;font-size:1.25rem;color:#fff;line-height:1.35;margin-bottom:16px}
+.count b{color:var(--o-2)}
+.sms-consent-wrap{margin:4px 0 18px}
+.verdict{display:flex;gap:20px;align-items:center;padding:20px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(125,211,252,.2);margin:18px 0}
+.grade{flex:0 0 auto;width:96px;height:96px;border-radius:18px;background:var(--o);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--disp)}
+.grade b{font-size:50px;line-height:1}
+.grade span{font-size:11px;font-weight:600}
+.verdict p{color:#fff;font-size:1.05rem;line-height:1.45}
+.small{color:var(--muted-d);font-size:.85rem;line-height:1.5;margin-top:8px}
+.what .card h3{font-size:1.15rem}
+.what .card p{font-size:.97rem}
+.mock-flag{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:90;background:#FFD166;color:#0B1633;font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+@media (prefers-reduced-motion:reduce){.alist li.wait .dot{animation:none}}
+</style>
+</head>
+<body>
+<svg class="techbg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g class="base" stroke="#2E9BFF" stroke-opacity=".4" stroke-width="1.5" fill="none">
+    <path id="g1" d="M0 140 H240 L290 90 H560 L600 130 H840"/>
+    <path id="g2" d="M1440 240 H1180 L1130 290 H880 L840 250 H600"/>
+    <path id="g3" d="M0 470 H170 L220 420 H460 L500 460 H720"/>
+    <path id="g4" d="M1440 560 H1220 L1170 610 H950"/>
+    <path id="g5" d="M0 780 H300 L350 830 H640 L680 790 H1020 L1060 830 H1440"/>
+    <path id="g6" d="M130 0 V190 L180 240 V430"/><path id="g7" d="M1300 0 V160 L1250 210 V440 L1300 490 V900"/><path d="M660 900 V770 L710 720 V540"/>
+  </g>
+  <g stroke="#FB6926" stroke-opacity=".35" stroke-width="1.5" fill="none"><path id="g8" d="M1440 360 H1260 L1210 410 H1040"/><path id="g9" d="M1440 700 H1300 L1250 650 H1120"/></g>
+  <g fill="#38BDF8" fill-opacity=".7"><circle cx="290" cy="90" r="3.5"/><circle cx="600" cy="130" r="3.5"/><circle cx="1130" cy="290" r="3.5"/><circle cx="220" cy="420" r="3.5"/><circle cx="1170" cy="610" r="3.5"/><circle cx="350" cy="830" r="3.5"/><circle cx="180" cy="240" r="3.5"/><circle cx="1250" cy="210" r="3.5"/></g>
+  <g fill="#FB6926" fill-opacity=".7"><circle cx="1210" cy="410" r="3.5"/><circle cx="1250" cy="650" r="3.5"/></g>
+  <use href="#g1" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC"/>
+  <use href="#g2" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:1.2s"/>
+  <use href="#g3" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:2.1s"/>
+  <use href="#g4" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:.3s"/>
+  <use href="#g5" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:.6s"/>
+  <use href="#g6" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:1.7s"/>
+  <use href="#g7" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:2.6s"/>
+  <use href="#g8" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:.9s"/>
+  <use href="#g9" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:2.3s"/>
+</svg>
+<div class="promo"><a href="/win?src=site"><span class="tag">Giveaway</span><span><b>Win a $5,000 website + Business Suite package</b> or center ice seats to Thunder Opening Night.</span><span class="go">Enter free →</span></a></div>
+<nav class="nav" id="nav"><div class="wrap nav-in">
+  <a class="logo" href="/" aria-label="ProyTech home"><img src="/images/proytech-logo-nav.webp" alt="ProyTech" width="478" height="128" class="logo-img"></a>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
+    <div class="dd"><button type="button" class="dd-btn" aria-haspopup="true" aria-expanded="false">Growth OS <span aria-hidden="true">▾</span></button>
+      <div class="dd-menu">
+        <a href="/#growth-os"><b>Growth OS</b><span>Website + Business Suite, built together</span></a>
+        <a href="/websites"><b>Websites</b><span>Get found and get chosen</span></a>
+        <a href="/suite"><b>Business Suite</b><span>Your super CRM: the whole business on one screen</span></a>
+        <a href="/automation"><b>Automations</b><span>Missed calls, reviews, follow up</span></a>
+      </div>
+    </div>
+    <a href="/work">Our work</a>
+    <a href="/events">Events</a>
+    <a href="/resources">Resources</a>
+    <a href="/about">About</a>
+    <a class="btn btn-o" href="/book">Free Nucleus Session</a>
+  </div>
+</div></nav>
+<main>
+<section class="phero ah" style="padding:118px 0 70px">
+  <div class="wrap">
+    <span class="eyebrow">Free website audit · About a minute</span>
+    <h1 style="font-size:clamp(2.2rem,4.4vw,3.6rem);max-width:20ch">See what your homepage is <em>missing.</em></h1>
+    <p class="lede">Enter your website address. We check your homepage from the outside, the way a visitor's browser does, and email you the report.</p>
+
+    <div class="app" id="app">
+      <div class="app-body">
+
+        <!-- 1. the address -->
+        <div id="viewEnter">
+          <div class="field" id="urlField">
+            <label for="a_url">Your website</label>
+            <input type="text" id="a_url" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" maxlength="300" placeholder="yourbusiness.com">
+            <div class="err" id="urlErr">Enter your website address, like yourbusiness.com.</div>
+          </div>
+          <button type="button" class="abtn" id="runBtn">Run my free audit</button>
+          <p class="note">One page only: your homepage. Nothing is changed on your site.</p>
+        </div>
+
+        <!-- 2. running -->
+        <div id="viewRun" hidden>
+          <h2 id="runTitle" aria-live="polite">Loading your homepage…</h2>
+          <p class="sub" id="runSub"></p>
+          <ul class="alist" id="runList"></ul>
+          <div id="speedWait" hidden>
+            <p class="note">Now measuring speed on a simulated phone. This is the slow part and can take up to a minute.</p>
+            <button type="button" class="linkbtn" id="skipSpeed">Skip the speed test</button>
+          </div>
+        </div>
+
+        <!-- 3. the teaser and the gate -->
+        <div id="viewGate" hidden>
+          <h2>Your audit is ready.</h2>
+          <p class="count" id="gateCount"></p>
+          <ul class="alist" id="gateList"></ul>
+          <p class="note" id="gateNote" hidden></p>
+          <h2 style="margin-top:26px">Where should we send the report?</h2>
+          <p class="sub">The details for each check are in the report. We email it to you.</p>
+          <div class="field" data-key="name"><label for="g_name">Your name</label><input type="text" id="g_name" autocomplete="name" maxlength="120"><div class="err">What is your name?</div></div>
+          <div class="field" data-key="email"><label for="g_email">Email</label><input type="email" id="g_email" inputmode="email" autocomplete="email" maxlength="200" placeholder="you@business.com"><div class="err">That email doesn't look right.</div></div>
+          <div class="field" data-key="phone"><label for="g_phone">Mobile</label><input type="tel" id="g_phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(316) 555-0142"><div class="err">We need a 10-digit mobile number.</div></div>
+          <div class="hp" aria-hidden="true"><label for="g_fax">Fax</label><input type="text" id="g_fax" tabindex="-1" autocomplete="off"></div>
+          <!-- The text consent box: the site's existing wording, OPTIONAL and unticked. The mobile number is
+               required; ticking this is not, and nothing here gates the button on it. -->
+          <div class="sms-consent-wrap"><label><input type="checkbox" id="g_consent"> <span>I agree to receive text messages from ProyTech at the number provided, including replies to my inquiry, appointment reminders, follow ups, and occasional offers. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/terms" target="_blank" rel="noopener">Terms</a>.</span></label></div>
+          <!-- ===== A CAPTCHA GOES HERE (none today). Render its widget in #captchaSlot and send its token with
+               the report request; api/audit-report.js has the matching verifyHuman() to fill in. ===== -->
+          <div id="captchaSlot" hidden></div>
+          <button type="button" class="abtn" id="sendBtn">Email me my report</button>
+          <div class="msg" id="gateMsg" role="alert"></div>
+        </div>
+
+        <!-- 4. sent -->
+        <div id="viewSent" hidden>
+          <h2 tabindex="-1" id="sentTitle">Your report is on its way.</h2>
+          <p class="sub" id="sentTo"></p>
+          <div class="verdict">
+            <div class="grade"><b id="sentGrade">–</b><span>ProyTech score</span></div>
+            <div><p id="sentCount"></p></div>
+          </div>
+          <p class="small" id="sentLabel"></p>
+          <p class="small">How the grade works: it is the share of the checks that ran which passed. A is 90% or more, B is 80%, C is 70%, D is 60%, and F is anything lower. A check that could not run is left out.</p>
+          <a class="abtn" id="bookBtn" href="/book?src=audit" style="margin-top:22px">Book your free Nucleus Session</a>
+          <p class="note">Free, 15 to 30 minutes on Google Meet. You leave knowing your next three moves.</p>
+        </div>
+
+        <div class="msg" id="topMsg" role="alert"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-dark what">
+  <div class="wrap">
+    <h2 class="h2 rv" style="margin-top:0">What it checks</h2>
+    <div class="grid3">
+      <article class="card rv"><h3>Secure connection</h3><p>Whether your homepage loads over https, whether the old http address forwards to it, and a few related settings.</p></article>
+      <article class="card rv"><h3>Search basics</h3><p>Your page title, your description and your main heading: the words a search result is built from.</p></article>
+      <article class="card rv"><h3>On a phone</h3><p>Whether the page is set up to fit a phone screen.</p></article>
+      <article class="card rv"><h3>Contact and next step</h3><p>A tap-to-call link, a way to write to you, a clear button, and a link to your Google Business profile.</p></article>
+      <article class="card rv"><h3>Speed</h3><p>One lab test on a simulated phone through Google PageSpeed Insights: how fast the main content appears, whether the page jumps, and how heavy it is.</p></article>
+      <article class="card card-o rv"><h3>What it is not</h3><p>It is an automated outside check of one page on one day. It does not log in, and it does not look at the rest of your site.</p></article>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/" aria-label="ProyTech home"><img src="/images/proytech-logo-nav.webp" alt="ProyTech" width="478" height="128" class="logo-img"></a>
+        <p>We build the systems that let you grow without hiring. The Growth OS: a website and a Business Suite that shows your whole business on one screen.</p>
+      </div>
+      <div><h5>What we build</h5><a href="/#growth-os">Growth OS</a><a href="/websites">Websites</a><a href="/suite">Business Suite</a><a href="/automation">Automations</a></div>
+      <div><h5>Company</h5><a href="/about">About us</a><a href="/work">Our work</a><a href="/events">Events</a><a href="/resources">Resources</a><a href="/partner">Partner Program</a></div>
+      <div><h5>Talk to us</h5><a href="/book">Free Nucleus Session</a><a href="tel:9013353905">901-335-3905</a><a href="mailto:admin@getproytech.com">admin@getproytech.com</a></div>
+    </div>
+    <div class="foot-base"><span>© <span id="yr"></span> ProyTech Business Solutions LLC · 201 N Water St, Wichita, KS 67202 · 901-335-3905 · admin@getproytech.com</span><span><a href="/terms">Terms of Service</a> · <a href="/privacy">Privacy Policy</a> &middot; Text STOP to opt out</span><span>Based in Wichita, building for businesses across the country.</span></div>
+  </div>
+</footer>
+<script src="/js/pt-site.js?v=3"></script>
+<script>
+(function(){
+  "use strict";
+  /* The three routes and their field names, in one place. */
+  var API = {
+    scan: '/api/audit-scan',       // { url }                     -> { ok, host, token, needWork, ran, checks:[{id,name,ran}] }
+    speed: '/api/audit-speed',     // { token }                   -> { ok, token, speedRan, needWork, ran, checks }
+    report: '/api/audit-report'    // { token, name, email, phone, consent, src, fax } -> { ok, grade, needWork, ran, notRun }
+  };
+  var SPEED_IDS = ['lcp', 'cls', 'weight'];
+  var SPEED_WAIT_MS = 58000;       // the speed function has 60 seconds
+  var params = new URLSearchParams(location.search);
+  var MOCK = params.get('mock') === '1';
+  /* the link's tag, kept for the whole visit: the CRM's rule (a-z 0-9 _ -, 24 characters) */
+  var SRC = (params.get('src') || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 24);
+
+  var $ = function(id){ return document.getElementById(id); };
+  var state = { token: null, host: '', teaser: null, speedRan: false, skipped: false };
+  var views = ['viewEnter', 'viewRun', 'viewGate', 'viewSent'];
+  function show(id){
+    views.forEach(function(v){ $(v).hidden = v !== id; });
+    $('topMsg').textContent = '';
+    var top = $('app').getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * .6) $('app').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  var SAY = {
+    bad_address: 'That does not look like a website address. Try something like yourbusiness.com.',
+    private: 'We can only check public website addresses.',
+    unreachable: 'We could not load that address. Check the spelling and try again.',
+    blocked: 'That site did not let our checker in, so we could not read the homepage.',
+    not_html: 'That address did not return a web page.',
+    host_limit: 'That website has been checked several times today. Try again tomorrow.',
+    too_many: 'Too many tries from this connection. Please try again later.',
+    busy: 'The audit is busy right now. Please try again later.',
+    bad_token: 'Your results expired. Run the audit again.',
+    already_sent: 'We already sent a report to that address today. Check your inbox, or use another address.',
+    email_failed: 'We could not send the email just now. Nothing was lost. Try again in a minute.',
+    unavailable: 'The audit is not available right now. Please try again later.'
+  };
+  function sayFor(code){ return SAY[code] || SAY.unavailable; }
+
+  function post(path, body, timeoutMs){
+    if (MOCK) return mock(path, body);
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function(){ ctl.abort(); }, timeoutMs || 30000) : null;
+    return fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: ctl ? ctl.signal : undefined })
+      .then(function(r){ return r.json().catch(function(){ return null; }).then(function(j){ if (timer) clearTimeout(timer); if (!j) throw new Error('http ' + r.status); return j; }); });
+  }
+
+  function renderList(ul, checks, mode){
+    ul.textContent = '';
+    checks.forEach(function(c){
+      var li = document.createElement('li'), dot = document.createElement('span'), name = document.createElement('span');
+      dot.className = 'dot'; dot.textContent = '✓'; name.textContent = c.name;
+      li.appendChild(dot); li.appendChild(name);
+      var isSpeed = SPEED_IDS.indexOf(c.id) >= 0;
+      if (c.ran) li.className = 'done';
+      else if (mode === 'running' && isSpeed) li.className = 'wait';
+      else { li.className = 'skip'; var tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = 'could not run'; li.appendChild(tag); }
+      ul.appendChild(li);
+    });
+  }
+
+  /* ---------- 1 -> 2: run ---------- */
+  function run(){
+    var url = $('a_url').value.trim();
+    $('urlField').classList.toggle('bad', !url);
+    if (!url){ $('a_url').focus(); return; }
+    state.token = null; state.skipped = false; state.speedRan = false;
+    $('runTitle').textContent = 'Loading your homepage…'; $('runSub').textContent = ''; $('runList').textContent = ''; $('speedWait').hidden = true;
+    show('viewRun');
+    post(API.scan, { url: url }).then(function(j){
+      if (!j.ok || typeof j.token !== 'string' || !Array.isArray(j.checks)){ back(sayFor(j && j.error)); return; }
+      state.token = j.token; state.host = String(j.host || ''); state.teaser = j;
+      $('runTitle').textContent = 'Checking your homepage…'; $('runSub').textContent = state.host;
+      renderList($('runList'), j.checks, 'running'); $('speedWait').hidden = false;
+      var mine = j.token;
+      post(API.speed, { token: j.token }, SPEED_WAIT_MS).then(function(s){
+        if (state.skipped || state.token !== mine) return;
+        if (s && s.ok && typeof s.token === 'string' && Array.isArray(s.checks)){ state.token = s.token; state.teaser = s; state.speedRan = !!s.speedRan; }
+        gate();
+      }).catch(function(){ if (!state.skipped && state.token === mine) gate(); });   // a timeout is "could not run", and the report still goes out
+    }).catch(function(){ back(SAY.unavailable); });
+  }
+  function back(text){ show('viewEnter'); $('topMsg').textContent = text; }
+  $('runBtn').addEventListener('click', run);
+  $('a_url').addEventListener('keydown', function(e){ if (e.key === 'Enter') run(); });
+  $('skipSpeed').addEventListener('click', function(){ if (!state.token) return; state.skipped = true; gate(); });
+
+  /* ---------- 3: the teaser and the gate ---------- */
+  function gate(){
+    var t = state.teaser, el = $('gateCount');
+    el.textContent = '';
+    el.appendChild(document.createTextNode('We ran ' + t.ran + ' checks on ' + state.host + '. '));
+    var b = document.createElement('b'); b.textContent = t.needWork === 1 ? '1 needs work.' : t.needWork + ' need work.'; el.appendChild(b);
+    renderList($('gateList'), t.checks, 'gate');
+    var missed = t.checks.filter(function(c){ return !c.ran; }).length, n = $('gateNote');
+    n.hidden = !missed;
+    n.textContent = !missed ? '' : state.speedRan || !t.checks.some(function(c){ return !c.ran && SPEED_IDS.indexOf(c.id) >= 0; })
+      ? 'A check that could not run is left out of your grade. It is never counted against you.'
+      : 'Speed could not be measured today. It is left out of your grade, and the rest of the report does not depend on it.';
+    show('viewGate');
+  }
+  var digits = function(s){ return String(s || '').replace(/\D/g, ''); };
+  function phone10(v){ var d = digits(v); if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1); return d; }
+  $('g_phone').addEventListener('input', function(e){ var d = phone10(e.target.value).slice(0, 10); e.target.value = d.length < 4 ? d : d.length < 7 ? '(' + d.slice(0,3) + ') ' + d.slice(3) : '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6); });
+  function fieldOf(key){ return document.querySelector('.field[data-key="' + key + '"]'); }
+  function validate(){
+    var bad = [];
+    if (!$('g_name').value.trim()) bad.push('name');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('g_email').value.trim())) bad.push('email');
+    if (phone10($('g_phone').value).length !== 10) bad.push('phone');
+    markBad(bad); return !bad.length;
+  }
+  function markBad(keys){
+    ['name', 'email', 'phone'].forEach(function(k){ fieldOf(k).classList.toggle('bad', keys.indexOf(k) >= 0); });
+    var first = keys.filter(function(k){ return fieldOf(k); })[0];
+    if (first){ var i = fieldOf(first).querySelector('input'); i.focus(); }
+  }
+  ['g_name', 'g_email', 'g_phone'].forEach(function(id){ $(id).addEventListener('input', function(e){ e.target.closest('.field').classList.remove('bad'); }); });
+
+  $('sendBtn').addEventListener('click', function(){
+    if (!validate()) return;
+    var btn = $('sendBtn'), email = $('g_email').value.trim(), box = $('g_consent');
+    var body = { token: state.token, name: $('g_name').value.trim(), email: email, phone: phone10($('g_phone').value), consent: !!(box && box.checked), src: SRC, fax: $('g_fax').value };
+    btn.disabled = true; btn.textContent = 'Sending…'; $('gateMsg').textContent = '';
+    post(API.report, body).then(function(j){
+      btn.disabled = false; btn.textContent = 'Email me my report';
+      if (j.ok) return sent(j, email);
+      if (j.error === 'invalid' && Array.isArray(j.fields) && j.fields.some(function(k){ return fieldOf(k); })) return markBad(j.fields);
+      if (j.error === 'bad_token') return back(SAY.bad_token);
+      $('gateMsg').textContent = sayFor(j.error);
+    }).catch(function(){ btn.disabled = false; btn.textContent = 'Email me my report'; $('gateMsg').textContent = SAY.unavailable; });
+  });
+
+  /* ---------- 4: sent ---------- */
+  function sent(j, email){
+    $('sentTo').textContent = 'We sent it to ' + email + '. If it is not there in a few minutes, check your spam folder.';
+    var g = typeof j.grade === 'string' && /^[A-F]$/.test(j.grade) ? j.grade : null;
+    $('sentGrade').textContent = g || '–';
+    var ran = +j.ran || 0, need = +j.needWork || 0;
+    $('sentCount').textContent = !g ? 'None of the checks could run today, so there is no grade.'
+      : need === 0 ? 'All ' + ran + ' checks that ran passed.' : need + ' of the ' + ran + ' checks that ran ' + (need === 1 ? 'needs' : 'need') + ' work. The report says which, and how to fix each one.';
+    $('sentLabel').textContent = 'This grade is ProyTech’s own score for these checks on the homepage of ' + state.host + ' today. It does not come from Google or any rating body.';
+    $('bookBtn').setAttribute('href', '/book?src=' + (SRC ? 'audit-' + SRC : 'audit').slice(0, 24));
+    show('viewSent');
+    setTimeout(function(){ try { $('sentTitle').focus({ preventScroll: true }); } catch(e){} }, 300);
+  }
+
+  /* ---------- ?mock=1: the whole flow with no network ----------
+     &fail=unreachable|private|speed|email|sent|config   forces a path; &grade=A..F picks the grade shown */
+  var NAMES = [['https','Loads over https'],['http_redirect','Old http address forwards to https'],['hsts','Tells browsers to always use https'],['mixed','Nothing loads over plain http'],['headers','Common protective headers'],['title','Page title'],['description','Page description'],['h1','One main heading'],['viewport','Set up for phone screens'],['tel','Tap-to-call link'],['write','A way to write to you'],['cta','A clear next step'],['gbp','Link to your Google Business profile'],['lcp','Main content appears quickly'],['cls','Page holds still while loading'],['weight','Page weight']];
+  function mock(path, body){
+    var fail = params.get('fail');
+    function list(speed){ return NAMES.map(function(n){ return { id: n[0], name: n[1], ran: SPEED_IDS.indexOf(n[0]) < 0 || speed }; }); }
+    return new Promise(function(res, rej){ setTimeout(function(){
+      if (window.console) console.info('[mock] ' + path, JSON.parse(JSON.stringify(body)));
+      if (fail === 'config') return res({ ok: false, error: 'not_configured', missing: ['SUPABASE_URL', 'SUPABASE_SERVICE_KEY'] });
+      if (path === API.scan){
+        if (fail === 'unreachable' || fail === 'private') return res({ ok: false, error: fail });
+        var host = String(body.url).replace(/^[a-z]+:\/\//i, '').split('/')[0].toLowerCase();
+        return res({ ok: true, host: host, token: 'mock-scan', needWork: 4, ran: 13, checks: list(false) });
+      }
+      if (path === API.speed){
+        if (fail === 'speed') return res({ ok: true, token: 'mock-nospeed', speedRan: false, needWork: 4, ran: 13, checks: list(false) });
+        return res({ ok: true, token: 'mock-speed', speedRan: true, needWork: 5, ran: 16, checks: list(true) });
+      }
+      if (path === API.report){
+        if (fail === 'email') return res({ ok: false, error: 'email_failed' });
+        if (fail === 'sent') return res({ ok: false, error: 'already_sent' });
+        var withSpeed = body.token === 'mock-speed', g = /^[A-F]$/.test(params.get('grade') || '') ? params.get('grade') : (withSpeed ? 'D' : 'D');
+        return res({ ok: true, grade: g, needWork: withSpeed ? 5 : 4, ran: withSpeed ? 16 : 13, notRun: withSpeed ? [] : ['Main content appears quickly', 'Page holds still while loading', 'Page weight'] });
+      }
+      rej(new Error('mock'));
+    }, path === API.speed ? 1800 : 500); });
+  }
+  if (MOCK){ var flag = document.createElement('div'); flag.className = 'mock-flag'; flag.textContent = 'Mock mode: nothing is sent'; document.body.appendChild(flag); }
+})();
+</script>
+
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6ae7f2cb03d93fc5217b9946" data-source="WEB_USER"></script>
+</body>
+</html>
