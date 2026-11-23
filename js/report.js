@@ -34,6 +34,7 @@
   };
   TD.pillClass = function (p) { return p === 'Good' ? 'g' : p === 'Needs work' ? 'w' : p === 'Broken' ? 'x' : 'n'; };
   var STATUS = { pass: 'Pass', partial: 'Partial', miss: 'Miss', na: 'Not checked' };
+  var KIND = { home: 'Homepage', contact: 'Contact', services: 'Service', about: 'About', reviews: 'Reviews', faq: 'FAQ', pricing: 'Pricing', areas: 'Area', work: 'Our work', other: 'Page' };
   var STATUS_CLASS = { pass: 'g', partial: 'w', miss: 'x', na: 'n' };
 
   /* -------------------------------------------------------------- DOM */
@@ -67,7 +68,9 @@
 
     add(m, el(doc, 'p', 'label', 'Website report · ' + str(d.domain || r.host, 120) + ' · ' + when));
     add(m, el(doc, 'h1', '', 'Your website report, ' + business));
-    add(m, el(doc, 'p', 'lede', 'We went through your homepage the way a new customer on their phone would, and graded it the same way we grade sites by hand.'));
+    var v2 = r.v === 2;
+    var nPages = r.checked && r.checked.pages > 0 ? r.checked.pages : 1;
+    add(m, el(doc, 'p', 'lede', v2 ? 'We read ' + (nPages === 1 ? 'your homepage' : nPages + ' pages of your site') + ' the way a new customer on their phone would, and graded it the same way we grade sites by hand: 12 areas, from the first five seconds to what runs behind the scenes.' : 'We went through your homepage the way a new customer on their phone would, and graded it the same way we grade sites by hand.'));
 
     /* verdict */
     var v = add(m, el(doc, 'div', 'verdict'));
@@ -94,7 +97,20 @@
       var w = add(s1, el(doc, 'div', 'working'));
       working.slice(0, 5).forEach(function (x) {
         var d1 = add(w, el(doc, 'div', '', str(x.text, 200)));
-        if (x.quote) add(d1, el(doc, 'q', '', str(x.quote, 200)));
+        if (x.quote) { var wq = add(d1, el(doc, 'div', 'wq')); if (x.page && x.page !== '/') add(wq, el(doc, 'span', 'on', str(x.page, 120))); add(wq, el(doc, 'q', '', str(x.quote, 200))); }
+      });
+    }
+
+    /* how a first-time visitor moves through the site (v2) */
+    var journey = Array.isArray(r.journey) ? r.journey : [];
+    if (journey.length) {
+      var sj = add(m, el(doc, 'section'));
+      add(sj, el(doc, 'h2', '', 'How a first-time visitor moves through your site'));
+      var jl = add(sj, el(doc, 'ol', 'journey'));
+      journey.slice(0, 5).forEach(function (x) {
+        var li = add(jl, el(doc, 'li'));
+        add(li, el(doc, 'p', '', str(x.text, 220)));
+        if (x.quote) { var jq = add(li, el(doc, 'div', 'jq')); if (x.page) add(jq, el(doc, 'span', 'on', x.page === '/' ? 'Homepage' : str(x.page, 120))); add(jq, el(doc, 'q', '', str(x.quote, 200))); }
       });
     }
 
@@ -113,6 +129,34 @@
       add(f, el(doc, 'b', '', 'The fix: '));
       f.appendChild(doc.createTextNode(str(p.fix, 300)));
     });
+
+    /* what we looked at (v2): the pages read and what the site runs on */
+    var pages = Array.isArray(r.pages) ? r.pages : [];
+    if (pages.length || r.stack) {
+      var sl = add(m, el(doc, 'section'));
+      add(sl, el(doc, 'h2', '', 'What we looked at'));
+      var lk = add(sl, el(doc, 'div', 'looked'));
+      if (pages.length) {
+        var b1 = add(lk, el(doc, 'div', 'box'));
+        add(b1, el(doc, 'h3', '', 'The pages we read'));
+        var pl = add(b1, el(doc, 'ul', 'plist'));
+        pages.slice(0, 8).forEach(function (p) {
+          var li = add(pl, el(doc, 'li'));
+          add(li, el(doc, 'span', 'p', p.path === '/' ? 'Homepage' : str(p.path, 120)));
+          add(li, el(doc, 'span', 'k', (KIND[p.kind] || 'Page') + (p.words ? ' · ' + p.words + ' words' : '')));
+        });
+        if (r.checked && r.checked.found > pages.length - 1) add(b1, el(doc, 'p', 'why', 'We found ' + r.checked.found + ' pages linked from your homepage and sitemap, and read the ones a buyer is most likely to visit.'));
+      }
+      if (r.stack) {
+        var b2 = add(lk, el(doc, 'div', 'box'));
+        add(b2, el(doc, 'h3', '', 'What your site runs on'));
+        add(b2, el(doc, 'p', '', 'Built on: ' + str(r.stack.platform, 60)));
+        var tl2 = Array.isArray(r.stack.tools) ? r.stack.tools : [];
+        if (tl2.length) { var tw = add(b2, el(doc, 'div', 'tools')); tl2.slice(0, 16).forEach(function (t) { add(tw, el(doc, 'span', '', str(t.name, 60))); }); }
+        else add(b2, el(doc, 'p', 'why', 'We did not spot a CRM, booking tool, chat or analytics tag.'));
+        add(b2, el(doc, 'p', 'why', 'Email: ' + str(r.stack.email, 60) + '. This is what anyone can see from outside; we never log in.'));
+      }
+    }
 
     /* speed */
     var s3 = add(m, el(doc, 'section'));
@@ -139,7 +183,7 @@
         var li = add(ul, el(doc, 'li'));
         add(li, el(doc, 'span', 'st pill ' + (STATUS_CLASS[it.status] || 'n'), STATUS[it.status] || 'Not checked'));
         li.appendChild(doc.createTextNode(str(it.name, 120) + (it.evidence ? '. ' + str(it.evidence, 300) : '')));
-        if (it.quote) { li.appendChild(doc.createTextNode(' ')); add(li, el(doc, 'span', 'q', '"' + str(it.quote, 200) + '"')); }
+        if (it.quote) { li.appendChild(doc.createTextNode(' ')); if (it.page) add(li, el(doc, 'span', 'on', it.page === '/' ? 'Homepage' : str(it.page, 120))); add(li, el(doc, 'span', 'q', '"' + str(it.quote, 200) + '"')); }
         if (it.fix) { var fx = add(li, el(doc, 'span', 'fx')); add(fx, el(doc, 'b', '', 'The fix: ')); fx.appendChild(doc.createTextNode(str(it.fix, 300))); }
       });
     });
@@ -148,7 +192,8 @@
     var s5 = add(m, el(doc, 'section'));
     add(s5, el(doc, 'h2', '', 'How we graded this'));
     var nc = Array.isArray(r.notChecked) ? r.notChecked.map(function (x) { return str(x, 120); }) : [];
-    add(s5, el(doc, 'p', '', '10 areas, 100 points, scored only from what anyone can see on your homepage on ' + when + '. Areas we couldn\'t check were left out: ' + (nc.length ? nc.join('; ') : 'none') + '.'));
+    if (v2) add(s5, el(doc, 'p', '', str(r.rule, 700).replace(/^How we graded this: /, '') + ' Checked on ' + when + '. Left out today: ' + (nc.length ? nc.join('; ') : 'nothing') + '.'));
+    else add(s5, el(doc, 'p', '', '10 areas, 100 points, scored only from what anyone can see on your homepage on ' + when + '. Areas we couldn\'t check were left out: ' + (nc.length ? nc.join('; ') : 'none') + '.'));
     if (r.judgment === false) add(s5, el(doc, 'p', 'why', 'Our written review of your copy and layout could not run this time, so those items were left out too.'));
     add(s5, el(doc, 'p', 'why', str(r.scoreLabel, 300)));
 
@@ -156,7 +201,7 @@
     var o = add(m, el(doc, 'div', 'offer'));
     var ol = add(o, el(doc, 'div'));
     add(ol, el(doc, 'h2', '', "Let's go over it together"));
-    add(ol, el(doc, 'p', '', "Book 15 minutes with me and I'll walk you through every finding and how we'd fix it. Useful whether we work together or not."));
+    add(ol, el(doc, 'p', '', v2 ? "Book 15 minutes with me and I'll walk you through the fix for every item on this list, in the order that brings in the most calls first. Useful whether we work together or not." : "Book 15 minutes with me and I'll walk you through every finding and how we'd fix it. Useful whether we work together or not."));
     var btn = add(ol, el(doc, 'a', 'btn', 'Book your call'));
     btn.href = TD.safeBook(d.bookUrl);
     var card = add(o, el(doc, 'div', 'code'));
@@ -170,7 +215,7 @@
       add(card, el(doc, 'p', '', code ? 'This code expired on ' + until + ". You can still book a call and we'll go over your report." : "Book a call and we'll go over your report."));
     }
 
-    add(m, el(doc, 'p', 'foot', 'Prepared by ProyTech for ' + business + '. Based on our own review of the homepage of ' + str(d.domain || r.host, 120) + ' on ' + when + ', from the outside. ProyTech Business Solutions LLC, 201 N Water St, Wichita, KS 67202.'));
+    add(m, el(doc, 'p', 'foot', 'Prepared by ProyTech for ' + business + '. Based on our own review of ' + (v2 ? (nPages === 1 ? 'the homepage of ' : nPages + ' pages of ') : 'the homepage of ') + str(d.domain || r.host, 120) + ' on ' + when + ', from the outside. ProyTech Business Solutions LLC, 201 N Water St, Wichita, KS 67202.'));
   };
 
   /* ------------------------------------------------------------ boot */

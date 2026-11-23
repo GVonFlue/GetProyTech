@@ -1,13 +1,17 @@
 // api/audit-scan.js — step 1 of the free website teardown (/audit).
 // Body:   { url }
-// Answer: { ok, host, token, needWork, checked, misses:[names] }
+// Answer: { ok, host, token, needWork, checked, misses:[names], pages:[paths], stack }
 //      or { ok:false, error }   bad_address | private | unreachable | blocked |
 //                               not_html | host_limit | (the gate's own errors)
 //
-// It fetches ONE page, the homepage of the address given, the way a visitor's
-// browser would, with a user agent that names us (./_audit-net.js has the
-// rules that keep that fetch off private networks), and reads the rubric's
-// rule items off it (./_rubric.js ruleFacts). NO AI HERE: this step is free.
+// It reads the site the way a visitor's browser would, with a user agent that
+// names us: the homepage, then up to 7 more of its pages, its robots.txt,
+// sitemap and llms.txt, and the domain's email records (./_audit-net.js
+// crawlSite; the rules that keep every fetch off private networks are there).
+// The rubric's rule items are read off what came back. NO AI HERE: this step
+// is free. `pages` (the paths read) and `stack` (what the site runs on, in
+// names from OUR tables) go back for the progress screen only; they are not
+// in the token.
 // The result goes back SEALED: the browser carries it to the next two routes
 // and can neither read the details nor change them. Before the details form
 // the visitor sees a count and a few item names, no grade.
@@ -39,7 +43,10 @@ export function makeHandler({ scan = scanSite } = {}) {
     try {
       const r = await (gate.mock ? mockScan : scan)(v.host);
       if (!r.ok) { res.status(200).json({ ok: false, error: WHY[r.why] || 'unreachable' }); return; }
-      res.status(200).json({ ok: true, host: v.host, token: seal(r.data, key), ...teaser(r.data) });
+      const pages = (Array.isArray(r.pages) ? r.pages : []).slice(0, 8).map(p => String(p).slice(0, 120));
+      const st = r.stack && typeof r.stack === 'object' ? r.stack : null;
+      const stack = st ? { platform: String(st.platform || ''), tools: (st.tools || []).slice(0, 12).map(t => String(t.name)), email: String(st.email || '') } : null;
+      res.status(200).json({ ok: true, host: v.host, token: seal(r.data, key), ...teaser(r.data), pages, stack });
     } catch (e) {
       console.error('[audit-scan]', String((e && e.message) || e).slice(0, 200));
       res.status(200).json({ ok: false, error: 'unreachable' });

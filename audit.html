@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Free website teardown | ProyTech</title>
-<meta name="description" content="A free website teardown: your homepage graded A to F the way ProyTech grades sites by hand, with the three things to fix first. Report by email and link.">
+<meta name="description" content="A free website teardown: up to 8 pages of your site graded A to F across 12 areas, from buyer psychology to Google and AI assistants, the way ProyTech grades sites by hand. Report by email and link.">
 <meta name="theme-color" content="#071A3D">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="canonical" href="https://getproytech.com/audit">
 <meta property="og:title" content="Free website teardown | ProyTech">
-<meta property="og:description" content="Your homepage graded A to F, with the three things to fix first.">
+<meta property="og:description" content="Your whole website graded A to F across 12 areas, with the three things to fix first.">
 <meta property="og:image" content="https://getproytech.com/images/proytech-dog.jpg">
 <meta property="og:url" content="https://getproytech.com/audit">
 <meta property="og:type" content="website">
@@ -116,9 +116,9 @@
 <main>
 <section class="phero ah" style="padding:118px 0 70px">
   <div class="wrap">
-    <span class="eyebrow">Free website teardown · About two minutes</span>
-    <h1 style="font-size:clamp(2.2rem,4.4vw,3.6rem);max-width:20ch">Get your homepage <em>graded.</em></h1>
-    <p class="lede">Enter your website address. We grade your homepage A to F the same way Garrett grades sites by hand: 10 areas, 100 points, and the three things to fix first. You get the full report by email and as a link, with $500 off our standard website if you want us to fix it.</p>
+    <span class="eyebrow">Free website teardown · About three minutes</span>
+    <h1 style="font-size:clamp(2.2rem,4.4vw,3.6rem);max-width:20ch">Get your website <em>graded.</em></h1>
+    <p class="lede">Enter your website address. We read up to 8 pages of your site the way a new customer would and grade it A to F the same way Garrett grades sites by hand: 12 areas, 100 points, from the first five seconds and buyer psychology to Google, AI assistants and what runs behind the scenes. You get the full report by email and as a link, with $500 off our standard website if you want us to fix it.</p>
 
     <div class="app" id="app">
       <div class="app-body">
@@ -130,13 +130,13 @@
             <input type="text" id="a_url" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" maxlength="300" placeholder="yourbusiness.com">
             <div class="err" id="urlErr">Enter your website address, like yourbusiness.com.</div>
           </div>
-          <button type="button" class="abtn" id="runBtn">Grade my homepage</button>
-          <p class="note">One page only: your homepage. Nothing is changed on your site.</p>
+          <button type="button" class="abtn" id="runBtn">Grade my website</button>
+          <p class="note">We read up to 8 pages of your site, plus its public robots, sitemap and email records. Nothing is changed on your site.</p>
         </div>
 
         <!-- 2. running -->
         <div id="viewRun" hidden>
-          <h2 id="runTitle" aria-live="polite">Loading your homepage…</h2>
+          <h2 id="runTitle" aria-live="polite">Reading your website…</h2>
           <p class="sub" id="runSub"></p>
           <ul class="alist" id="runList"></ul>
           <div id="speedWait" hidden>
@@ -152,7 +152,7 @@
           <ul class="alist" id="gateList"></ul>
           <p class="note" id="gateNote"></p>
           <h2 style="margin-top:26px">Get the full teardown</h2>
-          <p class="sub">Your grade, every finding with the fix, and what is already working. We read your copy and layout too, which takes about 20 seconds.</p>
+          <p class="sub">Your grade across all 12 areas, every finding, what is already working, and how a first-time visitor moves through your site. Our review reads every page for trust and buyer psychology, which takes about a minute.</p>
           <div class="field" data-key="name"><label for="g_name">Your name</label><input type="text" id="g_name" autocomplete="name" maxlength="120"><div class="err">What is your name?</div></div>
           <div class="field" data-key="company"><label for="g_company">Business name</label><input type="text" id="g_company" autocomplete="organization" maxlength="120"><div class="err">What is your business called?</div></div>
           <div class="field" data-key="email"><label for="g_email">Email</label><input type="email" id="g_email" inputmode="email" autocomplete="email" maxlength="200" placeholder="you@business.com"><div class="err">That email doesn't look right.</div></div>
@@ -165,6 +165,7 @@
                the report request; api/audit-report.js has the matching verifyHuman() to fill in. ===== -->
           <div id="captchaSlot" hidden></div>
           <button type="button" class="abtn" id="sendBtn">Get my teardown</button>
+          <ul class="alist" id="sendList" hidden style="margin-top:16px" aria-live="polite"></ul>
           <div class="msg" id="gateMsg" role="alert"></div>
         </div>
 
@@ -178,7 +179,7 @@
           <a class="abtn" id="reportBtn" href="#" target="_blank" rel="noopener" style="margin-top:6px">Open your report</a>
           <p class="sub" id="sentTo" style="margin-top:14px"></p>
           <p class="small" id="sentLabel"></p>
-          <p class="small">How the grade works: 10 areas worth 100 points. Each check passes, partly passes or misses. Anything we could not check is left out and the rest is scaled to 100. A is 90 or more, B 80 to 89, C 70 to 79, D 60 to 69, F below 60.</p>
+          <p class="small">How the grade works: 12 areas worth 100 points. Each check passes, partly passes or misses. Anything we could not check is left out and the rest is scaled to 100. A is 90 or more, B 80 to 89, C 70 to 79, D 60 to 69, F below 60.</p>
         </div>
 
         <div class="msg" id="topMsg" role="alert"></div>
@@ -191,12 +192,12 @@
   <div class="wrap">
     <h2 class="h2 rv" style="margin-top:0">What it grades</h2>
     <div class="grid3">
-      <article class="card rv"><h3>The first five seconds</h3><p>Whether a new visitor can tell what you do, where, and what to do next, without scrolling.</p></article>
-      <article class="card rv"><h3>Contact and trust</h3><p>Tap-to-call, a form, one consistent phone number, reviews, and real facts about your business.</p></article>
-      <article class="card rv"><h3>Copy and flow</h3><p>Whether the page talks to the customer, answers their worries, and leads to one clear next step.</p></article>
-      <article class="card rv"><h3>Phone, speed and Google</h3><p>Phone setup, one lab speed test through Google PageSpeed Insights, and the basics a search result is built from.</p></article>
-      <article class="card rv"><h3>Broken things and tracking</h3><p>Errors on the page, an old copyright year, insecure pieces, and whether you can tell where leads come from.</p></article>
-      <article class="card card-o rv"><h3>What it is not</h3><p>Our own outside review of one page on one day. It does not log in, it does not look at the rest of your site, and the grade is ProyTech's score, not Google's.</p></article>
+      <article class="card rv"><h3>The first five seconds</h3><p>Whether a new visitor on a phone can tell what you do, where, and what to do next, and whether the top of the page shows your real work.</p></article>
+      <article class="card rv"><h3>Trust and buyer psychology</h3><p>Proof, reviews and credentials, and the levers that make people act: naming their problem, selling the result, why you, taking the risk off, and an honest reason to call now.</p></article>
+      <article class="card rv"><h3>The customer journey</h3><p>How a visitor moves through your pages: a way to reach you on every page, a next step at the end of each, and a contact form that doesn't ask for too much.</p></article>
+      <article class="card rv"><h3>Pages, Google and AI assistants</h3><p>A page for each service and area, titles and descriptions on every page, your sitemap, and whether AI assistants are allowed to read your site at all.</p></article>
+      <article class="card rv"><h3>Behind the scenes</h3><p>What your site runs on and what catches the lead: the CRM, booking, chat, analytics, ad pixels and call tracking we can see, plus your email domain's protection.</p></article>
+      <article class="card card-o rv"><h3>What it is not</h3><p>Our own outside review of up to 8 pages on one day. It does not log in or see inside your systems, and the grade is ProyTech's score, not Google's.</p></article>
     </div>
   </div>
 </section>
@@ -221,19 +222,20 @@
   "use strict";
   /* The three routes and their field names, in one place. */
   var API = {
-    scan: '/api/audit-scan',       // { url }   -> { ok, host, token, needWork, checked, misses:[name] }
+    scan: '/api/audit-scan',       // { url }   -> { ok, host, token, needWork, checked, misses:[name], pages:[path], stack }
     speed: '/api/audit-speed',     // { token } -> { ok, token, speedRan, needWork, checked, misses, shot }
     report: '/api/audit-report'    // { token, name, company, email, phone, consent, src, fax, shot } -> { ok, grade, score, needWork, reportUrl }
   };
+  var SCAN_WAIT_MS = 65000;        // the scan reads up to 8 pages; its function has 60 seconds
   var SPEED_WAIT_MS = 58000;       // the speed function has 60 seconds
-  var REPORT_WAIT_MS = 58000;      // the report function has 60 seconds (one model call)
+  var REPORT_WAIT_MS = 170000;     // the report reads the site again and makes one long model call
   var params = new URLSearchParams(location.search);
   var MOCK = params.get('mock') === '1';
   /* the link's tag, kept for the whole visit: the CRM's rule (a-z 0-9 _ -, 24 characters) */
   var SRC = (params.get('src') || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 24);
 
   var $ = function(id){ return document.getElementById(id); };
-  var state = { token: null, host: '', teaser: null, speedRan: false, skipped: false, shot: '' };
+  var state = { token: null, host: '', teaser: null, speedRan: false, skipped: false, shot: '', pages: [], stack: null };
   var views = ['viewEnter', 'viewRun', 'viewGate', 'viewSent'];
   function show(id){
     views.forEach(function(v){ $(v).hidden = v !== id; });
@@ -276,28 +278,55 @@
       li.appendChild(dot); li.appendChild(name); ul.appendChild(li);
     });
   }
-  var STEPS = ['Reading the page', 'Contact and trust', 'Search basics', 'Broken things and tracking'];
+  /* A checklist that ticks itself off while a slow request runs: every step
+     named here is real work the server does, the timing is approximate, and
+     the last step keeps spinning until the answer comes back. */
+  function progress(ul, steps, everyMs){
+    var done = 0, timer = null;
+    function draw(){
+      ul.textContent = '';
+      steps.forEach(function(n, i){
+        var li = document.createElement('li'), dot = document.createElement('span'), name = document.createElement('span');
+        li.className = i < done ? 'done' : i === done ? 'wait' : 'skip'; dot.className = 'dot'; dot.textContent = i < done ? '✓' : ''; name.textContent = n;
+        li.appendChild(dot); li.appendChild(name); ul.appendChild(li);
+      });
+    }
+    draw();
+    timer = setInterval(function(){ if (done < steps.length - 1){ done++; draw(); } }, everyMs);
+    return function stop(){ clearInterval(timer); };
+  }
+  var SCAN_STEPS = ['Loading your homepage', 'Finding your pages in the menu and sitemap', 'Reading up to 8 pages', 'Checking robots.txt, your sitemap and llms.txt', 'Checking your email domain and the tools behind the site'];
+  var REPORT_STEPS = ['Reading every page again', 'Judging the first five seconds', 'Checking trust and proof', 'Reading for buyer psychology', 'Walking the customer journey, page by page', 'Scoring 12 areas', 'Writing your report'];
 
   /* ---------- 1 -> 2: run ---------- */
   function run(){
     var url = $('a_url').value.trim();
     $('urlField').classList.toggle('bad', !url);
     if (!url){ $('a_url').focus(); return; }
-    state.token = null; state.skipped = false; state.speedRan = false; state.shot = '';
-    $('runTitle').textContent = 'Loading your homepage…'; $('runSub').textContent = ''; $('runList').textContent = ''; $('speedWait').hidden = true;
+    state.token = null; state.skipped = false; state.speedRan = false; state.shot = ''; state.pages = []; state.stack = null;
+    $('runTitle').textContent = 'Reading your website…'; $('runSub').textContent = ''; $('runList').textContent = ''; $('speedWait').hidden = true;
     show('viewRun');
-    post(API.scan, { url: url }).then(function(j){
+    var stopScan = progress($('runList'), SCAN_STEPS, 2200);
+    post(API.scan, { url: url }, SCAN_WAIT_MS).then(function(j){
+      stopScan();
       if (!j.ok || typeof j.token !== 'string' || !Array.isArray(j.misses)){ back(sayFor(j && j.error)); return; }
       state.token = j.token; state.host = String(j.host || ''); state.teaser = j;
-      $('runTitle').textContent = 'Grading your homepage…'; $('runSub').textContent = state.host;
-      renderList($('runList'), STEPS, 'done'); $('speedWait').hidden = false;
+      state.pages = Array.isArray(j.pages) ? j.pages.slice(0, 8).map(String) : [];
+      state.stack = j.stack && typeof j.stack === 'object' ? j.stack : null;
+      var n = state.pages.length || 1;
+      $('runTitle').textContent = 'We read ' + n + (n === 1 ? ' page of ' : ' pages of ') + state.host;
+      var bits = [];
+      if (state.stack && state.stack.platform && state.stack.platform !== 'Not identified') bits.push('Built on ' + state.stack.platform);
+      if (state.stack && Array.isArray(state.stack.tools) && state.stack.tools.length) bits.push('Tools we spotted: ' + state.stack.tools.slice(0, 6).join(', '));
+      $('runSub').textContent = bits.join('. ') + (bits.length ? '.' : '');
+      renderList($('runList'), state.pages.length ? state.pages.map(function(p){ return p === '/' ? 'Homepage' : p; }) : ['Homepage'], 'done'); $('speedWait').hidden = false;
       var mine = j.token;
       post(API.speed, { token: j.token }, SPEED_WAIT_MS).then(function(s){
         if (state.skipped || state.token !== mine) return;
         if (s && s.ok && typeof s.token === 'string' && Array.isArray(s.misses)){ state.token = s.token; state.teaser = s; state.speedRan = !!s.speedRan; state.shot = typeof s.shot === 'string' ? s.shot : ''; }
         gate();
       }).catch(function(){ if (!state.skipped && state.token === mine) gate(); });   // a timeout is "not checked", and the report still goes out
-    }).catch(function(){ back(SAY.unavailable); });
+    }).catch(function(){ stopScan(); back(SAY.unavailable); });
   }
   function back(text){ show('viewEnter'); $('topMsg').textContent = text; }
   $('runBtn').addEventListener('click', run);
@@ -308,10 +337,11 @@
   function gate(){
     var t = state.teaser, el = $('gateCount'), need = +t.needWork || 0, of = +t.checked || 0;
     el.textContent = '';
-    el.appendChild(document.createTextNode('We checked ' + of + ' things on ' + state.host + ' so far. '));
+    var pc = state.pages.length;
+    el.appendChild(document.createTextNode('We checked ' + of + ' things across ' + (pc > 1 ? pc + ' pages of ' : '') + state.host + ' so far. '));
     var b = document.createElement('b'); b.textContent = need === 1 ? '1 needs work.' : need + ' need work.'; el.appendChild(b);
     renderList($('gateList'), t.misses.slice(0, 4), 'miss');
-    $('gateNote').textContent = (need > t.misses.length ? 'These are the biggest ones. ' : '') + (state.speedRan ? '' : 'Speed could not be measured today, so it is left out. ') + 'Your copy and layout are graded in the full teardown.';
+    $('gateNote').textContent = (need > t.misses.length ? 'These are the biggest ones. ' : '') + (state.speedRan ? '' : 'Speed could not be measured today, so it is left out. ') + 'Your first impression, trust, buyer psychology and customer journey are graded in the full teardown.';
     show('viewGate');
   }
   var digits = function(s){ return String(s || '').replace(/\D/g, ''); };
@@ -340,14 +370,17 @@
     var btn = $('sendBtn'), email = $('g_email').value.trim(), box = $('g_consent');
     var body = { token: state.token, name: $('g_name').value.trim(), company: $('g_company').value.trim(), email: email, phone: phone10($('g_phone').value), consent: !!(box && box.checked), src: SRC, fax: $('g_fax').value };
     if (state.shot) body.shot = state.shot;
-    btn.disabled = true; btn.textContent = 'Grading your copy and layout…'; $('gateMsg').textContent = '';
+    btn.disabled = true; btn.textContent = 'Building your teardown… about a minute'; $('gateMsg').textContent = '';
+    var list = $('sendList'); list.hidden = false;
+    var stopSend = progress(list, REPORT_STEPS, 11000);
+    var finish = function(){ stopSend(); list.hidden = true; list.textContent = ''; btn.disabled = false; btn.textContent = SEND; };
     post(API.report, body, REPORT_WAIT_MS).then(function(j){
-      btn.disabled = false; btn.textContent = SEND;
+      finish();
       if (j.ok) return sent(j, email);
       if (j.error === 'invalid' && Array.isArray(j.fields) && j.fields.some(function(k){ return fieldOf(k); })) return markBad(j.fields);
       if (j.error === 'bad_token') return back(SAY.bad_token);
       $('gateMsg').textContent = sayFor(j.error);
-    }).catch(function(){ btn.disabled = false; btn.textContent = SEND; $('gateMsg').textContent = SAY.unavailable; });
+    }).catch(function(){ finish(); $('gateMsg').textContent = SAY.unavailable; });
   });
 
   /* ---------- 4: done ---------- */
@@ -363,7 +396,7 @@
     var link = safeReport(j.reportUrl), a = $('reportBtn');
     a.hidden = !link; if (link) a.setAttribute('href', link);
     $('sentTo').textContent = 'We also emailed the link to ' + email + '. If it is not there in a few minutes, check your spam folder.';
-    $('sentLabel').textContent = 'The grade is ProyTech’s score for these checks on the homepage of ' + state.host + ' on this date. It does not come from Google or any rating body.';
+    $('sentLabel').textContent = 'The grade is ProyTech’s score for these checks on ' + state.host + ' on this date. It does not come from Google or any rating body.';
     show('viewSent');
     setTimeout(function(){ try { $('sentTitle').focus({ preventScroll: true }); } catch(e){} }, 300);
   }
@@ -379,20 +412,20 @@
       if (path === API.scan){
         if (fail === 'unreachable' || fail === 'private') return res({ ok: false, error: fail });
         var host = String(body.url).replace(/^[a-z]+:\/\//i, '').split('/')[0].toLowerCase();
-        return res({ ok: true, host: host, token: 'mock-scan', needWork: 13, checked: 20, misses: MISSES });
+        return res({ ok: true, host: host, token: 'mock-scan', needWork: 21, checked: 38, misses: MISSES, pages: ['/', '/services', '/roofing', '/about', '/contact'], stack: { platform: 'WordPress', tools: ['Contact Form 7', 'Google Analytics'], email: 'Google Workspace' } });
       }
       if (path === API.speed){
-        if (fail === 'speed') return res({ ok: true, token: 'mock-nospeed', speedRan: false, needWork: 13, checked: 20, misses: MISSES, shot: '' });
-        return res({ ok: true, token: 'mock-speed', speedRan: true, needWork: 15, checked: 24, misses: MISSES, shot: '' });
+        if (fail === 'speed') return res({ ok: true, token: 'mock-nospeed', speedRan: false, needWork: 21, checked: 38, misses: MISSES, shot: '' });
+        return res({ ok: true, token: 'mock-speed', speedRan: true, needWork: 23, checked: 42, misses: MISSES, shot: '' });
       }
       if (path === API.report){
         if (fail === 'save') return res({ ok: false, error: 'save_failed' });
         if (fail === 'sent') return res({ ok: false, error: 'already_sent' });
         var g = /^[A-F]$/.test(params.get('grade') || '') ? params.get('grade') : 'F';
-        return res({ ok: true, grade: g, score: 43, needWork: 19, reportUrl: 'https://www.getproytech.com/report?t=mocktoken0001' });
+        return res({ ok: true, grade: g, score: 43, needWork: 41, reportUrl: 'https://www.getproytech.com/report?t=mocktoken0001' });
       }
       rej(new Error('mock'));
-    }, path === API.speed ? 1800 : 500); });
+    }, path === API.speed ? 1800 : path === API.report ? 6000 : 3500); });
   }
   if (MOCK){
     var flag = document.createElement('div'); flag.className = 'mock-flag'; flag.textContent = 'Mock mode: nothing is sent'; document.body.appendChild(flag);

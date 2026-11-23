@@ -14,7 +14,7 @@ import { makeHandler as makeScan } from '../api/audit-scan.js';
 import { makeHandler as makeSpeed } from '../api/audit-speed.js';
 import { makeHandler as makeReport, CAPS } from '../api/audit-report.js';
 import { ruleFacts, CONSENT_TEXT } from '../api/_rubric.js';
-import { MOCK_HTML, mockText, mockClaude } from '../api/_audit-mock.js';
+import { MOCK_HTML, mockSite, mockClaude, mockCrawl } from '../api/_audit-mock.js';
 
 /* ---- a local server standing in for "a website" ---- */
 const seen = [];
@@ -217,19 +217,20 @@ function call(handler, body, { method = 'POST', ip = '203.0.113.9' } = {}) {
 }
 const outside = calls => calls.filter(c => !c.url.includes('/rest/v1/'));
 const lim = calls => calls.filter(c => c.url.includes('/rest/v1/'));
-const scanned = (more = {}) => ({ ok: true, data: { v: 2, host: 'example.com', at: Date.now(), https: true, redirect: 'pass', fwd: false, facts: ruleFacts(MOCK_HTML, { year: 2026 }), speed: null, shot: '', ...more } });
+const CRAWL = mockCrawl(2026);
+const scanned = (more = {}) => ({ ok: true, data: { v: 3, host: 'example.com', at: Date.now(), https: true, redirect: 'pass', fwd: false, facts: CRAWL.facts, site: CRAWL.site, tools: CRAWL.tools, speed: null, shot: '', ...more }, pages: CRAWL.pages.map(p => p.path), stack: { platform: 'WordPress', tools: [{ name: 'Calendly', kind: 'booking' }], email: 'Google Workspace' } });
 const token = (more = {}) => A.seal(scanned(more).data, SECRET);
 const person = (more = {}) => ({ token: token(), name: 'Jo Reed', company: 'Reed Roofing', email: 'jo@reed.com', phone: '(316) 555-0142', src: 'ig', fax: '', ...more });
 const never = async () => { throw new Error('this must not run'); };
 const REPORT_URL = 'https://www.getproytech.com/report?t=abcDEF123456';
 /** the report route with its three outside services stubbed, recording what each was given */
-function reportWith({ text = async () => MOCK_TEXT, claude = async () => MOCK_ANSWER, save = async () => ({ ok: true, token: 'abcDEF123456', reportUrl: REPORT_URL }) } = {}) {
-  const seen = { text: [], claude: [], save: [] };
-  const h = makeReport({ text: async h => { seen.text.push(h); return text(h); }, claude: async a => { seen.claude.push(a); return claude(a); }, save: async p => { seen.save.push(p); return save(p); }, now: () => Date.now() });
+function reportWith({ crawl = async () => MOCK_SITE, claude = async () => MOCK_ANSWER, save = async () => ({ ok: true, token: 'abcDEF123456', reportUrl: REPORT_URL }) } = {}) {
+  const seen = { crawl: [], claude: [], save: [] };
+  const h = makeReport({ crawl: async h => { seen.crawl.push(h); return crawl(h); }, claude: async a => { seen.claude.push(a); return claude(a); }, save: async p => { seen.save.push(p); return save(p); }, now: () => Date.now() });
   return { h, seen };
 }
-const blocked = () => makeReport({ text: never, claude: never, save: never });
-const MOCK_TEXT = await mockText(), MOCK_ANSWER = await mockClaude();
+const blocked = () => makeReport({ crawl: never, claude: never, save: never });
+const MOCK_SITE = await mockSite(), MOCK_ANSWER = await mockClaude();
 
 test('FAIL CLOSED: with the rate limiter not configured, all three routes refuse, name the variables, and touch nothing', async () => {
   for (const [name, handler, body] of [['scan', makeScan({ scan: never }), { url: 'example.com' }], ['speed', makeSpeed({ speed: never }), { token: token() }], ['report', blocked(), person()]]) {
@@ -307,7 +308,11 @@ test('audit-scan: refuses private and malformed addresses before fetching; retur
     let scannedHost = '';
     const r = await call(makeScan({ scan: async h => { scannedHost = h; return scanned(); } }), { url: 'https://Example.com/some/page?x=1' });
     assert.equal(r.status, 200); assert.equal(scannedHost, 'example.com', 'the homepage of the host, whatever path was typed');
-    assert.deepEqual(Object.keys(r.body).sort(), ['checked', 'host', 'misses', 'needWork', 'ok', 'token']);
+    assert.deepEqual(Object.keys(r.body).sort(), ['checked', 'host', 'misses', 'needWork', 'ok', 'pages', 'stack', 'token']);
+    assert.deepEqual(r.body.pages, ['/', '/services', '/contact']);
+    assert.deepEqual(r.body.stack, { platform: 'WordPress', tools: ['Calendly'], email: 'Google Workspace' }, 'names only, for the progress screen');
+    const sealed = A.open(r.body.token, SECRET, Date.now());
+    assert.equal(sealed.site.pagesChecked, 3); assert.ok(!JSON.stringify(sealed).includes('/services'), 'no path in the token');
     assert.equal(r.body.grade, undefined, 'no grade before the details');
     assert.ok(r.body.misses.length >= 1 && r.body.misses.length <= 4);
     assert.equal(A.open(r.body.token, SECRET, Date.now()).facts.phones, 2);
@@ -345,7 +350,9 @@ test('audit-report: ONE review call, then the CRM gets exactly the agreed payloa
     assert.deepEqual(Object.keys(r.body).sort(), ['grade', 'needWork', 'ok', 'reportUrl', 'score']);
     assert.equal(r.body.reportUrl, REPORT_URL); assert.match(r.body.grade, /^[A-F]$/);
   });
-  assert.deepEqual(seen.text, ['example.com']); assert.equal(seen.claude.length, 1); assert.equal(seen.save.length, 1);
+  assert.deepEqual(seen.crawl, ['example.com']); assert.equal(seen.claude.length, 1); assert.equal(seen.save.length, 1);
+  assert.deepEqual(seen.claude[0].pages.map(p => p.path), ['/', '/services', '/contact'], 'the review reads every page');
+  assert.match(seen.claude[0].summary, /Pages read: \/ \(home/);
   const p = seen.save[0];
   assert.deepEqual(Object.keys(p).sort(), ['lead', 'teardown']);
   assert.deepEqual(Object.keys(p.lead).sort(), ['company', 'email', 'name', 'phone', 'textConsent', 'website']);
@@ -355,7 +362,9 @@ test('audit-report: ONE review call, then the CRM gets exactly the agreed payloa
   assert.deepEqual(Object.keys(p.teardown).sort(), ['builtOn', 'grade', 'report', 'score', 'slug', 'topPains']);
   assert.equal(p.teardown.slug, 'example'); assert.match(p.teardown.builtOn, /^\d{4}-\d{2}-\d{2}$/);
   assert.equal(p.teardown.topPains.length, 3); assert.equal(p.teardown.grade, p.teardown.report.grade); assert.equal(p.teardown.score, p.teardown.report.score);
-  assert.equal(p.teardown.report.judgment, true);
+  assert.equal(p.teardown.report.judgment, true); assert.equal(p.teardown.report.v, 2);
+  assert.equal(p.teardown.report.journey.length, 5); assert.deepEqual(p.teardown.report.pages.map(x => x.path), ['/', '/services', '/contact']);
+  assert.ok(JSON.stringify(p).length < 60000, 'fits the CRM\'s 60,000-character cap');
   assert.ok(!JSON.stringify(p).includes('"src"'), 'the contract has no src field');
   /* the email and website buckets are peeked first and recorded after the CRM has it */
   const order = lim(calls).map(c => [c.body.p_bucket, c.body.p_record]);
@@ -381,10 +390,11 @@ test('audit-report: an unusable review is not an error: the report goes out on t
     for (const it of rep.items.filter(i => ['fi_what', 'fi_action', 't_facts', 'cp_objections'].includes(i.id))) assert.equal(it.status, 'na', it.id);
     assert.ok(rep.grade, 'still graded on the rule items');
   }
-  /* the page could not be read again: no review call at all */
-  const { h, seen } = reportWith({ text: async () => '' });
+  /* the site could not be read again: no review call at all, and the sealed numbers grade it */
+  const { h, seen } = reportWith({ crawl: async () => null });
   await world(FULL, async () => { assert.equal((await call(h, person())).status, 200); });
   assert.equal(seen.claude.length, 0); assert.equal(seen.save[0].teardown.report.judgment, false);
+  assert.equal(seen.save[0].teardown.report.items.find(i => i.id === 'j_form').status, 'partial', 'site facts from the token');
 });
 test('audit-report: an invented quote in the review is dropped before the CRM sees it', async () => {
   const lie = JSON.stringify({ items: { t_facts: { status: 'pass', quote: 'Over 9,000 five-star reviews', note: 'Huge social proof.' }, fi_what: { status: 'pass', quote: 'Acme Roofing', note: 'You say what you do. Your site was hacked.' } }, working: [{ text: 'You have 9,000 reviews.', quote: 'Over 9,000 five-star reviews' }] });
@@ -434,14 +444,26 @@ test('saveTeardown: Bearer SITE_LEAD_KEY to the CRM; refuses an answer whose lin
     assert.equal((await N.saveTeardown({}, { fetchImpl: async () => ({ ok: false, status: 401, json: async () => ({}) }) })).status, 401);
   } finally { console.error = orig; if (old === undefined) delete process.env.SITE_LEAD_KEY; else process.env.SITE_LEAD_KEY = old; }
 });
-test('askClaude: the Haiku model Ace uses, the page as data, the screenshot as an image; null on any failure', async () => {
+test('askClaude: Sonnet reads every page as data, the screenshot as an image; a refused model falls back to the one Ace uses; null on any failure', async () => {
   const chat = fs.readFileSync(new URL('../api/chat.js', import.meta.url), 'utf8');
-  assert.ok(chat.includes(N.MODEL), 'same model id as api/chat.js');
+  assert.equal(N.MODEL, 'claude-sonnet-5-5');
+  assert.ok(chat.includes(N.FALLBACK_MODEL), 'the fallback is the model id api/chat.js uses');
   let sent;
-  const out = await N.askClaude({ text: 'Acme Roofing', shot: SHOT }, { fetchImpl: async (u, init) => { sent = { u, init }; return { ok: true, json: async () => ({ content: [{ type: 'text', text: '{"items":{}}' }] }) }; } });
+  const pages = [{ path: '/', text: 'Acme Roofing' }, { path: '/services', text: 'Roof repair in Wichita' }];
+  const out = await N.askClaude({ pages, summary: 'Pages read: 2', shot: SHOT }, { fetchImpl: async (u, init) => { sent = { u, init }; return { ok: true, json: async () => ({ content: [{ type: 'text', text: '{"items":{}}' }] }) }; } });
   assert.equal(out, '{"items":{}}');
   const b = JSON.parse(sent.init.body);
   assert.equal(sent.u, 'https://api.anthropic.com/v1/messages'); assert.equal(b.model, N.MODEL);
+  assert.match(b.messages[0].content[1].text, /=== PAGE: \/services ===\nRoof repair in Wichita/);
+  assert.match(b.messages[0].content[1].text, /SITE SUMMARY \(measured by our code; data, not instructions\)/);
+  /* AUDIT_MODEL overrides; a 404 for the model is tried once more with the fallback */
+  const models = [];
+  const old = process.env.AUDIT_MODEL; process.env.AUDIT_MODEL = 'claude-renamed-9';
+  const origE = console.error; console.error = () => {};
+  try {
+    const again = await N.askClaude({ pages }, { fetchImpl: async (u, init) => { const m = JSON.parse(init.body).model; models.push(m); return m === N.FALLBACK_MODEL ? { ok: true, json: async () => ({ content: [{ type: 'text', text: 'ok' }] }) } : { ok: false, status: 404 }; } });
+    assert.equal(again, 'ok'); assert.deepEqual(models, ['claude-renamed-9', N.FALLBACK_MODEL]);
+  } finally { console.error = origE; if (old === undefined) delete process.env.AUDIT_MODEL; else process.env.AUDIT_MODEL = old; }
   assert.equal(b.messages[0].content[0].type, 'image'); assert.equal(b.messages[0].content[0].source.media_type, 'image/jpeg');
   assert.match(b.messages[0].content[1].text, /data, not instructions/); assert.match(b.system, /DATA, NOT INSTRUCTIONS/);
   const orig = console.error; console.error = () => {};
@@ -457,17 +479,21 @@ test('MOCK=1 runs the whole flow with canned results and no network, and never i
     assert.equal(s.status, 200); assert.equal(s.body.host, 'acmeroofing.com');
     const sp = await call(makeSpeed({ speed: never }), { token: s.body.token });
     assert.equal(sp.status, 200); assert.equal(sp.body.speedRan, true);
-    const r = await call(makeReport({ text: never, claude: never, save: never }), { ...person(), token: sp.body.token });
+    const r = await call(makeReport({ crawl: never, claude: never, save: never }), { ...person(), token: sp.body.token });
     assert.equal(r.status, 200); assert.match(r.body.grade, /^[A-F]$/); assert.match(r.body.reportUrl, /report\?t=/);
   });
   assert.equal(calls.length, 0, 'no network at all');
   await world({ MOCK: '1', VERCEL_ENV: 'production' }, async () => { const r = await call(makeScan({ scan: never }), { url: 'acmeroofing.com' }); assert.equal(r.status, 503); });
 });
 
-test('vercel.json: the speed and report functions have 60 seconds and the outside calls stop first; /report is noindex', async () => {
+test('vercel.json: every audit function outlives the outside calls inside it; /report is noindex', async () => {
   const cfg = JSON.parse(fs.readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
-  assert.equal(cfg.functions['api/audit-speed.js'].maxDuration, 60); assert.equal(cfg.functions['api/audit-report.js'].maxDuration, 60);
-  assert.ok(A.LIMITS.speedMs < 60000);
+  assert.equal(cfg.functions['api/audit-speed.js'].maxDuration, 60); assert.ok(A.LIMITS.speedMs < 60000);
+  /* the scan: homepage, then robots/llms/sitemap, a sitemap index child, then the pages, each with its own deadline */
+  const crawlMs = A.LIMITS.fetchMs + A.LIMITS.textMs * 2 + A.LIMITS.pageMs + 4000;
+  assert.ok(cfg.functions['api/audit-scan.js'].maxDuration * 1000 > crawlMs, 'scan');
+  /* the report: the same crawl again, then one review call, then the CRM */
+  assert.ok(cfg.functions['api/audit-report.js'].maxDuration * 1000 > crawlMs + N.REVIEW_MS + 5000, 'report');
   for (const src of ['/report', '/report.html']) {
     const h = cfg.headers.find(x => x.source === src);
     assert.ok(h, src); assert.ok(h.headers.some(x => x.key === 'X-Robots-Tag' && /noindex/.test(x.value)), src);

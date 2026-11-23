@@ -75,10 +75,31 @@ section{margin-top:64px}
 .code .c{font-family:'Space Mono',monospace;font-size:22px;letter-spacing:1px;color:var(--navy);word-break:break-all}
 .code p{color:var(--ink);font-size:15px;margin-top:8px}
 .foot{margin-top:28px;font-size:13px;color:var(--muted)}
+.looked{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px}
+.box{border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.box h3{font-size:17px;margin-bottom:10px}
+.plist{list-style:none;margin:0;padding:0}
+.plist li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:15px}
+.plist li:first-child{border-top:0}
+.plist .p{font-family:'Space Mono',monospace;font-size:13px;word-break:break-all}
+.plist .k{color:var(--muted);font-size:13px;white-space:nowrap}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tools span{background:var(--tint);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:14px}
+.journey{list-style:none;margin:0;padding:0;counter-reset:j}
+.journey li{position:relative;padding:4px 0 18px 54px;counter-increment:j}
+.journey li::before{content:counter(j);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700}
+.journey li::after{content:"";position:absolute;left:17px;top:40px;bottom:2px;width:2px;background:var(--line)}
+.journey li:last-child::after{display:none}
+.journey p{font-size:17px;font-weight:500}
+.journey .jq{margin-top:4px;font-size:14px;color:var(--muted)}
+.journey q{color:var(--muted)}
+.working .wq{margin-top:4px}
+.working .wq q{display:inline;margin:0}
+.on{font-family:'Space Mono',monospace;font-size:12px;color:var(--blue);margin-right:6px}
 .state{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
 .state a{color:var(--orange);font-weight:600}
 .mock-flag{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:90;background:#FFD166;color:#0B1633;font:700 12px/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px}
-@media (max-width:640px){.verdict,.offer{grid-template-columns:minmax(0,1fr)}.frame{margin:6px;border-width:4px}main{padding:40px 18px 56px}.band{padding:14px 18px}}
+@media (max-width:640px){.verdict,.offer,.looked{grid-template-columns:minmax(0,1fr)}.frame{margin:6px;border-width:4px}main{padding:40px 18px 56px}.band{padding:14px 18px}}
 @media print{.frame{border:0;margin:0}section,.prob{break-inside:avoid}}
 </style>
 </head>
@@ -90,7 +111,7 @@ section{margin-top:64px}
 <!-- Everything below is drawn by /js/report.js with textContent only: the report
      comes from the CRM and quotes the audited site, so none of it is ever
      parsed as HTML. -->
-<script src="/js/report.js?v=1"></script>
+<script src="/js/report.js?v=2"></script>
 <script src="/js/td-ping.js?v=1" defer></script>
 </body>
 </html>

@@ -11,8 +11,8 @@ import { MOCK_HTML } from '../api/_audit-mock.js';
 const all = s => Object.fromEntries(R.ITEMS.map(i => [i.id, { s }]));
 
 /* ------------------------------------------------------------ the rubric */
-test('rubric: 10 categories worth exactly 100 points, every item in one of them, ids unique', () => {
-  assert.equal(R.CATEGORIES.length, 10);
+test('rubric: 12 categories worth exactly 100 points, every item in one of them, ids unique', () => {
+  assert.equal(R.CATEGORIES.length, 12);
   assert.equal(R.CATEGORIES.reduce((t, c) => t + c.weight, 0), 100);
   const ids = R.ITEMS.map(i => i.id);
   assert.equal(new Set(ids).size, ids.length);
@@ -20,6 +20,8 @@ test('rubric: 10 categories worth exactly 100 points, every item in one of them,
   for (const c of R.CATEGORIES) assert.ok(R.ITEMS.some(i => i.cat === c.id), c.id + ' has items');
   for (const i of R.ITEMS) assert.ok(i.name && (i.fix || i.how === 'browser'), i.id + ' has a name and a fix');
   for (const i of R.ITEMS.filter(i => i.how === 'browser')) assert.ok(!i.heading, i.id + ' (browser only) can never be a top pain');
+  for (const i of R.ITEMS.filter(i => i.how === 'ai' || i.how === 'image')) assert.ok(i.look && i.look.length > 20, i.id + ' tells Claude what to look for');
+  for (const c of ['psych', 'journey', 'pages', 'aivis', 'behind']) assert.ok(R.ITEMS.filter(i => i.cat === c).length >= 4, c + ' has real depth');
 });
 
 test('scoreItems: all pass is 100/A, all miss is 0/F, all partial is 50/F; nothing checked is no grade, not an F', () => {
@@ -96,6 +98,7 @@ test('ruleResults: the good page passes the rule items; nothing that needs a bro
     assert.equal(r[id].s, 'pass', id + ': ' + r[id].ev);
   for (const id of ['c_scroll', 'f_end', 'm_sideways', 'm_reach']) assert.equal(r[id].s, 'na', id + ' needs a browser');
   for (const id of [...R.AI_IDS, ...R.IMAGE_IDS]) assert.equal(r[id], undefined, id + ' is left to the review');
+  for (const i of R.ITEMS.filter(i => i.how === 'site')) assert.ok(r[i.id], i.id + ' always has a result, even with no site facts');
 });
 
 test('ruleResults: the fixture roofer (Acme) misses what it is missing, with numbers, and no speed is "not checked"', () => {

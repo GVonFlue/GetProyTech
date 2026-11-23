@@ -6,10 +6,10 @@
       "maxDuration": 60
     },
     "api/audit-scan.js": {
-      "maxDuration": 30
+      "maxDuration": 60
     },
     "api/audit-report.js": {
-      "maxDuration": 60
+      "maxDuration": 150
     }
   },
   "headers": [

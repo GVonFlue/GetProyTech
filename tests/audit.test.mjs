@@ -7,10 +7,11 @@ import * as A from '../api/_audit.js';
 
 const SECRET = 'test-secret-test-secret-test-secret-1234';
 const NOW = Date.UTC(2026, 10, 23, 16, 0, 0);
-import { ruleFacts, FACT_KEYS } from '../api/_rubric.js';
-import { MOCK_HTML } from '../api/_audit-mock.js';
-const FACTS = ruleFacts(MOCK_HTML, { year: 2026 });
-const result = (more = {}) => ({ v: 2, host: 'example.com', at: NOW, https: true, redirect: 'pass', fwd: false, facts: { ...FACTS }, speed: null, shot: '', ...more });
+import { FACT_KEYS } from '../api/_rubric.js';
+import { SITE_KEYS } from '../api/_crawl.js';
+import { mockCrawl } from '../api/_audit-mock.js';
+const CRAWL = mockCrawl(2026), FACTS = CRAWL.facts;
+const result = (more = {}) => ({ v: 3, host: 'example.com', at: NOW, https: true, redirect: 'pass', fwd: false, facts: { ...FACTS }, site: { ...CRAWL.site }, tools: [...CRAWL.tools], speed: null, shot: '', ...more });
 
 /* ---- which addresses may be fetched ---- */
 test('validateUrl: accepts a public host name and audits its root', () => {
@@ -51,14 +52,19 @@ test('seal/open: round trip; altered, forged, re-keyed and expired tokens do not
   assert.equal(A.open(tok, SECRET, NOW - 10 * 60000), null, 'from the future');
   for (const junk of ['', 'abc', null, undefined, {}, 'a'.repeat(7000), Buffer.from(JSON.stringify(r)).toString('base64url')]) assert.equal(A.open(junk, SECRET, NOW), null);
   assert.equal(A.open(A.seal({ ...r, v: 1 }, SECRET), SECRET, NOW), null, 'an old v1 token does not open');
+  assert.equal(A.open(A.seal({ ...r, v: 2 }, SECRET), SECRET, NOW), null, 'a homepage-only v2 token does not open either');
   assert.equal(A.secretOk('short'), false); assert.equal(A.secretOk(SECRET), true);
 });
 test('sanitizeResult: only numbers, booleans and a hash survive, even from a correctly sealed token', () => {
-  const dirty = result({ note: 'click http://evil.example', facts: { ...FACTS, title: '<b>BUY PILLS</b>', words: 'lots' }, speed: { lcpMs: 2000, cls: 0.1, weightBytes: 1e6, fontOk: true, tapOk: 'yes', html: '<x>' }, shot: 'not-a-hash', redirect: 'evil' });
+  const dirty = result({ note: 'click http://evil.example', facts: { ...FACTS, title: '<b>BUY PILLS</b>', words: 'lots' }, site: { ...CRAWL.site, path: '/evil', pagesChecked: 'eight', platform: 999, aiBlocked: 1e4 }, tools: [37, 'Calendly', 999, -1, 37], speed: { lcpMs: 2000, cls: 0.1, weightBytes: 1e6, fontOk: true, tapOk: 'yes', html: '<x>' }, shot: 'not-a-hash', redirect: 'evil' });
   const clean = A.open(A.seal(dirty, SECRET), SECRET, NOW);
   assert.ok(clean, 'opens');
-  assert.deepEqual(Object.keys(clean).sort(), ['at', 'facts', 'fwd', 'host', 'https', 'redirect', 'shot', 'speed', 'v']);
+  assert.deepEqual(Object.keys(clean).sort(), ['at', 'facts', 'fwd', 'host', 'https', 'redirect', 'shot', 'site', 'speed', 'tools', 'v']);
   assert.deepEqual(Object.keys(clean.facts).sort(), [...FACT_KEYS].sort());
+  assert.deepEqual(Object.keys(clean.site).sort(), [...SITE_KEYS].sort());
+  for (const v of Object.values(clean.site)) assert.ok(typeof v === 'number');
+  assert.equal(clean.site.pagesChecked, 0); assert.ok(clean.site.platform < 30); assert.ok(clean.site.aiBlocked < 32);
+  assert.deepEqual(clean.tools, [37], 'only known tool indexes, once each');
   for (const v of Object.values(clean.facts)) assert.ok(v == null || typeof v === 'number');
   assert.deepEqual(clean.speed, { lcpMs: 2000, cls: 0.1, weightBytes: 1e6, fontOk: true, tapOk: null });
   assert.equal(clean.shot, ''); assert.equal(clean.redirect, 'na');
@@ -99,7 +105,9 @@ test('audit.html: teardown copy, the grade rule and whose score it is, four requ
   const html = readFileSync(new URL('../audit.html', import.meta.url), 'utf8');
   assert.match(html, /free website teardown/i);
   assert.match(html, /A is 90 or more, B 80 to 89, C 70 to 79, D 60 to 69, F below 60/);
-  assert.match(html, /The grade is ProyTech’s score for these checks on the homepage of ' \+ state.host \+ ' on this date/);
+  assert.match(html, /The grade is ProyTech’s score for these checks on ' \+ state.host \+ ' on this date/);
+  assert.match(html, /up to 8 pages/); assert.match(html, /12 areas/);
+  assert.ok(!/One page only/.test(html), 'the old one-page promise is gone');
   assert.match(html, /\$500 off/);
   for (const id of ['g_name', 'g_company', 'g_email', 'g_phone']) assert.ok(html.includes(`id="${id}"`), id);
   assert.ok(!/id="g_consent"[^>]*(checked|required)/.test(html));

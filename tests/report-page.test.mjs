@@ -44,17 +44,39 @@ test('render: the fixture draws the grade, the score, the top 3, every category 
   assert.ok(text.includes('43 / 100'));
   for (const t of fixture.report.top) { assert.ok(text.includes(t.heading), t.heading); assert.ok(text.includes(t.fix)); }
   for (const c of fixture.report.categories) assert.ok(text.includes(c.name), c.name);
-  for (const s of ["Let's go over it together", "Book 15 minutes with me and I'll walk you through every finding and how we'd fix it. Useful whether we work together or not.", 'Book your call',
+  for (const s of ["Let's go over it together", "Book 15 minutes with me and I'll walk you through the fix for every item on this list, in the order that brings in the most calls first. Useful whether we work together or not.", 'Book your call',
     '$500 off our standard website. $1,499 becomes $999, plus $149 a month for hosting and care. Good through December 7, 2026.', "Mention it on the call and we'll get started right away.", fixture.code]) assert.ok(text.includes(s), s);
   assert.ok(text.includes(fixture.report.scoreLabel));
   const btn = doc.root.all().find(n => n.className === 'btn');
   assert.equal(btn.href, 'https://www.getproytech.com/book?src=td-acmeroofing');
 });
 
+test('render v2: the pages read, what the site runs on, the visitor\'s journey with each quote\'s page, and no fix outside the top 3', () => {
+  const doc = makeDoc(); TD.render(doc, fixture, NOV(23));
+  const text = doc.root.textContent, r = fixture.report;
+  assert.equal(r.v, 2);
+  assert.ok(text.includes('We read 3 pages of your site'));
+  for (const s of ['What we looked at', 'The pages we read', '/services', '/contact', 'What your site runs on', 'Contact Form 7', 'Email: Google Workspace', 'How a first-time visitor moves through your site']) assert.ok(text.includes(s), s);
+  for (const j of r.journey) { assert.ok(text.includes(j.text), j.text); assert.ok(text.includes(j.quote), j.quote); }
+  assert.ok(text.includes('12 areas, 100 points'), 'the v2 grading rule');
+  assert.equal(r.items.filter(i => i.fix).length, 0, 'per-item fixes are for the call');
+  assert.ok(r.items.some(i => i.page === '/services'), 'a finding says which page it is on');
+});
+
+test('render: a report saved before v2 still draws, with the homepage wording', () => {
+  const d = JSON.parse(JSON.stringify(fixture));
+  delete d.report.v; delete d.report.journey; delete d.report.pages; delete d.report.stack; delete d.report.checked;
+  const doc = makeDoc(); TD.render(doc, d, NOV(23));
+  const text = doc.root.textContent;
+  assert.ok(text.includes('We went through your homepage'));
+  assert.ok(text.includes("Book 15 minutes with me and I'll walk you through every finding and how we'd fix it."));
+  assert.ok(!text.includes('What we looked at'));
+});
+
 test('render: markup in any string from the CRM shows as text and never becomes an element', () => {
   const evil = '<img src=x onerror=alert(1)><script>alert(2)</script>';
   const d = JSON.parse(JSON.stringify(fixture));
-  d.business = evil; d.report.verdict = [evil]; d.report.top[0].heading = evil; d.report.items[0].quote = evil; d.report.working[0] = { text: evil, quote: evil }; d.code = evil.slice(0, 40);
+  d.business = evil; d.report.verdict = [evil]; d.report.top[0].heading = evil; d.report.items[0].quote = evil; d.report.working[0] = { text: evil, quote: evil, page: evil }; d.report.journey[0] = { text: evil, quote: evil, page: evil }; d.report.pages[1] = { path: evil, kind: evil, words: 3 }; d.report.stack.tools[0] = { name: evil, kind: 'forms' }; d.code = evil.slice(0, 40);
   const doc = makeDoc(); TD.render(doc, d, NOV(23));
   assert.ok(doc.root.textContent.includes('<script>alert(2)</script>'));
   const tags = new Set(doc.root.all().map(n => n.tagName));
