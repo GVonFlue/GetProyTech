@@ -1,7 +1,7 @@
 // tests/audit-net.test.mjs — the audit's fetch, rate limiter and three routes.
 // Plain node. The only sockets opened are to a throwaway server on 127.0.0.1;
-// Supabase, PageSpeed, Resend and the CRM are a stubbed fetch.
-//   node --test tests/
+// Supabase, PageSpeed, Anthropic and the CRM are stubbed.
+//   node --test tests/*.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
@@ -12,7 +12,9 @@ import * as N from '../api/_audit-net.js';
 import { keyedBucket } from '../api/_bucket.js';
 import { makeHandler as makeScan } from '../api/audit-scan.js';
 import { makeHandler as makeSpeed } from '../api/audit-speed.js';
-import { makeHandler as makeReport } from '../api/audit-report.js';
+import { makeHandler as makeReport, CAPS } from '../api/audit-report.js';
+import { ruleFacts, CONSENT_TEXT } from '../api/_rubric.js';
+import { MOCK_HTML, mockText, mockClaude } from '../api/_audit-mock.js';
 
 /* ---- a local server standing in for "a website" ---- */
 const seen = [];
@@ -155,20 +157,21 @@ test('scanSite: one homepage, read into checks; an unreachable or private site i
 
 /* ---- PageSpeed ---- */
 const psi = audits => ({ ok: true, json: async () => ({ lighthouseResult: { audits } }) });
-test('runPageSpeed: reads the three lab numbers; a timeout or an error is "could not run", never a fail', async () => {
+const SHOT = 'data:image/jpeg;base64,' + 'QUJD'.repeat(50);
+test('runPageSpeed: the lab numbers, text size and tap targets, the screenshot; works without a key; a timeout or error is null, never a fail', async () => {
   let asked = '';
-  const good = await N.runPageSpeed('https://example.com/', 'KEY', { fetchImpl: async u => { asked = u; return psi({ 'largest-contentful-paint': { numericValue: 1800 }, 'cumulative-layout-shift': { numericValue: 0.25 }, 'total-byte-weight': { numericValue: 1024 * 1024 } }); } });
-  assert.deepEqual(good, { lcp: { s: 'pass', c: 'ok', n: 1800 }, cls: { s: 'fail', c: 'shifts', n: 250 }, weight: { s: 'pass', c: 'ok', n: 1024 } });
-  assert.match(asked, /url=https%3A%2F%2Fexample\.com%2F&strategy=mobile&category=performance&key=KEY$/);
+  const good = await N.runPageSpeed('https://example.com/', 'KEY', { fetchImpl: async u => { asked = u; return psi({ 'largest-contentful-paint': { numericValue: 1800 }, 'cumulative-layout-shift': { numericValue: 0.25 }, 'total-byte-weight': { numericValue: 1024 * 1024 }, 'font-size': { score: 1 }, 'tap-targets': { score: 0.5 }, 'final-screenshot': { details: { data: SHOT } } }); } });
+  assert.deepEqual(good, { lcpMs: 1800, cls: 0.25, weightBytes: 1048576, fontOk: true, tapOk: false, shot: SHOT });
+  assert.match(asked, /url=https%3A%2F%2Fexample\.com%2F&strategy=mobile&category=performance&category=seo&key=KEY$/);
+  await N.runPageSpeed('https://example.com/', '', { fetchImpl: async u => { asked = u; return psi({}); } });
+  assert.ok(!asked.includes('key='), 'keyless when no key is set');
+  const odd = await N.runPageSpeed('https://example.com/', '', { fetchImpl: async () => psi({ 'final-screenshot': { details: { data: 'javascript:alert(1)' } } }) });
+  assert.equal(odd.shot, '', 'only an image data: URL is kept'); assert.equal(odd.tapOk, null, 'an audit Lighthouse did not run is unknown, not a fail');
   const slow = await N.runPageSpeed('https://example.com/', 'KEY', { timeoutMs: 50, fetchImpl: (u, { signal }) => new Promise((_, rej) => signal.addEventListener('abort', () => rej(Object.assign(new Error('aborted'), { name: 'AbortError' })))) });
-  for (const id of A.SPEED_IDS) assert.deepEqual(slow[id], { s: 'na', c: 'timeout' });
+  assert.equal(slow, null);
   const orig = console.error; console.error = () => {};
-  try {
-    for (const bad of [async () => ({ ok: false, status: 429 }), async () => { throw new Error('down'); }, async () => psi({})]) {
-      const r = await N.runPageSpeed('https://example.com/', 'KEY', { fetchImpl: bad });
-      for (const id of A.SPEED_IDS) assert.equal(r[id].s, 'na', id);
-    }
-  } finally { console.error = orig; }
+  try { for (const bad of [async () => ({ ok: false, status: 429 }), async () => { throw new Error('down'); }]) assert.equal(await N.runPageSpeed('https://example.com/', 'KEY', { fetchImpl: bad }), null); }
+  finally { console.error = orig; }
 });
 
 /* ---- the routes ---- */
@@ -179,8 +182,10 @@ const K = name => keyedBucket(name, SALT);
 const KEYED = /^site:[0-9a-f]{40}$/;
 const HOST_BUCKET = () => K('site:audit-host:' + N.hashed('example.com'));
 const EMAIL_BUCKET = () => K('site:audit-email:' + N.hashed('jo@reed.com'));
-const ENV_KEYS = ['SUPABASE_URL', 'VITE_SUPABASE_URL', 'SUPABASE_ANON_KEY', 'SITE_LIMIT_SALT', 'SUPABASE_SERVICE_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'AUDIT_SIGNING_KEY', 'PAGESPEED_API_KEY', 'RESEND_API_KEY', 'AUDIT_FROM', 'SITE_LEAD_KEY'];
-const FULL = { SUPABASE_URL: 'https://db.example.org', SUPABASE_ANON_KEY: 'anon-public', SITE_LIMIT_SALT: SALT, AUDIT_SIGNING_KEY: SECRET, PAGESPEED_API_KEY: 'psi', RESEND_API_KEY: 're_x', AUDIT_FROM: 'ProyTech <audit@getproytech.com>', SITE_LEAD_KEY: 'pts_x' };
+const SITE_BUCKET = () => K('site:audit-report-host:' + N.hashed('example.com'));
+const ENV_KEYS = ['SUPABASE_URL', 'VITE_SUPABASE_URL', 'SUPABASE_ANON_KEY', 'SITE_LIMIT_SALT', 'SUPABASE_SERVICE_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'AUDIT_SIGNING_KEY', 'PAGESPEED_API_KEY', 'RESEND_API_KEY', 'AUDIT_FROM', 'SITE_LEAD_KEY', 'ANTHROPIC_API_KEY', 'MOCK', 'VERCEL_ENV'];
+/* test values, not secrets */
+const FULL = { SUPABASE_URL: 'https://db.example.org', SUPABASE_ANON_KEY: 'anon-public', SITE_LIMIT_SALT: SALT, AUDIT_SIGNING_KEY: SECRET, SITE_LEAD_KEY: 'pts_test', ANTHROPIC_API_KEY: 'sk-test' };
 const realFetch = globalThis.fetch;
 /** Run `fn` with exactly `env` set and fetch replaced. Returns what was fetched. */
 async function world(env, fn, { hits = () => 0, limiter = 'up' } = {}) {
@@ -198,7 +203,7 @@ async function world(env, fn, { hits = () => 0, limiter = 'up' } = {}) {
       if (!/^site:[A-Za-z0-9:._-]{1,195}$/.test(call.body.p_bucket)) return { ok: false, status: 400, json: async () => ({}) };
       return { ok: true, status: 200, json: async () => hits(call.body.p_bucket) >= call.body.p_limit };
     }
-    return { ok: true, status: 200, json: async () => ({ ok: true, id: 'x' }) };
+    return { ok: false, status: 599, json: async () => ({}) };   // nothing else may be reached from a test
   };
   try { await fn(calls, errors); } finally { globalThis.fetch = realFetch; console.error = origErr; for (const k of ENV_KEYS) { if (old[k] === undefined) delete process.env[k]; else process.env[k] = old[k]; } }
   return calls;
@@ -211,14 +216,23 @@ function call(handler, body, { method = 'POST', ip = '203.0.113.9' } = {}) {
   });
 }
 const outside = calls => calls.filter(c => !c.url.includes('/rest/v1/'));
-const goodChecks = () => Object.fromEntries(A.CHECK_IDS.map(id => [id, A.SPEED_IDS.includes(id) ? { s: 'na', c: 'not_run' } : { s: 'pass', c: 'ok' }]));
-const scanned = (over = {}) => ({ ok: true, data: { v: 1, host: 'example.com', at: Date.now(), https: true, fwd: false, checks: { ...goodChecks(), ...over } } });
-const token = (over = {}) => A.seal(scanned(over).data, SECRET);
-const person = (more = {}) => ({ token: token(), name: 'Jo Reed', email: 'jo@reed.com', phone: '(316) 555-0142', src: 'ig', fax: '', ...more });
-const neverScan = async () => { throw new Error('the scan must not run'); };
+const lim = calls => calls.filter(c => c.url.includes('/rest/v1/'));
+const scanned = (more = {}) => ({ ok: true, data: { v: 2, host: 'example.com', at: Date.now(), https: true, redirect: 'pass', fwd: false, facts: ruleFacts(MOCK_HTML, { year: 2026 }), speed: null, shot: '', ...more } });
+const token = (more = {}) => A.seal(scanned(more).data, SECRET);
+const person = (more = {}) => ({ token: token(), name: 'Jo Reed', company: 'Reed Roofing', email: 'jo@reed.com', phone: '(316) 555-0142', src: 'ig', fax: '', ...more });
+const never = async () => { throw new Error('this must not run'); };
+const REPORT_URL = 'https://www.getproytech.com/report?t=abcDEF123456';
+/** the report route with its three outside services stubbed, recording what each was given */
+function reportWith({ text = async () => MOCK_TEXT, claude = async () => MOCK_ANSWER, save = async () => ({ ok: true, token: 'abcDEF123456', reportUrl: REPORT_URL }) } = {}) {
+  const seen = { text: [], claude: [], save: [] };
+  const h = makeReport({ text: async h => { seen.text.push(h); return text(h); }, claude: async a => { seen.claude.push(a); return claude(a); }, save: async p => { seen.save.push(p); return save(p); }, now: () => Date.now() });
+  return { h, seen };
+}
+const blocked = () => makeReport({ text: never, claude: never, save: never });
+const MOCK_TEXT = await mockText(), MOCK_ANSWER = await mockClaude();
 
 test('FAIL CLOSED: with the rate limiter not configured, all three routes refuse, name the variables, and touch nothing', async () => {
-  for (const [name, handler, body] of [['scan', makeScan({ scan: neverScan }), { url: 'example.com' }], ['speed', makeSpeed({ speed: neverScan }), { token: token() }], ['report', makeReport({ email: neverScan, lead: neverScan }), person()]]) {
+  for (const [name, handler, body] of [['scan', makeScan({ scan: never }), { url: 'example.com' }], ['speed', makeSpeed({ speed: never }), { token: token() }], ['report', blocked(), person()]]) {
     const env = { ...FULL }; delete env.SUPABASE_URL; delete env.SUPABASE_ANON_KEY; delete env.SITE_LIMIT_SALT;
     const calls = await world(env, async (c, errors) => {
       const r = await call(handler, body);
@@ -229,64 +243,74 @@ test('FAIL CLOSED: with the rate limiter not configured, all three routes refuse
     assert.equal(calls.length, 0, name + ' made no network call at all');
   }
 });
-test('FAIL CLOSED: each route names its own missing variable; nothing falls back', async () => {
+test('FAIL CLOSED: each route names its own missing variable; nothing falls back; email and PageSpeed keys are not needed', async () => {
   const cases = [
-    ['scan', makeScan({ scan: neverScan }), { url: 'example.com' }, ['AUDIT_SIGNING_KEY']],
-    ['speed', makeSpeed({ speed: neverScan }), { token: token() }, ['PAGESPEED_API_KEY']],
-    ['report', makeReport({ email: neverScan, lead: neverScan }), person(), ['RESEND_API_KEY']],
-    ['report', makeReport({ email: neverScan, lead: neverScan }), person(), ['AUDIT_FROM']],
-    ['report', makeReport({ email: neverScan, lead: neverScan }), person(), ['SITE_LEAD_KEY']],
-    ['report', makeReport({ email: neverScan, lead: neverScan }), person(), ['RESEND_API_KEY', 'AUDIT_FROM']],
+    ['scan', makeScan({ scan: never }), { url: 'example.com' }, ['AUDIT_SIGNING_KEY']],
+    ['speed', makeSpeed({ speed: never }), { token: token() }, ['AUDIT_SIGNING_KEY']],
+    ['report', blocked(), person(), ['AUDIT_SIGNING_KEY']],
+    ['report', blocked(), person(), ['SITE_LEAD_KEY']],
+    ['report', blocked(), person(), ['ANTHROPIC_API_KEY']],
+    ['report', blocked(), person(), ['SITE_LEAD_KEY', 'ANTHROPIC_API_KEY']],
   ];
   for (const [name, handler, body, drop] of cases) {
     const env = { ...FULL }; for (const k of drop) delete env[k];
     const calls = await world(env, async () => { const r = await call(handler, body); assert.equal(r.status, 503, name); assert.deepEqual(r.body.missing, drop, name); });
     assert.equal(calls.length, 0);
   }
-  await world({ ...FULL, AUDIT_FROM: 'not an address' }, async () => { const r = await call(makeReport({ email: neverScan, lead: neverScan }), person()); assert.equal(r.status, 503); assert.deepEqual(r.body.missing, ['AUDIT_FROM']); });
-  await world({ ...FULL, AUDIT_SIGNING_KEY: 'short' }, async () => { const r = await call(makeScan({ scan: neverScan }), { url: 'example.com' }); assert.equal(r.status, 503); assert.deepEqual(r.body.missing, ['AUDIT_SIGNING_KEY']); });
+  await world({ ...FULL, AUDIT_SIGNING_KEY: 'short' }, async () => { const r = await call(makeScan({ scan: never }), { url: 'example.com' }); assert.equal(r.status, 503); assert.deepEqual(r.body.missing, ['AUDIT_SIGNING_KEY']); });
+  /* FULL has no PAGESPEED_API_KEY, RESEND_API_KEY or AUDIT_FROM, and every route runs */
+  await world(FULL, async () => {
+    assert.equal((await call(makeSpeed({ speed: async () => null }), { token: token() })).status, 200);
+    assert.equal((await call(reportWith().h, person())).status, 200);
+  });
 });
 test('FAIL CLOSED: a limiter that cannot be read is a refusal, not a pass', async () => {
-  for (const [handler, body] of [[makeScan({ scan: neverScan }), { url: 'example.com' }], [makeSpeed({ speed: neverScan }), { token: token() }], [makeReport({ email: neverScan, lead: neverScan }), person()]]) {
+  for (const [handler, body] of [[makeScan({ scan: never }), { url: 'example.com' }], [makeSpeed({ speed: never }), { token: token() }], [blocked(), person()]]) {
     await world(FULL, async () => { const r = await call(handler, body); assert.equal(r.status, 503); assert.equal(r.body.error, 'limiter_unavailable'); }, { limiter: 'down' });
   }
 });
-test('rate limits: the daily caps and per-IP limits are the agreed numbers', async () => {
+test('caps: 25 reports a day in all, 3 per IP an hour, 3 per website a day, 1 per email a day; scan and speed 300 a day, 5 per IP', async () => {
+  assert.deepEqual(CAPS, { perDay: 25, perIp: 3, ipWindowMin: 60, perSite: 3, perEmail: 1 });
   const cases = [
-    [makeScan({ scan: neverScan }), { url: 'example.com' }, 'site:audit-scan:global', 300, 'busy'], [makeScan({ scan: neverScan }), { url: 'example.com' }, 'site:audit-scan:ip:203.0.113.9', 5, 'too_many'],
-    [makeSpeed({ speed: neverScan }), { token: token() }, 'site:audit-speed:global', 300, 'busy'], [makeSpeed({ speed: neverScan }), { token: token() }, 'site:audit-speed:ip:203.0.113.9', 5, 'too_many'],
-    [makeReport({ email: neverScan, lead: neverScan }), person(), 'site:audit-report:global', 200, 'busy'], [makeReport({ email: neverScan, lead: neverScan }), person(), 'site:audit-report:ip:203.0.113.9', 3, 'too_many'],
+    [() => makeScan({ scan: never }), { url: 'example.com' }, 'site:audit-scan:global', 300, 'busy'], [() => makeScan({ scan: never }), { url: 'example.com' }, 'site:audit-scan:ip:203.0.113.9', 5, 'too_many'],
+    [() => makeSpeed({ speed: never }), { token: token() }, 'site:audit-speed:global', 300, 'busy'], [() => makeSpeed({ speed: never }), { token: token() }, 'site:audit-speed:ip:203.0.113.9', 5, 'too_many'],
+    [blocked, person(), 'site:audit-report:global', 25, 'busy'], [blocked, person(), 'site:audit-report:ip:203.0.113.9', 3, 'too_many'],
   ];
-  for (const [handler, body, bucket, limit, error] of cases) {
-    await world(FULL, async () => { const r = await call(handler, body); assert.equal(r.status, 429, bucket); assert.equal(r.body.error, error); }, { hits: b => (b === K(bucket) ? limit : 0) });
-    // one under the limit gets past this bucket (and then fails later for its own reasons, never with 429 from it)
-    await world(FULL, async () => { const r = await call(handler, body); assert.notEqual(r.body && r.body.error, error, bucket + ' at limit-1'); }, { hits: b => (b === K(bucket) ? limit - 1 : 0) }).catch(() => {});
+  for (const [mk, body, bucket, limit, error] of cases) {
+    const calls = await world(FULL, async () => { const r = await call(mk(), body); assert.equal(r.status, 429, bucket); assert.equal(r.body.error, error); }, { hits: b => (b === K(bucket) ? limit : 0) });
+    assert.equal(outside(calls).length, 0, bucket + ': nothing outside was reached');
   }
-  await world(FULL, async () => { const r = await call(makeScan({ scan: neverScan }), { url: 'example.com' }); assert.equal(r.status, 429); assert.equal(r.body.error, 'host_limit'); }, { hits: b => (b === HOST_BUCKET() ? 5 : 0) });
-  await world(FULL, async () => { const r = await call(makeReport({ email: neverScan, lead: neverScan }), person()); assert.equal(r.status, 429); assert.equal(r.body.error, 'already_sent'); }, { hits: b => (b === EMAIL_BUCKET() ? 1 : 0) });
+  await world(FULL, async () => { const r = await call(makeScan({ scan: never }), { url: 'example.com' }); assert.equal(r.status, 429); assert.equal(r.body.error, 'host_limit'); }, { hits: b => (b === HOST_BUCKET() ? 5 : 0) });
+  await world(FULL, async () => { const r = await call(blocked(), person()); assert.equal(r.status, 429); assert.equal(r.body.error, 'already_sent'); }, { hits: b => (b === EMAIL_BUCKET() ? 1 : 0) });
+  await world(FULL, async () => { const r = await call(blocked(), person()); assert.equal(r.status, 429); assert.equal(r.body.error, 'site_limit'); }, { hits: b => (b === SITE_BUCKET() ? 3 : 0) });
+  /* the report's global window is a day; its IP window an hour */
+  const calls = await world(FULL, async () => { await call(reportWith().h, person()); });
+  const w = Object.fromEntries(lim(calls).map(c => [c.body.p_bucket, [c.body.p_window_sec, c.body.p_limit]]));
+  assert.deepEqual(w[K('site:audit-report:global')], [86400, 25]); assert.deepEqual(w[K('site:audit-report:ip:203.0.113.9')], [3600, 3]);
+  assert.deepEqual(w[SITE_BUCKET()], [86400, 3]); assert.deepEqual(w[EMAIL_BUCKET()], [86400, 1]);
 });
 test('gate: POST only, and oversized bodies are refused before anything runs', async () => {
   await world(FULL, async calls => {
-    assert.equal((await call(makeScan({ scan: neverScan }), {}, { method: 'GET' })).status, 405);
-    assert.equal((await call(makeScan({ scan: neverScan }), { url: 'a'.repeat(700) + '.com' })).status, 413);
-    assert.equal((await call(makeReport({ email: neverScan, lead: neverScan }), person({ name: 'x'.repeat(9000) }))).status, 413);
+    assert.equal((await call(makeScan({ scan: never }), {}, { method: 'GET' })).status, 405);
+    assert.equal((await call(makeScan({ scan: never }), { url: 'a'.repeat(700) + '.com' })).status, 413);
+    assert.equal((await call(blocked(), person({ shot: 'x'.repeat(N.SHOT_MAX + 7000) }))).status, 413);
     assert.equal(calls.length, 0);
   });
 });
 
-test('audit-scan: refuses private and malformed addresses before fetching; returns a sealed result and a teaser', async () => {
+test('audit-scan: refuses private and malformed addresses before fetching; returns a sealed result, a count and the headline misses', async () => {
   await world(FULL, async () => {
     for (const [url, error] of [['http://127.0.0.1/', 'private'], ['http://169.254.169.254/', 'private'], ['localhost', 'bad_address'], ['http://db.internal/', 'private'], ['ftp://example.com', 'bad_address'], ['', 'bad_address'], [42, 'bad_address']]) {
-      const r = await call(makeScan({ scan: neverScan }), { url });
+      const r = await call(makeScan({ scan: never }), { url });
       assert.equal(r.status, 400, String(url)); assert.equal(r.body.error, error, String(url));
     }
     let scannedHost = '';
-    const r = await call(makeScan({ scan: async h => { scannedHost = h; return scanned({ title: { s: 'fail', c: 'long', n: 90 } }); } }), { url: 'https://Example.com/some/page?x=1' });
+    const r = await call(makeScan({ scan: async h => { scannedHost = h; return scanned(); } }), { url: 'https://Example.com/some/page?x=1' });
     assert.equal(r.status, 200); assert.equal(scannedHost, 'example.com', 'the homepage of the host, whatever path was typed');
-    assert.deepEqual(Object.keys(r.body).sort(), ['checks', 'host', 'needWork', 'ok', 'ran', 'token']);
-    assert.equal(r.body.needWork, 1); assert.equal(r.body.grade, undefined, 'no grade before the gate');
-    assert.ok(!JSON.stringify(r.body.checks).includes('long'), 'no details before the gate');
-    assert.equal(A.open(r.body.token, SECRET, Date.now()).checks.title.c, 'long');
+    assert.deepEqual(Object.keys(r.body).sort(), ['checked', 'host', 'misses', 'needWork', 'ok', 'token']);
+    assert.equal(r.body.grade, undefined, 'no grade before the details');
+    assert.ok(r.body.misses.length >= 1 && r.body.misses.length <= 4);
+    assert.equal(A.open(r.body.token, SECRET, Date.now()).facts.phones, 2);
     for (const [why, error] of [['private', 'private'], ['timeout', 'unreachable'], ['http_status', 'blocked'], ['not_html', 'not_html']]) {
       const bad = await call(makeScan({ scan: async () => ({ ok: false, why }) }), { url: 'example.com' });
       assert.deepEqual([bad.status, bad.body.ok, bad.body.error, bad.body.token], [200, false, error, undefined]);
@@ -294,117 +318,175 @@ test('audit-scan: refuses private and malformed addresses before fetching; retur
   });
 });
 
-test('audit-speed: only for a sealed scan; a timeout still returns a result with speed "could not run"', async () => {
+test('audit-speed: only for a sealed scan; seals the numbers and the screenshot\'s hash; a failed test still returns a result', async () => {
   await world(FULL, async () => {
     for (const bad of ['', 'garbage', A.seal(scanned().data, 'another-secret-another-secret-another-1'), token().slice(0, -2) + 'AA']) {
-      const r = await call(makeSpeed({ speed: neverScan }), { token: bad });
+      const r = await call(makeSpeed({ speed: never }), { token: bad });
       assert.equal(r.status, 400); assert.equal(r.body.error, 'bad_token');
     }
     let target = '';
-    const ok = await call(makeSpeed({ speed: async t => { target = t; return A.speedChecks({ lcpMs: 5000, cls: 0, weightBytes: 1000 }); } }), { token: token() });
-    assert.equal(target, 'https://example.com/'); assert.equal(ok.body.speedRan, true); assert.equal(ok.body.needWork, 1); assert.equal(ok.body.ran, 16);
-    assert.equal(A.open(ok.body.token, SECRET, Date.now()).checks.lcp.n, 5000);
-    for (const speed of [async () => A.speedChecks(null, 'timeout'), async () => { throw new Error('boom'); }, async () => null]) {
+    const ok = await call(makeSpeed({ speed: async t => { target = t; return { lcpMs: 5000, cls: 0, weightBytes: 1000, fontOk: true, tapOk: true, shot: SHOT }; } }), { token: token() });
+    assert.equal(target, 'https://example.com/'); assert.equal(ok.body.speedRan, true); assert.equal(ok.body.shot, SHOT);
+    const opened = A.open(ok.body.token, SECRET, Date.now());
+    assert.equal(opened.speed.lcpMs, 5000); assert.equal(opened.shot, N.shotHash(SHOT)); assert.ok(!JSON.stringify(opened).includes('base64'));
+    for (const speed of [async () => null, async () => { throw new Error('boom'); }]) {
       const r = await call(makeSpeed({ speed }), { token: token() });
-      assert.deepEqual([r.status, r.body.ok, r.body.speedRan, r.body.needWork, r.body.ran], [200, true, false, 0, 13]);
-      const opened = A.open(r.body.token, SECRET, Date.now());
-      for (const id of A.SPEED_IDS) assert.equal(opened.checks[id].s, 'na');
-      assert.equal(A.gradeOf(opened.checks).grade, 'A', 'a missing speed test does not lower the grade');
+      assert.deepEqual([r.status, r.body.ok, r.body.speedRan, r.body.shot], [200, true, false, '']);
+      assert.equal(A.open(r.body.token, SECRET, Date.now()).speed, null);
     }
   });
 });
 
-test('audit-report: emails the report through Resend and posts the lead to the CRM as it works today', async () => {
+test('audit-report: ONE review call, then the CRM gets exactly the agreed payload; the visitor gets the grade and the link', async () => {
+  const { h, seen } = reportWith();
   const calls = await world(FULL, async () => {
-    const r = await call(makeReport(), person({ token: token({ title: { s: 'fail', c: 'long', n: 90 } }), consent: true }));
-    assert.deepEqual(r.body, { ok: true, grade: 'A', needWork: 1, ran: 13, notRun: ['Main content appears quickly', 'Page holds still while loading', 'Page weight'] });
+    const r = await call(h, person({ consent: true }));
+    assert.equal(r.status, 200);
+    assert.deepEqual(Object.keys(r.body).sort(), ['grade', 'needWork', 'ok', 'reportUrl', 'score']);
+    assert.equal(r.body.reportUrl, REPORT_URL); assert.match(r.body.grade, /^[A-F]$/);
   });
-  const [mail, lead] = outside(calls);
-  assert.equal(outside(calls).length, 2);
-  assert.equal(mail.url, 'https://api.resend.com/emails'); assert.equal(mail.headers.authorization, 'Bearer re_x');
-  assert.deepEqual(Object.keys(mail.body), ['from', 'to', 'subject', 'html', 'text']);
-  assert.equal(mail.body.from, 'ProyTech <audit@getproytech.com>'); assert.deepEqual(mail.body.to, ['jo@reed.com']);
-  assert.equal(mail.body.subject, 'Your website report for example.com');
-  assert.match(mail.body.html, /Your website report, Jo</);
-  for (const typed of ['Reed', 'jo@reed.com', '3165550142', '555-0142']) assert.ok(!mail.body.html.includes(typed) && !mail.body.text.includes(typed), typed);
-  assert.equal(lead.url, 'https://proytech-crm.vercel.app/api/site-lead'); assert.equal(lead.headers.authorization, 'Bearer pts_x');
-  assert.deepEqual(Object.keys(lead.body), ['kind', 'source', 'form', 'name', 'email', 'phone', 'page', 'message']);
-  assert.equal(lead.body.source, 'Website audit'); assert.equal(lead.body.name, 'Jo Reed'); assert.equal(lead.body.phone, '3165550142');
-  assert.match(lead.body.page, /audit\?src=ig \(audited example\.com\)/); assert.match(lead.body.message, /Text consent box: TICKED\./);
-  const email = calls.filter(c => c.body && c.body.p_bucket === EMAIL_BUCKET());
-  assert.deepEqual(email.map(c => [c.body.p_limit, c.body.p_window_sec, c.body.p_record]), [[1, 86400, false], [1, 86400, true]], 'asked before the send, recorded after it');
-  assert.ok(calls.indexOf(email[0]) < calls.indexOf(mail) && calls.indexOf(mail) < calls.indexOf(email[1]));
+  assert.deepEqual(seen.text, ['example.com']); assert.equal(seen.claude.length, 1); assert.equal(seen.save.length, 1);
+  const p = seen.save[0];
+  assert.deepEqual(Object.keys(p).sort(), ['lead', 'teardown']);
+  assert.deepEqual(Object.keys(p.lead).sort(), ['company', 'email', 'name', 'phone', 'textConsent', 'website']);
+  assert.deepEqual([p.lead.name, p.lead.company, p.lead.email, p.lead.phone, p.lead.website], ['Jo Reed', 'Reed Roofing', 'jo@reed.com', '3165550142', 'example.com']);
+  assert.deepEqual(Object.keys(p.lead.textConsent).sort(), ['at', 'given', 'text']);
+  assert.equal(p.lead.textConsent.given, true); assert.equal(p.lead.textConsent.text, CONSENT_TEXT); assert.ok(!Number.isNaN(Date.parse(p.lead.textConsent.at)));
+  assert.deepEqual(Object.keys(p.teardown).sort(), ['builtOn', 'grade', 'report', 'score', 'slug', 'topPains']);
+  assert.equal(p.teardown.slug, 'example'); assert.match(p.teardown.builtOn, /^\d{4}-\d{2}-\d{2}$/);
+  assert.equal(p.teardown.topPains.length, 3); assert.equal(p.teardown.grade, p.teardown.report.grade); assert.equal(p.teardown.score, p.teardown.report.score);
+  assert.equal(p.teardown.report.judgment, true);
+  assert.ok(!JSON.stringify(p).includes('"src"'), 'the contract has no src field');
+  /* the email and website buckets are peeked first and recorded after the CRM has it */
+  const order = lim(calls).map(c => [c.body.p_bucket, c.body.p_record]);
+  assert.deepEqual(order.slice(2), [[EMAIL_BUCKET(), false], [SITE_BUCKET(), false], [EMAIL_BUCKET(), true], [SITE_BUCKET(), true]]);
 });
-test('audit-report: the number is required and goes to the CRM either way; an unticked box is said in words and is not consent', async () => {
-  await world(FULL, async () => {
-    const sent = [];
-    const h = makeReport({ email: async () => ({ ok: true }), lead: async p => { sent.push(p); return { ok: true }; } });
-    for (const phone of ['', '555-0142', undefined]) { const r = await call(h, person({ phone })); assert.equal(r.status, 400); assert.deepEqual(r.body, { ok: false, error: 'invalid', fields: ['phone'] }); }
-    assert.deepEqual((await call(h, person({ email: 'nope' }))).body.fields, ['email']);
-    assert.deepEqual((await call(h, person({ consent: 'yes' }))).body.fields, ['consent']);
-    assert.equal(sent.length, 0);
-    for (const consent of [undefined, false]) await call(h, person(consent === undefined ? {} : { consent }));
-    assert.equal(sent.length, 2);
-    for (const p of sent) { assert.equal(p.phone, '3165550142'); assert.match(p.message, /Text consent box: NOT ticked \(do not text this number\)\./); assert.equal(p.fields, undefined); }
-  });
+test('audit-report: an unticked box is "not given" with no wording; only the boolean true is consent', async () => {
+  for (const [consent, status] of [[undefined, 200], [false, 200], ['true', 400], [1, 400]]) {
+    const { h, seen } = reportWith();
+    await world(FULL, async () => {
+      const r = await call(h, person(consent === undefined ? {} : { consent }));
+      assert.equal(r.status, status, String(consent));
+      if (status === 200) { assert.equal(seen.save[0].lead.textConsent.given, false); assert.equal(seen.save[0].lead.textConsent.text, undefined); }
+      else { assert.deepEqual(r.body.fields, ['consent']); assert.equal(seen.claude.length, 0); }
+    });
+  }
 });
-test('audit-report: a forged, altered or expired result sends nothing; neither does anything the browser adds', async () => {
-  const stale = A.seal({ ...scanned().data, at: Date.now() - A.LIMITS.tokenMaxAgeMs - 1000 }, SECRET);
-  const plain = Buffer.from(JSON.stringify(scanned().data)).toString('base64url');
-  const calls = await world(FULL, async () => {
-    const h = makeReport();
-    for (const bad of ['', 'garbage', plain, stale, token().slice(0, 40) + 'AAAA' + token().slice(44), A.seal(scanned().data, 'another-secret-another-secret-another-1')]) {
-      const r = await call(h, person({ token: bad }));
-      assert.equal(r.status, 400); assert.equal(r.body.error, 'bad_token');
-    }
-    for (const extra of [{ html: '<b>hi</b>' }, { subject: 'Buy now' }, { to: 'victim@example.org' }, { message: 'spam' }, { checks: {} }]) {
-      const r = await call(h, person(extra));
-      assert.equal(r.status, 400); assert.deepEqual(r.body, { ok: false, error: 'invalid', fields: Object.keys(extra) });
-    }
-  });
-  assert.equal(outside(calls).length, 0, 'no email and no lead');
+test('audit-report: an unusable review is not an error: the report goes out on the rule items and says so', async () => {
+  for (const claude of [async () => 'Sure! Here is my review: the site is great.', async () => null, async () => '{"items": "nope"}']) {
+    const { h, seen } = reportWith({ claude });
+    await world(FULL, async () => { const r = await call(h, person()); assert.equal(r.status, 200); });
+    const rep = seen.save[0].teardown.report;
+    assert.equal(rep.judgment, false);
+    for (const it of rep.items.filter(i => ['fi_what', 'fi_action', 't_facts', 'cp_objections'].includes(i.id))) assert.equal(it.status, 'na', it.id);
+    assert.ok(rep.grade, 'still graded on the rule items');
+  }
+  /* the page could not be read again: no review call at all */
+  const { h, seen } = reportWith({ text: async () => '' });
+  await world(FULL, async () => { assert.equal((await call(h, person())).status, 200); });
+  assert.equal(seen.claude.length, 0); assert.equal(seen.save[0].teardown.report.judgment, false);
 });
-test('audit-report: honeypot, failed email, failed CRM', async () => {
-  let calls = await world(FULL, async () => { const r = await call(makeReport(), person({ fax: '555' })); assert.deepEqual(r.body, { ok: true, grade: null, needWork: 0, ran: 0, notRun: [] }); });
-  assert.equal(outside(calls).length, 0, 'a filled honeypot looks like success and does nothing');
+test('audit-report: an invented quote in the review is dropped before the CRM sees it', async () => {
+  const lie = JSON.stringify({ items: { t_facts: { status: 'pass', quote: 'Over 9,000 five-star reviews', note: 'Huge social proof.' }, fi_what: { status: 'pass', quote: 'Acme Roofing', note: 'You say what you do. Your site was hacked.' } }, working: [{ text: 'You have 9,000 reviews.', quote: 'Over 9,000 five-star reviews' }] });
+  const { h, seen } = reportWith({ claude: async () => lie });
+  await world(FULL, async () => { assert.equal((await call(h, person())).status, 200); });
+  const s = JSON.stringify(seen.save[0]);
+  assert.ok(!s.includes('9,000') && !/hacked/i.test(s));
+});
+test('audit-report: the screenshot is used only if its hash was sealed by the speed step', async () => {
+  const sealed = token({ shot: N.shotHash(SHOT) });
+  for (const [shot, used] of [[SHOT, true], [SHOT.replace('QUJD', 'QUJE'), false], ['', false]]) {
+    const { h, seen } = reportWith();
+    await world(FULL, async () => { assert.equal((await call(h, person({ token: sealed, shot }))).status, 200); });
+    assert.equal(seen.claude[0].shot, used ? SHOT : '', String(used));
+  }
+  const { h, seen } = reportWith();
+  await world(FULL, async () => { await call(h, person({ shot: SHOT })); });
+  assert.equal(seen.claude[0].shot, '', 'no hash sealed, no screenshot');
+});
+test('audit-report: a forged, altered or expired result, a bad field or the honeypot spends nothing', async () => {
+  for (const [body, error] of [[person({ token: 'garbage' }), 'bad_token'], [person({ token: token({ at: Date.now() - A.LIMITS.tokenMaxAgeMs - 1000 }) }), 'bad_token'], [person({ evil: 1 }), 'invalid'], [person({ company: '' }), 'invalid'], [person({ phone: '555' }), 'invalid']]) {
+    const calls = await world(FULL, async () => { const r = await call(blocked(), body); assert.equal(r.status, 400, error); assert.equal(r.body.error, error); });
+    assert.equal(outside(calls).length, 0);
+  }
+  await world(FULL, async () => { const r = await call(blocked(), person({ fax: 'buy pills' })); assert.equal(r.status, 200); assert.equal(r.body.reportUrl, ''); });
+});
+test('audit-report: if the CRM does not take it, the visitor is told and is NOT locked out', async () => {
+  const { h } = reportWith({ save: async () => ({ ok: false, status: 500 }) });
+  const calls = await world(FULL, async () => { const r = await call(h, person()); assert.equal(r.status, 502); assert.equal(r.body.error, 'save_failed'); });
+  assert.ok(!lim(calls).some(c => (c.body.p_bucket === EMAIL_BUCKET() || c.body.p_bucket === SITE_BUCKET()) && c.body.p_record), 'nothing recorded for the email or the site');
+});
 
-  let leads = 0;
-  calls = await world(FULL, async () => {
-    const r = await call(makeReport({ email: async () => ({ ok: false, status: 500 }), lead: async () => { leads++; return { ok: true }; } }), person());
-    assert.equal(r.status, 502); assert.deepEqual(r.body, { ok: false, error: 'email_failed' });
-  });
-  assert.equal(leads, 0, 'no lead without a report, so a retry cannot duplicate one');
-  const emailCalls = calls.filter(c => c.body && c.body.p_bucket === EMAIL_BUCKET());
-  assert.deepEqual(emailCalls.map(c => c.body.p_record), [false], 'asked, and a failed send does not use up the address\'s one report');
-
-  await world(FULL, async (c, errors) => {
-    const r = await call(makeReport({ email: async () => ({ ok: true }), lead: async () => ({ ok: false, status: 502 }) }), person());
-    assert.equal(r.status, 200); assert.equal(r.body.ok, true);
-    assert.match(errors.join('\n'), /LEAD NOT SAVED for an audit of example\.com/);
-  });
+test('saveTeardown: Bearer SITE_LEAD_KEY to the CRM; refuses an answer whose link is not our report page; never throws', async () => {
+  const old = process.env.SITE_LEAD_KEY; process.env.SITE_LEAD_KEY = 'pts_test';
+  const orig = console.error; console.error = () => {};
+  try {
+    let got;
+    const ok = await N.saveTeardown({ a: 1 }, { fetchImpl: async (u, init) => { got = { u, init }; return { ok: true, status: 200, json: async () => ({ ok: true, token: 'tok', reportUrl: REPORT_URL }) }; } });
+    assert.deepEqual(ok, { ok: true, token: 'tok', reportUrl: REPORT_URL });
+    assert.equal(got.u, 'https://proytech-crm.vercel.app/api/teardown-save'); assert.equal(got.init.method, 'POST');
+    assert.equal(got.init.headers.authorization, 'Bearer pts_test'); assert.deepEqual(JSON.parse(got.init.body), { a: 1 });
+    for (const url of ['https://evil.example/report?t=abcdefgh', 'javascript:alert(1)', 'https://www.getproytech.com/report?t=<x>', '']) {
+      const r = await N.saveTeardown({}, { fetchImpl: async () => ({ ok: true, status: 200, json: async () => ({ ok: true, reportUrl: url }) }) });
+      assert.equal(r.ok, false, url);
+    }
+    assert.equal((await N.saveTeardown({}, { fetchImpl: async () => { throw new Error('down'); } })).ok, false);
+    assert.equal((await N.saveTeardown({}, { fetchImpl: async () => ({ ok: false, status: 401, json: async () => ({}) }) })).status, 401);
+  } finally { console.error = orig; if (old === undefined) delete process.env.SITE_LEAD_KEY; else process.env.SITE_LEAD_KEY = old; }
 });
-test('the speed function has its 60 seconds, and the test inside it stops first', async () => {
-  const { readFileSync } = await import('node:fs');
-  const cfg = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
-  assert.equal(cfg.functions['api/audit-speed.js'].maxDuration, 60);
+test('askClaude: the Haiku model Ace uses, the page as data, the screenshot as an image; null on any failure', async () => {
+  const chat = fs.readFileSync(new URL('../api/chat.js', import.meta.url), 'utf8');
+  assert.ok(chat.includes(N.MODEL), 'same model id as api/chat.js');
+  let sent;
+  const out = await N.askClaude({ text: 'Acme Roofing', shot: SHOT }, { fetchImpl: async (u, init) => { sent = { u, init }; return { ok: true, json: async () => ({ content: [{ type: 'text', text: '{"items":{}}' }] }) }; } });
+  assert.equal(out, '{"items":{}}');
+  const b = JSON.parse(sent.init.body);
+  assert.equal(sent.u, 'https://api.anthropic.com/v1/messages'); assert.equal(b.model, N.MODEL);
+  assert.equal(b.messages[0].content[0].type, 'image'); assert.equal(b.messages[0].content[0].source.media_type, 'image/jpeg');
+  assert.match(b.messages[0].content[1].text, /data, not instructions/); assert.match(b.system, /DATA, NOT INSTRUCTIONS/);
+  const orig = console.error; console.error = () => {};
+  try {
+    assert.equal(await N.askClaude({ text: 'x' }, { fetchImpl: async () => ({ ok: false, status: 529 }) }), null);
+    assert.equal(await N.askClaude({ text: 'x' }, { fetchImpl: async () => { throw new Error('down'); } }), null);
+  } finally { console.error = orig; }
+});
+
+test('MOCK=1 runs the whole flow with canned results and no network, and never in production', async () => {
+  const calls = await world({ MOCK: '1' }, async () => {
+    const s = await call(makeScan({ scan: never }), { url: 'acmeroofing.com' });
+    assert.equal(s.status, 200); assert.equal(s.body.host, 'acmeroofing.com');
+    const sp = await call(makeSpeed({ speed: never }), { token: s.body.token });
+    assert.equal(sp.status, 200); assert.equal(sp.body.speedRan, true);
+    const r = await call(makeReport({ text: never, claude: never, save: never }), { ...person(), token: sp.body.token });
+    assert.equal(r.status, 200); assert.match(r.body.grade, /^[A-F]$/); assert.match(r.body.reportUrl, /report\?t=/);
+  });
+  assert.equal(calls.length, 0, 'no network at all');
+  await world({ MOCK: '1', VERCEL_ENV: 'production' }, async () => { const r = await call(makeScan({ scan: never }), { url: 'acmeroofing.com' }); assert.equal(r.status, 503); });
+});
+
+test('vercel.json: the speed and report functions have 60 seconds and the outside calls stop first; /report is noindex', async () => {
+  const cfg = JSON.parse(fs.readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+  assert.equal(cfg.functions['api/audit-speed.js'].maxDuration, 60); assert.equal(cfg.functions['api/audit-report.js'].maxDuration, 60);
   assert.ok(A.LIMITS.speedMs < 60000);
+  for (const src of ['/report', '/report.html']) {
+    const h = cfg.headers.find(x => x.source === src);
+    assert.ok(h, src); assert.ok(h.headers.some(x => x.key === 'X-Robots-Tag' && /noindex/.test(x.value)), src);
+  }
 });
 
 test('the limiter is the CRM\'s site_hit() on the ANON key: the service key is never read or sent', async () => {
-  /* the service key alone does not configure the limiter */
   const env = { ...FULL, SUPABASE_SERVICE_KEY: 'svc-secret', SUPABASE_SERVICE_ROLE_KEY: 'svc-secret' }; delete env.SUPABASE_ANON_KEY;
-  let calls = await world(env, async () => { const r = await call(makeScan({ scan: neverScan }), { url: 'example.com' }); assert.equal(r.status, 503); assert.deepEqual(r.body.missing, ['SUPABASE_ANON_KEY']); });
+  let calls = await world(env, async () => { const r = await call(makeScan({ scan: never }), { url: 'example.com' }); assert.equal(r.status, 503); assert.deepEqual(r.body.missing, ['SUPABASE_ANON_KEY']); });
   assert.equal(calls.length, 0);
-  /* configured: every limiter call is POST rpc/site_hit, the key on apikey only, buckets site_hit accepts */
   calls = await world({ ...FULL, SUPABASE_SERVICE_KEY: 'svc-secret' }, async () => { await call(makeScan({ scan: async () => scanned() }), { url: 'example.com' }, { ip: 'fe80::1%eth0' }); });
-  const lim = calls.filter(c => c.url.includes('/rest/v1/'));
-  assert.equal(lim.length, 3, 'global, per IP, per host');
-  for (const c of lim) {
+  const l = lim(calls);
+  assert.equal(l.length, 3, 'global, per IP, per host');
+  for (const c of l) {
     assert.equal(c.url, 'https://db.example.org/rest/v1/rpc/site_hit'); assert.equal(c.method, 'POST');
     assert.deepEqual(Object.keys(c.headers).sort(), ['apikey', 'content-type']); assert.equal(c.headers.apikey, 'anon-public');
     assert.match(c.body.p_bucket, KEYED); assert.equal(c.body.p_record, true);
   }
-  assert.deepEqual(lim.map(c => [c.body.p_bucket, c.body.p_window_sec, c.body.p_limit]),
+  assert.deepEqual(l.map(c => [c.body.p_bucket, c.body.p_window_sec, c.body.p_limit]),
     [[K('site:audit-scan:global'), 86400, 300], [K('site:audit-scan:ip:fe80::1%eth0'), 600, 5], [HOST_BUCKET(), 86400, 5]]);
   assert.ok(!JSON.stringify(calls).includes('svc-secret'));
   for (const f of ['_audit-net.js', 'audit-scan.js', 'audit-speed.js', 'audit-report.js']) {
@@ -412,37 +494,31 @@ test('the limiter is the CRM\'s site_hit() on the ANON key: the service key is n
   }
 });
 test('a limiter answer that is not a plain true/false is a refusal, not a pass', async () => {
-  const old = globalThis.fetch;
   for (const answer of [null, 'false', 0, {}]) {
-    const r = await world(FULL, async () => {
+    await world(FULL, async () => {
       globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => answer });
-      const out = await call(makeScan({ scan: neverScan }), { url: 'example.com' });
+      const out = await call(makeScan({ scan: never }), { url: 'example.com' });
       assert.equal(out.status, 503, JSON.stringify(answer)); assert.equal(out.body.error, 'limiter_unavailable');
     });
   }
-  globalThis.fetch = old;
 });
-
 test('KEYED: every audit bucket is site: + 40 hex; the same name under two salts is two buckets', async () => {
   assert.notEqual(keyedBucket('site:audit-scan:global', SALT), keyedBucket('site:audit-scan:global', SALT.replace('0001', '0002')));
-  assert.equal(keyedBucket('site:audit-scan:global', SALT), K('site:audit-scan:global'));
-  /* through the real routes, under two salts: no bucket in common */
-  const sent = async salt => (await world({ ...FULL, SITE_LIMIT_SALT: salt }, async () => { await call(makeReport({ email: async () => ({ ok: true }), lead: async () => ({ ok: true }) }), person()); }))
-    .filter(c => c.url.includes('/rest/v1/')).map(c => c.body.p_bucket);
+  const sent = async salt => lim(await world({ ...FULL, SITE_LIMIT_SALT: salt }, async () => { await call(reportWith().h, person()); })).map(c => c.body.p_bucket);
   const a = await sent(SALT), b = await sent(SALT.replace('0001', '0002'));
-  assert.equal(a.length, 4, 'global, per IP, then the address asked and recorded');
+  assert.equal(a.length, 6, 'global, per IP, email and site asked, then recorded');
   for (const x of [...a, ...b]) assert.match(x, KEYED);
   assert.ok(!a.some(x => b.includes(x)), 'a different salt shares no bucket');
 });
 test('KEYED: an email address cannot be probed — neither it nor its plain hash reaches the database', async () => {
-  const calls = await world(FULL, async () => { await call(makeReport({ email: async () => ({ ok: true }), lead: async () => ({ ok: true }) }), person()); });
-  const toDb = JSON.stringify(calls.filter(c => c.url.includes('/rest/v1/')));
+  const calls = await world(FULL, async () => { await call(reportWith().h, person()); });
+  const toDb = JSON.stringify(lim(calls));
   for (const x of ['jo@reed.com', N.hashed('jo@reed.com'), 'audit-email', 'example.com', N.hashed('example.com'), '203.0.113.9', SALT]) assert.ok(!toDb.includes(x), x + ' reached the database');
   assert.ok(toDb.includes(EMAIL_BUCKET()));
 });
 test('MISSING SALT: all three routes refuse with not_configured naming SITE_LIMIT_SALT, and touch nothing', async () => {
   for (const salt of [undefined, '', 'too-short']) {
-    for (const [handler, body] of [[makeScan({ scan: neverScan }), { url: 'example.com' }], [makeSpeed({ speed: neverScan }), { token: token() }], [makeReport({ email: neverScan, lead: neverScan }), person()]]) {
+    for (const [handler, body] of [[makeScan({ scan: never }), { url: 'example.com' }], [makeSpeed({ speed: never }), { token: token() }], [blocked(), person()]]) {
       const env = { ...FULL }; if (salt === undefined) delete env.SITE_LIMIT_SALT; else env.SITE_LIMIT_SALT = salt;
       const calls = await world(env, async (c, errors) => {
         const r = await call(handler, body);
@@ -452,10 +528,9 @@ test('MISSING SALT: all three routes refuse with not_configured naming SITE_LIMI
       assert.equal(calls.length, 0);
     }
   }
-  assert.deepEqual(await (async () => { const old = process.env.SITE_LIMIT_SALT; delete process.env.SITE_LIMIT_SALT; try { return await N.hit('site:x', 1, 1); } finally { if (old !== undefined) process.env.SITE_LIMIT_SALT = old; } })(), 'down', 'hit() itself never sends an unkeyed name');
 });
 test('FULL TABLE: site_hit\'s NULL is limiter_unavailable on every route, and is logged by readable name', async () => {
-  for (const [handler, body] of [[makeScan({ scan: neverScan }), { url: 'example.com' }], [makeSpeed({ speed: neverScan }), { token: token() }], [makeReport({ email: neverScan, lead: neverScan }), person()]]) {
+  for (const [handler, body] of [[makeScan({ scan: never }), { url: 'example.com' }], [makeSpeed({ speed: never }), { token: token() }], [blocked(), person()]]) {
     await world(FULL, async (c, errors) => {
       globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => null });
       const r = await call(handler, body);

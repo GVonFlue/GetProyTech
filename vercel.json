@@ -2,9 +2,15 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "functions": {
-    "api/audit-speed.js": { "maxDuration": 60 },
-    "api/audit-scan.js": { "maxDuration": 30 },
-    "api/audit-report.js": { "maxDuration": 30 }
+    "api/audit-speed.js": {
+      "maxDuration": 60
+    },
+    "api/audit-scan.js": {
+      "maxDuration": 30
+    },
+    "api/audit-report.js": {
+      "maxDuration": 60
+    }
   },
   "headers": [
     {
@@ -44,6 +50,32 @@
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/report",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        }
+      ]
+    },
+    {
+      "source": "/report.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
         }
       ]
     }
