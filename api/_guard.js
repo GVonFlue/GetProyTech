@@ -13,18 +13,23 @@
 //                     check); this is the layer that actually caps the bill
 //   3. Per-IP       — stops one machine hammering the endpoint
 //
-// State lives in Supabase (the same api_hits table the CRM uses) because Vercel
+// State lives in the CRM's Supabase (its api_hits table) because Vercel
 // functions are stateless and cold starts — exactly when you're hit hardest —
-// would reset an in-memory counter. Buckets are namespaced "site:<name>" so
-// they never collide with the CRM's own counters.
+// would reset an in-memory counter. The site holds ONLY the public anon key
+// (see _env.js) and makes ONE kind of call with it: public.site_hit(), which
+// counts a "site:" bucket and answers true (over) or false (under, recorded).
+// The count and the record happen in one database call under a per-bucket
+// lock, so a burst cannot slip past the way read-then-write over REST did.
+// The function also deletes old rows, so there is nothing to sweep from here.
 //
-// FAILS OPEN. If Supabase isn't configured, or it blips, the request is allowed:
-// a rate limiter that takes the marketing site down when its datastore hiccups
-// is worse than the abuse it prevents. Until SUPABASE_URL + SUPABASE_SERVICE_KEY
-// are set on this Vercel project (see _env.js), the size check still runs and
-// the rate limiting is simply inactive — so deploying this breaks nothing.
+// WHEN THE LIMITER IS MISSING OR DOWN, the route decides:
+//   forms (default)    let the request through. Losing a real lead is worse
+//                      than one junk row, and the size check still runs.
+//   failClosed: true   refuse with 503. The AI routes pass this: with no
+//                      counter, nothing bounds the Anthropic bill.
+// A missing variable is named in the log; it is never silently "fine".
 
-import { SUPA_URL, SUPA_KEY } from './_env.js';
+import { limiterEnv, limiterMissing } from './_env.js';
 
 /** Caller's IP. Vercel sets x-forwarded-for; take the FIRST entry — later ones
  *  are proxies and are trivially spoofable by the client. */
@@ -34,54 +39,53 @@ export function ipOf(req) {
   return req.headers['x-real-ip'] || req.socket?.remoteAddress || 'unknown';
 }
 
-async function sbCall(path, opts = {}) {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${path}`, {
-    ...opts,
-    headers: {
-      apikey: SUPA_KEY,
-      authorization: `Bearer ${SUPA_KEY}`,
-      'content-type': 'application/json',
-      ...(opts.headers || {}),
-    },
-  });
-  if (!r.ok) return null;
-  const t = await r.text();
-  return t ? JSON.parse(t) : [];
-}
+/** site_hit() accepts only ^site:[A-Za-z0-9:._-]{1,195}$. A header value with
+ *  anything else in it (an IPv6 zone "%eth0", junk from a client) would make
+ *  the database refuse the call and look like an outage, so it is folded into
+ *  the allowed characters here instead. */
+export const bucketPart = s => String(s == null ? '' : s).replace(/[^A-Za-z0-9:._-]/g, '_').slice(0, 90) || '_';
 
-async function sb(path, opts = {}) {
-  if (!SUPA_URL || !SUPA_KEY) return null;   // not configured — fail open
-  try { return await sbCall(path, opts); }
-  catch { return null; }                     // outage — fail open
-}
+const LIMITER_MS = 3000;
 
-/** Count hits in a rolling window and record this one. Returns {ok}. */
-async function bump(bucket, limit, windowMin) {
-  const since = new Date(Date.now() - windowMin * 60000).toISOString();
-  const rows = await sb(
-    `api_hits?bucket=eq.${encodeURIComponent(bucket)}&at=gte.${since}&select=id`
-  );
-  if (rows === null) return { ok: true, degraded: true };   // unreachable → allow
-  if (rows.length >= limit) return { ok: false };
-  await sb('api_hits', {
-    method: 'POST',
-    body: JSON.stringify({ bucket, at: new Date().toISOString() }),
-  });
-  return { ok: true };
+/** One call to public.site_hit(). Answers 'ok' (under, recorded), 'limit'
+ *  (over, nothing recorded), 'down' (unreachable or an unexpected answer) or
+ *  'off' (not configured). `record: false` asks for the count only. */
+export async function siteHit(bucket, limit, windowSec, { record = true } = {}) {
+  const { url, key } = limiterEnv();
+  if (!url || !key) return 'off';
+  const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), LIMITER_MS);
+  try {
+    const r = await fetch(`${url.replace(/\/+$/, '')}/rest/v1/rpc/site_hit`, {
+      method: 'POST',
+      // the key goes on `apikey` ONLY: a publishable key (sb_publishable_…) on
+      // Authorization is parsed as a JWT and refused. A legacy anon JWT works
+      // the same way on `apikey`.
+      headers: { apikey: key, 'content-type': 'application/json' },
+      body: JSON.stringify({ p_bucket: bucket, p_window_sec: Math.round(windowSec), p_limit: Math.round(limit), p_record: !!record }),
+      signal: ctl.signal,
+    });
+    if (!r.ok) { console.error(`[guard] the limiter answered ${r.status} for ${bucket.split(':').slice(0, 2).join(':')}`); return 'down'; }
+    const over = await r.json();
+    return over === true ? 'limit' : over === false ? 'ok' : 'down';
+  } catch {
+    return 'down';
+  } finally { clearTimeout(timer); }
 }
 
 /**
  * Guard a public endpoint. Call it first thing in the handler:
  *
- *   const gate = await guard(req, res, { name:'chat', perIp:30, perDay:3000, maxChars:30000 });
+ *   const gate = await guard(req, res, { name:'chat', perIp:30, perDay:3000, maxChars:30000, failClosed:true });
  *   if (!gate.ok) return;              // guard already sent the response
  *
  * Options:
- *   name      required. Namespaces the counters per endpoint.
- *   perIp     requests per IP per window     (default 20)
- *   windowMin window length in minutes       (default 10)
- *   perDay    GLOBAL cap across all callers   (default 2000)
- *   maxChars  reject bodies larger than this  (default 12000) — ALWAYS set per route.
+ *   name        required. Namespaces the counters per endpoint.
+ *   perIp       requests per IP per window     (default 20)
+ *   windowMin   window length in minutes       (default 10)
+ *   perDay      GLOBAL cap across all callers   (default 2000)
+ *   maxChars    reject bodies larger than this  (default 12000) — ALWAYS set per route.
+ *   failClosed  refuse (503) when the limiter is missing or down (default false).
+ *               Every route that spends on a model passes true.
  */
 export async function guard(req, res, opts = {}) {
   const {
@@ -90,6 +94,7 @@ export async function guard(req, res, opts = {}) {
     windowMin = 10,
     perDay = 2000,
     maxChars = 12000,
+    failClosed = false,
   } = opts;
 
   if (req.method === 'OPTIONS') { res.status(204).end(); return { ok: false }; }
@@ -106,30 +111,50 @@ export async function guard(req, res, opts = {}) {
     return { ok: false };
   }
 
+  const ip = ipOf(req);
+  const unavailable = why => {
+    res.status(503).json({ error: 'This service is unavailable right now. Please try again later.' });
+    return { ok: false, why };
+  };
+  const missing = limiterMissing();
+  if (missing.length) {
+    if (failClosed) {
+      console.error(`[guard] ${name}: REFUSING, the rate limiter is not set on this project: ${missing.join(', ')}`);
+      return unavailable('not_configured');
+    }
+    console.error(`[guard] ${name}: running WITHOUT a rate limit, not set on this project: ${missing.join(', ')}`);
+    return { ok: true, ip, limiter: 'off' };
+  }
+
   // 2. global daily cap FIRST — the only layer that bounds a botnet's bill
-  const day = await bump(`site:${name}:global`, perDay, 60 * 24);
-  if (!day.ok) {
+  const day = await siteHit(`site:${bucketPart(name)}:global`, perDay, 24 * 3600);
+  if (day === 'limit') {
     console.error(`[guard] DAILY CAP HIT on ${name}`);
     res.status(429).json({ error: 'This service is busy right now. Please try again later.' });
     return { ok: false };
   }
+  if (day === 'down') {
+    if (failClosed) { console.error(`[guard] ${name}: REFUSING, the rate limiter cannot be reached`); return unavailable('limiter_unavailable'); }
+    console.error(`[guard] ${name}: the rate limiter cannot be reached; letting this request through`);
+    return { ok: true, ip, limiter: 'down' };
+  }
 
   // 3. per-IP
-  const ip = ipOf(req);
-  const one = await bump(`site:${name}:ip:${ip}`, perIp, windowMin);
-  if (!one.ok) {
+  const one = await siteHit(`site:${bucketPart(name)}:ip:${bucketPart(ip)}`, perIp, windowMin * 60);
+  if (one === 'limit') {
     res.setHeader('retry-after', String(windowMin * 60));
     res.status(429).json({ error: `Too many requests. Try again in ${windowMin} minutes.` });
     return { ok: false };
   }
+  if (one === 'down') {
+    if (failClosed) { console.error(`[guard] ${name}: REFUSING, the rate limiter cannot be reached`); return unavailable('limiter_unavailable'); }
+    console.error(`[guard] ${name}: the rate limiter cannot be reached; letting this request through`);
+    return { ok: true, ip, limiter: 'down' };
+  }
 
-  return { ok: true, ip };
+  return { ok: true, ip, limiter: 'on' };
 }
 
-/** Best-effort cleanup so the table doesn't grow forever. Cheap, ~1% of calls.
- *  Only deletes this site's own rate-limit rows (bucket like 'site:%'). */
-export async function sweep() {
-  if (Math.random() > 0.01) return;
-  const cutoff = new Date(Date.now() - 48 * 3600 * 1000).toISOString();
-  await sb(`api_hits?at=lt.${cutoff}&bucket=like.site:*`, { method: 'DELETE' }).catch(() => {});
-}
+/** Kept so the routes that call it need no change. Cleanup now happens inside
+ *  site_hit() in the database; the anon key cannot delete rows, by design. */
+export function sweep() {}
