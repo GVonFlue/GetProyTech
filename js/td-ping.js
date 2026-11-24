@@ -9,6 +9,17 @@
     if (window.__tdPinged) return;
     window.__tdPinged = true;
     var q = new URLSearchParams(location.search), body = null;
+    /* OUR OWN VIEWS DON'T COUNT. Open any report once with ?staff=on and this
+       browser is marked as ProyTech's (?staff=off undoes it); a marked browser
+       never pings, so checking a report before or after sending it doesn't
+       turn the Teardowns board to "viewed". Nothing is stored for visitors. */
+    try {
+      var st = q.get('staff');
+      if (st === 'on') window.localStorage.setItem('proytech_staff', '1');
+      if (st === 'off') window.localStorage.removeItem('proytech_staff');
+      if (st && window.history && window.history.replaceState) { q.delete('staff'); window.history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash); }
+      if (window.localStorage.getItem('proytech_staff') === '1') return;
+    } catch (e) { /* no storage: count the view */ }
     var t = q.get('t') || '';
     var meta = document.querySelector('meta[name="td-slug"]');
     if (/^[A-Za-z0-9_-]{8,128}$/.test(t) && t !== 'mock') body = { token: t };
