@@ -139,13 +139,27 @@ test('td-ping: once per load, slug or token only, to the CRM; on every hand-buil
   const ping = fs.readFileSync(new URL('../js/td-ping.js', import.meta.url), 'utf8');
   assert.ok(ping.includes("'https://proytech-crm.vercel.app/api/teardown-view'"));
   assert.ok(ping.includes('sendBeacon') && ping.includes('__tdPinged'));
-  assert.ok(!/cookie|localStorage|email/i.test(ping.replace(/\/\*[\s\S]*?\*\//g, '')));
+  const code = ping.replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.ok(!/cookie|email/i.test(code));
+  assert.deepEqual([...new Set(code.match(/localStorage\.\w+\('[^']+'/g).map(m => m.split("'")[1]))], ['proytech_staff'], 'storage is only the staff flag');
   /* run it twice in one page: one beacon, with the slug from the meta tag */
   const beacons = [];
   const page = slug => ({ window: {}, location: { search: '' }, document: { querySelector: () => (slug ? { content: slug } : null) }, navigator: { sendBeacon: (u, b) => { beacons.push(u); return true; } }, Blob: class { constructor(p) { this.p = p; } }, URLSearchParams, JSON, fetch: () => { throw new Error('beacon first'); } });
   const ctx = page('acmeroofing'); ctx.window = ctx; vm.runInNewContext(ping, ctx); vm.runInNewContext(ping, ctx);
   assert.equal(beacons.length, 1);
   const none = page(''); none.window = none; vm.runInNewContext(ping, none); assert.equal(beacons.length, 1, 'no slug, no token: no ping');
+  /* a browser marked with ?staff=on never pings, and the flag leaves the address bar */
+  const store = {}, replaced = [];
+  const staff = (search) => { const c = page('acmeroofing'); c.window = c; c.location = { search, pathname: '/previews/acmeroofing-report', hash: '' };
+    c.window.localStorage = { setItem: (k, v) => { store[k] = v; }, getItem: k => (k in store ? store[k] : null), removeItem: k => { delete store[k]; } };
+    c.window.history = { replaceState: (a, b, u) => replaced.push(u) }; return c; };
+  const before = beacons.length;
+  vm.runInNewContext(ping, staff('?staff=on'));
+  vm.runInNewContext(ping, staff(''));
+  assert.equal(beacons.length, before, 'staff views send nothing');
+  assert.deepEqual(replaced, ['/previews/acmeroofing-report']);
+  vm.runInNewContext(ping, staff('?staff=off'));
+  assert.equal(beacons.length, before + 1, 'unmarked again: views count');
   const dir = new URL('../previews/', import.meta.url);
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.html'));
   const reports = files.filter(f => f.endsWith('-report.html'));
