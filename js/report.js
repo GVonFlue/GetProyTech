@@ -218,7 +218,13 @@
     var code = str(d.code, 40), until = TD.longDate(d.codeExpires);
     if (code && !TD.codeExpired(d.codeExpires, nowMs)) {
       add(card, el(doc, 'div', 'c', code));
-      add(card, el(doc, 'p', '', '$500 off our standard website. $1,499 becomes $999, plus $149 a month for hosting and care. Good through ' + until + '.'));
+      /* the offer's numbers come with the report (a hand-built report can carry
+         a one-off monthly); missing or odd values fall back to the standard offer */
+      var money = function (v, dflt) { return v != null && v !== '' && Number.isFinite(+v) && +v > 0 ? Math.round(+v) : dflt; };
+      var pr = money(d.price, 1499), cp = money(d.codePrice, 999), mo = money(d.monthly, 149);
+      if (cp >= pr) { pr = 1499; cp = 999; }
+      var usd = function (n) { return '$' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
+      add(card, el(doc, 'p', '', usd(pr - cp) + ' off our standard website. ' + usd(pr) + ' becomes ' + usd(cp) + ', plus ' + usd(mo) + ' a month for hosting and care. Good through ' + until + '.'));
       add(card, el(doc, 'p', '', "Mention it on the call and we'll get started right away."));
     } else {
       add(card, el(doc, 'p', '', code ? 'This code expired on ' + until + ". You can still book a call and we'll go over your report." : "Book a call and we'll go over your report."));

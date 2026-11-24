@@ -189,3 +189,14 @@ test('boot: a hand-built report draws its own inline data, and stops after its p
   assert.ok(live.includes('TEARDOWN-VISIONARY')); assert.equal(data.report.grade, 'C');
   assert.ok(boot('2026-12-23', Date.UTC(2026, 11, 24, 18)).includes('This report has expired.'));
 });
+
+test('render: the code card uses the report\'s own offer numbers, and falls back to the standard offer', () => {
+  const d = JSON.parse(JSON.stringify(fixture)); d.monthly = 79;
+  let doc = makeDoc(); TD.render(doc, d, NOV(23));
+  assert.ok(doc.root.textContent.includes('$500 off our standard website. $1,499 becomes $999, plus $79 a month for hosting and care.'));
+  d.monthly = 'abc'; d.codePrice = 5000;
+  doc = makeDoc(); TD.render(doc, d, NOV(23));
+  assert.ok(doc.root.textContent.includes('$1,499 becomes $999, plus $149 a month'), 'odd values fall back to the standard offer');
+  const page = fs.readFileSync(new URL('../previews/visionary-report.html', import.meta.url), 'utf8');
+  assert.equal(JSON.parse(/id="td-data">([\s\S]*?)<\/script>/.exec(page)[1]).monthly, 79, 'Leo\'s report carries $79 a month');
+});
