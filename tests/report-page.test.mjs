@@ -157,3 +157,35 @@ test('td-ping: once per load, slug or token only, to the CRM; on every hand-buil
   }
   for (const f of files.filter(f => !f.endsWith('-report.html'))) assert.ok(!fs.readFileSync(new URL(f, dir), 'utf8').includes('td-ping'), f + ' is a preview homepage');
 });
+
+test('render: a page weight measured without Google\'s speed test shows the weight, never "null"', () => {
+  const d = JSON.parse(JSON.stringify(fixture));
+  d.report.speed = { lcpS: null, cls: null, weightMb: 11.1, fullMb: 38 };
+  const doc = makeDoc(); TD.render(doc, d, NOV(23));
+  const text = doc.root.textContent;
+  assert.ok(text.includes('11.1 MB') && text.includes('38 MB')); assert.ok(!/null/.test(text));
+  assert.ok(text.includes('load time was left out of the grade'));
+});
+
+test('boot: a hand-built report draws its own inline data, and stops after its preview-expires day', () => {
+  const page = fs.readFileSync(new URL('../previews/visionary-report.html', import.meta.url), 'utf8');
+  const meta = n => (new RegExp(`<meta name="${n}" content="([^"]+)"`).exec(page) || [])[1];
+  assert.equal(meta('robots'), 'noindex, nofollow'); assert.equal(meta('td-slug'), 'visionary');
+  assert.equal(meta('code-expires'), '2026-12-07'); assert.equal(meta('preview-expires'), '2026-12-23');
+  assert.ok(page.includes('/js/td-ping.js'));
+  const json = /<script type="application\/json" id="td-data">([\s\S]*?)<\/script>/.exec(page)[1];
+  assert.ok(!json.includes('<'), 'no raw < inside the inline JSON');
+  const data = JSON.parse(json);
+  const boot = (expires, nowMs) => {
+    const doc = makeDoc(), inline = { textContent: json };
+    doc.getElementById = id => (id === 'root' ? doc.root : id === 'td-data' ? inline : null);
+    doc.querySelector = () => ({ content: expires });
+    const realNow = Date.now; Date.now = () => nowMs;
+    try { TD.boot({ document: doc, location: { search: '' }, fetch: () => { throw new Error('no fetch for inline reports'); } }); } finally { Date.now = realNow; }
+    return doc.root.textContent;
+  };
+  const live = boot('2026-12-23', NOV(24));
+  assert.ok(live.includes('Your website report, Visionary Carpet & Upholstery Cleaning'));
+  assert.ok(live.includes('TEARDOWN-VISIONARY')); assert.equal(data.report.grade, 'C');
+  assert.ok(boot('2026-12-23', Date.UTC(2026, 11, 24, 18)).includes('This report has expired.'));
+});

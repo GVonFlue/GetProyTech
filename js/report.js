@@ -145,7 +145,8 @@
           add(li, el(doc, 'span', 'p', p.path === '/' ? 'Homepage' : str(p.path, 120)));
           add(li, el(doc, 'span', 'k', (KIND[p.kind] || 'Page') + (p.words ? ' · ' + p.words + ' words' : '')));
         });
-        if (r.checked && r.checked.found > pages.length - 1) add(b1, el(doc, 'p', 'why', 'We found ' + r.checked.found + ' pages linked from your homepage and sitemap, and read the ones a buyer is most likely to visit.'));
+        if (r.checked && r.checked.found > pages.length) add(b1, el(doc, 'p', 'why', 'We found ' + r.checked.found + ' pages linked from your homepage and sitemap, and read the ones a buyer is most likely to visit.'));
+        else if (pages.length === 1) add(b1, el(doc, 'p', 'why', 'Your site is a single page, so this is everything a visitor can see.'));
       }
       if (r.stack) {
         var b2 = add(lk, el(doc, 'div', 'box'));
@@ -161,13 +162,21 @@
     /* speed */
     var s3 = add(m, el(doc, 'section'));
     add(s3, el(doc, 'h2', '', 'Speed and quality'));
-    if (r.speed && Number.isFinite(+r.speed.lcpS)) {
+    /* +null is 0, so a missing number must be ruled out before it is coerced */
+    var num = function (v) { return v != null && v !== '' && Number.isFinite(+v); };
+    if (r.speed && num(r.speed.lcpS)) {
       var mt = add(s3, el(doc, 'div', 'metrics'));
       var tile = function (big, small) { var t = add(mt, el(doc, 'div', 'm')); add(t, el(doc, 'b', '', big)); add(t, el(doc, 'span', '', small)); };
       tile(r.speed.lcpS + 's', 'Main content on a phone');
       if (r.speed.weightMb != null) tile(r.speed.weightMb + ' MB', 'Page weight');
       if (r.speed.cls != null) tile(String(r.speed.cls), 'Layout shift (0.1 or less is steady)');
       add(s3, el(doc, 'p', 'why', 'Measured once on ' + when + ' with Google PageSpeed Insights on a simulated phone. A real visit can be faster or slower.'));
+    } else if (r.speed && num(r.speed.weightMb)) {
+      /* a hand-built report can measure page weight without Google's speed test */
+      var mw = add(s3, el(doc, 'div', 'metrics')), tw = add(mw, el(doc, 'div', 'm'));
+      add(tw, el(doc, 'b', '', r.speed.weightMb + ' MB')); add(tw, el(doc, 'span', '', 'Downloaded before anyone scrolls'));
+      if (num(r.speed.fullMb)) { var tf = add(mw, el(doc, 'div', 'm')); add(tf, el(doc, 'b', '', r.speed.fullMb + ' MB')); add(tf, el(doc, 'span', '', 'The whole page, scrolled to the bottom')); }
+      add(s3, el(doc, 'p', 'why', 'Page weight measured in Chrome on ' + when + '. Google\'s phone speed test could not run that day, so load time was left out of the grade.'));
     } else add(s3, el(doc, 'p', 'why', 'Speed could not be measured today, so it was left out of the grade.'));
 
     /* everything we found */
@@ -221,6 +230,18 @@
   /* ------------------------------------------------------------ boot */
   TD.boot = function (win) {
     var doc = win.document, q = new URLSearchParams(win.location.search);
+    /* A hand-built report (previews/<slug>-report.html) carries its own data in
+       <script type="application/json" id="td-data">, drawn the same text-only
+       way, and stops drawing after its <meta name="preview-expires"> day. */
+    var inline = doc.getElementById('td-data');
+    if (inline) {
+      var exp = doc.querySelector('meta[name="preview-expires"]');
+      if (!exp || !/^\d{4}-\d{2}-\d{2}$/.test(exp.content || '') || TD.centralDate(Date.now()) > exp.content) { TD.renderState(doc, 'This report has expired.', 'Reports are kept for 30 days. You can still'); return; }
+      var d0 = null; try { d0 = JSON.parse(inline.textContent); } catch (e) { d0 = null; }
+      if (!d0 || !d0.report) { TD.renderState(doc, "We couldn't load your report right now.", 'Try again in a minute, or'); return; }
+      TD.render(doc, d0, Date.now());
+      return;
+    }
     var t = q.get('t') || '', mock = t === 'mock' || q.get('mock') === '1';
     if (mock) { var f = doc.createElement('div'); f.className = 'mock-flag'; f.textContent = 'Mock report: sample data'; doc.body.appendChild(f); }
     if (!mock && !/^[A-Za-z0-9_-]{8,128}$/.test(t)) { TD.renderState(doc, "We couldn't find that report.", 'Check the link in your email, or'); return; }
