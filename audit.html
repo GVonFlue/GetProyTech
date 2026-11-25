@@ -69,6 +69,7 @@
 .mock-flag{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:90;background:#FFD166;color:#0B1633;font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 @media (prefers-reduced-motion:reduce){.alist li.wait .dot{animation:none}}
 </style>
+<script type="module" src="/js/analytics.js"></script>
 </head>
 <body>
 <svg class="techbg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -303,6 +304,7 @@
     var url = $('a_url').value.trim();
     $('urlField').classList.toggle('bad', !url);
     if (!url){ $('a_url').focus(); return; }
+    if (!MOCK) try { if (window.ptTrack) window.ptTrack('Teardown started'); } catch(e){}   // js/analytics.js: the name only, never the URL
     state.token = null; state.skipped = false; state.speedRan = false; state.shot = ''; state.pages = []; state.stack = null;
     $('runTitle').textContent = 'Reading your website…'; $('runSub').textContent = ''; $('runList').textContent = ''; $('speedWait').hidden = true;
     show('viewRun');

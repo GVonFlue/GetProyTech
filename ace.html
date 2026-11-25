@@ -147,6 +147,7 @@ img,svg,iframe,video{max-width:100%;height:auto}
 body{overflow-x:hidden}
 [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr !important}
 }</style>
+<script type="module" src="/js/analytics.js"></script>
 </head>
 <body>
 
@@ -264,7 +265,7 @@ async function sendAce(){
   bubble(text,'user');aceHistory.push({role:'user',content:text});
   const dots=typing();
   try{
-    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:aceHistory})});
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:aceHistory,src:new URLSearchParams(location.search).get('src')||''})});
     dots.remove();if(!res.ok)throw new Error('bad');
     const data=await res.json();
     const reply=data.reply||"Sorry — I hit a snag. Email admin@getproytech.com and we'll jump right on it.";

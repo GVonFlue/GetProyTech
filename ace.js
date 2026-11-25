@@ -134,7 +134,9 @@
       fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history, leadCaptured: leadCaptured }),
+        // src: the ?src= tag on this page, if any; the server cleans it and
+        // keeps it apart from the source ("Ace chat"), which it sets itself
+        body: JSON.stringify({ messages: history, leadCaptured: leadCaptured, src: new URLSearchParams(location.search).get('src') || '' }),
       })
         .then(function (r) { return r.json().catch(function () { return {}; }); })
         .then(function (data) {
