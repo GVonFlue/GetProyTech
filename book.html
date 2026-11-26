@@ -141,6 +141,7 @@
 .mock-flag{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:90;background:#FFD166;color:#0B1633;font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 .mcta.away{display:none!important}
 </style>
+<script type="module" src="/js/analytics.js"></script>
 </head>
 <body>
 <svg class="techbg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -413,6 +414,15 @@
   function forget(){ try { sessionStorage.removeItem(STORE); } catch(e){} }
   var saved = load();
 
+  /* Analytics (js/analytics.js, production only): each event once per page
+     load, never from ?mock=1, and never with anything the visitor typed. */
+  var counted = {};
+  function countOnce(name){
+    if (MOCK || counted[name]) return;
+    counted[name] = true;
+    try { if (window.ptTrack) window.ptTrack(name); } catch(e){}
+  }
+
   /* src tag: from the link, kept for the whole visit, sent with the booking */
   state.src = (params.get('src') || saved.src || 'book-page').slice(0, 80);
   state.leak = Array.isArray(saved.leak) ? saved.leak : null;
@@ -524,6 +534,7 @@
     var n = state.view;
     if (!checkStep(n)) return;
     if (n === 1 && consent && !consent.checked) return;   // pt-site.js shows the consent message
+    if (n === 1) countOnce('Booking started');            // js/analytics.js: a name, no answers
     if (n < 3){ show(n + 1, true); return; }
     show('times', true); openTimes();
   }); });
@@ -737,6 +748,7 @@
   function done(j){
     var R = ADAPTER.res;
     state.booked = true; forget();
+    countOnce('Booking completed');
     var when = (typeof j[R.when] === 'string' && j[R.when]) || (dayLong(state.date) + ' at ' + state.timeLabel + ' Central');
     $('#doneWhen').textContent = when + ' on Google Meet';
     var link = j[R.meetLink], a = $('#doneMeet');
