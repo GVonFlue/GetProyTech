@@ -23,6 +23,22 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://erikachoriego.exprealty.com https://script.google.com https://script.googleusercontent.com; script-src 'self' 'unsafe-inline' https://widgets.leadconnectorhq.com https://*.leadconnectorhq.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.leadconnectorhq.com; font-src 'self' data: https://fonts.gstatic.com https://*.leadconnectorhq.com; img-src 'self' data: blob: https://bearcreek-ks.com https://grandframemedia.com https://imagescdn.homes.com https://img.chime.me https://landing-page-app-hero-images.s3.amazonaws.com https://pvobppbsoqelfdqwovgd.supabase.co https://*.leadconnectorhq.com; connect-src 'self' https://api.web3forms.com https://proytech-crm.vercel.app https://script.google.com https://script.googleusercontent.com https://*.leadconnectorhq.com; frame-src 'self' https://maps.google.com https://script.google.com https://script.googleusercontent.com https://*.leadconnectorhq.com"
         }
       ]
     },
