@@ -4,7 +4,7 @@
 // What is asserted:
 //   pinned      the vendored loader is @vercel/analytics 2.0.1, byte for byte
 //   production  nothing loads and nothing is sent off getproytech.com
-//   no PII      the three events carry a name and nothing else, and a name
+//   no PII      the five events carry a name and nothing else, and a name
 //               outside the list is dropped
 //   coverage    every public page loads the module exactly once; every event
 //               name a page uses is in the list
@@ -67,10 +67,10 @@ test('PRODUCTION: getproytech.com and www load Vercel\'s script once, in product
   }
 });
 
-test('NO PERSONAL DATA: the three events go out as a name only; any other name is dropped', async () => {
+test('NO PERSONAL DATA: the five events go out as a name only; any other name is dropped', async () => {
   const w = await load('www.getproytech.com');
   try {
-    assert.deepEqual(Object.values(w.mod.EVENTS), ['Booking started', 'Booking completed', 'Teardown started']);
+    assert.deepEqual(Object.values(w.mod.EVENTS), ['Booking started', 'Booking completed', 'Teardown started', 'Score started', 'Score completed']);
     for (const n of Object.values(w.mod.EVENTS)) globalThis.ptTrack(n, { email: 'jo@reed.com' });
     globalThis.ptTrack('Booking Started');      // a typo
     globalThis.ptTrack('Lead email jo@reed.com');

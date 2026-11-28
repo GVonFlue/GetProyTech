@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Business Nucleus Score | ProyTech</title>
+<meta name="description" content="The Business Nucleus Score: nine quick questions, two minutes. Get a score out of 100, your three weakest areas and where to start.">
+<meta name="theme-color" content="#071A3D">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://getproytech.com/score">
+<meta property="og:title" content="The Business Nucleus Score | ProyTech">
+<meta property="og:description" content="Nine quick questions. A score out of 100, your three weakest areas and where to start.">
+<meta property="og:image" content="https://getproytech.com/images/proytech-dog.jpg">
+<meta property="og:url" content="https://getproytech.com/score">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/pt-site.css?v=3">
+<style>
+/* the form shell, as on /book */
+.app{max-width:680px;margin:40px auto 0;background:rgba(10,22,51,.72);border:1px solid rgba(125,211,252,.22);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.42);overflow:hidden}
+.app-head{padding:20px 26px;border-bottom:1px solid rgba(125,211,252,.14)}
+.app-head .lbl{font-family:var(--disp);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-2)}
+.app-rail{height:4px;border-radius:99px;background:rgba(46,155,255,.16);overflow:hidden;margin-top:10px}
+.app-rail i{display:block;height:100%;width:33.34%;border-radius:99px;background:linear-gradient(90deg,var(--elec),var(--o));transition:width .35s cubic-bezier(.4,0,.2,1)}
+.app-body{padding:26px}
+@media (max-width:560px){.app-head,.app-body{padding-left:18px;padding-right:18px}}
+.astep h3,.app-view h3{font-family:var(--disp);font-weight:700;font-size:1.5rem;letter-spacing:-.01em;color:#fff;margin-bottom:20px}
+.app .field{margin:0 0 20px;padding:0;border:0;min-width:0}
+.app .field>label,.app .field>legend{display:block;padding:0;font-weight:600;font-size:.98rem;line-height:1.4;margin-bottom:8px;color:#fff}
+.app .field .opt-tag{font-weight:500;color:var(--muted-d);font-size:.85rem}
+.app .help{font-size:.86rem;color:var(--muted-d);margin:-2px 0 9px;line-height:1.45}
+.app .field input[type=text],.app .field input[type=tel],.app .field input[type=email],.app .field textarea{width:100%;font:inherit;font-size:16px;padding:14px 16px;border-radius:13px;color:#fff;background:rgba(255,255,255,.05);border:1.5px solid rgba(125,211,252,.22);transition:border-color .15s,background .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+.app .field textarea{min-height:96px;resize:vertical;line-height:1.5}
+.app .field input::placeholder,.app .field textarea::placeholder{color:#7F93B3}
+.app .field input:focus,.app .field textarea:focus{outline:none;border-color:var(--ice);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(46,155,255,.2)}
+.app .field.bad input[type=text],.app .field.bad input[type=tel],.app .field.bad input[type=email],.app .field.bad textarea{border-color:var(--o)}
+.app .field .err{display:none;color:var(--o-2);font-size:.85rem;font-weight:500;margin-top:7px}
+.app .field.bad .err{display:block}
+.choices{display:grid;gap:9px}
+.choice{display:flex;align-items:center;gap:12px;min-height:54px;padding:12px 16px;border-radius:14px;cursor:pointer;background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.18);color:#fff;font-weight:500;line-height:1.35;transition:border-color .15s,background .15s}
+.choice:hover{border-color:var(--ice)}
+.choice input{flex:0 0 auto;width:20px;height:20px;margin:0;accent-color:#FB6926;cursor:pointer}
+.choice.sel{border-color:var(--o);background:rgba(251,105,38,.10)}
+.app .field.bad .choice{border-color:rgba(251,105,38,.55)}
+.anav{display:flex;gap:12px;align-items:center;margin-top:8px}
+.anav .back{flex:0 0 auto}
+.book-btn{flex:1;width:100%;font-family:var(--disp);font-weight:700;font-size:1.05rem;padding:17px 20px;border-radius:999px;border:0;cursor:pointer;background:var(--o);color:#fff;box-shadow:0 14px 34px rgba(251,105,38,.4);transition:transform .16s,background .16s;display:flex;align-items:center;justify-content:center}
+.book-btn:hover:not(:disabled){transform:translateY(-2px);background:var(--o-2)}
+.book-btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.back{background:none;border:0;color:var(--muted-d);font:inherit;font-size:.95rem;font-weight:600;cursor:pointer;padding:12px 6px;text-decoration:underline;text-underline-offset:3px}
+.back:hover{color:#fff}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.app-msg{margin-top:14px;font-size:.95rem;line-height:1.5;color:#FFB59A}
+.app-msg:empty{display:none}
+.app-msg a{color:#fff}
+/* /score only */
+.field legend{display:block;font-family:var(--disp);font-weight:600;font-size:1.08rem;line-height:1.35;color:#fff;margin-bottom:12px;padding:0}
+.field legend .qn{display:block;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-2);margin-bottom:6px}
+.score-you{margin:34px 0 18px;padding-top:26px;border-top:1px solid rgba(125,211,252,.14)}
+.score-you p{color:var(--muted-d);font-size:.95rem;margin:-12px 0 20px}
+.score-out{text-align:center}
+.score-big{font-family:var(--disp);font-weight:700;font-size:clamp(4.4rem,18vw,6.4rem);line-height:1;color:#fff}
+.score-big small{display:block;font-size:1rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ice-2);margin-top:8px}
+.score-band{display:inline-block;margin-top:14px;padding:6px 16px;border-radius:999px;border:1.5px solid var(--o);color:#fff;font-weight:600}
+.score-weak{list-style:none;margin:26px 0 0;padding:0;text-align:left;display:grid;gap:10px}
+.score-weak li{padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1.5px solid rgba(125,211,252,.18);line-height:1.5;color:#DCE7F7}
+.score-weak li b{color:#fff}
+.score-h{font-family:var(--disp);font-weight:700;font-size:1.15rem;color:#fff;margin:30px 0 0;text-align:left}
+.score-track{margin-top:12px;padding:18px;border-radius:16px;text-align:left;border:1.5px solid rgba(251,105,38,.6);background:rgba(251,105,38,.08);color:#DCE7F7;line-height:1.55}
+.score-track b{display:block;font-family:var(--disp);font-size:1.3rem;color:#fff;margin-bottom:6px}
+.score-out .book-btn{display:block;margin-top:22px;text-align:center;text-decoration:none}
+</style>
+<script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+<svg class="techbg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g class="base" stroke="#2E9BFF" stroke-opacity=".4" stroke-width="1.5" fill="none">
+    <path id="g1" d="M0 140 H240 L290 90 H560 L600 130 H840"/>
+    <path id="g2" d="M1440 240 H1180 L1130 290 H880 L840 250 H600"/>
+    <path id="g3" d="M0 470 H170 L220 420 H460 L500 460 H720"/>
+    <path id="g4" d="M1440 560 H1220 L1170 610 H950"/>
+    <path id="g5" d="M0 780 H300 L350 830 H640 L680 790 H1020 L1060 830 H1440"/>
+    <path id="g6" d="M130 0 V190 L180 240 V430"/><path id="g7" d="M1300 0 V160 L1250 210 V440 L1300 490 V900"/><path d="M660 900 V770 L710 720 V540"/>
+  </g>
+  <g stroke="#FB6926" stroke-opacity=".35" stroke-width="1.5" fill="none"><path id="g8" d="M1440 360 H1260 L1210 410 H1040"/><path id="g9" d="M1440 700 H1300 L1250 650 H1120"/></g>
+  <g fill="#38BDF8" fill-opacity=".7"><circle cx="290" cy="90" r="3.5"/><circle cx="600" cy="130" r="3.5"/><circle cx="1130" cy="290" r="3.5"/><circle cx="220" cy="420" r="3.5"/><circle cx="1170" cy="610" r="3.5"/><circle cx="350" cy="830" r="3.5"/><circle cx="180" cy="240" r="3.5"/><circle cx="1250" cy="210" r="3.5"/></g>
+  <g fill="#FB6926" fill-opacity=".7"><circle cx="1210" cy="410" r="3.5"/><circle cx="1250" cy="650" r="3.5"/></g>
+  <use href="#g1" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC"/>
+  <use href="#g2" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:1.2s"/>
+  <use href="#g3" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:2.1s"/>
+  <use href="#g4" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:.3s"/>
+  <use href="#g5" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:.6s"/>
+  <use href="#g6" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:1.7s"/>
+  <use href="#g7" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:2.6s"/>
+  <use href="#g8" class="pulse" stroke="#FB6926" style="color:#FB6926;animation-delay:.9s"/>
+  <use href="#g9" class="pulse" stroke="#7DD3FC" style="color:#7DD3FC;animation-delay:2.3s"/>
+</svg>
+<div class="promo"><a href="/win?src=site"><span class="tag">Giveaway</span><span><b>Win a $5,000 website + Business Suite package</b> or center ice seats to Thunder Opening Night.</span><span class="go">Enter free →</span></a></div>
+<nav class="nav" id="nav"><div class="wrap nav-in">
+  <a class="logo" href="/" aria-label="ProyTech home"><img src="/images/proytech-logo-nav.webp" alt="ProyTech" width="478" height="128" class="logo-img"></a>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
+    <div class="dd"><button type="button" class="dd-btn" aria-haspopup="true" aria-expanded="false">Growth OS <span aria-hidden="true">▾</span></button>
+      <div class="dd-menu">
+        <a href="/#growth-os"><b>Growth OS</b><span>Website + Business Suite, built together</span></a>
+        <a href="/websites"><b>Websites</b><span>Get found and get chosen</span></a>
+        <a href="/suite"><b>Business Suite</b><span>Your super CRM: the whole business on one screen</span></a>
+        <a href="/automation"><b>Automations</b><span>Missed calls, reviews, follow up</span></a>
+      </div>
+    </div>
+    <a href="/work">Our work</a>
+    <a href="/events">Events</a>
+    <a href="/resources">Resources</a>
+    <a href="/about">About</a>
+    <a class="btn btn-o" href="/book">Free Nucleus Session</a>
+  </div>
+</div></nav>
+<main>
+
+<!-- 1. HERO -->
+<section class="phero nh" style="padding:118px 0 30px">
+  <div class="wrap">
+    <span class="eyebrow">The Business Nucleus Score · Free · 2 minutes</span>
+    <h1 style="font-size:clamp(2.2rem,4.4vw,3.6rem);max-width:20ch">How much business is <em>slipping past you?</em></h1>
+    <p class="lede">Nine quick questions. You get a score out of 100, your three weakest areas, and where to start.</p>
+  </div>
+</section>
+
+<!-- 2. THE QUIZ, THEN THE RESULT -->
+<section class="sec sec-dark" id="quiz" style="padding-top:20px">
+  <div class="wrap">
+    <div class="app" id="app">
+      <div class="app-head">
+        <div class="lbl" id="scoreStep" aria-live="polite">9 questions</div>
+        <div class="app-rail"><i id="scoreBar" style="width:0"></i></div>
+      </div>
+      <div class="app-body">
+        <!-- Works with JavaScript off: a plain post to /api/score, which answers with the result page. -->
+        <form id="scoreForm" method="post" action="/api/score" autocomplete="on">
+          <input type="hidden" name="src" value="">
+
+          <fieldset class="field" data-q="leads"><legend><span class="qn">1 of 9</span>How do new leads reach you?</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="leads" value="word_of_mouth" required><span>Word of mouth, nothing I control</span></label>
+            <label class="choice"><input type="radio" name="leads" value="one_source" required><span>One steady source</span></label>
+            <label class="choice"><input type="radio" name="leads" value="two_sources" required><span>Two or more steady sources</span></label>
+            <label class="choice"><input type="radio" name="leads" value="tracked" required><span>Several, and I know what each brings in</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <fieldset class="field" data-q="speed"><legend><span class="qn">2 of 9</span>When a lead calls, texts or fills in a form, how fast do they hear back?</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="speed" value="five_min" required><span>Within 5 minutes, every time</span></label>
+            <label class="choice"><input type="radio" name="speed" value="hour" required><span>Within the hour</span></label>
+            <label class="choice"><input type="radio" name="speed" value="same_day" required><span>Same day</span></label>
+            <label class="choice"><input type="radio" name="speed" value="next_day" required><span>Next day or later</span></label>
+            <label class="choice"><input type="radio" name="speed" value="never" required><span>Some never hear back</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <fieldset class="field" data-q="followup"><legend><span class="qn">3 of 9</span>If they don’t reply the first time, what happens?</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="followup" value="let_go" required><span>We let it go</span></label>
+            <label class="choice"><input type="radio" name="followup" value="one_try" required><span>One more try when someone remembers</span></label>
+            <label class="choice"><input type="radio" name="followup" value="by_hand" required><span>A few tries, by hand</span></label>
+            <label class="choice"><input type="radio" name="followup" value="sequence" required><span>A set sequence that runs on its own</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <fieldset class="field" data-q="website"><legend><span class="qn">4 of 9</span>What does your website do for you?</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="website" value="none" required><span>No website</span></label>
+            <label class="choice"><input type="radio" name="website" value="nothing" required><span>Have one, brings in nothing</span></label>
+            <label class="choice"><input type="radio" name="website" value="few" required><span>A few leads a month</span></label>
+            <label class="choice"><input type="radio" name="website" value="steady" required><span>Steady leads and I can see the numbers</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <fieldset class="field" data-q="reviews"><legend><span class="qn">5 of 9</span>Where are your Google reviews?</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="reviews" value="under_10" required><span>Fewer than 10</span></label>
+            <label class="choice"><input type="radio" name="reviews" value="some" required><span>10 to 49, we ask now and then</span></label>
+            <label class="choice"><input type="radio" name="reviews" value="many" required><span>50 or more, when we remember</span></label>
+            <label class="choice"><input type="radio" name="reviews" value="automatic" required><span>50 or more, every customer is asked automatically</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <fieldset class="field" data-q="booking"><legend><span class="qn">6 of 9</span>How does a customer get on your calendar?</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="booking" value="call" required><span>They call and hope we answer</span></label>
+            <label class="choice"><input type="radio" name="booking" value="back_forth" required><span>Back and forth by text or email</span></label>
+            <label class="choice"><input type="radio" name="booking" value="link" required><span>A booking link, confirmed by hand</span></label>
+            <label class="choice"><input type="radio" name="booking" value="online" required><span>They book online and reminders send themselves</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <fieldset class="field" data-q="revenue"><legend><span class="qn">7 of 9</span>Revenue over the last 12 months</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="revenue" value="under_50k" required><span>Under $50k</span></label>
+            <label class="choice"><input type="radio" name="revenue" value="50k_250k" required><span>$50k to $250k</span></label>
+            <label class="choice"><input type="radio" name="revenue" value="250k_1m" required><span>$250k to $1M</span></label>
+            <label class="choice"><input type="radio" name="revenue" value="1m_3m" required><span>$1M to $3M</span></label>
+            <label class="choice"><input type="radio" name="revenue" value="3m_10m" required><span>$3M to $10M</span></label>
+            <label class="choice"><input type="radio" name="revenue" value="over_10m" required><span>Over $10M</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <fieldset class="field" data-q="teamSize"><legend><span class="qn">8 of 9</span>How many people work in the business, counting you?</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="teamSize" value="just_me" required><span>Just me</span></label>
+            <label class="choice"><input type="radio" name="teamSize" value="2_5" required><span>2 to 5</span></label>
+            <label class="choice"><input type="radio" name="teamSize" value="6_15" required><span>6 to 15</span></label>
+            <label class="choice"><input type="radio" name="teamSize" value="16_50" required><span>16 to 50</span></label>
+            <label class="choice"><input type="radio" name="teamSize" value="over_50" required><span>Over 50</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <fieldset class="field" data-q="want"><legend><span class="qn">9 of 9</span>What would help most right now?</legend><div class="choices" role="radiogroup">
+            <label class="choice"><input type="radio" name="want" value="website" required><span>A website</span></label>
+            <label class="choice"><input type="radio" name="want" value="website_system" required><span>A website and a system</span></label>
+            <label class="choice"><input type="radio" name="want" value="scale" required><span>To scale</span></label>
+          </div><div class="err">Pick one.</div></fieldset>
+
+          <div class="score-you astep">
+            <h3>Where do we send your score?</h3>
+            <p>Your score shows on the next screen. We ask so we can follow up on it.</p>
+            <div class="field" data-req="text"><label for="s_first">First name</label><input type="text" id="s_first" name="firstName" autocomplete="given-name" maxlength="59" required><div class="err">What is your first name?</div></div>
+            <div class="field" data-req="text"><label for="s_last">Last name</label><input type="text" id="s_last" name="lastName" autocomplete="family-name" maxlength="60" required><div class="err">What is your last name?</div></div>
+            <div class="field" data-req="phone"><label for="s_phone">Mobile</label><input type="tel" id="s_phone" name="phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(316) 555-0142" required><div class="err">We need a 10-digit mobile number.</div></div>
+            <div class="field" data-req="email"><label for="s_email">Email</label><input type="email" id="s_email" name="email" inputmode="email" autocomplete="email" maxlength="160" placeholder="you@business.com" required><div class="err">That email doesn't look right.</div></div>
+            <div class="hp" aria-hidden="true"><label for="s_fax">Fax</label><input type="text" id="s_fax" name="fax" tabindex="-1" autocomplete="off"></div>
+            <div class="sms-consent-wrap"><label><input type="checkbox" class="js-score-consent" name="textConsent" value="1"> <span>I agree to receive text messages from ProyTech at the number provided, including replies to my inquiry, appointment reminders, follow ups, and occasional offers. Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="/terms" target="_blank" rel="noopener">Terms</a>.</span></label></div>
+            <div class="anav"><button type="submit" class="book-btn" id="scoreBtn">Show my score</button></div>
+            <p class="app-msg" id="scoreMsg" role="alert"></p>
+          </div>
+        </form>
+
+        <div class="score-out" id="scoreResult" hidden tabindex="-1">
+          <div class="score-big"><span id="rTotal"></span><small>out of 100</small></div>
+          <div class="score-band" id="rBand"></div>
+          <h3 class="score-h" id="rWeakH">Your three weakest areas</h3>
+          <ol class="score-weak" id="rWeak"></ol>
+          <h3 class="score-h">Where to start</h3>
+          <div class="score-track"><b id="rTrack"></b><span id="rPitch"></span></div>
+          <a class="book-btn" id="rBook" href="/book?src=score">Book your Nucleus Session</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="/" aria-label="ProyTech home"><img src="/images/proytech-logo-nav.webp" alt="ProyTech" width="478" height="128" class="logo-img"></a>
+        <p>We build the systems that let you grow without hiring. The Growth OS: a website and a Business Suite that shows your whole business on one screen.</p>
+      </div>
+      <div><h5>What we build</h5><a href="/#growth-os">Growth OS</a><a href="/websites">Websites</a><a href="/suite">Business Suite</a><a href="/automation">Automations</a></div>
+      <div><h5>Company</h5><a href="/about">About us</a><a href="/work">Our work</a><a href="/events">Events</a><a href="/resources">Resources</a><a href="/partner">Partner Program</a></div>
+      <div><h5>Talk to us</h5><a href="/book">Free Nucleus Session</a><a href="tel:9013353905">901-335-3905</a><a href="mailto:admin@getproytech.com">admin@getproytech.com</a></div>
+    </div>
+    <div class="foot-base"><span>© <span id="yr"></span> ProyTech Business Solutions LLC · 201 N Water St, Wichita, KS 67202 · 901-335-3905 · admin@getproytech.com</span><span><a href="/terms">Terms of Service</a> · <a href="/privacy">Privacy Policy</a> &middot; Text STOP to opt out</span><span>Based in Wichita, building for businesses across the country.</span></div>
+  </div>
+</footer>
+<script src="/js/pt-site.js?v=3"></script>
+<script>
+(function(){
+  "use strict";
+  /* The nine questions, by the id the CRM knows them by (proytech-crm
+     src/lib/nucleusscore.js). The page sends which answer was picked; the CRM
+     holds the points and works out the score. Nothing here adds anything up. */
+  var QUESTIONS = ["leads","speed","followup","website","reviews","booking","revenue","teamSize","want"];
+  /* what /book calls the same three answers (its form field names) */
+  var HANDOFF = 'nucleus-score-handoff-v1';
+  var LATER = 'The score is not available right now. Please try again later.';
+  var TRACK_PITCH = {
+    website: 'From your answers, the place to start is a website that brings in leads. On a Nucleus Session we confirm the fit and show you the plan.',
+    growth_os: 'From your answers, you need more than a website. Growth OS is your site plus the Business Suite that runs your leads, follow-up and customers.',
+    empire_os: 'A company your size needs a real plan before anyone quotes a number. Empire OS is the full operating system and AI team, and the Nucleus Session is where we learn the business.'
+  };
+
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
+  var form = $('#scoreForm'), msg = $('#scoreMsg'), btn = $('#scoreBtn');
+  var params = new URLSearchParams(location.search);
+  /* ?src= rides along as its own field: a short slug, never anything typed */
+  var src = (params.get('src') || '').toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 24);
+  form.elements.src.value = src;
+  form.noValidate = true;                 // the script checks instead, and says which question
+
+  /* Analytics (js/analytics.js, production only): each event once per page
+     load, and never with anything the visitor typed or picked. */
+  var counted = {};
+  function countOnce(name){
+    if (counted[name]) return;
+    counted[name] = true;
+    try { if (window.ptTrack) window.ptTrack(name); } catch(e){}
+  }
+
+  function picked(q){ var r = $('input[name="' + q + '"]:checked', form); return r ? r.value : ''; }
+  function val(k){ var el = form.elements[k]; return el ? String(el.value || '').trim() : ''; }
+  var digits = function(s){ return String(s || '').replace(/\D/g, ''); };
+  function phone10(v){ var d = digits(v); if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1); return d; }
+  function fmtPhone(v){ var d = phone10(v).slice(0, 10); if (d.length < 4) return d; if (d.length < 7) return '(' + d.slice(0,3) + ') ' + d.slice(3); return '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6); }
+  form.elements.phone.addEventListener('input', function(e){ e.target.value = fmtPhone(e.target.value); });
+
+  function progress(){
+    var n = QUESTIONS.filter(picked).length;
+    $('#scoreBar').style.width = Math.round(n / QUESTIONS.length * 100) + '%';
+    $('#scoreStep').textContent = n === QUESTIONS.length ? 'All 9 answered' : n + ' of 9 answered';
+  }
+  form.addEventListener('change', function(e){
+    if (e.target.type !== 'radio') return;
+    $$('input[name="' + e.target.name + '"]', form).forEach(function(r){ r.parentNode.classList.toggle('sel', r.checked); });
+    var f = e.target.closest('.field'); if (f) f.classList.remove('bad');
+    countOnce('Score started');
+    progress();
+  });
+  form.addEventListener('input', function(e){ var f = e.target.closest('.field'); if (f && f.classList.contains('bad') && fieldOk(f)) f.classList.remove('bad'); });
+
+  function fieldOk(f){
+    var q = f.getAttribute('data-q'); if (q) return !!picked(q);
+    var inp = $('input', f), kind = f.getAttribute('data-req'), v = String(inp.value || '').trim();
+    if (kind === 'phone') return phone10(v).length === 10;
+    if (kind === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    return !!v;
+  }
+  function check(){
+    var first = null;
+    $$('.field', form).forEach(function(f){ var ok = fieldOk(f); f.classList.toggle('bad', !ok); if (!ok && !first) first = f; });
+    if (first){ try { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); var i = $('input', first); if (i) i.focus({ preventScroll: true }); } catch(e){} }
+    return !first;
+  }
+  /* the server named what it could not read: point at those */
+  var NAMES = { name: 'firstName', firstName: 'firstName', lastName: 'lastName', email: 'email', phone: 'phone' };
+  function mark(fields){
+    var first = null;
+    (fields || []).forEach(function(k){
+      var f = $('.field[data-q="' + k + '"]', form);
+      if (!f && NAMES[k] && form.elements[NAMES[k]]) f = form.elements[NAMES[k]].closest('.field');
+      if (f){ f.classList.add('bad'); if (!first) first = f; }
+    });
+    if (first) try { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(e){}
+  }
+
+  function show(r){
+    $('#rTotal').textContent = r.total;
+    $('#rBand').textContent = r.band || '';
+    $('#rBand').hidden = !r.band;
+    var list = $('#rWeak'); list.textContent = '';
+    (r.weak || []).forEach(function(w){
+      var li = document.createElement('li'), b = document.createElement('b');
+      b.textContent = w.label + '. '; li.appendChild(b); li.appendChild(document.createTextNode(w.line)); list.appendChild(li);
+    });
+    $('#rWeakH').textContent = !(r.weak || []).length ? 'No weak area: full marks everywhere' : r.weak.length === 1 ? 'Your weakest area' : 'Your ' + (r.weak.length === 3 ? 'three' : 'two') + ' weakest areas';
+    $('#rTrack').textContent = r.track.label || '';
+    $('#rPitch').textContent = TRACK_PITCH[r.track.name] || '';
+    /* ONLY src GOES IN THE LINK. Who they are and what they answered go to
+       /book through this tab's sessionStorage, which /book reads once and
+       then removes. Nothing personal is ever put in a URL. */
+    $('#rBook').setAttribute('href', '/book?src=' + (src || 'score'));
+    try {
+      sessionStorage.setItem(HANDOFF, JSON.stringify({ firstName: val('firstName'), lastName: val('lastName'), phone: val('phone'), email: val('email'),
+        revenue: picked('revenue'), team: picked('teamSize'), lookingFor: picked('want') }));
+    } catch(e){}
+    form.hidden = true;
+    $('#scoreStep').textContent = 'Your Business Nucleus Score';
+    $('#scoreBar').style.width = '100%';
+    var out = $('#scoreResult'); out.hidden = false;
+    try { $('#app').scrollIntoView({ block: 'start' }); out.focus({ preventScroll: true }); } catch(e){}
+    countOnce('Score completed');
+  }
+
+  var busy = false;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (busy) return;
+    msg.textContent = '';
+    if (!check()) return;
+    var body = { firstName: val('firstName'), lastName: val('lastName'), phone: val('phone'), email: val('email'), src: src,
+      fax: val('fax'), textConsent: $('.js-score-consent', form).checked };
+    QUESTIONS.forEach(function(q){ body[q] = picked(q); });
+    busy = true; btn.disabled = true; btn.textContent = 'Working it out…';
+    var done = function(){ busy = false; btn.disabled = false; btn.textContent = 'Show my score'; };
+    fetch('/api/score', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function(r){ return r.json().catch(function(){ return null; }).then(function(j){ return { status: r.status, j: j }; }); })
+      .then(function(x){
+        done();
+        var j = x.j || {};
+        if (x.status === 200 && j.ok && j.result) return show(j.result);
+        if (x.status === 200 && j.ok){ form.hidden = true; $('#scoreStep').textContent = 'Thanks. We have your answers.'; return; }
+        if (x.status === 400 && j.fields && j.fields.length){ mark(j.fields); msg.textContent = 'Check the highlighted answers and try again.'; return; }
+        msg.textContent = LATER;
+      })
+      .catch(function(){ done(); msg.textContent = LATER; });
+  });
+  progress();
+})();
+</script>
+</body>
+</html>
