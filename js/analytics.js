@@ -11,7 +11,7 @@
    Analytics is turned on for the project; until then that request 404s and
    nothing is counted.
 
-   NO PERSONAL DATA. Three events, each sent with a name only and no
+   NO PERSONAL DATA. Five events, each sent with a name only and no
    properties: no email, phone, business name, website or src tag. The page
    view is Vercel's own (path and referrer, no cookies). */
 import { inject, track } from './vendor/vercel-analytics-2.0.1.js';
@@ -19,12 +19,14 @@ import { inject, track } from './vendor/vercel-analytics-2.0.1.js';
 export const PROD_HOSTS = ['getproytech.com', 'www.getproytech.com'];
 
 /* The one vocabulary. A page calls window.ptTrack('<one of these names>'); a
-   name that is not here is dropped, so a typo cannot start a fourth event.
+   name that is not here is dropped, so a typo cannot start a new event.
    tests/analytics.test.mjs checks every name a page uses is in this list. */
 export const EVENTS = Object.freeze({
   bookingStarted: 'Booking started',      // book.html: the visitor finished the first step
   bookingCompleted: 'Booking completed',  // book.html: the CRM confirmed the booking
   teardownStarted: 'Teardown started',    // audit.html: a website scan began
+  scoreStarted: 'Score started',          // score.html: the visitor picked their first answer
+  scoreCompleted: 'Score completed',      // score.html: the CRM returned their score
 });
 const NAMES = Object.values(EVENTS);
 

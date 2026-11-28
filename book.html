@@ -461,7 +461,21 @@
       [].slice.call(el).forEach(function(r){ r.checked = (r.value === v); r.parentNode.classList.toggle('sel', r.checked); });
     } else { el.value = v; }
   }
+  /* HANDOFF FROM /score (score.html). The score page leaves who they are and
+     three of their answers in THIS TAB's sessionStorage, never in the link.
+     It is read once here and removed before anything else happens; a field
+     this form already holds is not overwritten. The consent box is never
+     pre-ticked: that is asked again here. */
+  var HANDOFF = 'nucleus-score-handoff-v1', HANDOFF_KEYS = ['firstName','lastName','phone','email','revenue','team','lookingFor'];
+  var handed = null;
+  try { handed = JSON.parse(sessionStorage.getItem(HANDOFF)); } catch(e){ handed = null; }
+  try { sessionStorage.removeItem(HANDOFF); } catch(e){}
+  if (handed && typeof handed === 'object'){
+    saved.a = saved.a || {};
+    HANDOFF_KEYS.forEach(function(k){ if (typeof handed[k] === 'string' && handed[k] && !saved.a[k]) saved.a[k] = handed[k].slice(0, 160); });
+  }
   if (saved.a) FIELDS.forEach(function(k){ setVal(k, saved.a[k]); });
+  if (handed && typeof handed === 'object') save();   // now it lives in the booking form's own store, like anything typed here
 
   /* phone mask, same as the old /book */
   var digits = function(s){ return String(s || '').replace(/\D/g, ''); };
